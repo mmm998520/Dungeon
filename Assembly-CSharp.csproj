@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\MazeCreate.cs" />
     <Compile Include="Assets\Scripts\MazeGen.cs" />
+    <None Include="Assets\LightMask\mask教學.txt" />
+    <None Include="Assets\LightMask\LightMask.shader" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Dmmm998520/software/Unity/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
