@@ -6,7 +6,7 @@ public class MazeGen : MonoBehaviour
 {
     public const int Creat_row = 12*2+1, Creat_col = 9*2+1, fill = 40;
     MazeCreate mazeCreate;
-    public Sprite roomSprite, wall_rowSprite, wall_colSprite;
+    public Sprite floorSprite, wall_rowSprite, wall_colSprite;
 
     void Awake()
     {
@@ -57,7 +57,8 @@ public class MazeGen : MonoBehaviour
                         column.transform.position = new Vector3(i, j, 0);
                         column.transform.localScale *= 2f;
                         column.transform.parent = transform.GetChild(0);
-                        column.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = roomSprite;
+                        column.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = floorSprite;
+                        Destroy(column.transform.GetComponent<Collider2D>());
                         //加入房間清單
                         rooms[_i].Add(column);
                         column.name = _i + "," + _j;
@@ -83,12 +84,12 @@ public class MazeGen : MonoBehaviour
                     sprite.localScale *= 2;
                     if (i % 2 == 0)
                     {
-                        column.transform.localScale = new Vector3(0.2f, 2, 1);
+                        column.transform.localScale = new Vector3(0.4f, 2, 1);
                         sprite.GetComponent<SpriteRenderer>().sprite = wall_rowSprite;
                     }
                     else
                     {
-                        column.transform.localScale = new Vector3(2, 0.2f, 1);
+                        column.transform.localScale = new Vector3(2, 0.4f, 1);
                         sprite.GetComponent<SpriteRenderer>().sprite = wall_colSprite;
                     }
                     sprite.GetComponent<SpriteRenderer>().sortingOrder = 1;
