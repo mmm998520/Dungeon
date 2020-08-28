@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MazeGen : MonoBehaviour
 {
-    public  const int Creat_row = 12*2+1, Creat_col = 9*2+1, fill = 40;
+    public const int Creat_row = 12*2+1, Creat_col = 9*2+1, fill = 40;
     MazeCreate mazeCreate;
+    public Sprite roomSprite, wall_rowSprite, wall_colSprite;
+
     void Awake()
     {
         mazeCreate = MazeCreate.GetMaze(Creat_row, Creat_col);
@@ -55,6 +57,7 @@ public class MazeGen : MonoBehaviour
                         column.transform.position = new Vector3(i, j, 0);
                         column.transform.localScale *= 2f;
                         column.transform.parent = transform.GetChild(0);
+                        column.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = roomSprite;
                         //加入房間清單
                         rooms[_i].Add(column);
                         column.name = _i + "," + _j;
@@ -75,21 +78,26 @@ public class MazeGen : MonoBehaviour
                     column = MonoBehaviour.Instantiate(column);
                     column.GetComponent<MeshRenderer>().material.color = Color.red;
                     column.transform.parent = transform.GetChild(1);
-                    column.transform.position = new Vector3(i, j, 0);
+                    column.transform.position = new Vector3(i, j, 0.1f);
+                    Transform sprite = column.transform.GetChild(0);
+                    sprite.parent = null;
+                    sprite.localScale *= 2;
                     if (i % 2 == 0)
                     {
-                        column.transform.localScale = new Vector3(0.2f, 2f, 3);
+                        column.transform.localScale = new Vector3(0.2f, 2, 1);
+                        sprite.GetComponent<SpriteRenderer>().sprite = wall_rowSprite;
                     }
                     else
                     {
-                        column.transform.localScale = new Vector3(2f, 0.2f, 3);
+                        column.transform.localScale = new Vector3(2, 0.2f, 1);
+                        sprite.GetComponent<SpriteRenderer>().sprite = wall_colSprite;
                     }
+                    sprite.GetComponent<SpriteRenderer>().sortingOrder = 1;
+                    sprite.parent = column.transform;
                     column.name = i + "," + j;
                 }
-
             }
         }
-
         //gameManager.GetComponent<GameManager>().rooms = rooms;
     }
 }

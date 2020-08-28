@@ -385,6 +385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017dbe644dd289d4c9621c040fe1262e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomSprite: {fileID: 21300000, guid: 7066af92a4df22344aab6ac4cec1affc, type: 3}
+  wall_rowSprite: {fileID: 21300000, guid: ecf25a4bee9633c4daf6b960318f64c5, type: 3}
+  wall_colSprite: {fileID: 21300000, guid: 3638328b281eba042bf1fa7d73a53520, type: 3}
 --- !u!4 &1922408627
 Transform:
   m_ObjectHideFlags: 0
