@@ -76,7 +76,6 @@ public class MazeGen : MonoBehaviour
                 {
                     GameObject column = (GameObject)Resources.Load("Prefabs/maze");
                     column = MonoBehaviour.Instantiate(column);
-                    column.GetComponent<MeshRenderer>().material.color = Color.red;
                     column.transform.parent = transform.GetChild(1);
                     column.transform.position = new Vector3(i, j, 0.1f);
                     Transform sprite = column.transform.GetChild(0);
