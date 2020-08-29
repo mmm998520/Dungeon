@@ -5,41 +5,27 @@ using UnityEngine.UI;
 
 namespace com.BoardGameDungeon
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : ValueSet
     {
-        //角色職業  刺客 -> 戰士 -> 法師
-        public enum Career
-        {
-            Thief = 0,
-            Warrior = 1,
-            Magician = 2,
-            //角色種類總數
-            Count = 3
-        }
         public Career career;
         public int level = 1, exp = 0;
-        //角色素質之後能做成2維陣列儲存 不同職業(1維) 在 對應等級(2維) 時的素質
-        //刺客 -> 戰士 -> 法師
-        //角色移動速度
-        float moveSpeed = 5;
-        public float[,] ATK = new float[(int)Career.Count, 4] { { 0, 5, 7, 10 }, { 0, 2, 4, 6 }, { 0, 6, 8, 12 } };
-        //紀錄血量上限，傷害用累計的，超過上限 -> 死
-        public float[,] HP = new float[(int)Career.Count, 4] { { 0, 20, 30, 40 }, { 0, 40, 55, 70 }, { 0, 20, 30, 40 } };
-        public float Hurt = 0;
-
-        //攻擊招式，跟素質一樣可用陣列處理
-        public GameObject[] Attack = new GameObject[3];
-        //攻擊招式持續時間列表
-        public float[] duration = new float[(int)Career.Count] { 0.4f, 0.4f, 2 };
-        //攻擊招式是否為持續傷害
-        public bool[] continuous = new bool[(int)Career.Count] { false, false, true };
-
+        
         //紀錄點擊間隔用的計時器
         float TouchBeganTimer = 0;
         //攻擊模式開關
         bool attackMode = false;
         //攻擊開關開啟計時器，太久沒攻擊則關閉
         float attackModeTimer = 0;
+
+        void Start()
+        {
+            //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
+            //刺客 -> 戰士 -> 法師
+            ATK = new float[(int)Career.Count, 4] { { 0, 5, 7, 10 }, { 0, 2, 4, 6 }, { 0, 6, 8, 12 } };
+            HP = new float[(int)Career.Count, 4] { { 0, 20, 30, 40 }, { 0, 40, 55, 70 }, { 0, 20, 30, 40 } };
+            duration = new float[(int)Career.Count] { 0.4f, 0.4f, 2 };
+            continuous = new bool[(int)Career.Count] { false, false, true };
+        }
 
         void Update()
         {
@@ -141,6 +127,5 @@ namespace com.BoardGameDungeon
             //點擊間隔計時器
             TouchBeganTimer += Time.deltaTime;
         }
-
     }
 }
