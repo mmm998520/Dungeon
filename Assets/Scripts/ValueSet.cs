@@ -27,7 +27,7 @@ public class ValueSet : MonoBehaviour
     public float[,] ATK,HP;
     public float Hurt = 0;
     //移動速度 "目前" 統一
-    protected float moveSpeed = 5;
+    protected float moveSpeed = 10;
 
     //招式
     /// <summary>

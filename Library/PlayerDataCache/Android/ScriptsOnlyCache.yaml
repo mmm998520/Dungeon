@@ -1,20 +1,17 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - com.BoardGameDungeon.MagicianAttackManager
     - com.BoardGameDungeon.MazeGen
     - com.BoardGameDungeon.PlayerManager
+    - com.BoardGameDungeon.ThiefAttackManager
+    - com.BoardGameDungeon.WarriorAttackManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
-    UnityEngine.UI.dll:
-    - UnityEngine.EventSystems.EventSystem
-    - UnityEngine.EventSystems.StandaloneInputModule
-    - UnityEngine.UI.CanvasScaler
-    - UnityEngine.UI.GraphicRaycaster
-    - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/Game.unity:
     - Class: 1
@@ -39,6 +36,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 58
       Script: {instanceID: 0}
+    - Class: 60
+      Script: {instanceID: 0}
     - Class: 61
       Script: {instanceID: 0}
     - Class: 81
@@ -48,22 +47,16 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11152}
+      Script: {instanceID: 11686}
     - Class: 114
-      Script: {instanceID: 11310}
+      Script: {instanceID: 12290}
     - Class: 114
-      Script: {instanceID: 11684}
+      Script: {instanceID: 18430}
     - Class: 114
-      Script: {instanceID: 11734}
+      Script: {instanceID: 22344}
     - Class: 114
-      Script: {instanceID: 12288}
-    - Class: 114
-      Script: {instanceID: 12594}
-    - Class: 114
-      Script: {instanceID: 12942}
+      Script: {instanceID: 23748}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -72,12 +65,6 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
-      Script: {instanceID: 0}
-    - Class: 222
-      Script: {instanceID: 0}
-    - Class: 223
-      Script: {instanceID: 0}
-    - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -340,7 +327,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: b1431a5d252e6faf1afd9262ed8114e0
+      Hash: ac72603658e74191db8f598755d554f3
     assemblyName: Assembly-CSharp.dll
     namespaceName: com.BoardGameDungeon
     className: PlayerManager
@@ -524,6 +511,36 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 2b501ec6649d350b53e4f99994221e2f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: WarriorAttackManager
+  - hash:
+      serializedVersion: 2
+      Hash: 00ed3f6856de4f0dffab93699ac14da6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: AttackManager
+  - hash:
+      serializedVersion: 2
+      Hash: af9ea31c0bf342579039d4ae7a86f1f6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ValueSet
+  - hash:
+      serializedVersion: 2
+      Hash: 2b501ec6649d350b53e4f99994221e2f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: ThiefAttackManager
+  - hash:
+      serializedVersion: 2
+      Hash: 2b501ec6649d350b53e4f99994221e2f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: MagicianAttackManager
   platform: 13
   scenePathNames:
   - Assets/Scenes/Game.unity

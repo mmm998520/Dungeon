@@ -9,14 +9,23 @@ namespace com.BoardGameDungeon
     {
         public Career career;
         public int level = 1, exp = 0;
-        
-        //紀錄點擊間隔用的計時器
-        float TouchBeganTimer = 0;
-        //攻擊模式開關
-        bool attackMode = false;
-        //攻擊開關開啟計時器，太久沒攻擊則關閉
-        float attackModeTimer = 0;
 
+        /// <summary>
+        /// 紀錄點擊間隔用的計時器
+        /// </summary>
+        float TouchBeganTimer = 0;
+        /// <summary>
+        /// 紀錄點擊瞬間的點，可用於計算雙擊後觸控點是否有發生拖動
+        /// </summary>
+        Vector3 TouchBeganPos;
+        /// <summary>
+        /// 攻擊模式開關
+        /// </summary>
+        bool attackMode = false;
+        /// <summary>
+        /// 攻擊開關開啟計時器，太久沒攻擊則關閉
+        /// </summary>
+        float attackModeTimer = 0;
         void Start()
         {
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
@@ -29,7 +38,6 @@ namespace com.BoardGameDungeon
 
         void Update()
         {
-            //攻擊開關開啟計時器、點擊間隔計時器
             timer();
 
             //電腦測試用
@@ -42,10 +50,12 @@ namespace com.BoardGameDungeon
                 }
             }
 
-            //統整觸控行為
             touchBehavior();
         }
 
+        /// <summary>
+        /// 統整觸控行為
+        /// </summary>
         void touchBehavior()
         {
             //對不同觸控點分別處裡
@@ -63,11 +73,17 @@ namespace com.BoardGameDungeon
                     move(touchPos, targetDis);
                     readyForAttack(touch.phase);
                 }
+                //偵測雙擊後的點與觸控點距離，
+                if(Vector3.Distance(TouchBeganPos, touchPos) > 0.5f && targetDis < 1 && attackMode)
+                {
+                    attack(touchPos);
+                }
+                /*
                 //給攻擊的前推多一點空間，但要超出基本操作範圍
                 if (targetDis < 1 && targetDis > 0.3f && attackMode)
                 {
                     attack(touchPos);
-                }
+                }*/
             }
         }
 
@@ -97,9 +113,12 @@ namespace com.BoardGameDungeon
                 if (TouchBeganTimer < 0.5f)
                 {
                     attackMode = true;
+
                 }
                 //計時器歸零，開始計算間隔
                 TouchBeganTimer = 0;
+                //紀錄點擊瞬間的點
+                TouchBeganPos = transform.position * Vector2.one;
             }
         }
 
@@ -113,6 +132,9 @@ namespace com.BoardGameDungeon
             attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);
         }
 
+        /// <summary>
+        /// 攻擊開關開啟計時器、點擊間隔計時器
+        /// </summary>
         void timer()
         {
             //攻擊開關開啟計時器
