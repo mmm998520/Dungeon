@@ -64,11 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AttackManager.cs" />
-    <Compile Include="Assets\Scripts\KnifeLightManager.cs" />
     <Compile Include="Assets\Scripts\MazeCreate.cs" />
     <Compile Include="Assets\Scripts\MazeGen.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\ThiefAttackManager.cs" />
     <Compile Include="Assets\Scripts\ValueSet.cs" />
+    <Compile Include="Assets\Scripts\WarriorAttackManager.cs" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Dmmm998520/software/Unity/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

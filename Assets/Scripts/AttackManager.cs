@@ -25,5 +25,21 @@ namespace com.BoardGameDungeon
         {
             collider.gameObject.GetComponent<ValueSet>().Hurt += ATK;
         }
+
+        protected void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (!continuous)
+            {
+                hurt(collider, ATK);
+            }
+        }
+
+        protected void OnTriggerStay2D(Collider2D collider)
+        {
+            if (continuous)
+            {
+                hurt(collider, Time.deltaTime * ATK / duration);
+            }
+        }
     }
 }
