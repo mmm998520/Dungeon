@@ -1,20 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace com.BoardGameDungeon
 {
     public class PlayerManager : MonoBehaviour
     {
+        public Text text;
         //角色素質之後能做成2維陣列儲存 不同職業(1維) 在 對應等級(2維) 時的素質
         //角色移動速度
         float moveSpeed = 3;
+
+        //攻擊招式，跟素質一樣可用陣列處理
+        public GameObject Attack;
 
         //紀錄點擊間隔用的計時器
         float TouchBeganTimer = 0;
 
         //攻擊模式開關
         bool attackMode = false;
+
         void Update()
         {
             TouchBeganTimer += Time.deltaTime;
@@ -26,17 +32,20 @@ namespace com.BoardGameDungeon
                 Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
                 touchPos.z = 0;
                 //觸控點與角色的距離
-                float targetDis = Vector3.Distance(touchPos, new Vector3(transform.position.x, transform.position.y, 0));
+                float targetDis = Vector3.Distance(touchPos, transform.position * Vector2.one);
                 //距離夠近才能進行操作
                 if (targetDis < 0.5f)
                 {
                     move(touchPos, targetDis);
                     readyForAttack(touch.phase);
                 }
-                //給攻擊的前推多一點空間
-                else if(targetDis < 1)
+                //給攻擊的前推多一點空間，但要超出基本操作範圍
+                if(targetDis < 1 && targetDis>0.3f && attackMode)
                 {
-
+                    text.text += "c";
+                    Debug.LogError("c");
+                    attack(touchPos);
+                    attackMode = false;
                 }
             }
         }
@@ -60,17 +69,35 @@ namespace com.BoardGameDungeon
         //預備攻擊，如果快點兩下就能進入攻擊模式
         void readyForAttack(TouchPhase phase)
         {
+            Debug.LogError("a");
+            text.text += "a";
             //如果接觸點是點擊瞬間則開始倒數計時 (看時間內有沒有其他點擊發生)
             if(phase == TouchPhase.Began)
             {
+                Debug.LogError("b");
+                text.text += "b";
                 //與上次點擊的間隔夠短就能開啟攻擊模式 (快點兩下)
-                if(TouchBeganTimer < 0.5f)
+                if (TouchBeganTimer < 0.5f)
                 {
                     attackMode = true;
                 }
                 //計時器歸零，開始計算間隔
                 TouchBeganTimer = 0;
             }
+        }
+
+        void attack(Vector3 touchPos)
+        {
+            Debug.LogError("d");
+            text.text += "d";
+            //生成攻擊在觸控方向，並旋轉攻擊朝向該方向
+            /*
+            float angle = Vector3.Angle(Vector3.right, touchPos * Vector2.one - transform.position * Vector2.one);
+            if (touchPos.y < transform.position.y)
+            {
+                angle *= -1;
+            }*/
+            Instantiate(Attack, transform.position + Vector3.Normalize(touchPos * Vector2.one - transform.position * Vector2.one) * 0.7f, Quaternion.Euler(0,0,Vector3.SignedAngle(Vector3.right, touchPos * Vector2.one - transform.position * Vector2.one, Vector3.forward)));
         }
     }
 }

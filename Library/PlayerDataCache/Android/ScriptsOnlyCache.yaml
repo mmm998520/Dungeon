@@ -1,14 +1,20 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - MazeGen
-    - PlayerManager
+    - com.BoardGameDungeon.MazeGen
+    - com.BoardGameDungeon.PlayerManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
+    UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/Game.unity:
     - Class: 1
@@ -42,10 +48,22 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11686}
+      Script: {instanceID: 11152}
     - Class: 114
-      Script: {instanceID: 14238}
+      Script: {instanceID: 11310}
+    - Class: 114
+      Script: {instanceID: 11684}
+    - Class: 114
+      Script: {instanceID: 11734}
+    - Class: 114
+      Script: {instanceID: 12288}
+    - Class: 114
+      Script: {instanceID: 12594}
+    - Class: 114
+      Script: {instanceID: 12942}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -54,6 +72,12 @@ ScriptsOnlyBuild:
     - Class: 212
       Script: {instanceID: 0}
     - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -222,7 +246,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: c8f5e5a04c0cd1e14402d1a44ae50682
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: com.BoardGameDungeon
     className: MazeGen
   - hash:
       serializedVersion: 2
@@ -258,7 +282,7 @@ ScriptsOnlyBuild:
       serializedVersion: 2
       Hash: 23be02afab2b0bc0cf56d71ab811b6ea
     assemblyName: Assembly-CSharp.dll
-    namespaceName: 
+    namespaceName: com.BoardGameDungeon
     className: MazeCreate
   - hash:
       serializedVersion: 2
@@ -314,6 +338,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: b1431a5d252e6faf1afd9262ed8114e0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: PlayerManager
   - hash:
       serializedVersion: 2
       Hash: 783f593b9380cf72d0f7ebfd4a0d4bcd
@@ -494,12 +524,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlayerManager
   platform: 13
   scenePathNames:
   - Assets/Scenes/Game.unity
