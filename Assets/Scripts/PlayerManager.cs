@@ -37,7 +37,7 @@ namespace com.BoardGameDungeon
             {
                 if (Input.anyKeyDown)
                 {
-                    GameObject attack = Instantiate(Attack[(int)career], transform.position + Vector3.right, Quaternion.identity);
+                    GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.identity);
                     attack.GetComponent<AttackManager>().setValue(ATK[1, 1], 0.4f, false, true);
                 }
             }
@@ -108,7 +108,7 @@ namespace com.BoardGameDungeon
             attackMode = false;
             //生成攻擊在觸控方向，並旋轉攻擊朝向該方向
             float angle = Vector3.SignedAngle(Vector3.right, touchPos * Vector2.one - transform.position * Vector2.one, Vector3.forward);
-            GameObject attack = Instantiate(Attack[(int)career], transform.position + Vector3.Normalize(touchPos * Vector2.one - transform.position * Vector2.one) * 0.7f, Quaternion.Euler(0,0,angle));
+            GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.Euler(0,0,angle));
             //設定攻擊參數
             attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);
         }

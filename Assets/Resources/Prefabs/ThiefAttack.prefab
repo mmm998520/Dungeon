@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7192982894167168172}
   - component: {fileID: 5965371458589787089}
   m_Layer: 0
-  m_Name: MagicBlast_01
+  m_Name: KnifeLight_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119144109538019918}
   m_LocalRotation: {x: -0, y: -0, z: 0.42991334, w: 0.9028702}
-  m_LocalPosition: {x: -0.84, y: 0.187, z: 0}
-  m_LocalScale: {x: 0.72058, y: 0.72058, z: 0.72058}
+  m_LocalPosition: {x: 1.2132001, y: 0.00549984, z: 0}
+  m_LocalScale: {x: 0.59008825, y: 0.57718503, z: 0.56750715}
   m_Children: []
   m_Father: {fileID: 2973024770362353461}
   m_RootOrder: 0
@@ -140,10 +140,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.48391968, y: -0.084143065}
-      - {x: 0.2379756, y: 0.16718163}
-      - {x: -0.44403836, y: 0.48174703}
-      - {x: -1.8393835, y: 0.23163861}
+    - - {x: 1.410321, y: -0.21637362}
+      - {x: 2.040188, y: 0.016349077}
+      - {x: 1.419075, y: 0.25831127}
+      - {x: 0.4325745, y: 0.011652827}
 --- !u!114 &8794156203765306381
 MonoBehaviour:
   m_ObjectHideFlags: 0

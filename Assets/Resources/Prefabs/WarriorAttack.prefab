@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6151019412378887222}
   - component: {fileID: 1198918494153123266}
   m_Layer: 0
-  m_Name: KnifeLight
+  m_Name: WarriorAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,13 +81,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.44941562, y: -1.0360069}
-      - {x: 0.7117733, y: -0.1640651}
-      - {x: 0.4908032, y: 0.652768}
-      - {x: -0.08548263, y: 1.2633111}
-      - {x: -1.0722053, y: 1.4057194}
-      - {x: -0.7716933, y: -1.6520522}
-      - {x: -0.1837182, y: -1.5576369}
+    - - {x: 1.9825771, y: -0.9610138}
+      - {x: 2.2032726, y: -0.15573311}
+      - {x: 1.882314, y: 0.9277363}
+      - {x: 1.1893744, y: 1.4049625}
+      - {x: 0.38596427, y: 1.5307045}
+      - {x: 0.024740815, y: -0.048728943}
+      - {x: 0.6031525, y: -1.7770376}
+      - {x: 1.4494324, y: -1.4909773}
 --- !u!1 &8551711913310264965
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,8 +114,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8551711913310264965}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.57, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.87, y: 0.025188446, z: 0}
+  m_LocalScale: {x: 1.06, y: 1.06, z: 1.06}
   m_Children: []
   m_Father: {fileID: 2973024770362353461}
   m_RootOrder: 0
