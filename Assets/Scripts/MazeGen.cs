@@ -76,12 +76,14 @@ namespace com.BoardGameDungeon
                             _i++;
                         }
                     }
+                    //牆壁標記
                     else if (!(i % 2 == 0 && j % 2 == 0))
                     {
                         GameObject column = (GameObject)Resources.Load("Prefabs/maze");
                         column = MonoBehaviour.Instantiate(column);
                         column.transform.parent = transform.GetChild(1);
                         column.transform.position = new Vector3(i, j, 0.1f);
+                        //因為column要發生變形，不希望圖片因此扭曲，所以將圖片抽出來再進行變形
                         Transform sprite = column.transform.GetChild(0);
                         sprite.parent = null;
                         sprite.localScale *= 2;
@@ -95,6 +97,7 @@ namespace com.BoardGameDungeon
                             column.transform.localScale = new Vector3(2, 0.4f, 1);
                             sprite.GetComponent<SpriteRenderer>().sprite = wall_colSprite;
                         }
+                        //讓牆壁圖層在地板上面
                         sprite.GetComponent<SpriteRenderer>().sortingOrder = 1;
                         sprite.parent = column.transform;
                         column.name = i + "," + j;
