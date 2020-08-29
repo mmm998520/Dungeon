@@ -10,7 +10,7 @@ namespace com.BoardGameDungeon
         public Text text;
         //角色素質之後能做成2維陣列儲存 不同職業(1維) 在 對應等級(2維) 時的素質
         //角色移動速度
-        float moveSpeed = 3;
+        float moveSpeed = 5;
 
         //攻擊招式，跟素質一樣可用陣列處理
         public GameObject Attack;
@@ -91,13 +91,8 @@ namespace com.BoardGameDungeon
             Debug.LogError("d");
             text.text += "d";
             //生成攻擊在觸控方向，並旋轉攻擊朝向該方向
-            /*
-            float angle = Vector3.Angle(Vector3.right, touchPos * Vector2.one - transform.position * Vector2.one);
-            if (touchPos.y < transform.position.y)
-            {
-                angle *= -1;
-            }*/
-            Instantiate(Attack, transform.position + Vector3.Normalize(touchPos * Vector2.one - transform.position * Vector2.one) * 0.7f, Quaternion.Euler(0,0,Vector3.SignedAngle(Vector3.right, touchPos * Vector2.one - transform.position * Vector2.one, Vector3.forward)));
+            float angle = Vector3.SignedAngle(Vector3.right, touchPos * Vector2.one - transform.position * Vector2.one, Vector3.forward);
+            Instantiate(Attack, transform.position + Vector3.Normalize(touchPos * Vector2.one - transform.position * Vector2.one) * 0.7f, Quaternion.Euler(0,0,angle));
         }
     }
 }
