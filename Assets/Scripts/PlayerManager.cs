@@ -38,26 +38,30 @@ namespace com.BoardGameDungeon
         float TouchBeganTimer = 0;
         //攻擊模式開關
         bool attackMode = false;
-        //攻擊開寬開啟計時器，太久沒攻擊則關閉
+        //攻擊開關開啟計時器，太久沒攻擊則關閉
         float attackModeTimer = 0;
 
         void Update()
         {
-            if (Input.anyKeyDown)
+            //攻擊開關開啟計時器、點擊間隔計時器
+            timer();
+
+            //電腦測試用
+            if(Input.touchCount == 0)
             {
-                GameObject attack = Instantiate(Attack[(int)career], transform.position + Vector3.right,Quaternion.identity);
-                attack.GetComponent<AttackManager>().setValue(ATK[1, 1], 0.4f, false, true);
+                if (Input.anyKeyDown)
+                {
+                    GameObject attack = Instantiate(Attack[(int)career], transform.position + Vector3.right, Quaternion.identity);
+                    attack.GetComponent<AttackManager>().setValue(ATK[1, 1], 0.4f, false, true);
+                }
             }
 
-            if (attackMode)
-            {
-                attackModeTimer += Time.deltaTime;
-            }
-            else if (attackModeTimer != 0)
-            {
-                attackModeTimer = 0;
-            }
-            TouchBeganTimer += Time.deltaTime;
+            //統整觸控行為
+            touchBehavior();
+        }
+
+        void touchBehavior()
+        {
             //對不同觸控點分別處裡
             for (int i = 0; i < Input.touchCount; i++)
             {
@@ -74,12 +78,11 @@ namespace com.BoardGameDungeon
                     readyForAttack(touch.phase);
                 }
                 //給攻擊的前推多一點空間，但要超出基本操作範圍
-                if(targetDis < 1 && targetDis>0.3f && attackMode)
+                if (targetDis < 1 && targetDis > 0.3f && attackMode)
                 {
                     attack(touchPos);
                 }
             }
-
         }
 
         void move(Vector3 touchPos, float targetDis)
@@ -123,5 +126,21 @@ namespace com.BoardGameDungeon
             //設定攻擊參數
             attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);
         }
+
+        void timer()
+        {
+            //攻擊開關開啟計時器
+            if (attackMode)
+            {
+                attackModeTimer += Time.deltaTime;
+            }
+            else if (attackModeTimer != 0)
+            {
+                attackModeTimer = 0;
+            }
+            //點擊間隔計時器
+            TouchBeganTimer += Time.deltaTime;
+        }
+
     }
 }
