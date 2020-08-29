@@ -13,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - player
+  - player(noMove)
+  - monster
+  - monster(noMove)
   - 
   - 
   - 
