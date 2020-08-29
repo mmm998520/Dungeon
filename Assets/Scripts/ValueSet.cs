@@ -5,24 +5,77 @@ using UnityEngine;
 public class ValueSet : MonoBehaviour
 {
     /// <summary>
-    /// 角色職業  刺客 -> 戰士 -> 法師 >>>> 角色種類總數
+    /// <para>角色職業</para>
+    /// <para>刺客 -> 戰士 -> 法師 >>>> 角色種類總數</para>
     /// </summary>
     public enum Career
     {
+        /// <summary>
+        /// 刺客
+        /// </summary>
         Thief = 0,
+        /// <summary>
+        /// 戰士
+        /// </summary>
         Warrior = 1,
+        /// <summary>
+        /// 法師
+        /// </summary>
         Magician = 2,
         /// <summary>
         /// 角色種類總數
         /// </summary>
         Count = 3
     }
-    
+
     /// <summary>
-    /// 角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質。
-    /// 刺客 -> 戰士 -> 法師。
-    /// 怪物等級為0。
-    /// HP紀錄血量上限，傷害用累計的，超過上限 -> 死。
+    /// <para>怪物種類</para>
+    /// </summary>
+    public enum MonsterType
+    {
+        /// <summary>
+        /// 蜘蛛
+        /// </summary>
+        spider = 0,
+        /// <summary>
+        /// 牛頭人
+        /// </summary>
+        Tauren = 1,
+        /// <summary>
+        /// 史萊姆
+        /// </summary>
+        Slime = 2,
+        /// <summary>
+        /// 蝙蝠
+        /// </summary>
+        bat = 3,
+        /// <summary>
+        /// 狼
+        /// </summary>
+        wolf = 4,
+        /// <summary>
+        /// 幽靈
+        /// </summary>
+        ghost = 5,
+        /// <summary>
+        /// 幽靈
+        /// </summary>
+        SkeletonKnight = 6,
+        /// <summary>
+        /// 龍
+        /// </summary>
+        Dragon = 7,
+        /// <summary>
+        /// 怪物種類總數
+        /// </summary>
+        Count = 8
+    }
+
+    /// <summary>
+    /// <para>角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質。</para> 
+    /// <para>刺客 -> 戰士 -> 法師。</para> 
+    /// <para>怪物等級為0。</para> 
+    /// <para>HP紀錄血量上限，傷害用累計的，超過上限 -> 死。</para> 
     /// </summary>
     public float[,] ATK,HP;
     public float Hurt = 0;

@@ -8,6 +8,9 @@ namespace com.BoardGameDungeon
     public class PlayerManager : ValueSet
     {
         public Career career;
+        /// <summary>
+        /// 等級與當前經驗值，升級後經驗值不會歸零而是累加
+        /// </summary>
         public int level = 1, exp = 0;
 
         /// <summary>
@@ -78,12 +81,6 @@ namespace com.BoardGameDungeon
                 {
                     attack(touchPos);
                 }
-                /*
-                //給攻擊的前推多一點空間，但要超出基本操作範圍
-                if (targetDis < 1 && targetDis > 0.3f && attackMode)
-                {
-                    attack(touchPos);
-                }*/
             }
         }
 

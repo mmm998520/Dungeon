@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\MagicianAttackManager.cs" />
     <Compile Include="Assets\Scripts\MazeCreate.cs" />
     <Compile Include="Assets\Scripts\MazeGen.cs" />
+    <Compile Include="Assets\Scripts\MonsterManager.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\ThiefAttackManager.cs" />
     <Compile Include="Assets\Scripts\ValueSet.cs" />
