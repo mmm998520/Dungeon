@@ -20,8 +20,10 @@ namespace com.BoardGameDungeon
         //刺客 -> 戰士 -> 法師
         //角色移動速度
         float moveSpeed = 5;
-        float[,] ATK = new float[3, 4] { { 0, 5, 7, 10 }, { 0, 2, 4, 6 }, { 0, 6, 8, 12 } };
-        float[,] HP = new float[3, 4] { { 0, 20, 30, 40 }, { 0, 40, 55, 70 }, { 0, 20, 30, 40 } };
+        public float[,] ATK = new float[3, 4] { { 0, 5, 7, 10 }, { 0, 2, 4, 6 }, { 0, 6, 8, 12 } };
+        //紀錄血量上限，傷害用累計的，超過上限 -> 死
+        public float[,] HP = new float[3, 4] { { 0, 20, 30, 40 }, { 0, 40, 55, 70 }, { 0, 20, 30, 40 } };
+        public float Hurt = 0;
 
         //攻擊招式，跟素質一樣可用陣列處理
         public GameObject[] Attack = new GameObject[3];
@@ -35,6 +37,12 @@ namespace com.BoardGameDungeon
 
         void Update()
         {
+            if (Input.anyKeyDown)
+            {
+                GameObject attack = Instantiate(Attack[(int)career], transform.position + Vector3.right,Quaternion.identity);
+                attack.GetComponent<AttackManager>().setValue(ATK[1, 1], 0.4f, false, true);
+            }
+
             if (attackMode)
             {
                 attackModeTimer += Time.deltaTime;
@@ -106,6 +114,7 @@ namespace com.BoardGameDungeon
             //生成攻擊在觸控方向，並旋轉攻擊朝向該方向
             float angle = Vector3.SignedAngle(Vector3.right, touchPos * Vector2.one - transform.position * Vector2.one, Vector3.forward);
             GameObject attack = Instantiate(Attack[(int)career], transform.position + Vector3.Normalize(touchPos * Vector2.one - transform.position * Vector2.one) * 0.7f, Quaternion.Euler(0,0,angle));
+            attack.GetComponent<AttackManager>().setValue(ATK[1,1], 0.4f, false, true);
         }
     }
 }
