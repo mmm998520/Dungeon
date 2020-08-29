@@ -7,6 +7,11 @@ namespace com.BoardGameDungeon
 {
     public class PlayerManager : ValueSet
     {
+        /// <summary>
+        /// player的共通父物件，提供其他component使用
+        /// </summary>
+        public static Transform players;
+
         public Career career;
         /// <summary>
         /// 等級與當前經驗值，升級後經驗值不會歸零而是累加
@@ -31,6 +36,8 @@ namespace com.BoardGameDungeon
         float attackModeTimer = 0;
         void Start()
         {
+            players = transform.parent;
+
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
             //刺客 -> 戰士 -> 法師
             ATK = new float[(int)Career.Count, 4] { { 0, 5, 7, 10 }, { 0, 2, 4, 6 }, { 0, 6, 8, 12 } };
