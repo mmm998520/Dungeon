@@ -38,7 +38,30 @@ namespace com.BoardGameDungeon
             {
                 if (Input.anyKeyDown)
                 {
-
+                    //向指定pos打出兩道射線(有間距)判定打到甚麼來決定能不能通過
+                    Vector3 dir = GameManager.Players.GetChild(1).position * Vector2.one - transform.position * Vector2.one;
+                    Vector3 tempDir = Quaternion.Euler(0, 0, 90) * dir.normalized / 2;
+                    RaycastHit2D hit1 = Physics2D.Raycast(transform.position + tempDir, dir, dir.magnitude-0.1f);
+                    Debug.DrawRay(transform.position + tempDir, dir, Color.red, 2);
+                    RaycastHit2D hit2 = Physics2D.Raycast(transform.position - tempDir, dir, dir.magnitude-0.1f);
+                    Debug.DrawRay(transform.position - tempDir, dir, Color.red, 2);
+                    if (hit1 || hit2)
+                    {
+                        /*
+                        if ((hit1.collider.tag == "side" || hit1.collider.tag == "player") && (hit2.collider.tag == "side" || hit2.collider.tag == "player"))
+                        {
+                            print("hit");
+                        }
+                        else
+                        {
+                            print("!hit");
+                        }*/
+                        print("!hit");
+                    }
+                    else
+                    {
+                        print("short");
+                    }
                     GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.identity);
                     attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);
                 }

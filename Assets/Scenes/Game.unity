@@ -223,7 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 498865812}
   m_Layer: 0
-  m_Name: Rooms
+  m_Name: Floors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 602748828}
   m_Layer: 0
   m_Name: P2
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -375,10 +375,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 106387d904c1af145a2f7b216eb564ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hurt: 0
+  Attack:
+  - {fileID: 5389400205560984897, guid: 2d02fec3f99b0564c843943c021395f9, type: 3}
+  - {fileID: 5389400205560984897, guid: a50dd53c6ac80ad4ea939d15ef70e484, type: 3}
+  - {fileID: 5389400205560984897, guid: 055cee800768838428ddf47f8663bc60, type: 3}
+  MonsterAttack:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  duration: []
+  continuous: 
   career: 1
   level: 1
   exp: 0
-  Attack: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +479,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &849332509
 GameObject:
@@ -552,7 +562,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &902867053
 GameObject:
@@ -665,7 +675,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1022865750
 GameObject:
@@ -851,6 +861,49 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1270352828
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1270352830}
+  - component: {fileID: 1270352829}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1270352829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270352828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc466bab4637de459cbf23f1f715406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1270352830
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270352828}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.261771, y: 9.166976, z: -0.27929688}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1602588251
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,7 +920,7 @@ GameObject:
   - component: {fileID: 1602588257}
   m_Layer: 0
   m_Name: P1
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -983,10 +1036,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 106387d904c1af145a2f7b216eb564ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hurt: 0
+  Attack:
+  - {fileID: 5389400205560984897, guid: 2d02fec3f99b0564c843943c021395f9, type: 3}
+  - {fileID: 5389400205560984897, guid: a50dd53c6ac80ad4ea939d15ef70e484, type: 3}
+  - {fileID: 5389400205560984897, guid: 055cee800768838428ddf47f8663bc60, type: 3}
+  MonsterAttack:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  duration: []
+  continuous: 
   career: 0
   level: 1
   exp: 0
-  Attack: []
 --- !u!1 &1905250509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,7 +1066,7 @@ GameObject:
   - component: {fileID: 1905250515}
   m_Layer: 0
   m_Name: P4
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1119,10 +1182,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 106387d904c1af145a2f7b216eb564ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hurt: 0
+  Attack:
+  - {fileID: 5389400205560984897, guid: 2d02fec3f99b0564c843943c021395f9, type: 3}
+  - {fileID: 5389400205560984897, guid: a50dd53c6ac80ad4ea939d15ef70e484, type: 3}
+  - {fileID: 5389400205560984897, guid: 055cee800768838428ddf47f8663bc60, type: 3}
+  MonsterAttack:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  duration: []
+  continuous: 
   career: 2
   level: 1
   exp: 0
-  Attack: []
 --- !u!1 &1918484245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,7 +1228,7 @@ Transform:
   - {fileID: 1985836573}
   - {fileID: 1905250510}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1922408625
 GameObject:
@@ -1203,7 +1276,7 @@ Transform:
   - {fileID: 498865812}
   - {fileID: 902867054}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1985836572
 GameObject:
@@ -1221,7 +1294,7 @@ GameObject:
   - component: {fileID: 1985836578}
   m_Layer: 0
   m_Name: P3
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1337,10 +1410,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 106387d904c1af145a2f7b216eb564ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hurt: 0
+  Attack:
+  - {fileID: 5389400205560984897, guid: 2d02fec3f99b0564c843943c021395f9, type: 3}
+  - {fileID: 5389400205560984897, guid: a50dd53c6ac80ad4ea939d15ef70e484, type: 3}
+  - {fileID: 5389400205560984897, guid: 055cee800768838428ddf47f8663bc60, type: 3}
+  MonsterAttack:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  duration: []
+  continuous: 
   career: 2
   level: 1
   exp: 0
-  Attack: []
 --- !u!1 &2091742895
 GameObject:
   m_ObjectHideFlags: 0

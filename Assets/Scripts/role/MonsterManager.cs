@@ -76,18 +76,26 @@ namespace com.BoardGameDungeon
                     //向指定pos打出兩道射線(有間距)判定打到甚麼來決定能不能通過
                     Vector3 dir = pos[j] * Vector2.one - pos[i] * Vector2.one;
                     Vector3 tempDir = Quaternion.Euler(0, 0, 90) * dir.normalized / 2;
-                    RaycastHit2D hit1 = Physics2D.Raycast(pos[i] + tempDir, dir, 100);
+                    RaycastHit2D hit1 = Physics2D.Raycast(pos[i] + tempDir, dir, dir.magnitude - 0.1f);
                     Debug.DrawRay(pos[i] + tempDir, dir, Color.red, 2);
-                    RaycastHit2D hit2 = Physics2D.Raycast(pos[i] - tempDir, dir, 100);
+                    RaycastHit2D hit2 = Physics2D.Raycast(pos[i] - tempDir, dir, dir.magnitude - 0.1f);
                     Debug.DrawRay(pos[i] - tempDir, dir, Color.red, 2);
-                    RaycastHit2D hit = Physics2D.Raycast(pos[i], pos[j] - pos[i], 100);
-                    if(hit1.collider.name == "side" && hit2.collider.name == "side")
+                    if(hit1 || hit2)
                     {
-                        passwayLengths[i, j] = Vector3.Distance(pos[i] * Vector2.one, pos[i] * Vector2.one);
+                        /*
+                        if ((hit1.collider.tag == "side" || hit1.collider.tag == "player") && (hit2.collider.tag == "side" || hit2.collider.tag == "player"))
+                        {
+                            passwayLengths[i, j] = Vector3.Distance(pos[i] * Vector2.one, pos[i] * Vector2.one);
+                        }
+                        else
+                        {
+                            passwayLengths[i, j] = cantWalk;
+                        }*/
+                        passwayLengths[i, j] = cantWalk;
                     }
                     else
                     {
-                        passwayLengths[i, j] = cantWalk;
+                        passwayLengths[i, j] = Vector3.Distance(pos[i] * Vector2.one, pos[i] * Vector2.one);
                     }
                 }
             }
