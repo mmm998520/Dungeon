@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AttackManager.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Maze\MazeCreate.cs" />
     <Compile Include="Assets\Scripts\Maze\MazeGen.cs" />
     <Compile Include="Assets\Scripts\role\MonsterManager.cs" />

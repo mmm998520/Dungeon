@@ -6,11 +6,20 @@ namespace com.BoardGameDungeon
 {
     public class MonsterManager : ValueSet
     {
+        /// <summary> 紀錄各個導航點用的pos，0為自己，前半是玩家，後半是地板 </summary>
+        Vector3[] pos;
         /// <summary> 被擊殺後玩家可獲得的經驗值 </summary>
         public static int[] exp = new int[8] { 10, 20, 10, 0, 0, 0, 0, 0 };
 
         void Start()
         {
+            //處理房間部分的不變資訊
+            pos = new Vector3[MazeGen.row * MazeGen.col + 1 + GameManager.Players.childCount];
+            for(int i = 1 + GameManager.Players.childCount; i < pos.Length; i++)
+            {
+                pos[i] = GameManager.Floors.GetChild(i).position * Vector2.one;
+            }
+
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
             //刺客 -> 戰士 -> 法師
             ATK = new float[(int)MonsterType.Count, 1] { { 4 }, { 8 }, { 9 }, { 4 }, { 10 }, { 15 }, { 20 }, { 100 } };
@@ -28,24 +37,57 @@ namespace com.BoardGameDungeon
         NearestPlayer StraightLineNearestPlayer()
         {
             float minDis = float.MaxValue;
-            Transform minDisPlayer = PlayerManager.players.GetChild(0);
-            for (int i = 0; i < PlayerManager.players.childCount; i++)
+            Transform minDisPlayer = GameManager.Players.GetChild(0);
+            for (int i = 0; i < GameManager.Players.childCount; i++)
             {
-                float Dis = Vector3.Distance(transform.position, PlayerManager.players.GetChild(i).position);
+                float Dis = Vector3.Distance(transform.position, GameManager.Players.GetChild(i).position);
                 if (minDis > Dis)
                 {
                     minDis = Dis;
-                    minDisPlayer = PlayerManager.players.GetChild(i);
+                    minDisPlayer = GameManager.Players.GetChild(i);
                 }
             }
             return new NearestPlayer(minDisPlayer, minDis, null);
         }
 
-        /// <summary> 計算導航後的最近 玩家 與其 距離 、 路徑 /// </summary>
+        /// <summary> 計算導航後的最近 玩家 與其 距離 、 路徑 </summary>
         NearestPlayer navigationNearestPlayer()
         {
+            //可能經過的路徑點，增加怪物自己的位置與玩家位置
+            int pointNum = (MazeGen.row * MazeGen.col) + 1 + GameManager.Players.childCount;
+            //每個點到彼此的距離
+            float[,] passwayLengths = new float[pointNum, pointNum];
+            //導航中距離計算分"可過"與"不可過"兩種，由射線做區分
+            int cantWalk = 999999;
+            //點的路線
+            string[] path = new string[pointNum];
+            //最短路徑的頂點集合
+            int[] S = new int[pointNum];
+
+            //將pos的變動資訊更新(玩家、怪物位置
+            pos[0] = transform.position * Vector2.one;
+            for (int i = 1; i <= GameManager.Players.childCount; i++)
+            {
+                pos[i] = GameManager.Players.GetChild(i).position * Vector2.one;
+            }
+            //計算各點間的距離
+            for (int i = 0; i < pointNum; i++)
+            {
+                for(int j = 0; j < pointNum; j++)
+                {
+                    passwayLengths[i, j] = Vector3.Distance(transform.position * Vector2.one, pos[i]);
+                }
+            }
+
+            int min;
+            int next;
+            for(int i = pointNum - 1; i > 0; i--)
+            {
+
+            }
+
             float minDis = float.MaxValue;
-            Transform minDisPlayer = PlayerManager.players.GetChild(0);
+            Transform minDisPlayer = GameManager.Players.GetChild(0);
             return new NearestPlayer(minDisPlayer, minDis, null);
         }
     }
