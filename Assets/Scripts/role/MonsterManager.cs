@@ -8,6 +8,9 @@ namespace com.BoardGameDungeon
     public class MonsterManager : ValueSet
     {
         protected MonsterType monsterType;
+
+        protected float cd;
+        protected float cdTimer;
         /// <summary> 紀錄各個導航點用的pos，0為自己，前半是玩家，後半是能通過的地板 </summary>
         Vector3[] pos;
         int[] S;
@@ -40,6 +43,7 @@ namespace com.BoardGameDungeon
 
         protected void monsterUpdate()
         {
+            cdTimer += Time.deltaTime;
             died((int)monsterType, 0);
 
             if ((timer+=Time.deltaTime) > r)

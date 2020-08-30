@@ -9,6 +9,7 @@ namespace com.BoardGameDungeon
         void Start()
         {
             monsterStart();
+            cd = 1;
         }
 
         void Update()
@@ -17,6 +18,11 @@ namespace com.BoardGameDungeon
             if (Input.anyKeyDown)
             {
                 attack();
+            }
+            if (Vector3.Distance(transform.position, target.player.position)<2 && cdTimer>cd)
+            {
+                attack();
+                cdTimer = 0;
             }
         }
 
