@@ -38,6 +38,20 @@ namespace com.BoardGameDungeon
             {
                 if (Input.anyKeyDown)
                 {
+                    Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) * Vector2.one - transform.position * Vector2.one;
+                    Vector3 tempDir = Quaternion.Euler(0, 0, 90) * dir.normalized/2;
+                    RaycastHit2D hit1 = Physics2D.Raycast(transform.position + tempDir, dir, 100);
+                    Debug.DrawRay(transform.position + tempDir, dir, Color.red, 2);
+                    RaycastHit2D hit2 = Physics2D.Raycast(transform.position - tempDir, dir, 100);
+                    Debug.DrawRay(transform.position - tempDir, dir, Color.red, 2);
+                    if (hit1.collider.name == "side" && hit2.collider.name == "side")
+                    {
+                        print("side");
+                    }
+                    else
+                    {
+                        print("other");
+                    }
                     GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.identity);
                     attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);
                 }

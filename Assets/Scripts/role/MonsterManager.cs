@@ -75,7 +75,21 @@ namespace com.BoardGameDungeon
             {
                 for(int j = 0; j < pointNum; j++)
                 {
-                    passwayLengths[i, j] = Vector3.Distance(transform.position * Vector2.one, pos[i]);
+                    Vector3 dir = pos[j] * Vector2.one - pos[i] * Vector2.one;
+                    Vector3 tempDir = Quaternion.Euler(0, 0, 90) * dir.normalized / 2;
+                    RaycastHit2D hit1 = Physics2D.Raycast(pos[i] + tempDir, dir, 100);
+                    Debug.DrawRay(pos[i] + tempDir, dir, Color.red, 2);
+                    RaycastHit2D hit2 = Physics2D.Raycast(pos[i] - tempDir, dir, 100);
+                    Debug.DrawRay(pos[i] - tempDir, dir, Color.red, 2);
+                    RaycastHit2D hit = Physics2D.Raycast(pos[i], pos[j] - pos[i], 100);
+                    if(hit1.collider.name == "side" && hit2.collider.name == "side")
+                    {
+                        passwayLengths[i, j] = Vector3.Distance(pos[i] * Vector2.one, pos[i] * Vector2.one);
+                    }
+                    else
+                    {
+                        passwayLengths[i, j] = cantWalk;
+                    }
                 }
             }
 
