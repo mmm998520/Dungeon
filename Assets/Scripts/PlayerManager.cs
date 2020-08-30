@@ -18,6 +18,8 @@ namespace com.BoardGameDungeon
         float TouchBeganTimer = 0;
         /// <summary> 紀錄點擊瞬間的點，可用於計算雙擊後觸控點是否有發生拖動 </summary>
         Vector3 TouchBeganPos;
+        /// <summary> 紀錄點擊的手指代號，若放開則為-1 </summary>
+        int TouchID = -1;
         /// <summary> 攻擊模式開關 </summary>
         bool attackMode = false;
         /// <summary> 攻擊開關開啟計時器，太久沒攻擊則關閉 </summary>
@@ -64,32 +66,50 @@ namespace com.BoardGameDungeon
                 //觸控點與角色的距離
                 float targetDis = Vector3.Distance(touchPos, transform.position * Vector2.one);
                 //距離夠近才能進行操作
-                if (targetDis < 0.5f)
+                if (targetDis < 1f)
                 {
-                    move(touchPos, targetDis);
+                    move(touchPos, targetDis, i);
                     readyForAttack(touch.phase);
+                    RecordTouchInformation(touch.phase, i);
                 }
-                //偵測雙擊後的點與觸控點距離，
-                if(Vector3.Distance(TouchBeganPos, touchPos) > 0.5f && targetDis < 1 && attackMode)
+                //偵測雙擊後的點與觸控點距離
+                if(Vector3.Distance(TouchBeganPos, touchPos) > 0.5f && targetDis < 1 && attackMode && TouchID == i)
                 {
                     attack(touchPos);
                 }
             }
         }
-
-        void move(Vector3 touchPos, float targetDis)
+        /// <summary> 紀錄點擊資訊，如果資訊變換就更新 </summary>
+        void RecordTouchInformation(TouchPhase phase, int TouchID)
         {
-            //換算後的移動距離
-            float moveDis = Time.deltaTime * moveSpeed;
-            //如果觸控點到角色的距離大於移動距離，則朝對應方向移動
-            if (targetDis > moveDis)
+            if (phase == TouchPhase.Began && TouchID == -1)
             {
-                transform.position += Vector3.Normalize(touchPos * Vector2.one  - transform.position * Vector2.one) * moveDis;
+                TouchBeganPos = transform.position * Vector2.one;
+                this.TouchID = TouchID;
             }
-            //反之，直接瞬移到觸控點(因為移動距離夠)
-            else
+            //放開的手指若非按下的手指則無反應，避免兩人過近操作
+            else if(phase == TouchPhase.Ended && this.TouchID == TouchID)
             {
-                transform.position = new Vector3(touchPos.x, touchPos.y, transform.position.z);
+                this.TouchID = -1;
+            }
+        }
+
+        void move(Vector3 touchPos, float targetDis, int TouchID)
+        {
+            if(this.TouchID == TouchID)
+            {
+                //換算後的移動距離
+                float moveDis = Time.deltaTime * moveSpeed;
+                //如果觸控點到角色的距離大於移動距離，則朝對應方向移動
+                if (targetDis > moveDis)
+                {
+                    transform.position += Vector3.Normalize(touchPos * Vector2.one - transform.position * Vector2.one) * moveDis;
+                }
+                //反之，直接瞬移到觸控點(因為移動距離夠)
+                else
+                {
+                    transform.position = new Vector3(touchPos.x, touchPos.y, transform.position.z);
+                }
             }
         }
 
@@ -103,12 +123,9 @@ namespace com.BoardGameDungeon
                 if (TouchBeganTimer < 0.5f)
                 {
                     attackMode = true;
-
                 }
                 //計時器歸零，開始計算間隔
                 TouchBeganTimer = 0;
-                //紀錄點擊瞬間的點
-                TouchBeganPos = transform.position * Vector2.one;
             }
         }
 
