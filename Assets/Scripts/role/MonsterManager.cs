@@ -16,6 +16,8 @@ namespace com.BoardGameDungeon
         /// <summary> 攻擊、移動目標 </summary>
         public NearestPlayer target;
 
+        float timer = 0;
+        float r = Random.Range(1f,2f);
         void Start()
         {
             //處理房間部分的不變資訊，暫定所有房間都能通過
@@ -38,8 +40,24 @@ namespace com.BoardGameDungeon
 
         void Update()
         {
-            target = navigationNearestPlayer();
-            transform.Translate((target.road * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime);
+            if ((timer+=Time.deltaTime) > r)
+            {
+                target = navigationNearestPlayer();
+                r = Random.Range(1f, 2f);
+                timer = 0;
+            }
+            Vector3 dirM = (target.road * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
+            if (dirM.magnitude > (target.road * Vector2.one - transform.position * Vector2.one).magnitude)
+            {
+                transform.position = target.road;
+                target = navigationNearestPlayer();
+                r = Random.Range(1f, 2f);
+                timer = 0;
+            }
+            else
+            {
+                transform.position = transform.position + dirM;
+            }
         }
 
         /// <summary> 計算直線距離上的最近 玩家 與其 距離  </summary>
@@ -76,6 +94,8 @@ namespace com.BoardGameDungeon
             //最短路徑的頂點集合
             S = new int[pos.Length];
 
+            List<NearestPlayer> playerDis = new List<NearestPlayer>();
+
             //將pos的變動資訊更新(玩家、怪物位置
             pos[0] = transform.position * Vector2.one;
             for (int i = 1; i <= GameManager.Players.childCount; i++)
@@ -88,20 +108,27 @@ namespace com.BoardGameDungeon
             {
                 for(int j = 0; j < pos.Length; j++)
                 {
-                    //向指定pos打出兩道射線(有間距)判定打到甚麼來決定能不能通過
-                    Vector3 dir = pos[j] * Vector2.one - pos[i] * Vector2.one;
-                    Vector3 tempDir = Quaternion.Euler(0, 0, 90) * dir.normalized / 2;
-                    RaycastHit2D hit1 = Physics2D.Raycast(pos[i] + tempDir, dir, dir.magnitude - 0.1f);
-                    //Debug.DrawRay(pos[i] + tempDir, dir, Color.red, 2);
-                    RaycastHit2D hit2 = Physics2D.Raycast(pos[i] - tempDir, dir, dir.magnitude - 0.1f);
-                    //Debug.DrawRay(pos[i] - tempDir, dir, Color.red, 2);
-                    if((hit1 || hit2) || (i <= GameManager.Players.childCount && i > 0))
+                    if (i > GameManager.Players.childCount && j > GameManager.Players.childCount && Vector3.Distance(pos[j] * Vector2.one, pos[i] * Vector2.one)>2.001f)
                     {
                         passwayLengths[i, j] = cantWalk;
                     }
                     else
                     {
-                        passwayLengths[i, j] = dir.magnitude;
+                        //向指定pos打出兩道射線(有間距)判定打到甚麼來決定能不能通過
+                        Vector3 dir = pos[j] * Vector2.one - pos[i] * Vector2.one;
+                        Vector3 tempDir = Quaternion.Euler(0, 0, 90) * dir.normalized / 2;
+                        RaycastHit2D hit1 = Physics2D.Raycast(pos[i] + tempDir, dir, dir.magnitude - 0.1f);
+                        //Debug.DrawRay(pos[i] + tempDir, dir, Color.red, 2);
+                        RaycastHit2D hit2 = Physics2D.Raycast(pos[i] - tempDir, dir, dir.magnitude - 0.1f);
+                        //Debug.DrawRay(pos[i] - tempDir, dir, Color.red, 2);
+                        if ((hit1 || hit2) || (i <= GameManager.Players.childCount && i > 0))
+                        {
+                            passwayLengths[i, j] = cantWalk;
+                        }
+                        else
+                        {
+                            passwayLengths[i, j] = dir.magnitude;
+                        }
                     }
                 }
             }
@@ -149,7 +176,25 @@ namespace com.BoardGameDungeon
                     {
                         nextPoint = next;
                     }
-                    return new NearestPlayer(GameManager.Players.GetChild(next-1), min, pos[nextPoint]);
+                    playerDis.Add(new NearestPlayer(GameManager.Players.GetChild(next - 1), min, pos[nextPoint]));
+                    if (playerDis.Count >= GameManager.Players.childCount)
+                    {
+                        if(target.player != playerDis[0].player)
+                        {
+                            if (target.Distance+1 > playerDis[0].Distance)
+                            {
+                                Debug.LogError(playerDis[1].player.name);
+                                return playerDis[1];
+                            }
+                            else
+                            {
+                                Debug.LogError(playerDis[0].player.name);
+                                return playerDis[0];
+                            }
+                        }
+                        Debug.LogError(playerDis[0].player.name);
+                        return playerDis[0];
+                    }
                 }
                 // 重新初始0行所有列值
                 for (int j = 1; j < pos.Length; j++)//迴圈第0行的列
@@ -164,7 +209,8 @@ namespace com.BoardGameDungeon
                     }
                 }
             }
-            
+
+            Debug.LogError("!!!!!!!!!!!!!!!!!!!!!!!");
             return new NearestPlayer(null, 0);
         }
 
