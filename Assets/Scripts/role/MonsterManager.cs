@@ -24,10 +24,10 @@ namespace com.BoardGameDungeon
 
         }
 
-        /// <summary> 計算直線距離上的最近玩家 </summary>
+        /// <summary> 計算直線距離上的最近 玩家 與其 距離  </summary>
         NearestPlayer StraightLineNearestPlayer()
         {
-            float minDis = 9999999999f;
+            float minDis = float.MaxValue;
             Transform minDisPlayer = PlayerManager.players.GetChild(0);
             for (int i = 0; i < PlayerManager.players.childCount; i++)
             {
@@ -38,9 +38,18 @@ namespace com.BoardGameDungeon
                     minDisPlayer = PlayerManager.players.GetChild(i);
                 }
             }
-            return new NearestPlayer(minDisPlayer, minDis);
+            return new NearestPlayer(minDisPlayer, minDis, null);
+        }
+
+        /// <summary> 計算導航後的最近 玩家 與其 距離 、 路徑 /// </summary>
+        NearestPlayer navigationNearestPlayer()
+        {
+            float minDis = float.MaxValue;
+            Transform minDisPlayer = PlayerManager.players.GetChild(0);
+            return new NearestPlayer(minDisPlayer, minDis, null);
         }
     }
+
     /// <summary> 拿來儲存最近的玩家的資訊，哪個玩家、距離多遠，智能移動直線移動距離皆可 </summary>
     public class NearestPlayer
     {
@@ -48,10 +57,13 @@ namespace com.BoardGameDungeon
         public Transform player;
         /// <summary> 距離多遠 </summary>
         public float Distance;
-        public NearestPlayer(Transform _player, float _Distance)
+        /// <summary> 導航用最近路徑，非導航則null </summary>
+        public Vector3[] road;
+        public NearestPlayer(Transform _player, float _Distance , Vector3[] _road)
         {
             player = _player;
             Distance = _Distance;
+            road = _road;
         }
     }
 }
