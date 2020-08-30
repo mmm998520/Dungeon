@@ -14,7 +14,7 @@ namespace com.BoardGameDungeon
         }
 
         void Update()
-        {
+        {/*
             monsterUpdate();
             if (Input.anyKeyDown)
             {
@@ -24,7 +24,7 @@ namespace com.BoardGameDungeon
             {
                 attack();
                 cdTimer = 0;
-            }
+            }*/
         }
 
         void attack()

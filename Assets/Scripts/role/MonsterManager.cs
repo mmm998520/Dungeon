@@ -31,7 +31,7 @@ namespace com.BoardGameDungeon
         /// <summary> 總距離(g+h) </summary>
         float[,] f;
         /// <summary> 紀錄到該路徑的方向，8方位，上方為0，順時針遞增 </summary>
-        int[,] dirs;
+        Vector3[,] dirs;
 
         protected void monsterStart()
         {
@@ -95,13 +95,14 @@ namespace com.BoardGameDungeon
             g = new float[MazeGen.row, MazeGen.col];
             h = new float[MazeGen.row, MazeGen.col];
             f = new float[MazeGen.row, MazeGen.col];
+            dirs = new Vector3[MazeGen.row, MazeGen.col];
             for (int i = 0; i < MazeGen.row; i++)
             {
                 for (int j = 0; j < MazeGen.col; j++)
                 {
-                    g[i, j] = int.MaxValue;
-                    h[i, j] = int.MaxValue;
-                    f[i, j] = int.MaxValue;
+                    g[i, j] = float.MaxValue;
+                    h[i, j] = float.MaxValue;
+                    f[i, j] = float.MaxValue;
                 }
             }
 
@@ -121,6 +122,9 @@ namespace com.BoardGameDungeon
                     break;
                 }
             }
+
+            g[startRow, startCol] = 0;
+
             //終點像素化
             int[] endRow = new int[GameManager.Players.childCount], endCol = new int[GameManager.Players.childCount];
             for (int i = 0; i < GameManager.Players.childCount; i++)
@@ -134,11 +138,12 @@ namespace com.BoardGameDungeon
                 }
                 for (endCol[i] = 0; endCol[i] < MazeGen.Creat_col; endCol[i]++)
                 {
-                    if (Mathf.Abs(GameManager.Players.GetChild(i).position.x - (endCol[i] * 2 + 1)) <= 1)
+                    if (Mathf.Abs(GameManager.Players.GetChild(i).position.y - (endCol[i] * 2 + 1)) <= 1)
                     {
                         break;
                     }
                 }
+                Debug.Log(endRow[i] + "," + endCol[i]);
             }
             //紀錄當前位置
             int currentRow = startRow, currentCol = startCol;
@@ -210,6 +215,60 @@ namespace com.BoardGameDungeon
                     if (endRow[i] == currentRow && endCol[i] == currentCol)
                     {
                         Debug.LogError("YA");
+                        Debug.Log(endRow[i] +","+ endCol[i]);
+                        Debug.Log(currentRow + ","+ currentCol);
+                        int stepRow = currentRow, stepCol = currentCol;
+                        int time = 0;
+                        for (int t = 0; t < MazeGen.row; t++)
+                        {
+                            for (int tt = 0; tt < MazeGen.col; tt++)
+                            {
+                                print(t + "," + tt + "," + dirs[t, tt]);
+                            }
+                        }/*
+                        do
+                        {
+                            Debug.Log(dirs[stepRow, stepCol]);
+                            switch(dirs[stepRow, stepCol])
+                            {
+                                case 0:
+                                    stepRow--;
+                                    break;
+                                case 1:
+                                    stepRow--;
+                                    stepCol--;
+                                    break;
+                                case 2:
+                                    stepCol--;
+                                    break;
+                                case 3:
+                                    stepRow++;
+                                    stepCol--;
+                                    break;
+                                case 4:
+                                    stepRow++;
+                                    break;
+                                case 5:
+                                    stepRow++;
+                                    stepCol++;
+                                    break;
+                                case 6:
+                                    stepCol++;
+                                    break;
+                                case 7:
+                                    stepRow--;
+                                    stepCol++;
+                                    break;
+                            }
+                            if (time++ > 100)
+                            {
+                                Debug.LogError("Boom");
+                                break;
+                            }
+                        }
+                        while (!(stepRow == startRow && stepCol == startCol));
+                        */
+
                         return new NearestPlayer(null, 0);
                     }
                 }
@@ -267,11 +326,20 @@ namespace com.BoardGameDungeon
             if(g[nextRow, nextCol] > g[currentRow, currentCol] + cost)
             {
                 g[nextRow, nextCol] = g[currentRow, currentCol] + cost;
-                dirs[nextRow, nextCol] = dir;
+                dirs[nextRow, nextCol] = new Vector3(currentRow, currentCol);
             }
-            if(h[nextRow, nextCol]>Vector3.Distance(new Vector3(nextRow * 2 + 1, nextCol * 2 + 1), new Vector3(currentRow * 2 + 1, currentCol * 2 + 1)))
+            float minDistance = float.MaxValue;
+            for(int i = 0; i < GameManager.Players.childCount; i++)
             {
-                h[nextRow, nextCol] = Vector3.Distance(new Vector3(nextRow * 2 + 1, nextCol * 2 + 1), new Vector3(currentRow * 2 + 1, currentCol * 2 + 1));
+                float dis = Vector3.Distance(new Vector3(nextRow * 2 + 1, nextCol * 2 + 1), GameManager.Players.position);
+                if (minDistance > dis)
+                {
+                    minDistance = dis;
+                }
+            }
+            if(h[nextRow, nextCol]> minDistance)
+            {
+                h[nextRow, nextCol] = minDistance;
             }
             if(f[nextRow, nextCol]> g[nextRow, nextCol]+ h[nextRow, nextCol])
             {
