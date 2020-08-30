@@ -183,16 +183,16 @@ namespace com.BoardGameDungeon
                         {
                             if (target.Distance+1 > playerDis[0].Distance)
                             {
-                                Debug.LogError(playerDis[1].player.name);
+                                //Debug.LogError(playerDis[1].player.name);
                                 return playerDis[1];
                             }
                             else
                             {
-                                Debug.LogError(playerDis[0].player.name);
+                                //Debug.LogError(playerDis[0].player.name);
                                 return playerDis[0];
                             }
                         }
-                        Debug.LogError(playerDis[0].player.name);
+                        //Debug.LogError(playerDis[0].player.name);
                         return playerDis[0];
                     }
                 }
