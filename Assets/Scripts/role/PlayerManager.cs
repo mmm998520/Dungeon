@@ -39,12 +39,12 @@ namespace com.BoardGameDungeon
             timer();
 
             //電腦測試用
-            if(Input.touchCount == 0)
+            if (Input.touchCount == 0)
             {
                 if (Input.anyKeyDown)
                 {
                     GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.identity);
-                    attack.GetComponent<AttackManager>().setValue(ATK[1, 1], 0.4f, false, true);
+                    attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);
                 }
             }
 
@@ -70,7 +70,7 @@ namespace com.BoardGameDungeon
                     readyForAttack(touch.phase);
                 }
                 //偵測雙擊後的點與觸控點距離，
-                if(Vector3.Distance(TouchBeganPos, touchPos) > 0.5f && targetDis < 1 && attackMode)
+                if (Vector3.Distance(TouchBeganPos, touchPos) > 0.5f && targetDis < 1 && attackMode)
                 {
                     attack(touchPos);
                 }
@@ -84,7 +84,7 @@ namespace com.BoardGameDungeon
             //如果觸控點到角色的距離大於移動距離，則朝對應方向移動
             if (targetDis > moveDis)
             {
-                transform.position += Vector3.Normalize(touchPos * Vector2.one  - transform.position * Vector2.one) * moveDis;
+                transform.position += Vector3.Normalize(touchPos * Vector2.one - transform.position * Vector2.one) * moveDis;
             }
             //反之，直接瞬移到觸控點(因為移動距離夠)
             else
@@ -97,7 +97,7 @@ namespace com.BoardGameDungeon
         void readyForAttack(TouchPhase phase)
         {
             //如果接觸點是點擊瞬間則開始倒數計時 (看時間內有沒有其他點擊發生)
-            if(phase == TouchPhase.Began)
+            if (phase == TouchPhase.Began)
             {
                 //與上次點擊的間隔夠短就能開啟攻擊模式 (快點兩下)
                 if (TouchBeganTimer < 0.5f)
@@ -117,7 +117,7 @@ namespace com.BoardGameDungeon
             attackMode = false;
             //生成攻擊在觸控方向，並旋轉攻擊朝向該方向
             float angle = Vector3.SignedAngle(Vector3.right, touchPos * Vector2.one - transform.position * Vector2.one, Vector3.forward);
-            GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.Euler(0,0,angle));
+            GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.Euler(0, 0, angle));
             //設定攻擊參數
             attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);
         }
