@@ -6,14 +6,14 @@ namespace com.BoardGameDungeon
 {
     public class MonsterManager : ValueSet
     {
-        /// <summary> 紀錄各個導航點用的pos，0為自己，前半是玩家，後半是地板 </summary>
+        /// <summary> 紀錄各個導航點用的pos，0為自己，前半是玩家，後半是能通過的地板 </summary>
         Vector3[] pos;
         /// <summary> 被擊殺後玩家可獲得的經驗值 </summary>
         public static int[] exp = new int[8] { 10, 20, 10, 0, 0, 0, 0, 0 };
 
         void Start()
         {
-            //處理房間部分的不變資訊
+            //處理房間部分的不變資訊，暫定所有房間都能通過
             pos = new Vector3[MazeGen.row * MazeGen.col + 1 + GameManager.Players.childCount];
             for(int i = 1 + GameManager.Players.childCount; i < pos.Length; i++)
             {
@@ -53,16 +53,14 @@ namespace com.BoardGameDungeon
         /// <summary> 計算導航後的最近 玩家 與其 距離 、 路徑 </summary>
         NearestPlayer navigationNearestPlayer()
         {
-            //可能經過的路徑點，增加怪物自己的位置與玩家位置
-            int pointNum = (MazeGen.row * MazeGen.col) + 1 + GameManager.Players.childCount;
             //每個點到彼此的距離
-            float[,] passwayLengths = new float[pointNum, pointNum];
+            float[,] passwayLengths = new float[pos.Length, pos.Length];
             //導航中距離計算分"可過"與"不可過"兩種，由射線做區分
             int cantWalk = 999999;
             //點的路線
-            string[] path = new string[pointNum];
+            string[] path = new string[pos.Length];
             //最短路徑的頂點集合
-            int[] S = new int[pointNum];
+            int[] S = new int[pos.Length];
 
             //將pos的變動資訊更新(玩家、怪物位置
             pos[0] = transform.position * Vector2.one;
@@ -71,10 +69,11 @@ namespace com.BoardGameDungeon
                 pos[i] = GameManager.Players.GetChild(i).position * Vector2.one;
             }
             //計算各點間的距離
-            for (int i = 0; i < pointNum; i++)
+            for (int i = 0; i < pos.Length; i++)
             {
-                for(int j = 0; j < pointNum; j++)
+                for(int j = 0; j < pos.Length; j++)
                 {
+                    //向指定pos打出兩道射線(有間距)判定打到甚麼來決定能不能通過
                     Vector3 dir = pos[j] * Vector2.one - pos[i] * Vector2.one;
                     Vector3 tempDir = Quaternion.Euler(0, 0, 90) * dir.normalized / 2;
                     RaycastHit2D hit1 = Physics2D.Raycast(pos[i] + tempDir, dir, 100);
@@ -95,7 +94,7 @@ namespace com.BoardGameDungeon
 
             int min;
             int next;
-            for(int i = pointNum - 1; i > 0; i--)
+            for(int i = pos.Length - 1; i > 0; i--)
             {
 
             }
