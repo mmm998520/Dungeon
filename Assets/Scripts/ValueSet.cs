@@ -10,21 +10,13 @@ public class ValueSet : MonoBehaviour
     /// </summary>
     public enum Career
     {
-        /// <summary>
-        /// 刺客
-        /// </summary>
+        /// <summary> 刺客 </summary>
         Thief = 0,
-        /// <summary>
-        /// 戰士
-        /// </summary>
+        /// <summary> 戰士 </summary>
         Warrior = 1,
-        /// <summary>
-        /// 法師
-        /// </summary>
+        /// <summary> 法師 </summary>
         Magician = 2,
-        /// <summary>
-        /// 角色種類總數
-        /// </summary>
+        /// <summary> 角色種類總數 </summary>
         Count = 3
     }
 
@@ -33,41 +25,23 @@ public class ValueSet : MonoBehaviour
     /// </summary>
     public enum MonsterType
     {
-        /// <summary>
-        /// 蜘蛛
-        /// </summary>
+        /// <summary> 蜘蛛 </summary>
         spider = 0,
-        /// <summary>
-        /// 牛頭人
-        /// </summary>
+        /// <summary> 牛頭人 </summary>
         Tauren = 1,
-        /// <summary>
-        /// 史萊姆
-        /// </summary>
+        /// <summary> 史萊姆 </summary>
         Slime = 2,
-        /// <summary>
-        /// 蝙蝠
-        /// </summary>
+        /// <summary> 蝙蝠 </summary>
         bat = 3,
-        /// <summary>
-        /// 狼
-        /// </summary>
+        /// <summary> 狼 </summary>
         wolf = 4,
-        /// <summary>
-        /// 幽靈
-        /// </summary>
+        /// <summary> 幽靈 </summary>
         ghost = 5,
-        /// <summary>
-        /// 幽靈
-        /// </summary>
+        /// <summary> 骷髏騎士 </summary>
         SkeletonKnight = 6,
-        /// <summary>
-        /// 龍
-        /// </summary>
+        /// <summary> 龍 </summary>
         Dragon = 7,
-        /// <summary>
-        /// 怪物種類總數
-        /// </summary>
+        /// <summary> 怪物種類總數 </summary>
         Count = 8
     }
 
@@ -83,20 +57,12 @@ public class ValueSet : MonoBehaviour
     protected float moveSpeed = 10;
 
     //招式
-    /// <summary>
-    /// 攻擊招式，跟素質一樣可用陣列處理
-    /// </summary>
+    /// <summary> 攻擊招式，跟素質一樣可用陣列處理 </summary>
     public GameObject[] Attack = new GameObject[3];
-    /// <summary>
-    /// 怪物攻擊招式，跟素質一樣可用陣列處理
-    /// </summary>
+    /// <summary> 怪物攻擊招式，跟素質一樣可用陣列處理 </summary>
     public GameObject[] MonsterAttack = new GameObject[3];
-    /// <summary>
-    /// 攻擊招式持續時間列表
-    /// </summary>
+    /// <summary> 攻擊招式持續時間列表 </summary>
     public float[] duration;
-    /// <summary>
-    /// 攻擊招式是否為持續傷害
-    /// </summary>
+    /// <summary> 攻擊招式是否為持續傷害 </summary>
     public bool[] continuous;
 }

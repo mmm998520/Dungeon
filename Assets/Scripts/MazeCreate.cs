@@ -41,9 +41,7 @@ namespace com.BoardGameDungeon
             return maze;
         }
 
-        /// <summary>
-        /// 迷宮生成過程中，記錄已經找到的點
-        /// </summary>
+        /// <summary> 迷宮生成過程中，記錄已經找到的點 </summary>
         public List<int> findList = new List<int>();
 
         //迷宮資料

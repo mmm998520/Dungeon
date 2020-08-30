@@ -7,32 +7,20 @@ namespace com.BoardGameDungeon
 {
     public class PlayerManager : ValueSet
     {
-        /// <summary>
-        /// player的共通父物件，提供其他component使用
-        /// </summary>
+        /// <summary> player的共通父物件，提供其他component使用 </summary>
         public static Transform players;
 
         public Career career;
-        /// <summary>
-        /// 等級與當前經驗值，升級後經驗值不會歸零而是累加
-        /// </summary>
+        /// <summary> 等級與當前經驗值，升級後經驗值不會歸零而是累加 </summary>
         public int level = 1, exp = 0;
 
-        /// <summary>
-        /// 紀錄點擊間隔用的計時器
-        /// </summary>
+        /// <summary> 紀錄點擊間隔用的計時器 </summary>
         float TouchBeganTimer = 0;
-        /// <summary>
-        /// 紀錄點擊瞬間的點，可用於計算雙擊後觸控點是否有發生拖動
-        /// </summary>
+        /// <summary> 紀錄點擊瞬間的點，可用於計算雙擊後觸控點是否有發生拖動 </summary>
         Vector3 TouchBeganPos;
-        /// <summary>
-        /// 攻擊模式開關
-        /// </summary>
+        /// <summary> 攻擊模式開關 </summary>
         bool attackMode = false;
-        /// <summary>
-        /// 攻擊開關開啟計時器，太久沒攻擊則關閉
-        /// </summary>
+        /// <summary> 攻擊開關開啟計時器，太久沒攻擊則關閉 </summary>
         float attackModeTimer = 0;
         void Start()
         {
@@ -63,9 +51,7 @@ namespace com.BoardGameDungeon
             touchBehavior();
         }
 
-        /// <summary>
-        /// 統整觸控行為
-        /// </summary>
+        /// <summary> 統整觸控行為 </summary>
         void touchBehavior()
         {
             //對不同觸控點分別處裡
@@ -136,9 +122,7 @@ namespace com.BoardGameDungeon
             attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);
         }
 
-        /// <summary>
-        /// 攻擊開關開啟計時器、點擊間隔計時器
-        /// </summary>
+        /// <summary> 攻擊開關開啟計時器、點擊間隔計時器 </summary>
         void timer()
         {
             //攻擊開關開啟計時器

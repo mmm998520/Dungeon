@@ -6,9 +6,7 @@ namespace com.BoardGameDungeon
 {
     public class MonsterManager : ValueSet
     {
-        /// <summary>
-        /// 被擊殺後玩家可獲得的經驗值
-        /// </summary>
+        /// <summary> 被擊殺後玩家可獲得的經驗值 </summary>
         public static int[] exp = new int[8] { 10, 20, 10, 0, 0, 0, 0, 0 };
 
         void Start()
@@ -26,10 +24,7 @@ namespace com.BoardGameDungeon
 
         }
 
-        /// <summary>
-        /// 計算直線距離上的最近玩家
-        /// </summary>
-        /// <returns></returns>
+        /// <summary> 計算直線距離上的最近玩家 </summary>
         NearestPlayer StraightLineNearestPlayer()
         {
             float minDis = 9999999999f;
@@ -46,18 +41,12 @@ namespace com.BoardGameDungeon
             return new NearestPlayer(minDisPlayer, minDis);
         }
     }
-    /// <summary>
-    /// 拿來儲存最近的玩家的資訊，哪個玩家、距離多遠，智能移動直線移動距離皆可
-    /// </summary>
+    /// <summary> 拿來儲存最近的玩家的資訊，哪個玩家、距離多遠，智能移動直線移動距離皆可 </summary>
     public class NearestPlayer
     {
-        /// <summary>
-        /// 最近的玩家
-        /// </summary>
+        /// <summary> 最近的玩家 </summary>
         public Transform player;
-        /// <summary>
-        /// 距離多遠
-        /// </summary>
+        /// <summary> 距離多遠 </summary>
         public float Distance;
         public NearestPlayer(Transform _player, float _Distance)
         {
