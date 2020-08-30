@@ -8,6 +8,7 @@ namespace com.BoardGameDungeon
     {
         void Start()
         {
+            navigationNearestPlayer();
             monsterStart();
             cd = 1;
         }
