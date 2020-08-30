@@ -47,20 +47,11 @@ namespace com.BoardGameDungeon
                     Debug.DrawRay(transform.position - tempDir, dir, Color.red, 2);
                     if (hit1 || hit2)
                     {
-                        /*
-                        if ((hit1.collider.tag == "side" || hit1.collider.tag == "player") && (hit2.collider.tag == "side" || hit2.collider.tag == "player"))
-                        {
-                            print("hit");
-                        }
-                        else
-                        {
-                            print("!hit");
-                        }*/
-                        print("!hit");
+                        //print("!hit");
                     }
                     else
                     {
-                        print("short");
+                        //print("short");
                     }
                     GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.identity);
                     attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);

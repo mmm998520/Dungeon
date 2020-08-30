@@ -8,6 +8,7 @@ namespace com.BoardGameDungeon
     {
         /// <summary> 紀錄各個導航點用的pos，0為自己，前半是玩家，後半是能通過的地板 </summary>
         Vector3[] pos;
+        int[] S;
         /// <summary> 被擊殺後玩家可獲得的經驗值 </summary>
         public static int[] exp = new int[8] { 10, 20, 10, 0, 0, 0, 0, 0 };
 
@@ -17,7 +18,7 @@ namespace com.BoardGameDungeon
             pos = new Vector3[MazeGen.row * MazeGen.col + 1 + GameManager.Players.childCount];
             for(int i = 1 + GameManager.Players.childCount; i < pos.Length; i++)
             {
-                pos[i] = GameManager.Floors.GetChild(i).position * Vector2.one;
+                pos[i] = GameManager.Floors.GetChild(i-1- GameManager.Players.childCount).position * Vector2.one;
             }
 
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
@@ -30,7 +31,10 @@ namespace com.BoardGameDungeon
 
         void Update()
         {
-
+            if (Input.GetMouseButtonDown(0))
+            {
+                navigationNearestPlayer();
+            }
         }
 
         /// <summary> 計算直線距離上的最近 玩家 與其 距離  </summary>
@@ -60,14 +64,15 @@ namespace com.BoardGameDungeon
             //點的路線
             string[] path = new string[pos.Length];
             //最短路徑的頂點集合
-            int[] S = new int[pos.Length];
+            S = new int[pos.Length];
 
             //將pos的變動資訊更新(玩家、怪物位置
             pos[0] = transform.position * Vector2.one;
             for (int i = 1; i <= GameManager.Players.childCount; i++)
             {
-                pos[i] = GameManager.Players.GetChild(i).position * Vector2.one;
+                pos[i] = GameManager.Players.GetChild(i-1).position * Vector2.one;
             }
+
             //計算各點間的距離
             for (int i = 0; i < pos.Length; i++)
             {
@@ -80,36 +85,76 @@ namespace com.BoardGameDungeon
                     Debug.DrawRay(pos[i] + tempDir, dir, Color.red, 2);
                     RaycastHit2D hit2 = Physics2D.Raycast(pos[i] - tempDir, dir, dir.magnitude - 0.1f);
                     Debug.DrawRay(pos[i] - tempDir, dir, Color.red, 2);
-                    if(hit1 || hit2)
+                    if((hit1 || hit2) || (i <= GameManager.Players.childCount && i > 0))
                     {
-                        /*
-                        if ((hit1.collider.tag == "side" || hit1.collider.tag == "player") && (hit2.collider.tag == "side" || hit2.collider.tag == "player"))
-                        {
-                            passwayLengths[i, j] = Vector3.Distance(pos[i] * Vector2.one, pos[i] * Vector2.one);
-                        }
-                        else
-                        {
-                            passwayLengths[i, j] = cantWalk;
-                        }*/
                         passwayLengths[i, j] = cantWalk;
                     }
                     else
                     {
-                        passwayLengths[i, j] = Vector3.Distance(pos[i] * Vector2.one, pos[i] * Vector2.one);
+                        passwayLengths[i, j] = dir.magnitude;
                     }
                 }
             }
 
-            int min;
+            float min;
             int next;
             for(int i = pos.Length - 1; i > 0; i--)
             {
-
+                min = float.MaxValue;
+                next = 0;
+                for (int j = 1; j < pos.Length; j++)//迴圈第0行的列
+                {
+                    if ((IsContain(j) == -1) && (passwayLengths[0, j] < min))//不在S中,找出第一行最小的元素所在的列
+                    {
+                        min = passwayLengths[0, j];
+                        next = j;
+                    }
+                }
+                //將下一個點加入S
+                S[next] = next;
+                //輸出最短距離和路徑
+                if (min >= cantWalk)
+                {
+                    Debug.Log("V0到V" + next + "的最短路徑為：無" + "," + pos[next]);
+                }
+                else
+                {
+                    Debug.Log("V0到V" + next + "的最短路徑為：" + min + ",路徑為：V0" + path[next] + "->V" + next + "," + pos[next]);
+                }
+                if(next<=GameManager.Players.childCount&& next > 0)
+                {
+                    break;
+                }
+                // 重新初始0行所有列值
+                for (int j = 1; j < pos.Length; j++)//迴圈第0行的列
+                {
+                    if (IsContain(j) == -1)//初始化除包含在S中的
+                    {
+                        if ((passwayLengths[next, j] + min) < passwayLengths[0, j])//如果小於原來的值就替換
+                        {
+                            passwayLengths[0, j] = passwayLengths[next, j] + min;
+                            path[j] = path[next] + "->V" + next;//記錄過程點
+                        }
+                    }
+                }
             }
-
+            
             float minDis = float.MaxValue;
             Transform minDisPlayer = GameManager.Players.GetChild(0);
             return new NearestPlayer(minDisPlayer, minDis, null);
+        }
+
+        int IsContain(int m)//判斷元素是否在mst中
+        {
+            int index = -1;
+            for (int i = 1; i < pos.Length; i++)
+            {
+                if (S[i] == m)
+                {
+                    index = i;
+                }
+            }
+            return index;
         }
     }
 
