@@ -7,6 +7,8 @@ namespace com.BoardGameDungeon
 {
     public class MonsterManager : ValueSet
     {
+        public GameObject[] tempDir;
+
         protected MonsterType monsterType;
 
         protected float cd;
@@ -31,7 +33,7 @@ namespace com.BoardGameDungeon
         /// <summary> 總距離(g+h) </summary>
         float[,] f;
         /// <summary> 紀錄到該路徑的方向，8方位，上方為0，順時針遞增 </summary>
-        Vector3[,] dirs;
+        int[,] dirs;
 
         protected void monsterStart()
         {
@@ -95,7 +97,7 @@ namespace com.BoardGameDungeon
             g = new float[MazeGen.row, MazeGen.col];
             h = new float[MazeGen.row, MazeGen.col];
             f = new float[MazeGen.row, MazeGen.col];
-            dirs = new Vector3[MazeGen.row, MazeGen.col];
+            dirs = new int[MazeGen.row, MazeGen.col];
             for (int i = 0; i < MazeGen.row; i++)
             {
                 for (int j = 0; j < MazeGen.col; j++)
@@ -224,8 +226,9 @@ namespace com.BoardGameDungeon
                             for (int tt = 0; tt < MazeGen.col; tt++)
                             {
                                 print(t + "," + tt + "," + dirs[t, tt]);
+                                Instantiate(tempDir[dirs[t, tt]], new Vector3(t * 2 + 1, tt * 2 + 1), Quaternion.identity);
                             }
-                        }/*
+                        }
                         do
                         {
                             Debug.Log(dirs[stepRow, stepCol]);
@@ -267,7 +270,7 @@ namespace com.BoardGameDungeon
                             }
                         }
                         while (!(stepRow == startRow && stepCol == startCol));
-                        */
+
 
                         return new NearestPlayer(null, 0);
                     }
@@ -326,7 +329,7 @@ namespace com.BoardGameDungeon
             if(g[nextRow, nextCol] > g[currentRow, currentCol] + cost)
             {
                 g[nextRow, nextCol] = g[currentRow, currentCol] + cost;
-                dirs[nextRow, nextCol] = new Vector3(currentRow, currentCol);
+                dirs[nextRow, nextCol] = dir;
             }
             float minDistance = float.MaxValue;
             for(int i = 0; i < GameManager.Players.childCount; i++)
