@@ -915,9 +915,9 @@ GameObject:
   - component: {fileID: 1541575052}
   - component: {fileID: 1541575051}
   - component: {fileID: 1541575050}
-  - component: {fileID: 1541575053}
   - component: {fileID: 1541575054}
   - component: {fileID: 1541575049}
+  - component: {fileID: 1541575053}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -1016,18 +1016,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1541575048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa16dc159f547b5418d9c613d1c50655, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d155f691b4a1974b80610ee53546194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Hurt: 0
-  Attack:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Attack: []
   MonsterAttack:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
+  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
+  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
+  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
+  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
+  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
+  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
+  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
   duration: []
   continuous: 
 --- !u!58 &1541575054

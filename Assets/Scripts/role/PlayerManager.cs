@@ -32,7 +32,7 @@ namespace com.BoardGameDungeon
         void Update()
         {
             timer();
-
+            died((int)career, level);
             //電腦測試用
             if (Input.touchCount == 0)
             {

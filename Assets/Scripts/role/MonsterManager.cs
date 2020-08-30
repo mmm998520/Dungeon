@@ -7,6 +7,7 @@ namespace com.BoardGameDungeon
 {
     public class MonsterManager : ValueSet
     {
+        protected MonsterType monsterType;
         /// <summary> 紀錄各個導航點用的pos，0為自己，前半是玩家，後半是能通過的地板 </summary>
         Vector3[] pos;
         int[] S;
@@ -17,8 +18,8 @@ namespace com.BoardGameDungeon
         public NearestPlayer target;
 
         float timer = 0;
-        float r = Random.Range(1f,2f);
-        void Start()
+        float r = 0.3f;
+        protected void monsterStart()
         {
             //處理房間部分的不變資訊，暫定所有房間都能通過
             pos = new Vector3[MazeGen.row * MazeGen.col + 1 + GameManager.Players.childCount];
@@ -28,7 +29,6 @@ namespace com.BoardGameDungeon
             }
 
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
-            //刺客 -> 戰士 -> 法師
             ATK = new float[(int)MonsterType.Count, 1] { { 4 }, { 8 }, { 9 }, { 4 }, { 10 }, { 15 }, { 20 }, { 100 } };
             HP = new float[(int)MonsterType.Count, 1] { { 6 }, { 15 }, { 2 }, { 6 }, { 10 }, { 25 }, { 30 }, { 110 } };
             duration = new float[(int)MonsterType.Count] { 0.4f, 0.4f, 3, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f };
@@ -38,8 +38,10 @@ namespace com.BoardGameDungeon
             target = new NearestPlayer(transform, 0);
         }
 
-        void Update()
+        protected void monsterUpdate()
         {
+            died((int)monsterType, 0);
+
             if ((timer+=Time.deltaTime) > r)
             {
                 target = navigationNearestPlayer();

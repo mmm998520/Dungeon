@@ -28,7 +28,7 @@ namespace com.BoardGameDungeon
 
         protected void OnTriggerEnter2D(Collider2D collider)
         {
-            if (!continuous)
+            if (!continuous && ((collider.tag!="player" &&player) || (collider.tag == "player" && !player)))
             {
                 hurt(collider, ATK);
             }
@@ -36,7 +36,7 @@ namespace com.BoardGameDungeon
 
         protected void OnTriggerStay2D(Collider2D collider)
         {
-            if (continuous)
+            if (continuous && ((collider.tag != "player" && player) || (collider.tag == "player" && !player)))
             {
                 hurt(collider, Time.deltaTime * ATK / duration);
             }

@@ -20,9 +20,7 @@ public class ValueSet : MonoBehaviour
         Count = 3
     }
 
-    /// <summary>
-    /// <para>怪物種類</para>
-    /// </summary>
+    /// <summary> 怪物種類 </summary>
     public enum MonsterType
     {
         /// <summary> 蜘蛛 </summary>
@@ -60,9 +58,17 @@ public class ValueSet : MonoBehaviour
     /// <summary> 攻擊招式，跟素質一樣可用陣列處理 </summary>
     public GameObject[] Attack = new GameObject[3];
     /// <summary> 怪物攻擊招式，跟素質一樣可用陣列處理 </summary>
-    public GameObject[] MonsterAttack = new GameObject[3];
+    public GameObject[] MonsterAttack = new GameObject[8];
     /// <summary> 攻擊招式持續時間列表 </summary>
     public float[] duration;
     /// <summary> 攻擊招式是否為持續傷害 </summary>
     public bool[] continuous;
+
+    protected void died(int type,int level)
+    {
+        if (Hurt > HP[type,level])
+        {
+            Destroy(gameObject);
+        }
+    }
 }
