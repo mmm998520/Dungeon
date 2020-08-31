@@ -192,7 +192,6 @@ namespace com.BoardGameDungeon
                 if (endRow[i] == currentRow && endCol[i] == currentCol)
                 {
                     Debug.LogWarning("nearby");
-                    navigateNextPoint();
                     return StraightLineNearest(end);
                 }
             }
@@ -476,7 +475,7 @@ namespace com.BoardGameDungeon
             }
         }
 
-        virtual protected void navigateNextPoint()
+        virtual protected void navigateNextPoint(Transform[] range, int nextTargetNum)
         {
 
         }

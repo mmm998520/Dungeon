@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Maze\testAStar.cs" />
     <Compile Include="Assets\Scripts\role\MonsterManager.cs" />
     <Compile Include="Assets\Scripts\role\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\role\SlimeManager.cs" />
     <Compile Include="Assets\Scripts\role\Spider.cs" />
     <Compile Include="Assets\Scripts\role\Tauren.cs" />
     <Compile Include="Assets\Scripts\role\ValueSet.cs" />

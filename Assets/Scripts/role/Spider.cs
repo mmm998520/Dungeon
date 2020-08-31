@@ -28,7 +28,6 @@ namespace com.BoardGameDungeon
             {
                 attack();
             }
-
         }
 
         override protected void attack()
