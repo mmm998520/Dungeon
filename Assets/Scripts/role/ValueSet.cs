@@ -24,17 +24,17 @@ public class ValueSet : MonoBehaviour
     public enum MonsterType
     {
         /// <summary> 蜘蛛 </summary>
-        spider = 0,
+        Spider = 0,
         /// <summary> 牛頭人 </summary>
         Tauren = 1,
         /// <summary> 史萊姆 </summary>
         Slime = 2,
         /// <summary> 蝙蝠 </summary>
-        bat = 3,
+        Bat = 3,
         /// <summary> 狼 </summary>
-        wolf = 4,
+        Wolf = 4,
         /// <summary> 幽靈 </summary>
-        ghost = 5,
+        Ghost = 5,
         /// <summary> 骷髏騎士 </summary>
         SkeletonKnight = 6,
         /// <summary> 龍 </summary>

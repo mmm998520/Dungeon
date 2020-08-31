@@ -7,8 +7,6 @@ namespace com.BoardGameDungeon
 {
     public class MonsterManager : ValueSet
     {
-        public GameObject[] tempDir;
-
         protected MonsterType monsterType;
 
         protected float cd;
@@ -31,7 +29,7 @@ namespace com.BoardGameDungeon
             continuous = new bool[(int)MonsterType.Count] { false, false, true, false, false, false, false, false};
 
             //初始沒有目標
-            target = new NearestPlayer(transform, 0);
+            target = new NearestPlayer(transform, 0, transform);
         }
 
         protected void monsterUpdate()
@@ -39,17 +37,31 @@ namespace com.BoardGameDungeon
             cdTimer += Time.deltaTime;
             died((int)monsterType, 0);
 
+            #region//間隔一段時間導航移動
             if ((timer+=Time.deltaTime) > r)
             {
-                target = navigationNearestPlayer();
+                Transform[] end = new Transform[GameManager.Players.childCount];
+                for (int i = 0; i < end.Length; i++)
+                {
+                    end[i] = GameManager.Players.GetChild(i);
+                }
+                target = navigationNearestPlayer(end);
                 r = Random.Range(1f, 2f);
                 timer = 0;
             }
-            Vector3 dirM = (target.player.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
-            if (dirM.magnitude > (target.player.position * Vector2.one - transform.position * Vector2.one).magnitude)
+            if (target.roadTraget != null)
             {
-                transform.position = target.player.position;
-                target = navigationNearestPlayer();
+            Vector3 dirM = (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
+            //到達定點則重開導航
+            if (dirM.magnitude > (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).magnitude)
+            {
+                transform.position = target.roadTraget.position;
+                Transform[] end = new Transform[GameManager.Players.childCount];
+                for(int i = 0; i < end.Length; i++)
+                {
+                    end[i] = GameManager.Players.GetChild(i);
+                }
+                target = navigationNearestPlayer(end);
                 r = Random.Range(1f, 2f);
                 timer = 0;
             }
@@ -57,6 +69,9 @@ namespace com.BoardGameDungeon
             {
                 transform.position = transform.position + dirM;
             }
+            }
+
+            #endregion
         }
 
         /// <summary> 計算直線距離上的最近 玩家 與其 距離  </summary>
@@ -73,11 +88,18 @@ namespace com.BoardGameDungeon
                     minDisPlayer = GameManager.Players.GetChild(i);
                 }
             }
-            return new NearestPlayer(minDisPlayer, minDis);
+            return new NearestPlayer(minDisPlayer, minDis,minDisPlayer);
         }
-        /// <summary> 計算導航後的最佳路徑，使用A-star方法 </summary>
-        protected NearestPlayer navigationNearestPlayer()
+        /// <summary> 計算導航後的最佳路徑，使用A-Star方法 </summary>
+        protected NearestPlayer navigationNearestPlayer(Transform[] end)
         {
+            //防止錯誤輸入
+            if(end.Length == 0)
+            {
+                Debug.LogError("NoTarget");
+                return null;
+            }
+
             //起點像素化
             int startRow, startCol;
             for (startRow = 0; startRow < MazeGen.row; startRow++)
@@ -94,6 +116,8 @@ namespace com.BoardGameDungeon
                     break;
                 }
             }
+            Debug.Log(startRow + "," + startCol);
+            /*
             //終點像素化
             int[] endRow = new int[GameManager.Players.childCount];
             int[] endCol = new int[GameManager.Players.childCount];
@@ -115,7 +139,29 @@ namespace com.BoardGameDungeon
                 }
                 Debug.Log(endRow[i] + "," + endCol[i]);
             }
-            Debug.Log(startRow + "," + startCol);
+            */
+            //終點像素化
+            int[] endRow = new int[end.Length];
+            int[] endCol = new int[end.Length];
+            for (int i = 0; i < end.Length; i++)
+            {
+                for (endRow[i] = 0; endRow[i] < MazeGen.row; endRow[i]++)
+                {
+                    if (Mathf.Abs(end[i].position.x - (endRow[i] * 2 + 1)) <= 1)
+                    {
+                        break;
+                    }
+                }
+                for (endCol[i] = 0; endCol[i] < MazeGen.Creat_col; endCol[i]++)
+                {
+                    if (Mathf.Abs(end[i].position.y - (endCol[i] * 2 + 1)) <= 1)
+                    {
+                        break;
+                    }
+                }
+                Debug.Log(endRow[i] + "," + endCol[i]);
+            }
+
             int currentRow = startRow;
             int currentCol = startCol;
 
@@ -136,7 +182,7 @@ namespace com.BoardGameDungeon
                 }
             }
             g[currentRow, currentCol] = 0;
-            for(int i = 0; i < GameManager.Players.childCount; i++)
+            for(int i = 0; i < end.Length; i++)
             {
                 if(h[currentRow, currentCol] > Mathf.Abs(endRow[i] - currentRow) + Mathf.Abs(endCol[i] - currentCol))
                 {
@@ -145,6 +191,17 @@ namespace com.BoardGameDungeon
             }
             f[currentRow, currentCol] = g[currentRow, currentCol] + h[currentRow, currentCol];
 
+            //若已在終點上，則改為直接追蹤
+            for(int i = 0; i < end.Length; i++)
+            {
+                if (endRow[i] == currentRow && endCol[i] == currentCol)
+                {
+                    Debug.LogWarning("nearby");
+                    return StraightLineNearestPlayer();
+                }
+            }
+
+            //開始A-Star
             for (int s = 0; s < 9999; s++)
             {
                 //將當前點close
@@ -167,35 +224,15 @@ namespace com.BoardGameDungeon
                                 Vector3 currentPos = new Vector3(currentRow * 2 + 1, currentCol * 2 + 1);
                                 Vector3 Dir = new Vector3(nextRow * 2 + 1, nextCol * 2 + 1) - currentPos;
                                 Vector3 tempDir = Quaternion.Euler(0, 0, 90) * Dir.normalized / 2;
-                                RaycastHit2D hit1 = Physics2D.Raycast(currentPos + tempDir, Dir, Dir.magnitude);
+                                //layerMask，讓射線只能打牆壁
+                                RaycastHit2D hit1 = Physics2D.Raycast(currentPos + tempDir, Dir, Dir.magnitude, 1 << 8);
                                 Debug.DrawRay(currentPos + tempDir, Dir, Color.red, 2);
-                                RaycastHit2D hit2 = Physics2D.Raycast(currentPos - tempDir, Dir, Dir.magnitude);
+                                RaycastHit2D hit2 = Physics2D.Raycast(currentPos - tempDir, Dir, Dir.magnitude, 1 << 8);
                                 Debug.DrawRay(currentPos - tempDir, Dir, Color.red, 2);
                                 transform.GetComponent<Collider2D>().enabled = true;
-                                bool update = false;
                                 if (!(hit1 || hit2))
                                 {
                                     //若不碰撞則更新數值
-                                    update = true;
-                                }
-                                else if(hit1)
-                                {
-                                    if (hit1.collider.tag == "player")
-                                    {
-                                        //撞到人也可更新
-                                        update = true;
-                                    }
-                                }
-                                else if (hit2)
-                                {
-                                    if (hit2.collider.tag == "player")
-                                    {
-                                        //撞到人也可更新
-                                        update = true;
-                                    }
-                                }
-                                if (update)
-                                {
                                     stat[nextRow, nextCol] = 1;
                                     #region//定義方向
                                     int dir = -1;
@@ -246,7 +283,7 @@ namespace com.BoardGameDungeon
                                         g[nextRow, nextCol] = g[currentRow, currentCol] + dis;
                                         dirs[nextRow, nextCol] = dir;
                                     }
-                                    for(int k = 0; k < GameManager.Players.childCount; k++)
+                                    for (int k = 0; k < end.Length; k++)
                                     {
                                         if (h[nextRow, nextCol] > Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol))
                                         {
@@ -298,7 +335,7 @@ namespace com.BoardGameDungeon
                 currentCol = newCol;
                 int minH = 9999;
                 int near = -1;
-                for (int i = 0; i < GameManager.Players.childCount; i++)
+                for (int i = 0; i < end.Length; i++)
                 {
                     if (minH > Mathf.Abs(endRow[i] - currentRow) + Mathf.Abs(endCol[i] - currentCol))
                     {
@@ -310,7 +347,7 @@ namespace com.BoardGameDungeon
 
                     }
                 }
-                Debug.LogError("end : "+ "P" + (near +1) + " : " + + endRow[near] + "," + endCol[near]);
+                print("end : "+ "P" + (near +1) + " : " + + endRow[near] + "," + endCol[near]);
                 print("current : " + currentRow + "," + currentCol);
                 if (endRow[near] == currentRow && endCol[near] == currentCol)
                 {
@@ -321,9 +358,9 @@ namespace com.BoardGameDungeon
                         print(newRow + "," + newCol + "," + dirs[newRow, newCol]);
                         if (dirs[newRow, newCol] == -1)
                         {
-                            print("end");
-                            print(nextRow + "," + nextCol);
-                            return new NearestPlayer(GameManager.Floors.GetChild(nextRow * MazeGen.col + nextCol), minH);
+                            Debug.LogWarning(nextRow + "," + nextCol);
+                            Debug.LogWarning("end : " + "P" + (near + 1) + " : " +endRow[near] + "," + endCol[near]);
+                            return new NearestPlayer(end[near], minH, GameManager.Floors.GetChild(nextRow * MazeGen.col + nextCol));
                         }
                         #region//找曾經的路徑點
                         else if (dirs[newRow, newCol] == 0)
@@ -383,8 +420,13 @@ namespace com.BoardGameDungeon
                     break;
                 }
             }
-
             return null;
+        }
+
+        /// <summary> 用override引用 </summary>
+        virtual protected void attack()
+        {
+
         }
     }
 
@@ -392,21 +434,16 @@ namespace com.BoardGameDungeon
     public class NearestPlayer
     {
         /// <summary> 最近的玩家 </summary>
-        public Transform player;
+        public Transform enemyTraget;
         /// <summary> 距離多遠 </summary>
         public float Distance;
         /// <summary> 導航用最近路徑，非導航則null </summary>
-        public Vector3 road;
-        public NearestPlayer(Transform _player, float _Distance , Vector3 _road)
+        public Transform roadTraget;
+        public NearestPlayer(Transform _enemyTraget, float _Distance , Transform _roadTraget)
         {
-            player = _player;
+            enemyTraget = _enemyTraget;
             Distance = _Distance;
-            road = _road;
-        }
-        public NearestPlayer(Transform _player, float _Distance)
-        {
-            player = _player;
-            Distance = _Distance;
+            roadTraget = _roadTraget;
         }
     }
 }
