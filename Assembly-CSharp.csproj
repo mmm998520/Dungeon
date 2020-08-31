@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Maze\MazeCreate.cs" />
     <Compile Include="Assets\Scripts\Maze\MazeGen.cs" />
+    <Compile Include="Assets\Scripts\Maze\testAStar.cs" />
     <Compile Include="Assets\Scripts\role\MonsterManager.cs" />
     <Compile Include="Assets\Scripts\role\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\role\Spider.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="Assets\Scripts\tempAttack\SpiderAttackManager.cs" />
     <Compile Include="Assets\Scripts\tempAttack\ThiefAttackManager.cs" />
     <Compile Include="Assets\Scripts\tempAttack\WarriorAttackManager.cs" />
-    <Compile Include="Assets\testAStar.cs" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Dmmm998520/software/Unity/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

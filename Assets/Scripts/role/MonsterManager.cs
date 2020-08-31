@@ -96,6 +96,7 @@ namespace com.BoardGameDungeon
 
             //起點像素化
             int startRow, startCol;
+            
             for (startRow = 0; startRow < MazeGen.row; startRow++)
             {
                 if (Mathf.Abs(transform.position.x - (startRow * 2 + 1)) <= 1)
@@ -426,13 +427,27 @@ namespace com.BoardGameDungeon
             return null;
         }
 
+        /// <summary>
+        /// 若選定的目標在範圍內則每一段時間攻擊一次
+        /// </summary>
+        virtual protected void attackOccasion(NearestPlayer Target,float hand)
+        {
+            if (Target.endTraget != null)
+            {
+                if (Vector3.Distance(transform.position, Target.endTraget.position) < hand && cdTimer > cd)
+                {
+                    attack();
+                    cdTimer = 0;
+                }
+            }
+        }
         /// <summary> 用override引用 </summary>
         virtual protected void attack()
         {
 
         }
         /// <summary> 每間隔一段時間導航移動，沒範圍則range = null </summary>
-        virtual protected void navigationNearestPlayer(Transform[] end, Transform[] range)
+        virtual protected void goNavigationNearest(Transform[] end, Transform[] range)
         {
             if ((navigationTimer += Time.deltaTime) > navigationTimerStoper)
             {

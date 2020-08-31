@@ -10,33 +10,25 @@ namespace com.BoardGameDungeon
         {
             monsterStart();
             cd = 1;
+            monsterType = MonsterType.Spider;
         }
 
         void Update()
         {
-            if (Input.anyKeyDown)
+            Transform[] end = new Transform[GameManager.Players.childCount];
+            for (int i = 0; i < end.Length; i++)
             {
-                Transform[] end = new Transform[GameManager.Players.childCount];
-                for (int i = 0; i < end.Length; i++)
-                {
-                    end[i] = GameManager.Players.GetChild(i);
-                }
-                navigation(end,null);
+                end[i] = GameManager.Players.GetChild(i);
             }
+            goNavigationNearest(end, null);
+            attackOccasion(navigateTarget, 2.5f);
             
             monsterUpdate();
             if (Input.anyKeyDown)
             {
                 attack();
             }
-            if (navigateTarget.endTraget != null)
-            {
-                if (Vector3.Distance(transform.position, navigateTarget.endTraget.position) < 2 && cdTimer > cd)
-                {
-                    attack();
-                    cdTimer = 0;
-                }
-            }
+
         }
 
         override protected void attack()
