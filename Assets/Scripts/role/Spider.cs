@@ -14,6 +14,11 @@ namespace com.BoardGameDungeon
 
         void Update()
         {
+            if (Input.anyKeyDown)
+            {
+                navigationNearestPlayer();
+            }
+            
             monsterUpdate();
             if (Input.anyKeyDown)
             {
