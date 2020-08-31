@@ -59,10 +59,10 @@ namespace com.BoardGameDungeon
                 r = Random.Range(1f, 2f);
                 timer = 0;
             }
-            Vector3 dirM = (target.road * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
-            if (dirM.magnitude > (target.road * Vector2.one - transform.position * Vector2.one).magnitude)
+            Vector3 dirM = (target.player.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
+            if (dirM.magnitude > (target.player.position * Vector2.one - transform.position * Vector2.one).magnitude)
             {
-                transform.position = target.road;
+                transform.position = target.player.position;
                 target = navigationNearestPlayer();
                 r = Random.Range(1f, 2f);
                 timer = 0;
@@ -337,7 +337,7 @@ namespace com.BoardGameDungeon
                         {
                             print("end");
                             print(nextRow + "," + nextCol);
-                            break;
+                            return new NearestPlayer(GameManager.Floors.GetChild(nextRow * MazeGen.col + nextCol), minH);
                         }
                         #region//找曾經的路徑點
                         else if (dirs[newRow, newCol] == 0)
