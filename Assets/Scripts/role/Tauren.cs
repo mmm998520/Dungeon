@@ -37,7 +37,31 @@ namespace com.BoardGameDungeon
 
         void Update()
         {
-            navigationNearestPlayer(new Transform[1] { range[rangeTargetNum] }, range);
+            //身邊有敵人就攻擊，沒有就尋路
+            Transform[] end = new Transform[GameManager.Players.childCount];
+            for (int i = 0; i < end.Length; i++)
+            {
+                end[i] = GameManager.Players.GetChild(i);
+            }
+            straightTarget = StraightLineNearest(end);
+            if (straightTarget.Distance > 3)
+            {
+                navigationNearestPlayer(new Transform[1] { range[rangeTargetNum] }, range);
+                print("導航 : " + navigateTarget.Distance + " , " + navigateTarget.roadTraget.name);
+            }
+            else
+            {
+                Vector3 dirM = (straightTarget.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
+                if (dirM.magnitude > Vector3.Distance(straightTarget.roadTraget.position * Vector2.one, transform.position * Vector2.one))
+                {
+                    transform.position = straightTarget.roadTraget.position;
+                }
+                else
+                {
+                    transform.position = transform.position + dirM;
+                }
+                print("直行 : " + straightTarget.Distance + " , " + straightTarget.roadTraget.name);
+            }
 
             monsterUpdate();
             if (Input.anyKeyDown)
@@ -52,24 +76,24 @@ namespace com.BoardGameDungeon
 
             if ((navigationTimer += Time.deltaTime) > navigationTimerStoper)
             {
-                target = navigation(end, range);
+                navigateTarget = navigation(end, range);
                 navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
                 navigationTimer = 0;
             }
-            if (target != null)
+            if (navigateTarget != null)
             {
-                if (target.roadTraget != null)
+                if (navigateTarget.roadTraget != null)
                 {
-                    Vector3 dirM = (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
+                    Vector3 dirM = (navigateTarget.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
                     //到達定點則重開導航
-                    if (dirM.magnitude > Vector3.Distance(target.roadTraget.position * Vector2.one,transform.position * Vector2.one))
+                    if (dirM.magnitude > Vector3.Distance(navigateTarget.roadTraget.position * Vector2.one,transform.position * Vector2.one))
                     {
-                        transform.position = target.roadTraget.position;
+                        transform.position = navigateTarget.roadTraget.position;
                         Debug.LogError("!!!!!!!!!!!!!!!!!!!!!");
-                        target = navigation(end, range);
+                        navigateTarget = navigation(end, range);
                         navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
                         navigationTimer = 0;
-                        if (range[rangeTargetNum] == target.endTraget)
+                        if (range[rangeTargetNum] == navigateTarget.endTraget)
                         {
                             navigateNextPoint();
                         }
@@ -81,12 +105,13 @@ namespace com.BoardGameDungeon
                 }
                 else
                 {
+                    navigateNextPoint();
                     Debug.LogError("RRRR");
                 }
             }
             else
             {
-                target = navigation(end, range);
+                navigateNextPoint();
                 Debug.LogError("RRRR");
             }
         }
@@ -99,12 +124,12 @@ namespace com.BoardGameDungeon
             } while (temp == rangeTargetNum);
             print(range[rangeTargetNum].name);
             navigationTimer = 0;
-            target = navigation(new Transform[1] { range[rangeTargetNum] }, range);
+            navigateTarget = navigation(new Transform[1] { range[rangeTargetNum] }, range);
         }
         override protected void attack()
         {
             //生成攻擊在觸控方向，並旋轉攻擊朝向該方向
-            float angle = Vector3.SignedAngle(Vector3.right, target.endTraget.position * Vector2.one - transform.position * Vector2.one, Vector3.forward);
+            float angle = Vector3.SignedAngle(Vector3.right, navigateTarget.endTraget.position * Vector2.one - transform.position * Vector2.one, Vector3.forward);
             GameObject attack = Instantiate(MonsterAttack[(int)monsterType], transform.position, Quaternion.Euler(0, 0, angle));
             //設定攻擊參數
             attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], false);

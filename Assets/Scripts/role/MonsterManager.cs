@@ -17,7 +17,8 @@ namespace com.BoardGameDungeon
         public static int[] exp = new int[8] { 10, 20, 10, 0, 0, 0, 0, 0 };
 
         /// <summary> 攻擊、移動目標 </summary>
-        public NearestPlayer target;
+        public NearestPlayer navigateTarget;
+        public NearestPlayer straightTarget;
 
         /// <summary> 導航間隔用的timer，避免一直重算浪費效能 </summary>
         protected float navigationTimer = 0;
@@ -32,7 +33,7 @@ namespace com.BoardGameDungeon
             continuous = new bool[(int)MonsterType.Count] { false, false, true, false, false, false, false, false};
 
             //初始沒有目標
-            target = new NearestPlayer(transform, 0, transform);
+            navigateTarget = new NearestPlayer(transform, 0, transform);
         }
 
         protected void monsterUpdate()
@@ -46,6 +47,7 @@ namespace com.BoardGameDungeon
         {
             if(end == null)
             {
+                Debug.LogError("RRRR");
                 return null;
             }
             float minDis = float.MaxValue;
@@ -59,7 +61,7 @@ namespace com.BoardGameDungeon
                     minDisEnd = end[i];
                 }
             }
-            return new NearestPlayer(minDisEnd, minDis,minDisEnd);
+            return new NearestPlayer(minDisEnd, minDis, minDisEnd);
         }
         /// <summary> 計算導航後的最佳路徑，使用A-Star方法 </summary>
         protected NearestPlayer navigation(Transform[] end, Transform[] range)
@@ -434,20 +436,20 @@ namespace com.BoardGameDungeon
         {
             if ((navigationTimer += Time.deltaTime) > navigationTimerStoper)
             {
-                target = navigation(end,range);
+                navigateTarget = navigation(end,range);
                 navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
                 navigationTimer = 0;
             }
-            if(target != null)
+            if(navigateTarget != null)
             {
-                if (target.roadTraget != null)
+                if (navigateTarget.roadTraget != null)
                 {
-                    Vector3 dirM = (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
+                    Vector3 dirM = (navigateTarget.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
                     //到達定點則重開導航
-                    if (dirM.magnitude > (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).magnitude)
+                    if (dirM.magnitude > (navigateTarget.roadTraget.position * Vector2.one - transform.position * Vector2.one).magnitude)
                     {
-                        transform.position = target.roadTraget.position;
-                        target = navigation(end, range);
+                        transform.position = navigateTarget.roadTraget.position;
+                        navigateTarget = navigation(end, range);
                         navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
                         navigationTimer = 0;
                     }
