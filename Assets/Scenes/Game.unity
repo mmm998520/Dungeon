@@ -1016,31 +1016,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1541575048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d155f691b4a1974b80610ee53546194, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a0980aece788c047bce6f464e5982b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Hurt: 0
-  Attack: []
+  Attack:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   MonsterAttack:
-  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
-  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
-  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
-  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
-  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
-  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
-  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
-  - {fileID: 5389400205560984897, guid: f9991e64339ea564b9a97042fb211fce, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   duration: []
   continuous: 
-  tempDir:
-  - {fileID: 909175464148426568, guid: 8149e60e5c853ff47ac2862c7c00f773, type: 3}
-  - {fileID: 909175464148426568, guid: 4fe1be89374e6fe448a5b74e2c3dc781, type: 3}
-  - {fileID: 909175464148426568, guid: 49edca753ccdae347891882f5c9201ef, type: 3}
-  - {fileID: 909175464148426568, guid: e83eabdeecebd4e4794514e5353a303b, type: 3}
-  - {fileID: 909175464148426568, guid: ee9eae198c05ea542b65c311c127fe62, type: 3}
-  - {fileID: 909175464148426568, guid: cd5ef6bb3cc62744082e4fec2c0bd768, type: 3}
-  - {fileID: 909175464148426568, guid: 6d5001619a729714db7a766f58ca8cc0, type: 3}
-  - {fileID: 909175464148426568, guid: 92f50ba1644f69b40be37352a5b7d3c2, type: 3}
 --- !u!58 &1541575054
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1460,7 +1454,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985836572}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.170801, y: 16.961811, z: -0.27999997}
+  m_LocalPosition: {x: 13.57, y: 4.15, z: -0.27999997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1022865751}

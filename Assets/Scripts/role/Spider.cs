@@ -29,9 +29,9 @@ namespace com.BoardGameDungeon
             {
                 attack();
             }
-            if (target.enemyTraget != null)
+            if (target.endTraget != null)
             {
-                if (Vector3.Distance(transform.position, target.enemyTraget.position) < 2 && cdTimer > cd)
+                if (Vector3.Distance(transform.position, target.endTraget.position) < 2 && cdTimer > cd)
                 {
                     attack();
                     cdTimer = 0;
@@ -41,10 +41,10 @@ namespace com.BoardGameDungeon
 
         override protected void attack()
         {
-            if (target.enemyTraget != null)
+            if (target.endTraget != null)
             {
                 //生成攻擊在觸控方向，並旋轉攻擊朝向該方向
-                float angle = Vector3.SignedAngle(Vector3.right, target.enemyTraget.position * Vector2.one - transform.position * Vector2.one, Vector3.forward);
+                float angle = Vector3.SignedAngle(Vector3.right, target.endTraget.position * Vector2.one - transform.position * Vector2.one, Vector3.forward);
                 GameObject attack = Instantiate(MonsterAttack[(int)monsterType], transform.position, Quaternion.Euler(0, 0, angle));
                 //設定攻擊參數
                 attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], false);

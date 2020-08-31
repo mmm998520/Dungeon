@@ -20,9 +20,9 @@ namespace com.BoardGameDungeon
         public NearestPlayer target;
 
         /// <summary> 導航間隔用的timer，避免一直重算浪費效能 </summary>
-        float navigationTimer = 0;
+        protected float navigationTimer = 0;
         /// <summary> 導航間隔用的timerStoper，重製時隨機時間避免跟其他怪同時計算 </summary>
-        float navigationTimerStoper = 0.3f;
+        protected float navigationTimerStoper = 0.3f,navigationTimerStoperMax = 1f,navigationTimerStoperMin = 2f;
         protected void monsterStart()
         {
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
@@ -50,7 +50,7 @@ namespace com.BoardGameDungeon
             }
             float minDis = float.MaxValue;
             Transform minDisEnd = end[0];
-            for (int i = 0; i < GameManager.Players.childCount; i++)
+            for (int i = 0; i < end.Length; i++)
             {
                 float Dis = Vector3.Distance(transform.position, end[i].position);
                 if (minDis > Dis)
@@ -188,7 +188,8 @@ namespace com.BoardGameDungeon
                 if (endRow[i] == currentRow && endCol[i] == currentCol)
                 {
                     Debug.LogWarning("nearby");
-                    return StraightLineNearest();
+                    navigateNextPoint();
+                    return StraightLineNearest(end);
                 }
             }
 
@@ -296,7 +297,6 @@ namespace com.BoardGameDungeon
                                         {
                                             f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
                                         }
-                                        print(nextRow + "," + nextCol + "," + f[nextRow, nextCol]);
                                     }
                                 }
                             }
@@ -350,15 +350,11 @@ namespace com.BoardGameDungeon
 
                     }
                 }
-                print("end : "+ "P" + (near +1) + " : " + + endRow[near] + "," + endCol[near]);
-                print("current : " + currentRow + "," + currentCol);
                 if (endRow[near] == currentRow && endCol[near] == currentCol)
                 {
-                    print(s);
                     int nextRow = currentCol, nextCol = currentCol;
                     for (int ss = 0; ss < 100; ss++)
                     {
-                        print(newRow + "," + newCol + "," + dirs[newRow, newCol]);
                         if (dirs[newRow, newCol] == -1)
                         {
                             Debug.LogWarning(nextRow + "," + nextCol);
@@ -432,30 +428,38 @@ namespace com.BoardGameDungeon
 
         }
         /// <summary> 每間隔一段時間導航移動，沒範圍則range = null </summary>
-        protected void navigationNearestPlayer(Transform[] end, Transform[] range)
+        virtual protected void navigationNearestPlayer(Transform[] end, Transform[] range)
         {
             if ((navigationTimer += Time.deltaTime) > navigationTimerStoper)
             {
                 target = navigation(end,range);
-                navigationTimerStoper = Random.Range(1f, 2f);
+                navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
                 navigationTimer = 0;
             }
-            if (target.roadTraget != null)
+            if(target != null)
             {
-                Vector3 dirM = (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
-                //到達定點則重開導航
-                if (dirM.magnitude > (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).magnitude)
+                if (target.roadTraget != null)
                 {
-                    transform.position = target.roadTraget.position;
-                    target = navigation(end,range);
-                    navigationTimerStoper = Random.Range(1f, 2f);
-                    navigationTimer = 0;
-                }
-                else
-                {
-                    transform.position = transform.position + dirM;
+                    Vector3 dirM = (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
+                    //到達定點則重開導航
+                    if (dirM.magnitude > (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).magnitude)
+                    {
+                        transform.position = target.roadTraget.position;
+                        target = navigation(end, range);
+                        navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
+                        navigationTimer = 0;
+                    }
+                    else
+                    {
+                        transform.position = transform.position + dirM;
+                    }
                 }
             }
+        }
+
+        virtual protected void navigateNextPoint()
+        {
+
         }
     }
 
@@ -463,14 +467,14 @@ namespace com.BoardGameDungeon
     public class NearestPlayer
     {
         /// <summary> 最近的玩家 </summary>
-        public Transform enemyTraget;
+        public Transform endTraget;
         /// <summary> 距離多遠 </summary>
         public float Distance;
         /// <summary> 導航用最近路徑，非導航則null </summary>
         public Transform roadTraget;
         public NearestPlayer(Transform _enemyTraget, float _Distance , Transform _roadTraget)
         {
-            enemyTraget = _enemyTraget;
+            endTraget = _enemyTraget;
             Distance = _Distance;
             roadTraget = _roadTraget;
         }
