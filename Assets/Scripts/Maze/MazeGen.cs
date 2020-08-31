@@ -101,11 +101,8 @@ namespace com.BoardGameDungeon
                         sprite.GetComponent<SpriteRenderer>().sortingOrder = 1;
                         sprite.parent = column.transform;
                         column.name = i + "," + j;
-                        //幫最周圍牆壁加TAG做區分
-                        if ((i == 0 || i == Creat_row - 1) || (j == 0 || j == Creat_col-1))
-                        {
-                            column.tag = "side";
-                        }
+                        //幫牆壁加TAG做區分
+                        column.tag = "wall";
                     }
                 }
             }

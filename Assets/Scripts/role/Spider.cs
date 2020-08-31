@@ -8,13 +8,17 @@ namespace com.BoardGameDungeon
     {
         void Start()
         {
-            navigationNearestPlayer();
             monsterStart();
             cd = 1;
         }
 
         void Update()
-        {/*
+        {
+            if (Input.anyKeyDown)
+            {
+                navigationNearestPlayer();
+            }
+            /*
             monsterUpdate();
             if (Input.anyKeyDown)
             {
