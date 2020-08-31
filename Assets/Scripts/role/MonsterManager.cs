@@ -41,21 +41,25 @@ namespace com.BoardGameDungeon
             died((int)monsterType, 0);
         }
 
-        /// <summary> 計算直線距離上的最近 玩家 與其 距離  </summary>
-        protected NearestPlayer StraightLineNearestPlayer()
+        /// <summary> 計算直線距離上的最近點與其距離  </summary>
+        protected NearestPlayer StraightLineNearest(Transform[] end)
         {
+            if(end == null)
+            {
+                return null;
+            }
             float minDis = float.MaxValue;
-            Transform minDisPlayer = GameManager.Players.GetChild(0);
+            Transform minDisEnd = end[0];
             for (int i = 0; i < GameManager.Players.childCount; i++)
             {
-                float Dis = Vector3.Distance(transform.position, GameManager.Players.GetChild(i).position);
+                float Dis = Vector3.Distance(transform.position, end[i].position);
                 if (minDis > Dis)
                 {
                     minDis = Dis;
-                    minDisPlayer = GameManager.Players.GetChild(i);
+                    minDisEnd = end[i];
                 }
             }
-            return new NearestPlayer(minDisPlayer, minDis,minDisPlayer);
+            return new NearestPlayer(minDisEnd, minDis,minDisEnd);
         }
         /// <summary> 計算導航後的最佳路徑，使用A-Star方法 </summary>
         protected NearestPlayer navigation(Transform[] end, Transform[] range)
@@ -184,7 +188,7 @@ namespace com.BoardGameDungeon
                 if (endRow[i] == currentRow && endCol[i] == currentCol)
                 {
                     Debug.LogWarning("nearby");
-                    return StraightLineNearestPlayer();
+                    return StraightLineNearest();
                 }
             }
 
