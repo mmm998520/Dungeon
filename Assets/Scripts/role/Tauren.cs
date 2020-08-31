@@ -13,8 +13,6 @@ namespace com.BoardGameDungeon
         {
             monsterStart();
             cd = 2;
-            navigationTimerStoperMax = 10;
-            navigationTimerStoperMin = 5;
 
             range = new Transform[15];
             for(int i = 0; i < range.Length; i++)
@@ -41,7 +39,6 @@ namespace com.BoardGameDungeon
         {
             navigationNearestPlayer(new Transform[1] { range[rangeTargetNum] }, range);
 
-
             monsterUpdate();
             if (Input.anyKeyDown)
             {
@@ -65,22 +62,32 @@ namespace com.BoardGameDungeon
                 {
                     Vector3 dirM = (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
                     //到達定點則重開導航
-                    if (dirM.magnitude > (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).magnitude)
+                    if (dirM.magnitude > Vector3.Distance(target.roadTraget.position * Vector2.one,transform.position * Vector2.one))
                     {
+                        transform.position = target.roadTraget.position;
+                        Debug.LogError("!!!!!!!!!!!!!!!!!!!!!");
+                        target = navigation(end, range);
+                        navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
+                        navigationTimer = 0;
                         if (range[rangeTargetNum] == target.endTraget)
                         {
                             navigateNextPoint();
                         }
-                        transform.position = target.roadTraget.position;
-                        target = navigation(end, range);
-                        navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
-                        navigationTimer = 0;
                     }
                     else
                     {
                         transform.position = transform.position + dirM;
                     }
                 }
+                else
+                {
+                    Debug.LogError("RRRR");
+                }
+            }
+            else
+            {
+                target = navigation(end, range);
+                Debug.LogError("RRRR");
             }
         }
         protected override void navigateNextPoint()

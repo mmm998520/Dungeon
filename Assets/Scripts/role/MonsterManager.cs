@@ -22,7 +22,7 @@ namespace com.BoardGameDungeon
         /// <summary> 導航間隔用的timer，避免一直重算浪費效能 </summary>
         protected float navigationTimer = 0;
         /// <summary> 導航間隔用的timerStoper，重製時隨機時間避免跟其他怪同時計算 </summary>
-        protected float navigationTimerStoper = 0.3f,navigationTimerStoperMax = 1f,navigationTimerStoperMin = 2f;
+        protected float navigationTimerStoper = 0.3f,navigationTimerStoperMax = 0.5f,navigationTimerStoperMin = 0.3f;
         protected void monsterStart()
         {
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
@@ -149,6 +149,7 @@ namespace com.BoardGameDungeon
             }
             if (!TargetInRange)
             {
+                Debug.LogError("RRRR");
                 return null;
             }
 
@@ -357,7 +358,7 @@ namespace com.BoardGameDungeon
                     {
                         if (dirs[newRow, newCol] == -1)
                         {
-                            Debug.LogWarning(nextRow + "," + nextCol);
+                            Debug.LogWarning(nextRow + "," + nextCol +", name : "+GameManager.Floors.GetChild(nextRow * MazeGen.col + nextCol).name);
                             Debug.LogWarning("end : " + "P" + (near + 1) + " : " +endRow[near] + "," + endCol[near]);
                             return new NearestPlayer(end[near], minH, GameManager.Floors.GetChild(nextRow * MazeGen.col + nextCol));
                         }
@@ -419,6 +420,7 @@ namespace com.BoardGameDungeon
                     break;
                 }
             }
+            Debug.LogError("RRRR");
             return null;
         }
 
