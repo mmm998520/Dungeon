@@ -21,7 +21,7 @@ namespace com.BoardGameDungeon
                 {
                     end[i] = GameManager.Players.GetChild(i);
                 }
-                navigationNearestPlayer(end);
+                navigation(end,null);
             }
             
             monsterUpdate();

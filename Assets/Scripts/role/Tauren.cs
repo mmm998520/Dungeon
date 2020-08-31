@@ -16,14 +16,15 @@ namespace com.BoardGameDungeon
         {
             if (Input.anyKeyDown)
             {
-                Transform[] end = new Transform[GameManager.Players.childCount];
-                for (int i = 0; i < end.Length; i++)
-                {
-                    end[i] = GameManager.Players.GetChild(i);
-                }
-                navigationNearestPlayer(end);
+                
             }
-            
+            Transform[] end = new Transform[GameManager.Players.childCount];
+            for (int i = 0; i < end.Length; i++)
+            {
+                end[i] = GameManager.Players.GetChild(i);
+            }
+            navigationNearestPlayer(end, null);
+
             monsterUpdate();
             if (Input.anyKeyDown)
             {

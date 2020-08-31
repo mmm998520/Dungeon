@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -18,8 +19,10 @@ namespace com.BoardGameDungeon
         /// <summary> 攻擊、移動目標 </summary>
         public NearestPlayer target;
 
-        float timer = 0;
-        float r = 0.3f;
+        /// <summary> 導航間隔用的timer，避免一直重算浪費效能 </summary>
+        float navigationTimer = 0;
+        /// <summary> 導航間隔用的timerStoper，重製時隨機時間避免跟其他怪同時計算 </summary>
+        float navigationTimerStoper = 0.3f;
         protected void monsterStart()
         {
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
@@ -36,46 +39,10 @@ namespace com.BoardGameDungeon
         {
             cdTimer += Time.deltaTime;
             died((int)monsterType, 0);
-
-            #region//間隔一段時間導航移動
-            if ((timer+=Time.deltaTime) > r)
-            {
-                Transform[] end = new Transform[GameManager.Players.childCount];
-                for (int i = 0; i < end.Length; i++)
-                {
-                    end[i] = GameManager.Players.GetChild(i);
-                }
-                target = navigationNearestPlayer(end);
-                r = Random.Range(1f, 2f);
-                timer = 0;
-            }
-            if (target.roadTraget != null)
-            {
-            Vector3 dirM = (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
-            //到達定點則重開導航
-            if (dirM.magnitude > (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).magnitude)
-            {
-                transform.position = target.roadTraget.position;
-                Transform[] end = new Transform[GameManager.Players.childCount];
-                for(int i = 0; i < end.Length; i++)
-                {
-                    end[i] = GameManager.Players.GetChild(i);
-                }
-                target = navigationNearestPlayer(end);
-                r = Random.Range(1f, 2f);
-                timer = 0;
-            }
-            else
-            {
-                transform.position = transform.position + dirM;
-            }
-            }
-
-            #endregion
         }
 
         /// <summary> 計算直線距離上的最近 玩家 與其 距離  </summary>
-        NearestPlayer StraightLineNearestPlayer()
+        protected NearestPlayer StraightLineNearestPlayer()
         {
             float minDis = float.MaxValue;
             Transform minDisPlayer = GameManager.Players.GetChild(0);
@@ -91,13 +58,34 @@ namespace com.BoardGameDungeon
             return new NearestPlayer(minDisPlayer, minDis,minDisPlayer);
         }
         /// <summary> 計算導航後的最佳路徑，使用A-Star方法 </summary>
-        protected NearestPlayer navigationNearestPlayer(Transform[] end)
+        protected NearestPlayer navigation(Transform[] end, Transform[] range)
         {
             //防止錯誤輸入
             if(end.Length == 0)
             {
                 Debug.LogError("NoTarget");
                 return null;
+            }
+
+            List<int[]> rangeToInt = new List<int[]>();
+            if (range == null)
+            {
+                foreach (Transform child in GameManager.Floors)
+                {
+                    string[] sArray = child.name.Split(',');
+                    rangeToInt.Add(new int[] { int.Parse(sArray[0]), int.Parse(sArray[1]) });
+                }
+            }
+            else
+            {
+                foreach (Transform child in GameManager.Floors)
+                {
+                    if (range.Contains(child))
+                    {
+                        string[] sArray = child.name.Split(',');
+                        rangeToInt.Add(new int[] { int.Parse(sArray[0]), int.Parse(sArray[1]) });
+                    }
+                }
             }
 
             //起點像素化
@@ -117,29 +105,7 @@ namespace com.BoardGameDungeon
                 }
             }
             Debug.Log(startRow + "," + startCol);
-            /*
-            //終點像素化
-            int[] endRow = new int[GameManager.Players.childCount];
-            int[] endCol = new int[GameManager.Players.childCount];
-            for (int i = 0; i < GameManager.Players.childCount; i++)
-            {
-                for (endRow[i] = 0; endRow[i] < MazeGen.row; endRow[i]++)
-                {
-                    if (Mathf.Abs(GameManager.Players.GetChild(i).position.x - (endRow[i] * 2 + 1)) <= 1)
-                    {
-                        break;
-                    }
-                }
-                for (endCol[i] = 0; endCol[i] < MazeGen.Creat_col; endCol[i]++)
-                {
-                    if (Mathf.Abs(GameManager.Players.GetChild(i).position.y - (endCol[i] * 2 + 1)) <= 1)
-                    {
-                        break;
-                    }
-                }
-                Debug.Log(endRow[i] + "," + endCol[i]);
-            }
-            */
+
             //終點像素化
             int[] endRow = new int[end.Length];
             int[] endCol = new int[end.Length];
@@ -161,7 +127,28 @@ namespace com.BoardGameDungeon
                 }
                 Debug.Log(endRow[i] + "," + endCol[i]);
             }
+            //若目標不在範圍
+            bool TargetInRange = false;
+            for (int i = 0; i < rangeToInt.Count; i++)
+            {
+                for(int j = 0; j < endRow.Length; j++)
+                {
+                    if (TargetInRange)
+                    {
+                        break;
+                    }
+                    if (rangeToInt[i][0] == endRow[j] && rangeToInt[i][1] == endCol[j])
+                    {
+                        TargetInRange = true;
+                    }
+                }
+            }
+            if (!TargetInRange)
+            {
+                return null;
+            }
 
+            //初始化數值
             int currentRow = startRow;
             int currentCol = startCol;
 
@@ -215,86 +202,98 @@ namespace com.BoardGameDungeon
                         //判定點有沒有超範圍
                         if (nextRow < MazeGen.row && nextRow >= 0 && nextCol < MazeGen.col && nextCol >= 0)
                         {
-                            //判定點是否已經close，已經close就不管他
-                            //其餘的判定移動會不會碰撞
-                            if (stat[nextRow, nextCol] != 2)
+                            bool inRange = false;
+                            for(int k = 0; k < rangeToInt.Count; k++)
                             {
-                                transform.GetComponent<Collider2D>().enabled = false;
-                                //向指定pos打出兩道射線(有間距)判定打到甚麼來決定能不能通過
-                                Vector3 currentPos = new Vector3(currentRow * 2 + 1, currentCol * 2 + 1);
-                                Vector3 Dir = new Vector3(nextRow * 2 + 1, nextCol * 2 + 1) - currentPos;
-                                Vector3 tempDir = Quaternion.Euler(0, 0, 90) * Dir.normalized / 2;
-                                //layerMask，讓射線只能打牆壁
-                                RaycastHit2D hit1 = Physics2D.Raycast(currentPos + tempDir, Dir, Dir.magnitude, 1 << 8);
-                                Debug.DrawRay(currentPos + tempDir, Dir, Color.red, 2);
-                                RaycastHit2D hit2 = Physics2D.Raycast(currentPos - tempDir, Dir, Dir.magnitude, 1 << 8);
-                                Debug.DrawRay(currentPos - tempDir, Dir, Color.red, 2);
-                                transform.GetComponent<Collider2D>().enabled = true;
-                                if (!(hit1 || hit2))
+                                if (rangeToInt[k][0] == nextRow && rangeToInt[k][1] == nextCol)
                                 {
-                                    //若不碰撞則更新數值
-                                    stat[nextRow, nextCol] = 1;
-                                    #region//定義方向
-                                    int dir = -1;
-                                    if (i == 0 && j == 1)
+                                    inRange = true;
+                                    break;
+                                }
+                            }
+                            if (inRange)
+                            {
+                                //判定點是否已經close，已經close就不管他
+                                //其餘的判定移動會不會碰撞
+                                if (stat[nextRow, nextCol] != 2)
+                                {
+                                    transform.GetComponent<Collider2D>().enabled = false;
+                                    //向指定pos打出兩道射線(有間距)判定打到甚麼來決定能不能通過
+                                    Vector3 currentPos = new Vector3(currentRow * 2 + 1, currentCol * 2 + 1);
+                                    Vector3 Dir = new Vector3(nextRow * 2 + 1, nextCol * 2 + 1) - currentPos;
+                                    Vector3 tempDir = Quaternion.Euler(0, 0, 90) * Dir.normalized / 2;
+                                    //layerMask，讓射線只能打牆壁
+                                    RaycastHit2D hit1 = Physics2D.Raycast(currentPos + tempDir, Dir, Dir.magnitude, 1 << 8);
+                                    Debug.DrawRay(currentPos + tempDir, Dir, Color.red, 2);
+                                    RaycastHit2D hit2 = Physics2D.Raycast(currentPos - tempDir, Dir, Dir.magnitude, 1 << 8);
+                                    Debug.DrawRay(currentPos - tempDir, Dir, Color.red, 2);
+                                    transform.GetComponent<Collider2D>().enabled = true;
+                                    if (!(hit1 || hit2))
                                     {
-                                        dir = 0;
-                                    }
-                                    else if (i == 1 && j == 1)
-                                    {
-                                        dir = 1;
-                                    }
-                                    else if (i == 1 && j == 0)
-                                    {
-                                        dir = 2;
-                                    }
-                                    else if (i == 1 && j == -1)
-                                    {
-                                        dir = 3;
-                                    }
-                                    else if (i == 0 && j == -1)
-                                    {
-                                        dir = 4;
-                                    }
-                                    else if (i == -1 && j == -1)
-                                    {
-                                        dir = 5;
-                                    }
-                                    else if (i == -1 && j == 0)
-                                    {
-                                        dir = 6;
-                                    }
-                                    else if (i == -1 && j == 1)
-                                    {
-                                        dir = 7;
-                                    }
-                                    #endregion
-                                    float dis;
-                                    if (dir % 2 == 0)
-                                    {
-                                        dis = 1;
-                                    }
-                                    else
-                                    {
-                                        dis = 1.4f;
-                                    }
-                                    if (g[nextRow, nextCol] > g[currentRow, currentCol] + dis)
-                                    {
-                                        g[nextRow, nextCol] = g[currentRow, currentCol] + dis;
-                                        dirs[nextRow, nextCol] = dir;
-                                    }
-                                    for (int k = 0; k < end.Length; k++)
-                                    {
-                                        if (h[nextRow, nextCol] > Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol))
+                                        //若不碰撞則更新數值
+                                        stat[nextRow, nextCol] = 1;
+                                        #region//定義方向
+                                        int dir = -1;
+                                        if (i == 0 && j == 1)
                                         {
-                                            h[nextRow, nextCol] = Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol);
+                                            dir = 0;
                                         }
+                                        else if (i == 1 && j == 1)
+                                        {
+                                            dir = 1;
+                                        }
+                                        else if (i == 1 && j == 0)
+                                        {
+                                            dir = 2;
+                                        }
+                                        else if (i == 1 && j == -1)
+                                        {
+                                            dir = 3;
+                                        }
+                                        else if (i == 0 && j == -1)
+                                        {
+                                            dir = 4;
+                                        }
+                                        else if (i == -1 && j == -1)
+                                        {
+                                            dir = 5;
+                                        }
+                                        else if (i == -1 && j == 0)
+                                        {
+                                            dir = 6;
+                                        }
+                                        else if (i == -1 && j == 1)
+                                        {
+                                            dir = 7;
+                                        }
+                                        #endregion
+                                        float dis;
+                                        if (dir % 2 == 0)
+                                        {
+                                            dis = 1;
+                                        }
+                                        else
+                                        {
+                                            dis = 1.4f;
+                                        }
+                                        if (g[nextRow, nextCol] > g[currentRow, currentCol] + dis)
+                                        {
+                                            g[nextRow, nextCol] = g[currentRow, currentCol] + dis;
+                                            dirs[nextRow, nextCol] = dir;
+                                        }
+                                        for (int k = 0; k < end.Length; k++)
+                                        {
+                                            if (h[nextRow, nextCol] > Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol))
+                                            {
+                                                h[nextRow, nextCol] = Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol);
+                                            }
+                                        }
+                                        if (f[nextRow, nextCol] > g[nextRow, nextCol] + h[nextRow, nextCol])
+                                        {
+                                            f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
+                                        }
+                                        print(nextRow + "," + nextCol + "," + f[nextRow, nextCol]);
                                     }
-                                    if (f[nextRow, nextCol] > g[nextRow, nextCol] + h[nextRow, nextCol])
-                                    {
-                                        f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
-                                    }
-                                    print(nextRow + "," + nextCol + "," + f[nextRow, nextCol]);
                                 }
                             }
                         }
@@ -427,6 +426,32 @@ namespace com.BoardGameDungeon
         virtual protected void attack()
         {
 
+        }
+        /// <summary> 每間隔一段時間導航移動，沒範圍則range = null </summary>
+        protected void navigationNearestPlayer(Transform[] end, Transform[] range)
+        {
+            if ((navigationTimer += Time.deltaTime) > navigationTimerStoper)
+            {
+                target = navigation(end,range);
+                navigationTimerStoper = Random.Range(1f, 2f);
+                navigationTimer = 0;
+            }
+            if (target.roadTraget != null)
+            {
+                Vector3 dirM = (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
+                //到達定點則重開導航
+                if (dirM.magnitude > (target.roadTraget.position * Vector2.one - transform.position * Vector2.one).magnitude)
+                {
+                    transform.position = target.roadTraget.position;
+                    target = navigation(end,range);
+                    navigationTimerStoper = Random.Range(1f, 2f);
+                    navigationTimer = 0;
+                }
+                else
+                {
+                    transform.position = transform.position + dirM;
+                }
+            }
         }
     }
 
