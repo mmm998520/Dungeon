@@ -17,8 +17,8 @@ namespace com.BoardGameDungeon
         public static int[] exp = new int[8] { 10, 20, 10, 0, 0, 0, 0, 0 };
 
         /// <summary> 攻擊、移動目標 </summary>
-        public NearestPoint navigateTarget;
-        public NearestPoint straightTarget;
+        public NearestEnd navigateTarget;
+        public NearestEnd straightTarget;
 
         /// <summary> 導航間隔用的timer，避免一直重算浪費效能 </summary>
         protected float navigationTimer = 0;
@@ -35,7 +35,7 @@ namespace com.BoardGameDungeon
             //初始沒有目標
             List<Transform> temp = new List<Transform>();
             temp.Add(transform);
-            navigateTarget = new NearestPoint(transform, 0, temp);
+            navigateTarget = new NearestEnd(transform, 0, temp);
         }
 
         protected void monsterUpdate()
@@ -45,7 +45,7 @@ namespace com.BoardGameDungeon
         }
 
         /// <summary> 計算直線距離上的最近點與其距離  </summary>
-        protected NearestPoint StraightLineNearest(Transform[] end)
+        protected NearestEnd StraightLineNearest(Transform[] end)
         {
             if(end == null)
             {
@@ -65,10 +65,10 @@ namespace com.BoardGameDungeon
             }
             List<Transform> temp = new List<Transform>();
             temp.Add(minDisEnd);
-            return new NearestPoint(minDisEnd, minDis, temp);
+            return new NearestEnd(minDisEnd, minDis, temp);
         }
         /// <summary> 計算導航後的最佳路徑，使用A-Star方法 </summary>
-        protected NearestPoint navigation(Transform[] end, Transform[] range)
+        protected NearestEnd navigation(Transform[] end, Transform[] range)
         {
             //防止錯誤輸入
             if(end.Length == 0)
@@ -199,7 +199,7 @@ namespace com.BoardGameDungeon
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     //要換成改追蹤下個點
                     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    return StraightLineNearest(end);
+                    return nearby(end);
                 }
             }
 
@@ -370,7 +370,7 @@ namespace com.BoardGameDungeon
                         {
                             Debug.LogWarning(nextRow + "," + nextCol +", name : "+GameManager.Floors.GetChild(nextRow * MazeGen.col + nextCol).name);
                             Debug.LogWarning("end : " + "P" + (near + 1) + " : " +endRow[near] + "," + endCol[near]);
-                            return new NearestPoint(end[near], minH, road);
+                            return new NearestEnd(end[near], minH, road);
                         }
                         #region//找曾經的路徑點
                         else if (dirs[newRow, newCol] == 0)
@@ -438,7 +438,7 @@ namespace com.BoardGameDungeon
         /// <summary>
         /// 若選定的目標在範圍內則每一段時間攻擊一次
         /// </summary>
-        virtual protected void attackOccasion(NearestPoint Target,float hand)
+        virtual protected void attackOccasion(NearestEnd Target,float hand)
         {
             if (Target.endTraget != null)
             {
@@ -491,14 +491,14 @@ namespace com.BoardGameDungeon
         */
 
         /// <summary> 朝目標導航移動 </summary>
-        virtual protected NearestPoint goNavigation(Transform[] end, Transform[] range,NearestPoint nearestPoint)
+        virtual protected NearestEnd goNavigation(Transform[] end, Transform[] range,NearestEnd nearestEnd)
         {
             // 每幀朝road的最後一個點移動，若到達則扣除最後一個點，如果沒有點了就代表到達終點
-            if (nearestPoint != null)
+            if (nearestEnd != null)
             {
-                if (nearestPoint.roadTragets.Count!=0)
+                if (nearestEnd.roadTragets.Count!=0)
                 {
-                    Vector3 nextPos = nearestPoint.roadTragets[nearestPoint.roadTragets.Count - 1].position*Vector2.one;
+                    Vector3 nextPos = nearestEnd.roadTragets[nearestEnd.roadTragets.Count - 1].position*Vector2.one;
                     Vector3 dir = nextPos * Vector2.one - transform.position * Vector2.one;
                     //單位時間移動量
                     float dis = Time.deltaTime * moveSpeed;
@@ -506,15 +506,14 @@ namespace com.BoardGameDungeon
                     Debug.LogWarning(dis + "," + dir.magnitude);
                     if (dis > dir.magnitude)
                     {
-                        Debug.LogError("arrive");
                         transform.position = nextPos + transform.position.z * Vector3.forward;
-                        if (nearestPoint.roadTragets.Count > 0)
+                        if (nearestEnd.roadTragets.Count > 0)
                         {
-                            nearestPoint.roadTragets.RemoveAt(nearestPoint.roadTragets.Count - 1);
+                            nearestEnd.roadTragets.RemoveAt(nearestEnd.roadTragets.Count - 1);
                         }
                         else
                         {
-                            nearestPoint = navigation(end, range);
+                            nearestEnd = navigateNextPoint(end,range,nearestEnd);
                         }
                     }
                     else
@@ -524,20 +523,27 @@ namespace com.BoardGameDungeon
                 }
                 else
                 {
-                    nearestPoint = navigation(end, range);
+                    nearestEnd = navigation(end, range);
                 }
             }
-            return nearestPoint;
+            return nearestEnd;
         }
 
-        virtual protected void navigateNextPoint(Transform[] range, int nextTargetNum)
+        virtual protected NearestEnd navigateNextPoint(Transform[] end, Transform[] range, NearestEnd nearestEnd)
         {
+            nearestEnd = navigation(end, range);
+            return nearestEnd;
+        }
 
+        virtual protected NearestEnd nearby(Transform[] end)
+        {
+            Debug.LogError("靠近之後要幹嘛你又沒說，override我啦乾");
+            return null;
         }
     }
 
     /// <summary> 拿來儲存最近的玩家的資訊，哪個玩家、距離多遠，智能移動直線移動距離皆可 </summary>
-    public class NearestPoint
+    public class NearestEnd
     {
         /// <summary> 最近的玩家 </summary>
         public Transform endTraget;
@@ -545,7 +551,7 @@ namespace com.BoardGameDungeon
         public float Distance;
         /// <summary> 導航用最近路徑，非導航則null </summary>
         public List<Transform> roadTragets;
-        public NearestPoint(Transform _enemyTraget, float _Distance , List<Transform> _roadTragets)
+        public NearestEnd(Transform _enemyTraget, float _Distance , List<Transform> _roadTragets)
         {
             endTraget = _enemyTraget;
             Distance = _Distance;
