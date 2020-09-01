@@ -68,13 +68,13 @@ namespace com.BoardGameDungeon
             if (straightTarget.Distance > 3)
             {
                 Debug.LogError("安心");
-                goNavigationNearest(new Transform[1] { side[sideTargetNum] }, side, sideTargetNum);
+                //goNavigationNearest(new Transform[1] { side[sideTargetNum] }, side, sideTargetNum);
             }
             //距離玩家太近，逃向中央
             else
             {
                 Debug.LogError("逃命");
-                goNavigationNearest(new Transform[1] { mid[midTargetNum] }, mid, midTargetNum);
+                //goNavigationNearest(new Transform[1] { mid[midTargetNum] }, mid, midTargetNum);
             }
 
             monsterUpdate();
@@ -83,7 +83,7 @@ namespace com.BoardGameDungeon
                 attack();
             }
         }
-
+/*
         void goNavigationNearest(Transform[] end, Transform[] range, int nextTargetNum)
         {
             if ((navigationTimer += Time.deltaTime) > navigationTimerStoper)
@@ -94,13 +94,13 @@ namespace com.BoardGameDungeon
             }
             if (navigateTarget != null)
             {
-                if (navigateTarget.roadTraget != null)
+                if (navigateTarget.roadTragets != null)
                 {
-                    Vector3 dirM = (navigateTarget.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
+                    Vector3 dirM = (navigateTarget.roadTragets.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
                     //到達定點則重開導航
-                    if (dirM.magnitude > Vector3.Distance(navigateTarget.roadTraget.position * Vector2.one, transform.position * Vector2.one))
+                    if (dirM.magnitude > Vector3.Distance(navigateTarget.roadTragets.position * Vector2.one, transform.position * Vector2.one))
                     {
-                        transform.position = navigateTarget.roadTraget.position;
+                        transform.position = navigateTarget.roadTragets.position;
                         Debug.LogError("!!!!!!!!!!!!!!!!!!!!!");
                         navigateTarget = navigation(end, range);
                         navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
@@ -138,6 +138,6 @@ namespace com.BoardGameDungeon
             print(range[nextTargetNum].name);
             navigationTimer = 0;
             navigateTarget = navigation(new Transform[1] { range[nextTargetNum] }, range);
-        }
+        }*/
     }
 }
