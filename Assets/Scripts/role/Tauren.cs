@@ -8,13 +8,16 @@ namespace com.BoardGameDungeon
 {
     public class Tauren : MonsterManager
     {
+        /// <summary> 守衛範圍 </summary>
         Transform[] range;
-        int rangeTargetNum = 0;
+        Transform[] randomRangePoint;
+        NearestEnd target;
 
         void Start()
         {
             monsterStart();
             cd = 2;
+            moveSpeed = 1;
             monsterType = MonsterType.Tauren;
             #region//決定守衛範圍
             range = new Transform[15];
@@ -37,6 +40,8 @@ namespace com.BoardGameDungeon
                 range[i] = nearestFloor;
             }
             #endregion
+
+            Invoke("reNavigate", 0.01f);
         }
 
         void Update()
@@ -50,7 +55,7 @@ namespace com.BoardGameDungeon
                 attack();
             }
         }
-
+        /*
         override protected void goNavigationNearest(Transform[] end, Transform[] range)
         {
             if ((navigationTimer += Time.deltaTime) > navigationTimerStoper)
@@ -61,13 +66,13 @@ namespace com.BoardGameDungeon
             }
             if (navigateTarget != null)
             {
-                if (navigateTarget.roadTraget != null)
+                if (navigateTarget.roadTragets != null)
                 {
-                    Vector3 dirM = (navigateTarget.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
+                    Vector3 dirM = (navigateTarget.roadTragets.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
                     //到達定點則重開導航
-                    if (dirM.magnitude > Vector3.Distance(navigateTarget.roadTraget.position * Vector2.one,transform.position * Vector2.one))
+                    if (dirM.magnitude > Vector3.Distance(navigateTarget.roadTragets.position * Vector2.one,transform.position * Vector2.one))
                     {
-                        transform.position = navigateTarget.roadTraget.position;
+                        transform.position = navigateTarget.roadTragets.position;
                         Debug.LogError("!!!!!!!!!!!!!!!!!!!!!");
                         navigateTarget = navigation(end, range);
                         navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
@@ -104,7 +109,7 @@ namespace com.BoardGameDungeon
             print(range[nextTargetNum].name);
             navigationTimer = 0;
             navigateTarget = navigation(new Transform[1] { range[nextTargetNum] }, range);
-        }
+        }*/
         override protected void attack()
         {
             //生成攻擊在觸控方向，並旋轉攻擊朝向該方向
@@ -113,7 +118,7 @@ namespace com.BoardGameDungeon
             //設定攻擊參數
             attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], false);
         }
-
+        
         /// <summary> 決定要追最近敵人還是巡邏 </summary>
         void actionMode()
         {
@@ -127,12 +132,12 @@ namespace com.BoardGameDungeon
             //附近沒敵人，守家
             if (straightTarget.Distance > 3)
             {
-                goNavigationNearest(new Transform[1] { range[rangeTargetNum] }, range);
-                print("導航 : " + navigateTarget.Distance + " , " + navigateTarget.roadTraget.name);
+                target = goNavigation(randomRangePoint, range, target);
+                print("導航 : " + target.Distance + " , " + target.endTraget.name);
             }
             else
             {
-                //附近有敵人，但我超過守備範圍了，回家
+                //附近有敵人，但超過守備範圍，回家
                 int startRow, startCol;
                 for (startRow = 0; startRow < MazeGen.row; startRow++)
                 {
@@ -150,24 +155,48 @@ namespace com.BoardGameDungeon
                 }
                 if (!range.Contains(GameManager.Floors.GetChild(startRow * MazeGen.col + startCol)))
                 {
-                    goNavigationNearest(new Transform[1] { range[rangeTargetNum] }, range);
-                    print("導航 : " + navigateTarget.Distance + " , " + navigateTarget.roadTraget.name);
+                    target = goNavigation(randomRangePoint, range, target);
+                    print("導航 : " + target.Distance + " , " + target.endTraget.name);
                 }
                 //附近有敵人，追擊
                 else
                 {
-                    Vector3 dirM = (straightTarget.roadTraget.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
-                    if (dirM.magnitude > Vector3.Distance(straightTarget.roadTraget.position * Vector2.one, transform.position * Vector2.one))
+                    Vector3 endPos = straightTarget.endTraget.position * Vector2.one;
+                    Vector3 dir = endPos * Vector2.one - transform.position * Vector2.one;
+                    //單位時間移動量
+                    float dis = Time.deltaTime * moveSpeed;
+                    if(dis > dir.magnitude)
                     {
-                        transform.position = straightTarget.roadTraget.position;
+                        transform.position = endPos + transform.position.z * Vector3.forward;
                     }
                     else
                     {
-                        transform.position = transform.position + dirM;
+                        transform.Translate(dis * dir.normalized);
                     }
-                    print("直行 : " + straightTarget.Distance + " , " + straightTarget.roadTraget.name);
+                    print("直行 : " + straightTarget.Distance + " , " + straightTarget.endTraget.name);
                 }
             }
+        }
+
+        void reNavigate()
+        {
+            randomRangePoint = new Transform[1] { range[Random.Range(0, range.Length)] };
+            target = navigation(randomRangePoint, range);
+        }
+
+        override protected NearestEnd navigateNextPoint(Transform[] end, Transform[] range, NearestEnd nearestEnd)
+        {
+            print("a");
+            randomRangePoint = new Transform[1] { range[Random.Range(0, range.Length)] };
+            nearestEnd = navigation(randomRangePoint, range);
+            return nearestEnd;
+        }
+        protected override NearestEnd nearby(Transform[] end)
+        {
+            print("a");
+            randomRangePoint = new Transform[1] { range[Random.Range(0, range.Length)] };
+            target = navigation(randomRangePoint, range);
+            return target;
         }
     }
 }

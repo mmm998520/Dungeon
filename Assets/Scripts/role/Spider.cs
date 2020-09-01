@@ -10,7 +10,9 @@ namespace com.BoardGameDungeon
         {
             monsterStart();
             cd = 1;
+            moveSpeed = 1;
             monsterType = MonsterType.Spider;
+            Invoke("reNavigate", 0.01f);
         }
 
         void Update()
@@ -20,7 +22,7 @@ namespace com.BoardGameDungeon
             {
                 end[i] = GameManager.Players.GetChild(i);
             }
-            goNavigationNearest(end, null);
+            navigateTarget = goNavigation(end, null, navigateTarget);
             attackOccasion(navigateTarget, 2.5f);
             
             monsterUpdate();
@@ -28,6 +30,17 @@ namespace com.BoardGameDungeon
             {
                 attack();
             }
+        }
+
+        void reNavigate()
+        {
+            Transform[] end = new Transform[GameManager.Players.childCount];
+            for (int i = 0; i < end.Length; i++)
+            {
+                end[i] = GameManager.Players.GetChild(i);
+            }
+            navigateTarget = navigation(end, null);
+            Invoke("reNavigate", Random.Range(0.2f, 0.4f));
         }
 
         override protected void attack()
@@ -40,6 +53,11 @@ namespace com.BoardGameDungeon
                 //設定攻擊參數
                 attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], false);
             }
+        }
+
+        protected override NearestEnd nearby(Transform[] end)
+        {
+            return StraightLineNearest(end);
         }
     }
 }
