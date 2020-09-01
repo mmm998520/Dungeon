@@ -103,6 +103,7 @@ namespace com.BoardGameDungeon
                         column.name = i + "," + j;
                         //幫牆壁加TAG做區分
                         column.tag = "wall";
+                        column.layer = 8;
                     }
                 }
             }
