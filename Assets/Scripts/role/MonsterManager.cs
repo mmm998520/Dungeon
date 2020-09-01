@@ -152,7 +152,7 @@ namespace com.BoardGameDungeon
             }
             if (!TargetInRange)
             {
-                Debug.LogError("RRRR");
+                Debug.LogError("Target Not In Range");
                 return null;
             }
 
@@ -422,7 +422,7 @@ namespace com.BoardGameDungeon
                     break;
                 }
             }
-            Debug.LogError("RRRR");
+            Debug.LogError("Cant Find Road");
             return null;
         }
 
