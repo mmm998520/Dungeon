@@ -1,9 +1,14 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - GameManager
     - com.BoardGameDungeon.MagicianAttackManager
     - com.BoardGameDungeon.MazeGen
     - com.BoardGameDungeon.PlayerManager
+    - com.BoardGameDungeon.Slime
+    - com.BoardGameDungeon.Spider
+    - com.BoardGameDungeon.SpiderAttackManager
+    - com.BoardGameDungeon.Tauren
     - com.BoardGameDungeon.ThiefAttackManager
     - com.BoardGameDungeon.WarriorAttackManager
     Unity.Rider.Editor.dll:
@@ -47,15 +52,25 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11686}
+      Script: {instanceID: 11240}
     - Class: 114
-      Script: {instanceID: 12290}
+      Script: {instanceID: 11614}
     - Class: 114
-      Script: {instanceID: 18430}
+      Script: {instanceID: 11694}
     - Class: 114
-      Script: {instanceID: 22344}
+      Script: {instanceID: 12228}
     - Class: 114
-      Script: {instanceID: 23748}
+      Script: {instanceID: 12304}
+    - Class: 114
+      Script: {instanceID: 12378}
+    - Class: 114
+      Script: {instanceID: 12420}
+    - Class: 114
+      Script: {instanceID: 12520}
+    - Class: 114
+      Script: {instanceID: 12644}
+    - Class: 114
+      Script: {instanceID: 12896}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -91,6 +106,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_Dropdown
+  - hash:
+      serializedVersion: 2
+      Hash: 2b501ec6649d350b53e4f99994221e2f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: ThiefAttackManager
   - hash:
       serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
@@ -201,6 +222,12 @@ ScriptsOnlyBuild:
     className: AspectRatioFitter
   - hash:
       serializedVersion: 2
+      Hash: af9ea31c0bf342579039d4ae7a86f1f6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ValueSet
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -219,10 +246,22 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
+      Hash: 2b501ec6649d350b53e4f99994221e2f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: WarriorAttackManager
+  - hash:
+      serializedVersion: 2
       Hash: aba7b2852ef61d175dd9602e7723d5e5
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Mask
+  - hash:
+      serializedVersion: 2
+      Hash: 00ed3f6856de4f0dffab93699ac14da6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: AttackManager
   - hash:
       serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
@@ -249,6 +288,12 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
+      Hash: af9ea31c0bf342579039d4ae7a86f1f6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: MonsterManager
+  - hash:
+      serializedVersion: 2
       Hash: b8a5e8091ab0b8861d2add371082c5e0
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -265,6 +310,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Selectable
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: testAStar
   - hash:
       serializedVersion: 2
       Hash: 23be02afab2b0bc0cf56d71ab811b6ea
@@ -327,6 +378,12 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
+      Hash: af9ea31c0bf342579039d4ae7a86f1f6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: Spider
+  - hash:
+      serializedVersion: 2
       Hash: ac72603658e74191db8f598755d554f3
     assemblyName: Assembly-CSharp.dll
     namespaceName: com.BoardGameDungeon
@@ -375,10 +432,28 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
+      Hash: af9ea31c0bf342579039d4ae7a86f1f6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: Slime
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameManager
+  - hash:
+      serializedVersion: 2
       Hash: c1933cc0a2f4ff6eb13333347497beb3
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: TimelineAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 2b501ec6649d350b53e4f99994221e2f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: MagicianAttackManager
   - hash:
       serializedVersion: 2
       Hash: 8001a5f7502aab37e42206da015e6914
@@ -403,6 +478,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools
     className: BeforeAfterTestCommandState
+  - hash:
+      serializedVersion: 2
+      Hash: 2b501ec6649d350b53e4f99994221e2f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: SpiderAttackManager
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -433,6 +514,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
     className: PlayModeRunnerCallback
+  - hash:
+      serializedVersion: 2
+      Hash: af9ea31c0bf342579039d4ae7a86f1f6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: com.BoardGameDungeon
+    className: Tauren
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -511,36 +598,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 2b501ec6649d350b53e4f99994221e2f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: com.BoardGameDungeon
-    className: WarriorAttackManager
-  - hash:
-      serializedVersion: 2
-      Hash: 00ed3f6856de4f0dffab93699ac14da6
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: com.BoardGameDungeon
-    className: AttackManager
-  - hash:
-      serializedVersion: 2
-      Hash: af9ea31c0bf342579039d4ae7a86f1f6
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ValueSet
-  - hash:
-      serializedVersion: 2
-      Hash: 2b501ec6649d350b53e4f99994221e2f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: com.BoardGameDungeon
-    className: ThiefAttackManager
-  - hash:
-      serializedVersion: 2
-      Hash: 2b501ec6649d350b53e4f99994221e2f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: com.BoardGameDungeon
-    className: MagicianAttackManager
   platform: 13
   scenePathNames:
   - Assets/Scenes/Game.unity

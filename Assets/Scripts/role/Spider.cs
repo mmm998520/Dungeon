@@ -26,10 +26,6 @@ namespace com.BoardGameDungeon
             attackOccasion(navigateTarget, 2.5f);
             
             monsterUpdate();
-            if (Input.anyKeyDown)
-            {
-                attack();
-            }
         }
 
         void reNavigate()

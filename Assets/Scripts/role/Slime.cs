@@ -69,10 +69,6 @@ namespace com.BoardGameDungeon
             actionMode();
 
             monsterUpdate();
-            if (Input.anyKeyDown)
-            {
-                attack();
-            }
         }
 
         /*

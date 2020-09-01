@@ -50,10 +50,6 @@ namespace com.BoardGameDungeon
             attackOccasion(straightTarget, 2.5f);
 
             monsterUpdate();
-            if (Input.anyKeyDown)
-            {
-                attack();
-            }
         }
         /*
         override protected void goNavigationNearest(Transform[] end, Transform[] range)

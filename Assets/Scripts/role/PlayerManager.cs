@@ -56,6 +56,7 @@ namespace com.BoardGameDungeon
                     GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.identity);
                     attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);
                 }
+                transform.Translate(Input.GetAxis("Vertical") * Vector3.up*Time.deltaTime + Input.GetAxis("Horizontal") * Vector3.right*Time.deltaTime);
             }
 
             touchBehavior();
@@ -74,13 +75,13 @@ namespace com.BoardGameDungeon
                 //觸控點與角色的距離
                 float targetDis = Vector3.Distance(touchPos, transform.position * Vector2.one);
                 //距離夠近才能進行操作
-                if (targetDis < 0.5f)
+                if (targetDis < 0.75f)
                 {
                     move(touchPos, targetDis);
                     readyForAttack(touch.phase);
                 }
                 //偵測雙擊後的點與觸控點距離，
-                if (Vector3.Distance(TouchBeganPos, touchPos) > 0.5f && targetDis < 1 && attackMode)
+                if (Vector3.Distance(TouchBeganPos, touchPos) > 0.5f && targetDis < 1.25 && attackMode)
                 {
                     attack(touchPos);
                 }
