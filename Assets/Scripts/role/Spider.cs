@@ -6,7 +6,6 @@ namespace com.BoardGameDungeon
 {
     public class Spider : MonsterManager
     {
-        NearestEnd target;
         void Start()
         {
             monsterStart();
@@ -23,7 +22,7 @@ namespace com.BoardGameDungeon
             {
                 end[i] = GameManager.Players.GetChild(i);
             }
-            target = goNavigation(end, null, target);
+            navigateTarget = goNavigation(end, null, navigateTarget);
             attackOccasion(navigateTarget, 2.5f);
             
             monsterUpdate();
@@ -40,7 +39,7 @@ namespace com.BoardGameDungeon
             {
                 end[i] = GameManager.Players.GetChild(i);
             }
-            target = navigation(end, null);
+            navigateTarget = navigation(end, null);
             Invoke("reNavigate", Random.Range(0.2f, 0.4f));
         }
 

@@ -435,9 +435,7 @@ namespace com.BoardGameDungeon
             return null;
         }
 
-        /// <summary>
-        /// 若選定的目標在範圍內則每一段時間攻擊一次
-        /// </summary>
+        /// <summary> 若選定的目標在範圍(hand)內則每一段時間攻擊一次 </summary>
         virtual protected void attackOccasion(NearestEnd Target,float hand)
         {
             if (Target.endTraget != null)
@@ -503,7 +501,6 @@ namespace com.BoardGameDungeon
                     //單位時間移動量
                     float dis = Time.deltaTime * moveSpeed;
                     //到達定點(移動量大於距離)則重開導航
-                    Debug.LogWarning(dis + "," + dir.magnitude);
                     if (dis > dir.magnitude)
                     {
                         transform.position = nextPos + transform.position.z * Vector3.forward;
