@@ -136,7 +136,6 @@ namespace com.BoardGameDungeon
                         break;
                     }
                 }
-                Debug.Log(endRow[i] + "," + endCol[i]);
             }
             //若目標不在範圍
             bool TargetInRange = false;
@@ -204,7 +203,7 @@ namespace com.BoardGameDungeon
             }
 
             //開始A-Star
-            for (int s = 0; s < 9999; s++)
+            for (int s = 0; s < 999; s++)
             {
                 //將當前點close
                 stat[currentRow, currentCol] = 2;
@@ -368,8 +367,7 @@ namespace com.BoardGameDungeon
                     {
                         if (dirs[newRow, newCol] == -1)
                         {
-                            Debug.LogWarning(nextRow + "," + nextCol +", name : "+GameManager.Floors.GetChild(nextRow * MazeGen.col + nextCol).name);
-                            Debug.LogWarning("end : " + "P" + (near + 1) + " : " +endRow[near] + "," + endCol[near]);
+                            Debug.LogWarning("end : " + "P" + (near + 1) + " : " +endRow[near] + "," + endCol[near]+", next : "+ nextRow + "," + nextCol + ", name : " + GameManager.Floors.GetChild(nextRow * MazeGen.col + nextCol).name);
                             return new NearestEnd(end[near], minH, road);
                         }
                         #region//找曾經的路徑點

@@ -68,7 +68,13 @@ public class ValueSet : MonoBehaviour
     {
         if (Hurt > HP[type,level])
         {
+            afterDied();
             Destroy(gameObject);
         }
+    }
+
+    virtual protected void afterDied()
+    {
+
     }
 }

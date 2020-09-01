@@ -132,7 +132,6 @@ namespace com.BoardGameDungeon
             //附近沒敵人，守家
             if (straightTarget.Distance > 3)
             {
-
                 target = goNavigation(randomRangePoint, range, target);
                 print("導航 : " + target.Distance + " , " + target.endTraget.name);
             }
