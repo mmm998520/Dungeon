@@ -23,7 +23,7 @@ namespace com.BoardGameDungeon
 
         protected void hurt(Collider2D collider, float ATK)
         {
-            collider.gameObject.GetComponent<ValueSet>().Hurt += ATK;
+            collider.GetComponent<ValueSet>().Hurt += ATK;
         }
 
         protected void OnTriggerEnter2D(Collider2D collider)
