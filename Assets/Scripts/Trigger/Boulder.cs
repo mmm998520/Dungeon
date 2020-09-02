@@ -44,17 +44,17 @@ namespace com.BoardGameDungeon
             }
             else if (r >= 2)
             {
-                stone = Instantiate(this.stone, new Vector3(row * 2 + 1, 0), Quaternion.identity);
+                stone = Instantiate(this.stone, new Vector3(row * 2 + 1, 0 * 2 + 1), Quaternion.identity);
             }
             else if (r >= 1)
             {
-                stone = Instantiate(this.stone, new Vector3(row * 2 + 1, MazeGen.col * 2 + 1), Quaternion.identity);
+                stone = Instantiate(this.stone, new Vector3(MazeGen.row * 2 + 1, col * 2 + 1), Quaternion.identity);
             }
             else
             {
-                stone = Instantiate(this.stone, new Vector3(row * 2 + 1, MazeGen.col * 2 + 1), Quaternion.identity);
+                stone = Instantiate(this.stone, new Vector3(0 * 2 + 1, col * 2 + 1), Quaternion.identity);
             }
-            stone.GetComponent<>
+            stone.GetComponent<Stone>().dir = (transform.position - stone.transform.position).normalized;
         }
     }
 }

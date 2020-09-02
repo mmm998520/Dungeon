@@ -21,6 +21,14 @@ namespace com.BoardGameDungeon
             {
                 collider.GetComponent<ValueSet>().Hurt += ATK;
             }
+            else if(collider.tag == "wall")
+            {
+                Destroy(collider.gameObject);
+            }
+            else if(collider.tag == "side")
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
