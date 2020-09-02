@@ -4,49 +4,94 @@ using UnityEngine;
 
 namespace com.BoardGameDungeon
 {
+    /// <summary> 在陷阱前後產生包夾，如果有牆阻隔，則盡可能選可以完成包夾的位置進行生成 </summary>
     public class Alarm : MonoBehaviour
     {
         GameObject monster;
-        void Start()
-        {
-
-        }
-
-        void Update()
-        {
-
-        }
 
         void OnTriggerEnter2D(Collider2D collider)
         {
             if (collider.GetComponent<PlayerManager>())
             {
-                //位置像素化
-                int row, col;
-                for (row = 0; row < MazeGen.row; row++)
+                //向4方位打ray看有沒有碰到牆，以此來判斷在哪生出怪物
+                Vector3 currentPos = transform.position * Vector2.one;
+                RaycastHit2D[] hits = new RaycastHit2D[4];
+                int hitNum = 0;
+                Vector2 dir = Vector3.up;
+                for(int i = 0; i < 4; i++)
                 {
-                    if (Mathf.Abs(transform.position.x - (row * 2 + 1)) <= 1)
+                    hits[i] = Physics2D.Raycast(currentPos, dir, 2, 1 << 8);
+                    dir = Quaternion.Euler(0, 0, 90) * dir;
+                    if (hits[i])
                     {
-                        break;
+                        hitNum++;
                     }
                 }
-                for (col = 0; col < MazeGen.Creat_col; col++)
+                //如果所有方向都沒hit
+                if (hitNum >= 4)
                 {
-                    if (Mathf.Abs(transform.position.y - (col * 2 + 1)) <= 1)
+                    //上下或左右隨機一個進行生成
+                    if (Random.Range(0, 2) < 1)
                     {
-                        break;
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.up * 2, Quaternion.identity);
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.down * 2, Quaternion.identity);
+                    }
+                    else
+                    {
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.right * 2, Quaternion.identity);
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.left * 2, Quaternion.identity);
+
                     }
                 }
-                if (Random.Range(0, 2) < 2)
+                else if(hitNum >= 3)
                 {
-                    Instantiate(monster, new Vector3((row + 1) * 2 + 1, col * 2 + 1, transform.position.z), Quaternion.identity);
-                    Instantiate(monster, new Vector3((row - 1) * 2 + 1, col * 2 + 1, transform.position.z), Quaternion.identity);
+                    RaycastHit2D hit = Physics2D.Raycast(currentPos-Vector3.up * 2, currentPos, 4, 1 << 8);
+                    //如果上下有打到牆，生成左右
+                    if (hit)
+                    {
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.right * 2, Quaternion.identity);
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.left * 2, Quaternion.identity);
+                    }
+                    //反之，左右有打到牆，生成上下
+                    else
+                    {
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.up * 2, Quaternion.identity);
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.down * 2, Quaternion.identity);
+                    }
+                }
+                else if (hitNum >= 2)
+                {
+                    dir = Vector2.up;
+                    for (int i = 0; i < 4; i++)
+                    {
+                        //如果雷射方向有打到牆，就直接生成在那(因為不管怎樣都可以達成包夾)
+                        if (!hits[i])
+                        {
+                            Instantiate(monster, transform.position * Vector2.one + dir * 2, Quaternion.identity);
+                        }
+                        dir = Quaternion.Euler(0, 0, 90) * dir;
+                    }
+                }
+                else if(hitNum >= 1)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        //如果雷射方向沒有打到牆，就生成在那跟他的反方向
+                        if (!hits[i])
+                        {
+                            Instantiate(monster, transform.position * Vector2.one + dir * 2, Quaternion.identity);
+                            Instantiate(monster, transform.position * Vector2.one - dir * 2, Quaternion.identity);
+                            break;
+                        }
+                        dir = Quaternion.Euler(0, 0, 90) * dir;
+                    }
                 }
                 else
                 {
-                    Instantiate(monster, new Vector3(row * 2 + 1, (col + 1) * 2 + 1, transform.position.z), Quaternion.identity);
-                    Instantiate(monster, new Vector3(row * 2 + 1, (col - 1) * 2 + 1, transform.position.z), Quaternion.identity);
+                    Debug.LogError("我很好奇你現在在哪...");
                 }
+
+                Destroy(gameObject);
             }
         }
     }
