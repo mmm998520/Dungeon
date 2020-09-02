@@ -6,7 +6,7 @@ namespace com.BoardGameDungeon
 {
     public class Exp : TriggerManager
     {
-        int exp;
+        int exp = 5;
         public ValueSet.Career career;
 
         void OnTriggerEnter2D(Collider2D collider)
@@ -16,8 +16,8 @@ namespace com.BoardGameDungeon
                 if(career == collider.GetComponent<PlayerManager>().career)
                 {
                     collider.GetComponent<PlayerManager>().exp += exp;
-                    Destroy(gameObject);
                 }
+                Destroy(gameObject);
             }
         }
     }

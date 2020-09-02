@@ -7,7 +7,7 @@ namespace com.BoardGameDungeon
     /// <summary> 在陷阱前後產生包夾，如果有牆阻隔，則盡可能選可以完成包夾的位置進行生成 </summary>
     public class Alarm : MonoBehaviour
     {
-        GameObject monster;
+        public GameObject monster;
 
         void OnTriggerEnter2D(Collider2D collider)
         {
@@ -27,36 +27,24 @@ namespace com.BoardGameDungeon
                         hitNum++;
                     }
                 }
-                //如果所有方向都沒hit
+                //如果所有方向都打到......?
                 if (hitNum >= 4)
                 {
-                    //上下或左右隨機一個進行生成
-                    if (Random.Range(0, 2) < 1)
-                    {
-                        Instantiate(monster, transform.position * Vector2.one + Vector2.up * 2, Quaternion.identity);
-                        Instantiate(monster, transform.position * Vector2.one + Vector2.down * 2, Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(monster, transform.position * Vector2.one + Vector2.right * 2, Quaternion.identity);
-                        Instantiate(monster, transform.position * Vector2.one + Vector2.left * 2, Quaternion.identity);
+                    Debug.LogError("我很好奇你現在在哪...");
 
-                    }
                 }
                 else if(hitNum >= 3)
                 {
-                    RaycastHit2D hit = Physics2D.Raycast(currentPos-Vector3.up * 2, currentPos, 4, 1 << 8);
-                    //如果上下有打到牆，生成左右
-                    if (hit)
+                    for (int i = 0; i < 4; i++)
                     {
-                        Instantiate(monster, transform.position * Vector2.one + Vector2.right * 2, Quaternion.identity);
-                        Instantiate(monster, transform.position * Vector2.one + Vector2.left * 2, Quaternion.identity);
-                    }
-                    //反之，左右有打到牆，生成上下
-                    else
-                    {
-                        Instantiate(monster, transform.position * Vector2.one + Vector2.up * 2, Quaternion.identity);
-                        Instantiate(monster, transform.position * Vector2.one + Vector2.down * 2, Quaternion.identity);
+                        //如果雷射方向沒有打到牆，就生成在那跟他的反方向
+                        if (!hits[i])
+                        {
+                            Instantiate(monster, transform.position * Vector2.one + dir * 2, Quaternion.identity);
+                            Instantiate(monster, transform.position * Vector2.one - dir * 2, Quaternion.identity);
+                            break;
+                        }
+                        dir = Quaternion.Euler(0, 0, 90) * dir;
                     }
                 }
                 else if (hitNum >= 2)
@@ -74,21 +62,35 @@ namespace com.BoardGameDungeon
                 }
                 else if(hitNum >= 1)
                 {
-                    for (int i = 0; i < 4; i++)
+                    RaycastHit2D hit = Physics2D.Raycast(currentPos - Vector3.up * 2, currentPos, 4, 1 << 8);
+                    //如果上下有打到牆，生成左右
+                    if (hit)
                     {
-                        //如果雷射方向沒有打到牆，就生成在那跟他的反方向
-                        if (!hits[i])
-                        {
-                            Instantiate(monster, transform.position * Vector2.one + dir * 2, Quaternion.identity);
-                            Instantiate(monster, transform.position * Vector2.one - dir * 2, Quaternion.identity);
-                            break;
-                        }
-                        dir = Quaternion.Euler(0, 0, 90) * dir;
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.right * 2, Quaternion.identity);
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.left * 2, Quaternion.identity);
+                    }
+                    //反之，左右有打到牆，生成上下
+                    else
+                    {
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.up * 2, Quaternion.identity);
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.down * 2, Quaternion.identity);
                     }
                 }
+                //如果所有方向都沒hit
                 else
                 {
-                    Debug.LogError("我很好奇你現在在哪...");
+                    //上下或左右隨機一個進行生成
+                    if (Random.Range(0, 2) < 1)
+                    {
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.up * 2, Quaternion.identity);
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.down * 2, Quaternion.identity);
+                    }
+                    else
+                    {
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.right * 2, Quaternion.identity);
+                        Instantiate(monster, transform.position * Vector2.one + Vector2.left * 2, Quaternion.identity);
+
+                    }
                 }
 
                 Destroy(gameObject);

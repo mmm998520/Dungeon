@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Trigger\Boulder.cs" />
     <Compile Include="Assets\Scripts\Trigger\Exp.cs" />
     <Compile Include="Assets\Scripts\Trigger\Medical.cs" />
+    <Compile Include="Assets\Scripts\Trigger\Spine.cs" />
     <Compile Include="Assets\Scripts\Trigger\Stab.cs" />
     <Compile Include="Assets\Scripts\Trigger\Stone.cs" />
     <Compile Include="Assets\Scripts\Trigger\TriggerManager.cs" />

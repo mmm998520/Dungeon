@@ -38,23 +38,30 @@ namespace com.BoardGameDungeon
             }
             int r = Random.Range(0, 4);
             GameObject stone;
+            Vector3 dir;
             if (r >= 3)
             {
-                stone = Instantiate(this.stone, new Vector3(row * 2 + 1, MazeGen.col * 2 + 1), Quaternion.identity);
+                stone = Instantiate(this.stone, new Vector3(row * 2 + 1, (MazeGen.col - 1) * 2 + 1), Quaternion.identity);
+                dir = Vector3.down;
             }
             else if (r >= 2)
             {
                 stone = Instantiate(this.stone, new Vector3(row * 2 + 1, 0 * 2 + 1), Quaternion.identity);
+                dir = Vector3.up;
             }
             else if (r >= 1)
             {
-                stone = Instantiate(this.stone, new Vector3(MazeGen.row * 2 + 1, col * 2 + 1), Quaternion.identity);
+                stone = Instantiate(this.stone, new Vector3((MazeGen.row - 1) * 2 + 1, col * 2 + 1), Quaternion.identity);
+                dir = Vector3.left;
             }
             else
             {
                 stone = Instantiate(this.stone, new Vector3(0 * 2 + 1, col * 2 + 1), Quaternion.identity);
+                dir = Vector3.right;
             }
-            stone.GetComponent<Stone>().dir = (transform.position - stone.transform.position).normalized;
+            stone.GetComponent<Stone>().dir = dir;
+
+            Destroy(gameObject);
         }
     }
 }

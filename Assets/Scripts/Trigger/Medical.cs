@@ -12,7 +12,11 @@ namespace com.BoardGameDungeon
         {
             if (collider.GetComponent<PlayerManager>())
             {
-                collider.GetComponent<PlayerManager>().Hurt += recovery;
+                collider.GetComponent<PlayerManager>().Hurt -= recovery;
+                if (collider.GetComponent<PlayerManager>().Hurt < 0)
+                {
+                    collider.GetComponent<PlayerManager>().Hurt = 0;
+                }
                 Destroy(gameObject);
             }
         }

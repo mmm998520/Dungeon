@@ -9,18 +9,21 @@ namespace com.BoardGameDungeon
     {
         bool pop = false;
         float popTimer;
-        float popTimerStoper;
+        float popTimerStoper = 1;
 
         void Update()
         {
-            if((popTimer += Time.deltaTime) > popTimerStoper)
+            if (pop)
             {
-                foreach (Transform child in transform)
+                if ((popTimer += Time.deltaTime) > popTimerStoper)
                 {
-                    child.GetComponent<Collider2D>().enabled = true;
+                    foreach (Transform child in transform)
+                    {
+                        child.GetComponent<Collider2D>().enabled = false;
+                    }
                     pop = false;
+                    popTimer = 0;
                 }
-                popTimer = 0;
             }
         }
 

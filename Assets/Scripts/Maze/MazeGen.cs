@@ -102,7 +102,14 @@ namespace com.BoardGameDungeon
                         sprite.parent = column.transform;
                         column.name = i + "," + j;
                         //幫牆壁加TAG做區分
-                        column.tag = "wall";
+                        if (i == 0 || j == 0 || i == Creat_row - 1 || j == Creat_col - 1)
+                        {
+                            column.tag = "side";
+                        }
+                        else
+                        {
+                            column.tag = "wall";
+                        }
                         column.layer = 8;
                     }
                 }
