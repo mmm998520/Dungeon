@@ -67,10 +67,25 @@ namespace com.BoardGameDungeon
                             //不能生成在周圍
                             if (!(pos[r][0] <= 1 || pos[r][1] <= 1 || pos[r][0] >= MazeGen.row - 2 || pos[r][1] >= MazeGen.col - 2))
                             {
-                                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                //守備區域不能重疊
-                                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                if (true)
+                                if (i == 0 && pos[r][0] <= 5 && pos[r][1] <= 3)
+                                {
+                                    ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
+                                    pos.RemoveAt(r);
+                                    break;
+                                }
+                                if (i == 1 && pos[r][0] >= 6 && pos[r][1] >= 5)
+                                {
+                                    ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
+                                    pos.RemoveAt(r);
+                                    break;
+                                }
+                                else if (i == 2 && pos[r][0] <= 5 && pos[r][1] >= 5)
+                                {
+                                    ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
+                                    pos.RemoveAt(r);
+                                    break;
+                                }
+                                else if (i == 3 && pos[r][0] >= 6 && pos[r][1] <= 3)
                                 {
                                     ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
                                     pos.RemoveAt(r);
