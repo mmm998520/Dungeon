@@ -118,6 +118,7 @@ namespace com.BoardGameDungeon
             //距離玩家很遠，安心走自己的
             if (straightTarget.Distance > 3)
             {
+                Debug.LogError("安心");
                 range = side;
                 randomRangePoint = randomSidePoint;
                 target = goNavigation(randomRangePoint, null, navigation(randomRangePoint, null));
@@ -126,6 +127,7 @@ namespace com.BoardGameDungeon
             //距離玩家太近，逃向中央
             else
             {
+                Debug.LogError("逃命");
                 range = mid;
                 randomRangePoint = randomMidPoint;
                 target = goNavigation(randomRangePoint, null, navigation(randomRangePoint, null));
@@ -139,6 +141,12 @@ namespace com.BoardGameDungeon
             randomMidPoint = new Transform[1] { mid[Random.Range(0, mid.Length)] };
             range = side;
             randomRangePoint = randomSidePoint;
+            target = navigation(randomRangePoint, range);
+            InvokeRepeating("Re", 1f, 1f);
+        }
+
+        private void Re()
+        {
             target = navigation(randomRangePoint, range);
         }
 
@@ -161,6 +169,7 @@ namespace com.BoardGameDungeon
             target = navigation(randomRangePoint, range);
             return target;
         }
+
         protected override NearestEnd nearby(Transform[] end)
         {
             randomSidePoint = new Transform[1] { side[Random.Range(0, side.Length)] };

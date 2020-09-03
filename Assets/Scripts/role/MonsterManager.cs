@@ -115,27 +115,34 @@ namespace com.BoardGameDungeon
                     break;
                 }
             }
-            Debug.Log(startRow + "," + startCol);
 
             //終點像素化
             int[] endRow = new int[end.Length];
             int[] endCol = new int[end.Length];
-            for (int i = 0; i < end.Length; i++)
+            if (end.Length > 0)
             {
-                for (endRow[i] = 0; endRow[i] < MazeGen.row; endRow[i]++)
+                for (int i = 0; i < end.Length; i++)
                 {
-                    if (Mathf.Abs(end[i].position.x - (endRow[i] * 2 + 1)) <= 1)
+                    for (endRow[i] = 0; endRow[i] < MazeGen.row; endRow[i]++)
                     {
-                        break;
+                        if (Mathf.Abs(end[i].position.x - (endRow[i] * 2 + 1)) <= 1)
+                        {
+                            break;
+                        }
+                    }
+                    for (endCol[i] = 0; endCol[i] < MazeGen.Creat_col; endCol[i]++)
+                    {
+                        if (Mathf.Abs(end[i].position.y - (endCol[i] * 2 + 1)) <= 1)
+                        {
+                            break;
+                        }
                     }
                 }
-                for (endCol[i] = 0; endCol[i] < MazeGen.Creat_col; endCol[i]++)
-                {
-                    if (Mathf.Abs(end[i].position.y - (endCol[i] * 2 + 1)) <= 1)
-                    {
-                        break;
-                    }
-                }
+
+            }
+            else
+            {
+                Debug.LogError("????????");
             }
             //若目標不在範圍
             bool TargetInRange = false;
@@ -294,6 +301,14 @@ namespace com.BoardGameDungeon
                                         dis += 100;
                                     }
                                     dis = priority(dis,nextRow, nextCol);
+                                    RaycastHit2D hit = Physics2D.Raycast(currentPos, Dir, Dir.magnitude);
+                                    if (hit)
+                                    {
+                                        if (hit.collider.tag != "player")
+                                        {
+                                            dis += 10;
+                                        }
+                                    }
 
                                     if (g[nextRow, nextCol] > g[currentRow, currentCol] + dis)
                                     {
@@ -371,7 +386,6 @@ namespace com.BoardGameDungeon
                     {
                         if (dirs[newRow, newCol] == -1)
                         {
-                            Debug.LogWarning("end : " + "P" + (near + 1) + " : " +endRow[near] + "," + endCol[near]+", next : "+ nextRow + "," + nextCol + ", name : " + GameManager.Floors.GetChild(nextRow * MazeGen.col + nextCol).name);
                             return new NearestEnd(end[near], minH, road);
                         }
                         #region//找曾經的路徑點

@@ -193,6 +193,12 @@ namespace com.BoardGameDungeon
         {
             randomRangePoint = new Transform[1] { range[Random.Range(0, range.Length)] };
             target = navigation(randomRangePoint, range);
+            InvokeRepeating("Re", 1f,1f);
+        }
+
+        private void Re()
+        {
+            target = navigation(randomRangePoint, range);
         }
 
         protected override NearestEnd navigateNextPoint(Transform[] end, Transform[] range, NearestEnd nearestEnd)
