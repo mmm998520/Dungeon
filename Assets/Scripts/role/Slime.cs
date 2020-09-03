@@ -7,10 +7,14 @@ namespace com.BoardGameDungeon
 {
     public class Slime : MonsterManager
     {
+        enum OrigenStat
+        {
+            mid,side
+        }
+        OrigenStat origenStat = OrigenStat.side;
         //當前移動目標
-        NearestEnd target;
-        Transform[] range;
-        Transform[] randomRangePoint;
+        NearestEnd midTarget, sideTarget;
+        //Transform[] range;
         //定義移動區域
         Transform[] mid, side;
         Transform[] randomMidPoint, randomSidePoint;
@@ -118,88 +122,66 @@ namespace com.BoardGameDungeon
             //距離玩家很遠，安心走自己的
             if (straightTarget.Distance > 3)
             {
-                Debug.LogError("安心");
-                range = side;
-                randomRangePoint = randomSidePoint;
-                target = goNavigation(randomRangePoint, null, navigation(randomRangePoint, null));
-                //goNavigationNearest(new Transform[1] { side[sideTargetNum] }, side, sideTargetNum);
+                if(sideTarget == null)
+                {
+                    randomSidePoint = new Transform[1] { side[Random.Range(0, side.Length)] };
+                    sideTarget = Navigate(randomSidePoint, side);
+                }
+                GoNavigate(sideTarget);
+                if (origenStat != OrigenStat.side)
+                {
+                    randomSidePoint = new Transform[1] { side[Random.Range(0, side.Length)] };
+                    randomMidPoint = new Transform[1] { mid[Random.Range(0, mid.Length)] };
+                    sideTarget = Navigate(randomSidePoint, side);
+                    origenStat = OrigenStat.side;
+                }
             }
             //距離玩家太近，逃向中央
             else
             {
-                Debug.LogError("逃命");
-                range = mid;
-                randomRangePoint = randomMidPoint;
-                target = goNavigation(randomRangePoint, null, navigation(randomRangePoint, null));
-                //goNavigationNearest(new Transform[1] { mid[midTargetNum] }, mid, midTargetNum);
+                if (midTarget == null)
+                {
+                    randomMidPoint = new Transform[1] { mid[Random.Range(0, mid.Length)] };
+                    midTarget = Navigate(randomMidPoint, mid);
+                }
+                GoNavigate(midTarget);
+                if (origenStat != OrigenStat.mid)
+                {
+                    randomSidePoint = new Transform[1] { side[Random.Range(0, side.Length)] };
+                    randomMidPoint = new Transform[1] { mid[Random.Range(0, mid.Length)] };
+                    midTarget = Navigate(randomMidPoint, mid);
+                    origenStat = OrigenStat.mid;
+                }
             }
         }
 
-        void reNavigate()
+        protected override float willMeetPlayer(float dis)
         {
-            randomSidePoint = new Transform[1] { side[Random.Range(0, side.Length)] };
-            randomMidPoint = new Transform[1] { mid[Random.Range(0, mid.Length)] };
-            range = side;
-            randomRangePoint = randomSidePoint;
-            target = navigation(randomRangePoint, range);
-            InvokeRepeating("Re", 1f, 1f);
+            dis += 50;
+            return dis;
         }
 
-        private void Re()
+        protected override void GoNextRoad()
         {
-            target = navigation(randomRangePoint, range);
+            sideTarget =  Navigate(randomSidePoint, side);
+            midTarget = Navigate(randomMidPoint, mid);
         }
 
-        protected override NearestEnd navigateNextPoint(Transform[] end, Transform[] range, NearestEnd nearestEnd)
-        {
-            randomSidePoint = new Transform[1] { side[Random.Range(0, side.Length)] };
-            randomMidPoint = new Transform[1] { mid[Random.Range(0, mid.Length)] };
-            if (straightTarget.Distance > 3)
-            {
-                range = side;
-                randomRangePoint = randomSidePoint;
-            }
-            //距離玩家太近，逃向中央
-            else
-            {
-                range = mid;
-                randomRangePoint = randomMidPoint;
-            }
-
-            target = navigation(randomRangePoint, range);
-            return target;
-        }
-
-        protected override NearestEnd nearby(Transform[] end)
+        protected override NearestEnd GoNextTarget()
         {
             randomSidePoint = new Transform[1] { side[Random.Range(0, side.Length)] };
             randomMidPoint = new Transform[1] { mid[Random.Range(0, mid.Length)] };
             if (straightTarget.Distance > 3)
             {
-                range = side;
-                randomRangePoint = randomSidePoint;
+                sideTarget = Navigate(randomSidePoint, side);
+                return sideTarget;
             }
             //距離玩家太近，逃向中央
             else
             {
-                range = mid;
-                randomRangePoint = randomMidPoint;
+                midTarget = Navigate(randomMidPoint, mid);
+                return midTarget;
             }
-            
-            target = navigation(randomRangePoint, range);
-            return target;
-        }
-
-        protected override void afterDied()
-        {
-            attack();
-        }
-
-        protected override void attack()
-        {
-            //生成攻擊在自己腳下
-            GameObject attack = Instantiate(MonsterAttack[(int)monsterType], transform.position, Quaternion.identity);
-            attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], false);
         }
 
         protected override float priority(float dis, int nextRow, int nextCol)
@@ -219,7 +201,7 @@ namespace com.BoardGameDungeon
                 Vector3 nextPos = new Vector3(nextRow * 2 + 1, nextCol * 2 + 1);
                 foreach (Transform player in GameManager.Players)
                 {
-                    if(minDis > Vector3.Distance(nextPos, player.position))
+                    if (minDis > Vector3.Distance(nextPos, player.position))
                     {
                         minDis = Vector3.Distance(nextPos, player.position);
                     }
@@ -228,5 +210,34 @@ namespace com.BoardGameDungeon
             }
             return dis;
         }
+
+        void reNavigate()
+        {
+            randomSidePoint = new Transform[1] { side[Random.Range(0, side.Length)] };
+            randomMidPoint = new Transform[1] { mid[Random.Range(0, mid.Length)] };
+            sideTarget = Navigate(randomSidePoint, side);
+            midTarget = Navigate(randomMidPoint, mid);
+            Debug.LogError("a");
+            InvokeRepeating("Re", 0.5f, 0.5f);
+        }
+
+        private void Re()
+        {
+            sideTarget = Navigate(randomSidePoint, side);
+            midTarget = Navigate(randomMidPoint, mid);
+        }
+
+        protected override void afterDied()
+        {
+            attack();
+        }
+
+        protected override void attack()
+        {
+            //生成攻擊在自己腳下
+            GameObject attack = Instantiate(MonsterAttack[(int)monsterType], transform.position, Quaternion.identity);
+            attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], false);
+        }
+
     }
 }

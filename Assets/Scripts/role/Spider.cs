@@ -6,6 +6,7 @@ namespace com.BoardGameDungeon
 {
     public class Spider : MonsterManager
     {
+        Transform[] end;
         void Start()
         {
             monsterStart();
@@ -17,12 +18,12 @@ namespace com.BoardGameDungeon
 
         void Update()
         {
-            Transform[] end = new Transform[GameManager.Players.childCount];
+            end = new Transform[GameManager.Players.childCount];
             for (int i = 0; i < end.Length; i++)
             {
                 end[i] = GameManager.Players.GetChild(i);
             }
-            navigateTarget = goNavigation(end, null, navigateTarget);
+            GoNavigate(navigateTarget);
             attackOccasion(navigateTarget, 2.5f);
             
             monsterUpdate();
@@ -35,7 +36,7 @@ namespace com.BoardGameDungeon
             {
                 end[i] = GameManager.Players.GetChild(i);
             }
-            navigateTarget = navigation(end, null);
+            navigateTarget = Navigate(end, null);
             Invoke("reNavigate", Random.Range(0.2f, 0.4f));
         }
 
@@ -51,8 +52,9 @@ namespace com.BoardGameDungeon
             }
         }
 
-        protected override NearestEnd nearby(Transform[] end)
+        protected override NearestEnd GoNextTarget()
         {
+            //因為蜘蛛的終點就是玩家沒必要找新的了，直接直線追擊就好
             return StraightLineNearest(end);
         }
     }
