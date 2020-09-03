@@ -21,36 +21,6 @@ namespace com.BoardGameDungeon
             cd = 2;
             moveSpeed = 1;
             monsterType = MonsterType.Tauren;
-            #region//決定守衛範圍
-            /*
-            range = new Transform[rangeCol.Count];
-            for(int i = 0; i < range.Length; i++)
-            {
-                range[i] = GameManager.Floors.GetChild(rangeRow[i] * MazeGen.col + rangeCol[i]);
-            }
-            */
-            /*
-            range = new Transform[15];
-            for(int i = 0; i < range.Length; i++)
-            {
-                float min = float.MaxValue;
-                Transform nearestFloor = GameManager.Floors.GetChild(0);
-                foreach(Transform child in GameManager.Floors)
-                {
-                    if(min > Vector3.Distance(transform.position, child.position))
-                    {
-                        if (!range.Contains(child))
-                        {
-                            min = Vector3.Distance(transform.position, child.position);
-                            nearestFloor = child;
-                        }
-                    }
-
-                }
-                range[i] = nearestFloor;
-            }
-            */
-            #endregion
 
             Invoke("reNavigate", 0.01f);
         }
@@ -139,7 +109,7 @@ namespace com.BoardGameDungeon
             //附近沒敵人，守家
             if (straightTarget.Distance > 3)
             {
-                target = goNavigation(randomRangePoint, range, target);
+                GoNavigate(target);
                 if (target == null)
                 {
                     Debug.LogError("a");
@@ -166,7 +136,7 @@ namespace com.BoardGameDungeon
                 }
                 if (!range.Contains(GameManager.Floors.GetChild(startRow * MazeGen.col + startCol)))
                 {
-                    target = goNavigation(randomRangePoint, range, target);
+                    GoNavigate(target);
                     print("導航 : " + target.Distance + " , " + target.endTraget.name);
                 }
                 //附近有敵人，追擊
@@ -189,30 +159,15 @@ namespace com.BoardGameDungeon
             }
         }
 
-        void reNavigate()
+        protected override void GoNextRoad()
         {
-            randomRangePoint = new Transform[1] { range[Random.Range(0, range.Length)] };
-            target = navigation(randomRangePoint, range);
-            InvokeRepeating("Re", 1f,1f);
+            target = Navigate(randomRangePoint, range);
         }
 
-        private void Re()
+        protected override NearestEnd GoNextTarget()
         {
-            target = navigation(randomRangePoint, range);
-        }
-
-        protected override NearestEnd navigateNextPoint(Transform[] end, Transform[] range, NearestEnd nearestEnd)
-        {
-            print("a");
             randomRangePoint = new Transform[1] { range[Random.Range(0, range.Length)] };
-            nearestEnd = navigation(randomRangePoint, range);
-            return nearestEnd;
-        }
-        protected override NearestEnd nearby(Transform[] end)
-        {
-            print("a");
-            randomRangePoint = new Transform[1] { range[Random.Range(0, range.Length)] };
-            target = navigation(randomRangePoint, range);
+            target = Navigate(randomRangePoint, range);
             return target;
         }
 
@@ -224,6 +179,18 @@ namespace com.BoardGameDungeon
                 dis += 1000;
             }
             return dis;
+        }
+
+        void reNavigate()
+        {
+            randomRangePoint = new Transform[1] { range[Random.Range(0, range.Length)] };
+            target = Navigate(randomRangePoint, range);
+            InvokeRepeating("Re", 0.5f, 0.5f);
+        }
+
+        private void Re()
+        {
+            target = Navigate(randomRangePoint, range);
         }
     }
 }

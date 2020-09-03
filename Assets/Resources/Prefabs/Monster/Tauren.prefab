@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2424806681723904173}
   m_Layer: 0
   m_Name: Tauren
-  m_TagString: Untagged
+  m_TagString: monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,3 +144,6 @@ MonoBehaviour:
   - {fileID: 5389400205560984897, guid: 6eff1b53d9fb2ef439a8a6d19c2da06c, type: 3}
   duration: []
   continuous: 
+  range: []
+  rangeRow: 
+  rangeCol: 
