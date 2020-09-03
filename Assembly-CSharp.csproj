@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Maze\MazeCreate.cs" />
     <Compile Include="Assets\Scripts\Maze\MazeGen.cs" />
     <Compile Include="Assets\Scripts\Maze\testAStar.cs" />
+    <Compile Include="Assets\Scripts\ObjectGen.cs" />
     <Compile Include="Assets\Scripts\Trigger\Alarm.cs" />
     <Compile Include="Assets\Scripts\Trigger\Boulder.cs" />
     <Compile Include="Assets\Scripts\Trigger\Exp.cs" />

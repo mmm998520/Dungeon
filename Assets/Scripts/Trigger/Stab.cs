@@ -29,12 +29,15 @@ namespace com.BoardGameDungeon
 
         void OnTriggerEnter2D(Collider2D collision)
         {
-            foreach(Transform child in transform)
+            if (collision.GetComponent<PlayerManager>())
             {
-                child.GetComponent<Collider2D>().enabled = true;
+                foreach (Transform child in transform)
+                {
+                    child.GetComponent<Collider2D>().enabled = true;
+                }
+                pop = true;
+                popTimer = 0;
             }
-            pop = true;
-            popTimer = 0;
         }
     }
 }
