@@ -174,8 +174,8 @@ namespace com.BoardGameDungeon
                 {
                     stat[i, j] = 0;
                     dirs[i, j] = -1;
-                    g[i, j] = 9999;
-                    h[i, j] = 9999;
+                    g[i, j] = 9999999;
+                    h[i, j] = 9999999;
                     f[i, j] = g[i, j] + h[i, j];
                 }
             }
@@ -216,96 +216,100 @@ namespace com.BoardGameDungeon
                         //判定點有沒有超範圍
                         if (nextRow < MazeGen.row && nextRow >= 0 && nextCol < MazeGen.col && nextCol >= 0)
                         {
-                            bool inRange = false;
-                            for(int k = 0; k < rangeToInt.Count; k++)
+                            //判定點是否已經close，已經close就不管他
+                            //其餘的判定移動會不會碰撞
+                            if (stat[nextRow, nextCol] != 2)
                             {
-                                if (rangeToInt[k][0] == nextRow && rangeToInt[k][1] == nextCol)
+                                transform.GetComponent<Collider2D>().enabled = false;
+                                //向指定pos打出兩道射線(有間距)判定打到甚麼來決定能不能通過
+                                Vector3 currentPos = new Vector3(currentRow * 2 + 1, currentCol * 2 + 1);
+                                Vector3 Dir = new Vector3(nextRow * 2 + 1, nextCol * 2 + 1) - currentPos;
+                                Vector3 tempDir = Quaternion.Euler(0, 0, 90) * Dir.normalized / 2;
+                                //layerMask，讓射線只能打牆壁
+                                RaycastHit2D hit1 = Physics2D.Raycast(currentPos + tempDir, Dir, Dir.magnitude, 1 << 8);
+                                Debug.DrawRay(currentPos + tempDir, Dir, Color.red, 2);
+                                RaycastHit2D hit2 = Physics2D.Raycast(currentPos - tempDir, Dir, Dir.magnitude, 1 << 8);
+                                Debug.DrawRay(currentPos - tempDir, Dir, Color.red, 2);
+                                transform.GetComponent<Collider2D>().enabled = true;
+                                if (!(hit1 || hit2))
                                 {
-                                    inRange = true;
-                                    break;
-                                }
-                            }
-                            if (inRange)
-                            {
-                                //判定點是否已經close，已經close就不管他
-                                //其餘的判定移動會不會碰撞
-                                if (stat[nextRow, nextCol] != 2)
-                                {
-                                    transform.GetComponent<Collider2D>().enabled = false;
-                                    //向指定pos打出兩道射線(有間距)判定打到甚麼來決定能不能通過
-                                    Vector3 currentPos = new Vector3(currentRow * 2 + 1, currentCol * 2 + 1);
-                                    Vector3 Dir = new Vector3(nextRow * 2 + 1, nextCol * 2 + 1) - currentPos;
-                                    Vector3 tempDir = Quaternion.Euler(0, 0, 90) * Dir.normalized / 2;
-                                    //layerMask，讓射線只能打牆壁
-                                    RaycastHit2D hit1 = Physics2D.Raycast(currentPos + tempDir, Dir, Dir.magnitude, 1 << 8);
-                                    Debug.DrawRay(currentPos + tempDir, Dir, Color.red, 2);
-                                    RaycastHit2D hit2 = Physics2D.Raycast(currentPos - tempDir, Dir, Dir.magnitude, 1 << 8);
-                                    Debug.DrawRay(currentPos - tempDir, Dir, Color.red, 2);
-                                    transform.GetComponent<Collider2D>().enabled = true;
-                                    if (!(hit1 || hit2))
+                                    //若不碰撞則更新數值
+                                    stat[nextRow, nextCol] = 1;
+                                    #region//定義方向
+                                    int dir = -1;
+                                    if (i == 0 && j == 1)
                                     {
-                                        //若不碰撞則更新數值
-                                        stat[nextRow, nextCol] = 1;
-                                        #region//定義方向
-                                        int dir = -1;
-                                        if (i == 0 && j == 1)
+                                        dir = 0;
+                                    }
+                                    else if (i == 1 && j == 1)
+                                    {
+                                        dir = 1;
+                                    }
+                                    else if (i == 1 && j == 0)
+                                    {
+                                        dir = 2;
+                                    }
+                                    else if (i == 1 && j == -1)
+                                    {
+                                        dir = 3;
+                                    }
+                                    else if (i == 0 && j == -1)
+                                    {
+                                        dir = 4;
+                                    }
+                                    else if (i == -1 && j == -1)
+                                    {
+                                        dir = 5;
+                                    }
+                                    else if (i == -1 && j == 0)
+                                    {
+                                        dir = 6;
+                                    }
+                                    else if (i == -1 && j == 1)
+                                    {
+                                        dir = 7;
+                                    }
+                                    #endregion
+                                    float dis;
+                                    if (dir % 2 == 0)
+                                    {
+                                        dis = 1;
+                                    }
+                                    else
+                                    {
+                                        dis = 1.4f;
+                                    }
+                                    //看該點是否在守備區域內，若有則增加移動難度
+                                    bool inRange = false;
+                                    for (int k = 0; k < rangeToInt.Count; k++)
+                                    {
+                                        if (rangeToInt[k][0] == nextRow && rangeToInt[k][1] == nextCol)
                                         {
-                                            dir = 0;
+                                            inRange = true;
+                                            break;
                                         }
-                                        else if (i == 1 && j == 1)
+                                    }
+                                    if (!inRange)
+                                    {
+                                        dis += 100;
+                                    }
+                                    dis = priority(dis,nextRow, nextCol);
+
+                                    if (g[nextRow, nextCol] > g[currentRow, currentCol] + dis)
+                                    {
+                                        g[nextRow, nextCol] = g[currentRow, currentCol] + dis;
+                                        dirs[nextRow, nextCol] = dir;
+                                    }
+                                    for (int k = 0; k < end.Length; k++)
+                                    {
+                                        if (h[nextRow, nextCol] > Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol))
                                         {
-                                            dir = 1;
+                                            h[nextRow, nextCol] = Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol);
                                         }
-                                        else if (i == 1 && j == 0)
-                                        {
-                                            dir = 2;
-                                        }
-                                        else if (i == 1 && j == -1)
-                                        {
-                                            dir = 3;
-                                        }
-                                        else if (i == 0 && j == -1)
-                                        {
-                                            dir = 4;
-                                        }
-                                        else if (i == -1 && j == -1)
-                                        {
-                                            dir = 5;
-                                        }
-                                        else if (i == -1 && j == 0)
-                                        {
-                                            dir = 6;
-                                        }
-                                        else if (i == -1 && j == 1)
-                                        {
-                                            dir = 7;
-                                        }
-                                        #endregion
-                                        float dis;
-                                        if (dir % 2 == 0)
-                                        {
-                                            dis = 1;
-                                        }
-                                        else
-                                        {
-                                            dis = 1.4f;
-                                        }
-                                        if (g[nextRow, nextCol] > g[currentRow, currentCol] + dis)
-                                        {
-                                            g[nextRow, nextCol] = g[currentRow, currentCol] + dis;
-                                            dirs[nextRow, nextCol] = dir;
-                                        }
-                                        for (int k = 0; k < end.Length; k++)
-                                        {
-                                            if (h[nextRow, nextCol] > Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol))
-                                            {
-                                                h[nextRow, nextCol] = Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol);
-                                            }
-                                        }
-                                        if (f[nextRow, nextCol] > g[nextRow, nextCol] + h[nextRow, nextCol])
-                                        {
-                                            f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
-                                        }
+                                    }
+                                    if (f[nextRow, nextCol] > g[nextRow, nextCol] + h[nextRow, nextCol])
+                                    {
+                                        f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
                                     }
                                 }
                             }
@@ -314,8 +318,8 @@ namespace com.BoardGameDungeon
                 }
 
                 //從open中找f最小的當新的current，沒有則找h最小
-                float minf = 9999;
-                float minh = 9999;
+                float minf = 9999999;
+                float minh = 9999999;
                 int newRow = 0, newCol = 0;
                 for (int i = 0; i < MazeGen.row; i++)
                 {
@@ -328,7 +332,7 @@ namespace com.BoardGameDungeon
                                 minf = f[i, j];
                                 newRow = i;
                                 newCol = j;
-                                minh = 9999;
+                                minh = 9999999;
                             }
                             else if (minf == f[i, j])
                             {
@@ -345,7 +349,7 @@ namespace com.BoardGameDungeon
 
                 currentRow = newRow;
                 currentCol = newCol;
-                int minH = 9999;
+                int minH = 9999999;
                 int near = -1;
                 for (int i = 0; i < end.Length; i++)
                 {
@@ -431,6 +435,11 @@ namespace com.BoardGameDungeon
             }
             Debug.LogError("Cant Find Road");
             return null;
+        }
+        /// <summary> 決定優先行動區域，讓怪盡量不會超出自己區域 </summary>
+        virtual protected float priority(float dis, int nextRow, int nextCol)
+        {
+            return dis;
         }
 
         /// <summary> 若選定的目標在範圍(hand)內則每一段時間攻擊一次 </summary>

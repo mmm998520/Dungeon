@@ -12,6 +12,8 @@ namespace com.BoardGameDungeon
     {
         public List<GameObject> Objects = new List<GameObject>();
         public List<int> Num = new List<int>();
+        public List<int> TaurenRangeRow = new List<int>();
+        public List<int> TaurenRangeCol = new List<int>();
         public GameObject StabPrefab;
         void Start()
         {
@@ -110,7 +112,46 @@ namespace com.BoardGameDungeon
                     }
                     if(ins!= null)
                     {
-                        if (ins.name == "Exp(Clone)")
+                        if (ins.name == "Tauren(Clone)")
+                        {
+                            if(i == 0)
+                            {
+                                ins.GetComponent<Tauren>().range = new Transform[8];
+                                for (int j = 0; j < 8; j++)
+                                {
+                                    ins.GetComponent<Tauren>().range[j] = GameManager.Floors.GetChild(TaurenRangeRow[j] * MazeGen.col + TaurenRangeCol[j]);
+                                }
+                            }
+                            else if(i == 1)
+                            {
+                                ins.GetComponent<Tauren>().range = new Transform[8];
+                                for (int j = 8; j < 16; j++)
+                                {
+                                    ins.GetComponent<Tauren>().range[j-8] = GameManager.Floors.GetChild(TaurenRangeRow[j] * MazeGen.col + TaurenRangeCol[j]);
+                                }
+                            }
+                            else if(i == 2)
+                            {
+                                ins.GetComponent<Tauren>().range = new Transform[7];
+                                for (int j = 16; j < 23; j++)
+                                {
+                                    ins.GetComponent<Tauren>().range[j-16] = GameManager.Floors.GetChild(TaurenRangeRow[j] * MazeGen.col + TaurenRangeCol[j]);
+                                }
+                            }
+                            else if(i == 3)
+                            {
+                                ins.GetComponent<Tauren>().range = new Transform[7];
+                                for (int j = 23; j < 30; j++)
+                                {
+                                    ins.GetComponent<Tauren>().range[j-23] = GameManager.Floors.GetChild(TaurenRangeRow[j] * MazeGen.col + TaurenRangeCol[j]);
+                                }
+                            }
+                            else
+                            {
+                                Debug.LogError("數值設定有問題");
+                            }
+                        }
+                        else if (ins.name == "Exp(Clone)")
                         {
                             if (i < 3)
                             {

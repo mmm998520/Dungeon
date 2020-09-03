@@ -9,9 +9,11 @@ namespace com.BoardGameDungeon
     public class Tauren : MonsterManager
     {
         /// <summary> 守衛範圍 </summary>
-        Transform[] range;
+        public Transform[] range;
         Transform[] randomRangePoint;
         NearestEnd target;
+        public List<int> rangeRow = new List<int>();
+        public List<int> rangeCol = new List<int>();
 
         void Start()
         {
@@ -20,6 +22,14 @@ namespace com.BoardGameDungeon
             moveSpeed = 1;
             monsterType = MonsterType.Tauren;
             #region//決定守衛範圍
+            /*
+            range = new Transform[rangeCol.Count];
+            for(int i = 0; i < range.Length; i++)
+            {
+                range[i] = GameManager.Floors.GetChild(rangeRow[i] * MazeGen.col + rangeCol[i]);
+            }
+            */
+            /*
             range = new Transform[15];
             for(int i = 0; i < range.Length; i++)
             {
@@ -39,6 +49,7 @@ namespace com.BoardGameDungeon
                 }
                 range[i] = nearestFloor;
             }
+            */
             #endregion
 
             Invoke("reNavigate", 0.01f);
@@ -129,7 +140,11 @@ namespace com.BoardGameDungeon
             if (straightTarget.Distance > 3)
             {
                 target = goNavigation(randomRangePoint, range, target);
-                print("導航 : " + target.Distance + " , " + target.endTraget.name);
+                if (target == null)
+                {
+                    Debug.LogError("a");
+                }
+                //print("導航 : " + target.Distance + " , " + target.endTraget.name);
             }
             else
             {
@@ -180,7 +195,7 @@ namespace com.BoardGameDungeon
             target = navigation(randomRangePoint, range);
         }
 
-        override protected NearestEnd navigateNextPoint(Transform[] end, Transform[] range, NearestEnd nearestEnd)
+        protected override NearestEnd navigateNextPoint(Transform[] end, Transform[] range, NearestEnd nearestEnd)
         {
             print("a");
             randomRangePoint = new Transform[1] { range[Random.Range(0, range.Length)] };
@@ -193,6 +208,16 @@ namespace com.BoardGameDungeon
             randomRangePoint = new Transform[1] { range[Random.Range(0, range.Length)] };
             target = navigation(randomRangePoint, range);
             return target;
+        }
+
+        //牛頭人優先走中心區域
+        protected override float priority(float dis, int nextRow, int nextCol)
+        {
+            if (!(nextRow < MazeGen.row - 3 && nextRow >= 3 && nextCol < MazeGen.col - 3 && nextCol >= 3))
+            {
+                dis += 1000;
+            }
+            return dis;
         }
     }
 }
