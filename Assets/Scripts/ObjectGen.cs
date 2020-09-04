@@ -171,14 +171,17 @@ namespace com.BoardGameDungeon
                             if (i < 3)
                             {
                                 ins.GetComponent<Exp>().career = ValueSet.Career.Thief;
+                                ins.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Picture/Trigger/Exp/Green");
                             }
                             else if (i < 6)
                             {
                                 ins.GetComponent<Exp>().career = ValueSet.Career.Warrior;
+                                ins.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Picture/Trigger/Exp/Red");
                             }
                             else if (i < 9)
                             {
                                 ins.GetComponent<Exp>().career = ValueSet.Career.Magician;
+                                ins.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Picture/Trigger/Exp/Blue");
                             }
                             else
                             {
@@ -190,6 +193,7 @@ namespace com.BoardGameDungeon
                             if (i < 4)
                             {
                                 ins.GetComponent<Medical>().recovery = 5;
+                                ins.transform.localScale *= 0.7f;
                             }
                             else if (i < 7)
                             {

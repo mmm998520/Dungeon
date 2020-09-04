@@ -11,7 +11,7 @@ namespace com.BoardGameDungeon
         /// <summary> 等級與當前經驗值，升級後經驗值歸零累加 </summary>
         public int level = 1;
         public float exp = 0;
-        static int[] expToNextLevel = new int[4] { 0, 50, 50,999999 };
+        public static int[] expToNextLevel = new int[4] { 0, 50, 50,999999 };
 
         /// <summary> 紀錄點擊間隔用的計時器 </summary>
         float TouchBeganTimer = 0;

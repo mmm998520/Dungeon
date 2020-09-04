@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Trigger\Stab.cs" />
     <Compile Include="Assets\Scripts\Trigger\Stone.cs" />
     <Compile Include="Assets\Scripts\Trigger\TriggerManager.cs" />
+    <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\role\MonsterManager.cs" />
     <Compile Include="Assets\Scripts\role\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\role\Slime.cs" />

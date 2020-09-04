@@ -18,10 +18,8 @@ namespace com.BoardGameDungeon
             {
                 if ((popTimer += Time.deltaTime) > popTimerStoper)
                 {
-                    foreach (Transform child in transform)
-                    {
-                        child.GetComponent<Collider2D>().enabled = false;
-                    }
+                    transform.GetChild(1).GetComponent<Collider2D>().enabled = false;
+                    transform.GetChild(1).GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
                     pop = false;
                     popTimer = 0;
                 }
@@ -33,11 +31,9 @@ namespace com.BoardGameDungeon
             if (collision.GetComponent<PlayerManager>())
             {
                 user = collision.GetComponent<PlayerManager>();
-                foreach (Transform child in transform)
-                {
-                    child.GetComponent<Collider2D>().enabled = true;
-                    child.GetComponent<Spine>().user = user;
-                }
+                transform.GetChild(1).GetComponent<Collider2D>().enabled = true;
+                transform.GetChild(1).GetComponent<Spine>().user = user;
+                transform.GetChild(1).GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
                 pop = true;
                 popTimer = 0;
             }
