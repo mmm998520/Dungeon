@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,5 +13,13 @@ public class GameManager : MonoBehaviour
         Floors = GameObject.Find("Floors").transform;
         Walls = GameObject.Find("Walls").transform;
         Players = GameObject.Find("Players").transform;
+    }
+
+    private void Update()
+    {
+        if (Players.childCount == 0)
+        {
+            SceneManager.LoadScene("Game2");
+        }
     }
 }

@@ -71,6 +71,8 @@
     <Compile Include="Assets\Scripts\ObjectGen.cs" />
     <Compile Include="Assets\Scripts\Trigger\Alarm.cs" />
     <Compile Include="Assets\Scripts\Trigger\Boulder.cs" />
+    <Compile Include="Assets\Scripts\Trigger\Exit.cs" />
+    <Compile Include="Assets\Scripts\Trigger\ExitSwitcher.cs" />
     <Compile Include="Assets\Scripts\Trigger\Exp.cs" />
     <Compile Include="Assets\Scripts\Trigger\Medical.cs" />
     <Compile Include="Assets\Scripts\Trigger\Spine.cs" />

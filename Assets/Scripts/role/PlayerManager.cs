@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace com.BoardGameDungeon
 {
@@ -21,6 +22,16 @@ namespace com.BoardGameDungeon
         bool attackMode = false;
         /// <summary> 攻擊開關開啟計時器，太久沒攻擊則關閉 </summary>
         float attackModeTimer = 0;
+
+        void Awake()
+        {
+            if(SceneManager.GetActiveScene().name != "Game")
+            {
+                Hurt = PlayerPrefs.GetFloat(name+ "Hurt");
+                level = PlayerPrefs.GetInt(name+ "Level");
+                exp = PlayerPrefs.GetFloat(name+ "Exp");
+            }
+        }
         void Start()
         {
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質

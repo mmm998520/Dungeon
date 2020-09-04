@@ -94,6 +94,22 @@ namespace com.BoardGameDungeon
                             }
                         } while (s<100);
                     }
+                    else if(obj.Key.name == "Exit")
+                    {
+                        int s = 0;
+                        do
+                        {
+                            s++;
+                            int r = Random.Range(0, pos.Count);
+                            //不能生成在周圍
+                            if (!(pos[r][0] <= 1 || pos[r][1] <= 1 || pos[r][0] >= MazeGen.row - 2 || pos[r][1] >= MazeGen.col - 2))
+                            {
+                                ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
+                                pos.RemoveAt(r);
+                                break;
+                            }
+                        } while (s < 100);
+                    }
                     else if(obj.Key.name == "Spine")
                     {
                         if (i < 2)
@@ -165,6 +181,11 @@ namespace com.BoardGameDungeon
                             {
                                 Debug.LogError("數值設定有問題");
                             }
+                        }
+                        else if (ins.name == "Exit(Clone)")
+                        {
+                            ins.transform.parent = GameObject.Find("ExitSwitcher(Clone)").transform;
+                            ins.SetActive(false);
                         }
                         else if (ins.name == "Exp(Clone)")
                         {
