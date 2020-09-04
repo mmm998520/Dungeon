@@ -32,68 +32,14 @@ namespace com.BoardGameDungeon
 
             monsterUpdate();
         }
-        /*
-        override protected void goNavigationNearest(Transform[] end, Transform[] range)
-        {
-            if ((navigationTimer += Time.deltaTime) > navigationTimerStoper)
-            {
-                navigateTarget = navigation(end, range);
-                navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
-                navigationTimer = 0;
-            }
-            if (navigateTarget != null)
-            {
-                if (navigateTarget.roadTragets != null)
-                {
-                    Vector3 dirM = (navigateTarget.roadTragets.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
-                    //到達定點則重開導航
-                    if (dirM.magnitude > Vector3.Distance(navigateTarget.roadTragets.position * Vector2.one,transform.position * Vector2.one))
-                    {
-                        transform.position = navigateTarget.roadTragets.position;
-                        Debug.LogError("!!!!!!!!!!!!!!!!!!!!!");
-                        navigateTarget = navigation(end, range);
-                        navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
-                        navigationTimer = 0;
-                        if (range[rangeTargetNum] == navigateTarget.endTraget)
-                        {
-                            navigateNextPoint(range, rangeTargetNum);
-                        }
-                    }
-                    else
-                    {
-                        transform.position = transform.position + dirM;
-                    }
-                }
-                else
-                {
-                    navigateNextPoint(range, rangeTargetNum);
-                    Debug.LogError("RRRR");
-                }
-            }
-            else
-            {
-                navigateNextPoint(range, rangeTargetNum);
-                Debug.LogError("RRRR");
-            }
-        }
-        override protected void navigateNextPoint(Transform[] range, int nextTargetNum)
-        {
-            int temp = nextTargetNum;
-            do
-            {
-                nextTargetNum = Random.Range(0, range.Length);
-            } while (temp == nextTargetNum);
-            print(range[nextTargetNum].name);
-            navigationTimer = 0;
-            navigateTarget = navigation(new Transform[1] { range[nextTargetNum] }, range);
-        }*/
+
         override protected void attack()
         {
             //生成攻擊在觸控方向，並旋轉攻擊朝向該方向
             float angle = Vector3.SignedAngle(Vector3.right, straightTarget.endTraget.position * Vector2.one - transform.position * Vector2.one, Vector3.forward);
             GameObject attack = Instantiate(MonsterAttack[(int)monsterType], transform.position, Quaternion.Euler(0, 0, angle));
             //設定攻擊參數
-            attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], false);
+            attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], null);
         }
         
         /// <summary> 決定要追最近敵人還是巡邏 </summary>
@@ -137,7 +83,6 @@ namespace com.BoardGameDungeon
                 if (!range.Contains(GameManager.Floors.GetChild(startRow * MazeGen.col + startCol)))
                 {
                     GoNavigate(target);
-                    print("導航 : " + target.Distance + " , " + target.endTraget.name);
                 }
                 //附近有敵人，追擊
                 else
@@ -154,7 +99,6 @@ namespace com.BoardGameDungeon
                     {
                         transform.Translate(dis * dir.normalized);
                     }
-                    print("直行 : " + straightTarget.Distance + " , " + straightTarget.endTraget.name);
                 }
             }
         }

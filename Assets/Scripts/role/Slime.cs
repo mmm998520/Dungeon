@@ -55,62 +55,6 @@ namespace com.BoardGameDungeon
             monsterUpdate();
         }
 
-        /*
-                void goNavigationNearest(Transform[] end, Transform[] range, int nextTargetNum)
-                {
-                    if ((navigationTimer += Time.deltaTime) > navigationTimerStoper)
-                    {
-                        navigateTarget = navigation(end, range);
-                        navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
-                        navigationTimer = 0;
-                    }
-                    if (navigateTarget != null)
-                    {
-                        if (navigateTarget.roadTragets != null)
-                        {
-                            Vector3 dirM = (navigateTarget.roadTragets.position * Vector2.one - transform.position * Vector2.one).normalized * Time.deltaTime;
-                            //到達定點則重開導航
-                            if (dirM.magnitude > Vector3.Distance(navigateTarget.roadTragets.position * Vector2.one, transform.position * Vector2.one))
-                            {
-                                transform.position = navigateTarget.roadTragets.position;
-                                Debug.LogError("!!!!!!!!!!!!!!!!!!!!!");
-                                navigateTarget = navigation(end, range);
-                                navigationTimerStoper = Random.Range(navigationTimerStoperMax, navigationTimerStoperMin);
-                                navigationTimer = 0;
-                                if (range[midTargetNum] == navigateTarget.endTraget)
-                                {
-                                    navigateNextPoint(range, nextTargetNum);
-                                }
-                            }
-                            else
-                            {
-                                transform.position = transform.position + dirM;
-                            }
-                        }
-                        else
-                        {
-                            navigateNextPoint(range, nextTargetNum);
-                            Debug.LogError("RRRR");
-                        }
-                    }
-                    else
-                    {
-                        navigateNextPoint(range, nextTargetNum);
-                        Debug.LogError("RRRR");
-                    }
-                }
-
-                override protected void navigateNextPoint(Transform[] range, int nextTargetNum)
-                {
-                    int temp = nextTargetNum;
-                    do
-                    {
-                        nextTargetNum = Random.Range(0, range.Length);
-                    } while (temp == nextTargetNum);
-                    print(range[nextTargetNum].name);
-                    navigationTimer = 0;
-                    navigateTarget = navigation(new Transform[1] { range[nextTargetNum] }, range);
-                }*/
         void actionMode()
         {
             Transform[] end = new Transform[GameManager.Players.childCount];
@@ -217,7 +161,6 @@ namespace com.BoardGameDungeon
             randomMidPoint = new Transform[1] { mid[Random.Range(0, mid.Length)] };
             sideTarget = Navigate(randomSidePoint, side);
             midTarget = Navigate(randomMidPoint, mid);
-            Debug.LogError("a");
             InvokeRepeating("Re", 0.5f, 0.5f);
         }
 
@@ -236,7 +179,7 @@ namespace com.BoardGameDungeon
         {
             //生成攻擊在自己腳下
             GameObject attack = Instantiate(MonsterAttack[(int)monsterType], transform.position, Quaternion.identity);
-            attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], false);
+            attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], null);
         }
 
     }

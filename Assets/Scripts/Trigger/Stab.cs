@@ -10,6 +10,7 @@ namespace com.BoardGameDungeon
         bool pop = false;
         float popTimer;
         float popTimerStoper = 1;
+        public PlayerManager user;
 
         void Update()
         {
@@ -31,9 +32,11 @@ namespace com.BoardGameDungeon
         {
             if (collision.GetComponent<PlayerManager>())
             {
+                user = collision.GetComponent<PlayerManager>();
                 foreach (Transform child in transform)
                 {
                     child.GetComponent<Collider2D>().enabled = true;
+                    child.GetComponent<Spine>().user = user;
                 }
                 pop = true;
                 popTimer = 0;

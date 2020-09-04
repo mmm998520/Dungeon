@@ -8,6 +8,8 @@ namespace com.BoardGameDungeon
     public class Boulder : TriggerManager
     {
         public GameObject stone;
+        public PlayerManager user;
+
         void Start()
         {
 
@@ -22,6 +24,7 @@ namespace com.BoardGameDungeon
         {
             if (collision.GetComponent<PlayerManager>())
             {
+                user = collision.GetComponent<PlayerManager>();
                 int row, col;
 
                 for (row = 0; row < MazeGen.row; row++)
@@ -62,7 +65,7 @@ namespace com.BoardGameDungeon
                     dir = Vector3.right;
                 }
                 stone.GetComponent<Stone>().dir = dir;
-
+                stone.GetComponent<Stone>().user = user;
                 Destroy(gameObject);
             }
         }

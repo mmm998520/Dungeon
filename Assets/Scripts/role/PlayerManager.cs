@@ -8,8 +8,10 @@ namespace com.BoardGameDungeon
     public class PlayerManager : ValueSet
     {
         public Career career;
-        /// <summary> 等級與當前經驗值，升級後經驗值不會歸零而是累加 </summary>
-        public int level = 1, exp = 0;
+        /// <summary> 等級與當前經驗值，升級後經驗值歸零累加 </summary>
+        public int level = 1;
+        public float exp = 0;
+        static int[] expToNextLevel = new int[4] { 0, 50, 50,999999 };
 
         /// <summary> 紀錄點擊間隔用的計時器 </summary>
         float TouchBeganTimer = 0;
@@ -32,8 +34,12 @@ namespace com.BoardGameDungeon
         void Update()
         {
             timer();
+            levelUp();
             died((int)career, level);
-            //電腦測試用
+
+            touchBehavior();
+
+            #region//電腦測試用
             if (Input.touchCount == 0)
             {
                 if (Input.anyKeyDown)
@@ -41,9 +47,9 @@ namespace com.BoardGameDungeon
                     //向指定pos打出兩道射線(有間距)判定打到甚麼來決定能不能通過
                     Vector3 dir = GameManager.Players.GetChild(1).position * Vector2.one - transform.position * Vector2.one;
                     Vector3 tempDir = Quaternion.Euler(0, 0, 90) * dir.normalized / 2;
-                    RaycastHit2D hit1 = Physics2D.Raycast(transform.position + tempDir, dir, dir.magnitude-0.1f);
+                    RaycastHit2D hit1 = Physics2D.Raycast(transform.position + tempDir, dir, dir.magnitude - 0.1f);
                     Debug.DrawRay(transform.position + tempDir, dir, Color.red, 2);
-                    RaycastHit2D hit2 = Physics2D.Raycast(transform.position - tempDir, dir, dir.magnitude-0.1f);
+                    RaycastHit2D hit2 = Physics2D.Raycast(transform.position - tempDir, dir, dir.magnitude - 0.1f);
                     Debug.DrawRay(transform.position - tempDir, dir, Color.red, 2);
                     if (hit1 || hit2)
                     {
@@ -54,12 +60,11 @@ namespace com.BoardGameDungeon
                         //print("short");
                     }
                     GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.identity);
-                    attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);
+                    attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], this);
                 }
-                transform.Translate(Input.GetAxis("Vertical") * Vector3.up*Time.deltaTime + Input.GetAxis("Horizontal") * Vector3.right*Time.deltaTime);
+                transform.Translate(Input.GetAxis("Vertical") * Vector3.up * Time.deltaTime + Input.GetAxis("Horizontal") * Vector3.right * Time.deltaTime);
             }
-
-            touchBehavior();
+            #endregion
         }
 
         /// <summary> 統整觸控行為 </summary>
@@ -130,7 +135,7 @@ namespace com.BoardGameDungeon
             float angle = Vector3.SignedAngle(Vector3.right, touchPos * Vector2.one - transform.position * Vector2.one, Vector3.forward);
             GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.Euler(0, 0, angle));
             //設定攻擊參數
-            attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], true);
+            attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], this);
         }
 
         /// <summary> 攻擊開關開啟計時器、點擊間隔計時器 </summary>
@@ -147,6 +152,14 @@ namespace com.BoardGameDungeon
             }
             //點擊間隔計時器
             TouchBeganTimer += Time.deltaTime;
+        }
+
+        void levelUp()
+        {
+            if (exp > expToNextLevel[level])
+            {
+                exp -= expToNextLevel[level++];
+            }
         }
     }
 }

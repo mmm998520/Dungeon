@@ -9,6 +9,7 @@ namespace com.BoardGameDungeon
         public Vector3 dir;
         float speed = 3;
         float ATK = 5;
+        public PlayerManager user;
 
         void Update()
         {
@@ -35,11 +36,13 @@ namespace com.BoardGameDungeon
             }
             else if(collider.tag == "wall")
             {
+                Destroy(collider.gameObject);
             }
             else if(collider.tag == "side")
             {
                 Destroy(gameObject);
             }
+            MonsterManager.addHurtMe(collider, user);
         }
     }
 }

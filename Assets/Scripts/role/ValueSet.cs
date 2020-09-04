@@ -64,7 +64,7 @@ public class ValueSet : MonoBehaviour
     /// <summary> 攻擊招式是否為持續傷害 </summary>
     public bool[] continuous;
 
-    protected void died(int type,int level)
+    virtual protected void died(int type,int level)
     {
         if (Hurt > HP[type,level])
         {

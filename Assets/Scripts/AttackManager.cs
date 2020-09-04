@@ -12,13 +12,13 @@ namespace com.BoardGameDungeon
         public float duration;
         //紀錄該傷害是否為持續傷害
         public bool continuous = false;
-        //紀錄該傷害是誰發出的避免誤傷
-        public bool player = true;
+        //紀錄該傷害是誰發出的避免誤傷、給予經驗值計算標準，若怪物發出則為null
+        public PlayerManager user;
 
         //創建後使用該數值設定攻擊
-        public void setValue(float _ATK, float _duration, bool _continuous, bool _player)
+        public void setValue(float _ATK, float _duration, bool _continuous, PlayerManager _user)
         {
-            ATK = _ATK; duration = _duration; continuous = _continuous; player = _player;
+            ATK = _ATK; duration = _duration; continuous = _continuous; user = _user;
         }
 
         protected void hurt(Collider2D collider, float ATK)
@@ -28,15 +28,16 @@ namespace com.BoardGameDungeon
 
         protected void OnTriggerEnter2D(Collider2D collider)
         {
-            if (!continuous && ((collider.tag!="player" &&player) || (collider.tag == "player" && !player)))
+            if (!continuous && ((collider.tag !="player" && user != null) || (collider.tag == "player" && user == null)))
             {
                 hurt(collider, ATK);
             }
+            MonsterManager.addHurtMe(collider, user);
         }
 
         protected void OnTriggerStay2D(Collider2D collider)
         {
-            if (continuous && ((collider.tag != "player" && player) || (collider.tag == "player" && !player)))
+            if (continuous && ((collider.tag != "player" && user != null) || (collider.tag == "player" && user == null)))
             {
                 hurt(collider, Time.deltaTime * ATK / duration);
             }
