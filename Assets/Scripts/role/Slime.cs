@@ -181,6 +181,14 @@ namespace com.BoardGameDungeon
             GameObject attack = Instantiate(MonsterAttack[(int)monsterType], transform.position, Quaternion.identity);
             attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], null);
         }
-
+        /*
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if(collision.gameObject.tag == "monster")
+            {
+                reNavigate();
+            }
+        }
+        */
     }
 }

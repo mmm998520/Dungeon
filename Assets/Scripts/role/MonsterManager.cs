@@ -10,9 +10,6 @@ namespace com.BoardGameDungeon
     {
         protected MonsterType monsterType;
 
-        protected float cd;
-        protected float cdTimer;
-
         /// <summary> 被擊殺後玩家可獲得的經驗值 </summary>
         public static float[] exp = new float[8] { 10, 20, 10, 0, 0, 0, 0, 0 };
         public List<PlayerManager> HurtMe = new List<PlayerManager>();
@@ -37,6 +34,7 @@ namespace com.BoardGameDungeon
         {
             cdTimer += Time.deltaTime;
             died((int)monsterType, 0);
+            transform.GetChild(1).localScale = new Vector3((HP[(int)monsterType, 0] - Hurt) / HP[(int)monsterType, 0], 1, 1);
         }
 
         #region//導航
@@ -201,7 +199,7 @@ namespace com.BoardGameDungeon
                                     float dis;
                                     if (hitOther)
                                     {
-                                        if (hitOther.collider.tag != "monster" || (hitOther.collider.tag == "monster" && Vector3.Distance(hitOther.collider.transform.position, transform.position) < 3))
+                                        if (hitOther.collider.tag != "monster" || (hitOther.collider.tag == "monster" && Vector3.Distance(hitOther.collider.transform.position, transform.position) > 10))
                                         {
                                             Debug.DrawRay(currentPos, Dir, Color.green, 5);
                                             stat[nextRow, nextCol] = 1;

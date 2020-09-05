@@ -82,11 +82,13 @@
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\role\MonsterManager.cs" />
     <Compile Include="Assets\Scripts\role\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\role\SkeletonKnight.cs" />
     <Compile Include="Assets\Scripts\role\Slime.cs" />
     <Compile Include="Assets\Scripts\role\Spider.cs" />
     <Compile Include="Assets\Scripts\role\Tauren.cs" />
     <Compile Include="Assets\Scripts\role\ValueSet.cs" />
     <Compile Include="Assets\Scripts\tempAttack\MagicianAttackManager.cs" />
+    <Compile Include="Assets\Scripts\tempAttack\QuarterAttackManager.cs" />
     <Compile Include="Assets\Scripts\tempAttack\SpiderAttackManager.cs" />
     <Compile Include="Assets\Scripts\tempAttack\ThiefAttackManager.cs" />
     <Compile Include="Assets\Scripts\tempAttack\WarriorAttackManager.cs" />

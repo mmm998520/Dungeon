@@ -27,6 +27,13 @@ namespace com.BoardGameDungeon
                     {
                         transform.GetChild(0).GetChild(i).localScale = new Vector3(0, transform.localScale.y, transform.localScale.z);
                     }
+                    for(int j = 0; j < transform.GetChild(2).GetChild(i).childCount; j++)
+                    {
+                        if (players[i].level > j)
+                        {
+                            transform.GetChild(2).GetChild(i).GetChild(j).gameObject.SetActive(true);
+                        }
+                    }
                 }
                 else
                 {

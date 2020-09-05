@@ -53,6 +53,8 @@ public class ValueSet : MonoBehaviour
     public float Hurt = 0;
     //移動速度 "目前" 統一
     protected float moveSpeed = 10;
+    protected float cd;
+    protected float cdTimer;
 
     //招式
     /// <summary> 攻擊招式，跟素質一樣可用陣列處理 </summary>
@@ -66,7 +68,7 @@ public class ValueSet : MonoBehaviour
 
     virtual protected void died(int type,int level)
     {
-        if (Hurt > HP[type,level])
+        if (Hurt >= HP[type,level])
         {
             afterDied();
             Destroy(gameObject);

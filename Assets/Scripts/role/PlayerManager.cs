@@ -40,16 +40,18 @@ namespace com.BoardGameDungeon
             HP = new float[(int)Career.Count, 4] { { 0, 20, 30, 40 }, { 0, 40, 55, 70 }, { 0, 20, 30, 40 } };
             duration = new float[(int)Career.Count] { 0.4f, 0.4f, 2 };
             continuous = new bool[(int)Career.Count] { false, false, true };
+            cd = 1;
         }
 
         void Update()
         {
+            cdTimer += Time.deltaTime;
             timer();
             levelUp();
             died((int)career, level);
 
             touchBehavior();
-
+            
             #region//電腦測試用
             if (Input.touchCount == 0)
             {
@@ -91,15 +93,16 @@ namespace com.BoardGameDungeon
                 //觸控點與角色的距離
                 float targetDis = Vector3.Distance(touchPos, transform.position * Vector2.one);
                 //距離夠近才能進行操作
-                if (targetDis < 0.75f)
+                if (targetDis < 1.25f)
                 {
                     move(touchPos, targetDis);
                     readyForAttack(touch.phase);
                 }
                 //偵測雙擊後的點與觸控點距離，
-                if (Vector3.Distance(TouchBeganPos, touchPos) > 0.5f && targetDis < 1.25 && attackMode)
+                if (Vector3.Distance(TouchBeganPos, touchPos) > 0.5f && targetDis < 1.5f && attackMode && cdTimer > cd)
                 {
                     attack(touchPos);
+                    cdTimer = 0;
                 }
             }
         }
@@ -171,6 +174,13 @@ namespace com.BoardGameDungeon
             {
                 exp -= expToNextLevel[level++];
             }
+        }
+
+        protected override void afterDied()
+        {
+            PlayerPrefs.SetFloat(name + "Hurt", Hurt);
+            PlayerPrefs.SetInt(name + "Level", level);
+            PlayerPrefs.SetFloat(name + "Exp", exp);
         }
     }
 }

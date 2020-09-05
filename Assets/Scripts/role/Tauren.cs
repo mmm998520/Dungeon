@@ -136,5 +136,14 @@ namespace com.BoardGameDungeon
         {
             target = Navigate(randomRangePoint, range);
         }
+        /*
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag == "monster")
+            {
+                reNavigate();
+            }
+        }
+        */
     }
 }
