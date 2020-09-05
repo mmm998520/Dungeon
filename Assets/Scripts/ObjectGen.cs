@@ -229,6 +229,20 @@ namespace com.BoardGameDungeon
                         {
                             Stabs[i] = ins.transform;
                         }
+                        else if(ins.name == "Spine(Clone)")
+                        {
+                            if (i < 2)
+                            {
+                                Stabs[i].GetComponent<Stab>().spines.Add(ins.transform);
+                            }
+                            else
+                            {
+                                for(int j =2; j < obj.Value; j++)
+                                {
+                                    Stabs[j].GetComponent<Stab>().spines.Add(ins.transform);
+                                }
+                            }
+                        }
                     }
                 }
             }
