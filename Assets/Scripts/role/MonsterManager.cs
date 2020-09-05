@@ -201,9 +201,9 @@ namespace com.BoardGameDungeon
                                     float dis;
                                     if (hitOther)
                                     {
-                                        if (hitOther.collider.tag != "monster")
+                                        if (hitOther.collider.tag != "monster" || (hitOther.collider.tag == "monster" && Vector3.Distance(hitOther.collider.transform.position, transform.position) < 3))
                                         {
-                                            Debug.DrawRay(currentPos, Dir, Color.red, 5);
+                                            Debug.DrawRay(currentPos, Dir, Color.green, 5);
                                             stat[nextRow, nextCol] = 1;
                                             dir = canGoDir(nextRow, nextCol, i, j);
                                             dis = canGoDis(dir, nextRow, nextCol, rangeToInt);
@@ -228,25 +228,33 @@ namespace com.BoardGameDungeon
                                                 f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
                                             }
                                         }
-                                    }
-                                    stat[nextRow, nextCol] = 1;
-                                    dir = canGoDir(nextRow,nextCol,i,j);
-                                    dis = canGoDis(dir, nextRow, nextCol, rangeToInt);
-                                    if (g[nextRow, nextCol] > g[currentRow, currentCol] + dis)
-                                    {
-                                        g[nextRow, nextCol] = g[currentRow, currentCol] + dis;
-                                        dirs[nextRow, nextCol] = dir;
-                                    }
-                                    for (int k = 0; k < end.Length; k++)
-                                    {
-                                        if (h[nextRow, nextCol] > Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol))
+                                        else
                                         {
-                                            h[nextRow, nextCol] = Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol);
+                                            Debug.DrawRay(currentPos, Dir, Color.red, 5);
                                         }
                                     }
-                                    if (f[nextRow, nextCol] > g[nextRow, nextCol] + h[nextRow, nextCol])
+                                    else
                                     {
-                                        f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
+                                        Debug.DrawRay(currentPos, Dir, Color.green, 5);
+                                        stat[nextRow, nextCol] = 1;
+                                        dir = canGoDir(nextRow, nextCol, i, j);
+                                        dis = canGoDis(dir, nextRow, nextCol, rangeToInt);
+                                        if (g[nextRow, nextCol] > g[currentRow, currentCol] + dis)
+                                        {
+                                            g[nextRow, nextCol] = g[currentRow, currentCol] + dis;
+                                            dirs[nextRow, nextCol] = dir;
+                                        }
+                                        for (int k = 0; k < end.Length; k++)
+                                        {
+                                            if (h[nextRow, nextCol] > Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol))
+                                            {
+                                                h[nextRow, nextCol] = Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol);
+                                            }
+                                        }
+                                        if (f[nextRow, nextCol] > g[nextRow, nextCol] + h[nextRow, nextCol])
+                                        {
+                                            f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
+                                        }
                                     }
                                 }
                             }

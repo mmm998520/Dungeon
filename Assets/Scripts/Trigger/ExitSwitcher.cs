@@ -10,8 +10,8 @@ namespace com.BoardGameDungeon
         {
             if (collision.GetComponent<PlayerManager>())
             {
-                transform.GetChild(0).gameObject.SetActive(true);
-                transform.GetChild(0).parent = null;
+                transform.GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(1).parent = null;
                 Destroy(gameObject);
             }
         }
