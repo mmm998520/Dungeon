@@ -18,6 +18,10 @@ namespace com.BoardGameDungeon
         public NearestEnd navigateTarget;
         public NearestEnd straightTarget;
 
+        public static List<int[]> cantMoves = new List<int[]>();
+        public static List<int[]> meetPlayerMoves = new List<int[]>();
+        public static List<int[]> meetMonsterMoves = new List<int[]>();
+
         protected void monsterStart()
         {
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
@@ -182,77 +186,46 @@ namespace com.BoardGameDungeon
                             //其餘的判定移動會不會碰撞
                             if (stat[nextRow, nextCol] != 2)
                             {
+                                //如果cantMoves
+                                bool canGo = !cantMoves.Any(p => p.SequenceEqual(new int[] { currentRow, currentCol, nextRow, nextCol }));
                                 transform.GetComponent<Collider2D>().enabled = false;
-                                //向指定pos打出兩道射線(有間距)判定打到甚麼來決定能不能通過
+                                /*
                                 Vector3 currentPos = new Vector3(currentRow * 2 + 1, currentCol * 2 + 1);
                                 Vector3 Dir = new Vector3(nextRow * 2 + 1, nextCol * 2 + 1) - currentPos;
-                                Vector3 tempDir = Quaternion.Euler(0, 0, 90) * Dir.normalized / 2;
-                                //layerMask，讓射線只能打牆壁
-                                RaycastHit2D hitWall1 = Physics2D.Raycast(currentPos + tempDir, Dir, Dir.magnitude, 1 << 8);
-                                RaycastHit2D hitWall2 = Physics2D.Raycast(currentPos - tempDir, Dir, Dir.magnitude, 1 << 8);
                                 RaycastHit2D hitOther = Physics2D.Raycast(currentPos, Dir, Dir.magnitude, 1 << 0);
+                                */
                                 transform.GetComponent<Collider2D>().enabled = true;
                                 //如果會撞到則不選擇
-                                if (!(hitWall1 || hitWall2))
+                                if (canGo)
                                 {
                                     int dir;
                                     float dis;
-                                    if (hitOther)
+                                    stat[nextRow, nextCol] = 1;
+                                    dir = canGoDir(nextRow, nextCol, i, j);
+                                    dis = canGoDis(dir, nextRow, nextCol, rangeToInt);
+                                    if (meetPlayerMoves.Any(p => p.SequenceEqual(new int[] { currentRow, currentCol, nextRow, nextCol })))
                                     {
-                                        if (hitOther.collider.tag != "monster" || (hitOther.collider.tag == "monster" && Vector3.Distance(hitOther.collider.transform.position, transform.position) > 10))
+                                        dis = willMeetPlayer(dis);
+                                    }
+                                    if (meetMonsterMoves.Any(p => p.SequenceEqual(new int[] { currentRow, currentCol, nextRow, nextCol })))
+                                    {
+                                        dis = willMeetMonster(dis);
+                                    }
+                                    if (g[nextRow, nextCol] > g[currentRow, currentCol] + dis)
+                                    {
+                                        g[nextRow, nextCol] = g[currentRow, currentCol] + dis;
+                                        dirs[nextRow, nextCol] = dir;
+                                    }
+                                    for (int k = 0; k < end.Length; k++)
+                                    {
+                                        if (h[nextRow, nextCol] > Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol))
                                         {
-                                            Debug.DrawRay(currentPos, Dir, Color.green, 5);
-                                            stat[nextRow, nextCol] = 1;
-                                            dir = canGoDir(nextRow, nextCol, i, j);
-                                            dis = canGoDis(dir, nextRow, nextCol, rangeToInt);
-                                            if(hitOther.collider.tag == "player")
-                                            {
-                                                dis = willMeetPlayer(dis);
-                                            }
-                                            if (g[nextRow, nextCol] > g[currentRow, currentCol] + dis)
-                                            {
-                                                g[nextRow, nextCol] = g[currentRow, currentCol] + dis;
-                                                dirs[nextRow, nextCol] = dir;
-                                            }
-                                            for (int k = 0; k < end.Length; k++)
-                                            {
-                                                if (h[nextRow, nextCol] > Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol))
-                                                {
-                                                    h[nextRow, nextCol] = Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol);
-                                                }
-                                            }
-                                            if (f[nextRow, nextCol] > g[nextRow, nextCol] + h[nextRow, nextCol])
-                                            {
-                                                f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
-                                            }
-                                        }
-                                        else
-                                        {
-                                            Debug.DrawRay(currentPos, Dir, Color.red, 5);
+                                            h[nextRow, nextCol] = Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol);
                                         }
                                     }
-                                    else
+                                    if (f[nextRow, nextCol] > g[nextRow, nextCol] + h[nextRow, nextCol])
                                     {
-                                        Debug.DrawRay(currentPos, Dir, Color.green, 5);
-                                        stat[nextRow, nextCol] = 1;
-                                        dir = canGoDir(nextRow, nextCol, i, j);
-                                        dis = canGoDis(dir, nextRow, nextCol, rangeToInt);
-                                        if (g[nextRow, nextCol] > g[currentRow, currentCol] + dis)
-                                        {
-                                            g[nextRow, nextCol] = g[currentRow, currentCol] + dis;
-                                            dirs[nextRow, nextCol] = dir;
-                                        }
-                                        for (int k = 0; k < end.Length; k++)
-                                        {
-                                            if (h[nextRow, nextCol] > Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol))
-                                            {
-                                                h[nextRow, nextCol] = Mathf.Abs(endRow[k] - nextRow) + Mathf.Abs(endCol[k] - nextCol);
-                                            }
-                                        }
-                                        if (f[nextRow, nextCol] > g[nextRow, nextCol] + h[nextRow, nextCol])
-                                        {
-                                            f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
-                                        }
+                                        f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
                                     }
                                 }
                             }
@@ -436,9 +409,8 @@ namespace com.BoardGameDungeon
             {
                 dis = 1.4f;
             }
-            //看該點是否在守備區域內，若有則增加移動難度
+            //看該點是否在守備區域內，若無則增加移動難度
             bool inRange = false;
-            
             for (int k = 0; k < rangeToInt.Count; k++)
             {
                 if (rangeToInt[k][0] == nextRow && rangeToInt[k][1] == nextCol)
@@ -459,6 +431,11 @@ namespace com.BoardGameDungeon
         /// <summary> 給特別會針對路徑上的player做反應的怪用，例如史萊姆 </summary>
         virtual protected float willMeetPlayer(float dis)
         {
+            return dis;
+        }
+        virtual protected float willMeetMonster(float dis)
+        {
+            dis += 1000;
             return dis;
         }
 
