@@ -18,6 +18,9 @@ namespace com.BoardGameDungeon
         public NearestEnd navigateTarget;
         public NearestEnd straightTarget;
 
+        /// <summary> 石頭路徑，怪物會主動迴避 </summary>
+        public static List<int[]> stoneway = new List<int[]>();
+
         protected void monsterStart()
         {
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
@@ -199,7 +202,7 @@ namespace com.BoardGameDungeon
                                     float dis;
                                     if (hitOther)
                                     {
-                                        if (hitOther.collider.tag != "monster" || (hitOther.collider.tag == "monster" && Vector3.Distance(hitOther.collider.transform.position, transform.position) > 10))
+                                        if (hitOther.collider.tag != "monster" || (hitOther.collider.tag == "monster" && Vector3.Distance(hitOther.collider.transform.position, transform.position) > 20))
                                         {
                                             Debug.DrawRay(currentPos, Dir, Color.green, 5);
                                             stat[nextRow, nextCol] = 1;
@@ -450,6 +453,14 @@ namespace com.BoardGameDungeon
             if (!inRange)
             {
                 dis += 100;
+            }
+            for(int i = 0; i < stoneway.Count; i++)
+            {
+                if(stoneway[i][0]==nextRow&& stoneway[i][1] == nextCol)
+                {
+                    dis += 1000;
+                    break;
+                }
             }
             dis = priority(dis, nextRow, nextCol);
             return dis;

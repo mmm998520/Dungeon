@@ -23,7 +23,7 @@ namespace com.BoardGameDungeon
         {
             monsterStart();
             cd = 0;
-            moveSpeed = 1;
+            moveSpeed = 0.5f;
             monsterType = MonsterType.Slime;
 
             #region//決定範圍
@@ -63,8 +63,41 @@ namespace com.BoardGameDungeon
                 end[i] = GameManager.Players.GetChild(i);
             }
             straightTarget = StraightLineNearest(end);
+            int startRow, startCol;
+            for (startRow = 0; startRow < MazeGen.row; startRow++)
+            {
+                if (Mathf.Abs(transform.position.x - (startRow * 2 + 1)) <= 1)
+                {
+                    break;
+                }
+            }
+            for (startCol = 0; startCol < MazeGen.Creat_col; startCol++)
+            {
+                if (Mathf.Abs(transform.position.y - (startCol * 2 + 1)) <= 1)
+                {
+                    break;
+                }
+            }
+            bool DodgeStone = false;
+            List<Transform> noneStoneway = new List<Transform>();
+            foreach(Transform child in GameManager.Floors)
+            {
+                noneStoneway.Add(child);
+            }
+            for (int i = 0; i < stoneway.Count; i++)
+            {
+                noneStoneway.Remove(GameManager.Floors.GetChild(stoneway[i][0] * MazeGen.col + stoneway[i][1]));
+                if (stoneway[i][0] == startRow && stoneway[i][1] == startCol)
+                {
+                    DodgeStone = true;
+                }
+            }
+            if (DodgeStone)
+            {
+                GoNavigate(Navigate(noneStoneway.ToArray(), null));
+            }
             //距離玩家很遠，安心走自己的
-            if (straightTarget.Distance > 3)
+            else if (straightTarget.Distance > 3)
             {
                 if(sideTarget == null)
                 {
@@ -181,14 +214,5 @@ namespace com.BoardGameDungeon
             GameObject attack = Instantiate(MonsterAttack[(int)monsterType], transform.position, Quaternion.identity);
             attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], null);
         }
-        /*
-        private void OnCollisionStay2D(Collision2D collision)
-        {
-            if(collision.gameObject.tag == "monster")
-            {
-                reNavigate();
-            }
-        }
-        */
     }
 }

@@ -12,6 +12,75 @@ namespace com.BoardGameDungeon
         
         public PlayerManager user;
 
+        void Start()
+        {
+            int startRow, startCol;
+            for (startRow = 0; startRow < MazeGen.row; startRow++)
+            {
+                if (Mathf.Abs(transform.position.x - (startRow * 2 + 1)) <= 1)
+                {
+                    break;
+                }
+            }
+            for (startCol = 0; startCol < MazeGen.Creat_col; startCol++)
+            {
+                if (Mathf.Abs(transform.position.y - (startCol * 2 + 1)) <= 1)
+                {
+                    break;
+                }
+            }
+            int tempRow = 0, tempCol = 0;
+            int row = 0, col = 0;
+            for(int i = 0; i < 3; i++)
+            {
+                if (i == 1)
+                {
+                    if(Mathf.Abs(dir.x) > 0.5f)
+                    {
+                        tempCol = 1;
+                    }
+                    else
+                    {
+                        tempRow = -1;
+                    }
+                }
+                else if(i == 2)
+                {
+                    if (Mathf.Abs(dir.x) > 0.5f)
+                    {
+                        tempCol = -1;
+                    }
+                    else
+                    {
+                        tempRow = -1;
+                    }
+                }
+                for(int j = 0; i < 20; j++)
+                {
+                    if (startRow + row + tempRow >= 0 && startRow + row + tempRow < MazeGen.row && startCol + col + tempCol >= 0 && startCol + col + tempCol < MazeGen.col)
+                    {
+                        MonsterManager.stoneway.Add(new int[] { startRow + row + tempRow, startCol + col + tempCol });
+                    }
+                    if (dir.x > 0.5f)
+                    {
+                        row++;
+                    }
+                    else if (dir.x < 0.5f)
+                    {
+                        row--;
+                    }
+                    else if (dir.y > 0.5f)
+                    {
+                        col++;
+                    }
+                    else if (dir.y < 0.5f)
+                    {
+                        col--;
+                    }
+                }
+            }
+        }
+
         void Update()
         {
             transform.Translate(dir * Time.deltaTime * speed);
@@ -23,6 +92,7 @@ namespace com.BoardGameDungeon
             {
                 if (hit.collider.tag == "side")
                 {
+                    MonsterManager.stoneway.Clear();
                     Destroy(gameObject);
                 }
                 else if (hit.collider.tag == "wall")
