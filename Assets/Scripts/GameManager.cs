@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+namespace com.BoardGameDungeon
 {
-    /// <summary> 共通父物件，提供其他component使用 </summary>
-    public static Transform Floors,Walls,Players;
-
-    void Awake()
+    public class GameManager : MonoBehaviour
     {
-        Floors = GameObject.Find("Floors").transform;
-        Walls = GameObject.Find("Walls").transform;
-        Players = GameObject.Find("Players").transform;
-    }
+        /// <summary> 共通父物件，提供其他component使用 </summary>
+        public static Transform Floors, Walls, Players;
 
-    private void Update()
-    {
-        if (Players.childCount == 0)
+        void Awake()
         {
-            SceneManager.LoadScene("Game2");
+            Floors = GameObject.Find("Floors").transform;
+            Walls = GameObject.Find("Walls").transform;
+            Players = GameObject.Find("Players").transform;
+        }
+
+        private void Update()
+        {
+
         }
     }
 }

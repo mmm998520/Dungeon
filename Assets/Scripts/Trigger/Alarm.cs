@@ -31,10 +31,10 @@ namespace com.BoardGameDungeon
                 if (hitNum >= 4)
                 {
                     Debug.LogError("我很好奇你現在在哪...");
-
                 }
                 else if(hitNum >= 3)
                 {
+                    print("3");
                     for (int i = 0; i < 4; i++)
                     {
                         //如果雷射方向沒有打到牆，就生成在那跟他的反方向
@@ -49,6 +49,7 @@ namespace com.BoardGameDungeon
                 }
                 else if (hitNum >= 2)
                 {
+                    print("2");
                     dir = Vector2.up;
                     for (int i = 0; i < 4; i++)
                     {
@@ -62,16 +63,20 @@ namespace com.BoardGameDungeon
                 }
                 else if(hitNum >= 1)
                 {
-                    RaycastHit2D hit = Physics2D.Raycast(currentPos - Vector3.up * 2, currentPos, 4, 1 << 8);
+                    print("1");
+                    RaycastHit2D hit = Physics2D.Raycast(currentPos - Vector3.up * 2, currentPos-(currentPos - Vector3.up * 2), 4, 1 << 8);
+                    Debug.DrawRay(currentPos - Vector3.up * 2, currentPos, Color.red, 3);
                     //如果上下有打到牆，生成左右
                     if (hit)
                     {
+                        print("左右");
                         Instantiate(monster, transform.position * Vector2.one + Vector2.right * 2, Quaternion.identity);
                         Instantiate(monster, transform.position * Vector2.one + Vector2.left * 2, Quaternion.identity);
                     }
                     //反之，左右有打到牆，生成上下
                     else
                     {
+                        print("上下");
                         Instantiate(monster, transform.position * Vector2.one + Vector2.up * 2, Quaternion.identity);
                         Instantiate(monster, transform.position * Vector2.one + Vector2.down * 2, Quaternion.identity);
                     }
@@ -79,6 +84,7 @@ namespace com.BoardGameDungeon
                 //如果所有方向都沒hit
                 else
                 {
+                    print("0");
                     //上下或左右隨機一個進行生成
                     if (Random.Range(0, 2) < 1)
                     {

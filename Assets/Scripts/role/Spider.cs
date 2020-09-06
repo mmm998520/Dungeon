@@ -11,7 +11,7 @@ namespace com.BoardGameDungeon
         {
             monsterStart();
             cd = 1;
-            moveSpeed = 1;
+            moveSpeed = 1.6f;
             monsterType = MonsterType.Spider;
             Invoke("reNavigate", 0.01f);
         }

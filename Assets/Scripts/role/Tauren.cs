@@ -19,7 +19,7 @@ namespace com.BoardGameDungeon
         {
             monsterStart();
             cd = 2;
-            moveSpeed = 1;
+            moveSpeed = 1.3f;
             monsterType = MonsterType.Tauren;
 
             Invoke("reNavigate", 0.01f);
@@ -53,7 +53,7 @@ namespace com.BoardGameDungeon
             }
             straightTarget = StraightLineNearest(end);
             //附近沒敵人，守家
-            if (straightTarget.Distance > 3)
+            if (straightTarget.Distance > 4)
             {
                 GoNavigate(target);
                 if (target == null)
@@ -98,6 +98,7 @@ namespace com.BoardGameDungeon
                     else
                     {
                         transform.Translate(dis * dir.normalized);
+                        print("我正在追你");
                     }
                 }
             }

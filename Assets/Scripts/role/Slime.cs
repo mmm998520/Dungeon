@@ -23,7 +23,7 @@ namespace com.BoardGameDungeon
         {
             monsterStart();
             cd = 0;
-            moveSpeed = 1;
+            moveSpeed = 0.8f;
             monsterType = MonsterType.Slime;
 
             #region//決定範圍

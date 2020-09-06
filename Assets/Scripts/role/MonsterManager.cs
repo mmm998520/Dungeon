@@ -479,7 +479,6 @@ namespace com.BoardGameDungeon
             {
                 transform.Translate(dis * dir.normalized);
             }
-            transform.position += (targer.roadTraget.position - transform.position).normalized * Time.deltaTime * moveSpeed;
         }
 
         /// <summary> 抵達路徑點，朝下個路徑點前進 </summary>
@@ -526,6 +525,14 @@ namespace com.BoardGameDungeon
         {
             if (Hurt > HP[type, level])
             {
+                for (int i = HurtMe.Count - 1; i >= 0; i--)
+                {
+                    if (HurtMe[i] == null)
+                    {
+                        print("有人掰囉");
+                        HurtMe.RemoveAt(i);
+                    }
+                }
                 foreach (PlayerManager playerManager in HurtMe)
                 {
                     playerManager.exp += exp[(int)monsterType] / HurtMe.Count;

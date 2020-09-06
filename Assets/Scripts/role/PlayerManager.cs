@@ -93,13 +93,13 @@ namespace com.BoardGameDungeon
                 //觸控點與角色的距離
                 float targetDis = Vector3.Distance(touchPos, transform.position * Vector2.one);
                 //距離夠近才能進行操作
-                if (targetDis < 1.25f)
+                if (targetDis < 1.25f && cdTimer > cd)
                 {
                     move(touchPos, targetDis);
                     readyForAttack(touch.phase);
                 }
                 //偵測雙擊後的點與觸控點距離，
-                if (Vector3.Distance(TouchBeganPos, touchPos) > 0.5f && targetDis < 1.5f && attackMode && cdTimer > cd)
+                if (Vector3.Distance(TouchBeganPos, touchPos) > 0.2f && targetDis < 1.5f && attackMode)
                 {
                     attack(touchPos);
                     cdTimer = 0;
@@ -158,10 +158,12 @@ namespace com.BoardGameDungeon
             //攻擊開關開啟計時器
             if (attackMode)
             {
+                transform.GetChild(0).gameObject.SetActive(true);
                 attackModeTimer += Time.deltaTime;
             }
             else if (attackModeTimer != 0)
             {
+                transform.GetChild(0).gameObject.SetActive(false);
                 attackModeTimer = 0;
             }
             //點擊間隔計時器

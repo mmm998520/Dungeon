@@ -58,7 +58,7 @@ namespace com.BoardGameDungeon
             }
             straightTarget = StraightLineNearest(end);
             //附近沒敵人，守家
-            if (straightTarget.Distance > 3)
+            if (straightTarget.Distance > 4)
             {
                 GoNavigate(target);
                 if (target == null)
