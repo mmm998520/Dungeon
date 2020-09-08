@@ -57,6 +57,10 @@ namespace com.BoardGameDungeon
 
         void actionMode()
         {
+            if (paralysis)
+            {
+                return;
+            }
             List<Transform> end = new List<Transform>();
             foreach (Transform player in GameManager.Players)
             {

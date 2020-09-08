@@ -58,7 +58,7 @@ namespace com.BoardGameDungeon
             {
                 collider.GetComponent<ValueSet>().Hurt += ATK;
             }
-            MonsterManager.addHurtMe(collider, user);
+            MonsterManager.hurtMe(collider, user, false);
         }
     }
 }

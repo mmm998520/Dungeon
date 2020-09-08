@@ -14,7 +14,8 @@ namespace com.BoardGameDungeon
         public bool continuous = false;
         //紀錄該傷害是誰發出的避免誤傷、給予經驗值計算標準，若怪物發出則為null
         public PlayerManager user;
-
+        //該攻擊是否有塗毒
+        public bool poison;
         //創建後使用該數值設定攻擊
         public void setValue(float _ATK, float _duration, bool _continuous, PlayerManager _user)
         {
@@ -32,7 +33,7 @@ namespace com.BoardGameDungeon
             {
                 hurt(collider, ATK);
             }
-            MonsterManager.addHurtMe(collider, user);
+            MonsterManager.hurtMe(collider, user, poison);
         }
 
         protected void OnTriggerStay2D(Collider2D collider)

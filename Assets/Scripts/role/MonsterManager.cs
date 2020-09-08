@@ -18,6 +18,9 @@ namespace com.BoardGameDungeon
         public NearestEnd navigateTarget;
         public NearestEnd straightTarget;
 
+        /// <summary> 麻痺狀態 </summary>
+        public bool paralysis = false;
+
         protected void monsterStart()
         {
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
@@ -505,6 +508,10 @@ namespace com.BoardGameDungeon
         /// <summary> 若選定的目標在範圍(hand)內則每一段時間攻擊一次 </summary>
         virtual protected void attackOccasion(NearestEnd Target, float hand)
         {
+            if (paralysis)
+            {
+                return;
+            }
             if (Target.endTraget != null)
             {
                 if (Vector3.Distance(transform.position, Target.endTraget.position) < hand && cdTimer > cd)
@@ -542,15 +549,37 @@ namespace com.BoardGameDungeon
             }
         }
         /// <summary> 增加傷害清單，紀錄誰對他觸發過攻擊 </summary>
-        public static void addHurtMe(Collider2D collider, PlayerManager user)
+        public static void hurtMe(Collider2D collider, PlayerManager user, bool poison)
         {
             if (collider.GetComponent<MonsterManager>() && user != null)
             {
+                if (poison)
+                {
+                    collider.GetComponent<MonsterManager>().callParalysis(user);
+                }
                 if (!collider.GetComponent<MonsterManager>().HurtMe.Contains(user))
                 {
                     collider.GetComponent<MonsterManager>().HurtMe.Add(user);
                 }
             }
+        }
+
+        public void callParalysis(PlayerManager player)
+        {
+            player.statTwo = false;
+            StartCoroutine("Paralysis");
+        }
+
+        WaitForSeconds paralysisWait = new WaitForSeconds(1);
+        IEnumerator Paralysis()
+        {
+            paralysis = true;
+            if (transform.GetChild(2))
+            {
+                transform.GetChild(2).gameObject.SetActive(false);
+            }
+            yield return paralysisWait;
+            paralysis = false;
         }
     }
 

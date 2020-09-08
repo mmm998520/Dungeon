@@ -74,8 +74,7 @@ namespace com.BoardGameDungeon
                     {
                         //print("short");
                     }
-                    GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.identity);
-                    attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], this);
+                    attack(Vector3.right);
                 }
                 transform.Translate(Input.GetAxis("Vertical") * Vector3.up * Time.deltaTime + Input.GetAxis("Horizontal") * Vector3.right * Time.deltaTime);
             }
@@ -149,9 +148,13 @@ namespace com.BoardGameDungeon
             attackMode = false;
             //生成攻擊在觸控方向，並旋轉攻擊朝向該方向
             float angle = Vector3.SignedAngle(Vector3.right, touchPos * Vector2.one - transform.position * Vector2.one, Vector3.forward);
-            GameObject attack = Instantiate(Attack[(int)career], transform.position, Quaternion.Euler(0, 0, angle));
+            AttackManager attack = Instantiate(Attack[(int)career], transform.position, Quaternion.Euler(0, 0, angle)).GetComponent<AttackManager>();
             //設定攻擊參數
-            attack.GetComponent<AttackManager>().setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], this);
+            attack.setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], this);
+            if(career == Career.Thief && statTwo)
+            {
+                attack.poison = true;
+            }
         }
 
         /// <summary> 攻擊開關開啟計時器、點擊間隔計時器 </summary>
@@ -188,12 +191,15 @@ namespace com.BoardGameDungeon
         }
 
         #region//技能
-        /// <summary>
-        ///隱身 
-        /// </summary>
+        /// <summary> 隱身 </summary>
         public void ThiefOne_Stealth()
         {
             statOne = true;
+        }
+        /// <summary> 塗毒 </summary>
+        public void ThiefTwo_Poison()
+        {
+            statTwo = true;
         }
         #endregion
     }
