@@ -22,6 +22,14 @@ namespace com.BoardGameDungeon
                     spine.GetComponent<Spine>().popTimer = 0;
                     spine.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
                 }
+
+                if (spines.Count > 1)
+                {
+                    Stab insStab = ObjectGen.instantiate(gameObject).GetComponent<Stab>();
+                    insStab.user = null;
+                    ObjectGen.addInsPos(gameObject);
+                    Destroy(gameObject);
+                }
             }
         }
     }

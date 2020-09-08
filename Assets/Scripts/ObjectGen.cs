@@ -15,10 +15,12 @@ namespace com.BoardGameDungeon
         public List<int> TaurenRangeRow = new List<int>();
         public List<int> TaurenRangeCol = new List<int>();
         public GameObject StabPrefab;
+        /// <summary> 可生成點的紀錄，以免重複地點生成 </summary>
+        public static List<int[]> insPos = new List<int[]>();
+
         void Start()
         {
             Dictionary<GameObject, int> ObjectNum = new Dictionary<GameObject, int>();
-            List<int[]> pos = new List<int[]>();
             Transform[] Stabs = new Transform[Num[Objects.IndexOf(StabPrefab)]];
 
             for (int i = 0; i < Objects.Count; i++)
@@ -31,7 +33,7 @@ namespace com.BoardGameDungeon
                 {
                     if (!((i == 0 && j == 0) || (i == 0 && j == MazeGen.col - 1) || (i == MazeGen.row - 1 && j == 0) || (i == MazeGen.row - 1 && j == MazeGen.col - 1)))
                     {
-                        pos.Add(new int[2] { i, j });
+                        insPos.Add(new int[2] { i, j });
                     }
                 }
             }
@@ -47,12 +49,12 @@ namespace com.BoardGameDungeon
                         do
                         {
                             s++;
-                            int r = Random.Range(0, pos.Count);
+                            int r = Random.Range(0, insPos.Count);
                             //不能生成在中央
-                            if(pos[r][0] <= 1 || pos[r][1] <= 1 || pos[r][0] >= MazeGen.row - 2 || pos[r][1] >= MazeGen.col - 2)
+                            if(insPos[r][0] <= 1 || insPos[r][1] <= 1 || insPos[r][0] >= MazeGen.row - 2 || insPos[r][1] >= MazeGen.col - 2)
                             {
-                                ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
-                                pos.RemoveAt(r);
+                                ins = Instantiate(obj.Key, new Vector3(insPos[r][0] * 2 + 1, insPos[r][1] * 2 + 1, 0), Quaternion.identity);
+                                insPos.RemoveAt(r);
                                 break;
                             }
                         } while (s<100);
@@ -63,32 +65,32 @@ namespace com.BoardGameDungeon
                         do
                         {
                             s++;
-                            int r = Random.Range(0, pos.Count);
+                            int r = Random.Range(0, insPos.Count);
                             //不能生成在周圍
-                            if (!(pos[r][0] <= 1 || pos[r][1] <= 1 || pos[r][0] >= MazeGen.row - 2 || pos[r][1] >= MazeGen.col - 2))
+                            if (!(insPos[r][0] <= 1 || insPos[r][1] <= 1 || insPos[r][0] >= MazeGen.row - 2 || insPos[r][1] >= MazeGen.col - 2))
                             {
-                                if (i == 0 && pos[r][0] <= 5 && pos[r][1] <= 3)
+                                if (i == 0 && insPos[r][0] <= 5 && insPos[r][1] <= 3)
                                 {
-                                    ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
-                                    pos.RemoveAt(r);
+                                    ins = Instantiate(obj.Key, new Vector3(insPos[r][0] * 2 + 1, insPos[r][1] * 2 + 1, 0), Quaternion.identity);
+                                    insPos.RemoveAt(r);
                                     break;
                                 }
-                                if (i == 1 && pos[r][0] >= 6 && pos[r][1] >= 5)
+                                if (i == 1 && insPos[r][0] >= 6 && insPos[r][1] >= 5)
                                 {
-                                    ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
-                                    pos.RemoveAt(r);
+                                    ins = Instantiate(obj.Key, new Vector3(insPos[r][0] * 2 + 1, insPos[r][1] * 2 + 1, 0), Quaternion.identity);
+                                    insPos.RemoveAt(r);
                                     break;
                                 }
-                                else if (i == 2 && pos[r][0] <= 5 && pos[r][1] >= 5)
+                                else if (i == 2 && insPos[r][0] <= 5 && insPos[r][1] >= 5)
                                 {
-                                    ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
-                                    pos.RemoveAt(r);
+                                    ins = Instantiate(obj.Key, new Vector3(insPos[r][0] * 2 + 1, insPos[r][1] * 2 + 1, 0), Quaternion.identity);
+                                    insPos.RemoveAt(r);
                                     break;
                                 }
-                                else if (i == 3 && pos[r][0] >= 6 && pos[r][1] <= 3)
+                                else if (i == 3 && insPos[r][0] >= 6 && insPos[r][1] <= 3)
                                 {
-                                    ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
-                                    pos.RemoveAt(r);
+                                    ins = Instantiate(obj.Key, new Vector3(insPos[r][0] * 2 + 1, insPos[r][1] * 2 + 1, 0), Quaternion.identity);
+                                    insPos.RemoveAt(r);
                                     break;
                                 }
                             }
@@ -100,12 +102,12 @@ namespace com.BoardGameDungeon
                         do
                         {
                             s++;
-                            int r = Random.Range(0, pos.Count);
+                            int r = Random.Range(0, insPos.Count);
                             //不能生成在周圍
-                            if (!(pos[r][0] <= 1 || pos[r][1] <= 1 || pos[r][0] >= MazeGen.row - 2 || pos[r][1] >= MazeGen.col - 2))
+                            if (!(insPos[r][0] <= 1 || insPos[r][1] <= 1 || insPos[r][0] >= MazeGen.row - 2 || insPos[r][1] >= MazeGen.col - 2))
                             {
-                                ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
-                                pos.RemoveAt(r);
+                                ins = Instantiate(obj.Key, new Vector3(insPos[r][0] * 2 + 1, insPos[r][1] * 2 + 1, 0), Quaternion.identity);
+                                insPos.RemoveAt(r);
                                 break;
                             }
                         } while (s < 100);
@@ -125,21 +127,20 @@ namespace com.BoardGameDungeon
                         }
                         else if (i < 6)
                         {
-                            int r = Random.Range(0, pos.Count);
-                            ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
-                            pos.RemoveAt(r);
+                            int r = Random.Range(0, insPos.Count);
+                            ins = Instantiate(obj.Key, new Vector3(insPos[r][0] * 2 + 1, insPos[r][1] * 2 + 1, 0), Quaternion.identity);
+                            insPos.RemoveAt(r);
                         }
                         else
                         {
                             Debug.LogError("數值設定有問題");
                         }
-                        ins.transform.parent = Stabs[i];
                     }
                     else
                     {
-                        int r = Random.Range(0, pos.Count);
-                        ins = Instantiate(obj.Key, new Vector3(pos[r][0] * 2 + 1, pos[r][1] * 2 + 1, 0), Quaternion.identity);
-                        pos.RemoveAt(r);
+                        int r = Random.Range(0, insPos.Count);
+                        ins = Instantiate(obj.Key, new Vector3(insPos[r][0] * 2 + 1, insPos[r][1] * 2 + 1, 0), Quaternion.identity);
+                        insPos.RemoveAt(r);
                     }
                     if(ins!= null)
                     {
@@ -246,6 +247,34 @@ namespace com.BoardGameDungeon
                     }
                 }
             }
+        }
+
+        public static GameObject instantiate(GameObject obj)
+        {
+            int r = Random.Range(0, insPos.Count);
+            GameObject ins = Instantiate(obj, new Vector3(insPos[r][0] * 2 + 1, insPos[r][1] * 2 + 1, 0), Quaternion.identity);
+            insPos.RemoveAt(r);
+            return ins;
+        }
+
+        public static void addInsPos(GameObject obj)
+        {
+            int row, col;
+            for (row = 0; row < MazeGen.row; row++)
+            {
+                if (Mathf.Abs(obj.transform.position.x - (row * 2 + 1)) <= 1)
+                {
+                    break;
+                }
+            }
+            for (col = 0; col < MazeGen.Creat_col; col++)
+            {
+                if (Mathf.Abs(obj.transform.position.y - (col * 2 + 1)) <= 1)
+                {
+                    break;
+                }
+            }
+            insPos.Add(new int[] { row, col });
         }
     }
 }
