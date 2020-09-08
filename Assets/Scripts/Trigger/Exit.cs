@@ -7,6 +7,12 @@ namespace com.BoardGameDungeon
 {
     public class Exit : MonoBehaviour
     {
+        public AudioSource ExitAudio;
+        void Start()
+        {
+            ExitAudio.Play();
+        }
+
         void OnTriggerEnter2D(Collider2D collider)
         {
             if (collider.GetComponent<PlayerManager>())

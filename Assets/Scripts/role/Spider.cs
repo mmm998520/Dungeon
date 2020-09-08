@@ -42,6 +42,16 @@ namespace com.BoardGameDungeon
 
         override protected void attack()
         {
+            StartCoroutine("attackWait");
+
+        }
+
+        WaitForSeconds AttackWait = new WaitForSeconds(1);
+        IEnumerator attackWait()
+        {
+            transform.GetChild(2).gameObject.SetActive(true);
+            yield return AttackWait;
+            transform.GetChild(2).gameObject.SetActive(false);
             if (navigateTarget.endTraget != null)
             {
                 //生成攻擊在觸控方向，並旋轉攻擊朝向該方向

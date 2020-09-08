@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace com.BoardGameDungeon
 {
@@ -105,12 +106,17 @@ namespace com.BoardGameDungeon
                         if (i == 0 || j == 0 || i == Creat_row - 1 || j == Creat_col - 1)
                         {
                             column.tag = "side";
+                            column.layer = 8;
                         }
                         else
                         {
                             column.tag = "wall";
+                            column.layer = 8;
+                            if (SceneManager.GetActiveScene().name == "Game2")
+                            {
+                                Destroy(column);
+                            }
                         }
-                        column.layer = 8;
                     }
                 }
             }

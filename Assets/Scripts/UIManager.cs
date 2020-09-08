@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace com.BoardGameDungeon
 {
@@ -9,9 +10,12 @@ namespace com.BoardGameDungeon
         PlayerManager[] players = new PlayerManager[4];
         void Start()
         {
-            for (int i = 0; i < transform.GetChild(0).childCount / 2; i++)
+            //if(SceneManager.GetActiveScene().name == "Game")
             {
-                players[i] = GameManager.Players.GetChild(i).GetComponent<PlayerManager>();
+                for (int i = 0; i < transform.GetChild(0).childCount / 2; i++)
+                {
+                    players[i] = GameManager.Players.GetChild(i).GetComponent<PlayerManager>();
+                }
             }
         }
 

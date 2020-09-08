@@ -11,6 +11,12 @@ namespace com.BoardGameDungeon
         float ATK = 5;
         
         public PlayerManager user;
+        public AudioSource stoneAudio;
+
+        void Start()
+        {
+            stoneAudio.Play();
+        }
 
         void Update()
         {
