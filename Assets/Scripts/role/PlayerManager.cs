@@ -195,11 +195,20 @@ namespace com.BoardGameDungeon
         public void ThiefOne_Stealth()
         {
             statOne = true;
+            //攻擊後結束，時間到結束
         }
         /// <summary> 塗毒 </summary>
         public void ThiefTwo_Poison()
         {
             statTwo = true;
+            //攻擊後結束，時間到結束
+        }
+
+        /// <summary> 無敵 </summary>
+        public void WarriorOne_Invincible()
+        {
+            statOne = true;
+            //攻擊後結束，時間到結束
         }
         #endregion
     }

@@ -24,6 +24,13 @@ namespace com.BoardGameDungeon
 
         protected void hurt(Collider2D collider, float ATK)
         {
+            if (collider.GetComponent<PlayerManager>())
+            {
+                if(collider.GetComponent<PlayerManager>().career == ValueSet.Career.Warrior && collider.GetComponent<PlayerManager>().statOne == true)
+                {
+                    return;
+                }
+            }
             collider.GetComponent<ValueSet>().Hurt += ATK;
         }
 
