@@ -210,6 +210,18 @@ namespace com.BoardGameDungeon
             statOne = true;
             //攻擊後結束，時間到結束
         }
+
+        public void MagicianOne_Recover()
+        {
+            foreach(Transform player in GameManager.Players)
+            {
+                PlayerManager playerManager = player.GetComponent<PlayerManager>();
+                if((playerManager.Hurt -= 20) < 0)
+                {
+                    playerManager.Hurt = 0;
+                }
+            }
+        }
         #endregion
     }
 }
