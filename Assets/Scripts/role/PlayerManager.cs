@@ -222,6 +222,14 @@ namespace com.BoardGameDungeon
                 }
             }
         }
+
+        public void MagicianTwo_Range()
+        {
+            AttackManager attack = Instantiate(Resources.Load<GameObject>("Prefabs/Attack/Attack_Magician"), transform.position, Quaternion.identity).GetComponent<AttackManager>();
+            //設定攻擊參數
+            attack.setValue(10, 2, true, this);
+            attack.transform.localScale *= 5;
+        }
         #endregion
     }
 }
