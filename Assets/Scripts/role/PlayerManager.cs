@@ -22,6 +22,8 @@ namespace com.BoardGameDungeon
         bool attackMode = false;
         /// <summary> 攻擊開關開啟計時器，太久沒攻擊則關閉 </summary>
         float attackModeTimer = 0;
+        /// <summary> 若玩家發動持續性技能，紀錄該技能是否生效 </summary>
+        public bool statOne = false, statTwo = false;
 
         void Awake()
         {
@@ -184,5 +186,15 @@ namespace com.BoardGameDungeon
             PlayerPrefs.SetInt(name + "Level", level);
             PlayerPrefs.SetFloat(name + "Exp", exp);
         }
+
+        #region//技能
+        /// <summary>
+        ///隱身 
+        /// </summary>
+        public void ThiefOne_Stealth()
+        {
+            statOne = true;
+        }
+        #endregion
     }
 }

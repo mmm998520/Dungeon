@@ -18,11 +18,16 @@ namespace com.BoardGameDungeon
 
         void Update()
         {
-            end = new Transform[GameManager.Players.childCount];
-            for (int i = 0; i < end.Length; i++)
+            List<Transform> end = new List<Transform>();
+            foreach (Transform player in GameManager.Players)
             {
-                end[i] = GameManager.Players.GetChild(i);
+                PlayerManager playerManager = player.GetComponent<PlayerManager>();
+                if (!(playerManager.career == Career.Thief && playerManager.statOne))
+                {
+                    end.Add(player);
+                }
             }
+            this.end = end.ToArray();
             GoNavigate(navigateTarget);
             attackOccasion(navigateTarget, 2.5f);
             
@@ -31,12 +36,16 @@ namespace com.BoardGameDungeon
 
         void reNavigate()
         {
-            Transform[] end = new Transform[GameManager.Players.childCount];
-            for (int i = 0; i < end.Length; i++)
+            List<Transform> end = new List<Transform>();
+            foreach (Transform player in GameManager.Players)
             {
-                end[i] = GameManager.Players.GetChild(i);
+                PlayerManager playerManager = player.GetComponent<PlayerManager>();
+                if (!(playerManager.career == Career.Thief && playerManager.statOne))
+                {
+                    end.Add(player);
+                }
             }
-            navigateTarget = Navigate(end, null);
+            navigateTarget = Navigate(end.ToArray(), null);
             Invoke("reNavigate", Random.Range(0.2f, 0.4f));
         }
 

@@ -55,12 +55,16 @@ namespace com.BoardGameDungeon
         void actionMode()
         {
             //身邊有敵人就攻擊，沒有就尋路
-            Transform[] end = new Transform[GameManager.Players.childCount];
-            for (int i = 0; i < end.Length; i++)
+            List<Transform> end = new List<Transform>();
+            foreach(Transform player in GameManager.Players)
             {
-                end[i] = GameManager.Players.GetChild(i);
+                PlayerManager playerManager = player.GetComponent<PlayerManager>();
+                if (!(playerManager.career == Career.Thief && playerManager.statOne))
+                {
+                    end.Add(player);
+                }
             }
-            straightTarget = StraightLineNearest(end);
+            straightTarget = StraightLineNearest(end.ToArray());
             //附近沒敵人，守家
             if (straightTarget.Distance > 4)
             {

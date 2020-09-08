@@ -57,12 +57,16 @@ namespace com.BoardGameDungeon
 
         void actionMode()
         {
-            Transform[] end = new Transform[GameManager.Players.childCount];
-            for (int i = 0; i < end.Length; i++)
+            List<Transform> end = new List<Transform>();
+            foreach (Transform player in GameManager.Players)
             {
-                end[i] = GameManager.Players.GetChild(i);
+                PlayerManager playerManager = player.GetComponent<PlayerManager>();
+                if (!(playerManager.career == Career.Thief && playerManager.statOne))
+                {
+                    end.Add(player);
+                }
             }
-            straightTarget = StraightLineNearest(end);
+            straightTarget = StraightLineNearest(end.ToArray());
             //距離玩家很遠，安心走自己的
             if (straightTarget.Distance > 3)
             {
@@ -145,9 +149,13 @@ namespace com.BoardGameDungeon
                 Vector3 nextPos = new Vector3(nextRow * 2 + 1, nextCol * 2 + 1);
                 foreach (Transform player in GameManager.Players)
                 {
-                    if (minDis > Vector3.Distance(nextPos, player.position))
+                    PlayerManager playerManager = player.GetComponent<PlayerManager>();
+                    if (!(playerManager.career == Career.Thief && playerManager.statOne))
                     {
-                        minDis = Vector3.Distance(nextPos, player.position);
+                        if (minDis > Vector3.Distance(nextPos, player.position))
+                        {
+                            minDis = Vector3.Distance(nextPos, player.position);
+                        }
                     }
                 }
                 dis += 5 / minDis;
