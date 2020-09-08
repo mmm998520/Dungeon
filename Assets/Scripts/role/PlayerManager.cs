@@ -25,7 +25,7 @@ namespace com.BoardGameDungeon
         /// <summary> 技能cd </summary>
         float skillOneCD = 0,skillOneCDTimer = 0, skillTwoCD = 0, skillTwoCDTimer = 0;
         /// <summary> 技能cd </summary>
-        float skillOneContinued = 0, skillOneContinuedTimer = 0, skillTwoContinued = 0, skillTwoContinuedTimer = 0;
+        public float skillOneContinued = 0, skillOneContinuedTimer = 0, skillTwoContinued = 0, skillTwoContinuedTimer = 0;
         /// <summary> 若玩家發動持續性技能，紀錄該技能是否生效 </summary>
         public bool statOne = false, statTwo = false;
         /// <summary> 戰士專用技能bool，確保衝鋒中不會有其他操作 </summary>
@@ -120,6 +120,7 @@ namespace com.BoardGameDungeon
                         StartCoroutine("WarriorChargeStat", dir);
                         statTwo = false;
                         attackMode = false;
+                        skillTwoContinuedTimer = 999999999;
                     }
                     else if(attackMode)
                     {
@@ -174,14 +175,16 @@ namespace com.BoardGameDungeon
             attack.setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], this);
             if (career == Career.Thief)
             {
-                if (statOne)
+                /*if (statOne)
                 {
                     statOne = false;
-                }
+                    skillOneContinuedTimer = 100;
+                }*/
                 if (statTwo)
                 {
                     attack.poison = true;
                     statTwo = false;
+                    skillTwoContinuedTimer = 100;
                 }
             }
         }
@@ -196,29 +199,54 @@ namespace com.BoardGameDungeon
             TouchBeganTimer += Time.deltaTime;
 
             //技能用
-            if ((skillOneCDTimer += Time.deltaTime) > skillOneCD)
+            if (level > 1)
             {
                 skillButton[0].SetActive(true);
+                if((skillOneContinuedTimer += Time.deltaTime) / skillOneContinued <= 1)
+                {
+                    skillButton[0].transform.GetChild(0).localScale = new Vector3(1, 1 - ((skillOneContinuedTimer += Time.deltaTime) / skillOneContinued), 1);
+                }
+                else
+                {
+                    skillButton[0].transform.GetChild(0).localScale = new Vector3(1, 0, 1);
+                }
+                if((skillOneCDTimer += Time.deltaTime) / skillOneCD <= 1)
+                {
+                    skillButton[0].transform.GetChild(1).localScale = new Vector3(1, (skillOneCDTimer += Time.deltaTime) / skillOneCD, 1);
+                }
+                else
+                {
+                    skillButton[0].transform.GetChild(1).localScale = new Vector3(1, 0, 1);
+                }
+                if (skillOneContinuedTimer > skillOneContinued)
+                {
+                    statOne = false;
+                }
             }
-            else
-            {
-                skillButton[0].SetActive(false);
-            }
-            if ((skillTwoCDTimer += Time.deltaTime) > skillTwoCD)
+            if (level > 2)
             {
                 skillButton[1].SetActive(true);
-            }
-            else
-            {
-                skillButton[1].SetActive(false);
-            }
-            if ((skillOneContinuedTimer += Time.deltaTime) > skillOneContinued)
-            {
-                statOne = false;
-            }
-            if ((skillTwoContinuedTimer += Time.deltaTime) > skillTwoContinued)
-            {
-                statTwo = false;
+                if((skillTwoContinuedTimer += Time.deltaTime) / skillTwoContinued <= 1)
+                {
+                    skillButton[1].transform.GetChild(0).localScale = new Vector3(1, 1 - ((skillTwoContinuedTimer += Time.deltaTime) / skillTwoContinued), 1);
+                }
+                else
+                {
+                    skillButton[1].transform.GetChild(0).localScale = new Vector3(1, 0, 1);
+                }
+                if((skillTwoCDTimer += Time.deltaTime) / skillTwoCD <= 1)
+                {
+                    skillButton[1].transform.GetChild(1).localScale = new Vector3(1, (skillTwoCDTimer += Time.deltaTime) / skillTwoCD, 1);
+                }
+                else
+                {
+                    skillButton[1].transform.GetChild(1).localScale = new Vector3(1, 0, 1);
+                }
+
+                if (skillTwoContinuedTimer > skillTwoContinued)
+                {
+                    statTwo = false;
+                }
             }
         }
 
@@ -240,34 +268,36 @@ namespace com.BoardGameDungeon
         #region//技能
         public void skill(int skillNum)
         {
+            bool one = (skillNum == 1 && skillOneCDTimer > skillOneCD);
+            bool two = (skillNum == 2 && skillTwoCDTimer > skillTwoCD);
             switch (career)
             {
                 case Career.Thief:
-                    if(skillNum == 1)
+                    if(one)
                     {
                         ThiefOne_Stealth();
                     }
-                    else
+                    else if (two)
                     {
                         ThiefTwo_Poison();
                     }
                     break;
                 case Career.Warrior:
-                    if (skillNum == 1)
+                    if (one)
                     {
                         WarriorOne_Invincible();
                     }
-                    else
+                    else if (two)
                     {
                         WarriorTwo_Charge();
                     }
                     break;
                 case Career.Magician:
-                    if (skillNum == 1)
+                    if (one)
                     {
                         MagicianOne_Recover();
                     }
-                    else
+                    else if (two)
                     {
                         MagicianTwo_Range();
                     }
@@ -314,7 +344,7 @@ namespace com.BoardGameDungeon
             //攻擊後結束，變成衝鋒狀態
             skillTwoCD = 60;
             skillTwoCDTimer = 0;
-            skillTwoContinued = float.MaxValue;
+            skillTwoContinued = 999999999;
             skillTwoContinuedTimer = 0;
         }
 

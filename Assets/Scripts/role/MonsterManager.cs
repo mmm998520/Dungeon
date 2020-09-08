@@ -553,6 +553,11 @@ namespace com.BoardGameDungeon
         {
             if (collider.GetComponent<MonsterManager>() && user != null)
             {
+                if(user.career == Career.Thief && user.statOne)
+                {
+                    user.statOne = false;
+                    user.skillOneContinuedTimer = 100;
+                }
                 if (poison)
                 {
                     collider.GetComponent<MonsterManager>().callParalysis(user);
