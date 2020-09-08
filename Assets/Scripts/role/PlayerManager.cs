@@ -24,6 +24,8 @@ namespace com.BoardGameDungeon
         float attackModeTimer = 0;
         /// <summary> 若玩家發動持續性技能，紀錄該技能是否生效 </summary>
         public bool statOne = false, statTwo = false;
+        /// <summary> 戰士專用技能bool，確保衝鋒中不會有其他操作 </summary>
+        bool cahrge = false;
 
         void Awake()
         {
@@ -51,7 +53,10 @@ namespace com.BoardGameDungeon
             timer();
             levelUp();
             died((int)career, level);
-
+            if (cahrge)
+            {
+                return;
+            }
             touchBehavior();
             
             #region//電腦測試用
@@ -102,8 +107,15 @@ namespace com.BoardGameDungeon
                 //偵測雙擊後的點與觸控點距離，
                 if (Vector3.Distance(TouchBeganPos, touchPos) > 0.2f && targetDis < 1.5f && attackMode)
                 {
-                    attack(touchPos);
-                    cdTimer = 0;
+                    if(career == Career.Warrior && statTwo)
+                    {
+                        StartCoroutine("WarriorChargeStat", touchPos);
+                    }
+                    else
+                    {
+                        attack(touchPos);
+                        cdTimer = 0;
+                    }
                 }
             }
         }
@@ -211,6 +223,12 @@ namespace com.BoardGameDungeon
             //攻擊後結束，時間到結束
         }
 
+        public void WarriorTwo_Charge()
+        {
+            statTwo = true;
+            //攻擊後結束，變成衝鋒狀態
+        }
+
         public void MagicianOne_Recover()
         {
             foreach(Transform player in GameManager.Players)
@@ -231,5 +249,24 @@ namespace com.BoardGameDungeon
             attack.transform.localScale *= 5;
         }
         #endregion
+
+        WaitForSeconds probablyUpdate = new WaitForSeconds(0.02f);
+        /// <summary> 戰士專用衝刺狀態，會在2秒內持續向前 </summary>
+        IEnumerator WarriorChargeStat(Vector3 touchPos)
+        {
+            cahrge = true;
+            Vector3 dir = (touchPos * Vector2.one - transform.position * Vector2.one).normalized;
+            AttackManager attack = Instantiate(Resources.Load<GameObject>("Prefabs/Attack/Attack_Magician"), transform.position, Quaternion.identity, transform).GetComponent<AttackManager>();
+            //設定攻擊參數
+            attack.setValue(10, 2, true, this);
+            attack.transform.localScale *= 0.5f;
+            cdTimer = 0;
+            for (int i = 0; i < 100; i++)
+            {
+                transform.Translate(dir * Time.deltaTime * moveSpeed);
+                yield return probablyUpdate;
+            }
+            cahrge = false;
+        }
     }
 }
