@@ -248,6 +248,26 @@ namespace com.BoardGameDungeon
                     statTwo = false;
                 }
             }
+
+            //出口倒計時
+            if (exit)
+            {
+                if ((exitTimer += Time.deltaTime) > 3)
+                {
+                    PlayerPrefs.SetFloat(name + "Hurt", Hurt);
+                    PlayerPrefs.SetInt(name + "Level", level);
+                    PlayerPrefs.SetFloat(name + "Exp", exp);
+                    if (GameManager.Players.childCount == 1)
+                    {
+                        SceneManager.LoadScene("Game2");
+                    }
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    print(exitTimer);
+                }
+            }
         }
 
         void levelUp()
@@ -393,5 +413,25 @@ namespace com.BoardGameDungeon
             Debug.LogError("a");
             cahrge = false;
         }
+
+        float exitTimer = 0;
+        bool exit = false;
+        void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.GetComponent<Exit>())
+            {
+                exit = true;
+            }
+        }
+
+        void OnTriggerExit2D(Collider2D collider)
+        {
+            if (collider.GetComponent<Exit>())
+            {
+                exitTimer = 0;
+                exit = false;
+            }
+        }
+
     }
 }
