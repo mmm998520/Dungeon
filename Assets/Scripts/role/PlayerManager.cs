@@ -12,7 +12,7 @@ namespace com.BoardGameDungeon
         /// <summary> 等級與當前經驗值，升級後經驗值歸零累加 </summary>
         public int level = 1;
         public float exp = 0;
-        public static int[] expToNextLevel = new int[4] { 0, 30, 50,999999 };
+        public static int[] expToNextLevel = new int[4] { 0, 30, 50, 999999 };
 
         /// <summary> 紀錄點擊間隔用的計時器 </summary>
         float TouchBeganTimer = 0;
@@ -59,10 +59,6 @@ namespace com.BoardGameDungeon
             timer();
             levelUp();
             died((int)career, level);
-            if (cahrge)
-            {
-                return;
-            }
             touchBehavior();
             
             #region//電腦測試用
@@ -114,15 +110,8 @@ namespace com.BoardGameDungeon
                 if (Vector3.Distance(TouchBeganPos, touchPos) > 0.2f && targetDis < 1.5f)
                 {
                     Vector3 dir = touchPos * Vector2.one - TouchBeganPos * Vector2.one;
-
-                    if (career == Career.Warrior && statTwo)
-                    {
-                        StartCoroutine("WarriorChargeStat", dir);
-                        statTwo = false;
-                        attackMode = false;
-                        skillTwoContinuedTimer = 999999999;
-                    }
-                    else if(attackMode)
+                    
+                    if(attackMode)
                     {
                         attack(dir);
                         cdTimer = 0;
@@ -330,9 +319,9 @@ namespace com.BoardGameDungeon
         {
             statOne = true;
             //攻擊後結束，時間到結束
-            skillOneCD = 60;
+            skillOneCD = 15;
             skillOneCDTimer = 0;
-            skillOneContinued = 10;
+            skillOneContinued = 4;
             skillOneContinuedTimer = 0;
         }
         /// <summary> 塗毒 </summary>
@@ -340,9 +329,9 @@ namespace com.BoardGameDungeon
         {
             statTwo = true;
             //攻擊後結束，時間到結束
-            skillTwoCD = 60;
+            skillTwoCD = 20;
             skillTwoCDTimer = 0;
-            skillTwoContinued = 10;
+            skillTwoContinued = 999999999;
             skillTwoContinuedTimer = 0;
         }
 
@@ -351,35 +340,28 @@ namespace com.BoardGameDungeon
         {
             statOne = true;
             //時間到結束
-            skillOneCD = 60;
+            skillOneCD = 25;
             skillOneCDTimer = 0;
-            skillOneContinued = 10;
+            skillOneContinued = 4;
             skillOneContinuedTimer = 0;
         }
 
         /// <summary> 衝鋒 </summary>
         public void WarriorTwo_Charge()
         {
-            statTwo = true;
+            StartCoroutine("WarriorChargeStat");
             //攻擊後結束，變成衝鋒狀態
-            skillTwoCD = 60;
+            skillTwoCD = 20;
             skillTwoCDTimer = 0;
-            skillTwoContinued = 999999999;
+            skillTwoContinued = 3;
             skillTwoContinuedTimer = 0;
         }
 
         /// <summary> 恢復 </summary>
         public void MagicianOne_Recover()
         {
-            foreach(Transform player in GameManager.Players)
-            {
-                PlayerManager playerManager = player.GetComponent<PlayerManager>();
-                if((playerManager.Hurt -= 20) < 0)
-                {
-                    playerManager.Hurt = 0;
-                }
-            }
-            skillOneCD = 60;
+            Destroy(Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Attack/Recover"), transform.position, Quaternion.identity, transform), 5);
+            skillOneCD = 30;
             skillOneCDTimer = 0;
         }
 
@@ -387,30 +369,27 @@ namespace com.BoardGameDungeon
         public void MagicianTwo_Range()
         {
             AttackManager attack = Instantiate(Resources.Load<GameObject>("Prefabs/Attack/Attack_Magician"), transform.position, Quaternion.identity).GetComponent<AttackManager>();
+            Destroy(attack.gameObject, 3);
             //設定攻擊參數
-            attack.setValue(10, 2, true, this);
+            attack.setValue(18, 3, true, this);
             attack.transform.localScale *= 5;
             skillTwoCD = 60;
             skillTwoCDTimer = 0;
         }
         #endregion
 
-        WaitForSeconds probablyUpdate = new WaitForSeconds(0.02f);
+        WaitForSeconds three = new WaitForSeconds(3);
         /// <summary> 戰士專用衝鋒狀態，會在2秒內持續向前 </summary>
-        IEnumerator WarriorChargeStat(Vector3 dir)
+        IEnumerator WarriorChargeStat()
         {
             cahrge = true;
             AttackManager attack = Instantiate(Resources.Load<GameObject>("Prefabs/Attack/Attack_Magician"), transform.position, Quaternion.identity, transform).GetComponent<AttackManager>();
             //設定攻擊參數
-            attack.setValue(10, 2, true, this);
+            Destroy(attack.gameObject, 3);
+            attack.setValue(0, 3, false, this);
             //attack.transform.localScale *= 0.5f;
             cdTimer = 0;
-            for (int i = 0; i < 100; i++)
-            {
-                transform.Translate(dir * Time.deltaTime * moveSpeed);
-                yield return probablyUpdate;
-            }
-            Debug.LogError("a");
+            yield return three;
             cahrge = false;
         }
 
@@ -433,5 +412,17 @@ namespace com.BoardGameDungeon
             }
         }
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (cahrge)
+            {
+                Transform Collision = collision.transform;
+                if (Collision.tag == "monster")
+                {
+                    Collision.GetComponent<MonsterManager>().cahrged = (Collision.position * Vector2.one - transform.position * Vector2.one).normalized;
+                    Collision.GetComponent<MonsterManager>().cahrgedSpeed = 4;
+                }
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2973024770362353461}
   - component: {fileID: 1198918494153123266}
-  - component: {fileID: 2709420229611018021}
+  - component: {fileID: 7097431078416120910}
   m_Layer: 0
   m_Name: Attack_Magician
   m_TagString: Untagged
@@ -67,7 +67,7 @@ PolygonCollider2D:
       - {x: -0.6138799, y: 0.20687108}
       - {x: -0.6291827, y: -0.328986}
       - {x: -0.29976335, y: -0.6957757}
---- !u!114 &2709420229611018021
+--- !u!114 &7097431078416120910
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5389400205560984897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99c6a8396b7081545bb71cfa783aa10d, type: 3}
+  m_Script: {fileID: 11500000, guid: af4ce3c8a6b8f674a82496136d7bdde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ATK: 0

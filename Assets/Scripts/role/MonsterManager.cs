@@ -20,7 +20,9 @@ namespace com.BoardGameDungeon
 
         /// <summary> 麻痺狀態 </summary>
         public bool paralysis = false;
-
+        /// <summary> 擊退狀態 </summary>
+        public Vector3 cahrged = Vector3.zero;
+        public float cahrgedSpeed = 0;
         protected void monsterStart()
         {
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
@@ -38,6 +40,10 @@ namespace com.BoardGameDungeon
             cdTimer += Time.deltaTime;
             died((int)monsterType, 0);
             transform.GetChild(1).localScale = new Vector3((HP[(int)monsterType, 0] - Hurt) / HP[(int)monsterType, 0], 1, 1);
+            if ((cahrgedSpeed -= Time.deltaTime*2) > 0)
+            {
+                transform.Translate(cahrged * Time.deltaTime * cahrgedSpeed);
+            }
         }
 
         #region//導航
@@ -575,7 +581,7 @@ namespace com.BoardGameDungeon
             StartCoroutine("Paralysis");
         }
 
-        WaitForSeconds paralysisWait = new WaitForSeconds(1);
+        WaitForSeconds paralysisWait = new WaitForSeconds(4);
         IEnumerator Paralysis()
         {
             paralysis = true;
