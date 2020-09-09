@@ -24,10 +24,10 @@ namespace com.BoardGameDungeon
         protected void monsterStart()
         {
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
-            ATK = new float[(int)MonsterType.Count, 1] { { 4 }, { 8 }, { 9 }, { 4 }, { 10 }, { 15 }, { 20 }, { 100 } };
-            HP = new float[(int)MonsterType.Count, 1] { { 6 }, { 15 }, { 2 }, { 6 }, { 10 }, { 25 }, { 30 }, { 110 } };
-            duration = new float[(int)MonsterType.Count] { 0.4f, 0.4f, 3, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f };
-            continuous = new bool[(int)MonsterType.Count] { false, false, true, false, false, false, false, false};
+            ATK = new float[(int)MonsterType.Count, 1] { { 4 }, { 8 }, { 9 }, { 4 }, { 10 }, { 15 }, { 20 }, { 20 } };
+            HP = new float[(int)MonsterType.Count, 1] { { 6 }, { 15 }, { 2 }, { 6 }, { 10 }, { 25 }, { 30 }, { 150 } };
+            duration = new float[(int)MonsterType.Count] { 0.4f, 0.4f, 3, 0.4f, 0.4f, 0.4f, 0.4f, 2f };
+            continuous = new bool[(int)MonsterType.Count] { false, false, true, false, false, false, false, true};
 
             //初始沒有目標
             navigateTarget = new NearestEnd(transform, 0, transform);
@@ -591,7 +591,7 @@ namespace com.BoardGameDungeon
     /// <summary> 拿來儲存最近的玩家的資訊，哪個玩家、距離多遠，智能移動直線移動距離皆可 </summary>
     public class NearestEnd
     {
-        /// <summary> 最近的玩家 </summary>
+        /// <summary> 最近的終點 </summary>
         public Transform endTraget;
         /// <summary> 距離多遠 </summary>
         public float Distance;
