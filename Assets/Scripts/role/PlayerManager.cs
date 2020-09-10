@@ -193,7 +193,7 @@ namespace com.BoardGameDungeon
                 skillButton[0].SetActive(true);
                 if((skillOneContinuedTimer += Time.deltaTime) / skillOneContinued <= 1)
                 {
-                    skillButton[0].transform.GetChild(0).localScale = new Vector3(1, 1 - ((skillOneContinuedTimer += Time.deltaTime) / skillOneContinued), 1);
+                    skillButton[0].transform.GetChild(0).localScale = new Vector3(1, 1 - (skillOneContinuedTimer / skillOneContinued), 1);
                 }
                 else
                 {
@@ -201,7 +201,7 @@ namespace com.BoardGameDungeon
                 }
                 if((skillOneCDTimer += Time.deltaTime) / skillOneCD <= 1)
                 {
-                    skillButton[0].transform.GetChild(1).localScale = new Vector3(1, (skillOneCDTimer += Time.deltaTime) / skillOneCD, 1);
+                    skillButton[0].transform.GetChild(1).localScale = new Vector3(1, skillOneCDTimer / skillOneCD, 1);
                 }
                 else
                 {
@@ -217,7 +217,7 @@ namespace com.BoardGameDungeon
                 skillButton[1].SetActive(true);
                 if((skillTwoContinuedTimer += Time.deltaTime) / skillTwoContinued <= 1)
                 {
-                    skillButton[1].transform.GetChild(0).localScale = new Vector3(1, 1 - ((skillTwoContinuedTimer += Time.deltaTime) / skillTwoContinued), 1);
+                    skillButton[1].transform.GetChild(0).localScale = new Vector3(1, 1 - (skillTwoContinuedTimer / skillTwoContinued), 1);
                 }
                 else
                 {
@@ -225,7 +225,7 @@ namespace com.BoardGameDungeon
                 }
                 if((skillTwoCDTimer += Time.deltaTime) / skillTwoCD <= 1)
                 {
-                    skillButton[1].transform.GetChild(1).localScale = new Vector3(1, (skillTwoCDTimer += Time.deltaTime) / skillTwoCD, 1);
+                    skillButton[1].transform.GetChild(1).localScale = new Vector3(1, skillTwoCDTimer / skillTwoCD, 1);
                 }
                 else
                 {
@@ -241,7 +241,7 @@ namespace com.BoardGameDungeon
             //出口倒計時
             if (exit)
             {
-                if ((exitTimer += Time.deltaTime) > 3)
+                if ((exitTimer += Time.deltaTime) > 5)
                 {
                     PlayerPrefs.SetFloat(name + "Hurt", Hurt);
                     PlayerPrefs.SetInt(name + "Level", level);
@@ -261,7 +261,7 @@ namespace com.BoardGameDungeon
 
         void levelUp()
         {
-            if (exp > expToNextLevel[level])
+            if (exp >= expToNextLevel[level])
             {
                 exp -= expToNextLevel[level++];
             }
@@ -353,14 +353,14 @@ namespace com.BoardGameDungeon
             //攻擊後結束，變成衝鋒狀態
             skillTwoCD = 20;
             skillTwoCDTimer = 0;
-            skillTwoContinued = 3;
+            skillTwoContinued = 5;
             skillTwoContinuedTimer = 0;
         }
 
         /// <summary> 恢復 </summary>
         public void MagicianOne_Recover()
         {
-            Destroy(Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Attack/Recover"), transform.position, Quaternion.identity, transform), 5);
+            Destroy(Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Attack/Recover"), transform.position, Quaternion.identity, transform), 4);
             skillOneCD = 30;
             skillOneCDTimer = 0;
         }
@@ -372,7 +372,7 @@ namespace com.BoardGameDungeon
             Destroy(attack.gameObject, 3);
             //設定攻擊參數
             attack.setValue(18, 3, true, this);
-            attack.transform.localScale *= 5;
+            attack.transform.localScale *= 3;
             skillTwoCD = 60;
             skillTwoCDTimer = 0;
         }
@@ -383,19 +383,21 @@ namespace com.BoardGameDungeon
         IEnumerator WarriorChargeStat()
         {
             cahrge = true;
+            moveSpeed *= 2;
             AttackManager attack = Instantiate(Resources.Load<GameObject>("Prefabs/Attack/Attack_Magician"), transform.position, Quaternion.identity, transform).GetComponent<AttackManager>();
             //設定攻擊參數
-            Destroy(attack.gameObject, 3);
-            attack.setValue(0, 3, false, this);
+            Destroy(attack.gameObject, 6);
+            attack.setValue(6, 6, false, this);
             //attack.transform.localScale *= 0.5f;
             cdTimer = 0;
             yield return three;
             cahrge = false;
+            moveSpeed /= 2;
         }
 
         float exitTimer = 0;
-        bool exit = false;
-        void OnTriggerEnter2D(Collider2D collider)
+        public bool exit = false;
+        void OnTriggerStay2D(Collider2D collider)
         {
             if (collider.GetComponent<Exit>())
             {
@@ -420,7 +422,7 @@ namespace com.BoardGameDungeon
                 if (Collision.tag == "monster")
                 {
                     Collision.GetComponent<MonsterManager>().cahrged = (Collision.position * Vector2.one - transform.position * Vector2.one).normalized;
-                    Collision.GetComponent<MonsterManager>().cahrgedSpeed = 4;
+                    Collision.GetComponent<MonsterManager>().cahrgedSpeed = 6;
                 }
             }
         }

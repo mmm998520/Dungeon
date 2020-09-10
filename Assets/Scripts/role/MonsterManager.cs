@@ -578,6 +578,7 @@ namespace com.BoardGameDungeon
         public void callParalysis(PlayerManager player)
         {
             player.statTwo = false;
+            player.skillTwoContinuedTimer = player.skillTwoContinued;
             StartCoroutine("Paralysis");
         }
 

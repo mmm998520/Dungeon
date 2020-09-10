@@ -3950,6 +3950,7 @@ MonoBehaviour:
   skillButton:
   - {fileID: 1662774275}
   - {fileID: 224301464}
+  exit: 0
 --- !u!50 &984630613
 Rigidbody2D:
   serializedVersion: 4
@@ -5662,6 +5663,7 @@ MonoBehaviour:
   skillButton:
   - {fileID: 1974343510}
   - {fileID: 817779899}
+  exit: 0
 --- !u!50 &1363669777
 Rigidbody2D:
   serializedVersion: 4
@@ -5717,7 +5719,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 85c371d40a77d094d8244a8fa0b15c32, type: 2}
+  - {fileID: 2100000, guid: 5d029d3e93198234394807baa1ebfbf5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6136,6 +6138,7 @@ MonoBehaviour:
   skillButton:
   - {fileID: 724111790}
   - {fileID: 762088042}
+  exit: 0
 --- !u!1 &1625435809
 GameObject:
   m_ObjectHideFlags: 0
@@ -8071,6 +8074,7 @@ MonoBehaviour:
   skillButton:
   - {fileID: 186631955}
   - {fileID: 96387219}
+  exit: 0
 --- !u!50 &2057425041
 Rigidbody2D:
   serializedVersion: 4

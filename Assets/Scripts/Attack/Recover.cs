@@ -21,7 +21,7 @@ namespace com.BoardGameDungeon
                 }
             }
         }
-        private void OnTriggerEnter2D(Collider2D collider)
+        private void OnTriggerStay2D(Collider2D collider)
         {
             if (collider.tag == "player")
             {
@@ -38,6 +38,11 @@ namespace com.BoardGameDungeon
             {
                 players.Remove(collider.GetComponent<PlayerManager>());
             }
+        }
+
+        private void OnDestroy()
+        {
+            transform.parent.GetComponent<PlayerManager>().exit = false;
         }
     }
 }

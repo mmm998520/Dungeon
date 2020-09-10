@@ -3645,11 +3645,16 @@ MonoBehaviour:
   career: 2
   level: 1
   exp: 0
+  skillOneContinued: 0
+  skillOneContinuedTimer: 0
+  skillTwoContinued: 0
+  skillTwoContinuedTimer: 0
   statOne: 0
   statTwo: 0
   skillButton:
   - {fileID: 1491315588}
   - {fileID: 1157672851}
+  exit: 0
 --- !u!50 &984630613
 Rigidbody2D:
   serializedVersion: 4
@@ -5853,11 +5858,16 @@ MonoBehaviour:
   career: 2
   level: 1
   exp: 0
+  skillOneContinued: 0
+  skillOneContinuedTimer: 0
+  skillTwoContinued: 0
+  skillTwoContinuedTimer: 0
   statOne: 0
   statTwo: 0
   skillButton:
   - {fileID: 89317370}
   - {fileID: 18254042}
+  exit: 0
 --- !u!50 &1363669777
 Rigidbody2D:
   serializedVersion: 4
@@ -6648,11 +6658,16 @@ MonoBehaviour:
   career: 0
   level: 1
   exp: 0
+  skillOneContinued: 0
+  skillOneContinuedTimer: 0
+  skillTwoContinued: 0
+  skillTwoContinuedTimer: 0
   statOne: 0
   statTwo: 0
   skillButton:
   - {fileID: 590902704}
   - {fileID: 426331568}
+  exit: 0
 --- !u!1 &1628015899
 GameObject:
   m_ObjectHideFlags: 0
@@ -8118,11 +8133,16 @@ MonoBehaviour:
   career: 1
   level: 1
   exp: 0
+  skillOneContinued: 0
+  skillOneContinuedTimer: 0
+  skillTwoContinued: 0
+  skillTwoContinuedTimer: 0
   statOne: 0
   statTwo: 0
   skillButton:
   - {fileID: 1813676288}
   - {fileID: 1319580469}
+  exit: 0
 --- !u!50 &2057425041
 Rigidbody2D:
   serializedVersion: 4
