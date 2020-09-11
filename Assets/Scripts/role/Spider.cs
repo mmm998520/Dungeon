@@ -30,8 +30,16 @@ namespace com.BoardGameDungeon
                     }
                 }
                 this.end = end.ToArray();
-                GoNavigate(navigateTarget);
-                attackOccasion(navigateTarget, 2.5f);
+                if (ridiculedTarget != null)
+                {
+                    GoNavigate(ridiculedTarget);
+                    attackOccasion(ridiculedTarget, 2.5f);
+                }
+                else
+                {
+                    GoNavigate(navigateTarget);
+                    attackOccasion(navigateTarget, 2.5f);
+                }
             }
 
             

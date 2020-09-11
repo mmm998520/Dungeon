@@ -23,6 +23,10 @@ namespace com.BoardGameDungeon
         /// <summary> 擊退狀態 </summary>
         public Vector3 cahrged = Vector3.zero;
         public float cahrgedSpeed = 0;
+        /// <summary> 嘲諷狀態 </summary>
+        public NearestEnd ridiculedTarget = null;
+        public float ridiculedTimer = 0;
+
         protected void monsterStart()
         {
             //角色素質用2維陣列儲存， 不同職業(1維) 在 對應等級(2維) 時的素質
@@ -43,6 +47,10 @@ namespace com.BoardGameDungeon
             if ((cahrgedSpeed -= Time.deltaTime*2) > 0)
             {
                 transform.Translate(cahrged * Time.deltaTime * cahrgedSpeed);
+            }
+            if ((ridiculedTimer += Time.deltaTime) > 5)
+            {
+                ridiculedTarget = null;
             }
         }
 

@@ -164,11 +164,6 @@ namespace com.BoardGameDungeon
             attack.setValue(ATK[(int)career, level], duration[(int)career], continuous[(int)career], this);
             if (career == Career.Thief)
             {
-                /*if (statOne)
-                {
-                    statOne = false;
-                    skillOneContinuedTimer = 100;
-                }*/
                 if (statTwo)
                 {
                     attack.poison = true;
@@ -300,7 +295,7 @@ namespace com.BoardGameDungeon
                     }
                     else if (two)
                     {
-                        WarriorTwo_Charge();
+                        WarriorTwo_ridicule();
                     }
                     break;
                 case Career.Magician:
@@ -348,11 +343,18 @@ namespace com.BoardGameDungeon
             skillOneContinuedTimer = 0;
         }
 
-        /// <summary> 衝鋒 </summary>
-        public void WarriorTwo_Charge()
+        /// <summary> 嘲諷 </summary>
+        public void WarriorTwo_ridicule()
         {
-            StartCoroutine("WarriorChargeStat");
-            //攻擊後結束，變成衝鋒狀態
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 10, 1<<0);
+            foreach(Collider2D collider in colliders)
+            {
+                if (collider.GetComponent<MonsterManager>())
+                {
+                    collider.GetComponent<MonsterManager>().ridiculedTarget = new NearestEnd(transform, Vector3.Distance(transform.position * Vector2.one, collider.transform.position * Vector2.one), transform);
+                    collider.GetComponent<MonsterManager>().ridiculedTimer = 0;
+                }
+            }
             skillTwoCD = 20;
             skillTwoCDTimer = 0;
             skillTwoContinued = 5;

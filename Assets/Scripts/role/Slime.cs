@@ -14,7 +14,6 @@ namespace com.BoardGameDungeon
         OrigenStat origenStat = OrigenStat.side;
         //當前移動目標
         NearestEnd midTarget, sideTarget;
-        //Transform[] range;
         //定義移動區域
         Transform[] mid, side;
         Transform[] randomMidPoint, randomSidePoint;
@@ -50,7 +49,14 @@ namespace com.BoardGameDungeon
 
         void Update()
         {
-            actionMode();
+            if (ridiculedTarget != null)
+            {
+                GoNavigate(ridiculedTarget);
+            }
+            else
+            {
+                actionMode();
+            }
 
             monsterUpdate();
         }
@@ -193,14 +199,5 @@ namespace com.BoardGameDungeon
             GameObject attack = Instantiate(MonsterAttack[(int)monsterType], transform.position, Quaternion.identity);
             attack.GetComponent<AttackManager>().setValue(ATK[(int)monsterType, 0], duration[(int)monsterType], continuous[(int)monsterType], null);
         }
-        /*
-        private void OnCollisionStay2D(Collision2D collision)
-        {
-            if(collision.gameObject.tag == "monster")
-            {
-                reNavigate();
-            }
-        }
-        */
     }
 }

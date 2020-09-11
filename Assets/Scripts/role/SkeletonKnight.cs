@@ -32,8 +32,16 @@ namespace com.BoardGameDungeon
 
         void Update()
         {
-            actionMode();
-            attackOccasion(straightTarget, 2.5f);
+            if (ridiculedTarget != null)
+            {
+                GoNavigate(ridiculedTarget);
+                attackOccasion(ridiculedTarget, 2.5f);
+            }
+            else
+            {
+                actionMode();
+                attackOccasion(straightTarget, 2.5f);
+            }
 
             monsterUpdate();
         }
