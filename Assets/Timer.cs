@@ -8,10 +8,6 @@ namespace com.BoardGameDungeon
     public class Timer : MonoBehaviour
     {
         public static float timer = 180;
-        void Start()
-        {
-
-        }
 
         void Update()
         {
