@@ -13,36 +13,18 @@ namespace com.BoardGameDungeon
         }
         private void Update()
         {
-            foreach(PlayerManager player in players)
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, GetComponent<CircleCollider2D>().radius, 1 << 0);
+            foreach(Collider2D collider in colliders)
             {
-                if((player.Hurt -= Time.deltaTime * 3) < 0)
+                if (collider.GetComponent<PlayerManager>())
                 {
-                    player.Hurt = 0;
+                    PlayerManager player = collider.GetComponent<PlayerManager>();
+                    if ((player.Hurt -= Time.deltaTime * 3) < 0)
+                    {
+                        player.Hurt = 0;
+                    }
                 }
             }
-        }
-        private void OnTriggerStay2D(Collider2D collider)
-        {
-            if (collider.tag == "player")
-            {
-                if (!players.Contains(collider.GetComponent<PlayerManager>()))
-                {
-                    players.Add(collider.GetComponent<PlayerManager>());
-                }
-            }
-        }
-
-        private void OnTriggerExit2D(Collider2D collider)
-        {
-            if (collider.tag == "player")
-            {
-                players.Remove(collider.GetComponent<PlayerManager>());
-            }
-        }
-
-        private void OnDestroy()
-        {
-            transform.parent.GetComponent<PlayerManager>().exit = false;
         }
     }
 }
