@@ -257,6 +257,8 @@ namespace com.BoardGameDungeon
                     print(exitTimer);
                 }
             }
+            transform.GetChild(1).gameObject.SetActive(exit);
+            transform.GetChild(1).GetChild(0).transform.localScale = new Vector3(exitTimer / 5, 1, 1);
         }
 
         void levelUp()
