@@ -5,16 +5,17 @@ using UnityEngine;
 public class MapRange : MonoBehaviour
 {
     int times;
-    private int[,] mapArray;
+    public static int[,] mapArray;
     GameObject cubes;
     public GameObject[] cube = new GameObject[4];
 
     public enum roomStat
     {
-        green = 0,
-        black = 1,
-        blue = 2,
-        orange = 3
+        wall = 0,
+        green = 1,
+        black = 2,
+        blue = 3,
+        orange = 4
     }
     void Start()
     {
@@ -80,24 +81,40 @@ public class MapRange : MonoBehaviour
             for (int j = 0; j < MapCreate.col; j++)
             {
                 count = CheckNeighborWalls(array, i, j, 1);
-                if (count[0] > 4)
+                if (count[(int)roomStat.green] > 4)
                 {
                     newArray[i, j] = (int)roomStat.green;
                 }
-                else if(count[0] == 4)
+                else if(count[(int)roomStat.green] == 4)
                 {
                     int r = Random.Range(0, 2);
                     newArray[i, j] = (int)roomStat.green + r;
                 }
-                else if(count[1] >= 4)
+                else if(count[(int)roomStat.black] > 4)
                 {
                     newArray[i, j] = (int)roomStat.black;
                 }
-                else if(count[2] > 4)
+                else if (count[(int)roomStat.black] == 4)
+                {
+                    int r = Random.Range(0, 11);
+                    if (r >= 10)
+                    {
+                        newArray[i, j] = (int)roomStat.black;
+                    }
+                    else if(r >= 5)
+                    {
+                        newArray[i, j] = (int)roomStat.blue;
+                    }
+                    else
+                    {
+                        newArray[i, j] = (int)roomStat.orange;
+                    }
+                }
+                else if(count[(int)roomStat.blue] > 4)
                 {
                     newArray[i, j] = (int)roomStat.blue;
                 }
-                else if (count[3] > 4)
+                else if (count[(int)roomStat.orange] > 4)
                 {
                     newArray[i, j] = (int)roomStat.orange;
                 }
@@ -113,7 +130,7 @@ public class MapRange : MonoBehaviour
 
     int[] CheckNeighborWalls(int[,] array, int i, int j, int t)
     {
-        int[] count = new int[4] { 0, 0, 0, 0 };
+        int[] count = new int[5] { 0, 0, 0, 0, 0 };
         for (int i2 = i - t; i2 < i + t + 1; i2++)
         {
             for (int j2 = j - t; j2 < j + t + 1; j2++)
@@ -134,7 +151,16 @@ public class MapRange : MonoBehaviour
         {
             for (int j = 0; j < MapCreate.col; j++)
             {
-                GameObject go = Instantiate(cube[array[i, j]], new Vector3(i, 1, j), Quaternion.identity);
+                GameObject go;
+                if (MapCreate.mapArray[i, j])
+                {
+                    go = Instantiate(cube[array[i, j]], new Vector3(i, 1, j), Quaternion.identity);
+                }
+                else
+                {
+                    print("a");
+                    go = Instantiate(cube[0], new Vector3(i, 1, j), Quaternion.identity);
+                }
                 go.transform.SetParent(cubes.transform);
             }
         }

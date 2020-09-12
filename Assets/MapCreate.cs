@@ -6,7 +6,7 @@ public class MapCreate : MonoBehaviour
 {
     public static int row = 70;
     public static int col = 70;
-    private bool[,] mapArray;
+    public static bool[,] mapArray;
     public GameObject cube1, cube2;
     GameObject cubes;
     int times;
@@ -17,7 +17,6 @@ public class MapCreate : MonoBehaviour
     {
         cubes = new GameObject();
         mapArray = InitMapArray();
-        CreateMap(mapArray);
     }
 
 
@@ -105,35 +104,12 @@ public class MapCreate : MonoBehaviour
         return count;
     }
 
-
-    void CreateMap(bool[,] array)
-    {
-        for (int i = 0; i < row; i++)
-        {
-            for (int j = 0; j < col; j++)
-            {
-                if (!array[i, j])
-                {
-                    GameObject go = Instantiate(cube1, new Vector3(i, 1, j), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(cubes.transform);
-                }
-                else
-                {
-                    GameObject go = Instantiate(cube2, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(cubes.transform);
-                }
-            }
-        }
-    }
-
-
     public void Button1()
     {
         times = 0;
         Destroy(cubes);
         cubes = new GameObject();
         mapArray = InitMapArray();
-        CreateMap(mapArray);
     }
 
 
@@ -145,7 +121,6 @@ public class MapCreate : MonoBehaviour
             Destroy(cubes);
             cubes = new GameObject();
             mapArray = SmoothMapArray(mapArray);
-            CreateMap(mapArray);
         }
     }
 }
