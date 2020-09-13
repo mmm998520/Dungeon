@@ -7,18 +7,21 @@ public class MapCreate : MonoBehaviour
     public static int row = 70;
     public static int col = 70;
     public static bool[,] mapArray;
-    public GameObject cube1, cube2;
-    GameObject cubes;
-    int times;
-    int a;
-
-
+    public static MapCreate mapCreate;
     void Start()
     {
-        cubes = new GameObject();
-        mapArray = InitMapArray();
+        mapCreate = this;
+        reMapArray();
     }
 
+    public void reMapArray()
+    {
+        mapArray = InitMapArray();
+        for (int i = 0; i < 7; i++)
+        {
+            mapArray = SmoothMapArray(mapArray);
+        }
+    }
 
     void Update()
     {
@@ -106,9 +109,6 @@ public class MapCreate : MonoBehaviour
 
     public void Button1()
     {
-        times = 0;
-        Destroy(cubes);
-        cubes = new GameObject();
         mapArray = InitMapArray();
     }
 
@@ -117,9 +117,6 @@ public class MapCreate : MonoBehaviour
     {
         //if (times < 20)
         {
-            times++;
-            Destroy(cubes);
-            cubes = new GameObject();
             mapArray = SmoothMapArray(mapArray);
         }
     }
