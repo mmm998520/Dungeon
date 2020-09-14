@@ -10,7 +10,7 @@ namespace com.Dungeon
         public static int[,] mapArray;
         GameObject cubes;
         public GameObject[] cube = new GameObject[4];
-        public const int row = 70, col = 70;
+        public const int totalRow = 70, totalCol = 70;
 
 
         /// <summary> 地形種類 </summary>
@@ -64,16 +64,16 @@ namespace com.Dungeon
         int[,] InitMapArray()
         {
             int i, j;
-            int[,] array = new int[row, col];
-            for (i = 0; i < row; i++)
+            int[,] array = new int[totalRow, totalCol];
+            for (i = 0; i < totalRow; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 0; j < totalCol; j++)
                 {
-                    if (i >= row / 7 * 3 && i <= row / 7 * 4 && j >= col / 7 * 3 && j <= row / 7 * 4)
+                    if (i >= totalRow / 7 * 3 && i <= totalRow / 7 * 4 && j >= totalCol / 7 * 3 && j <= totalRow / 7 * 4)
                     {
                         array[i, j] = (int)roomStat.green;
                     }
-                    else if (i >= row / 7 * 2 && i <= row / 7 * 5 && j >= col / 7 * 2 && j <= row / 7 * 5)
+                    else if (i >= totalRow / 7 * 2 && i <= totalRow / 7 * 5 && j >= totalCol / 7 * 2 && j <= totalRow / 7 * 5)
                     {
                         array[i, j] = (int)roomStat.black;
                     }
@@ -103,11 +103,11 @@ namespace com.Dungeon
         int[,] SmoothMapArray(int[,] array)
         {
             int i, j;
-            int[,] newArray = new int[row, col];
+            int[,] newArray = new int[totalRow, totalCol];
             int[] count;
-            for (i = 0; i < row; i++)
+            for (i = 0; i < totalRow; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 0; j < totalCol; j++)
                 {
                     count = CheckNeighborWalls(array, i, j, 1);
                     if (count[(int)roomStat.green] > 4)
@@ -179,7 +179,7 @@ namespace com.Dungeon
             {
                 for (_j = j - t; _j < j + t + 1; _j++)
                 {
-                    if (_i >= 0 && _i < row && _j >= 0 && _j < col)
+                    if (_i >= 0 && _i < totalRow && _j >= 0 && _j < totalCol)
                     {
                         count[array[_i, _j]]++;
                     }
@@ -194,10 +194,10 @@ namespace com.Dungeon
         int[,] AddMapWall(int[,] array)
         {
             int i, j;
-            int[,] newArray = new int[row, col];
-            for (i = 0; i < row; i++)
+            int[,] newArray = new int[totalRow, totalCol];
+            for (i = 0; i < totalRow; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 0; j < totalCol; j++)
                 {
                     if (WallCreater.mapArray[i, j])
                     {
@@ -218,9 +218,9 @@ namespace com.Dungeon
         {
             int i, j;
             GameObject go;
-            for (i = 0; i < row; i++)
+            for (i = 0; i < totalRow; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 0; j < totalCol; j++)
                 {
                     if (WallCreater.mapArray[i, j])
                     {
@@ -251,21 +251,21 @@ namespace com.Dungeon
         {
             int t, j, i;
             //建立可通行路徑清單，由第一個偵測到的綠色區域作為起始點
-            bool[,] canGoArray = new bool[row, col];
+            bool[,] canGoArray = new bool[totalRow, totalCol];
             //必須到達點
             int[,] mustGo = new int[9, 2];
-            for (i = 0; i < row; i++)
+            for (i = 0; i < totalRow; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 0; j < totalCol; j++)
                 {
                     canGoArray[i, j] = false;
                 }
             }
             for (t = 0; t < 9; t++)
             {
-                for (i = row / 7 * (3 * (t / 3)); i < row / 7 * (3 * (t / 3) + 1); i++)
+                for (i = totalRow / 7 * (3 * (t / 3)); i < totalRow / 7 * (3 * (t / 3) + 1); i++)
                 {
-                    for (j = row / 7 * (3 * (t % 3)); j < col / 7 * (3 * (t % 3) + 1); j++)
+                    for (j = totalRow / 7 * (3 * (t % 3)); j < totalCol / 7 * (3 * (t % 3) + 1); j++)
                     {
                         if (t == 4)
                         {
@@ -298,13 +298,13 @@ namespace com.Dungeon
             //從最左上方的必須抵達點掃看能抵達點，若所有必需抵達點都為true則成功，反之失敗
             for (t = 0; t < 100; t++)
             {
-                for (i = 0; i < row; i++)
+                for (i = 0; i < totalRow; i++)
                 {
-                    for (j = 0; j < col; j++)
+                    for (j = 0; j < totalCol; j++)
                     {
                         if (canGoArray[i, j])
                         {
-                            if (i + 1 < row)
+                            if (i + 1 < totalRow)
                             {
                                 if (array[i + 1, j] != (int)roomStat.wall)
                                 {
@@ -318,7 +318,7 @@ namespace com.Dungeon
                                     canGoArray[i - 1, j] = true;
                                 }
                             }
-                            if (j + 1 < col)
+                            if (j + 1 < totalCol)
                             {
                                 if (array[i, j + 1] != (int)roomStat.wall)
                                 {
@@ -356,18 +356,18 @@ namespace com.Dungeon
         bool GreenWayNotSeparate(int[,] array)
         {
             int t, i, j;
-            bool[,] canGoArray = new bool[row, col];
+            bool[,] canGoArray = new bool[totalRow, totalCol];
             List<int[]> mustGo = new List<int[]>();
-            for (i = 0; i < row; i++)
+            for (i = 0; i < totalRow; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 0; j < totalCol; j++)
                 {
                     canGoArray[i, j] = false;
                 }
             }
-            for (i = 0; i < row; i++)
+            for (i = 0; i < totalRow; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 0; j < totalCol; j++)
                 {
                     if (array[i, j] == (int)roomStat.green)
                     {
@@ -386,13 +386,13 @@ namespace com.Dungeon
             //從最左上方的必須抵達點掃看能抵達點，若所有必需抵達點都為true則成功，反之失敗
             for (t = 0; t < 100; t++)
             {
-                for (i = 0; i < row; i++)
+                for (i = 0; i < totalRow; i++)
                 {
-                    for (j = 0; j < col; j++)
+                    for (j = 0; j < totalCol; j++)
                     {
                         if (canGoArray[i, j])
                         {
-                            if (i + 1 < row)
+                            if (i + 1 < totalRow)
                             {
                                 if (array[i + 1, j] == (int)roomStat.green)
                                 {
@@ -406,7 +406,7 @@ namespace com.Dungeon
                                     canGoArray[i - 1, j] = true;
                                 }
                             }
-                            if (j + 1 < col)
+                            if (j + 1 < totalCol)
                             {
                                 if (array[i, j + 1] == (int)roomStat.green)
                                 {
@@ -444,14 +444,14 @@ namespace com.Dungeon
         int[,] checkNum(int[,] array)
         {
             int t, i, j;
-            bool[,] Checked = new bool[row, col];
-            int[,] type = new int[row, col];
+            bool[,] Checked = new bool[totalRow, totalCol];
+            int[,] type = new int[totalRow, totalCol];
             List<int> typeNum = new List<int>();
             typeNum.Add(0);
             //先確認各區域分別有幾個格子
-            for (i = 0; i < row; i++)
+            for (i = 0; i < totalRow; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 0; j < totalCol; j++)
                 {
                     Checked[i, j] = false;
                     type[i, j] = 0;
@@ -466,9 +466,9 @@ namespace com.Dungeon
                     break;
                 }
                 //將最前方的標記為新起始
-                for (i = 0; i < row; i++)
+                for (i = 0; i < totalRow; i++)
                 {
-                    for (j = 0; j < col; j++)
+                    for (j = 0; j < totalCol; j++)
                     {
                         if (type[i, j] == 0)
                         {
@@ -492,13 +492,13 @@ namespace com.Dungeon
                         print(times2);
                         break;
                     }
-                    for (i = 0; i < row; i++)
+                    for (i = 0; i < totalRow; i++)
                     {
-                        for (j = 0; j < col; j++)
+                        for (j = 0; j < totalCol; j++)
                         {
                             if (!Checked[i, j] && type[i, j] != 0)
                             {
-                                if (i + 1 < row)
+                                if (i + 1 < totalRow)
                                 {
                                     if (array[i, j] == array[i + 1, j] && type[i + 1, j] == 0)
                                     {
@@ -516,7 +516,7 @@ namespace com.Dungeon
                                         typeNum[type[i, j]]++;
                                     }
                                 }
-                                if (j + 1 < col)
+                                if (j + 1 < totalCol)
                                 {
                                     if (array[i, j] == array[i, j + 1] && type[i, j + 1] == 0)
                                     {
@@ -541,9 +541,9 @@ namespace com.Dungeon
                 } while (t > 0);
             } while (true);
             //將格子數量太少的挑出來
-            for (i = 0; i < row; i++)
+            for (i = 0; i < totalRow; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 0; j < totalCol; j++)
                 {
                     if (typeNum[type[i, j]] < 10)
                     {

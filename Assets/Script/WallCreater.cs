@@ -6,15 +6,13 @@ namespace com.Dungeon
 {
     public class WallCreater : MonoBehaviour
     {
-        public int row, col;
+        public int totalRow = MapCreater.totalRow, totalCol= MapCreater.totalCol;
         public static bool[,] mapArray;
         public static WallCreater wallCreater;
 
 
         void Awake()
         {
-            row = MapCreater.row;
-            col = MapCreater.col;
             wallCreater = this;
             reMap();
         }
@@ -34,15 +32,15 @@ namespace com.Dungeon
         bool[,] InitMapArray()
         {
             int i, j;
-            bool[,] array = new bool[row, col];
-            for (i = 0; i < row; i++)
+            bool[,] array = new bool[totalRow, totalCol];
+            for (i = 0; i < totalRow; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 0; j < totalCol; j++)
                 {
                     //60%機率true反之false
                     array[i, j] = Random.Range(0, 100) < 60;
                     //外壁固定為牆
-                    if (i == 0 || i == row - 1 || j == 0 || j == col - 1)
+                    if (i == 0 || i == totalRow - 1 || j == 0 || j == totalCol - 1)
                     {
                         array[i, j] = false;
                     }
@@ -56,11 +54,11 @@ namespace com.Dungeon
         bool[,] SmoothMapArray(bool[,] array)
         {
             int i, j;
-            bool[,] newArray = new bool[row, col];
+            bool[,] newArray = new bool[totalRow, totalCol];
             int count1, count2;
-            for (i = 0; i < row; i++)
+            for (i = 0; i < totalRow; i++)
             {
-                for (j = 0; j < col; j++)
+                for (j = 0; j < totalCol; j++)
                 {
                     count1 = CheckNeighborWalls(array, i, j, 1);
                     count2 = CheckNeighborWalls(array, i, j, 2);
@@ -74,7 +72,7 @@ namespace com.Dungeon
                         newArray[i, j] = true;
                     }
 
-                    if (i == 0 || i == row - 1 || j == 0 || j == col - 1)
+                    if (i == 0 || i == totalRow - 1 || j == 0 || j == totalCol - 1)
                     {
                         newArray[i, j] = false;
                     }
@@ -93,7 +91,7 @@ namespace com.Dungeon
             {
                 for (_j = j - t; _j < j + t + 1; _j++)
                 {
-                    if (_i > 0 && _i < row && _j >= 0 && _j < col)
+                    if (_i > 0 && _i < totalRow && _j >= 0 && _j < totalCol)
                     {
                         if (!array[_i, _j])
                         {
