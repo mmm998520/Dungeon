@@ -27,6 +27,7 @@ namespace com.Dungeon
         void Awake()
         {
             setMap();
+            NavigationManager.setHashSet(mapArray);
         }
 
 
@@ -199,7 +200,6 @@ namespace com.Dungeon
             {
                 for (j = 0; j < totalCol; j++)
                 {
-                    print(i + "," + j);
                     if (WallCreater.mapArray[i, j])
                     {
                         newArray[i, j] = array[i, j];
@@ -461,7 +461,7 @@ namespace com.Dungeon
             int times = 0;
             do
             {
-                if (times++ > 1000)
+                if (times++ > 40000)
                 {
                     print(times);
                     break;
