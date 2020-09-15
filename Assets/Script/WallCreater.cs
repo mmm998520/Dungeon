@@ -6,13 +6,15 @@ namespace com.Dungeon
 {
     public class WallCreater : MonoBehaviour
     {
-        public int totalRow = MapCreater.totalRow, totalCol= MapCreater.totalCol;
+        public int totalRow, totalCol;
         public static bool[,] mapArray;
         public static WallCreater wallCreater;
 
 
         void Awake()
         {
+            totalRow = MapCreater.totalRow;
+            totalCol = MapCreater.totalCol;
             wallCreater = this;
             reMap();
         }

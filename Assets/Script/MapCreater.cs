@@ -10,7 +10,7 @@ namespace com.Dungeon
         public static int[,] mapArray;
         GameObject cubes;
         public GameObject[] cube = new GameObject[4];
-        public const int totalRow = 70, totalCol = 70;
+        public const int totalRow = 180, totalCol = 180;
 
 
         /// <summary> 地形種類 </summary>
@@ -199,6 +199,7 @@ namespace com.Dungeon
             {
                 for (j = 0; j < totalCol; j++)
                 {
+                    print(i + "," + j);
                     if (WallCreater.mapArray[i, j])
                     {
                         newArray[i, j] = array[i, j];
