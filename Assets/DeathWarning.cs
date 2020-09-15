@@ -18,7 +18,7 @@ namespace com.BoardGameDungeon
             foreach(Transform player in GameManager.Players)
             {
                 PlayerManager playerManager = player.GetComponent<PlayerManager>();
-                if(playerManager.Hurt > playerManager.HP[(int)playerManager.career,playerManager.level] / 4 * 3)
+                if(playerManager.Hurt > playerManager.HP[(int)playerManager.career,playerManager.level] / 3 * 2)
                 {
                     ShowIt = true;
                     break;
