@@ -14,6 +14,7 @@ namespace com.Dungeon
         {
             lastPos = transform.position;
         }
+
         void Update()
         {
             int i;
@@ -42,6 +43,7 @@ namespace com.Dungeon
             {
                 locked = true;
                 lastPos = transform.position;
+                //玩家手指超過區域則強制停止
                 transform.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             }
             else
@@ -49,14 +51,19 @@ namespace com.Dungeon
                 locked = false;
                 Vector3 inputPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.touches[touchNum].position.x, Input.touches[touchNum].position.y, 2));
                 lastPos = inputPos;
-                if(Vector3.Distance(inputPos, transform.position) > speed * Time.deltaTime)
-                {
-                    transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * speed;
-                }
-                else
-                {
-                    transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * 0.1f;
-                }
+                move(inputPos);
+            }
+        }
+
+        void move(Vector3 inputPos)
+        {
+            if (Vector3.Distance(inputPos, transform.position) > speed * Time.deltaTime)
+            {
+                transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * speed;
+            }
+            else
+            {
+                transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * 0.1f;
             }
         }
     }
