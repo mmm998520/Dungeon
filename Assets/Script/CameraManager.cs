@@ -13,25 +13,6 @@ namespace com.Dungeon
 
         void Update()
         {
-            cameraMove();
-            cameraSize();
-        }
-
-        void cameraMove()
-        {
-            center = Vector3.zero;
-            int i;
-            for (i = 0; i < players.childCount; i++)
-            {
-                center += players.GetChild(i).position;
-            }
-            center /= players.childCount;
-            center += Vector3.back * 2;
-            transform.position = center;
-        }
-
-        void cameraSize()
-        {
             maxX = -float.MaxValue;
             minX = float.MaxValue;
             maxY = -float.MaxValue;
@@ -57,6 +38,18 @@ namespace com.Dungeon
                     minY = playerPos.y;
                 }
             }
+            cameraMove();
+            cameraSize();
+        }
+
+        void cameraMove()
+        {
+            center = new Vector3((maxX + minX) / 2, (maxY + minY) / 2, -10);
+            transform.position = center;
+        }
+
+        void cameraSize()
+        {
             float size;
             disX = maxX - minX;
             disY = maxY - minY;
