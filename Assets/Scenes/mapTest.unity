@@ -538,6 +538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92958705c6d885d4b8b4dcf73b2b31f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPrefab: {fileID: 4401905908713439390, guid: 58a94b1fea59d404b92effeba522fddc,
+    type: 3}
 --- !u!23 &556027053
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -893,10 +895,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1045807276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48f6954d37697c445812d414ea434392, type: 3}
+  m_Script: {fileID: 11500000, guid: 27b9ac77c5cf1a440bf34ab0f2888e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dir: 0
+  players: {fileID: 2104732523}
 --- !u!1 &1110260223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,6 +1017,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92958705c6d885d4b8b4dcf73b2b31f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPrefab: {fileID: 4401905908713439390, guid: 58a94b1fea59d404b92effeba522fddc,
+    type: 3}
 --- !u!23 &1114675529
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1410,6 +1414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92958705c6d885d4b8b4dcf73b2b31f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPrefab: {fileID: 4401905908713439390, guid: 58a94b1fea59d404b92effeba522fddc,
+    type: 3}
 --- !u!23 &1839315259
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1905,6 +1911,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92958705c6d885d4b8b4dcf73b2b31f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPrefab: {fileID: 4401905908713439390, guid: 58a94b1fea59d404b92effeba522fddc,
+    type: 3}
 --- !u!50 &2126407592
 Rigidbody2D:
   serializedVersion: 4

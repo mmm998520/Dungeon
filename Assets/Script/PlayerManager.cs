@@ -101,8 +101,8 @@ namespace com.Dungeon
         void attack(Vector3 dir)
         {
             attackMode = false;
-            Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
-            Instantiate(attackPrefab, transform.position, Quaternion.identity);
+            float angle = Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
+            Instantiate(attackPrefab, transform.position, Quaternion.Euler(Vector3.forward * angle));
         }
 
         void timer()
