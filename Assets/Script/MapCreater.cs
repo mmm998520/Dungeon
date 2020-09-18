@@ -218,20 +218,20 @@ namespace com.Dungeon
         void createMap(int[,] array)
         {
             int i, j;
-            GameObject go;
+            GameObject cube;
             for (i = 0; i < totalRow; i++)
             {
                 for (j = 0; j < totalCol; j++)
                 {
                     if (WallCreater.mapArray[i, j])
                     {
-                        go = Instantiate(cube[array[i, j]], new Vector3(i, j, 1), Quaternion.identity);
+                        cube = Instantiate(this.cube[array[i, j]], new Vector3(i, j, 1), Quaternion.identity);
                     }
                     else
                     {
-                        go = Instantiate(cube[0], new Vector3(i, j, 1), Quaternion.identity);
+                        cube = Instantiate(this.cube[0], new Vector3(i, j, 1), Quaternion.identity);
                     }
-                    go.transform.SetParent(cubes.transform);
+                    cube.transform.SetParent(cubes.transform);
                 }
             }
         }

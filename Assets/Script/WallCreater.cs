@@ -39,7 +39,7 @@ namespace com.Dungeon
             {
                 for (j = 0; j < totalCol; j++)
                 {
-                    //60%機率true反之false
+                    //60%機率true(路)反之false(牆)
                     array[i, j] = Random.Range(0, 100) < 60;
                     //外壁固定為牆
                     if (i == 0 || i == totalRow - 1 || j == 0 || j == totalCol - 1)
