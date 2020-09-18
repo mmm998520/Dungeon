@@ -172,21 +172,21 @@ namespace com.Dungeon
 
 
         /// <summary> 潤飾地圖時偵測周圍同類數，藉此同化數值 </summary>
-        int[] CheckNeighborWalls(int[,] array, int i, int j, int t)
+        int[] CheckNeighborWalls(int[,] array, int currentRow, int currentCol, int t)
         {
-            int _i, _j;
+            int i, j;
             int[] count = new int[5] { 0, 0, 0, 0, 0 };
-            for (_i = i - t; _i < i + t + 1; _i++)
+            for (i = currentRow - t; i <= currentRow + t; i++)
             {
-                for (_j = j - t; _j < j + t + 1; _j++)
+                for (j = currentCol - t; j <= currentCol + t; j++)
                 {
-                    if (_i >= 0 && _i < totalRow && _j >= 0 && _j < totalCol)
+                    if (i >= 0 && i < totalRow && j >= 0 && j < totalCol)
                     {
-                        count[array[_i, _j]]++;
+                        count[array[i, j]]++;
                     }
                 }
             }
-            count[array[i, j]]--;
+            count[array[currentRow, currentCol]]--;
             return count;
         }
 
