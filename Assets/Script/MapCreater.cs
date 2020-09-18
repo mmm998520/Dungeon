@@ -17,10 +17,10 @@ namespace com.Dungeon
         public enum roomStat
         {
             wall = 0,
-            green = 1,
-            black = 2,
-            blue = 3,
-            orange = 4
+            green = 1,//起始生成+幽靈
+            black = 2,//陷阱
+            blue = 3,//怪物
+            orange = 4//怪物
         }
 
 
