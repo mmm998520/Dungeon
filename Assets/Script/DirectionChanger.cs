@@ -9,12 +9,10 @@ namespace com.DungeonPad
         protected float rotateSpeed = 200;
         public Transform target;
 
-        protected void setNavigateTarget()
+        protected void setNavigateTarget(int[] endRow, int[] endCol, HashSet<int> canGo)
         {
-            int[] a = new int[1] { (int)target.transform.position.x }, b = new int[1] { (int)target.transform.position.y };
-            int pos = FindRoad((int)transform.position.x, (int)transform.position.y, a, b, orangePos);
+            int pos = FindRoad((int)transform.position.x, (int)transform.position.y, endRow, endCol, canGo);
             target = GameManager.maze.GetChild(pos);
-            print(pos / MapCreater.totalCol + "," + pos % MapCreater.totalCol);
         }
 
         protected void changeDirection()

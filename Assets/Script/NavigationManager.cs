@@ -77,7 +77,7 @@ namespace com.DungeonPad
                     {
                         close.Add(t);
                     }
-                    if (!canGo.Contains(t))
+                    else if (!canGo.Contains(t))
                     {
                         hardToGo.Add(t);
                     }

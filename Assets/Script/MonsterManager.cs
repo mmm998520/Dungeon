@@ -22,5 +22,11 @@ namespace com.DungeonPad
             }
             return minDisPlayer;
         }
+
+        protected void moveToTarget()
+        {
+            changeDirection();
+            transform.Translate(Vector3.right * Time.deltaTime);
+        }
     }
 }
