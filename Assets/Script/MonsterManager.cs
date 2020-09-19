@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace com.Dungeon
+namespace com.DungeonPad
 {
     public class MonsterManager : NavigationManager
     {

@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-namespace com.Dungeon
+namespace com.DungeonPad
 {
     public class WallCreater : MonoBehaviour
     {

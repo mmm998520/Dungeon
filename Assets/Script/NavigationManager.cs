@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace com.Dungeon
+namespace com.DungeonPad
 {
     public class NavigationManager : MonoBehaviour
     {
@@ -138,8 +138,6 @@ namespace com.Dungeon
                 //從當前點往8方未確認可通行點，並將它們加入open
                 open = checkCanGo(minFPos, open, close);
             } while (true);
-            Debug.LogError("這是不可能的，你放心 : )");
-            return startRow * totalCol + startCol;
         }
 
 

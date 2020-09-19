@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace com.Dungeon
+namespace com.DungeonPad
 {
     public class CameraManager : MonoBehaviour
     {
-        public Transform players;
         Vector3 center;
         float maxX, minX, maxY, minY;
         public float disX, disY;
@@ -18,9 +17,9 @@ namespace com.Dungeon
             maxY = -float.MaxValue;
             minY = float.MaxValue;
             int i;
-            for (i = 0; i < players.childCount; i++)
+            for (i = 0; i < GameManager.players.childCount; i++)
             {
-                Vector3 playerPos = players.GetChild(i).position;
+                Vector3 playerPos = GameManager.players.GetChild(i).position;
                 if (maxX < playerPos.x)
                 {
                     maxX = playerPos.x;
