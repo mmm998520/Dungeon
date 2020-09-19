@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class MonsterManager : DirectionChanger
     {
-        void Update()
+        protected Transform MinDisPlayer()
         {
             int i;
             float minDis = float.MaxValue;
@@ -20,9 +20,7 @@ namespace com.DungeonPad
                     minDisPlayer = player;
                 }
             }
-            target = minDisPlayer;
-            changeDirection();
-            transform.Translate(Vector3.right * Time.deltaTime);
+            return minDisPlayer;
         }
     }
 }

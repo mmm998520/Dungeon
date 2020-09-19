@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class DirectionChanger : NavigationManager
     {
-        float rotateSpeed = 100;
+        protected float rotateSpeed = 200;
         public Transform target;
 
         protected void setNavigateTarget()
