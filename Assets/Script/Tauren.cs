@@ -20,15 +20,28 @@ namespace com.DungeonPad
         {
             if(stat == Stat.guard)
             {
-                guard(greenPos);
+                guard(guardPos);
+                if(Vector3.Distance(transform.position*Vector2.one, MinDisPlayer().position * Vector2.one) < 3)
+                {
+                    stat = Stat.pursue;
+                }
             }
             else if(stat == Stat.pursue)
             {
                 target = MinDisPlayer();
+                if (!pursuePos.Contains((int)transform.position.x * MapCreater.totalCol + (int)transform.position.y))
+                {
+                    stat = Stat.back;
+                }
             }
             else if(stat == Stat.back)
             {
-                guard(orangePos);
+                guard(pursuePos);
+                HP = MaxHP;
+                if (guardPos.Contains((int)transform.position.x * MapCreater.totalCol + (int)transform.position.y))
+                {
+                    stat = Stat.guard;
+                }
             }
             moveToTarget();
         }

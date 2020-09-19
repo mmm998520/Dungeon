@@ -558,5 +558,16 @@ namespace com.DungeonPad
             }
             return array;
         }
+
+
+        public static int RowColToNum(int row,int col)
+        {
+            return (row * totalCol) + col;
+        }
+
+        public static int[] NumToRowCol(int num)
+        {
+            return new int[2] { num / totalCol, num % totalCol };
+        }
     }
 }
