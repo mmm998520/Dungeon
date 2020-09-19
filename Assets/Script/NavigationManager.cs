@@ -57,10 +57,6 @@ namespace com.DungeonPad
         /// <summary> 尋路，return下一個路徑點 </summary>
         protected int FindRoad(int _startRow, int _startCol, int[] _endRow, int[] _endCol, HashSet<int> canGo)
         {
-            print(_startRow);
-            print(_startCol);
-            print(_endRow[0]);
-            print(_endCol[0]);
             //初始設置
             startRow = _startRow;
             startCol = _startCol;
@@ -108,7 +104,6 @@ namespace com.DungeonPad
                 {
                     if (open.Contains(endRow[i] * totalCol + endCol[i]))
                     {
-                        print("k");
                         foreach(int pos in open)
                         {
                             if(pos == endRow[i] * totalCol + endCol[i])
@@ -154,49 +149,41 @@ namespace com.DungeonPad
             bool downLeft = !close.Contains(currentPos - 1 - totalCol);
             if (up)
             {
-                    print(currentPos / totalCol + "," + currentPos % totalCol + "up");
                 countGHF(currentPos, currentPos + 1, Straight);
                 open.Add(currentPos + 1);
                 if(right && upRight)
                 {
-                    print(currentPos / totalCol + "," + currentPos % totalCol + "upRight");
                     countGHF(currentPos, currentPos + 1 + totalCol, hypotenuse);
                     open.Add(currentPos + 1 + totalCol);
                 }
                 if (left && upLeft)
                 {
-                    print(currentPos / totalCol + "," + currentPos % totalCol + "upLeft");
                     countGHF(currentPos, currentPos + 1 - totalCol, hypotenuse);
                     open.Add(currentPos + 1 - totalCol);
                 }
             }
             if (down)
             {
-                    print(currentPos/totalCol+","+ currentPos % totalCol + "down");
                 countGHF(currentPos, currentPos - 1, Straight);
                 open.Add(currentPos - 1);
                 if (right && downRight)
                 {
-                    print(currentPos / totalCol + "," + currentPos % totalCol + "downRight");
                     countGHF(currentPos, currentPos - 1 + totalCol, hypotenuse);
                     open.Add(currentPos - 1 + totalCol);
                 }
                 if (left && downLeft)
                 {
-                    print(currentPos / totalCol + "," + currentPos % totalCol + "downLeft");
                     countGHF(currentPos, currentPos - 1 - totalCol, hypotenuse);
                     open.Add(currentPos - 1 - totalCol);
                 }
             }
             if (right)
             {
-                print(currentPos / totalCol + "," + currentPos % totalCol + "right");
                 countGHF(currentPos, currentPos + totalCol, Straight);
                 open.Add(currentPos + totalCol);
             }
             if (left)
             {
-                print(currentPos / totalCol + "," + currentPos % totalCol + "left");
                 countGHF(currentPos, currentPos - totalCol, Straight);
                 open.Add(currentPos - totalCol);
             }

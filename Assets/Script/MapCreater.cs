@@ -57,6 +57,7 @@ namespace com.DungeonPad
                 }
             } while (!checkCanGo(mapArray) || !GreenWayNotSeparate(mapArray));
             createMap(mapArray);
+            GameManager.maze = cubes.transform;
             print(t);
         }
 

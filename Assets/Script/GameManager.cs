@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class GameManager : MonoBehaviour
     {
-        public static Transform players;
+        public static Transform players,maze;
 
         void Awake()
         {
