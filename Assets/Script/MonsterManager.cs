@@ -8,24 +8,24 @@ namespace com.DungeonPad
     {
         public float MaxHP,HP,ATK;
         /// <summary> 守備區域 </summary>
-        protected HashSet<int> guardPos;
+        protected HashSet<int> guardPos = new HashSet<int>();
         /// <summary> 追擊區域 </summary>
-        protected HashSet<int> pursuePos;
+        protected HashSet<int> pursuePos = new HashSet<int>();
         /// <summary> 將怪物誕生區域設為守備區域並給予追擊範圍 </summary>
-        void setCanGoPos()
+        protected void setCanGoPos()
         {
             //設置巡邏區域
             guardPos = new HashSet<int>();
             int i, j, t;
             MapCreater.roomStat roomStat;
-            guardPos.Add((int)transform.position.x * MapCreater.totalCol + (int)transform.position.y);
+            guardPos.Add((int)transform.position.x * MapCreater.totalCol[MapCreater.level] + (int)transform.position.y);
             roomStat = (MapCreater.roomStat)MapCreater.mapArray[(int)transform.position.x, (int)transform.position.y];
             do
             {
                 t = 0;
-                for (i = 0; i < MapCreater.totalRow; i++)
+                for (i = 0; i < MapCreater.totalRow[MapCreater.level]; i++)
                 {
-                    for (j = 0; j < MapCreater.totalCol; j++)
+                    for (j = 0; j < MapCreater.totalCol[MapCreater.level]; j++)
                     {
                         if (MapCreater.mapArray[i, j] == (int)roomStat && !guardPos.Contains(MapCreater.RowColToNum(i,j)))
                         {
@@ -47,7 +47,7 @@ namespace com.DungeonPad
                 {
                     for(j = -3; j <= 3; j++)
                     {
-                        if (array[0]+i >= 0 && array[0]+i < MapCreater.totalRow && array[1]+j >= 0 && array[1]+j < MapCreater.totalCol)
+                        if (array[0]+i >= 0 && array[0]+i < MapCreater.totalRow[MapCreater.level] && array[1]+j >= 0 && array[1]+j < MapCreater.totalCol[MapCreater.level])
                         {
                             pursuePos.Add(MapCreater.RowColToNum(i, j));
                         }

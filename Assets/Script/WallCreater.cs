@@ -13,8 +13,8 @@ namespace com.DungeonPad
 
         void Awake()
         {
-            totalRow = MapCreater.totalRow;
-            totalCol = MapCreater.totalCol;
+            totalRow = MapCreater.totalRow[MapCreater.level];
+            totalCol = MapCreater.totalCol[MapCreater.level];
             wallCreater = this;
             reMap();
         }

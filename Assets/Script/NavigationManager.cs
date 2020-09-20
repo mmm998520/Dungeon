@@ -6,13 +6,13 @@ namespace com.DungeonPad
 {
     public class NavigationManager : MonoBehaviour
     {
-        int totalRow = MapCreater.totalRow, totalCol = MapCreater.totalCol;
+        int totalRow = MapCreater.totalRow[MapCreater.level], totalCol = MapCreater.totalCol[MapCreater.level];
         int startRow, startCol;
         int[] endRow, endCol;
         /// <summary> 導航後得出，到終點時下一個要到的點 </summary>
-        int[] nextPos = new int[MapCreater.totalRow * MapCreater.totalCol];
+        int[] nextPos = new int[MapCreater.totalRow[MapCreater.level] * MapCreater.totalCol[MapCreater.level]];
         /// <summary> g : 起點到該點的移動量，h : 該點到終點的估算移動量(採對角線距離計算)，f : 合值 </summary>
-        float[,] g = new float[MapCreater.totalRow, MapCreater.totalCol], h = new float[MapCreater.totalRow, MapCreater.totalCol], f = new float[MapCreater.totalRow, MapCreater.totalCol];
+        float[,] g = new float[MapCreater.totalRow[MapCreater.level], MapCreater.totalCol[MapCreater.level]], h = new float[MapCreater.totalRow[MapCreater.level], MapCreater.totalCol[MapCreater.level]], f = new float[MapCreater.totalRow[MapCreater.level], MapCreater.totalCol[MapCreater.level]];
         /// <summary> 定義斜線、直線距離 </summary>
         const float Straight = 1, hypotenuse = 1.414f;
         /// <summary> 
@@ -27,9 +27,9 @@ namespace com.DungeonPad
         public static void setHashSet(int[,] mapArray)
         {
             int i, j, t = 0;
-            for (i = 0; i < MapCreater.totalRow; i++)
+            for (i = 0; i < MapCreater.totalRow[MapCreater.level]; i++)
             {
-                for (j = 0; j < MapCreater.totalCol; j++)
+                for (j = 0; j < MapCreater.totalCol[MapCreater.level]; j++)
                 {
                     switch(mapArray[i, j])
                     {
@@ -125,9 +125,7 @@ namespace com.DungeonPad
                         minFPos = pos;
                     }
                 }
-                print(open.Count);
                 open.Remove(minFPos);
-                print(open.Count);
                 close.Add(minFPos);
 
                 //從當前點往8方未確認可通行點，並將它們加入open
