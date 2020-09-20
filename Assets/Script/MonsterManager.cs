@@ -165,7 +165,9 @@ namespace com.DungeonPad
             {
                 if ((preparationTimer += Time.deltaTime) >= preparation)
                 {
-                    Instantiate(attack, transform.position, transform.rotation);
+                    MonsterAttack Attack = Instantiate(attack, transform.position, transform.rotation).GetComponent<MonsterAttack>();
+                    Destroy(Attack.gameObject,0.4f);
+                    Attack.ATK = ATK;
                     CDTimer = 0;
                     preparationTimer = 0;
                     prepare = false;

@@ -7,6 +7,9 @@ namespace com.DungeonPad
 {
     public class PlayerManager : MonoBehaviour
     {
+        public float MaxHP, HP, ATK, CD, CDTimer, preparation, preparationTimer, hand;
+        protected bool prepare = false;
+        public GameObject attack;
         Vector3 lastPos;
         bool locked = true;
         float speed = 3;

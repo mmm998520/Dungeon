@@ -417,6 +417,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92958705c6d885d4b8b4dcf73b2b31f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHP: 0
+  HP: 0
+  ATK: 0
+  CD: 0
+  CDTimer: 0
+  preparation: 0
+  preparationTimer: 0
+  hand: 0
+  attack: {fileID: 0}
   attackPrefab: {fileID: 4401905908713439390, guid: 58a94b1fea59d404b92effeba522fddc,
     type: 3}
 --- !u!23 &556027053
@@ -474,7 +483,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556027049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 86.473, y: 87.3, z: -8}
+  m_LocalPosition: {x: 11.1, y: 9.4, z: -8}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 2104732523}
@@ -645,7 +654,13 @@ MonoBehaviour:
   target: {fileID: 0}
   MaxHP: 0
   HP: 0
-  ATK: 0
+  ATK: 1
+  CD: 1
+  CDTimer: 0
+  preparation: 1
+  preparationTimer: 0
+  hand: 3
+  attack: {fileID: 6355018383450350413, guid: eb21b247204480d48bb2013840587412, type: 3}
   guardPoint: 30000000320000003b00000039000000
   nextGrardNum: 0
 --- !u!23 &995766937
@@ -838,7 +853,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114675524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 87.4, y: 86.301, z: -8}
+  m_LocalPosition: {x: 12.027, y: 8.401001, z: -8}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 2104732523}
@@ -893,6 +908,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92958705c6d885d4b8b4dcf73b2b31f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHP: 0
+  HP: 0
+  ATK: 0
+  CD: 0
+  CDTimer: 0
+  preparation: 0
+  preparationTimer: 0
+  hand: 0
+  attack: {fileID: 0}
   attackPrefab: {fileID: 4401905908713439390, guid: 58a94b1fea59d404b92effeba522fddc,
     type: 3}
 --- !u!23 &1114675529
@@ -979,6 +1003,14 @@ MonoBehaviour:
   MaxHP: 0
   HP: 0
   ATK: 0
+  CD: 0
+  CDTimer: 0
+  preparation: 0
+  preparationTimer: 0
+  hand: 0
+  attack: {fileID: 0}
+  guardPoint: 
+  nextGrardNum: 0
 --- !u!50 &1203070209
 Rigidbody2D:
   serializedVersion: 4
@@ -1291,7 +1323,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839315254}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 87.4, y: 87.3, z: -8}
+  m_LocalPosition: {x: 12.027, y: 9.400002, z: -8}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 2104732523}
@@ -1346,6 +1378,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92958705c6d885d4b8b4dcf73b2b31f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHP: 0
+  HP: 0
+  ATK: 0
+  CD: 0
+  CDTimer: 0
+  preparation: 0
+  preparationTimer: 0
+  hand: 0
+  attack: {fileID: 0}
   attackPrefab: {fileID: 4401905908713439390, guid: 58a94b1fea59d404b92effeba522fddc,
     type: 3}
 --- !u!23 &1839315259
@@ -2042,7 +2083,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2126407589}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 86.473, y: 86.301, z: -8}
+  m_LocalPosition: {x: 11.099998, y: 8.401001, z: -8}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 2104732523}
@@ -2060,6 +2101,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92958705c6d885d4b8b4dcf73b2b31f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHP: 0
+  HP: 0
+  ATK: 0
+  CD: 0
+  CDTimer: 0
+  preparation: 0
+  preparationTimer: 0
+  hand: 0
+  attack: {fileID: 0}
   attackPrefab: {fileID: 4401905908713439390, guid: 58a94b1fea59d404b92effeba522fddc,
     type: 3}
 --- !u!50 &2126407592
