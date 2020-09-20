@@ -6,7 +6,8 @@ namespace com.DungeonPad
 {
     public class MonsterManager : DirectionChanger
     {
-        public float MaxHP, HP, ATK, CD, CDTimer, Preparation, PreparationTimer, hand;
+        public float MaxHP, HP, ATK, CD, CDTimer, preparation, preparationTimer, hand;
+        protected bool prepare = false;
         public GameObject attack;
         /// <summary> 守備區域 </summary>
         protected HashSet<int> guardPos = new HashSet<int>();
@@ -143,23 +144,38 @@ namespace com.DungeonPad
         }
 
 
-        protected void Attack()
+        protected void attackCD()
         {
             if ((CDTimer += Time.deltaTime) >= CD)
             {
-                if (Vector3.Distance(transform.position * Vector2.one, MinDisPlayer().position * Vector2.one) < hand)
+                if (Vector3.Distance(transform.position * Vector2.one, MinDisPlayer().position * Vector2.one) < hand && stat == Stat.pursue)
                 {
-                    if ((PreparationTimer += Time.deltaTime) >= Preparation)
-                    {
-                        Instantiate(attack, transform.position, transform.rotation);
-                        CDTimer = 0;
-                        PreparationTimer = 0;
-                    }
+                    prepare = true;
                 }
                 else
                 {
-                    PreparationTimer = 0;
+                    preparationTimer = 0;
                 }
+            }
+        }
+
+        protected void prepareAttack()
+        {
+            if (stat != Stat.back)
+            {
+                if ((preparationTimer += Time.deltaTime) >= preparation)
+                {
+                    Instantiate(attack, transform.position, transform.rotation);
+                    CDTimer = 0;
+                    preparationTimer = 0;
+                    prepare = false;
+                }
+            }
+            else
+            {
+                CDTimer = 0;
+                preparationTimer = 0;
+                prepare = false;
             }
         }
     }

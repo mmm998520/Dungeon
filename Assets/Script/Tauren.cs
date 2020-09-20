@@ -33,7 +33,11 @@ namespace com.DungeonPad
         void Update()
         {
             guardBehaviour();
-            Attack();
+            attackCD();
+            if (prepare)
+            {
+                prepareAttack();
+            }
         }
     }
 }
