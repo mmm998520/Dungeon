@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Died.unity
     guid: 37f4d63e26e181c42a3eced295df3b05
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: d684befadcf689c45a447508e010c9c7
   m_configObjects: {}
