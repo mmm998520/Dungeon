@@ -93,7 +93,10 @@ namespace com.DungeonPad
         protected void moveToTarget()
         {
             changeDirection();
-            transform.Translate(Vector3.right * Time.deltaTime);
+            if (!prepare)
+            {
+                transform.Translate(Vector3.right * Time.deltaTime);
+            }
         }
 
         /// <summary> 巡邏怪行為 </summary>
@@ -155,6 +158,7 @@ namespace com.DungeonPad
                 else
                 {
                     preparationTimer = 0;
+                    prepare = false;
                 }
             }
         }

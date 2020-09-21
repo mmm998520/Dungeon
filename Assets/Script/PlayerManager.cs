@@ -7,13 +7,12 @@ namespace com.DungeonPad
 {
     public class PlayerManager : MonoBehaviour
     {
-        public float MaxHP, HP, ATK, CD, CDTimer, preparation, preparationTimer, hand;
-        protected bool prepare = false;
+        public float MaxHP, HP, ATK, preparation, preparationTimer, hand;
+        public float AttackMode, AttackModeTimer, CD, CDTimer;
         public GameObject attack;
         Vector3 lastPos;
         bool locked = true;
         float speed = 3;
-        //bool attackMode = false;
         float touchTimer = 0;
         public GameObject attackPrefab;
 
@@ -24,8 +23,8 @@ namespace com.DungeonPad
 
         void Update()
         {
-            //timer();
             behavior();
+            timer();
         }
 
         void behavior()
@@ -67,17 +66,9 @@ namespace com.DungeonPad
                 lastPos = inputPos;
                 if (Input.touches[touchNum].phase == TouchPhase.Began)
                 {
-                    if(touchTimer < 0.5f)
-                    {
-                        //attackMode = true;
-                    }
                     touchTimer = 0;
                 }
-                move(inputPos);/*
-                if (attackMode)
-                {
-                    attackPreparation(inputPos);
-                }*/
+                move(inputPos);
             }
         }
 
@@ -92,27 +83,49 @@ namespace com.DungeonPad
                 transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * 0.1f;
             }
         }
-        /*
-        void attackPreparation(Vector3 inputPos)
-        {
-            Vector3 dir = inputPos - transform.position;
-            if (dir.sqrMagnitude > 0.7f)
-            {
-                attack(dir);
-            }
-        }
-
-        void attack(Vector3 dir)
-        {
-            attackMode = false;
-            float angle = Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
-            Instantiate(attackPrefab, transform.position, Quaternion.Euler(Vector3.forward * angle));
-        }
 
         void timer()
         {
-            touchTimer += Time.deltaTime;
+            if (locked)
+            {
+                if ((AttackModeTimer += Time.deltaTime) >= AttackMode)
+                {
+                    if((CDTimer += Time.deltaTime) >= CD)
+                    {
+                        CDTimer = 0;
+                        Vector3 minDisPos = minDisMonster().position;
+                        Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, minDisPos * Vector2.one - transform.position * Vector2.one, Vector3.forward));
+                        Instantiate(attack, transform.position, quaternion);
+                    }
+                }
+            }
+            else
+            {
+                AttackModeTimer = 0;
+                CDTimer = 0;
+            }
         }
-        */
+
+        Transform minDisMonster()
+        {
+            int i;
+            float minDis = float.MaxValue;
+            Transform minDisMonster = null;
+            Transform monsters = GameManager.monsters;
+            for (i = 0; i < monsters.childCount; i++)
+            {
+                Transform monster = monsters.GetChild(i);
+                if(monster.gameObject.activeSelf)
+                {
+                    float dis = Vector3.Distance(monster.position, transform.position);
+                    if (minDis > dis)
+                    {
+                        minDis = dis;
+                        minDisMonster = monster;
+                    }
+                }
+            }
+            return minDisMonster;
+        }
     }
 }
