@@ -6,14 +6,28 @@ namespace com.DungeonPad
 {
     public class PlayerAttack : MonoBehaviour
     {
-        void Start()
+        public float ATK;
+        public bool continued = false;
+        void OnTriggerEnter2D(Collider2D collider)
         {
-
+            if (!continued)
+            {
+                if (collider.gameObject.layer == 9)
+                {
+                    collider.GetComponent<MonsterManager>().HP -= ATK;
+                }
+            }
         }
 
-        void Update()
+        void OnTriggerStay2D(Collider2D collider)
         {
-
+            if (continued)
+            {
+                if (collider.gameObject.layer == 9)
+                {
+                    collider.GetComponent<MonsterManager>().HP -= ATK * Time.deltaTime;
+                }
+            }
         }
     }
 }

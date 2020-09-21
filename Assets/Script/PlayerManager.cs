@@ -7,7 +7,7 @@ namespace com.DungeonPad
 {
     public class PlayerManager : MonoBehaviour
     {
-        public float MaxHP, HP, ATK, preparation, preparationTimer, hand;
+        public float MaxHP, HP, ATK, hand;
         public float AttackMode, AttackModeTimer, CD, CDTimer;
         public GameObject attack;
         Vector3 lastPos;
@@ -92,10 +92,15 @@ namespace com.DungeonPad
                 {
                     if((CDTimer += Time.deltaTime) >= CD)
                     {
-                        CDTimer = 0;
-                        Vector3 minDisPos = minDisMonster().position;
-                        Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, minDisPos * Vector2.one - transform.position * Vector2.one, Vector3.forward));
-                        Instantiate(attack, transform.position, quaternion);
+                        Vector3 minDisMonsterDir = minDisMonster().position * Vector2.one - transform.position * Vector2.one;
+                        if (minDisMonsterDir.sqrMagnitude < hand)
+                        {
+                            CDTimer = 0;
+                            Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, minDisMonsterDir, Vector3.forward));
+                            PlayerAttack playerAttack = Instantiate(attack, transform.position, quaternion).GetComponent<PlayerAttack>();
+                            Destroy(playerAttack.gameObject, 0.4f);
+                            playerAttack.ATK = ATK;
+                        }
                     }
                 }
             }
