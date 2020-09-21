@@ -71,7 +71,7 @@ namespace com.DungeonPad
 
 
         /// <summary> 獲取最近玩家 </summary>
-        protected Transform MinDisPlayer()
+        public Transform MinDisPlayer()
         {
             int i;
             float minDis = float.MaxValue;

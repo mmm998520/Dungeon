@@ -7,12 +7,33 @@ namespace com.DungeonPad
     public class ButtonCreater : MonoBehaviour
     {
         public GameObject buttonPrefab;
-        GameObject[] button = new GameObject[2];
+        public GameObject[] button = new GameObject[2];
+        public GameObject slime;
+        public GameObject cage;
 
         void Update()
         {
             if (gameObject.GetComponent<ButtonManager>().pushButton && button[0].GetComponent<ButtonManager>().pushButton && button[1].GetComponent<ButtonManager>().pushButton)
             {
+                List<GameObject> temp = new List<GameObject>();
+                temp.Add(gameObject);
+                temp.Add(button[0]);
+                temp.Add(button[1]);
+                int r, i;
+                for(i = 3; i > 0; i--)
+                {
+                    r = Random.Range(0, i);
+                    if (i == 3)
+                    {
+                        Vector3 vector = Quaternion.Euler(0, 0, Random.Range(0, 360)) * Vector3.up;
+                        Instantiate(slime, temp[r].transform.position + vector, Quaternion.Euler(Vector3.forward* Random.Range(0, 360)), GameManager.monsters);
+                    }
+                    else
+                    {
+                        Instantiate(cage, temp[r].transform.position, Quaternion.identity, GameManager.monsters);
+                    }
+                    temp.RemoveAt(r);
+                }
                 Destroy(gameObject);
                 Destroy(button[0]);
                 Destroy(button[1]);

@@ -19,7 +19,7 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (Vector3.Distance(transform.position, target.position) > 0.3f)
+            if (Vector3.Distance(transform.position * Vector2.one, target.position * Vector2.one) > 0.5f)
             {
                 target = MinDisPlayer();
                 moveToTarget();
@@ -27,15 +27,18 @@ namespace com.DungeonPad
             else
             {
                 transform.position = target.position;
+                target.GetComponent<PlayerManager>().speed = 1.5f;
             }
             if (HP <= 0)
             {
+                target.GetComponent<PlayerManager>().speed = 3;
                 Destroy(gameObject);
             }
         }
 
         void Destroy()
         {
+            target.GetComponent<PlayerManager>().speed = 3;
             MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation).GetComponent<MonsterAttack>();
             Destroy(monsterAttack.gameObject, 2f);
             monsterAttack.ATK = ATK;

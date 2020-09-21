@@ -12,7 +12,7 @@ namespace com.DungeonPad
         public GameObject attack;
         Vector3 lastPos;
         bool locked = true;
-        float speed = 3;
+        public float speed = 3;
         float touchTimer = 0;
         public GameObject attackPrefab;
 
