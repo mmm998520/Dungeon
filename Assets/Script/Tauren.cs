@@ -6,6 +6,10 @@ namespace com.DungeonPad
 {
     public class Tauren : MonsterManager
     {
+        private void Awake()
+        {
+            rotateSpeed = 200;
+        }
         void Start()
         {
             int i, j, t =0;

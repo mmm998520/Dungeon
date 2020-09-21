@@ -10,10 +10,36 @@ namespace com.DungeonPad
         {
             rotateSpeed = 200;
         }
-        void Update()
+
+        void Start()
         {
             target = MinDisPlayer();
-            moveToTarget();
+            Invoke("Destroy", 10);
+        }
+
+        void Update()
+        {
+            if (Vector3.Distance(transform.position, target.position) > 0.3f)
+            {
+                target = MinDisPlayer();
+                moveToTarget();
+            }
+            else
+            {
+                transform.position = target.position;
+            }
+        }
+
+        void Destroy()
+        {
+            MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation).GetComponent<MonsterAttack>();
+            Destroy(monsterAttack.gameObject, 2f);
+            monsterAttack.ATK = ATK;
+            monsterAttack.continued = true;
+            CDTimer = 0;
+            preparationTimer = 0;
+            prepare = false;
+            Destroy(gameObject);
         }
     }
 }

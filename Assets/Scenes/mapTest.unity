@@ -1012,13 +1012,13 @@ GameObject:
   - component: {fileID: 1203070213}
   - component: {fileID: 1203070209}
   - component: {fileID: 1203070208}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
 --- !u!114 &1203070208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,13 +1034,13 @@ MonoBehaviour:
   target: {fileID: 0}
   MaxHP: 0
   HP: 0
-  ATK: 0
+  ATK: 1.01
   CD: 0
   CDTimer: 0
   preparation: 0
   preparationTimer: 0
   hand: 0
-  attack: {fileID: 0}
+  attack: {fileID: 6355018383450350413, guid: fdb2107110823584c8804cc6c3247b65, type: 3}
   guardPoint: 
   nextGrardNum: 0
 --- !u!50 &1203070209
@@ -1119,7 +1119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203070207}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 67.33808, y: 72.248955, z: -0.012075424}
+  m_LocalPosition: {x: -6.79, y: -6.77, z: -0.012075424}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 1998553050}
