@@ -12,7 +12,7 @@ namespace com.DungeonPad
         {
             if (!continued)
             {
-                if (collider.gameObject.layer == 9)
+                if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
                 {
                     collider.GetComponent<MonsterManager>().HP -= ATK;
                 }
@@ -23,7 +23,7 @@ namespace com.DungeonPad
         {
             if (continued)
             {
-                if (collider.gameObject.layer == 9)
+                if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
                 {
                     collider.GetComponent<MonsterManager>().HP -= ATK * Time.deltaTime;
                 }

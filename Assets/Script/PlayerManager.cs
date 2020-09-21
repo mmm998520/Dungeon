@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -25,6 +25,10 @@ namespace com.DungeonPad
         {
             behavior();
             timer();
+            if (HP <= 0)
+            {
+                SceneManager.LoadScene("Died");
+            }
         }
 
         void behavior()
@@ -92,14 +96,17 @@ namespace com.DungeonPad
                 {
                     if((CDTimer += Time.deltaTime) >= CD)
                     {
-                        Vector3 minDisMonsterDir = minDisMonster().position * Vector2.one - transform.position * Vector2.one;
-                        if (minDisMonsterDir.sqrMagnitude < hand)
+                        if (GameManager.monsters.childCount != 0)
                         {
-                            CDTimer = 0;
-                            Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, minDisMonsterDir, Vector3.forward));
-                            PlayerAttack playerAttack = Instantiate(attack, transform.position, quaternion).GetComponent<PlayerAttack>();
-                            Destroy(playerAttack.gameObject, 0.4f);
-                            playerAttack.ATK = ATK;
+                            Vector3 minDisMonsterDir = minDisMonster().position * Vector2.one - transform.position * Vector2.one;
+                            if (minDisMonsterDir.sqrMagnitude < hand)
+                            {
+                                CDTimer = 0;
+                                Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, minDisMonsterDir, Vector3.forward));
+                                PlayerAttack playerAttack = Instantiate(attack, transform.position, quaternion).GetComponent<PlayerAttack>();
+                                Destroy(playerAttack.gameObject, 0.4f);
+                                playerAttack.ATK = ATK;
+                            }
                         }
                     }
                 }

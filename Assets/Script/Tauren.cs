@@ -42,6 +42,10 @@ namespace com.DungeonPad
             {
                 prepareAttack();
             }
+            if (HP <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

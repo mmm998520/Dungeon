@@ -28,6 +28,10 @@ namespace com.DungeonPad
             {
                 transform.position = target.position;
             }
+            if (HP <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
 
         void Destroy()
