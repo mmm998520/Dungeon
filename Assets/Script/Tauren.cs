@@ -47,5 +47,14 @@ namespace com.DungeonPad
                 Destroy(gameObject);
             }
         }
+
+        void OnDestroy()
+        {
+            ButtonCreater.Taurens.Remove(this);
+            if (ButtonCreater.Taurens.Count == 0)
+            {
+                ButtonCreater.Exit.enabled = true;
+            }
+        }
     }
 }

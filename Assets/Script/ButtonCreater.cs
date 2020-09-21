@@ -8,9 +8,9 @@ namespace com.DungeonPad
     {
         public GameObject buttonPrefab;
         public GameObject[] button = new GameObject[2];
-        public GameObject slime;
-        public GameObject cage;
-
+        public GameObject slime, cage, tauren, exit;
+        public static List<Tauren> Taurens = new List<Tauren>();
+        public static Exit Exit;
         void Update()
         {
             if (gameObject.GetComponent<ButtonManager>().pushButton && button[0].GetComponent<ButtonManager>().pushButton && button[1].GetComponent<ButtonManager>().pushButton)
@@ -34,6 +34,9 @@ namespace com.DungeonPad
                     }
                     temp.RemoveAt(r);
                 }
+                Taurens.Add(Instantiate(tauren, new Vector3(Random.Range(5, 7), Random.Range(3, 6)), Quaternion.Euler(Vector3.forward * Random.Range(0, 360)), GameManager.monsters).GetComponent<Tauren>());
+                Taurens.Add(Instantiate(tauren, new Vector3(Random.Range(5, 7), Random.Range(3, 6)), Quaternion.Euler(Vector3.forward * Random.Range(0, 360)), GameManager.monsters).GetComponent<Tauren>());
+                Exit = Instantiate(exit, new Vector3(Random.Range(5, 7), Random.Range(3, 6)), Quaternion.identity).GetComponent<Exit>();
                 Destroy(gameObject);
                 Destroy(button[0]);
                 Destroy(button[1]);

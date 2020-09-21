@@ -14,7 +14,10 @@ namespace com.DungeonPad
             {
                 if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
                 {
-                    collider.GetComponent<MonsterManager>().HP -= ATK;
+                    if (collider.GetComponent<MonsterManager>())
+                    {
+                        collider.GetComponent<MonsterManager>().HP -= ATK;
+                    }
                 }
             }
         }
@@ -25,7 +28,10 @@ namespace com.DungeonPad
             {
                 if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
                 {
-                    collider.GetComponent<MonsterManager>().HP -= ATK * Time.deltaTime;
+                    if (collider.GetComponent<MonsterManager>())
+                    {
+                        collider.GetComponent<MonsterManager>().HP -= ATK * Time.deltaTime;
+                    }
                 }
             }
         }
