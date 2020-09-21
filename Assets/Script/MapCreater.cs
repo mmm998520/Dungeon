@@ -280,6 +280,7 @@ namespace com.DungeonPad
                         }
                     }
                     cube.transform.SetParent(cubes.transform);
+                    cube.layer = 12;
                 }
             }
         }
