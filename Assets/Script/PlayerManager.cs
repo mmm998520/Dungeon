@@ -79,10 +79,14 @@ namespace com.DungeonPad
             if (Vector3.Distance(inputPos, transform.position) > speed * Time.deltaTime)
             {
                 transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * speed;
+                Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, (inputPos - transform.position), Vector3.forward));
+                transform.GetChild(3).localRotation = quaternion;
             }
             else
             {
                 transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * 0.1f;
+                Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, (inputPos - transform.position), Vector3.forward));
+                transform.GetChild(3).localRotation = quaternion;
             }
         }
 
@@ -101,6 +105,7 @@ namespace com.DungeonPad
                             {
                                 CDTimer = 0;
                                 Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, minDisMonsterDir, Vector3.forward));
+                                transform.GetChild(3).localRotation = quaternion;
                                 PlayerAttack playerAttack = Instantiate(attack, transform.position, quaternion).GetComponent<PlayerAttack>();
                                 Destroy(playerAttack.gameObject, atkTime);
                                 playerAttack.ATK = ATK;
