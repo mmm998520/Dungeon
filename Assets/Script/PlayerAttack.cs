@@ -17,6 +17,7 @@ namespace com.DungeonPad
                     if (collider.GetComponent<MonsterManager>())
                     {
                         collider.GetComponent<MonsterManager>().HP -= ATK;
+                        collider.transform.GetChild(3).gameObject.SetActive(true);
                     }
                 }
             }
@@ -31,6 +32,7 @@ namespace com.DungeonPad
                     if (collider.GetComponent<MonsterManager>())
                     {
                         collider.GetComponent<MonsterManager>().HP -= ATK * Time.deltaTime;
+                        collider.transform.GetChild(3).gameObject.SetActive(true);
                     }
                 }
             }
