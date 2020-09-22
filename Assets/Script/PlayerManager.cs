@@ -15,14 +15,17 @@ namespace com.DungeonPad
         public float speed = 3;
         float touchTimer = 0;
         public GameObject attackPrefab;
+        Transform hp;
 
         private void Start()
         {
             lastPos = transform.position;
+            hp = transform.GetChild(0);
         }
 
         void Update()
         {
+            hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
             behavior();
             timer();
             if (HP <= 0)

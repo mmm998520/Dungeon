@@ -6,12 +6,12 @@ namespace com.DungeonPad
 {
     public class Tauren : MonsterManager
     {
-        private void Awake()
-        {
-            rotateSpeed = 200;
-        }
+        Transform hp;
+
         void Start()
         {
+            hp = transform.GetChild(1);
+            rotateSpeed = 200;
             int i, j, t =0;
             greenPos = new HashSet<int>();
             pursuePos = new HashSet<int>();
@@ -36,6 +36,7 @@ namespace com.DungeonPad
 
         void Update()
         {
+            hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
             guardBehaviour();
             attackCD();
             if (prepare)

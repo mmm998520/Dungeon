@@ -6,19 +6,19 @@ namespace com.DungeonPad
 {
     public class Slime : MonsterManager
     {
-        private void Awake()
-        {
-            rotateSpeed = 200;
-        }
+        Transform hp;
 
         void Start()
         {
+            hp = transform.GetChild(1);
+            rotateSpeed = 200;
             target = MinDisPlayer();
             Invoke("Destroy", 10);
         }
 
         void Update()
         {
+            hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
             if (Vector3.Distance(transform.position * Vector2.one, target.position * Vector2.one) > 0.5f)
             {
                 target = MinDisPlayer();

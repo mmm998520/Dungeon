@@ -6,13 +6,16 @@ namespace com.DungeonPad
 {
     public class CageManager : MonsterManager
     {
+        Transform hp;
         void Start()
         {
+            hp = transform.GetChild(1);
             target = MinDisPlayer();
         }
 
         void Update()
         {
+            hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
             if (Vector3.Distance(transform.position * Vector2.one, target.position * Vector2.one) < 0.5f)
             {
                 transform.position = target.position;
