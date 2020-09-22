@@ -15,6 +15,7 @@ namespace com.DungeonPad
                 if (collider.gameObject.layer == 8)
                 {
                     collider.GetComponent<PlayerManager>().HP -= ATK;
+                    print(collider.transform.GetChild(2).name);
                     collider.transform.GetChild(2).gameObject.SetActive(true);
                 }
             }
@@ -27,6 +28,7 @@ namespace com.DungeonPad
                 if (collider.gameObject.layer == 8)
                 {
                     collider.GetComponent<PlayerManager>().HP -= ATK * Time.deltaTime;
+                    print(collider.transform.GetChild(2).name);
                     collider.transform.GetChild(2).gameObject.SetActive(true);
                 }
             }
