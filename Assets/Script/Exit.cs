@@ -28,8 +28,7 @@ namespace com.DungeonPad
         void Update()
         {
             Vector3 minDisPlayerDir = (transform.position * Vector2.one - MinDisPlayer().position * Vector2.one);
-            transform.Translate(minDisPlayerDir.normalized * (Time.deltaTime * 4));
-            int i;
+            transform.GetComponent<Rigidbody2D>().velocity = minDisPlayerDir.normalized * 4;
             if (minDisPlayerDir.sqrMagnitude < 0.5f)
             {
                 if ((timer += Time.deltaTime) >= time)

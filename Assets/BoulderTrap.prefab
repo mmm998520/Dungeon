@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6246048924417980529}
   - component: {fileID: 6246048924417980528}
   - component: {fileID: 6246048924417980531}
+  - component: {fileID: 4941536929389033656}
   m_Layer: 0
   m_Name: BoulderTrap
   m_TagString: Untagged
@@ -110,3 +111,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Boulder: {fileID: 3512385392066348971, guid: f2c9123d8ba16144a9deacabe9b2ee53, type: 3}
+--- !u!114 &4941536929389033656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6246048924417980530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f2f6b494118934b831e877cc05d630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

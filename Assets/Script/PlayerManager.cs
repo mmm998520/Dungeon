@@ -14,8 +14,6 @@ namespace com.DungeonPad
         Vector3 lastPos;
         bool locked = true;
         public float speed = 3;
-        float touchTimer = 0;
-        //public GameObject attackPrefab;
         Transform hp;
 
         private void Start()
@@ -72,10 +70,6 @@ namespace com.DungeonPad
                 locked = false;
                 Vector3 inputPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.touches[touchNum].position.x, Input.touches[touchNum].position.y, 2));
                 lastPos = inputPos;
-                if (Input.touches[touchNum].phase == TouchPhase.Began)
-                {
-                    touchTimer = 0;
-                }
                 move(inputPos);
             }
         }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1876180439600320032}
   - component: {fileID: 1876180439600320033}
   - component: {fileID: 1876180439600320034}
+  - component: {fileID: 8003047981944783868}
   m_Layer: 0
   m_Name: Button_Creater
   m_TagString: Untagged
@@ -132,3 +133,15 @@ MonoBehaviour:
   cage: {fileID: 6414547334631738500, guid: e9aab716c302aad49ae409b3da6dc3b7, type: 3}
   tauren: {fileID: 4654871908663019784, guid: 5bb2ce9fd60ae5a429eb04333dc7e442, type: 3}
   exit: {fileID: 2634253374536481611, guid: 6b3e672cfe460754da88942bc4a1edf3, type: 3}
+--- !u!114 &8003047981944783868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876180439600320035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f2f6b494118934b831e877cc05d630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
