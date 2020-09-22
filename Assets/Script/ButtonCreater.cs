@@ -47,6 +47,8 @@ namespace com.DungeonPad
         {
             if (collider.gameObject.layer == 8)
             {
+                Destroy(button[0]);
+                Destroy(button[1]);
                 button[0] = Instantiate(buttonPrefab, new Vector3(Random.Range(1, 11), Random.Range(1, 8)), Quaternion.identity);
                 button[1] = Instantiate(buttonPrefab, new Vector3(Random.Range(1, 11), Random.Range(1, 8)), Quaternion.identity);
             }

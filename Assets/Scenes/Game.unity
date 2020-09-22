@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 556027051}
   - component: {fileID: 556027050}
   m_Layer: 8
-  m_Name: P2
+  m_Name: "P2_\u6230\u58EB"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -545,6 +545,8 @@ MonoBehaviour:
   HP: 10
   ATK: 1
   hand: 1
+  atkTime: 0
+  continued: 0
   AttackMode: 0.5
   AttackModeTimer: 0
   CD: 1
@@ -1042,7 +1044,7 @@ GameObject:
   - component: {fileID: 1114675527}
   - component: {fileID: 1114675526}
   m_Layer: 8
-  m_Name: P3
+  m_Name: "P3_\u6CD5\u5E2B"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1115,13 +1117,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 10
   HP: 10
-  ATK: 1
+  ATK: 6
   hand: 1
+  atkTime: 0
+  continued: 1
   AttackMode: 0.5
   AttackModeTimer: 0
   CD: 1
   CDTimer: 0
-  attack: {fileID: 6355018383450350413, guid: 3a37df763a5ffcc4ca323d7c23ed55d1, type: 3}
+  attack: {fileID: 6355018383450350413, guid: 9d1fa12b7a7bcaf47b20586aa6ed4f8f, type: 3}
   speed: 3
   attackPrefab: {fileID: 4401905908713439390, guid: 58a94b1fea59d404b92effeba522fddc,
     type: 3}
@@ -1750,7 +1754,7 @@ GameObject:
   - component: {fileID: 1839315257}
   - component: {fileID: 1839315256}
   m_Layer: 8
-  m_Name: p4
+  m_Name: "p4_\u6CD5\u5E2B"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1823,13 +1827,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 10
   HP: 10
-  ATK: 1
+  ATK: 3
   hand: 1
+  atkTime: 0
+  continued: 1
   AttackMode: 0.5
   AttackModeTimer: 0
   CD: 1
   CDTimer: 0
-  attack: {fileID: 6355018383450350413, guid: 3a37df763a5ffcc4ca323d7c23ed55d1, type: 3}
+  attack: {fileID: 6355018383450350413, guid: 9d1fa12b7a7bcaf47b20586aa6ed4f8f, type: 3}
   speed: 3
   attackPrefab: {fileID: 4401905908713439390, guid: 58a94b1fea59d404b92effeba522fddc,
     type: 3}
@@ -2575,7 +2581,7 @@ GameObject:
   - component: {fileID: 2126407595}
   - component: {fileID: 2126407592}
   m_Layer: 8
-  m_Name: P1
+  m_Name: "P1_\u523A\u5BA2"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2611,13 +2617,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 10
   HP: 10
-  ATK: 1
+  ATK: 6
   hand: 1
+  atkTime: 0
+  continued: 0
   AttackMode: 0.5
   AttackModeTimer: 0
   CD: 1
   CDTimer: 0
-  attack: {fileID: 6355018383450350413, guid: 3a37df763a5ffcc4ca323d7c23ed55d1, type: 3}
+  attack: {fileID: 6355018383450350413, guid: 8c9acdd95059db74eb248a0dbb28544e, type: 3}
   speed: 3
   attackPrefab: {fileID: 4401905908713439390, guid: 58a94b1fea59d404b92effeba522fddc,
     type: 3}

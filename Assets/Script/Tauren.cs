@@ -54,6 +54,7 @@ namespace com.DungeonPad
             ButtonCreater.Taurens.Remove(this);
             if (ButtonCreater.Taurens.Count == 0)
             {
+                Debug.LogError(gameObject.name);
                 ButtonCreater.Exit.enabled = true;
             }
         }
