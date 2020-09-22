@@ -43,7 +43,7 @@ namespace com.DungeonPad
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D collider)
+        void OnTriggerEnter2D(Collider2D collider)
         {
             if (collider.gameObject.layer == 8)
             {
