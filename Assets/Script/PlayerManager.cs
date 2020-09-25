@@ -90,42 +90,17 @@ namespace com.DungeonPad
             }
         }
 
-        Transform minDisMonster()
-        {
-            int i;
-            float minDis = float.MaxValue;
-            Transform minDisMonster = null;
-            Transform monsters = GameManager.monsters;
-            for (i = 0; i < monsters.childCount; i++)
-            {
-                Transform monster = monsters.GetChild(i);
-                if(monster.gameObject.activeSelf)
-                {
-                    float dis = Vector3.Distance(monster.position, transform.position);
-                    if (minDis > dis)
-                    {
-                        minDis = dis;
-                        minDisMonster = monster;
-                    }
-                }
-            }
-            return minDisMonster;
-        }
-
         void OnTriggerStay2D(Collider2D collider)
         {
-            if (CDTimer >= CD)
+            if (CDTimer >= CD && (collider.gameObject.layer == 9 || collider.gameObject.layer == 11) && locked)
             {
-                CDTimer = 0;
-                if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
+                if (collider.GetComponent<MonsterManager>())
                 {
-                    if (collider.GetComponent<MonsterManager>())
-                    {
-                        PlayerAttack playerAttack = Instantiate(attack, transform.position, transform.GetChild(3).rotation).GetComponent<PlayerAttack>();
-                        playerAttack.ATK = ATK;
-                        playerAttack.continued = continued;
-                        Destroy(playerAttack.gameObject, atkTime);
-                    }
+                    CDTimer = 0;
+                    PlayerAttack playerAttack = Instantiate(attack, transform.position, transform.GetChild(3).rotation).GetComponent<PlayerAttack>();
+                    playerAttack.ATK = ATK;
+                    playerAttack.continued = continued;
+                    Destroy(playerAttack.gameObject, atkTime);
                 }
             }
         }
