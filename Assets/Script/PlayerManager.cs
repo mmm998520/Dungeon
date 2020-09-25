@@ -9,7 +9,7 @@ namespace com.DungeonPad
     {
         public float MaxHP, HP, ATK, hand, atkTime;
         public bool continued = false;
-        public float AttackMode, AttackModeTimer, CD, CDTimer;
+        public float CD, CDTimer;
         public GameObject attack;
         Vector3 lastPos;
         bool locked = true;
@@ -26,11 +26,11 @@ namespace com.DungeonPad
         {
             hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
             behavior();
-            timer();
             if (HP <= 0)
             {
                 SceneManager.LoadScene("Died");
             }
+            CDTimer += Time.deltaTime;
         }
 
         void behavior()
@@ -90,38 +90,6 @@ namespace com.DungeonPad
             }
         }
 
-        void timer()
-        {
-            if (locked)
-            {
-                if ((AttackModeTimer += Time.deltaTime) >= AttackMode)
-                {
-                    if((CDTimer += Time.deltaTime) >= CD)
-                    {
-                        if (GameManager.monsters.childCount != 0)
-                        {
-                            Vector3 minDisMonsterDir = minDisMonster().position * Vector2.one - transform.position * Vector2.one;
-                            if (minDisMonsterDir.sqrMagnitude < hand)
-                            {
-                                CDTimer = 0;
-                                Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, minDisMonsterDir, Vector3.forward));
-                                transform.GetChild(3).localRotation = quaternion;
-                                PlayerAttack playerAttack = Instantiate(attack, transform.position, quaternion).GetComponent<PlayerAttack>();
-                                Destroy(playerAttack.gameObject, atkTime);
-                                playerAttack.ATK = ATK;
-                                playerAttack.continued = continued;
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                AttackModeTimer = 0;
-                CDTimer = 0;
-            }
-        }
-
         Transform minDisMonster()
         {
             int i;
@@ -142,6 +110,24 @@ namespace com.DungeonPad
                 }
             }
             return minDisMonster;
+        }
+
+        void OnTriggerStay2D(Collider2D collider)
+        {
+            if (CDTimer >= CD)
+            {
+                CDTimer = 0;
+                if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
+                {
+                    if (collider.GetComponent<MonsterManager>())
+                    {
+                        PlayerAttack playerAttack = Instantiate(attack, transform.position, transform.GetChild(3).rotation).GetComponent<PlayerAttack>();
+                        playerAttack.ATK = ATK;
+                        playerAttack.continued = continued;
+                        Destroy(playerAttack.gameObject, atkTime);
+                    }
+                }
+            }
         }
     }
 }
