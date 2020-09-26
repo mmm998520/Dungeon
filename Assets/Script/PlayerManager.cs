@@ -77,15 +77,23 @@ namespace com.DungeonPad
 
         void move(Vector3 inputPos)
         {
-            if (Vector3.Distance(inputPos, transform.position) > speed * Time.deltaTime)
+            if (Vector3.Distance(inputPos, transform.position) > speed * Time.deltaTime*8)
             {
                 transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * speed;
                 Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, (inputPos - transform.position), Vector3.forward));
                 transform.GetChild(3).localRotation = quaternion;
             }
+            else if (Vector3.Distance(inputPos, transform.position) > speed * Time.deltaTime*3)
+            {
+                float a = Vector3.Distance(inputPos, transform.position);
+                
+                transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * speed* (a / speed / Time.deltaTime)*0.1f;
+                Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, (inputPos - transform.position), Vector3.forward));
+                transform.GetChild(3).localRotation = quaternion;
+            }
             else
             {
-                transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * 0.1f;
+                transform.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                 Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, (inputPos - transform.position), Vector3.forward));
                 transform.GetChild(3).localRotation = quaternion;
             }
