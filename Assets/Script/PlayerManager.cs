@@ -32,6 +32,7 @@ namespace com.DungeonPad
                 SceneManager.LoadScene("Died");
             }
             timer();
+            GetComponent<Rigidbody2D>().WakeUp();
         }
 
         void behavior()

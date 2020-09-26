@@ -7,7 +7,17 @@ namespace com.DungeonPad
     public class PlayerAttack : MonoBehaviour
     {
         public float ATK;
-        public bool continued = false;
+        public bool continued = false, lineAttack = false;
+        List<MonsterManager> monsters = new List<MonsterManager>();
+        void Update()
+        {
+            for(int i = 0; i < monsters.Count; i++)
+            {
+                print("e");
+                monsters[i].HP -= ATK * Time.deltaTime;
+            }
+        }
+
         void OnTriggerEnter2D(Collider2D collider)
         {
             if (!continued)
@@ -16,23 +26,49 @@ namespace com.DungeonPad
                 {
                     if (collider.GetComponent<MonsterManager>())
                     {
-                        collider.GetComponent<MonsterManager>().HP -= ATK;
+                        if (lineAttack)
+                        {
+                            collider.GetComponent<MonsterManager>().HP -= ATK * Time.deltaTime;
+                        }
+                        else
+                        {
+                            collider.GetComponent<MonsterManager>().HP -= ATK;
+                        }
                         collider.transform.GetChild(3).gameObject.SetActive(true);
+                    }
+                }
+            }
+            else
+            {
+                print("a");
+                if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
+                {
+                    print("b");
+                    if (collider.GetComponent<MonsterManager>())
+                    {
+                        print("c");
+                        if (!monsters.Contains(collider.GetComponent<MonsterManager>()))
+                        {
+                            print("d");
+                            monsters.Add(collider.GetComponent<MonsterManager>());
+                        }
                     }
                 }
             }
         }
 
-        void OnTriggerStay2D(Collider2D collider)
+        private void OnTriggerExit2D(Collider2D collider)
         {
             if (continued)
             {
+                print("f");
                 if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
                 {
+                    print("g");
                     if (collider.GetComponent<MonsterManager>())
                     {
-                        collider.GetComponent<MonsterManager>().HP -= ATK * Time.deltaTime;
-                        collider.transform.GetChild(3).gameObject.SetActive(true);
+                        print("h");
+                        monsters.Remove(collider.GetComponent<MonsterManager>());
                     }
                 }
             }

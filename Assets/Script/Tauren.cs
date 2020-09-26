@@ -47,6 +47,7 @@ namespace com.DungeonPad
             {
                 Destroy(gameObject);
             }
+            GetComponent<Rigidbody2D>().WakeUp();
         }
 
         void OnDestroy()

@@ -8,8 +8,8 @@ namespace com.DungeonPad
     {
         public static int playerChildCount;
         Vector3 p1, p2, center, dir;
-        float dis, unitDis = 1, angle;
-        public GameObject attack;
+        float dis, unitDis = 0.18f, angle;
+        public GameObject preAttack, attack ,attackCollider;
         Transform lineAttacks;
 
         private void Awake()
@@ -32,7 +32,18 @@ namespace com.DungeonPad
             {
                 for (j = 0; j < i; j++)
                 {
-                    if (transform.GetChild(i).GetComponent<PlayerManager>().lockedTimer>0.3f && transform.GetChild(j).GetComponent<PlayerManager>().lockedTimer > 0.3f)
+                    float P1timer = transform.GetChild(i).GetComponent<PlayerManager>().lockedTimer;
+                    float P2timer = transform.GetChild(j).GetComponent<PlayerManager>().lockedTimer;
+                    if (P1timer > 3f && P2timer > 3f)
+                    {
+                        transform.GetChild(i).GetComponent<PlayerManager>().lockedTimer = 0;
+                        transform.GetChild(j).GetComponent<PlayerManager>().lockedTimer = 0;
+                    }
+                    else if (P1timer > 1f && P2timer > 1f)
+                    {
+
+                    }
+                    else if (P1timer > 0.4f && P2timer > 0.4f)
                     {
                         k = 1;
                         p1 = transform.GetChild(i).position;
@@ -41,11 +52,55 @@ namespace com.DungeonPad
                         dis = Vector3.Distance(p1, p2);
                         dir = (p2 - p1).normalized * unitDis;
                         angle = Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
-                        Instantiate(attack, center, Quaternion.Euler(0,0,angle), lineAttacks);
+                        Transform collider = Instantiate(attackCollider, center, Quaternion.Euler(0, 0, angle), lineAttacks).transform;
+                        collider.localScale = new Vector3(dis, 0.1f, 1);
+                        Instantiate(attack, center, Quaternion.Euler(0, 0, angle), lineAttacks);
                         while (unitDis * k <= dis / 2)
                         {
                             Instantiate(attack, center + (dir * k), Quaternion.Euler(0, 0, angle), lineAttacks);
                             Instantiate(attack, center - (dir * k), Quaternion.Euler(0, 0, angle), lineAttacks);
+                            k++;
+                        }
+                    }
+                    else if (P1timer > 0.3f && P2timer > 0.3f)
+                    {
+
+                    }
+                    else if (P1timer > 0.2f && P2timer > 0.2f)
+                    {
+                        k = 1;
+                        p1 = transform.GetChild(i).position;
+                        p2 = transform.GetChild(j).position;
+                        center = (p1 + p2) / 2;
+                        dis = Vector3.Distance(p1, p2);
+                        dir = (p2 - p1).normalized * unitDis;
+                        angle = Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
+                        Instantiate(preAttack, center, Quaternion.Euler(0, 0, angle), lineAttacks);
+                        while (unitDis * k <= dis / 2)
+                        {
+                            Instantiate(preAttack, center + (dir * k), Quaternion.Euler(0, 0, angle), lineAttacks);
+                            Instantiate(preAttack, center - (dir * k), Quaternion.Euler(0, 0, angle), lineAttacks);
+                            k++;
+                        }
+                    }
+                    else if (P1timer > 0.1f && P2timer > 0.1f)
+                    {
+
+                    }
+                    else if(P1timer > 0f && P2timer > 0f)
+                    {
+                        k = 1;
+                        p1 = transform.GetChild(i).position;
+                        p2 = transform.GetChild(j).position;
+                        center = (p1 + p2) / 2;
+                        dis = Vector3.Distance(p1, p2);
+                        dir = (p2 - p1).normalized * unitDis;
+                        angle = Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
+                        Instantiate(preAttack, center, Quaternion.Euler(0, 0, angle), lineAttacks);
+                        while (unitDis * k <= dis / 2)
+                        {
+                            Instantiate(preAttack, center + (dir * k), Quaternion.Euler(0, 0, angle), lineAttacks);
+                            Instantiate(preAttack, center - (dir * k), Quaternion.Euler(0, 0, angle), lineAttacks);
                             k++;
                         }
                     }
