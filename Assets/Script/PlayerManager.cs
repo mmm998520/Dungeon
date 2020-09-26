@@ -13,6 +13,7 @@ namespace com.DungeonPad
         public GameObject attack;
         Vector3 lastPos;
         bool locked = true;
+        public float lockedTimer;
         public float speed = 3;
         Transform hp;
 
@@ -30,7 +31,7 @@ namespace com.DungeonPad
             {
                 SceneManager.LoadScene("Died");
             }
-            CDTimer += Time.deltaTime;
+            timer();
         }
 
         void behavior()
@@ -104,5 +105,19 @@ namespace com.DungeonPad
                 }
             }
         }
+
+        void timer()
+        {
+            CDTimer += Time.deltaTime;
+            if (locked)
+            {
+                lockedTimer += Time.deltaTime;
+            }
+            else
+            {
+                lockedTimer = 0;
+            }
+        }
+
     }
 }
