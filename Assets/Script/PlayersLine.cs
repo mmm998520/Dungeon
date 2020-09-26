@@ -32,7 +32,7 @@ namespace com.DungeonPad
             {
                 for (j = 0; j < i; j++)
                 {
-                    if (transform.GetChild(i).GetComponent<PlayerManager>().lockedTimer>0.3f && transform.GetChild(2).GetComponent<PlayerManager>().lockedTimer > 0.3f)
+                    if (transform.GetChild(i).GetComponent<PlayerManager>().lockedTimer>0.3f && transform.GetChild(j).GetComponent<PlayerManager>().lockedTimer > 0.3f)
                     {
                         k = 1;
                         p1 = transform.GetChild(i).position;
