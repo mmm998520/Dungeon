@@ -1631,16 +1631,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 10
   HP: 10
-  ATK: 6
-  hand: 9.5
+  ATK: 3
+  hand: 4.1
   atkTime: 2
-  continued: 1
+  continued: 0
   CD: 0.5
   CDTimer: 0
   attack: {fileID: 6355018383450350413, guid: 9d1fa12b7a7bcaf47b20586aa6ed4f8f, type: 3}
   lockedTimer: 0
   speed: 3
-  startRayPos: []
+  startRayPos:
+  - {x: 0.35, y: 0.35, z: 0}
+  - {x: 0.35, y: 0, z: 0}
+  - {x: 0.35, y: -0.35, z: 0}
 --- !u!23 &1114675529
 MeshRenderer:
   m_ObjectHideFlags: 0
