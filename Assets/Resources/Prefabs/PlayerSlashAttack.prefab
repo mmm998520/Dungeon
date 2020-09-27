@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8333136165291157766}
   - component: {fileID: 5230271913114964907}
   - component: {fileID: 677350385094768706}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: PlayerSlashAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,6 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ATK: 0
   continued: 0
+  lineAttack: 0
 --- !u!1 &6421799284076284804
 GameObject:
   m_ObjectHideFlags: 0

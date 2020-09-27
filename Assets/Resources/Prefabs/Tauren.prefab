@@ -492,8 +492,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  MaxHP: 10
-  HP: 10
+  MaxHP: 1000
+  HP: 1000
   ATK: 1
   CD: 0.7
   CDTimer: 0

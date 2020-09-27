@@ -16,6 +16,7 @@ namespace com.DungeonPad
         public float lockedTimer;
         public float speed = 3;
         Transform hp;
+        public List<Vector3> startRayPos;
 
         private void Start()
         {
@@ -33,6 +34,24 @@ namespace com.DungeonPad
             }
             timer();
             GetComponent<Rigidbody2D>().WakeUp();
+
+            RaycastHit2D? hit = Hit();
+            if (hit.HasValue)
+            {
+                print(transform.position);
+                print(hit.Value.point);
+                print(Vector3.Distance(transform.position, hit.Value.point));
+                print((Vector3.Distance(transform.position, hit.Value.point) / 4.45f));
+                transform.GetChild(3).GetChild(0).GetChild(0).localScale = new Vector3(1 - (Vector3.Distance(transform.position * Vector2.one, hit.Value.point * Vector2.one) / 4.45f), 1, 1);
+                if (hit.Value.collider.GetComponent<MonsterManager>())
+                {
+                    Attack();
+                }
+            }
+            else if(transform.GetChild(3).GetChild(0).childCount != 0)
+            {
+                transform.GetChild(3).GetChild(0).GetChild(0).localScale = new Vector3(0, 1, 1);
+            }
         }
 
         void behavior()
@@ -102,17 +121,50 @@ namespace com.DungeonPad
 
         void OnTriggerStay2D(Collider2D collider)
         {
-            if (CDTimer >= CD && (collider.gameObject.layer == 9 || collider.gameObject.layer == 11) && locked)
+            if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
             {
                 if (collider.GetComponent<MonsterManager>())
                 {
-                    CDTimer = 0;
-                    PlayerAttack playerAttack = Instantiate(attack, transform.position, transform.GetChild(3).rotation).GetComponent<PlayerAttack>();
-                    playerAttack.ATK = ATK;
-                    playerAttack.continued = continued;
-                    Destroy(playerAttack.gameObject, atkTime);
+                    Attack();
                 }
             }
+        }
+
+        void Attack()
+        {
+            if(CDTimer >= CD && locked)
+            {
+                CDTimer = 0;
+                PlayerAttack playerAttack = Instantiate(attack, transform.position, transform.GetChild(3).rotation).GetComponent<PlayerAttack>();
+                playerAttack.ATK = ATK;
+                playerAttack.continued = continued;
+                Destroy(playerAttack.gameObject, atkTime);
+                print(atkTime+","+CD);
+            }
+        }
+
+        /// <summary> 從玩家身上打出射線看何處命中(命中後將mask拉伸到命中點)，如果是戰士等不會有設限問題的攻擊則直接返回null不多加處理 </summary>
+        RaycastHit2D? Hit()
+        {
+            RaycastHit2D? Hit = null;
+            int i;
+            for (i = 0; i < startRayPos.Count; i++)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + startRayPos[i], Quaternion.Euler(0, 0, transform.GetChild(3).rotation.z) * Vector3.right, hand, 1 << 9 | 1 << 10 | 1 << 11 | 1 << 12);
+                Debug.DrawRay(transform.position + startRayPos[i], Quaternion.Euler(0, 0, transform.GetChild(3).rotation.z) * Vector3.right);
+                if (hit)
+                {
+                    if (!Hit.HasValue)
+                    {
+                        Hit = hit;
+                    }
+                    else if (Vector3.Distance((transform.position + startRayPos[i]) * Vector2.one, hit.point) < Vector3.Distance((transform.position + startRayPos[i]) * Vector2.one, Hit.Value.point))
+                    {
+                        Hit = hit;
+                    }
+                }
+            }
+            return Hit;
         }
 
         void timer()
@@ -127,6 +179,5 @@ namespace com.DungeonPad
                 lockedTimer = 0;
             }
         }
-
     }
 }
