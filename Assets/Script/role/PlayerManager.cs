@@ -38,10 +38,6 @@ namespace com.DungeonPad
             RaycastHit2D? hit = Hit();
             if (hit.HasValue)
             {
-                print(transform.position);
-                print(hit.Value.point);
-                print(Vector3.Distance(transform.position, hit.Value.point));
-                print((Vector3.Distance(transform.position, hit.Value.point) / 4.45f));
                 transform.GetChild(3).GetChild(0).GetChild(0).localScale = new Vector3(1 - (Vector3.Distance(transform.position * Vector2.one, hit.Value.point * Vector2.one) / 4.45f), 1, 1);
                 if (hit.Value.collider.GetComponent<MonsterManager>())
                 {

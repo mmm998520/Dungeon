@@ -11,7 +11,7 @@ namespace com.DungeonPad
 
         protected void setNavigateTarget(int[] endRow, int[] endCol, HashSet<int> canGo)
         {
-            int pos = FindRoad((int)transform.position.x, (int)transform.position.y, endRow, endCol, canGo);
+            int pos = FindRoad(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), endRow, endCol, canGo);
             target = GameManager.maze.GetChild(pos);
         }
 

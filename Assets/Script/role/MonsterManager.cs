@@ -15,13 +15,13 @@ namespace com.DungeonPad
         protected HashSet<int> pursuePos = new HashSet<int>();
         public int[] guardPoint;
         public int nextGrardNum;
-        enum Stat
+        protected enum Stat
         {
             guard,
             pursue,
             back
         }
-        Stat stat = Stat.guard;
+        protected Stat stat = Stat.guard;
 
 
         /// <summary> 將怪物誕生區域設為守備區域並給予追擊範圍 </summary>
@@ -141,7 +141,7 @@ namespace com.DungeonPad
         protected void guard(HashSet<int> canGo)
         {
             Vector3 endPos = GameManager.maze.GetChild(guardPoint[nextGrardNum]).position;
-            Debug.Log(endPos);
+            Debug.Log(guardPoint[nextGrardNum] + " : "+endPos);
             int[] endRow = new int[1] { (int)endPos.x }, endCol = new int[1] { (int)endPos.y };
             setNavigateTarget(endRow, endCol, canGo);
         }
@@ -169,12 +169,7 @@ namespace com.DungeonPad
             {
                 if ((preparationTimer += Time.deltaTime) >= preparation)
                 {
-                    MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation).GetComponent<MonsterAttack>();
-                    Destroy(monsterAttack.gameObject,0.4f);
-                    monsterAttack.ATK = ATK;
-                    CDTimer = 0;
-                    preparationTimer = 0;
-                    prepare = false;
+                    Attack();
                 }
             }
             else
@@ -183,6 +178,16 @@ namespace com.DungeonPad
                 preparationTimer = 0;
                 prepare = false;
             }
+        }
+
+        protected virtual void Attack()
+        {
+            MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation).GetComponent<MonsterAttack>();
+            Destroy(monsterAttack.gameObject, 0.4f);
+            monsterAttack.ATK = ATK;
+            CDTimer = 0;
+            preparationTimer = 0;
+            prepare = false;
         }
     }
 }
