@@ -16,7 +16,7 @@ namespace com.DungeonPad
         public float lockedTimer, flashTimer, flashTimerStoper;
         public float speed = 3;
         Transform hp;
-        public List<Vector3> startRayPos;
+        public List<Vector3> startRayPoss;
 
         private void Start()
         {
@@ -166,17 +166,18 @@ namespace com.DungeonPad
         {
             RaycastHit2D? Hit = null;
             int i;
-            for (i = 0; i < startRayPos.Count; i++)
+            for (i = 0; i < startRayPoss.Count; i++)
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + startRayPos[i], Quaternion.Euler(0, 0, transform.GetChild(3).rotation.z) * Vector3.right, hand, 1 << 9 | 1 << 10 | 1 << 11 | 1 << 12);
-                Debug.DrawRay(transform.position + startRayPos[i], Quaternion.Euler(0, 0, transform.GetChild(3).rotation.z) * Vector3.right);
+                Vector3 startRayPos = Quaternion.Euler(0, 0, transform.GetChild(3).rotation.eulerAngles.z) * startRayPoss[i];
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + startRayPos, Quaternion.Euler(0, 0, transform.GetChild(3).rotation.eulerAngles.z) * Vector3.right, hand, 1 << 9 | 1 << 10 | 1 << 11 | 1 << 12);
+                Debug.DrawRay(transform.position + startRayPos, Quaternion.Euler(0, 0, transform.GetChild(3).rotation.eulerAngles.z) * Vector3.right * 100,Color.red,2);
                 if (hit)
                 {
                     if (!Hit.HasValue)
                     {
                         Hit = hit;
                     }
-                    else if (Vector3.Distance((transform.position + startRayPos[i]) * Vector2.one, hit.point) < Vector3.Distance((transform.position + startRayPos[i]) * Vector2.one, Hit.Value.point))
+                    else if (Vector3.Distance((transform.position + startRayPos) * Vector2.one, hit.point) < Vector3.Distance((transform.position + startRayPos) * Vector2.one, Hit.Value.point))
                     {
                         Hit = hit;
                     }
