@@ -1558,7 +1558,8 @@ MonoBehaviour:
   ATK: 1
   CD: 2
   CDTimer: 0
-  preparation: 1
+  preparation1: 1.7
+  preparation2: 0.3
   preparationTimer: 0
   hand: 10
   atkTime: 2

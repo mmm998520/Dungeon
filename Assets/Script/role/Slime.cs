@@ -43,9 +43,6 @@ namespace com.DungeonPad
             Destroy(monsterAttack.gameObject, 2f);
             monsterAttack.ATK = ATK;
             monsterAttack.continued = true;
-            CDTimer = 0;
-            preparationTimer = 0;
-            prepare = false;
             Destroy(gameObject);
         }
     }

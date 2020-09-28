@@ -6,8 +6,8 @@ namespace com.DungeonPad
 {
     public class MonsterManager : DirectionChanger
     {
-        public float MaxHP, HP, ATK, CD, CDTimer, preparation, preparationTimer, hand, atkTime;
-        protected bool prepare = false;
+        public float MaxHP, HP, ATK, CD, CDTimer, preparation1, preparation2, preparationTimer, hand, atkTime;
+        protected int prepare = 0;
         public GameObject attack;
         /// <summary> 守備區域 </summary>
         protected HashSet<int> guardPos = new HashSet<int>();
@@ -92,8 +92,11 @@ namespace com.DungeonPad
         /// <summary> 轉向並向下一個目標點前進 </summary>
         protected void moveToTarget()
         {
-            changeDirection();
-            if (!prepare)
+            if (prepare != 2)
+            {
+                changeDirection();
+            }
+            if (prepare == 0)
             {
                 transform.Translate(Vector3.right * Time.deltaTime);
             }
@@ -141,7 +144,6 @@ namespace com.DungeonPad
         protected void guard(HashSet<int> canGo)
         {
             Vector3 endPos = GameManager.maze.GetChild(guardPoint[nextGrardNum]).position;
-            Debug.Log(guardPoint[nextGrardNum] + " : "+endPos);
             int[] endRow = new int[1] { (int)endPos.x }, endCol = new int[1] { (int)endPos.y };
             setNavigateTarget(endRow, endCol, canGo);
         }
@@ -153,12 +155,15 @@ namespace com.DungeonPad
             {
                 if (Vector3.Distance(transform.position * Vector2.one, MinDisPlayer().position * Vector2.one) < hand && stat == Stat.pursue)
                 {
-                    prepare = true;
+                    if (prepare == 0)
+                    {
+                        prepare = 1;
+                    }
                 }
                 else
                 {
                     preparationTimer = 0;
-                    prepare = false;
+                    prepare = 0;
                 }
             }
         }
@@ -167,7 +172,11 @@ namespace com.DungeonPad
         {
             if (stat != Stat.back)
             {
-                if ((preparationTimer += Time.deltaTime) >= preparation)
+                if ((preparationTimer += Time.deltaTime) >= preparation1)
+                {
+                    prepare = 2;
+                }
+                if ((preparationTimer += Time.deltaTime) >= preparation1 + preparation2)
                 {
                     Attack();
                 }
@@ -176,7 +185,7 @@ namespace com.DungeonPad
             {
                 CDTimer = 0;
                 preparationTimer = 0;
-                prepare = false;
+                prepare = 0;
             }
         }
 
@@ -187,7 +196,7 @@ namespace com.DungeonPad
             monsterAttack.ATK = ATK;
             CDTimer = 0;
             preparationTimer = 0;
-            prepare = false;
+            prepare = 0;
         }
     }
 }

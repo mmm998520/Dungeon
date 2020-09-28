@@ -36,7 +36,7 @@ namespace com.DungeonPad
             hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
             randomMove();
             attackCD();
-            if (prepare)
+            if (prepare != 0)
             {
                 target = MinDisPlayer();
                 prepareAttack();

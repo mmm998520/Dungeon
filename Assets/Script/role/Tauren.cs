@@ -39,7 +39,7 @@ namespace com.DungeonPad
             hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
             guardBehaviour();
             attackCD();
-            if (prepare)
+            if (prepare != 0)
             {
                 prepareAttack();
             }
