@@ -1104,6 +1104,8 @@ MonoBehaviour:
   CDTimer: 0
   attack: {fileID: 6355018383450350413, guid: 3a37df763a5ffcc4ca323d7c23ed55d1, type: 3}
   lockedTimer: 0
+  flashTimer: 0
+  flashTimerStoper: 0.1
   speed: 3
   startRayPos: []
 --- !u!23 &556027053
@@ -2131,6 +2133,8 @@ MonoBehaviour:
   CDTimer: 0
   attack: {fileID: 6355018383450350413, guid: 9d1fa12b7a7bcaf47b20586aa6ed4f8f, type: 3}
   lockedTimer: 0
+  flashTimer: 0
+  flashTimerStoper: 0.1
   speed: 3
   startRayPos:
   - {x: 0.35, y: 0.35, z: 0}
@@ -3099,6 +3103,8 @@ MonoBehaviour:
   CDTimer: 0
   attack: {fileID: 6355018383450350413, guid: 9d1fa12b7a7bcaf47b20586aa6ed4f8f, type: 3}
   lockedTimer: 0
+  flashTimer: 0
+  flashTimerStoper: 0.1
   speed: 3
   startRayPos:
   - {x: 0.35, y: 0.35, z: 0}
@@ -4212,6 +4218,8 @@ MonoBehaviour:
   CDTimer: 0
   attack: {fileID: 6355018383450350413, guid: 8c9acdd95059db74eb248a0dbb28544e, type: 3}
   lockedTimer: 0
+  flashTimer: 0
+  flashTimerStoper: 0.1
   speed: 3
   startRayPos: []
 --- !u!50 &2126407592

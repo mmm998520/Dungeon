@@ -12,8 +12,8 @@ namespace com.DungeonPad
         public float CD, CDTimer;
         public GameObject attack;
         Vector3 lastPos;
-        bool locked = true;
-        public float lockedTimer;
+        bool locked = true, flash = false;
+        public float lockedTimer, flashTimer, flashTimerStoper;
         public float speed = 3;
         Transform hp;
         public List<Vector3> startRayPos;
@@ -33,7 +33,6 @@ namespace com.DungeonPad
                 SceneManager.LoadScene("Died");
             }
             timer();
-            GetComponent<Rigidbody2D>().WakeUp();
 
             RaycastHit2D? hit = Hit();
             if (hit.HasValue)
@@ -85,9 +84,32 @@ namespace com.DungeonPad
             else
             {
                 locked = false;
-                Vector3 inputPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.touches[touchNum].position.x, Input.touches[touchNum].position.y, 2));
-                lastPos = inputPos;
-                move(inputPos);
+                if (lockedTimer < 0.5f && lockedTimer > 0)
+                {
+                    flash = true;
+                }
+                else if(!flash)
+                {
+                    Vector3 inputPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.touches[touchNum].position.x, Input.touches[touchNum].position.y, 2));
+                    lastPos = inputPos;
+                    move(inputPos);
+                }
+            }
+            if (flash)
+            {
+                int _i;
+                float minDis = float.MaxValue;
+                Transform minDisPlayer = null;
+                for (_i = 0; _i < GameManager.players.childCount; _i++)
+                {
+                    Transform player = GameManager.players.GetChild(_i);
+                    if (minDis > Vector3.Distance(player.position, transform.position) && player != transform)
+                    {
+                        minDis = Vector3.Distance(player.position, transform.position);
+                        minDisPlayer = player;
+                    }
+                }
+                transform.GetComponent<Rigidbody2D>().velocity = (minDisPlayer.position - transform.position).normalized * speed * 3;
             }
         }
 
@@ -173,6 +195,14 @@ namespace com.DungeonPad
             else
             {
                 lockedTimer = 0;
+            }
+            if (flash)
+            {
+                if ((flashTimer += Time.deltaTime) > flashTimerStoper)
+                {
+                    flash = false;
+                    flashTimer = 0;
+                }
             }
         }
     }
