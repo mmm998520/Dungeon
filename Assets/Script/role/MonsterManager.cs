@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class MonsterManager : DirectionChanger
     {
-        public float MaxHP, HP, ATK, CD, CDTimer, preparation, preparationTimer, hand;
+        public float MaxHP, HP, ATK, CD, CDTimer, preparation, preparationTimer, hand, atkTime;
         protected bool prepare = false;
         public GameObject attack;
         /// <summary> 守備區域 </summary>
@@ -183,7 +183,7 @@ namespace com.DungeonPad
         protected virtual void Attack()
         {
             MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation).GetComponent<MonsterAttack>();
-            Destroy(monsterAttack.gameObject, 0.4f);
+            Destroy(monsterAttack.gameObject, atkTime);
             monsterAttack.ATK = ATK;
             CDTimer = 0;
             preparationTimer = 0;
