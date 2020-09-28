@@ -13,7 +13,7 @@ namespace com.DungeonPad
         public GameObject attack;
         Vector3 lastPos;
         bool locked = true, flash = false;
-        public float lockedTimer, flashTimer, flashTimerStoper;
+        public float beganTouchedTimer, flashTimer, flashTimerStoper;
         public float speed = 3;
         Transform hp;
         public List<Vector3> startRayPoss;
@@ -59,7 +59,19 @@ namespace com.DungeonPad
                 Vector3 touchPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.touches[i].position.x, Input.touches[i].position.y, 2));
                 if (Input.touches[i].phase == TouchPhase.Began && locked)
                 {
-                    if (Vector3.Distance(touchPos, lastPos) < 0.5f)
+                    int _i;
+                    float minDis = float.MaxValue;
+                    Transform minDisPlayer = null;
+                    for (_i = 0; _i < GameManager.players.childCount; _i++)
+                    {
+                        Transform player = GameManager.players.GetChild(_i);
+                        if (minDis > Vector3.Distance(player.position, touchPos))
+                        {
+                            minDis = Vector3.Distance(player.position, touchPos);
+                            minDisPlayer = player;
+                        }
+                    }
+                    if (Vector3.Distance(touchPos, lastPos) < 2f && minDisPlayer == transform)
                     {
                         touchCount++;
                         touchNum = i;
@@ -83,12 +95,16 @@ namespace com.DungeonPad
             }
             else
             {
-                locked = false;
-                if (lockedTimer < 0.5f && lockedTimer > 0)
+                if(Input.touches[touchNum].phase == TouchPhase.Began)
                 {
-                    flash = true;
+                    if (beganTouchedTimer < 0.3f && beganTouchedTimer > 0)
+                    {
+                        flash = true;
+                    }
+                    beganTouchedTimer = 0;
                 }
-                else if(!flash)
+                locked = false;
+                if(!flash)
                 {
                     Vector3 inputPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.touches[touchNum].position.x, Input.touches[touchNum].position.y, 2));
                     lastPos = inputPos;
@@ -189,14 +205,7 @@ namespace com.DungeonPad
         void timer()
         {
             CDTimer += Time.deltaTime;
-            if (locked)
-            {
-                lockedTimer += Time.deltaTime;
-            }
-            else
-            {
-                lockedTimer = 0;
-            }
+            beganTouchedTimer += Time.deltaTime;
             if (flash)
             {
                 if ((flashTimer += Time.deltaTime) > flashTimerStoper)

@@ -32,12 +32,12 @@ namespace com.DungeonPad
             {
                 for (j = 0; j < i; j++)
                 {
-                    float P1timer = transform.GetChild(i).GetComponent<PlayerManager>().lockedTimer;
-                    float P2timer = transform.GetChild(j).GetComponent<PlayerManager>().lockedTimer;
+                    float P1timer = transform.GetChild(i).GetComponent<PlayerManager>().beganTouchedTimer;
+                    float P2timer = transform.GetChild(j).GetComponent<PlayerManager>().beganTouchedTimer;
                     if (P1timer > 3f && P2timer > 3f)
                     {
-                        transform.GetChild(i).GetComponent<PlayerManager>().lockedTimer = 0;
-                        transform.GetChild(j).GetComponent<PlayerManager>().lockedTimer = 0;
+                        transform.GetChild(i).GetComponent<PlayerManager>().beganTouchedTimer = 0;
+                        transform.GetChild(j).GetComponent<PlayerManager>().beganTouchedTimer = 0;
                     }
                     else if (P1timer > 1f && P2timer > 1f)
                     {
