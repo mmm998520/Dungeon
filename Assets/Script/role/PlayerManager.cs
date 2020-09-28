@@ -135,7 +135,7 @@ namespace com.DungeonPad
             {
                 transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * speed;
                 Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, (inputPos - transform.position), Vector3.forward));
-                transform.GetChild(3).localRotation = quaternion;
+                transform.localRotation = quaternion;
             }
             else if (Vector3.Distance(inputPos, transform.position) > speed * Time.deltaTime*3)
             {
@@ -143,13 +143,13 @@ namespace com.DungeonPad
                 
                 transform.GetComponent<Rigidbody2D>().velocity = (inputPos - transform.position).normalized * speed* (a / speed / Time.deltaTime)*0.1f;
                 Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, (inputPos - transform.position), Vector3.forward));
-                transform.GetChild(3).localRotation = quaternion;
+                transform.localRotation = quaternion;
             }
             else
             {
                 transform.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                 Quaternion quaternion = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, (inputPos - transform.position), Vector3.forward));
-                transform.GetChild(3).localRotation = quaternion;
+                transform.localRotation = quaternion;
             }
         }
 
@@ -169,7 +169,7 @@ namespace com.DungeonPad
             if(CDTimer >= CD && locked)
             {
                 CDTimer = 0;
-                PlayerAttack playerAttack = Instantiate(attack, transform.position, transform.GetChild(3).rotation).GetComponent<PlayerAttack>();
+                PlayerAttack playerAttack = Instantiate(attack, transform.position, transform.rotation).GetComponent<PlayerAttack>();
                 playerAttack.ATK = ATK;
                 playerAttack.continued = continued;
                 Destroy(playerAttack.gameObject, atkTime);
@@ -184,9 +184,9 @@ namespace com.DungeonPad
             int i;
             for (i = 0; i < startRayPoss.Count; i++)
             {
-                Vector3 startRayPos = Quaternion.Euler(0, 0, transform.GetChild(3).rotation.eulerAngles.z) * startRayPoss[i];
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + startRayPos, Quaternion.Euler(0, 0, transform.GetChild(3).rotation.eulerAngles.z) * Vector3.right, hand, 1 << 9 | 1 << 10 | 1 << 11 | 1 << 12);
-                Debug.DrawRay(transform.position + startRayPos, Quaternion.Euler(0, 0, transform.GetChild(3).rotation.eulerAngles.z) * Vector3.right * 100,Color.red,2);
+                Vector3 startRayPos = transform.rotation * startRayPoss[i];
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + startRayPos, transform.rotation * Vector3.right, hand, 1 << 9 | 1 << 10 | 1 << 11 | 1 << 12);
+                Debug.DrawRay(transform.position + startRayPos, transform.rotation * Vector3.right * 100, Color.red, 2);
                 if (hit)
                 {
                     if (!Hit.HasValue)
