@@ -12,7 +12,7 @@ namespace com.DungeonPad
         public float CD, CDTimer;
         public GameObject attack;
         Vector3 lastPos;
-        bool locked = true, flash = false;
+        public bool locked = true, flash = false;
         public float beganTouchedTimer, flashTimer, flashTimerStoper;
         public float speed = 3;
         Transform hp;

@@ -11,11 +11,13 @@ namespace com.DungeonPad
         float dis, unitDis = 0.18f, angle;
         public GameObject preAttack, attack ,attackCollider;
         Transform lineAttacks;
+        float[] lockedTimer;
 
         private void Awake()
         {
             playerChildCount = transform.childCount;
             lineAttacks = new GameObject("lineAttacks").transform;
+            lockedTimer = new float[playerChildCount];
         }
         void Update()
         {
@@ -28,16 +30,29 @@ namespace com.DungeonPad
             lineAttacks = new GameObject("lineAttacks").transform;
 
             int i, j, k;
+
+            for (i = 0; i < playerChildCount; i++)
+            {
+                if (transform.GetChild(i).GetComponent<PlayerManager>().locked)
+                {
+                    lockedTimer[i] += Time.deltaTime;
+                }
+                else
+                {
+                    lockedTimer[i] = 0;
+                }
+            }
+
             for (i = 0; i < playerChildCount; i++)
             {
                 for (j = 0; j < i; j++)
                 {
-                    float P1timer = transform.GetChild(i).GetComponent<PlayerManager>().beganTouchedTimer;
-                    float P2timer = transform.GetChild(j).GetComponent<PlayerManager>().beganTouchedTimer;
+                    float P1timer = lockedTimer[i];
+                    float P2timer = lockedTimer[j];
                     if (P1timer > 3f && P2timer > 3f)
                     {
-                        transform.GetChild(i).GetComponent<PlayerManager>().beganTouchedTimer = 0;
-                        transform.GetChild(j).GetComponent<PlayerManager>().beganTouchedTimer = 0;
+                        lockedTimer[i] = 0;
+                        lockedTimer[j] = 0;
                     }
                     else if (P1timer > 1f && P2timer > 1f)
                     {
