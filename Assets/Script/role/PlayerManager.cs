@@ -185,7 +185,7 @@ namespace com.DungeonPad
             for (i = 0; i < startRayPoss.Count; i++)
             {
                 Vector3 startRayPos = transform.rotation * startRayPoss[i];
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + startRayPos, transform.rotation * Vector3.right, hand, 1 << 9 | 1 << 10 | 1 << 11 | 1 << 12);
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + startRayPos, transform.rotation * Vector3.right, hand, 1 << 9 | 1 << 10 | 1 << 11);
                 Debug.DrawRay(transform.position + startRayPos, transform.rotation * Vector3.right * 100, Color.red, 2);
                 if (hit)
                 {
