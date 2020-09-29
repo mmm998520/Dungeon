@@ -13,6 +13,8 @@ namespace com.DungeonPad
         Transform lineAttacks;
         float[] lockedTimer;
         public bool draw = false;
+        public float cd;
+        public Transform ShowCD;
 
         private void Awake()
         {
@@ -22,6 +24,9 @@ namespace com.DungeonPad
         }
         void Update()
         {
+            cd += Time.deltaTime;
+            cd = Mathf.Clamp(cd, 0, 30);
+            ShowCD.localScale = new Vector3(1, (30 - cd) / 30, 1);
             if (draw)
             {
                 drawLine();
@@ -77,12 +82,16 @@ namespace com.DungeonPad
 
         public void button()
         {
-            StartCoroutine("wait");
+            if (cd >= 30)
+            {
+                StartCoroutine("wait");
+            }
         }
 
         IEnumerator wait()
         {
             draw = true;
+            cd = 0;
             yield return new WaitForSeconds(5);
             draw = false;
         }
