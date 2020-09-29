@@ -40,16 +40,12 @@ namespace com.DungeonPad
             }
             else
             {
-                print("a");
                 if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
                 {
-                    print("b");
                     if (collider.GetComponent<MonsterManager>())
                     {
-                        print("c");
                         if (!monsters.Contains(collider.GetComponent<MonsterManager>()))
                         {
-                            print("d");
                             monsters.Add(collider.GetComponent<MonsterManager>());
                         }
                     }
@@ -61,13 +57,10 @@ namespace com.DungeonPad
         {
             if (continued)
             {
-                print("f");
                 if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
                 {
-                    print("g");
                     if (collider.GetComponent<MonsterManager>())
                     {
-                        print("h");
                         monsters.Remove(collider.GetComponent<MonsterManager>());
                     }
                 }
