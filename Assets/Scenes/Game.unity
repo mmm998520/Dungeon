@@ -2775,7 +2775,7 @@ MonoBehaviour:
   attackCollider: {fileID: 4194553186035810207, guid: e50d6e0a11b58df44bf09162857093c6,
     type: 3}
   draw: 0
-  cd: 0
+  cd: 30
   ShowCD: {fileID: 1909121174}
 --- !u!1 &2112717215
 GameObject:
