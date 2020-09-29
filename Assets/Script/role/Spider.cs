@@ -10,6 +10,7 @@ namespace com.DungeonPad
 
         void Start()
         {
+            RepTime = new WaitForSeconds(repTimer);
             stat = Stat.pursue;
             hp = transform.GetChild(1);
             int i, j, t = 0;
@@ -60,8 +61,25 @@ namespace com.DungeonPad
 
         protected override void Attack()
         {
-            base.Attack();
+            print("a");
+            StartCoroutine("AttackRep");
+        }
+
+        WaitForSeconds RepTime;
+        IEnumerator AttackRep()
+        {
+            for(int i = 0; i < repTimes; i++)
+            {
+                base.Attack();
+                if (i != repTimes - 1)
+                {
+                    yield return RepTime;
+                }
+            }
             nextGrardNum = Random.Range(0, guardPoint.Length);
+            preparationTimer = 0;
+            prepare = 0;
+            attacked = false;
         }
     }
 }

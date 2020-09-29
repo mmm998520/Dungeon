@@ -15,6 +15,9 @@ namespace com.DungeonPad
         protected HashSet<int> pursuePos = new HashSet<int>();
         public int[] guardPoint;
         public int nextGrardNum;
+
+        public float difference, repTimes, repTimer;
+        protected bool attacked = false;
         protected enum Stat
         {
             guard,
@@ -178,7 +181,11 @@ namespace com.DungeonPad
                 }
                 if ((preparationTimer += Time.deltaTime) >= preparation1 + preparation2)
                 {
-                    Attack();
+                    if (!attacked)
+                    {
+                        Attack();
+                        attacked = true;
+                    }
                 }
             }
             else
@@ -191,12 +198,11 @@ namespace com.DungeonPad
 
         protected virtual void Attack()
         {
-            MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation).GetComponent<MonsterAttack>();
+            MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation * Quaternion.Euler(0,0,Random.Range(-difference,difference))).GetComponent<MonsterAttack>();
             Destroy(monsterAttack.gameObject, atkTime);
             monsterAttack.ATK = ATK;
             CDTimer = 0;
-            preparationTimer = 0;
-            prepare = 0;
+
         }
     }
 }
