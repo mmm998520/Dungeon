@@ -77,7 +77,7 @@ namespace com.DungeonPad
                             Instantiate(attack, center - (dir * k), Quaternion.Euler(0, 0, angle), lineAttacks);
                             k++;
                         }
-                    }
+                    }/*
                     else if (P1timer > 0.3f && P2timer > 0.3f)
                     {
 
@@ -119,7 +119,7 @@ namespace com.DungeonPad
                             Instantiate(preAttack, center - (dir * k), Quaternion.Euler(0, 0, angle), lineAttacks);
                             k++;
                         }
-                    }
+                    }*/
                 }
             }
         }
