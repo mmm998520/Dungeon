@@ -56,7 +56,8 @@ namespace com.DungeonPad
                     }
                     else if (P1timer > 1f && P2timer > 1f)
                     {
-
+                        lockedTimer[i] = 0;
+                        lockedTimer[j] = 0;
                     }
                     else if (P1timer > 0.4f && P2timer > 0.4f)
                     {

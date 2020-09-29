@@ -12,7 +12,6 @@ namespace com.DungeonPad
         {
             stat = Stat.pursue;
             hp = transform.GetChild(1);
-            rotateSpeed = 200;
             int i, j, t = 0;
             greenPos = new HashSet<int>();
             pursuePos = new HashSet<int>();

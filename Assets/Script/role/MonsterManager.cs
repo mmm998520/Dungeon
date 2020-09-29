@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class MonsterManager : DirectionChanger
     {
-        public float MaxHP, HP, ATK, CD, CDTimer, preparation1, preparation2, preparationTimer, hand, atkTime;
+        public float MaxHP, HP, ATK, CD, CDTimer, preparation1, preparation2, preparationTimer, hand, atkTime, speed;
         protected int prepare = 0;
         public GameObject attack;
         /// <summary> 守備區域 </summary>
@@ -98,7 +98,7 @@ namespace com.DungeonPad
             }
             if (prepare == 0)
             {
-                transform.Translate(Vector3.right * Time.deltaTime);
+                transform.Translate(Vector3.right * Time.deltaTime * speed);
             }
         }
 

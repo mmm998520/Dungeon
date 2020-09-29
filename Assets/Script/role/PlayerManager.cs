@@ -125,7 +125,7 @@ namespace com.DungeonPad
                         minDisPlayer = player;
                     }
                 }
-                transform.GetComponent<Rigidbody2D>().velocity = (minDisPlayer.position - transform.position).normalized * speed * 3;
+                transform.GetComponent<Rigidbody2D>().velocity = (minDisPlayer.position - transform.position).normalized * speed * 6;
             }
         }
 

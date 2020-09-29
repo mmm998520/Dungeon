@@ -329,7 +329,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779630006675397161}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.62300014, y: 7.51, z: -8}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
@@ -400,15 +400,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92958705c6d885d4b8b4dcf73b2b31f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 10
-  HP: 10
-  ATK: 1
+  MaxHP: 40
+  HP: 40
+  ATK: 2
   hand: 4.5
   atkTime: 0.4
   continued: 0
   CD: 0.5
   CDTimer: 0
   attack: {fileID: 6355018383450350413, guid: 3a37df763a5ffcc4ca323d7c23ed55d1, type: 3}
+  locked: 1
+  flash: 0
   beganTouchedTimer: 0
   flashTimer: 0
   flashTimerStoper: 0.1
