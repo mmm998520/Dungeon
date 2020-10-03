@@ -198,11 +198,29 @@ namespace com.DungeonPad
 
         protected virtual void Attack()
         {
-            MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation * Quaternion.Euler(0,0,Random.Range(-difference,difference))).GetComponent<MonsterAttack>();
-            Destroy(monsterAttack.gameObject, atkTime);
-            monsterAttack.ATK = ATK;
-            CDTimer = 0;
-
+            StartCoroutine("AttackRep");
         }
+
+        protected WaitForSeconds RepTime;
+
+        protected IEnumerator AttackRep()
+        {
+            for (int i = 0; i < repTimes; i++)
+            {
+                MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation * Quaternion.Euler(0, 0, Random.Range(-difference, difference))).GetComponent<MonsterAttack>();
+                Destroy(monsterAttack.gameObject, atkTime);
+                monsterAttack.ATK = ATK;
+                CDTimer = 0;
+                if (i != repTimes - 1)
+                {
+                    yield return RepTime;
+                }
+            }
+            nextGrardNum = Random.Range(0, guardPoint.Length);
+            preparationTimer = 0;
+            prepare = 0;
+            attacked = false;
+        }
+
     }
 }

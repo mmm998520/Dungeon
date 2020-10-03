@@ -58,28 +58,5 @@ namespace com.DungeonPad
             }
             guard(guardPos);
         }
-
-        protected override void Attack()
-        {
-            print("a");
-            StartCoroutine("AttackRep");
-        }
-
-        WaitForSeconds RepTime;
-        IEnumerator AttackRep()
-        {
-            for(int i = 0; i < repTimes; i++)
-            {
-                base.Attack();
-                if (i != repTimes - 1)
-                {
-                    yield return RepTime;
-                }
-            }
-            nextGrardNum = Random.Range(0, guardPoint.Length);
-            preparationTimer = 0;
-            prepare = 0;
-            attacked = false;
-        }
     }
 }
