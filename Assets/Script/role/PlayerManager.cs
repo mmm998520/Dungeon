@@ -10,7 +10,7 @@ namespace com.DungeonPad
         public float MaxHP, HP, ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
-        public GameObject attack;
+        public GameObject attack, regener;
         Vector3 lastPos;
         public bool locked = true, flash = false;
         public float beganTouchedTimer, flashTimer, flashTimerStoper;
@@ -218,12 +218,19 @@ namespace com.DungeonPad
 
         void ridicule()
         {
-            Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(transform.position, 10, 1 << 9);
+            Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(transform.position, 7, 1 << 9);
             for(int i = 0; i < collider2Ds.Length; i++)
             {
                 collider2Ds[i].GetComponent<MonsterManager>().ridiculed = transform;
                 collider2Ds[i].GetComponent<MonsterManager>().ridiculedTimer = 0;
             }
+        }
+
+        void regen()
+        {
+            regener re = Instantiate(regener, transform.position * Vector2.one, Quaternion.identity).GetComponent<regener>();
+            re.master = transform;
+            Destroy(re.gameObject, 4);
         }
     }
 }
