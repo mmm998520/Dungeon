@@ -40,11 +40,12 @@ namespace com.DungeonPad
 
         public void rePos(Transform gened)
         {
-            print(canGenPos.Count);
             int r = Random.Range(0, canGenPos.Count);
-            print(canGenPos[r]);
             gened.position = map.GetChild(canGenPos[r]).position;
-            canGenPos.Add(gened.GetComponent<Trigger>().GenNum);
+            if (gened.GetComponent<Trigger>().GenNum != 0)
+            {
+                canGenPos.Add(gened.GetComponent<Trigger>().GenNum);
+            }
             gened.GetComponent<Trigger>().GenNum = canGenPos[r];
             canGenPos.RemoveAt(r);
         }

@@ -10,7 +10,6 @@ namespace com.DungeonPad
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-            print("a");
             if (collider.GetComponent<PlayerManager>())
             {
                 triggerGen.rePos(transform);
