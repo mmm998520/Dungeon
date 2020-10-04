@@ -10,10 +10,17 @@ namespace com.DungeonPad
         public Transform map;
         void Start()
         {
-            int i;
-            for(i = 0; i < MapCreater.totalRow[MapCreater.level] * MapCreater.totalCol[MapCreater.level]; i++)
+            int i, j, k = 0;
+            for(i = 0; i < MapCreater.totalRow[MapCreater.level]; i++)
             {
-                canGenPos.Add(i);
+                for (j = 0; j < MapCreater.totalCol[MapCreater.level]; j++)
+                {
+                    if(!(i == 0 || j == 0 || i== MapCreater.totalRow[MapCreater.level]-1 ||  j == MapCreater.totalCol[MapCreater.level] - 1))
+                    {
+                        canGenPos.Add(k);
+                    }
+                    k++;
+                }
             }
             map = GameManager.maze;
             for (i = 0; i < transform.childCount; i++)
