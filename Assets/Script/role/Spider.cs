@@ -20,7 +20,6 @@ namespace com.DungeonPad
                 {
                     if (MapCreater.mapArray[i, j] != (int)MapCreater.roomStat.wall)
                     {
-                        print(t);
                         guardPos.Add(t);
                         pursuePos.Add(t);
                     }

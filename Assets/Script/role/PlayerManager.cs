@@ -173,7 +173,6 @@ namespace com.DungeonPad
                 playerAttack.ATK = ATK;
                 playerAttack.continued = continued;
                 Destroy(playerAttack.gameObject, atkTime);
-                print(atkTime+","+CD);
             }
         }
 

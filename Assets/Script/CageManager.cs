@@ -6,7 +6,6 @@ namespace com.DungeonPad
 {
     public class CageManager : MonsterManager
     {
-        Transform hp;
         void Start()
         {
             hp = transform.GetChild(1);
