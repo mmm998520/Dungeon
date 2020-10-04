@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace com.DungeonPad
 {
-    public class PlayersLine : MonoBehaviour
+    public class Players : MonoBehaviour
     {
         public static int playerChildCount;
         Vector3 p1, p2, center, dir;
@@ -13,8 +13,8 @@ namespace com.DungeonPad
         Transform lineAttacks;
         float[] lockedTimer;
         public bool draw = false;
-        public float cd;
-        public Transform ShowCD;
+        public float MP;
+        public Transform ShowMP;
 
         private void Awake()
         {
@@ -24,9 +24,9 @@ namespace com.DungeonPad
         }
         void Update()
         {
-            cd += Time.deltaTime;
-            cd = Mathf.Clamp(cd, 0, 30);
-            ShowCD.localScale = new Vector3(1, (30 - cd) / 30, 1);
+            MP += Time.deltaTime;
+            MP = Mathf.Clamp(MP, 0, 30);
+            ShowMP.localScale = new Vector3(MP / 30, 1, 1);
             if (draw)
             {
                 drawLine();
@@ -80,20 +80,38 @@ namespace com.DungeonPad
             }
         }
 
-        public void button()
+        public void LineButton()
         {
-            if (cd >= 30)
+            if (MP >= 10)
             {
-                StartCoroutine("wait");
+                MP -= 10;
+                StartCoroutine("LineButtonWait");
             }
         }
 
-        IEnumerator wait()
+        IEnumerator LineButtonWait()
         {
             draw = true;
-            cd = 0;
             yield return new WaitForSeconds(5);
             draw = false;
+        }
+
+        public void RidiculeButton()
+        {
+            if (MP >= 10)
+            {
+                MP -= 10;
+                transform.GetChild(0).GetComponent<PlayerManager>().ridicule();
+            }
+        }
+
+        public void RegenButton()
+        {
+            if (MP >= 10)
+            {
+                MP -= 10;
+                transform.GetChild(1).GetComponent<PlayerManager>().regen();
+            }
         }
     }
 }

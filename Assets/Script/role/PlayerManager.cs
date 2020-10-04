@@ -215,7 +215,7 @@ namespace com.DungeonPad
             }
         }
 
-        void ridicule()
+        public void ridicule()
         {
             Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(transform.position, 7, 1 << 9);
             for(int i = 0; i < collider2Ds.Length; i++)
@@ -225,7 +225,7 @@ namespace com.DungeonPad
             }
         }
 
-        void regen()
+        public void regen()
         {
             regener re = Instantiate(regener, transform.position * Vector2.one, Quaternion.identity).GetComponent<regener>();
             re.master = transform;
