@@ -215,5 +215,15 @@ namespace com.DungeonPad
                 }
             }
         }
+
+        void ridicule()
+        {
+            Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(transform.position, 10, 1 << 9);
+            for(int i = 0; i < collider2Ds.Length; i++)
+            {
+                collider2Ds[i].GetComponent<MonsterManager>().ridiculed = transform;
+                collider2Ds[i].GetComponent<MonsterManager>().ridiculedTimer = 0;
+            }
+        }
     }
 }

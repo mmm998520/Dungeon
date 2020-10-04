@@ -6,8 +6,6 @@ namespace com.DungeonPad
 {
     public class Spider : MonsterManager
     {
-        Transform hp;
-
         void Start()
         {
             RepTime = new WaitForSeconds(repTimer);
@@ -33,12 +31,20 @@ namespace com.DungeonPad
 
         void Update()
         {
+            timer();
             hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
             randomMove();
             attackCD();
             if (prepare != 0)
             {
-                target = MinDisPlayer();
+                if (ridiculed == null)
+                {
+                    target = MinDisPlayer();
+                }
+                else
+                {
+                    target = ridiculed;
+                }
                 prepareAttack();
             }
             moveToTarget();

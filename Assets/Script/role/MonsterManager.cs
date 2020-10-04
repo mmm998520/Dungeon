@@ -8,6 +8,7 @@ namespace com.DungeonPad
     {
         public float MaxHP, HP, ATK, CD, CDTimer, preparation1, preparation2, preparationTimer, hand, atkTime, speed;
         protected int prepare = 0;
+        protected Transform hp;
         public GameObject attack;
         /// <summary> 守備區域 </summary>
         protected HashSet<int> guardPos = new HashSet<int>();
@@ -15,6 +16,9 @@ namespace com.DungeonPad
         protected HashSet<int> pursuePos = new HashSet<int>();
         public int[] guardPoint;
         public int nextGrardNum;
+
+        public Transform ridiculed = null;
+        public float ridiculedTimer, ridiculedTimerStoper = 5;
 
         public float difference, repTimes, repTimer;
         protected bool attacked = false;
@@ -222,5 +226,16 @@ namespace com.DungeonPad
             attacked = false;
         }
 
+        protected virtual void timer()
+        {
+            if (ridiculed != null)
+            {
+                if ((ridiculedTimer += Time.deltaTime) > ridiculedTimerStoper)
+                {
+                    ridiculed = null;
+                    ridiculedTimer = 0;
+                }
+            }
+        }
     }
 }

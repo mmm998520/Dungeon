@@ -6,8 +6,6 @@ namespace com.DungeonPad
 {
     public class Tauren : MonsterManager
     {
-        Transform hp;
-
         void Start()
         {
             hp = transform.GetChild(1);
