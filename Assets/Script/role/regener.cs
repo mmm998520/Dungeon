@@ -10,7 +10,7 @@ namespace com.DungeonPad
         void Update()
         {
             transform.position = master.position * Vector2.one;
-            Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(transform.position, 7, 1 << 8);
+            Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(transform.position, 2, 1 << 8);
             for (int i = 0; i < collider2Ds.Length; i++)
             {
                 collider2Ds[i].GetComponent<PlayerManager>().HP+=Time.deltaTime*3;
