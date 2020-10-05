@@ -26,7 +26,7 @@ namespace com.DungeonPad
                     {
                         if (collider2Ds[i].GetComponent<PlayerManager>())
                         {
-                            collider2Ds[i].GetComponent<PlayerManager>().HP -= Time.deltaTime * 5;
+                            PlayerManager.HP -= Time.deltaTime * 5;
                         }
                         else if (collider2Ds[i].GetComponent<MonsterManager>())
                         {

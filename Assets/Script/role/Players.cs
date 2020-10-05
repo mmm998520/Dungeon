@@ -21,6 +21,7 @@ namespace com.DungeonPad
             playerChildCount = transform.childCount;
             lineAttacks = new GameObject("lineAttacks").transform;
             lockedTimer = new float[playerChildCount];
+            draw = true;
         }
         void Update()
         {

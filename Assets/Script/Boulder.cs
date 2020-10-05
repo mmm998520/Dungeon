@@ -18,7 +18,7 @@ namespace com.DungeonPad
         {
             if (collider.gameObject.layer == 8)
             {
-                collider.GetComponent<PlayerManager>().HP -= ATK;
+                PlayerManager.HP -= ATK;
                 collider.transform.GetChild(2).gameObject.SetActive(true);
             }
         }

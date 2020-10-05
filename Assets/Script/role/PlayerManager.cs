@@ -7,7 +7,8 @@ namespace com.DungeonPad
 {
     public class PlayerManager : MonoBehaviour
     {
-        public float MaxHP, HP, ATK, hand, atkTime;
+        public static float MaxHP = 40, HP = 40;
+        public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
         public GameObject attack, regener, ridiculeWind;
@@ -18,6 +19,8 @@ namespace com.DungeonPad
         Transform hp;
         public List<Vector3> startRayPoss;
 
+        public bool WASD;
+        Vector2 v = Vector2.zero;
         private void Start()
         {
             lastPos = transform.position;
@@ -27,10 +30,22 @@ namespace com.DungeonPad
         void Update()
         {
             hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
-            behavior();
+            TouchBehavior();
+            ComputerBehavior();
             if (HP <= 0)
             {
                 SceneManager.LoadScene("Died");
+            }
+            else
+            {
+                float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
+                HP += (1.5f - dis) * Time.deltaTime * 2;
+                if (HP > MaxHP)
+                {
+                    HP = MaxHP;
+                }
+                transform.GetChild(5).GetComponent<Light>().spotAngle = HP + 10;
+                transform.GetChild(5).GetComponent<Light>().intensity = HP + 10;
             }
             timer();
 
@@ -49,7 +64,33 @@ namespace com.DungeonPad
             }
         }
 
-        void behavior()
+        void ComputerBehavior()
+        {
+            if (WASD)
+            {
+                v.x += Input.GetAxis("HorizontalWASD") * 5 * Time.deltaTime;
+                v.y += Input.GetAxis("VerticalWASD") * 5 * Time.deltaTime;
+                v *= 0.985f;
+                if (v.magnitude > 3)
+                {
+                    v = v.normalized * 3;
+                }
+                GetComponent<Rigidbody2D>().velocity = v;
+            }
+            else
+            {
+                v.x += Input.GetAxis("Horizontal") * 5 * Time.deltaTime;
+                v.y += Input.GetAxis("Vertical") * 5 * Time.deltaTime;
+                v *= 0.985f;
+                if (v.magnitude > 3)
+                {
+                    v = v.normalized * 3;
+                }
+                GetComponent<Rigidbody2D>().velocity = v;
+            }
+        }
+
+        void TouchBehavior()
         {
             int i;
             int touchCount = 0;
@@ -166,6 +207,7 @@ namespace com.DungeonPad
 
         void Attack()
         {
+            /*
             if(CDTimer >= CD && locked)
             {
                 CDTimer = 0;
@@ -174,6 +216,7 @@ namespace com.DungeonPad
                 playerAttack.continued = continued;
                 Destroy(playerAttack.gameObject, atkTime);
             }
+            */
         }
 
         /// <summary> 從玩家身上打出射線看何處命中(命中後將mask拉伸到命中點)，如果是戰士等不會有設限問題的攻擊則直接返回null不多加處理 </summary>
