@@ -269,7 +269,7 @@ MonoBehaviour:
   target: {fileID: 0}
   MaxHP: 80
   HP: 80
-  ATK: 5
+  ATK: 2
   CD: 2
   CDTimer: 0
   preparation1: 1
@@ -1349,7 +1349,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.05
+  m_Intensity: 0.1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1684,7 +1684,7 @@ MonoBehaviour:
   target: {fileID: 0}
   MaxHP: 80
   HP: 80
-  ATK: 5
+  ATK: 2
   CD: 2
   CDTimer: 0
   preparation1: 1
@@ -3862,7 +3862,7 @@ PrefabInstance:
     - target: {fileID: 4674237558007018189, guid: d8d600deb5492ac4e9777555399d06a9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5789949681900826004, guid: d8d600deb5492ac4e9777555399d06a9,
         type: 3}

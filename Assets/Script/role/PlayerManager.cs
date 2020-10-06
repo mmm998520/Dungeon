@@ -68,23 +68,23 @@ namespace com.DungeonPad
         {
             if (WASD)
             {
-                v.x += Input.GetAxis("HorizontalWASD") * 5 * Time.deltaTime;
-                v.y += Input.GetAxis("VerticalWASD") * 5 * Time.deltaTime;
+                v.x += Input.GetAxis("HorizontalWASD") * 10 * Time.deltaTime;
+                v.y += Input.GetAxis("VerticalWASD") * 10 * Time.deltaTime;
                 v *= 0.985f;
-                if (v.magnitude > 3)
+                if (v.magnitude >10)
                 {
-                    v = v.normalized * 3;
+                    v = v.normalized * 10;
                 }
                 GetComponent<Rigidbody2D>().velocity = v;
             }
             else
             {
-                v.x += Input.GetAxis("Horizontal") * 5 * Time.deltaTime;
-                v.y += Input.GetAxis("Vertical") * 5 * Time.deltaTime;
+                v.x += Input.GetAxis("Horizontal") * 10 * Time.deltaTime;
+                v.y += Input.GetAxis("Vertical") * 10 * Time.deltaTime;
                 v *= 0.985f;
-                if (v.magnitude > 3)
+                if (v.magnitude > 10)
                 {
-                    v = v.normalized * 3;
+                    v = v.normalized * 10;
                 }
                 GetComponent<Rigidbody2D>().velocity = v;
             }
