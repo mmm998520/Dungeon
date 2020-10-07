@@ -6,42 +6,67 @@ namespace com.DungeonPad
 {
     public class Slime : MonsterManager
     {
+        public Transform BurstBubbler;
+
         void Start()
         {
+            RepTime = new WaitForSeconds(repTimer);
+            stat = Stat.pursue;
             hp = transform.GetChild(1);
-            rotateSpeed = 200;
-            target = MinDisPlayer();
-            Invoke("Destroy", 10);
+            int i, j, t = 0;
+            greenPos = new HashSet<int>();
+            pursuePos = new HashSet<int>();
+            for (i = 0; i < MapCreater.totalRow[MapCreater.level]; i++)
+            {
+                for (j = 0; j < MapCreater.totalCol[MapCreater.level]; j++)
+                {
+                    if (MapCreater.mapArray[i, j] != (int)MapCreater.roomStat.wall)
+                    {
+                        guardPos.Add(t);
+                        pursuePos.Add(t);
+                    }
+                    t++;
+                }
+            }
         }
 
         void Update()
         {
+            timer();
             hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
-            if (Vector3.Distance(transform.position * Vector2.one, target.position * Vector2.one) > 0.5f)
+            if (BurstBubbler == null)
             {
-                target = MinDisPlayer();
-                moveToTarget();
+                randomMove();
             }
             else
             {
-                transform.position = target.position;
-                target.GetComponent<PlayerManager>().speed = 1.5f;
+                target = BurstBubbler;
             }
+            moveToTarget();
             if (HP <= 0)
             {
-                target.GetComponent<PlayerManager>().speed = 3;
                 Destroy(gameObject);
             }
+            GetComponent<Rigidbody2D>().WakeUp();
         }
 
-        void Destroy()
+        void randomMove()
         {
-            target.GetComponent<PlayerManager>().speed = 3;
-            MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation).GetComponent<MonsterAttack>();
-            Destroy(monsterAttack.gameObject, 2f);
-            monsterAttack.ATK = ATK;
-            monsterAttack.continued = true;
-            Destroy(gameObject);
+            if (Vector3.Distance(GameManager.maze.GetChild(guardPoint[nextGrardNum]).position * Vector2.one, transform.position * Vector2.one) < 0.5f)
+            {
+                print("arrive");
+                nextGrardNum = Random.Range(0, guardPoint.Length);
+            }
+            guard(guardPos);
+        }
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.GetComponent<PlayerManager>())
+            {
+                collision.collider.GetComponent<PlayerManager>().StickTimer = 0;
+                Destroy(gameObject);
+            }
         }
     }
 }

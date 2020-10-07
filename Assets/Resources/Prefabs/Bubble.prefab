@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 407797013649360983}
   - component: {fileID: 407797013649360982}
   - component: {fileID: 407797013649361001}
-  - component: {fileID: 407797013649361000}
   - component: {fileID: 8933737816721649914}
   m_Layer: 0
   m_Name: Bubble
@@ -29,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 407797013649360980}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 407797014311305233}
   m_Father: {fileID: 0}
@@ -65,20 +64,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &407797013649361000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407797013649360980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9edf42f0ff0f9084596a2c5a66d2e079, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ATK: 10
-  continued: 0
 --- !u!50 &8933737816721649914
 Rigidbody2D:
   serializedVersion: 4

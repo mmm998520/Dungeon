@@ -36,14 +36,7 @@ namespace com.DungeonPad
             attackCD();
             if (prepare != 0)
             {
-                if (ridiculed == null)
-                {
-                    target = MinDisPlayer();
-                }
-                else
-                {
-                    target = ridiculed;
-                }
+                target = MinDisPlayer();
                 prepareAttack();
             }
             moveToTarget();

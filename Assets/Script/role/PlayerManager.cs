@@ -21,6 +21,8 @@ namespace com.DungeonPad
 
         public bool WASD;
         Vector2 v = Vector2.zero;
+
+        public float StickTimer = 10;
         private void Start()
         {
             lastPos = transform.position;
@@ -46,6 +48,26 @@ namespace com.DungeonPad
                 }
                 transform.GetChild(5).GetComponent<Light>().spotAngle = HP + 10;
                 transform.GetChild(5).GetComponent<Light>().intensity = HP + 10;
+                if (StickTimer < 5)
+                {
+                    transform.GetChild(4).gameObject.SetActive(true);
+                    if ((int)(StickTimer * 10)%9 < 3)
+                    {
+                        transform.GetChild(5).GetComponent<Light>().intensity -= 40;
+                    }
+                    else if ((int)(StickTimer * 10) % 3 < 6)
+                    {
+                        transform.GetChild(5).GetComponent<Light>().intensity -= 20;
+                    }
+                    else if ((int)(StickTimer * 10) % 3 < 9)
+                    {
+                        transform.GetChild(5).GetComponent<Light>().intensity -= 0;
+                    }
+                }
+                else
+                {
+                    transform.GetChild(4).gameObject.SetActive(false);
+                }
             }
             timer();
 
@@ -68,28 +90,45 @@ namespace com.DungeonPad
         {
             if (WASD)
             {
-                v.x += Input.GetAxis("HorizontalWASD") * 10 * Time.deltaTime;
-                v.y += Input.GetAxis("VerticalWASD") * 10 * Time.deltaTime;
-                v *= 0.985f;
-                if (v.magnitude >10)
+                v.x += Input.GetAxis("HorizontalWASD") * 2;
+                v.y += Input.GetAxis("VerticalWASD") * 2;
+
+                if ((StickTimer += Time.deltaTime) < 5)
                 {
-                    v = v.normalized * 10;
+                    if (v.magnitude > 0.5f)
+                    {
+                        v = v.normalized * 0.5f;
+                    }
+                }
+                else if (v.magnitude > 3)
+                {
+                    v = v.normalized * 3;
                 }
                 GetComponent<Rigidbody2D>().velocity = v;
             }
             else
             {
-                v.x += Input.GetAxis("Horizontal") * 10 * Time.deltaTime;
-                v.y += Input.GetAxis("Vertical") * 10 * Time.deltaTime;
-                v *= 0.985f;
-                if (v.magnitude > 10)
+                v.x += Input.GetAxis("Horizontal") * 2;
+                v.y += Input.GetAxis("Vertical") * 2;
+                if ((StickTimer += Time.deltaTime) < 5)
                 {
-                    v = v.normalized * 10;
+                    if (v.magnitude > 1f)
+                    {
+                        v = v.normalized * 1f;
+                    }
+                }
+                else if (v.magnitude > 3)
+                {
+                    v = v.normalized * 3;
                 }
                 GetComponent<Rigidbody2D>().velocity = v;
             }
         }
 
+        private void FixedUpdate()
+        {
+            v *= 0.93f;
+        }
         void TouchBehavior()
         {
             int i;

@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4778316681201430687
 Transform:
   m_ObjectHideFlags: 0
@@ -236,7 +236,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8318732579369336302
 Transform:
   m_ObjectHideFlags: 0
@@ -329,7 +329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6414547334353213345
 Transform:
   m_ObjectHideFlags: 0
@@ -539,15 +539,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9225c9754138b643b97992a0d4f6f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateSpeed: 300
   target: {fileID: 0}
-  MaxHP: 10
-  HP: 10
-  ATK: 1.01
-  CD: 0
+  MaxHP: 80
+  HP: 80
+  ATK: 2
+  CD: 0.01
   CDTimer: 0
-  preparation: 0
+  preparation1: 0
+  preparation2: 0
   preparationTimer: 0
-  hand: 0
-  attack: {fileID: 6355018383450350413, guid: fdb2107110823584c8804cc6c3247b65, type: 3}
-  guardPoint: 
+  hand: 10
+  atkTime: 2
+  speed: 1.5
+  attack: {fileID: 6355018383450350413, guid: e70d5eab1d8f6f7488c5e117357c0d83, type: 3}
+  guardPoint: 0a0000000b0000000c0000000d0000000e0000000f00000010000000130000001400000015000000160000001700000018000000190000001c0000001d0000001e0000001f00000020000000210000002200000025000000260000002700000028000000290000002a0000002b0000002e0000002f00000030000000310000003200000033000000340000003700000038000000390000003a0000003b0000003c0000003d00000040000000410000004200000043000000440000004500000046000000490000004a0000004b0000004c0000004d0000004e0000004f000000520000005300000054000000550000005600000057000000580000005b0000005c0000005d0000005e0000005f0000006000000061000000
   nextGrardNum: 0
+  ridiculed: {fileID: 0}
+  ridiculedTimer: 0
+  ridiculedTimerStoper: 5
+  difference: 10
+  repTimes: 2
+  repTimer: 0.3
+  BurstBubbler: {fileID: 0}

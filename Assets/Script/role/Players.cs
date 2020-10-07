@@ -49,7 +49,7 @@ namespace com.DungeonPad
             }
             lineAttacks = new GameObject("lineAttacks").transform;
 
-            int i, j, k;
+            int i, j;
 
             for (i = 0; i < playerChildCount; i++)
             {
