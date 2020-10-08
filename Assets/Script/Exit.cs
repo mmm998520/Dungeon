@@ -5,40 +5,24 @@ using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
-    public class Exit : MonoBehaviour
+    public class Exit : Trigger
     {
-        float time = 3, timer;
-        public Transform MinDisPlayer()
-        {
-            int i;
-            float minDis = float.MaxValue;
-            Transform minDisPlayer = null;
-            for (i = 0; i < GameManager.players.childCount; i++)
-            {
-                Transform player = GameManager.players.GetChild(i);
-                if (minDis > Vector3.Distance(player.position, transform.position))
-                {
-                    minDis = Vector3.Distance(player.position, transform.position);
-                    minDisPlayer = player;
-                }
-            }
-            return minDisPlayer;
-        }
+        public Transform monsters;
 
         void Update()
         {
-            Vector3 minDisPlayerDir = (transform.position * Vector2.one - MinDisPlayer().position * Vector2.one);
-            transform.GetComponent<Rigidbody2D>().velocity = minDisPlayerDir.normalized * 4;
-            if (minDisPlayerDir.sqrMagnitude < 0.5f)
+            if(monsters.childCount == 0)
             {
-                if ((timer += Time.deltaTime) >= time)
-                {
-                    SceneManager.LoadScene("Win");
-                }
+                GetComponent<Collider2D>().enabled = true;
+                GetComponent<MeshRenderer>().enabled = true;
             }
-            else
+        }
+
+        void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.GetComponent<PlayerManager>())
             {
-                timer = 0;
+                SceneManager.LoadScene("Game 2");
             }
         }
     }
