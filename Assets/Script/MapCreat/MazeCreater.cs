@@ -77,6 +77,6 @@ public class MazeCreater : MonoBehaviour
             {
                 currentRow++;
             }
-        } while (!(currentRow >= roomRowNum - 1 && (currentCol <= 0 || currentCol >= roomColNum - 1)));
+        } while (!(currentRow >= roomRowNum - 1 && (currentCol <= 0 || currentCol >= roomColNum - 1) && sameRowNum == 1));
     }
 }
