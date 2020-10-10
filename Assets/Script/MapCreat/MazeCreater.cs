@@ -7,8 +7,8 @@ public class MazeCreater : MonoBehaviour
 {
     /// <summary> 單層地牢的房間行列數 </summary>
     const int roomRowNum = 4, roomColNum = 4;
-    /// <summary> 遍歷房間基本形式用，使用前須將他複製為list，0 ┼，1 ├，2 ┬，3 ┤，4 ┴，5 └，6 ┌，7 ┐，8 ┘，9 │，10 ─ </summary>
-    int[] roomTypesArray = new int[11] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    /// <summary> 遍歷房間基本形式用，使用前須將他複製為list，0 ┼，1 ├，2 ┬，3 ┤，4 ┴，5 │，6 ─ </summary>
+    int[] roomTypesArray = new int[7] { 0, 1, 2, 3, 4, 5, 6 };
     void Start()
     {
         mainRoadsePasswaySelect(mainRoadDecide());
@@ -148,76 +148,56 @@ public class MazeCreater : MonoBehaviour
                 {
                     roomTypesList.Remove(2);
                     roomTypesList.Remove(6);
-                    roomTypesList.Remove(7);
-                    roomTypesList.Remove(10);
                 }
                 //移除有上方的
                 else if (mustNotRoad[i, j, 0])
                 {
-                    roomTypesList.Remove(0);
                     roomTypesList.Remove(1);
                     roomTypesList.Remove(3);
                     roomTypesList.Remove(4);
                     roomTypesList.Remove(5);
-                    roomTypesList.Remove(8);
-                    roomTypesList.Remove(9);
                 }
                 //移除沒右方的
                 if (mustRoad[i, j, 1])
                 {
                     roomTypesList.Remove(3);
-                    roomTypesList.Remove(7);
-                    roomTypesList.Remove(8);
-                    roomTypesList.Remove(9);
+                    roomTypesList.Remove(5);
                 }
                 //移除有右方的
                 else if (mustNotRoad[i, j, 1])
                 {
-                    roomTypesList.Remove(0);
                     roomTypesList.Remove(1);
                     roomTypesList.Remove(2);
                     roomTypesList.Remove(4);
-                    roomTypesList.Remove(5);
                     roomTypesList.Remove(6);
-                    roomTypesList.Remove(10);
                 }
                 //移除沒下方的
                 if (mustRoad[i, j, 2])
                 {
                     roomTypesList.Remove(4);
-                    roomTypesList.Remove(5);
-                    roomTypesList.Remove(8);
-                    roomTypesList.Remove(10);
+                    roomTypesList.Remove(6);
                 }
                 //移除有下方的
                 else if (mustNotRoad[i, j, 2])
                 {
-                    roomTypesList.Remove(0);
                     roomTypesList.Remove(1);
                     roomTypesList.Remove(2);
                     roomTypesList.Remove(3);
-                    roomTypesList.Remove(6);
-                    roomTypesList.Remove(7);
-                    roomTypesList.Remove(9);
+                    roomTypesList.Remove(5);
                 }
                 //移除沒左方的
                 if (mustRoad[i, j, 3])
                 {
                     roomTypesList.Remove(1);
                     roomTypesList.Remove(5);
-                    roomTypesList.Remove(6);
-                    roomTypesList.Remove(9);
                 }
                 //移除有左方的
                 else if (mustNotRoad[i, j, 3])
                 {
-                    roomTypesList.Remove(0);
                     roomTypesList.Remove(2);
                     roomTypesList.Remove(3);
                     roomTypesList.Remove(4);
-                    roomTypesList.Remove(7);
-                    roomTypesList.Remove(8);
-                    roomTypesList.Remove(10);
+                    roomTypesList.Remove(6);
                 }
                 #endregion
                 //從剩餘選項中隨機挑出一個通道型態
@@ -258,10 +238,10 @@ public class MazeCreater : MonoBehaviour
                                 if (canGo[i - 1, j] == false)
                                 {
                                     //看上方是否有通道
-                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 1 || roomtype[i, j] == 3 || roomtype[i, j] == 4 || roomtype[i, j] == 5 || roomtype[i, j] == 8 || roomtype[i, j] == 9)
+                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 1 || roomtype[i, j] == 3 || roomtype[i, j] == 4 || roomtype[i, j] == 5)
                                     {
                                         //看上方的房間是否有下方通道
-                                        if (roomtype[i - 1, j] == 0 || roomtype[i - 1, j] == 1 || roomtype[i - 1, j] == 2 || roomtype[i - 1, j] == 3 || roomtype[i - 1, j] == 6 || roomtype[i - 1, j] == 7 || roomtype[i - 1, j] == 9)
+                                        if (roomtype[i - 1, j] == 0 || roomtype[i - 1, j] == 1 || roomtype[i - 1, j] == 2 || roomtype[i - 1, j] == 3 || roomtype[i - 1, j] == 5)
                                         {
                                             //確認連接成功
                                             canGo[i - 1, j] = true;
@@ -278,10 +258,10 @@ public class MazeCreater : MonoBehaviour
                                 if (canGo[i, j + 1] == false)
                                 {
                                     //看右方是否有通道
-                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 1 || roomtype[i, j] == 2 || roomtype[i, j] == 4 || roomtype[i, j] == 5 || roomtype[i, j] == 6 || roomtype[i, j] == 10)
+                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 1 || roomtype[i, j] == 2 || roomtype[i, j] == 4 || roomtype[i, j] == 6)
                                     {
                                         //看右方的房間是否有左方通道
-                                        if (roomtype[i, j + 1] == 0 || roomtype[i, j + 1] == 2 || roomtype[i, j + 1] == 3 || roomtype[i, j + 1] == 4 || roomtype[i, j + 1] == 7 || roomtype[i, j + 1] == 8 || roomtype[i, j + 1] == 10)
+                                        if (roomtype[i, j + 1] == 0 || roomtype[i, j + 1] == 2 || roomtype[i, j + 1] == 3 || roomtype[i, j + 1] == 4 || roomtype[i, j + 1] == 6)
                                         {
                                             //確認連接成功
                                             canGo[i, j + 1] = true;
@@ -298,10 +278,10 @@ public class MazeCreater : MonoBehaviour
                                 if (canGo[i + 1, j] == false)
                                 {
                                     //看下方是否有通道
-                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 1 || roomtype[i, j] == 2 || roomtype[i, j] == 3 || roomtype[i, j] == 6 || roomtype[i, j] == 7 || roomtype[i, j] == 9)
+                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 1 || roomtype[i, j] == 2 || roomtype[i, j] == 3 || roomtype[i, j] == 5)
                                     {
                                         //看下方的房間是否有上方通道
-                                        if (roomtype[i + 1, j] == 0 || roomtype[i + 1, j] == 1 || roomtype[i + 1, j] == 3 || roomtype[i + 1, j] == 4 || roomtype[i + 1, j] == 5 || roomtype[i + 1, j] == 8 || roomtype[i + 1, j] == 9)
+                                        if (roomtype[i + 1, j] == 0 || roomtype[i + 1, j] == 1 || roomtype[i + 1, j] == 3 || roomtype[i + 1, j] == 4 || roomtype[i + 1, j] == 5)
                                         {
                                             //確認連接成功
                                             canGo[i + 1, j] = true;
@@ -318,10 +298,10 @@ public class MazeCreater : MonoBehaviour
                                 if (canGo[i, j - 1] == false)
                                 {
                                     //看左方是否有通道
-                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 2 || roomtype[i, j] == 3 || roomtype[i, j] == 4 || roomtype[i, j] == 7 || roomtype[i, j] == 8 || roomtype[i, j] == 10)
+                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 2 || roomtype[i, j] == 3 || roomtype[i, j] == 4 || roomtype[i, j] == 6)
                                     {
                                         //看左方的房間是否有右方通道
-                                        if (roomtype[i, j - 1] == 0 || roomtype[i, j - 1] == 1 || roomtype[i, j - 1] == 2 || roomtype[i, j - 1] == 4 || roomtype[i, j - 1] == 5 || roomtype[i, j - 1] == 6 || roomtype[i, j - 1] == 10)
+                                        if (roomtype[i, j - 1] == 0 || roomtype[i, j - 1] == 1 || roomtype[i, j - 1] == 2 || roomtype[i, j - 1] == 4 || roomtype[i, j - 1] == 6)
                                         {
                                             //確認連接成功
                                             canGo[i, j - 1] = true;
@@ -345,13 +325,6 @@ public class MazeCreater : MonoBehaviour
                 {
                     if (!canGo[i, j])
                     {
-                        //////////////////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////////////////
-                        ///原本安插在這可用，但沒有隨機炸通道
-                        //////////////////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////////////////
-                        //////////////////////////////////////////////////////////////////////////////////////////////
                         needBoom.Add(new int[] { i, j });
                     }
                 }
@@ -380,12 +353,6 @@ public class MazeCreater : MonoBehaviour
                             roomtype[i, j] = 0;
                             break;
                         case 6:
-                            roomtype[i, j] = 1;
-                            break;
-                        case 7:
-                            roomtype[i, j] = 3;
-                            break;
-                        case 10:
                             roomtype[i, j] = 4;
                             break;
                     }
@@ -395,13 +362,7 @@ public class MazeCreater : MonoBehaviour
                         case 4:
                             roomtype[i - 1, j] = 0;
                             break;
-                        case 5:
-                            roomtype[i - 1, j] = 1;
-                            break;
-                        case 8:
-                            roomtype[i - 1, j] = 3;
-                            break;
-                        case 10:
+                        case 6:
                             roomtype[i - 1, j] = 2;
                             break;
                     }
@@ -415,13 +376,7 @@ public class MazeCreater : MonoBehaviour
                         case 3:
                             roomtype[i, j] = 0;
                             break;
-                        case 7:
-                            roomtype[i, j] = 2;
-                            break;
-                        case 8:
-                            roomtype[i, j] = 3;
-                            break;
-                        case 9:
+                        case 5:
                             roomtype[i, j] = 1;
                             break;
                     }
@@ -432,12 +387,6 @@ public class MazeCreater : MonoBehaviour
                             roomtype[i, j + 1] = 0;
                             break;
                         case 5:
-                            roomtype[i, j + 1] = 4;
-                            break;
-                        case 6:
-                            roomtype[i, j + 1] = 2;
-                            break;
-                        case 9:
                             roomtype[i, j + 1] = 3;
                             break;
                     }
@@ -451,13 +400,7 @@ public class MazeCreater : MonoBehaviour
                         case 4:
                             roomtype[i, j] = 0;
                             break;
-                        case 5:
-                            roomtype[i, j] = 1;
-                            break;
-                        case 8:
-                            roomtype[i, j] = 3;
-                            break;
-                        case 10:
+                        case 6:
                             roomtype[i, j] = 2;
                             break;
                     }
@@ -468,12 +411,6 @@ public class MazeCreater : MonoBehaviour
                             roomtype[i + 1, j] = 0;
                             break;
                         case 6:
-                            roomtype[i + 1, j] = 1;
-                            break;
-                        case 7:
-                            roomtype[i + 1, j] = 3;
-                            break;
-                        case 10:
                             roomtype[i + 1, j] = 4;
                             break;
                     }
@@ -488,13 +425,7 @@ public class MazeCreater : MonoBehaviour
                             roomtype[i, j] = 0;
                             break;
                         case 5:
-                            roomtype[i, j] = 4;
-                            break;
-                        case 6:
-                            roomtype[i, j] = 2;
-                            break;
-                        case 9:
-                            roomtype[i, j] = 1;
+                            roomtype[i, j] = 3;
                             break;
                     }
                     //左方房間的右方
@@ -503,13 +434,7 @@ public class MazeCreater : MonoBehaviour
                         case 3:
                             roomtype[i, j - 1] = 0;
                             break;
-                        case 7:
-                            roomtype[i, j - 1] = 2;
-                            break;
-                        case 8:
-                            roomtype[i, j - 1] = 4;
-                            break;
-                        case 9:
+                        case 5:
                             roomtype[i, j - 1] = 1;
                             break;
                     }
@@ -540,21 +465,9 @@ public class MazeCreater : MonoBehaviour
                         a = a + "┴" + ",";
                         break;
                     case 5:
-                        a = a + "└" + ",";
-                        break;
-                    case 6:
-                        a = a + "┌" + ",";
-                        break;
-                    case 7:
-                        a = a + "┐" + ",";
-                        break;
-                    case 8:
-                        a = a + "┘" + ",";
-                        break;
-                    case 9:
                         a = a + "│" + ",";
                         break;
-                    case 10:
+                    case 6:
                         a = a + "─" + ",";
                         break;
                 }
