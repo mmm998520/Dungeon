@@ -32,6 +32,7 @@ public class DataLoader : MonoBehaviour
                 }
             }
         }
+        GameObject.Find("").g
     }
 
     void Update()
