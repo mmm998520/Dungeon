@@ -325,10 +325,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3267036d0e577d14c8d33c8d45c84503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textAsset: []
+  textAsset:
+  - {fileID: 4900000, guid: 75c3d88da29ced745a7adba0c3045db6, type: 3}
   layers: 1
   passwayNum: 0
-  level: 2
+  level: 1
   function: 2
   num: 0
   passwayType: 0

@@ -7,7 +7,7 @@ namespace com.DungeonPad
     public class GameManager : MonoBehaviour
     {
         public static Transform players, maze, monsters;
-
+        public static int layers = 1, level = 1;
         void Awake()
         {
             players = GameObject.Find("Players").transform;
