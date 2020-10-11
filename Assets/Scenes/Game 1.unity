@@ -2712,6 +2712,7 @@ MonoBehaviour:
   - name: t12
     prefabs:
     - {fileID: 4921315620671639691, guid: cbc1620717a138d4198d14aa2541481a, type: 3}
+  sensor: {fileID: 3727972926308268955, guid: 9900bfb2f1940324c970f22615fb2c02, type: 3}
 --- !u!4 &1200599303
 Transform:
   m_ObjectHideFlags: 0
@@ -5054,7 +5055,7 @@ PrefabInstance:
     - target: {fileID: 779630006675397161, guid: 4027eeffc34895249971bf8dc3bf3b53,
         type: 3}
       propertyPath: m_Name
-      value: "P2_\u6230\u58EB"
+      value: p1
       objectReference: {fileID: 0}
     - target: {fileID: 779630006675397164, guid: 4027eeffc34895249971bf8dc3bf3b53,
         type: 3}
@@ -5353,7 +5354,7 @@ PrefabInstance:
     - target: {fileID: 3900373170968948818, guid: 60f1d859986bcbd44a8a3264a908e374,
         type: 3}
       propertyPath: m_Name
-      value: "P3_\u6CD5\u5E2B"
+      value: p2
       objectReference: {fileID: 0}
     - target: {fileID: 3900373170968948819, guid: 60f1d859986bcbd44a8a3264a908e374,
         type: 3}

@@ -26,6 +26,7 @@ namespace com.DungeonPad
         private InstantiateObjectPrefabs.instantiateObjectPrefabs[] instantiateObjectPrefab;
         public Dictionary<string, GameObject[]> instantiateObjects = new Dictionary<string, GameObject[]>();
 
+        public GameObject sensor;
         void Awake()
         {
             GetComponent<DataLoader>().LoadAll();
@@ -66,17 +67,31 @@ namespace com.DungeonPad
                         if (i == 0 && j == 0)
                         {
                             mazeCreat(GameManager.layers, roomPasswayDatas[row, col], level, 0, row, col);
+                            created[row, col] = true;
                         }
                         else
                         {
                             mazeCreat(GameManager.layers, roomPasswayDatas[row, col], level, 1, row, col);
+                            created[row, col] = true;
                         }
                     }
                 }
             }
             level = Random.Range(1, 3);
             mazeCreat(GameManager.layers, roomPasswayDatas[endRow, endCol], level, 2, endRow, endCol);
-    }
+            created[endRow, endCol] = true;
+
+            for (i = 0; i < roomCountRowNum; i++)
+            {
+                for (j = 0; j < roomCountColNum; j++)
+                {
+                    Sensor s = Instantiate(sensor, new Vector3(i * objectCountRowNum + (objectCountRowNum / 2), j * objectCountColNum + (objectCountColNum / 2), 0), Quaternion.identity).GetComponent<Sensor>();
+                    s.row = i;
+                    s.col = j;
+                    s.mazeCreater = this;
+                }
+            }
+        }
 
         void Update()
         {
@@ -551,8 +566,31 @@ namespace com.DungeonPad
         #endregion
 
         #region//動態生成
+        public void creat(int currentRow, int currentCol)
+        {
+            int i, j;
+            int row, col, level;
+            for (i = -1; i <= 1; i++)
+            {
+                for (j = -1; j <= 1; j++)
+                {
+                    level = Random.Range(1, 3);
+                    row = currentRow + i;
+                    col = currentCol + j;
+                    if (row >= 0 && col >= 0 && row < roomCountRowNum && col < roomCountColNum)
+                    {
+                        if (!created[row, col])
+                        {
+                            mazeCreat(GameManager.layers, roomPasswayDatas[row, col], level, 1, row, col);
+                            created[row, col] = true;
+                        }
+                    }
+                }
+            }
+        }
+
         /// <summary> 根據狀態補全對應房間資訊 </summary>
-        void mazeCreat(int layers, int passwayType, int level, int functionTypeNum, int roomRow, int roomCol)
+        public void mazeCreat(int layers, int passwayType, int level, int functionTypeNum, int roomRow, int roomCol)
         {
             string[,] objectDatas;
             Dictionary<int, string[,]> roomData = DataLoader.AllRoomDatas[layers, passwayType, level, functionTypeNum];
@@ -573,7 +611,7 @@ namespace com.DungeonPad
             GameObject[] prefab;
             instantiateObjects.TryGetValue(objectData, out prefab);
             int r = Random.Range(0, prefab.Length);
-            Instantiate(prefab[r], new Vector3(insPosRow, insPosCol, 0), Quaternion.identity);
+            Instantiate(prefab[r], new Vector3(insPosRow, insPosCol, 0), Quaternion.identity, transform);
         }
         #endregion
     }

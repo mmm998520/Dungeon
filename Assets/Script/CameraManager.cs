@@ -36,10 +36,6 @@ namespace com.DungeonPad
                 {
                     minY = playerPos.y;
                 }
-                maxX = Mathf.Clamp(maxX, 10, float.MaxValue);
-                minX = Mathf.Clamp(minX, 0, MapCreater.totalRow[MapCreater.level] - 10);
-                maxY = Mathf.Clamp(maxY, 7, float.MaxValue);
-                minY = Mathf.Clamp(minY, 0, MapCreater.totalCol[MapCreater.level] -7);
             }
             cameraMove();
             //cameraSize();
