@@ -8,8 +8,8 @@ public class DataReverser : MonoBehaviour
 {
     public TextAsset[] textAsset;
     string name = "";
-    public int passwayNum, level, function;
-    public int num,a;
+    public int layers, passwayNum, level, function;
+    public int num, passwayType;
     void Start()
     {
         
@@ -25,20 +25,20 @@ public class DataReverser : MonoBehaviour
                 passwayNum = int.Parse(textAsset[i].name.Split('開')[0]);
                 if(passwayNum == 4)
                 {
-                    a = 0;
+                    passwayType = 0;
                 }
                 else if (passwayNum == 3)
                 {
-                    a = 1;
+                    passwayType = 1;
                 }
                 else if (passwayNum == 2)
                 {
-                    a = 5;
+                    passwayType = 5;
                 }
                 for (int j = 0; j < 8; j++)
                 {
-                    name = a + "_" + level + "_" + function + "_" + num;
-                    writeFile("D:/Dmmm998520/HomeWork/fourup/Dungeon/Assets/Resources/RoomDatas"+"/"+a+"/"+level+"/"+function, name, arrayToString(newArray));
+                    name = layers + "_" + passwayType + "_" + level + "_" + function + "_" + num;
+                    writeFile("D:/Dmmm998520/HomeWork/fourup/Dungeon/Assets/Resources/RoomDatas/" + layers + "/" + passwayType + "/" + level + "/" + function, name, arrayToString(newArray));
                     newArray = DataLoader.rotateArray(newArray);
                     if (j == 3)
                     {
@@ -50,9 +50,9 @@ public class DataReverser : MonoBehaviour
                     }
                     else if (passwayNum == 3)
                     {
-                        if (++a >= 5)
+                        if (++passwayType >= 5)
                         {
-                            a = 1;
+                            passwayType = 1;
                         }
                         if (j % 4 == 3)
                         {
@@ -61,9 +61,9 @@ public class DataReverser : MonoBehaviour
                     }
                     else if(passwayNum == 2)
                     {
-                        if (++a >= 7)
+                        if (++passwayType >= 7)
                         {
-                            a = 5;
+                            passwayType = 5;
                         }
                         if (j % 2 == 1)
                         {

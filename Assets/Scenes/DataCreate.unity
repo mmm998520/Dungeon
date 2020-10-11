@@ -326,11 +326,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAsset: []
+  layers: 1
   passwayNum: 0
   level: 2
-  function: 1
+  function: 2
   num: 0
-  a: 0
+  passwayType: 0
 --- !u!4 &1533619235
 Transform:
   m_ObjectHideFlags: 0

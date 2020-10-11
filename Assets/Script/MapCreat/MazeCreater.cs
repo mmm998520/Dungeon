@@ -6,24 +6,35 @@ using UnityEngine;
 public class MazeCreater : MonoBehaviour
 {
     /// <summary> 單層地牢的房間行列數 </summary>
-    const int roomRowNum = 4, roomColNum = 4;
+    public int roomCountRowNum, roomCountColNum;
+    /// <summary> 單個房間的物件行列數 </summary>
+    public int objectCountRowNum, objectCountColNum;
     /// <summary> 遍歷房間基本形式用，使用前須將他複製為list，0 ┼，1 ├，2 ┬，3 ┤，4 ┴，5 ─，6 │ </summary>
-    int[] roomTypesArray = new int[7] { 0, 1, 2, 3, 4, 5, 6 };
-    void Start()
+    int[] roomPasswayTypes = new int[7] { 0, 1, 2, 3, 4, 5, 6 };
+    /// <summary> 紀錄該層迷宮的房間通道類型，生成時須在該點生成對應房間 </summary>
+    public int[,] roomPasswayDatas, mazeDatas;
+
+
+    void Awake()
     {
-        mainRoadsePasswaySelect(mainRoadDecide());
+        int[,] mainRoadDecide = this.mainRoadDecide();
+        roomPasswayDatas = explodeRoad(RoadsePasswaySelect(mainRoadDecide), mainRoadDecide);
+        for(int i = 0; i < Random.Range(0, 4); i++)
+        {
+            roomPasswayDatas = rotateDungeon(roomPasswayDatas);
+        }
     }
 
     void Update()
     {
 
     }
-
+    #region//決定基本房間通道
     /// <summary> 決定基本路徑，從上方隨機一格開始隨機向下移動(每層都至少要橫向移動一次才能往下) </summary>
     int[,] mainRoadDecide()
     {
         //0:未計算，1:左，2:右，3:下，4:終點
-        int[,] moveway = new int[roomRowNum, roomColNum];
+        int[,] moveway = new int[roomCountRowNum, roomCountColNum];
         //決定起始房間
         int currentRow = 0, currentCol = Random.Range(0, 4);
         //紀錄橫向移動了多少次
@@ -37,7 +48,7 @@ public class MazeCreater : MonoBehaviour
                 {
                     lastMoveDir = 2;
                 }
-                else if (currentCol == roomColNum - 1)
+                else if (currentCol == roomCountColNum - 1)
                 {
                     lastMoveDir = 1;
                 }
@@ -49,14 +60,14 @@ public class MazeCreater : MonoBehaviour
             }
             else
             {
-                if ((currentCol == 0 && lastMoveDir == 1) || (currentCol == roomColNum - 1 && lastMoveDir == 2))
+                if ((currentCol == 0 && lastMoveDir == 1) || (currentCol == roomCountColNum - 1 && lastMoveDir == 2))
                 {
                     lastMoveDir = 3;
                     sameRowNum = 0;
                 }
                 else
                 {
-                    if (currentRow < roomRowNum - 1)
+                    if (currentRow < roomCountRowNum - 1)
                     {
                         int r = Random.Range(0, 2);
                         if (r < 1)
@@ -80,19 +91,20 @@ public class MazeCreater : MonoBehaviour
             {
                 currentRow++;
             }
-        } while (!(currentRow >= roomRowNum - 1 && (currentCol <= 0 || currentCol >= roomColNum - 1) && sameRowNum == 1));
+        } while (!(currentRow >= roomCountRowNum - 1 && (currentCol <= 0 || currentCol >= roomCountColNum - 1) && sameRowNum == 1));
         moveway[currentRow, currentCol] = 4;
         return moveway;
     }
 
-    void mainRoadsePasswaySelect(int[,] mainRoadDecide)
+    /// <summary> 決定個房間路徑 </summary>
+    int[,] RoadsePasswaySelect(int[,] mainRoadDecide)
     {
         //第三維紀錄房間四邊是否"必須"/"絕不能"有牆，0為上方牆壁，順時針遞增
-        bool[,,] mustRoad = new bool[roomRowNum, roomColNum, 4], mustNotRoad = new bool[roomRowNum, roomColNum, 4];
+        bool[,,] mustRoad = new bool[roomCountRowNum, roomCountColNum, 4], mustNotRoad = new bool[roomCountRowNum, roomCountColNum, 4];
         int t, i, j;
-        for (i = 0; i < roomRowNum; i++)
+        for (i = 0; i < roomCountRowNum; i++)
         {
-            for (j = 0; j < roomColNum; j++)
+            for (j = 0; j < roomCountColNum; j++)
             {
                 //檢查直向是否有絕對通路
                 if (mainRoadDecide[i, j] == 3)
@@ -102,7 +114,7 @@ public class MazeCreater : MonoBehaviour
                 }
 
                 //檢查直向是否有絕對死路
-                else if (i < roomRowNum - 1)
+                else if (i < roomCountRowNum - 1)
                 {
                     if (mainRoadDecide[i, j] != 0 && mainRoadDecide[i + 1, j] != 0)
                     {
@@ -134,13 +146,13 @@ public class MazeCreater : MonoBehaviour
 
 
         List<int> roomTypesList;
-        int[,] roomtype = new int[roomRowNum,roomColNum];
+        int[,] roomtype = new int[roomCountRowNum,roomCountColNum];
         //計算通路
-        for (i = 0; i < roomRowNum; i++)
+        for (i = 0; i < roomCountRowNum; i++)
         {
-            for (j = 0; j < roomColNum; j++)
+            for (j = 0; j < roomCountColNum; j++)
             {
-                roomTypesList = this.roomTypesArray.ToList();
+                roomTypesList = this.roomPasswayTypes.ToList();
                 #region//移除不符規定的通路選擇
                 roomTypesList.Remove(0);
                 //移除沒上方的
@@ -204,18 +216,25 @@ public class MazeCreater : MonoBehaviour
                 roomtype[i,j] = roomTypesList[Random.Range(0, roomTypesList.Count)];
             }
         }
+        return roomtype;
 
-        //強制連結支路徑
-        bool[,] canGo = new bool[roomRowNum, roomColNum];
+    }
+
+    /// <summary> 強制連結支路徑 </summary>
+    int[,] explodeRoad(int[,] roomPasswayDatas, int[,] mainRoadDecide)
+    {
+        int i, j, t;
+        bool[,] canGo = new bool[roomCountRowNum, roomCountColNum];
         int canGoFalseNum = canGo.Length;
-        for (j = 0; j < roomColNum; j++)
+        for (j = 0; j < roomCountColNum; j++)
         {
-            if (mainRoadDecide[roomRowNum - 1, j] == 4)
+            if (mainRoadDecide[roomCountRowNum - 1, j] == 4)
             {
-                canGo[roomRowNum - 1, j] = true;
+                canGo[roomCountRowNum - 1, j] = true;
                 canGoFalseNum--;
             }
         }
+
         //檢查不能通行路徑並強迫開路
         do
         {
@@ -223,9 +242,9 @@ public class MazeCreater : MonoBehaviour
             do
             {
                 t = 0;
-                for (i = roomRowNum - 1; i >= 0; i--)
+                for (i = roomCountRowNum - 1; i >= 0; i--)
                 {
-                    for (j = roomColNum - 1; j >= 0; j--)
+                    for (j = roomCountColNum - 1; j >= 0; j--)
                     {
                         if (canGo[i, j])
                         {
@@ -238,10 +257,10 @@ public class MazeCreater : MonoBehaviour
                                 if (canGo[i - 1, j] == false)
                                 {
                                     //看上方是否有通道
-                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 1 || roomtype[i, j] == 3 || roomtype[i, j] == 4 || roomtype[i, j] == 6)
+                                    if (roomPasswayDatas[i, j] == 0 || roomPasswayDatas[i, j] == 1 || roomPasswayDatas[i, j] == 3 || roomPasswayDatas[i, j] == 4 || roomPasswayDatas[i, j] == 6)
                                     {
                                         //看上方的房間是否有下方通道
-                                        if (roomtype[i - 1, j] == 0 || roomtype[i - 1, j] == 1 || roomtype[i - 1, j] == 2 || roomtype[i - 1, j] == 3 || roomtype[i - 1, j] == 6)
+                                        if (roomPasswayDatas[i - 1, j] == 0 || roomPasswayDatas[i - 1, j] == 1 || roomPasswayDatas[i - 1, j] == 2 || roomPasswayDatas[i - 1, j] == 3 || roomPasswayDatas[i - 1, j] == 6)
                                         {
                                             //確認連接成功
                                             canGo[i - 1, j] = true;
@@ -252,16 +271,16 @@ public class MazeCreater : MonoBehaviour
                                 }
                             }
                             //看右方是否有房間
-                            if (j + 1 < roomColNum)
+                            if (j + 1 < roomCountColNum)
                             {
                                 //右方房間是否已被計算過
                                 if (canGo[i, j + 1] == false)
                                 {
                                     //看右方是否有通道
-                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 1 || roomtype[i, j] == 2 || roomtype[i, j] == 4 || roomtype[i, j] == 5)
+                                    if (roomPasswayDatas[i, j] == 0 || roomPasswayDatas[i, j] == 1 || roomPasswayDatas[i, j] == 2 || roomPasswayDatas[i, j] == 4 || roomPasswayDatas[i, j] == 5)
                                     {
                                         //看右方的房間是否有左方通道
-                                        if (roomtype[i, j + 1] == 0 || roomtype[i, j + 1] == 2 || roomtype[i, j + 1] == 3 || roomtype[i, j + 1] == 4 || roomtype[i, j + 1] == 5)
+                                        if (roomPasswayDatas[i, j + 1] == 0 || roomPasswayDatas[i, j + 1] == 2 || roomPasswayDatas[i, j + 1] == 3 || roomPasswayDatas[i, j + 1] == 4 || roomPasswayDatas[i, j + 1] == 5)
                                         {
                                             //確認連接成功
                                             canGo[i, j + 1] = true;
@@ -272,16 +291,16 @@ public class MazeCreater : MonoBehaviour
                                 }
                             }
                             //看下方是否有房間
-                            if (i + 1 < roomRowNum)
+                            if (i + 1 < roomCountRowNum)
                             {
                                 //下方房間是否已被計算過
                                 if (canGo[i + 1, j] == false)
                                 {
                                     //看下方是否有通道
-                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 1 || roomtype[i, j] == 2 || roomtype[i, j] == 3 || roomtype[i, j] == 6)
+                                    if (roomPasswayDatas[i, j] == 0 || roomPasswayDatas[i, j] == 1 || roomPasswayDatas[i, j] == 2 || roomPasswayDatas[i, j] == 3 || roomPasswayDatas[i, j] == 6)
                                     {
                                         //看下方的房間是否有上方通道
-                                        if (roomtype[i + 1, j] == 0 || roomtype[i + 1, j] == 1 || roomtype[i + 1, j] == 3 || roomtype[i + 1, j] == 4 || roomtype[i + 1, j] == 6)
+                                        if (roomPasswayDatas[i + 1, j] == 0 || roomPasswayDatas[i + 1, j] == 1 || roomPasswayDatas[i + 1, j] == 3 || roomPasswayDatas[i + 1, j] == 4 || roomPasswayDatas[i + 1, j] == 6)
                                         {
                                             //確認連接成功
                                             canGo[i + 1, j] = true;
@@ -298,10 +317,10 @@ public class MazeCreater : MonoBehaviour
                                 if (canGo[i, j - 1] == false)
                                 {
                                     //看左方是否有通道
-                                    if (roomtype[i, j] == 0 || roomtype[i, j] == 2 || roomtype[i, j] == 3 || roomtype[i, j] == 4 || roomtype[i, j] == 5)
+                                    if (roomPasswayDatas[i, j] == 0 || roomPasswayDatas[i, j] == 2 || roomPasswayDatas[i, j] == 3 || roomPasswayDatas[i, j] == 4 || roomPasswayDatas[i, j] == 5)
                                     {
                                         //看左方的房間是否有右方通道
-                                        if (roomtype[i, j - 1] == 0 || roomtype[i, j - 1] == 1 || roomtype[i, j - 1] == 2 || roomtype[i, j - 1] == 4 || roomtype[i, j - 1] == 5)
+                                        if (roomPasswayDatas[i, j - 1] == 0 || roomPasswayDatas[i, j - 1] == 1 || roomPasswayDatas[i, j - 1] == 2 || roomPasswayDatas[i, j - 1] == 4 || roomPasswayDatas[i, j - 1] == 5)
                                         {
                                             //確認連接成功
                                             canGo[i, j - 1] = true;
@@ -318,52 +337,52 @@ public class MazeCreater : MonoBehaviour
                 }
             } while (t != 0);
             //強迫開路
-            List<int[]> needBoom = new List<int[]>();
-            for (i = 0; i < roomRowNum; i++)
+            List<int[]> needExplode = new List<int[]>();
+            for (i = 0; i < roomCountRowNum; i++)
             {
-                for (j = 0; j < roomColNum; j++)
+                for (j = 0; j < roomCountColNum; j++)
                 {
                     if (!canGo[i, j])
                     {
-                        needBoom.Add(new int[] { i, j });
+                        needExplode.Add(new int[] { i, j });
                     }
                 }
             }
-            if (needBoom.Count > 0)
+            if (needExplode.Count > 0)
             {
-                int r = Random.Range(0, needBoom.Count);
-                int[] temp = needBoom[r];
+                int r = Random.Range(0, needExplode.Count);
+                int[] temp = needExplode[r];
                 print(temp);
-                i = needBoom[r][0];
-                j = needBoom[r][1];
+                i = needExplode[r][0];
+                j = needExplode[r][1];
                 print(i);
                 print(j);
                 //強制隨機出非邊框數值
                 do
                 {
                     r = Random.Range(0, 4);
-                } while ((r == 0 && i <= 0) || (r == 1 && j >= roomColNum - 1) || (r == 2 && i >= roomRowNum - 1) || (r == 3 && j <= 0));
+                } while ((r == 0 && i <= 0) || (r == 1 && j >= roomCountColNum - 1) || (r == 2 && i >= roomCountRowNum - 1) || (r == 3 && j <= 0));
                 //如果新通道為向上，則強迫開啟自己的上方、上方房間的下方
                 if (r == 0)
                 {
                     //自己的上方
-                    switch (roomtype[i, j])
+                    switch (roomPasswayDatas[i, j])
                     {
                         case 2:
-                            roomtype[i, j] = 0;
+                            roomPasswayDatas[i, j] = 0;
                             break;
                         case 5:
-                            roomtype[i, j] = 4;
+                            roomPasswayDatas[i, j] = 4;
                             break;
                     }
                     //上方房間的下方
-                    switch (roomtype[i - 1, j])
+                    switch (roomPasswayDatas[i - 1, j])
                     {
                         case 4:
-                            roomtype[i - 1, j] = 0;
+                            roomPasswayDatas[i - 1, j] = 0;
                             break;
                         case 5:
-                            roomtype[i - 1, j] = 2;
+                            roomPasswayDatas[i - 1, j] = 2;
                             break;
                     }
                 }
@@ -371,23 +390,23 @@ public class MazeCreater : MonoBehaviour
                 if (r == 1)
                 {
                     //自己的右方
-                    switch (roomtype[i, j])
+                    switch (roomPasswayDatas[i, j])
                     {
                         case 3:
-                            roomtype[i, j] = 0;
+                            roomPasswayDatas[i, j] = 0;
                             break;
                         case 6:
-                            roomtype[i, j] = 1;
+                            roomPasswayDatas[i, j] = 1;
                             break;
                     }
                     //右方房間的左方
-                    switch (roomtype[i, j + 1])
+                    switch (roomPasswayDatas[i, j + 1])
                     {
                         case 1:
-                            roomtype[i, j + 1] = 0;
+                            roomPasswayDatas[i, j + 1] = 0;
                             break;
                         case 6:
-                            roomtype[i, j + 1] = 3;
+                            roomPasswayDatas[i, j + 1] = 3;
                             break;
                     }
                 }
@@ -395,23 +414,23 @@ public class MazeCreater : MonoBehaviour
                 if (r == 2)
                 {
                     //自己的下方
-                    switch (roomtype[i, j])
+                    switch (roomPasswayDatas[i, j])
                     {
                         case 4:
-                            roomtype[i, j] = 0;
+                            roomPasswayDatas[i, j] = 0;
                             break;
                         case 5:
-                            roomtype[i, j] = 2;
+                            roomPasswayDatas[i, j] = 2;
                             break;
                     }
                     //下方房間的上方
-                    switch (roomtype[i + 1, j])
+                    switch (roomPasswayDatas[i + 1, j])
                     {
                         case 2:
-                            roomtype[i + 1, j] = 0;
+                            roomPasswayDatas[i + 1, j] = 0;
                             break;
                         case 5:
-                            roomtype[i + 1, j] = 4;
+                            roomPasswayDatas[i + 1, j] = 4;
                             break;
                     }
                 }
@@ -419,61 +438,65 @@ public class MazeCreater : MonoBehaviour
                 if (r == 3)
                 {
                     //自己的左方
-                    switch (roomtype[i, j])
+                    switch (roomPasswayDatas[i, j])
                     {
                         case 1:
-                            roomtype[i, j] = 0;
+                            roomPasswayDatas[i, j] = 0;
                             break;
                         case 6:
-                            roomtype[i, j] = 3;
+                            roomPasswayDatas[i, j] = 3;
                             break;
                     }
                     //左方房間的右方
-                    switch (roomtype[i, j - 1])
+                    switch (roomPasswayDatas[i, j - 1])
                     {
                         case 3:
-                            roomtype[i, j - 1] = 0;
+                            roomPasswayDatas[i, j - 1] = 0;
                             break;
                         case 6:
-                            roomtype[i, j - 1] = 1;
+                            roomPasswayDatas[i, j - 1] = 1;
                             break;
                     }
                 }
             }
         } while (canGoFalseNum != 0);
+        return roomPasswayDatas;
+    }
 
-        for (i = 0; i < roomRowNum; i++)
+    int[,] rotateDungeon(int[,] roomPasswayDatas)
+    {
+        int[,] rotated = roomPasswayDatas;
+        int i, j;
+        for (i = 0; i < roomPasswayDatas.GetUpperBound(0) + 1; i++)
         {
-            string a = "";
-            for (j = 0; j < roomColNum; j++)
+            for (j = 0; j < roomPasswayDatas.GetUpperBound(1) + 1; j++)
             {
-                switch (roomtype[i, j])
+                rotated[i, roomPasswayDatas.GetUpperBound(1) - j] = roomPasswayDatas[j, i];
+                switch (rotated[i, roomPasswayDatas.GetUpperBound(1) - j])
                 {
-                    case 0:
-                        a = a + "┼" + ",";
-                        break;
                     case 1:
-                        a = a + "├" + ",";
-                        break;
                     case 2:
-                        a = a + "┬" + ",";
-                        break;
                     case 3:
-                        a = a + "┤" + ",";
+                        rotated[i, roomPasswayDatas.GetUpperBound(1) - j]++;
                         break;
                     case 4:
-                        a = a + "┴" + ",";
+                        rotated[i, roomPasswayDatas.GetUpperBound(1) - j] = 1;
                         break;
                     case 5:
-                        a = a + "─" + ",";
+                        rotated[i, roomPasswayDatas.GetUpperBound(1) - j] = 6;
                         break;
                     case 6:
-                        a = a + "│" + ",";
+                        rotated[i, roomPasswayDatas.GetUpperBound(1) - j] = 5;
                         break;
                 }
             }
-            Debug.LogWarning(a);
         }
+        return rotated;
+    }
+    #endregion
 
+    void mazeCreat(int passwayType, int level, int functionTypeNum)
+    {
+        int[,] objectDatas = new int[objectCountRowNum, objectCountColNum];
     }
 }

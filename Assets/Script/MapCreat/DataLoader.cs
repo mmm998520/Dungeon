@@ -4,40 +4,30 @@ using UnityEngine;
 
 public class DataLoader : MonoBehaviour
 {
+    TextAsset[] files;
     /// <summary> 通道型態list->難度list->功能list->關卡設計list ->關卡內容array </summary>
-    List<List<List<List<string[,]>>>> AllData = new List<List<List<List<string[,]>>>>();
+    Dictionary<int,string[,]>[,,,] AllData;
+    /// <summary> 層數 </summary>
+    int layers = 1;
     /// <summary> 通道型態總數，0 ┼，1 ├，2 ┬，3 ┤，4 ┴，5 ─，6 │ </summary>
     int passwayTypeNum = 7;
     /// <summary> 難度分級數 </summary>
     int level = 3;
     /// <summary> 功能種類數 </summary>
     int functionTypeNum = 3;
-    /// <summary> 單功能房間變化可能數 </summary>
-    int roomNum = 3;
     void Start()
     {
-        int i, j, k, l;
-        string fileName;
-        for (i = 0; i < passwayTypeNum; i++)
+        AllData = new Dictionary<int, string[,]>[layers, passwayTypeNum, level, functionTypeNum];
+        for(int a = 0; a < files.Length; a++)
         {
-            AllData.Add(new List<List<List<string[,]>>>());
-            for (j = 0; j < level; j++)
+            string[] sArray = files[a].name.Split('_');
+            int[] num = new int[sArray.Length];
+            for (int b=0; b <sArray.Length;b++)
             {
-                AllData[i].Add(new List<List<string[,]>>());
-                for (k = 0; k < functionTypeNum; k++)
-                {
-                    AllData[i][j].Add(new List<string[,]>());
-                    for (l = 0; l < roomNum; l++)
-                    {
-                        fileName = i + "_" + j + "_" + k + "_" + l;
-                        if (Resources.Load(fileName, typeof(TextAsset)))
-                        {
-                            TextAsset file = Resources.Load(fileName, typeof(TextAsset)) as TextAsset;
-                            AllData[i][j][k].Add(LoadData(file));
-                        }
-                    }
-                }
+                num[b] = int.Parse(sArray[b]);
             }
+            int c = 0;
+            AllData[num[c++], num[c++], num[c++], num[c++]].Add(num[c++], LoadData(files[a]));
         }
     }
 
