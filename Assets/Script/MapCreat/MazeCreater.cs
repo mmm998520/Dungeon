@@ -33,10 +33,10 @@ namespace com.DungeonPad
             #region//創建roomPasswayDatas通道基本型態
             int[,] mainRoadDecide = this.mainRoadDecide();
             roomPasswayDatas = explodeRoad(RoadsePasswaySelect(mainRoadDecide), mainRoadDecide);
-            int i, j;
-            for (i = 0; i < Random.Range(0, 4); i++)
+            int i, j, r = Random.Range(0, 4);
+            for (i = 0; i < r; i++)
             {
-                roomPasswayDatas = rotateDungeon(roomPasswayDatas);
+                roomPasswayDatas = Rotate(roomPasswayDatas);
                 //讓起點位置也旋轉
                 int temp = startRow;
                 startRow = startCol;
@@ -533,33 +533,36 @@ namespace com.DungeonPad
         }
 
         /// <summary> 旋轉90度地牢房間 </summary>
-        int[,] rotateDungeon(int[,] roomPasswayDatas)
+        static int[,] Rotate(int[,] origin)
         {
-            int[,] rotated = roomPasswayDatas;
-            int i, j;
-            for (i = 0; i < roomPasswayDatas.GetUpperBound(0) + 1; i++)
+            int[,] rotated = new int[origin.GetUpperBound(0) + 1, origin.GetUpperBound(0) + 1];
+            int newColumn, newRow = 0;
+            for (int i = 0; i < origin.GetUpperBound(0) + 1; i++)
             {
-                for (j = 0; j < roomPasswayDatas.GetUpperBound(1) + 1; j++)
+                newColumn = 0;
+                for (int j = origin.GetUpperBound(1); j >=0 ; j--)
                 {
-                    rotated[i, roomPasswayDatas.GetUpperBound(1) - j] = roomPasswayDatas[j, i];
-                    switch (rotated[i, roomPasswayDatas.GetUpperBound(1) - j])
+                    rotated[newRow, newColumn] = origin[j, i];
+                    switch (rotated[newRow, newColumn])
                     {
                         case 1:
                         case 2:
                         case 3:
-                            rotated[i, roomPasswayDatas.GetUpperBound(1) - j]++;
+                            rotated[newRow, newColumn]++;
                             break;
                         case 4:
-                            rotated[i, roomPasswayDatas.GetUpperBound(1) - j] = 1;
+                            rotated[newRow, newColumn] = 1;
                             break;
                         case 5:
-                            rotated[i, roomPasswayDatas.GetUpperBound(1) - j] = 6;
+                            rotated[newRow, newColumn] = 6;
                             break;
                         case 6:
-                            rotated[i, roomPasswayDatas.GetUpperBound(1) - j] = 5;
+                            rotated[newRow, newColumn] = 5;
                             break;
                     }
+                    newColumn++;
                 }
+                newRow++;
             }
             return rotated;
         }

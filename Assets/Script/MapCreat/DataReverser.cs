@@ -41,7 +41,7 @@ namespace com.DungeonPad
                     {
                         name = layers + "_" + passwayType + "_" + level + "_" + function + "_" + num;
                         writeFile("D:/Dmmm998520/HomeWork/fourup/Dungeon/Assets/Resources/RoomDatas/" + layers + "/" + passwayType + "/" + level + "/" + function, name, arrayToString(newArray));
-                        newArray = DataLoader.rotateArray(newArray);
+                        newArray = DataLoader.Rotate(newArray);
                         if (j == 3)
                         {
                             newArray = DataLoader.reverserArray(newArray);

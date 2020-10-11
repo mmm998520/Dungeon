@@ -74,18 +74,21 @@ namespace com.DungeonPad
             return dataArray;
         }
 
-        public static string[,] rotateArray(string[,] origin)
+        public static string[,] Rotate(string[,] origin)
         {
-            string[,] newArray = new string[origin.GetUpperBound(1) + 1, origin.GetUpperBound(0) + 1];
-            int i, j;
-            for (i = 0; i < origin.GetUpperBound(0) + 1; i++)
+            string[,] rotated = new string[origin.GetUpperBound(0) + 1, origin.GetUpperBound(0) + 1];
+            int newColumn, newRow = 0;
+            for (int i = 0; i < origin.GetUpperBound(0) + 1; i++)
             {
-                for (j = 0; j < origin.GetUpperBound(1) + 1; j++)
+                newColumn = 0;
+                for (int j = origin.GetUpperBound(1); j >= 0; j--)
                 {
-                    newArray[i, origin.GetUpperBound(1) - j] = origin[j, i];
+                    rotated[newRow, newColumn] = origin[j, i];
+                    newColumn++;
                 }
+                newRow++;
             }
-            return newArray;
+            return rotated;
         }
 
         public static string[,] reverserArray(string[,] origin)
