@@ -8,7 +8,7 @@ namespace com.DungeonPad
     {
         public float ATK;
         public bool continued = false, lineAttack = false;
-        List<MonsterManager> monsters = new List<MonsterManager>();
+        /*
         void Update()
         {
             for(int i = 0; i < monsters.Count; i++)
@@ -17,7 +17,7 @@ namespace com.DungeonPad
                 monsters[i].HP -= ATK * Time.deltaTime;
             }
         }
-
+        
         void OnTriggerEnter2D(Collider2D collider)
         {
             if (!continued)
@@ -52,7 +52,7 @@ namespace com.DungeonPad
                 }
             }
         }
-
+        
         private void OnTriggerExit2D(Collider2D collider)
         {
             if (continued)
@@ -66,5 +66,6 @@ namespace com.DungeonPad
                 }
             }
         }
+        */
     }
 }

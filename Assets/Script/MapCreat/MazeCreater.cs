@@ -7,6 +7,7 @@ namespace com.DungeonPad
 {
     public class MazeCreater : MonoBehaviour
     {
+        public static int totalRow, totalCol;
         /// <summary> 單層地牢的房間行列數 </summary>
         public int roomCountRowNum, roomCountColNum;
         /// <summary> 單個房間的物件行列數 </summary>
@@ -18,7 +19,7 @@ namespace com.DungeonPad
         /// <summary> 起點、終點位置 </summary>
         public int startRow, startCol, endRow, endCol;
         /// <summary> 紀錄是否已生成地圖 </summary>
-        bool[,] created;
+        public bool[,] created;
 
         /// <summary> 儲存地圖中各點功能 </summary>
         public string[,] mazeDatas;
@@ -27,8 +28,11 @@ namespace com.DungeonPad
         public Dictionary<string, GameObject[]> instantiateObjects = new Dictionary<string, GameObject[]>();
 
         public GameObject sensor;
+        public GameObject wall;
         void Awake()
         {
+            totalRow = roomCountRowNum * objectCountRowNum;
+            totalCol = roomCountColNum * objectCountColNum;
             GetComponent<DataLoader>().LoadAll();
             #region//創建roomPasswayDatas通道基本型態
             int[,] mainRoadDecide = this.mainRoadDecide();
@@ -93,10 +97,6 @@ namespace com.DungeonPad
             }
         }
 
-        void Update()
-        {
-
-        }
         #region//決定基本房間通道
         /// <summary> 決定基本路徑，從上方隨機一格開始隨機向下移動(每層都至少要橫向移動一次才能往下) </summary>
         int[,] mainRoadDecide()
@@ -603,7 +603,6 @@ namespace com.DungeonPad
             {
                 for (j = 0; j < objectDatas.GetUpperBound(1) + 1; j++)
                 {
-                    mazeDatas[roomRow * objectCountRowNum + i, roomCol * objectCountColNum + j] = objectDatas[i, j];
                     instantiateGameObject(objectDatas[i, j], roomRow * objectCountRowNum + i, roomCol * objectCountColNum + j);
                 }
             }
@@ -611,10 +610,19 @@ namespace com.DungeonPad
         /// <summary> 根據生成物件敘述生成對應物件 </summary>
         void instantiateGameObject(string objectData, int insPosRow, int insPosCol)
         {
-            GameObject[] prefab;
-            instantiateObjects.TryGetValue(objectData, out prefab);
-            int r = Random.Range(0, prefab.Length);
-            Instantiate(prefab[r], new Vector3(insPosRow, insPosCol, 0), Quaternion.identity, transform);
+            if (insPosRow <= 0 || insPosCol <= 0 || insPosRow >= roomCountRowNum * objectCountRowNum - 1 || insPosCol >= roomCountColNum * objectCountColNum - 1)
+            {
+                Instantiate(wall, new Vector3(insPosRow, insPosCol, 0), Quaternion.identity, transform);
+                mazeDatas[insPosRow, insPosCol] = "wall";
+            }
+            else
+            {
+                GameObject[] prefab;
+                instantiateObjects.TryGetValue(objectData, out prefab);
+                int r = Random.Range(0, prefab.Length);
+                Instantiate(prefab[r], new Vector3(insPosRow, insPosCol, 0), Quaternion.identity, transform);
+                mazeDatas[insPosRow, insPosCol] = prefab[r].name;
+            }
         }
         #endregion
     }

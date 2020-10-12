@@ -96,23 +96,5 @@ namespace com.DungeonPad
             yield return new WaitForSeconds(5);
             draw = false;
         }
-
-        public void RidiculeButton()
-        {
-            if (MP >= 10)
-            {
-                MP -= 10;
-                transform.GetChild(0).GetComponent<PlayerManager>().ridicule();
-            }
-        }
-
-        public void RegenButton()
-        {
-            if (MP >= 10)
-            {
-                MP -= 10;
-                transform.GetChild(1).GetComponent<PlayerManager>().regen();
-            }
-        }
     }
 }

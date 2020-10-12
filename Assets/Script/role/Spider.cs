@@ -4,57 +4,34 @@ using UnityEngine;
 
 namespace com.DungeonPad
 {
-    public class Spider : MonsterManager
+    public class Spider : Navigate
     {
+        public int[] nextPos;
+
         void Start()
         {
-            RepTime = new WaitForSeconds(repTimer);
-            stat = Stat.pursue;
-            hp = transform.GetChild(1);
-            int i, j, t = 0;
-            greenPos = new HashSet<int>();
-            pursuePos = new HashSet<int>();
-            for (i = 0; i < MapCreater.totalRow[MapCreater.level]; i++)
-            {
-                for (j = 0; j < MapCreater.totalCol[MapCreater.level]; j++)
-                {
-                    if (MapCreater.mapArray[i, j] != (int)MapCreater.roomStat.wall)
-                    {
-                        guardPos.Add(t);
-                        pursuePos.Add(t);
-                    }
-                    t++;
-                }
-            }
+            startRoomRow = Mathf.RoundToInt(transform.position.x) / GameManager.mazeCreater.objectCountRowNum;
+            startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
+            arriveNewRoom(startRoomRow, startRoomCol);
+            retarget();
         }
 
         void Update()
         {
-            timer();
-            hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
-            randomMove();
-            attackCD();
-            if (prepare != 0)
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                target = MinDisPlayer();
-                prepareAttack();
+                arriveNewRoom(startRoomRow, startRoomRow);
+                retarget();
             }
-            moveToTarget();
-            if (HP <= 0)
-            {
-                Destroy(gameObject);
-            }
-            GetComponent<Rigidbody2D>().WakeUp();
+            nextPos = findRoad();
+            transform.LookAt(new Vector3(nextPos[0], nextPos[1], 0));
         }
 
-        void randomMove()
+        void retarget()
         {
-            if (Vector3.Distance(GameManager.maze.GetChild(guardPoint[nextGrardNum]).position * Vector2.one, transform.position * Vector2.one) < 0.5f)
-            {
-                print("arrive");
-                nextGrardNum = Random.Range(0, guardPoint.Length);
-            }
-            guard(guardPos);
+            int r = Random.Range(0, canGo.Count);
+            endRow = new int[] { canGo[r] / MazeCreater.totalCol };
+            endCol = new int[] { canGo[r] % MazeCreater.totalCol };
         }
     }
 }
