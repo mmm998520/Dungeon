@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace com.DungeonPad
 {
-    public class BubbleGen : Trigger
+    public class BubbleGen : MonoBehaviour
     {
         public float timer, timerStoper;
         public GameObject Bubble;
