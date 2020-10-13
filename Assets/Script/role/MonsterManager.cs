@@ -17,8 +17,6 @@ namespace com.DungeonPad
         public int[] guardPoint;
         public int nextGrardNum;
 
-        public Transform ridiculed = null;
-        public float ridiculedTimer, ridiculedTimerStoper = 5;
 
         public float difference, repTimes, repTimer;
         protected bool attacked = false;
@@ -67,7 +65,7 @@ namespace com.DungeonPad
         {
             if ((CDTimer += Time.deltaTime) >= CD)
             {
-                if (Vector3.Distance(transform.position * Vector2.one, MinDisPlayer().position * Vector2.one) < hand && stat == Stat.pursue)
+                if (Vector3.Distance(transform.position * Vector2.one, MinDisPlayer().position * Vector2.one) < hand)
                 {
                     if (prepare == 0)
                     {
@@ -131,18 +129,6 @@ namespace com.DungeonPad
             preparationTimer = 0;
             prepare = 0;
             attacked = false;
-        }
-
-        protected virtual void timer()
-        {
-            if (ridiculed != null)
-            {
-                if ((ridiculedTimer += Time.deltaTime) > ridiculedTimerStoper)
-                {
-                    ridiculed = null;
-                    ridiculedTimer = 0;
-                }
-            }
         }
     }
 }
