@@ -125,14 +125,20 @@ namespace com.DungeonPad
                             for (l = 0; l < GameManager.mazeCreater.objectCountColNum; l++)
                             {
                                 col = j * GameManager.mazeCreater.objectCountColNum + l;
-                                if (GameManager.mazeCreater.mazeDatas[i, j] != "wall")
+                                if (GameManager.mazeCreater.mazeDatas[row, col] != "wall")
                                 {
+                                    string[,] ak = GameManager.mazeCreater.mazeDatas;
                                     canGo.Add(canGo.Count, row * MazeCreater.totalCol + col);
                                 }
                             }
                         }
                     }
                 }
+            }
+            List<int[]> a = new List<int[]>();
+            foreach(int v in canGo.Values)
+            {
+                a.Add(new int[] { v / MazeCreater.totalCol, v % MazeCreater.totalCol });
             }
         }
         #endregion
