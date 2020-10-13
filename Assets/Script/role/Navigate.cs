@@ -24,9 +24,20 @@ namespace com.DungeonPad
         public void arriveNewRoom(int roomRow, int roomCol)
         {
             setCanGoRoom();
-            for(int i = 0; i < 50; i++)
+            bool[,] roomPasswayDatas = GameManager.mazeCreater.created;
+            for (int t = 0; t < 50; t++)
             {
-                addCanGoRoom(roomRow, roomCol) ;
+                for(int i =0;i< GameManager.mazeCreater.roomCountRowNum; i++)
+                {
+                    for (int j = 0; j < GameManager.mazeCreater.roomCountRowNum; j++)
+                    {
+                        addCanGoRoom(i, j);
+                        if (!GameManager.mazeCreater.created[i, j])
+                        {
+                            canGoRoom[i, j] = -1;
+                        }
+                    }
+                }
             }
             setCanGo();
         }
@@ -49,11 +60,11 @@ namespace com.DungeonPad
         }
         bool addCanGoRoom(int roomRow,int roomCol)
         {
-            if(Mathf.Abs(roomRow - startRoomRow) < 2 && Mathf.Abs(roomCol - startRoomCol) < 2)
+            if (Mathf.Abs(roomRow - startRoomRow) < 2 && Mathf.Abs(roomCol - startRoomCol) < 2)
             {
-                if(canGoRoom[roomRow, roomCol] == -1)
+                int[,] roomPasswayDatas = GameManager.mazeCreater.roomPasswayDatas;
+                if (canGoRoom[roomRow, roomCol] == -1)
                 {
-                    int[,] roomPasswayDatas = GameManager.mazeCreater.roomPasswayDatas;
                     if (roomRow - 1 >= 0)
                     {
                         //看上方有沒有通道
@@ -216,8 +227,6 @@ namespace com.DungeonPad
                     return null;
                 }
             } while (true);
-
-            return null;
         }
 
         void CheckPassway(int row, int col)

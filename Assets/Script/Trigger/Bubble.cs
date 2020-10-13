@@ -26,14 +26,7 @@ namespace com.DungeonPad
             {
                 if (collider.GetComponent<PlayerManager>())
                 {
-                    Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(transform.position, 30, 1 << 9);
-                    for(int i = 0; i < collider2Ds.Length; i++)
-                    {
-                        if (collider2Ds[i].GetComponent<Slime>())
-                        {
-                            collider2Ds[i].GetComponent<Slime>().BurstBubbler = collider.transform;
-                        }
-                    }
+                    collider.GetComponent<PlayerManager>().StickTimer = 0;
                 }
                 Destroy(gameObject);
             }
