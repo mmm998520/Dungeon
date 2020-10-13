@@ -30,6 +30,11 @@ namespace com.DungeonPad
                 prepareAttack();
             }
             nextPos = findRoad();
+            if(nextPos == null)
+            {
+                reTarget();
+                nextPos = findRoad();
+            }
             moveToTarget();
             changeDirection();
             GetComponent<Rigidbody2D>().velocity = transform.right*1f;
@@ -53,13 +58,21 @@ namespace com.DungeonPad
                 timer = 0;
                 reTarget();
             }
-            if (nextPos.Length > 1)
+            if (nextPos != null)
             {
-                if (Vector3.Distance(new Vector3(nextPos[0], nextPos[1], 0), transform.position) < 0.5f)
+                if (nextPos.Length > 1)
                 {
-                    timer = 0;
-                    reTarget();
+                    if (Vector3.Distance(new Vector3(nextPos[0], nextPos[1], 0), transform.position) < 0.5f)
+                    {
+                        timer = 0;
+                        reTarget();
+                    }
                 }
+                reTarget();
+            }
+            else
+            {
+                reTarget();
             }
         }
     }
