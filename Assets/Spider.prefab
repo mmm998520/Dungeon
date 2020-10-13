@@ -396,8 +396,8 @@ MonoBehaviour:
   endCol: 
   nextPos: 
   rotateSpeed: 300
-  MaxHP: 80
-  HP: 80
+  MaxHP: 10
+  HP: 10
   ATK: 2
   CD: 2
   CDTimer: 0

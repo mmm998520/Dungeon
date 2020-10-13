@@ -8,7 +8,8 @@ namespace com.DungeonPad
     {
         public float ATK;
         public bool continued = false, lineAttack = false;
-        /*
+        List<MonsterManager> monsters = new List<MonsterManager>();
+
         void Update()
         {
             for(int i = 0; i < monsters.Count; i++)
@@ -66,6 +67,5 @@ namespace com.DungeonPad
                 }
             }
         }
-        */
     }
 }
