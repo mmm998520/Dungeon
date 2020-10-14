@@ -8,8 +8,7 @@ namespace com.DungeonPad
     {
         public static int touchNum;
         public string playerName;
-        public GameObject joy;
-        Rigidbody2D rigidbody2D;
+        public Rigidbody2D rigidbody2D;
         void Start()
         {
 
@@ -20,27 +19,26 @@ namespace com.DungeonPad
         {
             if (touchNum >= 2)
             {
-                joy.AddComponent(typeof(Rigidbody2D));
-                rigidbody2D = joy.GetComponent<Rigidbody2D>();
-                rigidbody2D.gravityScale = 0;
+                rigidbody2D.mass = 4;
             }
             else
             {
-                Destroy(rigidbody2D);
+                rigidbody2D.mass = 1000000;
+                rigidbody2D.velocity = Vector3.zero;
+                rigidbody2D.angularVelocity = 0;
             }
         }
 
-        void OnTriggerEnter2D(Collider2D collider)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collider.name == playerName)
+            if (collision.collider.name == playerName)
             {
                 touchNum++;
             }
         }
-
-        void OnTriggerExit2D(Collider2D collider)
+        private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collider.name == playerName)
+            if (collision.collider.name == playerName)
             {
                 touchNum--;
             }

@@ -24,7 +24,7 @@ namespace com.DungeonPad
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.gameObject.layer == 8 || collider.gameObject.layer == 10 ||  collider.gameObject.layer == 12)
+            if (collider.gameObject.layer == 8 || collider.gameObject.layer == 12)
             {
                 StartCoroutine("destroy");
             }

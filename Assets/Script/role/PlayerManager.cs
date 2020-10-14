@@ -8,6 +8,7 @@ namespace com.DungeonPad
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 40, HP = 40;
+        public static bool lockedHP = true;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -35,6 +36,10 @@ namespace com.DungeonPad
 
         void Update()
         {
+            if (lockedHP)
+            {
+                HP = 40;
+            }
             hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
             Behavior();
             if (HP <= 0)
