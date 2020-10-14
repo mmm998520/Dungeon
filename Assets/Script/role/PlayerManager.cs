@@ -25,6 +25,8 @@ namespace com.DungeonPad
 
         public float StickTimer = 10;
         public float ConfusionTimer = 100;
+        public SpriteRenderer ConfusionUIRenderer;
+        public ConfusionUIcontroler ConfusionUIcontroler;
         private void Start()
         {
             lastPos = transform.position;
@@ -34,7 +36,7 @@ namespace com.DungeonPad
         void Update()
         {
             hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
-            ComputerBehavior();
+            Behavior();
             if (HP <= 0)
             {
                 SceneManager.LoadScene("Died");
@@ -87,7 +89,7 @@ namespace com.DungeonPad
             timer();
         }
 
-        void ComputerBehavior()
+        void Behavior()
         {
             if (WASD)
             {
@@ -115,8 +117,10 @@ namespace com.DungeonPad
                     lastDirRight = false;
                 }
             }
-            if ((ConfusionTimer+=Time.deltaTime) <= 20)
+            if ((ConfusionTimer+=Time.deltaTime) <= 10)
             {
+                ConfusionUIRenderer.enabled = true;
+                ConfusionUIcontroler.enabled = true;
                 float tempVX = v.x + Random.Range(-6f, 6f);
                 float tempVY = v.y + Random.Range(-6f, 6f);
 
@@ -125,6 +129,8 @@ namespace com.DungeonPad
             }
             else
             {
+                ConfusionUIRenderer.enabled = false;
+                ConfusionUIcontroler.enabled = false;
                 if (WASD)
                 {
                     v.x += Input.GetAxis("HorizontalWASD") * 2;
