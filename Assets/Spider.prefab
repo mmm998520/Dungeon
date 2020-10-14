@@ -395,7 +395,7 @@ MonoBehaviour:
   endRow: 
   endCol: 
   nextPos: 
-  rotateSpeed: 300
+  rotateSpeed: 200
   MaxHP: 10
   HP: 10
   ATK: 2

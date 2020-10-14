@@ -157,76 +157,88 @@ namespace com.DungeonPad
         }
         #endregion
 
+        bool findingRoad;
+        public WaitForSeconds findRoadWait;
         #region//尋路
-        public int[] findRoad()
+        public IEnumerator findRoad()
         {
-            #region//設定基本數值
-            startRow = Mathf.RoundToInt(transform.position.x);
-            startCol = Mathf.RoundToInt(transform.position.y);
-            g = new float[MazeCreater.totalRow, MazeCreater.totalRow];
-            h = new float[MazeCreater.totalRow, MazeCreater.totalRow];
-            f = new float[MazeCreater.totalRow, MazeCreater.totalRow];
-            // key : pos，value : 下個該去的點
-            open = new Dictionary<int, int>();
-            close = new HashSet<int>();
-            int i, j;
-            for(i = 0; i < MazeCreater.totalRow; i++)
+            if (!findingRoad)
             {
-                for (j = 0; j < MazeCreater.totalCol; j++)
+                findingRoad = true;
+                yield return findRoadWait;
+                #region//找路
+                #region//設定基本數值
+                startRow = Mathf.RoundToInt(transform.position.x);
+                startCol = Mathf.RoundToInt(transform.position.y);
+                g = new float[MazeCreater.totalRow, MazeCreater.totalRow];
+                h = new float[MazeCreater.totalRow, MazeCreater.totalRow];
+                f = new float[MazeCreater.totalRow, MazeCreater.totalRow];
+                // key : pos，value : 下個該去的點
+                open = new Dictionary<int, int>();
+                close = new HashSet<int>();
+                int i, j;
+                for (i = 0; i < MazeCreater.totalRow; i++)
                 {
-                    g[i, j] = 99999;
-                    h[i, j] = 99999;
-                    f[i, j] = 999999;
-                    if (!canGo.ContainsValue(i * MazeCreater.totalCol + j))
+                    for (j = 0; j < MazeCreater.totalCol; j++)
                     {
-                        close.Add(i * MazeCreater.totalCol + j);
+                        g[i, j] = 99999;
+                        h[i, j] = 99999;
+                        f[i, j] = 999999;
+                        if (!canGo.ContainsValue(i * MazeCreater.totalCol + j))
+                        {
+                            close.Add(i * MazeCreater.totalCol + j);
+                        }
                     }
                 }
+                g[startRow, startCol] = 0;
+                open.Add(startRow * MazeCreater.totalCol + startCol, startRow * MazeCreater.totalCol + startCol);
+                #endregion
+
+                do
+                {
+                    #region//偵測是否到出口了
+                    for (i = 0; i < endRow.Length; i++)
+                    {
+                        int nextPos;
+                        if (open.TryGetValue(endRow[i] * MazeCreater.totalCol + endCol[i], out nextPos))
+                        {
+                            this.nextPos = new int[] { nextPos / MazeCreater.totalCol, nextPos % MazeCreater.totalCol };
+                            findingRoad = false;
+                            yield break;
+                        }
+                    }
+                    #endregion
+
+                    #region//從open中找f最小的來計算
+                    float min = float.MaxValue;
+                    int selected = -1;
+                    foreach (int pos in open.Keys)
+                    {
+                        if (min > f[pos / MazeCreater.totalCol, pos % MazeCreater.totalCol])
+                        {
+                            min = f[pos / MazeCreater.totalCol, pos % MazeCreater.totalCol];
+                            selected = pos;
+                        }
+                    }
+
+                    #endregion
+
+                    CheckPassway(selected / MazeCreater.totalCol, selected % MazeCreater.totalCol);
+
+                    if (open.ContainsKey(selected))
+                    {
+                        open.Remove(selected);
+                        close.Add(selected);
+                    }
+                    else
+                    {
+                        Debug.LogError("open空了");
+                        findingRoad = false;
+                        yield break;
+                    }
+                } while (true);
+                #endregion
             }
-            g[startRow, startCol] = 0;
-            open.Add(startRow * MazeCreater.totalCol + startCol, startRow * MazeCreater.totalCol + startCol);
-            #endregion
-
-            do
-            {
-                #region//偵測是否到出口了
-                for (i = 0; i < endRow.Length; i++)
-                {
-                    int nextPos;
-                    if(open.TryGetValue(endRow[i] * MazeCreater.totalCol + endCol[i], out nextPos))
-                    {
-                        return new int[] { nextPos / MazeCreater.totalCol, nextPos % MazeCreater.totalCol };
-                    }
-                }
-                #endregion
-
-                #region//從open中找f最小的來計算
-                float min = float.MaxValue;
-                int selected = -1;
-                foreach (int pos in open.Keys)
-                {
-                    if (min > f[pos / MazeCreater.totalCol, pos % MazeCreater.totalCol])
-                    {
-                        min = f[pos / MazeCreater.totalCol, pos % MazeCreater.totalCol];
-                        selected = pos;
-                    }
-                }
-
-                #endregion
-
-                CheckPassway(selected / MazeCreater.totalCol, selected % MazeCreater.totalCol);
-
-                if (open.ContainsKey(selected))
-                {
-                    open.Remove(selected);
-                    close.Add(selected);
-                }
-                else
-                {
-                    Debug.LogError("open空了");
-                    return null;
-                }
-            } while (true);
         }
 
         void CheckPassway(int row, int col)
@@ -341,18 +353,21 @@ namespace com.DungeonPad
         protected void changeDirection()
         {
             Vector3 myPos = transform.position;
-            Vector3 endPos = new Vector3(nextPos[0], nextPos[1], 0);
-            // 讓z軸沒有前後誤差值，以免面向錯方向
-            endPos.z = myPos.z;
-            //計算將要朝向的方向，定義其為物件的x軸方向
-            Vector3 vectorToTarget = endPos - myPos;
-            //將物件的x軸延z軸旋轉90度尋找y軸
-            Vector3 rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * vectorToTarget;
-            // LookRotation需要給予向前軸與向上軸，物件z軸將指向向前軸，y軸指向向上軸
-            //所以只要讓物件z軸面向世界座標z軸，y軸指向面向方向轉90度即可讓物件指向x軸
-            Quaternion targetRotation = Quaternion.LookRotation(forward: Vector3.forward, upwards: rotatedVectorToTarget);
-            // 讓物件朝指定方向轉指定角度(rotateSpeed * Time.deltaTime讓他變定速旋轉)
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+            if (nextPos != null &&nextPos.Length>1)
+            {
+                Vector3 endPos = new Vector3(nextPos[0], nextPos[1], 0);
+                // 讓z軸沒有前後誤差值，以免面向錯方向
+                endPos.z = myPos.z;
+                //計算將要朝向的方向，定義其為物件的x軸方向
+                Vector3 vectorToTarget = endPos - myPos;
+                //將物件的x軸延z軸旋轉90度尋找y軸
+                Vector3 rotatedVectorToTarget = Quaternion.Euler(0, 0, 90) * vectorToTarget;
+                // LookRotation需要給予向前軸與向上軸，物件z軸將指向向前軸，y軸指向向上軸
+                //所以只要讓物件z軸面向世界座標z軸，y軸指向面向方向轉90度即可讓物件指向x軸
+                Quaternion targetRotation = Quaternion.LookRotation(forward: Vector3.forward, upwards: rotatedVectorToTarget);
+                // 讓物件朝指定方向轉指定角度(rotateSpeed * Time.deltaTime讓他變定速旋轉)
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+            }
         }
     }
 }

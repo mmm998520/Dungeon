@@ -14,6 +14,7 @@ namespace com.DungeonPad
             arriveNewRoom(startRoomRow, startRoomCol);
             reTarget();
             hp = transform.GetChild(1);
+            findRoadWait = new WaitForSeconds(Random.Range(0.3f, 0.5f));
         }
 
         void Update()
@@ -29,11 +30,14 @@ namespace com.DungeonPad
                 nextPos = new int[] { Mathf.RoundToInt(t.position.x), Mathf.RoundToInt(t.position.y) };
                 prepareAttack();
             }
-            nextPos = findRoad();
-            if(nextPos == null)
+            else
+            {
+                StartCoroutine("findRoad");
+            }
+            if (nextPos == null)
             {
                 reTarget();
-                nextPos = findRoad();
+                StartCoroutine("findRoad");
             }
             moveToTarget();
             changeDirection();
@@ -62,13 +66,12 @@ namespace com.DungeonPad
             {
                 if (nextPos.Length > 1)
                 {
-                    if (Vector3.Distance(new Vector3(nextPos[0], nextPos[1], 0), transform.position) < 0.5f)
+                    if (Vector3.Distance(new Vector3(endRow[0], endCol[0], 0), transform.position) < 0.5f)
                     {
                         timer = 0;
                         reTarget();
                     }
                 }
-                reTarget();
             }
             else
             {

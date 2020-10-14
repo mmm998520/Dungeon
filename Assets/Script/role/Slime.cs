@@ -22,11 +22,11 @@ namespace com.DungeonPad
 
             randomMove();
 
-            nextPos = findRoad();
+            StartCoroutine("findRoad");
             if (nextPos == null)
             {
                 reTarget();
-                nextPos = findRoad();
+                StartCoroutine("findRoad");
             }
             moveToTarget();
             changeDirection();
