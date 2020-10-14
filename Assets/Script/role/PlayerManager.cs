@@ -20,9 +20,11 @@ namespace com.DungeonPad
         public List<Vector3> startRayPoss;
 
         public bool WASD;
+        public bool lastDirRight;
         Vector2 v = Vector2.zero;
 
         public float StickTimer = 10;
+        public float ConfusionTimer = 100;
         private void Start()
         {
             lastPos = transform.position;
@@ -89,39 +91,63 @@ namespace com.DungeonPad
         {
             if (WASD)
             {
-                v.x += Input.GetAxis("HorizontalWASD") * 2;
-                v.y += Input.GetAxis("VerticalWASD") * 2;
-
-                if ((StickTimer += Time.deltaTime) < 5)
+                if (Input.GetKeyDown(KeyCode.D)&&!lastDirRight)
                 {
-                    if (v.magnitude > 0.5f)
-                    {
-                        v = v.normalized * 0.5f;
-                    }
+                    ConfusionTimer++;
+                    lastDirRight = true;
                 }
-                else if (v.magnitude > 3)
+                else if (Input.GetKeyDown(KeyCode.A) && lastDirRight)
                 {
-                    v = v.normalized * 3;
+                    ConfusionTimer++;
+                    lastDirRight = false;
                 }
-                GetComponent<Rigidbody2D>().velocity = v;
             }
             else
             {
-                v.x += Input.GetAxis("Horizontal") * 2;
-                v.y += Input.GetAxis("Vertical") * 2;
-                if ((StickTimer += Time.deltaTime) < 5)
+                if (Input.GetKeyDown(KeyCode.RightArrow) && !lastDirRight)
                 {
-                    if (v.magnitude > 1f)
-                    {
-                        v = v.normalized * 1f;
-                    }
+                    ConfusionTimer++;
+                    lastDirRight = true;
                 }
-                else if (v.magnitude > 3)
+                else if (Input.GetKeyDown(KeyCode.LeftArrow) && lastDirRight)
                 {
-                    v = v.normalized * 3;
+                    ConfusionTimer++;
+                    lastDirRight = false;
                 }
-                GetComponent<Rigidbody2D>().velocity = v;
             }
+            if ((ConfusionTimer+=Time.deltaTime) <= 20)
+            {
+                float tempVX = v.x + Random.Range(-6f, 6f);
+                float tempVY = v.y + Random.Range(-6f, 6f);
+
+                v.x += (tempVX + v.x) / 3;
+                v.y += (tempVY + v.y) / 3;
+            }
+            else
+            {
+                if (WASD)
+                {
+                    v.x += Input.GetAxis("HorizontalWASD") * 2;
+                    v.y += Input.GetAxis("VerticalWASD") * 2;
+                }
+                else
+                {
+                    v.x += Input.GetAxis("Horizontal") * 2;
+                    v.y += Input.GetAxis("Vertical") * 2;
+                }
+            }
+            if ((StickTimer += Time.deltaTime) < 5)
+            {
+                if (v.magnitude > 0.5f)
+                {
+                    v = v.normalized * 0.5f;
+                }
+            }
+            else if (v.magnitude > 3)
+            {
+                v = v.normalized * 3;
+            }
+            GetComponent<Rigidbody2D>().velocity = v;
         }
 
         private void FixedUpdate()

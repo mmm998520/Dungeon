@@ -26,7 +26,7 @@ namespace com.DungeonPad
             {
                 if (collider.GetComponent<PlayerManager>())
                 {
-                    collider.GetComponent<PlayerManager>().StickTimer = 0;
+                    collider.GetComponent<PlayerManager>().ConfusionTimer = 0;
                 }
                 Destroy(gameObject);
             }
