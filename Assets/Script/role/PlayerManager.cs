@@ -154,6 +154,7 @@ namespace com.DungeonPad
                 v = v.normalized * 3;
             }
             GetComponent<Rigidbody2D>().velocity = v;
+            transform.GetChild(7).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(7).GetComponent <ParticleSystem>().shape.arc/2+180);
         }
 
         private void FixedUpdate()
