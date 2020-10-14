@@ -26,7 +26,15 @@ namespace com.DungeonPad
             {
                 if (collider.GetComponent<PlayerManager>())
                 {
-                    collider.GetComponent<PlayerManager>().StickTimer = 0;
+                    collider.GetComponent<PlayerManager>().ConfusionTimer = 0;
+                    Collider2D[] monsterColliders = Physics2D.OverlapCircleAll(transform.position, 10, 1 << 9);
+                    for(int i = 0; i < monsterColliders.Length; i++)
+                    {
+                        if (monsterColliders[i].GetComponent<MonsterManager>())
+                        {
+                            monsterColliders[i].GetComponent<MonsterManager>().TauntTarge = collider.transform;
+                        }
+                    }
                 }
                 Destroy(gameObject);
             }

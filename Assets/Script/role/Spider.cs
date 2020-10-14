@@ -12,7 +12,7 @@ namespace com.DungeonPad
             startRoomRow = Mathf.RoundToInt(transform.position.x) / GameManager.mazeCreater.objectCountRowNum;
             startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
             arriveNewRoom(startRoomRow, startRoomCol);
-            reTarget();
+            randomTarget();
             hp = transform.GetChild(1);
             findRoadWait = new WaitForSeconds(Random.Range(0.3f, 0.5f));
         }
@@ -21,7 +21,15 @@ namespace com.DungeonPad
         {
             hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
 
-            randomMove();
+            if (TauntTarge == null)
+            {
+                randomMove();
+            }
+            else
+            {
+                endRow = new int[] { Mathf.RoundToInt(TauntTarge.position.x) };
+                endCol = new int[] { Mathf.RoundToInt(TauntTarge.position.y) };
+            }
 
             attackCD();
             if (prepare != 0)
@@ -36,7 +44,15 @@ namespace com.DungeonPad
             }
             if (nextPos == null)
             {
-                reTarget();
+                if (TauntTarge == null)
+                {
+                    randomMove();
+                }
+                else
+                {
+                    endRow = new int[] { Mathf.RoundToInt(TauntTarge.position.x) };
+                    endCol = new int[] { Mathf.RoundToInt(TauntTarge.position.y) };
+                }
                 StartCoroutine("findRoad");
             }
             moveToTarget();
@@ -48,7 +64,7 @@ namespace com.DungeonPad
             }
         }
 
-        void reTarget()
+        void randomTarget()
         {
             int r = Random.Range(0, canGo.Count);
             endRow = new int[] { canGo[r] / MazeCreater.totalCol };
@@ -60,7 +76,7 @@ namespace com.DungeonPad
             if ((timer += Time.deltaTime) > 3)
             {
                 timer = 0;
-                reTarget();
+                randomTarget();
             }
             if (nextPos != null)
             {
@@ -69,13 +85,13 @@ namespace com.DungeonPad
                     if (Vector3.Distance(new Vector3(endRow[0], endCol[0], 0), transform.position) < 0.5f)
                     {
                         timer = 0;
-                        reTarget();
+                        randomTarget();
                     }
                 }
             }
             else
             {
-                reTarget();
+                randomTarget();
             }
         }
     }

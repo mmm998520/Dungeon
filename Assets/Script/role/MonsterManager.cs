@@ -17,9 +17,11 @@ namespace com.DungeonPad
         public int[] guardPoint;
         public int nextGrardNum;
 
-
+        //仇恨目標
+        public Transform TauntTarge;
         public float difference, repTimes, repTimer;
         protected bool attacked = false;
+
         protected enum Stat
         {
             guard,
