@@ -8,7 +8,7 @@ namespace com.DungeonPad
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 40, HP = 40;
-        public static bool lockedHP = true;
+        public static bool lockedHP = false;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
