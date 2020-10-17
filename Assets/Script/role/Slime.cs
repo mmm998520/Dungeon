@@ -13,12 +13,12 @@ namespace com.DungeonPad
             startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
             arriveNewRoom(startRoomRow, startRoomCol);
             reTarget();
-            hp = transform.GetChild(1);
+            ArmorBar = transform.GetChild(1);
         }
 
         void Update()
         {
-            hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
+            ArmorBar.localScale = new Vector3(Armor / MaxArmor, ArmorBar.localScale.y, ArmorBar.localScale.z);
 
             randomMove();
 
@@ -31,10 +31,6 @@ namespace com.DungeonPad
             moveToTarget();
             changeDirection();
             GetComponent<Rigidbody2D>().velocity = transform.right * 1f;
-            if (HP <= 0)
-            {
-                Destroy(gameObject);
-            }
         }
 
         void reTarget()

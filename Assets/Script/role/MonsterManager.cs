@@ -6,9 +6,10 @@ namespace com.DungeonPad
 {
     public class MonsterManager : Navigate
     {
-        public float MaxHP, HP, ATK, CD, CDTimer, preparation1, preparation2, preparationTimer, hand, atkTime, speed;
+        public float MaxArmor, Armor, ArmorConsumption, ATK, CD, CDTimer, preparation1, preparation2, preparationTimer, hand, atkTime, speed;
+        protected float energyDeficiencyTimer = 10;
         protected int prepare = 0;
-        protected Transform hp;
+        protected Transform ArmorBar;
         public GameObject attack;
         /// <summary> 守備區域 </summary>
         protected HashSet<int> guardPos = new HashSet<int>();
@@ -53,13 +54,19 @@ namespace com.DungeonPad
         /// <summary> 轉向並向下一個目標點前進 </summary>
         protected void moveToTarget()
         {
+            print(prepare);
             if (prepare != 2)
             {
                 changeDirection();
             }
             if (prepare == 0)
             {
-                transform.Translate(Vector3.right * Time.deltaTime * speed);
+                GetComponent<Rigidbody2D>().velocity = transform.right * speed;
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                GetComponent<Rigidbody2D>().angularVelocity = 0;
             }
         }
 
@@ -122,7 +129,17 @@ namespace com.DungeonPad
                 Destroy(monsterAttack.gameObject, atkTime);
                 monsterAttack.ATK = ATK;
                 CDTimer = 0;
+                Armor -= ArmorConsumption;
+                if (Armor <= 0)
+                {
+                    energyDeficiencyTimer = 0;
+                    Armor = 0;
+                }
                 if (i != repTimes - 1)
+                {
+                    yield return RepTime;
+                }
+                else
                 {
                     yield return RepTime;
                 }

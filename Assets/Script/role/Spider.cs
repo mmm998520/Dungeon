@@ -9,17 +9,22 @@ namespace com.DungeonPad
         float timer;
         void Start()
         {
+            RepTime = new WaitForSeconds(repTimer);
             startRoomRow = Mathf.RoundToInt(transform.position.x) / GameManager.mazeCreater.objectCountRowNum;
             startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
             arriveNewRoom(startRoomRow, startRoomCol);
             randomTarget();
-            hp = transform.GetChild(1);
+            ArmorBar = transform.GetChild(1);
             findRoadWait = new WaitForSeconds(Random.Range(0.3f, 0.5f));
         }
 
         void Update()
         {
-            hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
+            if ((energyDeficiencyTimer += Time.deltaTime) > 1f)
+            {
+                Armor += Time.deltaTime;
+                Armor = Mathf.Clamp(Armor, 0, MaxArmor);
+            }
 
             if (TauntTarge == null)
             {
@@ -34,8 +39,11 @@ namespace com.DungeonPad
             attackCD();
             if (prepare != 0)
             {
-                Transform t = MinDisPlayer();
-                nextPos = new int[] { Mathf.RoundToInt(t.position.x), Mathf.RoundToInt(t.position.y) };
+                if (prepare == 1)
+                {
+                    Transform t = MinDisPlayer();
+                    nextPos = new int[] { Mathf.RoundToInt(t.position.x), Mathf.RoundToInt(t.position.y) };
+                }
                 prepareAttack();
             }
             else
@@ -57,11 +65,9 @@ namespace com.DungeonPad
             }
             moveToTarget();
             changeDirection();
-            GetComponent<Rigidbody2D>().velocity = transform.right*1f;
-            if (HP <= 0)
-            {
-                Destroy(gameObject);
-            }
+
+            ArmorBar.gameObject.SetActive(Armor > 0);
+            ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
         }
 
         void randomTarget()
