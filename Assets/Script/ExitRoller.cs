@@ -10,7 +10,7 @@ namespace com.DungeonPad
         void Update()
         {
             transform.localPosition = Vector3.zero;
-            if (transform.rotation.eulerAngles.z > 345&& transform.rotation.eulerAngles.z<355)
+            if (transform.rotation.eulerAngles.z > 180 && transform.rotation.eulerAngles.z < 200)
             {
                 SceneManager.LoadScene("Game 2");
             }

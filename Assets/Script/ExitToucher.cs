@@ -19,7 +19,7 @@ namespace com.DungeonPad
         {
             if (touchNum >= 2)
             {
-                rigidbody2D.mass = 4;
+                rigidbody2D.mass = 0.2f;
             }
             else
             {

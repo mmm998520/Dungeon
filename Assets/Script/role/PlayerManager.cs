@@ -54,8 +54,8 @@ namespace com.DungeonPad
                 {
                     HP = MaxHP;
                 }
-                transform.GetChild(5).GetComponent<Light>().spotAngle = HP + 10;
-                transform.GetChild(5).GetComponent<Light>().intensity = HP + 10;
+                transform.GetChild(5).GetComponent<Light>().spotAngle = HP + 5;
+                transform.GetChild(5).GetComponent<Light>().intensity = HP + 5;
                 if (StickTimer < 5)
                 {
                     transform.GetChild(4).gameObject.SetActive(true);
