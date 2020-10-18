@@ -12,6 +12,7 @@ namespace com.DungeonPad
 
         void Update()
         {
+            transform.GetChild(0).localPosition = Vector3.zero;
             maxX = -float.MaxValue;
             minX = float.MaxValue;
             maxY = -float.MaxValue;
@@ -44,7 +45,7 @@ namespace com.DungeonPad
         void cameraMove()
         {
             center = new Vector3((maxX + minX) / 2, (maxY + minY) / 2, -10);
-            transform.position = center;
+            GetComponent<Rigidbody2D>().velocity = (center - transform.position)*3;
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

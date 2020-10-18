@@ -12,6 +12,7 @@ namespace com.DungeonPad
         {
             player = GameObject.Find("p"+playerNum++).transform;
             player.position = transform.position;
+            Camera.main.transform.position = transform.position + Vector3.back * 10;
         }
     }
 }
