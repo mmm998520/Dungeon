@@ -164,7 +164,7 @@ namespace com.DungeonPad
 
         private void FixedUpdate()
         {
-            v *= 0.93f;
+            v *= 0.9f;
         }
 
         void timer()
