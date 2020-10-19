@@ -20,7 +20,7 @@ namespace com.DungeonPad
         Transform hp;
         public List<Vector3> startRayPoss;
 
-        public bool WASD;
+        public bool p1;
         public bool lastDirRight;
         Vector2 v = Vector2.zero;
 
@@ -96,30 +96,146 @@ namespace com.DungeonPad
 
         void Behavior()
         {
-            if (WASD)
+            if (p1)
             {
-                if (Input.GetKeyDown(KeyCode.D)&&!lastDirRight)
+                if (!lastDirRight)
                 {
-                    ConfusionTimer++;
-                    lastDirRight = true;
+                    switch (test.p1Joy)
+                    {
+                        case "WASD":
+                            if (Input.GetKeyDown(KeyCode.D))
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                        case "ArrowKey":
+                            if (Input.GetKeyDown(KeyCode.RightArrow))
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) < 0.5f)
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                    }
                 }
-                else if (Input.GetKeyDown(KeyCode.A) && lastDirRight)
+                else
                 {
-                    ConfusionTimer++;
-                    lastDirRight = false;
+                    switch (test.p1Joy)
+                    {
+                        case "WASD":
+                            if (Input.GetKeyDown(KeyCode.A))
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                        case "ArrowKey":
+                            if (Input.GetKeyDown(KeyCode.LeftArrow))
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) > -0.5f)
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                    }
                 }
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.RightArrow) && !lastDirRight)
+                if (!lastDirRight)
                 {
-                    ConfusionTimer++;
-                    lastDirRight = true;
+                    switch (test.p2Joy)
+                    {
+                        case "WASD":
+                            if (Input.GetKeyDown(KeyCode.D))
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                        case "ArrowKey":
+                            if (Input.GetKeyDown(KeyCode.RightArrow))
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetAxis("HorizontalJoy" + test.p2Joy) < 0.5f)
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                    }
                 }
-                else if (Input.GetKeyDown(KeyCode.LeftArrow) && lastDirRight)
+                else
                 {
-                    ConfusionTimer++;
-                    lastDirRight = false;
+                    switch (test.p2Joy)
+                    {
+                        case "WASD":
+                            if (Input.GetKeyDown(KeyCode.A))
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                        case "ArrowKey":
+                            if (Input.GetKeyDown(KeyCode.LeftArrow))
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetAxis("HorizontalJoy" + test.p2Joy) > -0.5f)
+                            {
+                                ConfusionTimer++;
+                                lastDirRight = true;
+                            }
+                            break;
+                    }
                 }
             }
             if ((ConfusionTimer+=Time.deltaTime) <= 10)
@@ -136,16 +252,58 @@ namespace com.DungeonPad
             {
                 ConfusionUIRenderer.enabled = false;
                 ConfusionUIcontroler.enabled = false;
-                if (WASD)
+                #region//操作移動
+                if (p1)
                 {
-                    v.x += Input.GetAxis("HorizontalWASD") * 2;
-                    v.y += Input.GetAxis("VerticalWASD") * 2;
+                    switch (test.p1Joy)
+                    {
+                        case "WASD":
+                            v.x += Input.GetAxis("HorizontalWASD") * 2;
+                            v.y += Input.GetAxis("VerticalWASD") * 2;
+                            break;
+                        case "ArrowKey":
+                            v.x += Input.GetAxis("Horizontal") * 2;
+                            v.y += Input.GetAxis("Vertical") * 2;
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            v.x += Input.GetAxis("HorizontalJoy" + test.p1Joy) * 2;
+                            v.y -= Input.GetAxis("VerticalJoy" + test.p1Joy) * 2;
+                            break;
+                    }
                 }
                 else
                 {
-                    v.x += Input.GetAxis("Horizontal") * 2;
-                    v.y += Input.GetAxis("Vertical") * 2;
+                    switch (test.p2Joy)
+                    {
+                        case "WASD":
+                            v.x += Input.GetAxis("HorizontalWASD") * 2;
+                            v.y += Input.GetAxis("VerticalWASD") * 2;
+                            break;
+                        case "ArrowKey":
+                            v.x += Input.GetAxis("Horizontal") * 2;
+                            v.y += Input.GetAxis("Vertical") * 2;
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            v.x += Input.GetAxis("HorizontalJoy" + test.p2Joy) * 2;
+                            v.y -= Input.GetAxis("VerticalJoy" + test.p2Joy) * 2;
+                            break;
+                    }
                 }
+                #endregion
             }
             if ((StickTimer += Time.deltaTime) < 5)
             {

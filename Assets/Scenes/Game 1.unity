@@ -13153,6 +13153,11 @@ PrefabInstance:
       propertyPath: ConfusionUIcontroler
       value: 
       objectReference: {fileID: 97097399}
+    - target: {fileID: 779630006675397164, guid: 4027eeffc34895249971bf8dc3bf3b53,
+        type: 3}
+      propertyPath: p1
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 779630006675397165, guid: 4027eeffc34895249971bf8dc3bf3b53,
         type: 3}
       propertyPath: m_Enabled
