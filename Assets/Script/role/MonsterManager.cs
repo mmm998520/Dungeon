@@ -54,7 +54,6 @@ namespace com.DungeonPad
         /// <summary> 轉向並向下一個目標點前進 </summary>
         protected void moveToTarget()
         {
-            print(prepare);
             if (prepare != 2)
             {
                 changeDirection();

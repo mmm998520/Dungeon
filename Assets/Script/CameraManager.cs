@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class CameraManager : MonoBehaviour
     {
-        Vector3 center;
+        public static Vector3 center;
         public float maxX, minX, maxY, minY;
         public float disX, disY;
 

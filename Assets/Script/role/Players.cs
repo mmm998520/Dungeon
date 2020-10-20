@@ -27,7 +27,6 @@ namespace com.DungeonPad
         {
             MP += Time.deltaTime;
             MP = Mathf.Clamp(MP, 0, 30);
-            ShowMP.localScale = new Vector3(MP / 30, 1, 1);
             if (draw)
             {
                 drawLine();
