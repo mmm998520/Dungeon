@@ -8,7 +8,7 @@ namespace com.DungeonPad
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 40, HP = 40;
-        public static bool lockedHP = false;
+        public static bool lockedHP = true;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -55,7 +55,7 @@ namespace com.DungeonPad
                     HP = MaxHP;
                 }
                 transform.GetChild(5).GetComponent<Light>().spotAngle = HP + 5;
-                transform.GetChild(5).GetComponent<Light>().intensity = HP + 5;
+                transform.GetChild(5).GetComponent<Light>().intensity = HP + 15;
                 if (StickTimer < 5)
                 {
                     transform.GetChild(4).gameObject.SetActive(true);
@@ -124,7 +124,7 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) < 0.5f)
+                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) > 0.7f)
                             {
                                 ConfusionTimer++;
                                 lastDirRight = true;
@@ -158,7 +158,7 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) > -0.5f)
+                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) < -0.7f)
                             {
                                 ConfusionTimer++;
                                 lastDirRight = true;

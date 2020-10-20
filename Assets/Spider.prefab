@@ -142,7 +142,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec2098d4db7ea6844b5d1fa7a8306789, type: 2}
+  - {fileID: 2100000, guid: 09f367c65b8d5b3448c9b62ec785556b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -223,7 +223,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec2098d4db7ea6844b5d1fa7a8306789, type: 2}
+  - {fileID: 2100000, guid: 09f367c65b8d5b3448c9b62ec785556b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -398,21 +398,21 @@ MonoBehaviour:
   MaxArmor: 10
   Armor: 10
   ArmorConsumption: 5
-  ATK: 2
+  ATK: 7
   CD: 3
   CDTimer: 0
-  preparation1: 1
-  preparation2: 0.3
+  preparation1: 0.7
+  preparation2: 0
   preparationTimer: 0
   hand: 10
   atkTime: 2
-  speed: 1.5
+  speed: 3
   attack: {fileID: 6355018383450350413, guid: e70d5eab1d8f6f7488c5e117357c0d83, type: 3}
   guardPoint: 0a0000000b0000000c0000000d0000000e0000000f00000010000000130000001400000015000000160000001700000018000000190000001c0000001d0000001e0000001f00000020000000210000002200000025000000260000002700000028000000290000002a0000002b0000002e0000002f00000030000000310000003200000033000000340000003700000038000000390000003a0000003b0000003c0000003d00000040000000410000004200000043000000440000004500000046000000490000004a0000004b0000004c0000004d0000004e0000004f000000520000005300000054000000550000005600000057000000580000005b0000005c0000005d0000005e0000005f0000006000000061000000
   nextGrardNum: 0
   TauntTarge: {fileID: 0}
   difference: 0
-  repTimes: 2
+  repTimes: 1
   repTimer: 1
 --- !u!1 &7390371275698037257
 GameObject:
