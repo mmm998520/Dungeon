@@ -9,6 +9,7 @@ namespace com.DungeonPad
         public string[,] mazeDatas;
         int totalRow, totalCol;
         List<int[]> side = new List<int[]>();
+        List<List<float>> lights = new List<List<float>>();
         void Start()
         {
             mazeDatas = GameManager.mazeCreater.mazeDatas;
@@ -23,6 +24,20 @@ namespace com.DungeonPad
         void Update()
         {
 
+        }
+
+        void creatLight()
+        {
+            int[] newInsPos = findNewInsPos();
+            int newInsPosDir = setNewInsDir(newInsPos);
+            List<float> temp = new List<float>();
+            int i;
+            for (i = 0; i < newInsPos.Length; i++)
+            {
+                temp.Add(newInsPos[i]);
+            }
+            temp.Add(newInsPosDir);
+            lights.Add(temp);
         }
 
         int[] findNewInsPos()
