@@ -7,7 +7,7 @@ namespace com.DungeonPad
     public class FloorLight : MonoBehaviour
     {
         public string[,] mazeDatas;
-        public int totalRow, totalCol;
+        int totalRow, totalCol;
         List<int[]> side = new List<int[]>();
         void Start()
         {
@@ -51,6 +51,32 @@ namespace com.DungeonPad
                     }
                 }
             } while (true);
+        }
+
+        int setNewInsDir(int[] newPos)
+        {
+            if (newPos[0] == newPos[2])
+            {
+                if(Random.Range(0, 2) > 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+            else
+            {
+                if (Random.Range(0, 2) > 0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 3;
+                }
+            }
         }
     }
 }
