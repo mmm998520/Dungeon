@@ -14,9 +14,9 @@ namespace com.DungeonPad
 
         }
 
-        // Update is called once per frame
         void Update()
         {
+            transform.parent.parent.GetChild(2).gameObject.GetComponent<ParticleSystem>().emissionRate = rigidbody2D.angularVelocity;
             if (touchNum >= 2)
             {
                 rigidbody2D.mass = 0.2f;
