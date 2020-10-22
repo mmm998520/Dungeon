@@ -124,7 +124,7 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) > 0.7f)
+                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) > 0.8f)
                             {
                                 ConfusionTimer++;
                                 lastDirRight = true;
@@ -140,14 +140,14 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown(KeyCode.A))
                             {
                                 ConfusionTimer++;
-                                lastDirRight = true;
+                                lastDirRight = false;
                             }
                             break;
                         case "ArrowKey":
                             if (Input.GetKeyDown(KeyCode.LeftArrow))
                             {
                                 ConfusionTimer++;
-                                lastDirRight = true;
+                                lastDirRight = false;
                             }
                             break;
                         case "1":
@@ -158,10 +158,10 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) < -0.7f)
+                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) < -0.8f)
                             {
                                 ConfusionTimer++;
-                                lastDirRight = true;
+                                lastDirRight = false;
                             }
                             break;
                     }
@@ -195,7 +195,7 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetAxis("HorizontalJoy" + test.p2Joy) < 0.5f)
+                            if (Input.GetAxis("HorizontalJoy" + test.p2Joy) > 0.8f)
                             {
                                 ConfusionTimer++;
                                 lastDirRight = true;
@@ -211,14 +211,14 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown(KeyCode.A))
                             {
                                 ConfusionTimer++;
-                                lastDirRight = true;
+                                lastDirRight = false;
                             }
                             break;
                         case "ArrowKey":
                             if (Input.GetKeyDown(KeyCode.LeftArrow))
                             {
                                 ConfusionTimer++;
-                                lastDirRight = true;
+                                lastDirRight = false;
                             }
                             break;
                         case "1":
@@ -229,10 +229,10 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetAxis("HorizontalJoy" + test.p2Joy) > -0.5f)
+                            if (Input.GetAxis("HorizontalJoy" + test.p2Joy) < -0.8f)
                             {
                                 ConfusionTimer++;
-                                lastDirRight = true;
+                                lastDirRight = false;
                             }
                             break;
                     }
@@ -262,8 +262,8 @@ namespace com.DungeonPad
                             v.y += Input.GetAxis("VerticalWASD") * 2;
                             break;
                         case "ArrowKey":
-                            v.x += Input.GetAxis("Horizontal") * 2;
-                            v.y += Input.GetAxis("Vertical") * 2;
+                            v.x += Input.GetAxis("HorizontalArrowKey") * 2;
+                            v.y += Input.GetAxis("VerticalArrowKey") * 2;
                             break;
                         case "1":
                         case "2":
@@ -287,8 +287,8 @@ namespace com.DungeonPad
                             v.y += Input.GetAxis("VerticalWASD") * 2;
                             break;
                         case "ArrowKey":
-                            v.x += Input.GetAxis("Horizontal") * 2;
-                            v.y += Input.GetAxis("Vertical") * 2;
+                            v.x += Input.GetAxis("HorizontalArrowKey") * 2;
+                            v.y += Input.GetAxis("VerticalArrowKey") * 2;
                             break;
                         case "1":
                         case "2":

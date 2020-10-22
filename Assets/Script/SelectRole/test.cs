@@ -7,10 +7,6 @@ public class test : MonoBehaviour
 {
     public static string p1Joy, p2Joy;
     public bool selectP1 = true;
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
