@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Experimental.Rendering.Universal;
 
 namespace com.DungeonPad
 {
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 40, HP = 40;
-        public static bool lockedHP = true;
+        public static bool lockedHP = false;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -54,8 +55,8 @@ namespace com.DungeonPad
                 {
                     HP = MaxHP;
                 }
-                transform.GetChild(5).GetComponent<Light>().spotAngle = HP + 5;
-                transform.GetChild(5).GetComponent<Light>().intensity = HP + 15;
+                transform.GetChild(5).localScale = Vector3.one * (HP + 5) / 3;
+                transform.GetChild(5).GetComponent<Light2D>().intensity = HP / MaxHP;
                 if (StickTimer < 5)
                 {
                     transform.GetChild(4).gameObject.SetActive(true);
