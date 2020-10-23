@@ -9,31 +9,56 @@ namespace com.DungeonPad
         float timer;
         void Start()
         {
+            RepTime = new WaitForSeconds(repTimer);
             startRoomRow = Mathf.RoundToInt(transform.position.x) / GameManager.mazeCreater.objectCountRowNum;
             startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
             arriveNewRoom(startRoomRow, startRoomCol);
-            reTarget();
+            randomTarget();
             ArmorBar = transform.GetChild(1);
+            findRoadWait = new WaitForSeconds(Random.Range(0.3f, 0.5f));
         }
 
         void Update()
         {
-            ArmorBar.localScale = new Vector3(Armor / MaxArmor, ArmorBar.localScale.y, ArmorBar.localScale.z);
+            if ((energyDeficiencyTimer += Time.deltaTime) > 1f)
+            {
+                Armor += Time.deltaTime;
+                Armor = Mathf.Clamp(Armor, 0, MaxArmor);
+            }
 
-            randomMove();
+            if (TauntTarge == null)
+            {
+                randomMove();
+            }
+            else
+            {
+                endRow = new int[] { Mathf.RoundToInt(TauntTarge.position.x) };
+                endCol = new int[] { Mathf.RoundToInt(TauntTarge.position.y) };
+            }
+
 
             StartCoroutine("findRoad");
             if (nextPos == null)
             {
-                reTarget();
+                if (TauntTarge == null)
+                {
+                    randomMove();
+                }
+                else
+                {
+                    endRow = new int[] { Mathf.RoundToInt(TauntTarge.position.x) };
+                    endCol = new int[] { Mathf.RoundToInt(TauntTarge.position.y) };
+                }
                 StartCoroutine("findRoad");
             }
             moveToTarget();
             changeDirection();
-            GetComponent<Rigidbody2D>().velocity = transform.right * 1f;
+
+            ArmorBar.gameObject.SetActive(Armor > 0);
+            ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
         }
 
-        void reTarget()
+        void randomTarget()
         {
             int r = Random.Range(0, canGo.Count);
             endRow = new int[] { canGo[r] / MazeCreater.totalCol };
@@ -42,26 +67,25 @@ namespace com.DungeonPad
 
         void randomMove()
         {
-            if ((timer += Time.deltaTime) > 3)
+            if ((timer += Time.deltaTime) > 5)
             {
                 timer = 0;
-                reTarget();
+                randomTarget();
             }
             if (nextPos != null)
             {
                 if (nextPos.Length > 1)
                 {
-                    if (Vector3.Distance(new Vector3(nextPos[0], nextPos[1], 0), transform.position) < 0.5f)
+                    if (Vector3.Distance(new Vector3(endRow[0], endCol[0], 0), transform.position) < 0.5f)
                     {
                         timer = 0;
-                        reTarget();
+                        randomTarget();
                     }
                 }
-                reTarget();
             }
             else
             {
-                reTarget();
+                randomTarget();
             }
         }
     }
