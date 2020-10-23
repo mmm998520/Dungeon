@@ -9,7 +9,7 @@ namespace com.DungeonPad
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 40, HP = 40;
-        public static bool lockedHP = false;
+        public static bool lockedHP = true;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -29,6 +29,9 @@ namespace com.DungeonPad
         public float ConfusionTimer = 100;
         public SpriteRenderer ConfusionUIRenderer;
         public ConfusionUIcontroler ConfusionUIcontroler;
+
+        public float lightRotateTimer = 0, lightRotateTimerStoper = 0.5f;
+        public Sprite[] lightSprites;
         private void Start()
         {
             lastPos = transform.position;
@@ -56,41 +59,19 @@ namespace com.DungeonPad
                     HP = MaxHP;
                 }
                 transform.GetChild(5).localScale = Vector3.one * (HP + 5) / 3;
-                transform.GetChild(5).GetComponent<Light2D>().intensity = HP / MaxHP;
-                if (StickTimer < 5)
+                transform.GetChild(6).localScale = Vector3.one * (HP + 5) / 3;
+                if ((lightRotateTimer += Time.deltaTime) >= lightRotateTimerStoper)
                 {
-                    transform.GetChild(4).gameObject.SetActive(true);
-                    if ((int)(StickTimer * 10) % 6 < 1)
-                    {
-                        transform.GetChild(5).GetComponent<Light>().intensity -= 50;
-                    }
-                    else if ((int)(StickTimer * 10) % 6 < 2)
-                    {
-                        transform.GetChild(5).GetComponent<Light>().intensity -= 40;
-                    }
-                    else if ((int)(StickTimer * 10) % 6 < 3)
-                    {
-                        transform.GetChild(5).GetComponent<Light>().intensity -= 30;
-                    }
-                    else if ((int)(StickTimer * 10) % 6 < 4)
-                    {
-                        transform.GetChild(5).GetComponent<Light>().intensity -= 20;
-                    }
-                    else if ((int)(StickTimer * 10) % 6 < 5)
-                    {
-                        transform.GetChild(5).GetComponent<Light>().intensity -= 10;
-                    }
-                    else if ((int)(StickTimer * 10) % 6 < 6)
-                    {
-                        transform.GetChild(5).GetComponent<Light>().intensity -= 0;
-                    }
-                    transform.parent.GetChild(0).GetChild(5).GetComponent<Light>().intensity = 0;
-                    transform.parent.GetChild(1).GetChild(5).GetComponent<Light>().intensity = 0;
+                    lightRotateTimer = 0;
+                    transform.GetChild(6).rotation = transform.GetChild(5).rotation;
+                    transform.GetChild(5).rotation = Quaternion.Euler(Vector3.forward * Random.Range(0, 360));
+                    transform.GetChild(6).GetChild(0).GetComponent<Light2D>().lightCookieSprite = transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite;
+                    transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite = lightSprites[Random.Range(0, lightSprites.Length)];
                 }
-                else
-                {
-                    transform.GetChild(4).gameObject.SetActive(false);
-                }
+                float transition = lightRotateTimer / lightRotateTimerStoper, brightness = HP / MaxHP;
+                brightness *= GameManager.Gammar;
+                transform.GetChild(5).GetChild(0).GetComponent<Light2D>().intensity = transition * brightness;
+                transform.GetChild(6).GetChild(0).GetComponent<Light2D>().intensity = (1 - transition) * brightness;
             }
             timer();
         }
@@ -318,7 +299,7 @@ namespace com.DungeonPad
                 v = v.normalized * 3;
             }
             GetComponent<Rigidbody2D>().velocity = v;
-            transform.GetChild(7).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(7).GetComponent <ParticleSystem>().shape.arc/2+180);
+            transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent <ParticleSystem>().shape.arc/2+180);
         }
 
         private void FixedUpdate()

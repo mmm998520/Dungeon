@@ -10,6 +10,7 @@ namespace com.DungeonPad
         public static int layers = 1, level = 1;
         public static MazeCreater mazeCreater;
         public static SmallMap smallMap;
+        public static float Gammar = 1;
         void Awake()
         {
             players = GameObject.Find("Players").transform;
