@@ -20,12 +20,6 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if ((energyDeficiencyTimer += Time.deltaTime) > 1f)
-            {
-                Armor += Time.deltaTime;
-                Armor = Mathf.Clamp(Armor, 0, MaxArmor);
-            }
-
             if (TauntTarge == null)
             {
                 randomMove();
@@ -99,6 +93,11 @@ namespace com.DungeonPad
             {
                 randomTarget();
             }
+        }
+
+        protected override void afterAttack()
+        {
+            ArmorReCharge();
         }
     }
 }

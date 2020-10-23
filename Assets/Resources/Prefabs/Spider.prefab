@@ -395,9 +395,9 @@ MonoBehaviour:
   endCol: 
   nextPos: 
   rotateSpeed: 200
-  MaxArmor: 10
-  Armor: 10
-  ArmorConsumption: 5
+  MaxArmor: 1
+  Armor: 1
+  ArmorConsumption: 1
   ATK: 7
   CD: 3
   CDTimer: 0

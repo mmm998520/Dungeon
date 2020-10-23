@@ -134,19 +134,23 @@ namespace com.DungeonPad
                     energyDeficiencyTimer = 0;
                     Armor = 0;
                 }
-                if (i != repTimes - 1)
-                {
-                    yield return RepTime;
-                }
-                else
-                {
-                    yield return RepTime;
-                }
+                yield return RepTime;
             }
             nextGrardNum = Random.Range(0, guardPoint.Length);
             preparationTimer = 0;
             prepare = 0;
             attacked = false;
+            afterAttack();
+        }
+
+        protected virtual void afterAttack()
+        {
+
+        }
+
+        protected void ArmorReCharge()
+        {
+            Armor = MaxArmor;
         }
     }
 }
