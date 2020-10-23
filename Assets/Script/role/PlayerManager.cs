@@ -70,6 +70,38 @@ namespace com.DungeonPad
                 }
                 float transition = lightRotateTimer / lightRotateTimerStoper, brightness = HP / MaxHP;
                 brightness *= GameManager.Gammar;
+
+                if (StickTimer < 5)
+                {
+                    if ((int)(StickTimer * 10) % 6 < 1)
+                    {
+                        brightness *= 1f;
+                    }
+                    else if ((int)(StickTimer * 10) % 6 < 2)
+                    {
+                        brightness *= 0.6f;
+                    }
+                    else if ((int)(StickTimer * 10) % 6 < 3)
+                    {
+                        brightness *= 0.4f;
+                    }
+                    else if ((int)(StickTimer * 10) % 6 < 4)
+                    {
+                        brightness *= 0.4f;
+                    }
+                    else if ((int)(StickTimer * 10) % 6 < 5)
+                    {
+                        brightness *= 0.6f;
+                    }
+                    else if ((int)(StickTimer * 10) % 6 < 6)
+                    {
+                        brightness *= 1f;
+                    }
+                    //transform.parent.GetChild(0).GetChild(5).GetComponent<Light>().intensity = 0;
+                    //transform.parent.GetChild(1).GetChild(5).GetComponent<Light>().intensity = 0;
+                }
+                transform.GetChild(4).gameObject.SetActive(StickTimer < 5);
+
                 transform.GetChild(5).GetChild(0).GetComponent<Light2D>().intensity = transition * brightness;
                 transform.GetChild(6).GetChild(0).GetComponent<Light2D>().intensity = (1 - transition) * brightness;
             }

@@ -15,7 +15,7 @@ namespace com.DungeonPad
             arriveNewRoom(startRoomRow, startRoomCol);
             randomTarget();
             ArmorBar = transform.GetChild(1);
-            findRoadWait = new WaitForSeconds(Random.Range(0.3f, 0.5f));
+            findRoadWait = new WaitForSeconds(Random.Range(0.7f, 1f));
         }
 
         void Update()
@@ -86,6 +86,15 @@ namespace com.DungeonPad
             else
             {
                 randomTarget();
+            }
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.GetComponent<PlayerManager>())
+            {
+                collision.collider.GetComponent<PlayerManager>().StickTimer = 0;
+                Destroy(gameObject);
             }
         }
     }
