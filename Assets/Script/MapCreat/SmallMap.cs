@@ -8,6 +8,7 @@ namespace com.DungeonPad
     public class SmallMap : MonoBehaviour
     {
         public int unitLong;
+        public RectTransform playerPos;
         public void start()
         {
             transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(unitLong, unitLong);
@@ -29,17 +30,17 @@ namespace com.DungeonPad
 
         public void update()
         {
-            if (Time.time > 1)
+            if (Time.time > 0.1f)
             {
                 Transform temp;
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(CameraManager.center, 5, 1 << 15);
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(CameraManager.center, 4, 1 << 15);
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     temp = transform.GetChild(Mathf.RoundToInt(colliders[i].transform.position.x) * MazeCreater.totalCol + Mathf.RoundToInt(colliders[i].transform.position.y));
                     temp.GetComponent<Image>().enabled = false;
                     colliders[i].enabled = false;
                 }
-                colliders = Physics2D.OverlapCircleAll(CameraManager.center, 8, 1 << 15);
+                colliders = Physics2D.OverlapCircleAll(CameraManager.center, 7, 1 << 15);
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     temp = transform.GetChild(Mathf.RoundToInt(colliders[i].transform.position.x) * MazeCreater.totalCol + Mathf.RoundToInt(colliders[i].transform.position.y));
@@ -48,7 +49,7 @@ namespace com.DungeonPad
                         temp.GetComponent<Image>().color = new Color(1, 1, 1, 0.75f);
                     }
                 }
-                colliders = Physics2D.OverlapCircleAll(CameraManager.center, 7, 1 << 15);
+                colliders = Physics2D.OverlapCircleAll(CameraManager.center, 6, 1 << 15);
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     temp = transform.GetChild(Mathf.RoundToInt(colliders[i].transform.position.x) * MazeCreater.totalCol + Mathf.RoundToInt(colliders[i].transform.position.y));
@@ -57,13 +58,14 @@ namespace com.DungeonPad
                         temp.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
                     }
                 }
-                colliders = Physics2D.OverlapCircleAll(CameraManager.center, 6, 1 << 15);
+                colliders = Physics2D.OverlapCircleAll(CameraManager.center, 5, 1 << 15);
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     temp = transform.GetChild(Mathf.RoundToInt(colliders[i].transform.position.x) * MazeCreater.totalCol + Mathf.RoundToInt(colliders[i].transform.position.y));
                     temp.GetComponent<Image>().color = new Color(1, 1, 1, 0.25f);
                 }
             }
+            playerPos.anchoredPosition = new Vector2(unitLong * CameraManager.center.x, unitLong * CameraManager.center.y);
         }
     }
 }
