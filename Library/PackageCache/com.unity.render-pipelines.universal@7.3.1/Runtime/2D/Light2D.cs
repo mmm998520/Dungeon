@@ -229,7 +229,11 @@ namespace UnityEngine.Experimental.Rendering.Universal
         /// The lights current intensity
         /// </summary>
         public float volumeOpacity => m_LightVolumeOpacity;
-        public Sprite lightCookieSprite => m_LightCookieSprite;
+        public Sprite lightCookieSprite
+        {
+            get { return m_LightCookieSprite; }
+            set { m_LightCookieSprite = value; }
+        }
         public float falloffIntensity => m_FalloffIntensity;
         public bool useNormalMap => m_UseNormalMap;
         public bool alphaBlendOnOverlap => m_AlphaBlendOnOverlap;
