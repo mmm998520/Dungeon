@@ -16,19 +16,51 @@ namespace com.DungeonPad
         public bool canWalk = true, punching = false;
         public int summoningTimes;
         float anglePreSummoning, currentAngle;
+        Animator animator;
+
+        float timer;
         void Start()
         {
+            animator = GetComponent<Animator>();
             rigidbody = GetComponent<Rigidbody2D>();
             for(int i = 0; i < toDoLists.Length; i++)
             {
                 toDo.Add((toDoLists[i].Minutes * 60) + toDoLists[i].seconds, toDoLists[i].willDo);
             }
-            toDoLists = new ToDo.toDoList[0];
             anglePreSummoning = 360f / summoningTimes;
+            ArmorBar = transform.GetChild(3);
         }
 
         void Update()
         {
+            int t = (int)(timer += Time.deltaTime);
+            if (toDo.ContainsKey(t))
+            {
+                if (toDo[t] == ToDo.CanDo.Punch)
+                {
+                    animator.SetTrigger("Punch");
+                    toDo.Remove(t);
+                }
+                else if (toDo[t] == ToDo.CanDo.Summoning)
+                {
+                    animator.SetTrigger("Summoning");
+                    toDo.Remove(t);
+                }
+                else if (toDo[t] == ToDo.CanDo.ThrowAxe)
+                {
+                    animator.SetTrigger("ThrowAxe");
+                    toDo.Remove(t);
+                }
+                else if (toDo[t] == ToDo.CanDo.Reset)
+                {
+                    timer = 0;
+                    toDo.Clear();
+                    for (int i = 0; i < toDoLists.Length; i++)
+                    {
+                        toDo.Add((toDoLists[i].Minutes * 60) + toDoLists[i].seconds, toDoLists[i].willDo);
+                    }
+                }
+            }
             if (canWalk)
             {
                 rigidbody.velocity = Vector3.Normalize((MinDisPlayer().position - transform.position) * Vector2.one);
@@ -49,6 +81,9 @@ namespace com.DungeonPad
             {
                 rigidbody.velocity = Vector2.zero;
             }
+
+            ArmorBar.gameObject.SetActive(Armor > 0);
+            ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
         }
 
         /// <summary> 召喚術 </summary>
@@ -86,9 +121,10 @@ namespace com.DungeonPad
     {
         public enum CanDo
         {
-            throwAxe,
+            ThrowAxe,
             Punch,
-            Summoning
+            Summoning,
+            Reset
         }
 
         /// <summary> 儲存資料用 </summary>

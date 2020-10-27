@@ -1644,7 +1644,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 0.1
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
@@ -13260,7 +13260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitLong: 10
-  playerPos: {fileID: 1307679434}
+  playerPos: {fileID: 0}
 --- !u!1 &1738212344
 GameObject:
   m_ObjectHideFlags: 0

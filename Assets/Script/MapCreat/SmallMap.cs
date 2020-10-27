@@ -11,6 +11,7 @@ namespace com.DungeonPad
         public RectTransform playerPos;
         public void start()
         {
+            playerPos = transform.parent.GetChild(1).GetComponent<RectTransform>();
             transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(unitLong, unitLong);
             RectTransform temp;
             int i, j;

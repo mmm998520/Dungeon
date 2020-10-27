@@ -959,6 +959,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaurenBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 6115880102486937802, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7af27b8f06c86a84ab6c1f5c47f6977e, type: 3}
 --- !u!1001 &59023902
@@ -19758,7 +19763,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 0.5
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
