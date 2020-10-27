@@ -16,7 +16,10 @@ namespace com.DungeonPad
             players = GameObject.Find("Players").transform;
             monsters = GameObject.Find("Monsters").transform;
             triggers = GameObject.Find("Triggers").transform;
-            mazeCreater = GameObject.Find("MazeCreater").GetComponent<MazeCreater>();
+            if (GameObject.Find("MazeCreater"))
+            {
+                mazeCreater = GameObject.Find("MazeCreater").GetComponent<MazeCreater>();
+            }
             smallMap = GameObject.Find("SmallMap").GetComponent<SmallMap>();
             smallMap.start();
             UI = smallMap.transform.parent;

@@ -18,7 +18,8 @@ namespace com.DungeonPad
             transform.Translate(Vector3.right * Time.deltaTime * speed);
             if ((timer += Time.deltaTime) > timerStoper)
             {
-                StartCoroutine("destroy");
+                speed = 0;
+                Destroy(gameObject, destoryTime);
             }
         }
 
@@ -26,15 +27,9 @@ namespace com.DungeonPad
         {
             if (collider.gameObject.layer == 8 || collider.gameObject.layer == 12)
             {
-                StartCoroutine("destroy");
+                speed = 0;
+                Destroy(gameObject, destoryTime);
             }
-        }
-
-        IEnumerator destroy()
-        {
-            speed = 0;
-            yield return destoryTimer;
-            Destroy(gameObject);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace com.DungeonPad
 
         public bool p1;
         public bool lastDirRight;
-        Vector2 v = Vector2.zero;
+        public Vector2 v = Vector2.zero, a = Vector2.zero;
 
         public float StickTimer = 10;
         public float ConfusionTimer = 100;
@@ -330,6 +330,7 @@ namespace com.DungeonPad
             {
                 v = v.normalized * 3;
             }
+            v += a;
             GetComponent<Rigidbody2D>().velocity = v;
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent <ParticleSystem>().shape.arc/2+180);
         }
@@ -337,6 +338,7 @@ namespace com.DungeonPad
         private void FixedUpdate()
         {
             v *= 0.9f;
+            a *= 0.9f;
         }
 
         void timer()
