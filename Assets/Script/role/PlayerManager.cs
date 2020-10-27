@@ -114,7 +114,7 @@ namespace com.DungeonPad
             {
                 if (!lastDirRight)
                 {
-                    switch (test.p1Joy)
+                    switch (SelectRole.p1Joy)
                     {
                         case "WASD":
                             if (Input.GetKeyDown(KeyCode.D))
@@ -138,7 +138,7 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) > 0.8f)
+                            if (Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy) > 0.8f)
                             {
                                 ConfusionTimer++;
                                 lastDirRight = true;
@@ -148,7 +148,7 @@ namespace com.DungeonPad
                 }
                 else
                 {
-                    switch (test.p1Joy)
+                    switch (SelectRole.p1Joy)
                     {
                         case "WASD":
                             if (Input.GetKeyDown(KeyCode.A))
@@ -172,7 +172,7 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetAxis("HorizontalJoy" + test.p1Joy) < -0.8f)
+                            if (Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy) < -0.8f)
                             {
                                 ConfusionTimer++;
                                 lastDirRight = false;
@@ -185,7 +185,7 @@ namespace com.DungeonPad
             {
                 if (!lastDirRight)
                 {
-                    switch (test.p2Joy)
+                    switch (SelectRole.p2Joy)
                     {
                         case "WASD":
                             if (Input.GetKeyDown(KeyCode.D))
@@ -209,7 +209,7 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetAxis("HorizontalJoy" + test.p2Joy) > 0.8f)
+                            if (Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy) > 0.8f)
                             {
                                 ConfusionTimer++;
                                 lastDirRight = true;
@@ -219,7 +219,7 @@ namespace com.DungeonPad
                 }
                 else
                 {
-                    switch (test.p2Joy)
+                    switch (SelectRole.p2Joy)
                     {
                         case "WASD":
                             if (Input.GetKeyDown(KeyCode.A))
@@ -243,7 +243,7 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetAxis("HorizontalJoy" + test.p2Joy) < -0.8f)
+                            if (Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy) < -0.8f)
                             {
                                 ConfusionTimer++;
                                 lastDirRight = false;
@@ -269,7 +269,7 @@ namespace com.DungeonPad
                 #region//操作移動
                 if (p1)
                 {
-                    switch (test.p1Joy)
+                    switch (SelectRole.p1Joy)
                     {
                         case "WASD":
                             v.x += Input.GetAxis("HorizontalWASD") * 2;
@@ -287,14 +287,14 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoy" + test.p1Joy) * 2;
-                            v.y -= Input.GetAxis("VerticalJoy" + test.p1Joy) * 2;
+                            v.x += Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy) * 2;
+                            v.y -= Input.GetAxis("VerticalJoy" + SelectRole.p1Joy) * 2;
                             break;
                     }
                 }
                 else
                 {
-                    switch (test.p2Joy)
+                    switch (SelectRole.p2Joy)
                     {
                         case "WASD":
                             v.x += Input.GetAxis("HorizontalWASD") * 2;
@@ -312,8 +312,8 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoy" + test.p2Joy) * 2;
-                            v.y -= Input.GetAxis("VerticalJoy" + test.p2Joy) * 2;
+                            v.x += Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy) * 2;
+                            v.y -= Input.GetAxis("VerticalJoy" + SelectRole.p2Joy) * 2;
                             break;
                     }
                 }

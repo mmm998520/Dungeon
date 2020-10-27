@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class test : MonoBehaviour
+public class SelectRole : MonoBehaviour
 {
     public static string p1Joy, p2Joy;
     public bool selectP1 = true;
