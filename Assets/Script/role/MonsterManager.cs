@@ -49,6 +49,27 @@ namespace com.DungeonPad
             }
             return minDisPlayer;
         }
+        
+        /// <summary> 獲取最近玩家的左右方塊 </summary>
+        public Transform MinDisPlayerCube()
+        {
+            int i, j;
+            float minDis = float.MaxValue;
+            Transform minDisPlayerCube = null;
+            for (i = 0; i < GameManager.players.childCount; i++)
+            {
+                for (j = 0; j < 2; j++)
+                {
+                    Transform playerCube = GameManager.players.GetChild(i).GetChild(j);
+                    if (minDis > Vector3.Distance(playerCube.position, transform.position))
+                    {
+                        minDis = Vector3.Distance(playerCube.position, transform.position);
+                        minDisPlayerCube = playerCube;
+                    }
+                }
+            }
+            return minDisPlayerCube;
+        }
 
 
         /// <summary> 轉向並向下一個目標點前進 </summary>

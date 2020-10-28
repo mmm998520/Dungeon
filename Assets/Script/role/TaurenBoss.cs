@@ -6,64 +6,48 @@ namespace com.DungeonPad
 {
     public class TaurenBoss : MonsterManager
     {
-        [SerializeField]
-        private ToDo.toDoList[] toDoLists;
-        private Dictionary<float, ToDo.CanDo> toDo = new Dictionary<float, ToDo.CanDo>();
-
         Rigidbody2D rigidbody;
         public GameObject Axe, Tauren;
-        public Transform InsAxePos;
-        public bool canWalk = true, punching = false;
+        public Transform InsAxePos, center;
+        public bool canWalk = true , canPunch = true;
+        int punching = 0;
         public int summoningTimes;
         float anglePreSummoning, currentAngle;
-        Animator animator;
 
         float timer;
         void Start()
         {
-            animator = GetComponent<Animator>();
+            speed = 1;
             rigidbody = GetComponent<Rigidbody2D>();
-            for(int i = 0; i < toDoLists.Length; i++)
-            {
-                toDo.Add((toDoLists[i].Minutes * 60) + toDoLists[i].seconds, toDoLists[i].willDo);
-            }
             anglePreSummoning = 360f / summoningTimes;
             ArmorBar = transform.GetChild(3);
         }
 
         void Update()
         {
-            int t = (int)(timer += Time.deltaTime);
-            if (toDo.ContainsKey(t))
-            {
-                if (toDo[t] == ToDo.CanDo.Punch)
-                {
-                    animator.SetTrigger("Punch");
-                    toDo.Remove(t);
-                }
-                else if (toDo[t] == ToDo.CanDo.Summoning)
-                {
-                    animator.SetTrigger("Summoning");
-                    toDo.Remove(t);
-                }
-                else if (toDo[t] == ToDo.CanDo.ThrowAxe)
-                {
-                    animator.SetTrigger("ThrowAxe");
-                    toDo.Remove(t);
-                }
-                else if (toDo[t] == ToDo.CanDo.Reset)
-                {
-                    timer = 0;
-                    toDo.Clear();
-                    for (int i = 0; i < toDoLists.Length; i++)
-                    {
-                        toDo.Add((toDoLists[i].Minutes * 60) + toDoLists[i].seconds, toDoLists[i].willDo);
-                    }
-                }
-            }
             if (canWalk)
             {
-                rigidbody.velocity = Vector3.Normalize((MinDisPlayer().position - transform.position) * Vector2.one);
+                if (punching == 1 && canPunch)
+                {
+                    rigidbody.velocity = Vector3.zero;
+                }
+                else if (punching == 2 && canPunch)
+                {
+                    rigidbody.velocity = transform.right * 5 * speed;
+                }
+                //如果回歸中點的時間不足(不足再讓BOSS亂逛)時向中點移動
+                else if((32/* 抵達時間(33) - 容錯值(1) */ - timer) <= Vector2.Distance(transform.position, center.position) / speed)
+                {
+                    rigidbody.velocity = Vector3.Normalize((center.position - transform.position) * Vector2.one) * speed;
+                    //一但觸發回程，就不會使用揮拳了
+                    canPunch = false;
+                    Debug.LogWarning("回程");
+                }
+                else if (punching == 0)
+                {
+                    rigidbody.velocity = Vector3.Normalize((MinDisPlayerCube().position - transform.position) * Vector2.one) * speed;
+                }
+                 
                 if (rigidbody.velocity.x > 0)
                 {
                     transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -73,17 +57,14 @@ namespace com.DungeonPad
                     transform.rotation = Quaternion.Euler(Vector3.up * 180);
                 }
             }
-            else if (punching)
-            {
-                rigidbody.velocity = transform.right * 5;
-            }
-            else
-            {
-                rigidbody.velocity = Vector2.zero;
-            }
 
             ArmorBar.gameObject.SetActive(Armor > 0);
             ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
+        }
+
+        public void setCanPunch(bool canPunch)
+        {
+            this.canPunch = canPunch;
         }
 
         /// <summary> 召喚術 </summary>
@@ -112,27 +93,6 @@ namespace com.DungeonPad
                 collision.GetComponent<PlayerManager>().a += (Vector2)Vector3.Normalize((collision.transform.position - transform.position) * Vector2.one);
                 print("player");
             }
-        }
-    }
-
-    /// <summary> 儲存資料用 </summary>
-    [System.Serializable]
-    public class ToDo
-    {
-        public enum CanDo
-        {
-            ThrowAxe,
-            Punch,
-            Summoning,
-            Reset
-        }
-
-        /// <summary> 儲存資料用 </summary>
-        [System.Serializable]
-        public struct toDoList
-        {
-            public float Minutes, seconds;
-            public CanDo willDo;
         }
     }
 }
