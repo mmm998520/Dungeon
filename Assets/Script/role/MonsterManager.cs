@@ -60,7 +60,7 @@ namespace com.DungeonPad
             {
                 for (j = 0; j < 2; j++)
                 {
-                    Transform playerCube = GameManager.players.GetChild(i).GetChild(j);
+                    Transform playerCube = GameManager.players.GetChild(i).GetChild(0).GetChild(j);
                     if (minDis > Vector3.Distance(playerCube.position, transform.position))
                     {
                         minDis = Vector3.Distance(playerCube.position, transform.position);

@@ -10,11 +10,12 @@ namespace com.DungeonPad
         public GameObject Axe, Tauren;
         public Transform InsAxePos, center;
         public bool canWalk = true , canPunch = true;
-        int punching = 0;
+        public int punching = 0;
         public int summoningTimes;
         float anglePreSummoning, currentAngle;
-
+        public Animator animator;
         float timer;
+
         void Start()
         {
             speed = 1;
@@ -88,6 +89,10 @@ namespace com.DungeonPad
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (collision.name == "PlayerCube" && canWalk && canPunch)
+            {
+                animator.SetTrigger("Punch");
+            }
             if (collision.GetComponent<PlayerManager>())
             {
                 collision.GetComponent<PlayerManager>().a += (Vector2)Vector3.Normalize((collision.transform.position - transform.position) * Vector2.one);

@@ -550,11 +550,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaurenBoss
       objectReference: {fileID: 0}
-    - target: {fileID: 6115880102486937802, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7af27b8f06c86a84ab6c1f5c47f6977e, type: 3}
 --- !u!1001 &59023902
@@ -23035,21 +23030,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: p2
-      objectReference: {fileID: 0}
-    - target: {fileID: 691778020694673944, guid: 0f2615ffe1832de429dd2d196e5a4d34,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 691778020694673944, guid: 0f2615ffe1832de429dd2d196e5a4d34,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 691778020694673944, guid: 0f2615ffe1832de429dd2d196e5a4d34,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f2615ffe1832de429dd2d196e5a4d34, type: 3}

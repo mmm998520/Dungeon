@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 688235635}
   m_Layer: 9
-  m_Name: GameObject
+  m_Name: Armor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,8 +300,8 @@ MonoBehaviour:
   endCol: 
   nextPos: 
   rotateSpeed: 200
-  MaxArmor: 5
-  Armor: 5
+  MaxArmor: 1
+  Armor: 1
   ArmorConsumption: 0
   ATK: 0
   CD: 0
@@ -319,46 +319,15 @@ MonoBehaviour:
   difference: 0
   repTimes: 0
   repTimer: 0
-  toDoLists:
-  - Minutes: 0
-    seconds: 5
-    willDo: 1
-  - Minutes: 0
-    seconds: 10
-    willDo: 1
-  - Minutes: 0
-    seconds: 15
-    willDo: 0
-  - Minutes: 0
-    seconds: 20
-    willDo: 0
-  - Minutes: 0
-    seconds: 25
-    willDo: 0
-  - Minutes: 0
-    seconds: 30
-    willDo: 1
-  - Minutes: 0
-    seconds: 35
-    willDo: 1
-  - Minutes: 0
-    seconds: 40
-    willDo: 0
-  - Minutes: 0
-    seconds: 45
-    willDo: 0
-  - Minutes: 0
-    seconds: 50
-    willDo: 2
-  - Minutes: 0
-    seconds: 55
-    willDo: 3
   Axe: {fileID: 5683994576417963163, guid: 7249c241eb11fce43b6597adc4587c9d, type: 3}
   Tauren: {fileID: 5881255763045435205, guid: 5bb2ce9fd60ae5a429eb04333dc7e442, type: 3}
   InsAxePos: {fileID: 5637891530843328047}
+  center: {fileID: 0}
   canWalk: 0
+  canPunch: 1
   punching: 0
   summoningTimes: 6
+  animator: {fileID: 6115880101944645946}
 --- !u!95 &6115880101944645946
 Animator:
   serializedVersion: 3
