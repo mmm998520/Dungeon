@@ -621,6 +621,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 53859332}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &53859334 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6115880101944645947, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
+    type: 3}
+  m_PrefabInstance: {fileID: 53859332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b64c05ae9065fc429591a7116cc9d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &59696865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1691314572940453475, guid: eba2d36b39f4da94fbf235b4e1066e15,
@@ -4924,8 +4936,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 470661068}
-  - component: {fileID: 470661069}
   - component: {fileID: 470661070}
+  - component: {fileID: 470661069}
   m_Layer: 0
   m_Name: TaurenRoomControler
   m_TagString: Untagged
@@ -4981,6 +4993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d5df2d86ddb3b4a8901f91d21200e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taurenBoss: {fileID: 53859334}
 --- !u!1001 &471357227
 PrefabInstance:
   m_ObjectHideFlags: 0

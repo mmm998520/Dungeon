@@ -9,10 +9,8 @@ namespace com.DungeonPad
         Rigidbody2D rigidbody;
         public GameObject Axe, Tauren;
         public Transform InsAxePos, center;
-        public bool canWalk = true , canPunch = true;
+        public bool canWalk = false , canPunch = true;
         public int punching = 0;
-        public int summoningTimes;
-        float anglePreSummoning, currentAngle;
         public Animator animator;
         float timer;
 
@@ -20,7 +18,6 @@ namespace com.DungeonPad
         {
             speed = 1;
             rigidbody = GetComponent<Rigidbody2D>();
-            anglePreSummoning = 360f / summoningTimes;
             ArmorBar = transform.GetChild(3);
         }
 
@@ -61,18 +58,6 @@ namespace com.DungeonPad
 
             ArmorBar.gameObject.SetActive(Armor > 0);
             ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
-        }
-
-        public void setCanPunch(bool canPunch)
-        {
-            this.canPunch = canPunch;
-        }
-
-        /// <summary> 召喚術 </summary>
-        public void Summoning()
-        {
-            Instantiate(Tauren, transform.position + (Quaternion.Euler(Vector3.forward * currentAngle) * Vector3.up * 2), Quaternion.identity);
-            currentAngle += anglePreSummoning;
         }
 
         /// <summary> 丟斧頭 </summary>

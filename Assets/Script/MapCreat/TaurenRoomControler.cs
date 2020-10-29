@@ -6,6 +6,7 @@ namespace com.DungeonPad
 {
     public class TaurenRoomControler : MonoBehaviour
     {
+        public TaurenBoss taurenBoss;
         void Start()
         {
 
@@ -14,6 +15,25 @@ namespace com.DungeonPad
         void Update()
         {
 
+        }
+
+        public void setTaurenBossCanWalk(int _canWalk)
+        {
+            taurenBoss.canWalk = (_canWalk > 0);
+            if (_canWalk > 0)
+            {
+                taurenBoss.animator.SetTrigger("Walk");
+            }
+        }
+
+        public void setTaurenBossCanPunch(int _canPunch)
+        {
+            taurenBoss.canWalk = (_canPunch > 0);
+        }
+
+        public void setTaurenBossFatalBlow()
+        {
+            taurenBoss.animator.SetTrigger("FatalBlow");
         }
     }
 }
