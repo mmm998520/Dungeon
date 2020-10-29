@@ -7,6 +7,9 @@ namespace com.DungeonPad
     public class TaurenRoomControler : MonoBehaviour
     {
         public TaurenBoss taurenBoss;
+        public Transform centerWall;
+        HashSet<Transform> usedFort = new HashSet<Transform>();
+
         void Start()
         {
 
@@ -14,7 +17,10 @@ namespace com.DungeonPad
 
         void Update()
         {
-
+            if(usedFort.Count> centerWall.childCount - 4)
+            {
+                usedFort.Clear();
+            }
         }
 
         public void setTaurenBossCanWalk(int _canWalk)
@@ -39,6 +45,26 @@ namespace com.DungeonPad
         public void TaurenBossReCharge()
         {
             taurenBoss.Armor = taurenBoss.MaxArmor;
+        }
+
+        public void selectOneFort()
+        {
+            int r;
+            Transform selectedFort;
+            do
+            {
+                r = Random.Range(0, centerWall.childCount);
+                selectedFort = centerWall.GetChild(r).GetChild(2);
+            } while (usedFort.Contains(selectedFort));
+
+            Debug.LogError(selectedFort.name + "" + r);
+            usedFort.Add(selectedFort);
+            selectedFort.GetComponent<Animator>().SetTrigger("Shoot");
+        }
+
+        public void clearUsedFort()
+        {
+            usedFort.Clear();
         }
     }
 }

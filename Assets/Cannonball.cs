@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace com.DungeonPad
 {
-    public class MonsterShoter : MonoBehaviour
+    public class Cannonball : MonoBehaviour
     {
         public float speed, timer, timerStoper, destoryTime;
         public WaitForSeconds destoryTimer;
@@ -25,10 +25,9 @@ namespace com.DungeonPad
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.gameObject.layer == 8 || collider.gameObject.layer == 12)
+            if (collider.gameObject.layer == 8)
             {
-                speed = 0;
-                Destroy(gameObject, destoryTime);
+                collider.GetComponent<PlayerManager>().a += (Vector2)Vector3.Normalize(transform.position - collider.transform.position) * 3;
             }
         }
     }
