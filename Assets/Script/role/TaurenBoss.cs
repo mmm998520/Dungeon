@@ -28,7 +28,6 @@ namespace com.DungeonPad
             {
                 timer -= 60;
             }
-            print(timer);
             if (canWalk)
             {
                 if (punching == 1 && canPunch)
@@ -91,10 +90,24 @@ namespace com.DungeonPad
             ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
         }
 
+        float angle = 0;
+        public void throwAxeFaceTo()
+        {
+            angle = Vector3.SignedAngle(Vector3.right, (MinDisPlayer().position - transform.position) * Vector2.one, Vector3.forward);
+            print(angle);
+            if (Mathf.Abs(angle) < 90)
+            {
+                transform.rotation = Quaternion.Euler(Vector3.zero);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(Vector3.up * 180);
+            }
+        }
+
         /// <summary> 丟斧頭 </summary>
         public void throwAxe()
         {
-            float angle = Vector3.SignedAngle(Vector3.right, (MinDisPlayer().position - transform.position) * Vector2.one, Vector3.forward);
             Instantiate(Axe, InsAxePos.position, Quaternion.Euler(Vector3.forward * angle));
         }
 

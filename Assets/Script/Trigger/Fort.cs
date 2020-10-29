@@ -21,11 +21,11 @@ namespace com.DungeonPad
 
         public void lookAtPlayer()
         {
-            if (playerTargetNum++ > 2)
+            if (++playerTargetNum >= 2)
             {
                 playerTargetNum = 0;
             }
-            float angle = Vector3.SignedAngle(Vector3.right, GameManager.players.GetChild(0).position - transform.position, Vector3.forward);
+            float angle = Vector3.SignedAngle(Vector3.right, GameManager.players.GetChild(playerTargetNum).position - transform.position, Vector3.forward);
             transform.GetChild(0).rotation = Quaternion.Euler(0, 0, angle);
         }
 

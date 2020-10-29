@@ -213,6 +213,13 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 25
+    functionName: selectOneFort
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 25.016666
     functionName: clearUsedFort
     data: 
     objectReferenceParameter: {fileID: 0}

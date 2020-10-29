@@ -462,8 +462,22 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 7
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 7.233333
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 7.4666667
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -476,8 +490,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 7.9333334
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 8.166667
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 8.4
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -490,8 +518,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 8.866667
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 9.1
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 9.333333
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -504,8 +546,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 9.816667
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 10.05
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 10.283334
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -518,8 +574,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 10.75
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 10.983334
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 11.216666
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -532,8 +602,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 11.683333
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 11.916667
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 12.15
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -546,8 +630,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 12.616667
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 12.85
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 13.083333
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -560,8 +658,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 13.55
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 13.783334
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 14.016666
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -574,8 +686,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 14.483334
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 14.716666
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 14.95
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -588,8 +714,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 15.433333
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 15.666667
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 15.9
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -602,8 +742,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 16.366667
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 16.6
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 16.833334
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -616,8 +770,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 17.3
+    functionName: throwAxeFaceTo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 17.533333
     functionName: throwAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 17.766666
+    functionName: throwAxeFaceTo
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
