@@ -27,7 +27,7 @@ namespace com.DungeonPad
         {
             if (collider.gameObject.layer == 8)
             {
-                collider.GetComponent<PlayerManager>().a += (Vector2)Vector3.Normalize(collider.transform.position - transform.position) * 3;
+                collider.GetComponent<PlayerManager>().a += (Vector2)transform.right * 3;
             }
         }
     }
