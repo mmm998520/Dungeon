@@ -613,6 +613,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaurenBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 6115880101944645947, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
+        type: 3}
+      propertyPath: roomAnimation
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115880101944645947, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
+        type: 3}
+      propertyPath: roomAnimator
+      value: 
+      objectReference: {fileID: 470661069}
+    - target: {fileID: 6115880101944645947, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
+        type: 3}
+      propertyPath: center
+      value: 
+      objectReference: {fileID: 1388881733}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7af27b8f06c86a84ab6c1f5c47f6977e, type: 3}
 --- !u!4 &53859333 stripped

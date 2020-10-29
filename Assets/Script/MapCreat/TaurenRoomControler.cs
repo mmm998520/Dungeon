@@ -35,5 +35,10 @@ namespace com.DungeonPad
         {
             taurenBoss.animator.SetTrigger("FatalBlow");
         }
+
+        public void TaurenBossReCharge()
+        {
+            taurenBoss.Armor = taurenBoss.MaxArmor;
+        }
     }
 }

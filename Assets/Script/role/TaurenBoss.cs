@@ -11,7 +11,7 @@ namespace com.DungeonPad
         public Transform InsAxePos, center;
         public bool canWalk = false , canPunch = true;
         public int punching = 0;
-        public Animator animator;
+        public Animator animator, roomAnimator;
         float timer;
 
         void Start()
@@ -23,6 +23,8 @@ namespace com.DungeonPad
 
         void Update()
         {
+            timer = roomAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime * 60;
+            print(timer);
             if (canWalk)
             {
                 if (punching == 1 && canPunch)

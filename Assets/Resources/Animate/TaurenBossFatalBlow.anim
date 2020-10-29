@@ -21,7 +21,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 33
+        time: 0
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -30,7 +30,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 40
+        time: 7
         value: 1
         inSlope: 0
         outSlope: 0
@@ -49,7 +49,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 33
+        time: 0
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -58,7 +58,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 40
+        time: 7
         value: 1
         inSlope: 0
         outSlope: 0
@@ -77,7 +77,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 33
+        time: 0
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -86,7 +86,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 40
+        time: 7
         value: 1
         inSlope: 0
         outSlope: 0
@@ -105,7 +105,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 33
+        time: 0
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -114,7 +114,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 40
+        time: 7
         value: 1
         inSlope: 0
         outSlope: 0
@@ -131,103 +131,103 @@ AnimationClip:
     script: {fileID: 0}
   m_PPtrCurves:
   - curve:
-    - time: 33
+    - time: 0
       value: {fileID: 21300000, guid: 08599eebdfcf7fd408ab1f6da7811073, type: 3}
-    - time: 40
+    - time: 7
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 40.233334
+    - time: 7.233333
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 40.466667
+    - time: 7.4666667
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 40.7
+    - time: 7.7
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 40.933334
+    - time: 7.9333334
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 41.166668
+    - time: 8.166667
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 41.4
+    - time: 8.4
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 41.633335
+    - time: 8.633333
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 41.866665
+    - time: 8.866667
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 42.1
+    - time: 9.1
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 42.333332
+    - time: 9.333333
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 42.566666
+    - time: 9.566667
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 42.816666
+    - time: 9.816667
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 43.05
+    - time: 10.05
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 43.283333
+    - time: 10.283334
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 43.516666
+    - time: 10.516666
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 43.75
+    - time: 10.75
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 43.983334
+    - time: 10.983334
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 44.216667
+    - time: 11.216666
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 44.45
+    - time: 11.45
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 44.683334
+    - time: 11.683333
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 44.916668
+    - time: 11.916667
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 45.15
+    - time: 12.15
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 45.383335
+    - time: 12.383333
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 45.616665
+    - time: 12.616667
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 45.85
+    - time: 12.85
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 46.083332
+    - time: 13.083333
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 46.316666
+    - time: 13.316667
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 46.55
+    - time: 13.55
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 46.783333
+    - time: 13.783334
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 47.016666
+    - time: 14.016666
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 47.25
+    - time: 14.25
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 47.483334
+    - time: 14.483334
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 47.716667
+    - time: 14.716666
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 47.95
+    - time: 14.95
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 48.183334
+    - time: 15.183333
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 48.433334
+    - time: 15.433333
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 48.666668
+    - time: 15.666667
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 48.9
+    - time: 15.9
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 49.133335
+    - time: 16.133333
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 49.366665
+    - time: 16.366667
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 49.6
+    - time: 16.6
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 49.833332
+    - time: 16.833334
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 50.066666
+    - time: 17.066668
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 50.3
+    - time: 17.3
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 50.533333
+    - time: 17.533333
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 50.766666
+    - time: 17.766666
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 51
+    - time: 18
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
     attribute: m_Sprite
     path: New Sprite
@@ -330,7 +330,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 51.016666
+    m_StopTime: 18.016666
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -350,7 +350,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 33
+        time: 0
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -359,7 +359,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 40
+        time: 7
         value: 1
         inSlope: 0
         outSlope: 0
@@ -378,7 +378,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 33
+        time: 0
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -387,7 +387,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 40
+        time: 7
         value: 1
         inSlope: 0
         outSlope: 0
@@ -406,7 +406,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 33
+        time: 0
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -415,7 +415,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 40
+        time: 7
         value: 1
         inSlope: 0
         outSlope: 0
@@ -434,7 +434,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 33
+        time: 0
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -443,7 +443,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 40
+        time: 7
         value: 1
         inSlope: 0
         outSlope: 0
@@ -462,175 +462,175 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 40.233334
+  - time: 7.233333
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 40.7
+  - time: 7.7
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 41.166668
+  - time: 8.166667
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 41.633335
+  - time: 8.633333
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 42.1
+  - time: 9.1
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 42.566666
+  - time: 9.566667
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 43.05
+  - time: 10.05
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 43.516666
+  - time: 10.516666
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 43.983334
+  - time: 10.983334
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 44.45
+  - time: 11.45
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 44.916668
+  - time: 11.916667
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 45.383335
+  - time: 12.383333
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 45.85
+  - time: 12.85
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 46.316666
+  - time: 13.316667
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 46.783333
+  - time: 13.783334
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 47.25
+  - time: 14.25
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 47.716667
+  - time: 14.716666
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 48.183334
+  - time: 15.183333
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 48.666668
+  - time: 15.666667
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 49.133335
+  - time: 16.133333
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 49.6
+  - time: 16.6
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 50.066666
+  - time: 17.066668
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 50.533333
+  - time: 17.533333
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 51
+  - time: 18
     functionName: throwAxe
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 51
+  - time: 18
     functionName: useArmor
     data: 
     objectReferenceParameter: {fileID: 0}
