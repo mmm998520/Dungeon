@@ -57,7 +57,6 @@ namespace com.DungeonPad
                 selectedFort = centerWall.GetChild(r).GetChild(2);
             } while (usedFort.Contains(selectedFort));
 
-            Debug.LogError(selectedFort.name + "" + r);
             usedFort.Add(selectedFort);
             selectedFort.GetComponent<Animator>().SetTrigger("Shoot");
         }

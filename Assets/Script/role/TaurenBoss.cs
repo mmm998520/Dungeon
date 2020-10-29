@@ -54,9 +54,23 @@ namespace com.DungeonPad
                         rigidbody.velocity = Vector2.zero;
                     }
                 }
-                else if (punching == 0)
+                else if (punching == 0 && canPunch)
                 {
                     rigidbody.velocity = Vector3.Normalize((MinDisPlayerCube().position - transform.position) * Vector2.one) * speed;
+                }
+                else
+                {
+                    if (Vector2.Distance(transform.position, center.position) > 0.01f)
+                    {
+                        rigidbody.velocity = Vector3.Normalize((center.position - transform.position) * Vector2.one) * speed;
+                        //一但觸發回程，就不會使用揮拳了
+                        canPunch = false;
+                        Debug.LogWarning("回程");
+                    }
+                    else
+                    {
+                        rigidbody.velocity = Vector2.zero;
+                    }
                 }
                  
                 if (rigidbody.velocity.x > 0)
