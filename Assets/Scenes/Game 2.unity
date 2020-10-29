@@ -556,12 +556,12 @@ PrefabInstance:
     - target: {fileID: 6115880101944645926, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.66
+      value: 10.25
       objectReference: {fileID: 0}
     - target: {fileID: 6115880101944645926, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.7126236
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 6115880101944645926, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
         type: 3}
@@ -4925,8 +4925,9 @@ GameObject:
   m_Component:
   - component: {fileID: 470661068}
   - component: {fileID: 470661069}
+  - component: {fileID: 470661070}
   m_Layer: 0
-  m_Name: room
+  m_Name: TaurenRoomControler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4968,6 +4969,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &470661070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470661067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d5df2d86ddb3b4a8901f91d21200e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &471357227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22213,12 +22226,12 @@ PrefabInstance:
     - target: {fileID: 691778020512579969, guid: 0f2615ffe1832de429dd2d196e5a4d34,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.3199997
+      value: 10.7
       objectReference: {fileID: 0}
     - target: {fileID: 691778020512579969, guid: 0f2615ffe1832de429dd2d196e5a4d34,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 691778020512579969, guid: 0f2615ffe1832de429dd2d196e5a4d34,
         type: 3}
@@ -22287,12 +22300,12 @@ PrefabInstance:
     - target: {fileID: 6652142459782882193, guid: d9a29e9d3620a30438ffe6c613cc0b3f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.32
+      value: 9.7
       objectReference: {fileID: 0}
     - target: {fileID: 6652142459782882193, guid: d9a29e9d3620a30438ffe6c613cc0b3f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6652142459782882193, guid: d9a29e9d3620a30438ffe6c613cc0b3f,
         type: 3}
