@@ -15,8 +15,10 @@ namespace com.DungeonPad
                 if (collider.gameObject.layer == 8)
                 {
                     PlayerManager.HP -= ATK;
-                    print(collider.transform.GetChild(2).name);
-                    collider.transform.GetChild(2).gameObject.SetActive(true);
+                    if (collider.transform.childCount>2)
+                    {
+                        collider.transform.GetChild(2).gameObject.SetActive(true);
+                    }
                 }
             }
         }

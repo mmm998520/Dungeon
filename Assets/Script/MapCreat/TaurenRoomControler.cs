@@ -28,7 +28,7 @@ namespace com.DungeonPad
 
         public void setTaurenBossCanPunch(int _canPunch)
         {
-            taurenBoss.canWalk = (_canPunch > 0);
+            taurenBoss.canPunch = (_canPunch > 0);
         }
 
         public void setTaurenBossFatalBlow()

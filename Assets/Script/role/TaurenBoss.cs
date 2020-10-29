@@ -24,12 +24,16 @@ namespace com.DungeonPad
         void Update()
         {
             timer = roomAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime * 60;
+            while (timer >= 60)
+            {
+                timer -= 60;
+            }
             print(timer);
             if (canWalk)
             {
                 if (punching == 1 && canPunch)
                 {
-                    rigidbody.velocity = Vector3.zero;
+                    rigidbody.velocity = Vector2.zero;
                 }
                 else if (punching == 2 && canPunch)
                 {
@@ -38,10 +42,17 @@ namespace com.DungeonPad
                 //如果回歸中點的時間不足(不足再讓BOSS亂逛)時向中點移動
                 else if((32/* 抵達時間(33) - 容錯值(1) */ - timer) <= Vector2.Distance(transform.position, center.position) / speed)
                 {
-                    rigidbody.velocity = Vector3.Normalize((center.position - transform.position) * Vector2.one) * speed;
-                    //一但觸發回程，就不會使用揮拳了
-                    canPunch = false;
-                    Debug.LogWarning("回程");
+                    if(Vector2.Distance(transform.position, center.position) > 0.01f)
+                    {
+                        rigidbody.velocity = Vector3.Normalize((center.position - transform.position) * Vector2.one) * speed;
+                        //一但觸發回程，就不會使用揮拳了
+                        canPunch = false;
+                        Debug.LogWarning("回程");
+                    }
+                    else
+                    {
+                        rigidbody.velocity = Vector2.zero;
+                    }
                 }
                 else if (punching == 0)
                 {
@@ -56,6 +67,10 @@ namespace com.DungeonPad
                 {
                     transform.rotation = Quaternion.Euler(Vector3.up * 180);
                 }
+            }
+            else
+            {
+                rigidbody.velocity = Vector2.zero;
             }
 
             ArmorBar.gameObject.SetActive(Armor > 0);
