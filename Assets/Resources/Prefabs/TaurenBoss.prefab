@@ -326,8 +326,8 @@ MonoBehaviour:
   canWalk: 0
   canPunch: 1
   punching: 0
-  summoningTimes: 6
   animator: {fileID: 6115880101944645946}
+  roomAnimator: {fileID: 0}
 --- !u!95 &6115880101944645946
 Animator:
   serializedVersion: 3
