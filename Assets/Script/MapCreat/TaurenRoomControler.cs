@@ -7,7 +7,8 @@ namespace com.DungeonPad
     public class TaurenRoomControler : MonoBehaviour
     {
         public TaurenBoss taurenBoss;
-        public Transform centerWall, TaurenInsPoses;
+        public Transform CenterWall, TaurenInsPoses, Winds;
+        List<Transform> winds = new List<Transform>();
         public GameObject tauren;
         HashSet<Transform> usedFort = new HashSet<Transform>();
 
@@ -19,7 +20,7 @@ namespace com.DungeonPad
         void Update()
         {
             //防止條動畫失誤陷入無限迴圈
-            if(usedFort.Count> centerWall.childCount - 4)
+            if(usedFort.Count> CenterWall.childCount - 4)
             {
                 usedFort.Clear();
             }
@@ -58,8 +59,8 @@ namespace com.DungeonPad
             Transform selectedFort;
             do
             {
-                r = Random.Range(0, centerWall.childCount);
-                selectedFort = centerWall.GetChild(r).GetChild(2);
+                r = Random.Range(0, CenterWall.childCount);
+                selectedFort = CenterWall.GetChild(r).GetChild(2);
             } while (usedFort.Contains(selectedFort));
 
             usedFort.Add(selectedFort);
@@ -72,6 +73,7 @@ namespace com.DungeonPad
         }
         #endregion
 
+        #region//小牛頭人生成
         public void setTaurenInsPosesRotate()
         {
             float angle = Vector3.SignedAngle(Vector3.right, CameraManager.center * Vector2.one, Vector3.forward);
@@ -107,5 +109,32 @@ namespace com.DungeonPad
                 Instantiate(tauren, TaurenInsPoses.GetChild(Order).GetChild(Random.Range(0, TaurenInsPoses.GetChild(Order).childCount)).position, Quaternion.identity);
             }
         }
+        #endregion
+
+        #region//風
+        Transform selectedWind;
+
+        public void SelectWind()
+        {
+            int r = Random.Range(0, winds.Count), _r = Random.Range(0, 2);
+            selectedWind = winds[r];
+            selectedWind.rotation = Quaternion.Euler(0, _r * 180, selectedWind.rotation.eulerAngles.z);
+            winds.RemoveAt(r);
+        }
+
+        public void ResetWindsList()
+        {
+            winds.Clear();
+            for (int i = 0; i < Winds.childCount; i++)
+            {
+                winds.Add(Winds.GetChild(i));
+            }
+        }
+
+        public void LetWindBlow()
+        {
+            selectedWind.GetComponent<Animator>().SetTrigger("Blow");
+        }
+        #endregion
     }
 }
