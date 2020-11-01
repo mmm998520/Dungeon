@@ -41,10 +41,10 @@ namespace com.DungeonPad
                     {
                         name = layers + "_" + passwayType + "_" + level + "_" + function + "_" + num;
                         writeFile("D:/Dmmm998520/HomeWork/fourup/Dungeon/Assets/Resources/RoomDatas/" + layers + "/" + passwayType + "/" + level + "/" + function, name, arrayToString(newArray));
-                        newArray = DataLoader.Rotate(newArray);
+                        newArray = Rotate(newArray);
                         if (j == 3)
                         {
-                            newArray = DataLoader.reverserArray(newArray);
+                            newArray = reverserArray(newArray);
                         }
                         if (passwayNum == 4)
                         {
@@ -106,6 +106,151 @@ namespace com.DungeonPad
                 content += "\r";
             }
             return content;
+        }
+
+        public static string[,] Rotate(string[,] origin)
+        {
+            string[,] rotated = new string[origin.GetUpperBound(0) + 1, origin.GetUpperBound(0) + 1];
+            int newColumn, newRow = 0;
+            for (int i = 0; i < origin.GetUpperBound(0) + 1; i++)
+            {
+                newColumn = 0;
+                for (int j = origin.GetUpperBound(1); j >= 0; j--)
+                {
+                    rotated[newRow, newColumn] = origin[j, i];
+                    switch (rotated[newRow, newColumn])
+                    {
+                        case "w1上4":
+                            rotated[newRow, newColumn] = "w1右4";
+                            break;
+                        case "w1上3":
+                            rotated[newRow, newColumn] = "w1右3";
+                            break;
+                        case "w1上2":
+                            rotated[newRow, newColumn] = "w1右2";
+                            break;
+                        case "w1右4":
+                            rotated[newRow, newColumn] = "w1下4";
+                            break;
+                        case "w1右3":
+                            rotated[newRow, newColumn] = "w1下3";
+                            break;
+                        case "w1右2":
+                            rotated[newRow, newColumn] = "w1下2";
+                            break;
+                        case "w1下4":
+                            rotated[newRow, newColumn] = "w1左4";
+                            break;
+                        case "w1下3":
+                            rotated[newRow, newColumn] = "w1左3";
+                            break;
+                        case "w1下2":
+                            rotated[newRow, newColumn] = "w1左2";
+                            break;
+                        case "w1左4":
+                            rotated[newRow, newColumn] = "w1上4";
+                            break;
+                        case "w1左3":
+                            rotated[newRow, newColumn] = "w1上3";
+                            break;
+                        case "w1左2":
+                            rotated[newRow, newColumn] = "w1上2";
+                            break;
+                        case "w2上4":
+                            rotated[newRow, newColumn] = "w2右4";
+                            break;
+                        case "w2上3":
+                            rotated[newRow, newColumn] = "w2右3";
+                            break;
+                        case "w2上2":
+                            rotated[newRow, newColumn] = "w2右2";
+                            break;
+                        case "w2右4":
+                            rotated[newRow, newColumn] = "w2下4";
+                            break;
+                        case "w2右3":
+                            rotated[newRow, newColumn] = "w2下3";
+                            break;
+                        case "w2右2":
+                            rotated[newRow, newColumn] = "w2下2";
+                            break;
+                        case "w2下4":
+                            rotated[newRow, newColumn] = "w2左4";
+                            break;
+                        case "w2下3":
+                            rotated[newRow, newColumn] = "w2左3";
+                            break;
+                        case "w2下2":
+                            rotated[newRow, newColumn] = "w2左2";
+                            break;
+                        case "w2左4":
+                            rotated[newRow, newColumn] = "w2上4";
+                            break;
+                        case "w2左3":
+                            rotated[newRow, newColumn] = "w2上3";
+                            break;
+                        case "w2左2":
+                            rotated[newRow, newColumn] = "w2上2";
+                            break;
+                    }
+                    newColumn++;
+                }
+                newRow++;
+            }
+            return rotated;
+        }
+
+        public static string[,] reverserArray(string[,] origin)
+        {
+            string[,] newArray = new string[origin.GetUpperBound(0) + 1, origin.GetUpperBound(1) + 1];
+            int i, j;
+            for (i = 0; i < origin.GetUpperBound(0) + 1; i++)
+            {
+                for (j = 0; j < origin.GetUpperBound(1) + 1; j++)
+                {
+                    newArray[i, j] = origin[origin.GetUpperBound(0) - i, j];
+                    switch (newArray[i, j])
+                    {
+                        case "w1上4":
+                            newArray[i, j] = "w1下4";
+                            break;
+                        case "w1上3":
+                            newArray[i, j] = "w1下3";
+                            break;
+                        case "w1上2":
+                            newArray[i, j] = "w1下2";
+                            break;
+                        case "w1下4":
+                            newArray[i, j] = "w1上4";
+                            break;
+                        case "w1下3":
+                            newArray[i, j] = "w1上3";
+                            break;
+                        case "w1下2":
+                            newArray[i, j] = "w1上2";
+                            break;
+                        case "w2上4":
+                            newArray[i, j] = "w2下4";
+                            break;
+                        case "w2上3":
+                            newArray[i, j] = "w2下3";
+                            break;
+                        case "w2上2":
+                            newArray[i, j] = "w2下2";
+                            break;
+                        case "w2下4":
+                            newArray[i, j] = "w2上4";
+                            break;
+                        case "w2下3":
+                            newArray[i, j] = "w2上3";
+                            break;
+                        case "w2下2":
+                            newArray[i, j] = "w2上2";
+                            break;
+                    }
+                }
+            }
+            return newArray;
         }
     }
 }

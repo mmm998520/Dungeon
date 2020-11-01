@@ -57,9 +57,9 @@ namespace com.DungeonPad
             string[] lineArray = file.text.Split("\r"[0]);
             //建立二維陣列
             int i, j;
-            string[,] dataArray = new string[lineArray.Length - 1, lineArray[0].Split(',').Length];
+            string[,] dataArray = new string[lineArray.Length, lineArray[0].Split(',').Length];
             //把csv中的資料儲存在二位陣列中
-            for (i = 0; i < lineArray.Length - 1; i++)
+            for (i = 0; i < lineArray.Length; i++)
             {
                 if (lineArray[i].Split('\n').Length != 1)
                 {
@@ -72,37 +72,6 @@ namespace com.DungeonPad
                 }
             }
             return dataArray;
-        }
-
-        public static string[,] Rotate(string[,] origin)
-        {
-            string[,] rotated = new string[origin.GetUpperBound(0) + 1, origin.GetUpperBound(0) + 1];
-            int newColumn, newRow = 0;
-            for (int i = 0; i < origin.GetUpperBound(0) + 1; i++)
-            {
-                newColumn = 0;
-                for (int j = origin.GetUpperBound(1); j >= 0; j--)
-                {
-                    rotated[newRow, newColumn] = origin[j, i];
-                    newColumn++;
-                }
-                newRow++;
-            }
-            return rotated;
-        }
-
-        public static string[,] reverserArray(string[,] origin)
-        {
-            string[,] newArray = new string[origin.GetUpperBound(0) + 1, origin.GetUpperBound(1) + 1];
-            int i, j;
-            for (i = 0; i < origin.GetUpperBound(0) + 1; i++)
-            {
-                for (j = 0; j < origin.GetUpperBound(1) + 1; j++)
-                {
-                    newArray[i, j] = origin[origin.GetUpperBound(0) - i, j];
-                }
-            }
-            return newArray;
         }
     }
 }

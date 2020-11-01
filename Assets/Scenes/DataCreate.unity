@@ -326,11 +326,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAsset:
-  - {fileID: 4900000, guid: 75c3d88da29ced745a7adba0c3045db6, type: 3}
+  - {fileID: 4900000, guid: 9a7c6c610a798d443bf930479d007aac, type: 3}
   layers: 1
-  passwayNum: 0
-  level: 1
-  function: 2
+  passwayNum: 4
+  level: 3
+  function: 1
   num: 0
   passwayType: 0
 --- !u!4 &1533619235
