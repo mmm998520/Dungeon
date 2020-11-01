@@ -21,13 +21,13 @@ namespace com.DungeonPad
         int functionTypeNum = 3;
         public void LoadAll()
         {
-            AllRoomDatas = new Dictionary<int, string[,]>[layers, passwayTypeNum, level, functionTypeNum];
+            AllRoomDatas = new Dictionary<int, string[,]>[layers, passwayTypeNum, level + 1, functionTypeNum];
             int i, j, k, l;
             for (i = 0; i < layers; i++)
             {
                 for (j = 0; j < passwayTypeNum; j++)
                 {
-                    for (k = 0; k < level; k++)
+                    for (k = 0; k <= level; k++)
                     {
                         for (l = 0; l < functionTypeNum; l++)
                         {
@@ -57,9 +57,9 @@ namespace com.DungeonPad
             string[] lineArray = file.text.Split("\r"[0]);
             //建立二維陣列
             int i, j;
-            string[,] dataArray = new string[lineArray.Length, lineArray[0].Split(',').Length];
+            string[,] dataArray = new string[lineArray.Length - 1, lineArray[0].Split(',').Length];
             //把csv中的資料儲存在二位陣列中
-            for (i = 0; i < lineArray.Length; i++)
+            for (i = 0; i < lineArray.Length - 1; i++)
             {
                 if (lineArray[i].Split('\n').Length != 1)
                 {

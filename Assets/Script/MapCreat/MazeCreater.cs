@@ -63,7 +63,7 @@ namespace com.DungeonPad
             {
                 for (j = -1; j <= 1; j++)
                 {
-                    level = Random.Range(1, 3);
+                    level = Random.Range(1, 4);
                     row = startRow + i;
                     col = startCol + j;
                     if (row >= 0 && col >= 0 && row < roomCountRowNum && col < roomCountColNum)
@@ -81,7 +81,7 @@ namespace com.DungeonPad
                     }
                 }
             }
-            level = Random.Range(1, 3);
+            level = Random.Range(1, 4);
             mazeCreat(GameManager.layers, roomPasswayDatas[endRow, endCol], level, 2, endRow, endCol);
             created[endRow, endCol] = true;
 
@@ -289,7 +289,6 @@ namespace com.DungeonPad
                 }
             }
             return roomtype;
-
         }
 
         /// <summary> 強制連結支路徑 </summary>
@@ -577,7 +576,7 @@ namespace com.DungeonPad
             {
                 for (j = -1; j <= 1; j++)
                 {
-                    level = Random.Range(1, 3);
+                    level = Random.Range(1, 4);
                     row = currentRow + i;
                     col = currentCol + j;
                     if (row >= 0 && col >= 0 && row < roomCountRowNum && col < roomCountColNum)
@@ -597,12 +596,17 @@ namespace com.DungeonPad
         {
             string[,] objectDatas;
             Dictionary<int, string[,]> roomData = DataLoader.AllRoomDatas[layers, passwayType, level, functionTypeNum];
-            roomData.TryGetValue(Random.Range(0, roomData.Count), out objectDatas);
+            int r = Random.Range(0, roomData.Count);
+            if (!roomData.TryGetValue(r, out objectDatas))
+            {
+                Debug.LogError(r);
+            }
             int i, j;
             for (i = 0; i < objectDatas.GetUpperBound(0) + 1; i++)
             {
                 for (j = 0; j < objectDatas.GetUpperBound(1) + 1; j++)
                 {
+                    print(objectDatas[i, j]);
                     instantiateGameObject(objectDatas[i, j], roomRow * objectCountRowNum + i, roomCol * objectCountColNum + j);
                 }
             }
@@ -612,15 +616,18 @@ namespace com.DungeonPad
         {
             if (insPosRow <= 0 || insPosCol <= 0 || insPosRow >= roomCountRowNum * objectCountRowNum - 1 || insPosCol >= roomCountColNum * objectCountColNum - 1)
             {
-                Instantiate(wall, new Vector3(insPosRow, insPosCol, 0), Quaternion.identity, transform);
+                Instantiate(wall, new Vector3(insPosRow, insPosCol, 0), wall.transform.rotation, transform);
                 mazeDatas[insPosRow, insPosCol] = "wall";
             }
             else
             {
                 GameObject[] prefab;
-                instantiateObjects.TryGetValue(objectData, out prefab);
+                if (!instantiateObjects.TryGetValue(objectData, out prefab))
+                {
+                    Debug.LogError(objectData);
+                }
                 int r = Random.Range(0, prefab.Length);
-                Instantiate(prefab[r], new Vector3(insPosRow, insPosCol, 0), Quaternion.identity, transform);
+                Instantiate(prefab[r], new Vector3(insPosRow, insPosCol, 0), prefab[r].transform.rotation, transform);
                 mazeDatas[insPosRow, insPosCol] = prefab[r].name;
             }
         }
