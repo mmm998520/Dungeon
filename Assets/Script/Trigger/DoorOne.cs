@@ -1,0 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace com.DungeonPad
+{
+    public class DoorOne : MonoBehaviour
+    {
+        float localX, localXMax, speed = 3;
+        Transform doorSprite, doorCollider;
+        void Start()
+        {
+            doorSprite = transform.GetChild(0);
+            localX = localXMax = doorSprite.localPosition.x;
+            doorCollider = transform.GetChild(1);
+            doorCollider.localScale = new Vector3(localX, 1, 1);
+        }
+
+        void Update()
+        {
+            if (ButtonOne.useButtonNum >= 1)
+            {
+                localX -= Time.deltaTime * speed;
+            }
+            else
+            {
+                localX += Time.deltaTime * speed;
+            }
+            localX = Mathf.Clamp(localX, 0, localXMax);
+            doorSprite.localPosition = new Vector3(localX, 0, 0);
+            doorCollider.localScale = new Vector3(localX, 1, 1);
+        }
+    }
+}
