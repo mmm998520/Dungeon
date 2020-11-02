@@ -58,7 +58,6 @@ namespace com.DungeonPad
                 StartCoroutine("findRoad");
             }
             moveToTarget();
-            changeDirection();
 
             ArmorBar.gameObject.SetActive(Armor > 0);
             ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);

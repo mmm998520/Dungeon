@@ -78,13 +78,21 @@ namespace com.DungeonPad
         /// <summary> 轉向並向下一個目標點前進 </summary>
         protected void moveToTarget()
         {
-            if (prepare != 2)
-            {
-                changeDirection();
-            }
             if (prepare == 0)
             {
-                GetComponent<Rigidbody2D>().velocity = transform.right * speed;
+                if (nextPos != null && nextPos.Length > 1)
+                {
+                    Vector3 endPos = new Vector3(nextPos[0], nextPos[1], 0);
+                    GetComponent<Rigidbody2D>().velocity = Vector3.Normalize(endPos - transform.position) * speed;
+                    if (GetComponent<Rigidbody2D>().velocity.x > 0)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
+                    }
+                    if (GetComponent<Rigidbody2D>().velocity.x < 0)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 180, 0);
+                    }
+                }
             }
             else
             {
@@ -156,7 +164,8 @@ namespace com.DungeonPad
             for (int i = 0; i < repTimes; i++)
             {
                 attackSource.Play();
-                MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation * Quaternion.Euler(0, 0, Random.Range(-difference, difference))).GetComponent<MonsterAttack>();
+                float angle = Vector3.SignedAngle(Vector3.right, MinDisPlayer().position - transform.position, Vector3.forward);
+                MonsterAttack monsterAttack = Instantiate(attack, transform.position, Quaternion.Euler(0, 0, angle + Random.Range(-difference, difference))).GetComponent<MonsterAttack>();
                 Destroy(monsterAttack.gameObject, atkTime);
                 monsterAttack.ATK = ATK;
                 CDTimer = 0;

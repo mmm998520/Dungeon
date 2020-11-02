@@ -350,7 +350,7 @@ namespace com.DungeonPad
         }
         #endregion
 
-        protected void changeDirection()
+        /*protected void changeDirection()
         {
             Vector3 myPos = transform.position;
             if (nextPos != null &&nextPos.Length>1)
@@ -368,6 +368,6 @@ namespace com.DungeonPad
                 // 讓物件朝指定方向轉指定角度(rotateSpeed * Time.deltaTime讓他變定速旋轉)
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
             }
-        }
+        }*/
     }
 }
