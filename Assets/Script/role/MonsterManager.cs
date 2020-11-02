@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class MonsterManager : Navigate
     {
-        public float MaxArmor, Armor, ArmorConsumption, ATK, CD, CDTimer, preparation1, preparation2, preparationTimer, hand, atkTime, speed;
+        public float MaxArmor, Armor, ArmorConsumption, ATK, CD, CDTimer, CDMin, CDMax, preparation1, preparation2, preparationTimer, hand, atkTime, speed;
         protected float energyDeficiencyTimer = 10;
         protected int prepare = 0;
         protected Transform ArmorBar;
@@ -154,7 +154,10 @@ namespace com.DungeonPad
 
         protected virtual void Attack()
         {
-            StartCoroutine("AttackRep");
+            attackSource.Play();
+            float angle = Vector3.SignedAngle(Vector3.right, MinDisPlayer().position - transform.position, Vector3.forward);
+            MonsterAttack monsterAttack = Instantiate(attack, transform.position, Quaternion.Euler(0, 0, angle + Random.Range(-difference, difference))).GetComponent<MonsterAttack>();
+            Destroy(monsterAttack.gameObject, atkTime);
         }
 
         protected WaitForSeconds RepTime;
@@ -188,6 +191,11 @@ namespace com.DungeonPad
         protected virtual void afterAttack()
         {
 
+        }
+
+        public void useArmor(int cost)
+        {
+            Armor -= cost;
         }
 
         protected void ArmorReCharge()

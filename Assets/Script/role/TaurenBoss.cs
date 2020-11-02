@@ -111,11 +111,6 @@ namespace com.DungeonPad
             Instantiate(Axe, InsAxePos.position, Quaternion.Euler(Vector3.forward * angle));
         }
 
-        public void useArmor(int cost)
-        {
-            Armor -= cost;
-        }
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.name == "PlayerCube" && canWalk && canPunch)

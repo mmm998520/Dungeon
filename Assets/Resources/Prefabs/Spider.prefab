@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 2364598677078966683}
   - component: {fileID: 5652301302069140118}
   - component: {fileID: 7806190942745843461}
+  - component: {fileID: 4203273497549478462}
   m_Layer: 9
   m_Name: Spider
   m_TagString: Untagged
@@ -530,12 +531,14 @@ MonoBehaviour:
   ATK: 7
   CD: 3
   CDTimer: 0
+  CDMin: 3
+  CDMax: 4
   preparation1: 0.7
   preparation2: 0
   preparationTimer: 0
   hand: 10
   atkTime: 2
-  speed: 3
+  speed: 1
   prepareSource: {fileID: 6431428174509040607}
   attackSource: {fileID: 7020226564661491114}
   attack: {fileID: 6355018383450350413, guid: e70d5eab1d8f6f7488c5e117357c0d83, type: 3}
@@ -545,6 +548,26 @@ MonoBehaviour:
   difference: 0
   repTimes: 1
   repTimer: 1
+  spiderBehavior: 0
+--- !u!95 &4203273497549478462
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6479620777946499375}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 44b22cae382c9bb4bbbddeff4158b16e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7390371275698037257
 GameObject:
   m_ObjectHideFlags: 0

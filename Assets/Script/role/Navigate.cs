@@ -14,9 +14,10 @@ namespace com.DungeonPad
         public int[] endRow, endCol;
         const float squareRootOfTwo = 1.414f;
         float[,] g, h, f;
-        Dictionary<int, int> open;
-        HashSet<int> close;
+        int[,] lastPos;
+        HashSet<int> open, close;
 
+        protected List<int[]> roads = new List<int[]>();
         public int[] nextPos;
         public float rotateSpeed = 200;
 
@@ -160,12 +161,11 @@ namespace com.DungeonPad
         bool findingRoad;
         public WaitForSeconds findRoadWait;
         #region//尋路
-        public IEnumerator findRoad()
+        public void findRoad()
         {
             if (!findingRoad)
             {
                 findingRoad = true;
-                yield return findRoadWait;
                 #region//找路
                 #region//設定基本數值
                 startRow = Mathf.RoundToInt(transform.position.x);
@@ -173,8 +173,9 @@ namespace com.DungeonPad
                 g = new float[MazeCreater.totalRow, MazeCreater.totalRow];
                 h = new float[MazeCreater.totalRow, MazeCreater.totalRow];
                 f = new float[MazeCreater.totalRow, MazeCreater.totalRow];
+                lastPos = new int[MazeCreater.totalRow, MazeCreater.totalRow];
                 // key : pos，value : 下個該去的點
-                open = new Dictionary<int, int>();
+                open = new HashSet<int>();
                 close = new HashSet<int>();
                 int i, j;
                 for (i = 0; i < MazeCreater.totalRow; i++)
@@ -191,7 +192,8 @@ namespace com.DungeonPad
                     }
                 }
                 g[startRow, startCol] = 0;
-                open.Add(startRow * MazeCreater.totalCol + startCol, startRow * MazeCreater.totalCol + startCol);
+                open.Add(startRow * MazeCreater.totalCol + startCol);
+                lastPos[startRow, startCol] = startRow * MazeCreater.totalCol + startCol;
                 #endregion
 
                 do
@@ -199,12 +201,19 @@ namespace com.DungeonPad
                     #region//偵測是否到出口了
                     for (i = 0; i < endRow.Length; i++)
                     {
-                        int nextPos;
-                        if (open.TryGetValue(endRow[i] * MazeCreater.totalCol + endCol[i], out nextPos))
+                        if (open.Contains(endRow[i] * MazeCreater.totalCol + endCol[i]))
                         {
-                            this.nextPos = new int[] { nextPos / MazeCreater.totalCol, nextPos % MazeCreater.totalCol };
+                            int currentRow = endRow[i], currentCol = endCol[i], lastRow, lastCol;
+                            do
+                            {
+                                lastRow = lastPos[currentRow, currentCol] / MazeCreater.totalCol;
+                                lastCol = lastPos[currentRow, currentCol] % MazeCreater.totalCol;
+                                roads.Add(new int[] { lastRow, lastCol });
+                                currentRow = lastRow;
+                                currentCol = lastCol;
+                            } while (!(currentRow == startRow && currentCol == startCol));
                             findingRoad = false;
-                            yield break;
+                            return;
                         }
                     }
                     #endregion
@@ -212,7 +221,7 @@ namespace com.DungeonPad
                     #region//從open中找f最小的來計算
                     float min = float.MaxValue;
                     int selected = -1;
-                    foreach (int pos in open.Keys)
+                    foreach (int pos in open)
                     {
                         if (min > f[pos / MazeCreater.totalCol, pos % MazeCreater.totalCol])
                         {
@@ -225,7 +234,7 @@ namespace com.DungeonPad
 
                     CheckPassway(selected / MazeCreater.totalCol, selected % MazeCreater.totalCol);
 
-                    if (open.ContainsKey(selected))
+                    if (open.Contains(selected))
                     {
                         open.Remove(selected);
                         close.Add(selected);
@@ -234,7 +243,7 @@ namespace com.DungeonPad
                     {
                         Debug.LogError("open空了");
                         findingRoad = false;
-                        yield break;
+                        return;
                     }
                 } while (true);
                 #endregion
@@ -293,37 +302,12 @@ namespace com.DungeonPad
                 if (g[nextRow, nextCol] > g[currentRow, currentCol] + dis)
                 {
                     g[nextRow, nextCol] = g[currentRow, currentCol] + dis;
-                    if (!open.ContainsKey(nextRow * MazeCreater.totalCol + nextCol))
+                    if (!open.Contains(nextRow * MazeCreater.totalCol + nextCol))
                     {
-                        if(Mathf.Abs(startRow - nextRow) <= 1 && Mathf.Abs(startCol - nextCol) <= 1)
-                        {
-                            open.Add(nextRow * MazeCreater.totalCol + nextCol, nextRow * MazeCreater.totalCol + nextCol);
-                            List<int[]> a = new List<int[]>();
-                            foreach(int v in open.Values)
-                            {
-                                a.Add(new int[] { v / MazeCreater.totalCol, v % MazeCreater.totalCol });
-                            }
-                        }
-                        else
-                        {
-                            open.Add(nextRow * MazeCreater.totalCol + nextCol, open[currentRow * MazeCreater.totalCol + currentCol]);
-                            List<int[]> a = new List<int[]>();
-                            foreach (int v in open.Values)
-                            {
-                                a.Add(new int[] { v / MazeCreater.totalCol, v % MazeCreater.totalCol });
-                            }
-                        }
+                        open.Add(nextRow * MazeCreater.totalCol + nextCol);
                         h[nextRow, nextCol] = countH(currentRow, currentCol);
                     }
-                    else
-                    {
-                        open[nextRow * MazeCreater.totalCol + nextCol] = open[currentRow * MazeCreater.totalCol + currentCol];
-                        List<int[]> a = new List<int[]>();
-                        foreach (int v in open.Values)
-                        {
-                            a.Add(new int[] { v / MazeCreater.totalCol, v % MazeCreater.totalCol });
-                        }
-                    }
+                    lastPos[nextRow, nextCol] = currentRow * MazeCreater.totalCol + currentCol;
                     f[nextRow, nextCol] = g[nextRow, nextCol] + h[nextRow, nextCol];
                 }
             }

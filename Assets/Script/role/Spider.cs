@@ -6,9 +6,18 @@ namespace com.DungeonPad
 {
     public class Spider : MonsterManager
     {
+        public enum SpiderBehavior
+        {
+            ramdomMove = 0,
+            attack = 1
+        }
+        public SpiderBehavior spiderBehavior;
+
+        bool attacking = false;
         float timer;
         void Start()
         {
+            ReCD();
             RepTime = new WaitForSeconds(repTimer);
             startRoomRow = Mathf.RoundToInt(transform.position.x) / GameManager.mazeCreater.objectCountRowNum;
             startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
@@ -20,45 +29,23 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (TauntTarge == null)
+            if(spiderBehavior == SpiderBehavior.ramdomMove)
             {
-                randomMove();
-            }
-            else
-            {
-                endRow = new int[] { Mathf.RoundToInt(TauntTarge.position.x) };
-                endCol = new int[] { Mathf.RoundToInt(TauntTarge.position.y) };
-            }
-
-            attackCD();
-            if (prepare != 0)
-            {
-                if (prepare == 1)
+                Move();
+                if ((CDTimer += Time.deltaTime) >= CD && Vector3.Distance(transform.position * Vector2.one, MinDisPlayer().position * Vector2.one) < hand)
                 {
-                    Transform t = MinDisPlayer();
-                    nextPos = new int[] { Mathf.RoundToInt(t.position.x), Mathf.RoundToInt(t.position.y) };
-                }
-                prepareAttack();
-            }
-            else
-            {
-                StartCoroutine("findRoad");
-            }
-            if (nextPos == null)
-            {
-                if (TauntTarge == null)
-                {
-                    randomMove();
+                    if (!attacking)
+                    {
+                        attacking = true;
+                        GetComponent<Animator>().SetTrigger("Attack");
+                    }
+                    GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                 }
                 else
                 {
-                    endRow = new int[] { Mathf.RoundToInt(TauntTarge.position.x) };
-                    endCol = new int[] { Mathf.RoundToInt(TauntTarge.position.y) };
+                    attacking = false;
                 }
-                StartCoroutine("findRoad");
             }
-            moveToTarget();
-
             ArmorBar.gameObject.SetActive(Armor > 0);
             ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
         }
@@ -72,26 +59,53 @@ namespace com.DungeonPad
 
         void randomMove()
         {
-            if ((timer += Time.deltaTime) > 3)
+            if (roads.Count == 0)
             {
-                timer = 0;
                 randomTarget();
-            }
-            if (nextPos != null)
-            {
-                if (nextPos.Length > 1)
-                {
-                    if (Vector3.Distance(new Vector3(endRow[0], endCol[0], 0), transform.position) < 0.5f)
-                    {
-                        timer = 0;
-                        randomTarget();
-                    }
-                }
+                findRoad();
             }
             else
             {
-                randomTarget();
+                Vector3 nextPos = new Vector3(roads[roads.Count - 1][0], roads[roads.Count - 1][1]);
+                GetComponent<Rigidbody2D>().velocity = Vector3.Normalize(nextPos - transform.position) * speed;
+                if (Vector3.Distance(transform.position, nextPos) < 0.3f)
+                {
+                    roads.RemoveAt(roads.Count - 1);
+                }
             }
+        }
+
+        void Move()
+        {
+            if (TauntTarge == null)
+            {
+                randomMove();
+            }
+            else if ((timer += Time.deltaTime) > 0.3f)
+            {
+                timer = 0;
+                findRoad();
+                Vector3 nextPos = new Vector3(roads[roads.Count - 1][0], roads[roads.Count - 1][1]);
+                GetComponent<Rigidbody2D>().velocity = Vector3.Normalize(nextPos - transform.position) * speed;
+                if (Vector3.Distance(transform.position, nextPos) < 0.3f)
+                {
+                    roads.RemoveAt(roads.Count - 1);
+                }
+            }
+            if (GetComponent<Rigidbody2D>().velocity.x > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            if (GetComponent<Rigidbody2D>().velocity.x < 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
+
+        public void ReCD()
+        {
+            CDTimer = 0;
+            CD = Random.Range(CDMin, CDMax);
         }
 
         protected override void afterAttack()
