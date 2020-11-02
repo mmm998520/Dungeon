@@ -10,6 +10,9 @@ namespace com.DungeonPad
         protected float energyDeficiencyTimer = 10;
         protected int prepare = 0;
         protected Transform ArmorBar;
+
+        bool firstUpdateInThisAttack = true;
+        public AudioSource prepareSource, attackSource;
         public GameObject attack;
         /// <summary> 守備區域 </summary>
         protected HashSet<int> guardPos = new HashSet<int>();
@@ -99,12 +102,18 @@ namespace com.DungeonPad
                     if (prepare == 0)
                     {
                         prepare = 1;
+                        if (firstUpdateInThisAttack)
+                        {
+                            prepareSource.Play();
+                            firstUpdateInThisAttack = false;
+                        }
                     }
                 }
                 else
                 {
                     preparationTimer = 0;
                     prepare = 0;
+                    firstUpdateInThisAttack = true;
                 }
             }
         }
@@ -131,6 +140,7 @@ namespace com.DungeonPad
                 CDTimer = 0;
                 preparationTimer = 0;
                 prepare = 0;
+                firstUpdateInThisAttack = true;
             }
         }
 
@@ -145,6 +155,7 @@ namespace com.DungeonPad
         {
             for (int i = 0; i < repTimes; i++)
             {
+                attackSource.Play();
                 MonsterAttack monsterAttack = Instantiate(attack, transform.position, transform.rotation * Quaternion.Euler(0, 0, Random.Range(-difference, difference))).GetComponent<MonsterAttack>();
                 Destroy(monsterAttack.gameObject, atkTime);
                 monsterAttack.ATK = ATK;
@@ -160,6 +171,7 @@ namespace com.DungeonPad
             nextGrardNum = Random.Range(0, guardPoint.Length);
             preparationTimer = 0;
             prepare = 0;
+            firstUpdateInThisAttack = true;
             attacked = false;
             afterAttack();
         }
