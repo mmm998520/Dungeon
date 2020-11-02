@@ -9,7 +9,7 @@ namespace com.DungeonPad
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 40, HP = 40;
-        public static bool lockedHP = true;
+        public static bool lockedHP = false;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -53,7 +53,7 @@ namespace com.DungeonPad
             else
             {
                 float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
-                HP += (1.5f - dis) * Time.deltaTime * 2;
+                HP += (2f - dis) * Time.deltaTime * 2;
                 if (HP > MaxHP)
                 {
                     HP = MaxHP;

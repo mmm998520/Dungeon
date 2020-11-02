@@ -87,6 +87,7 @@ namespace com.DungeonPad
             if (collision.collider.GetComponent<PlayerManager>())
             {
                 collision.collider.GetComponent<PlayerManager>().StickTimer = 0;
+                attackSource.Play();
                 Destroy(gameObject);
             }
         }

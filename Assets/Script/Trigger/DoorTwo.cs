@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class DoorTwo : MonoBehaviour
     {
-        float localX, localXMax, speed = 3;
+        float localX, localXMax, speed = 1.5f;
         Transform doorSprite, doorCollider;
         void Start()
         {

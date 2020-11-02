@@ -67,13 +67,13 @@ public class SelectRole : MonoBehaviour
             {
                 p2Joy = "WASD";
                 print("WASD");
-                SceneManager.LoadScene("Game 2");
+                SceneManager.LoadScene("Game 1");
             }
             else if (Input.GetKeyDown(KeyCode.Keypad1) && p1Joy != "ArrowKey")
             {
                 p2Joy = "ArrowKey";
                 print("ArrowKey");
-                SceneManager.LoadScene("Game 2");
+                SceneManager.LoadScene("Game 1");
             }
             else
             {
@@ -83,7 +83,7 @@ public class SelectRole : MonoBehaviour
                     {
                         p2Joy = "" + i;
                         print(((KeyCode)330 + 20 * i).ToString());
-                        SceneManager.LoadScene("Game 2");
+                        SceneManager.LoadScene("Game 1");
                         break;
                     }
                 }

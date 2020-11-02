@@ -8,6 +8,7 @@ namespace com.DungeonPad
     {
         public float speed, timer, timerStoper, destoryTime;
         public WaitForSeconds destoryTimer;
+        public AudioSource hitSound;
 
         void Start()
         {
@@ -20,6 +21,9 @@ namespace com.DungeonPad
             {
                 speed = 0;
                 Destroy(gameObject, destoryTime);
+                hitSound.Play();
+                hitSound.transform.parent = null;
+                Destroy(hitSound.gameObject, 5);
             }
         }
 
@@ -29,6 +33,9 @@ namespace com.DungeonPad
             {
                 speed = 0;
                 Destroy(gameObject, destoryTime);
+                hitSound.Play();
+                hitSound.transform.parent = null;
+                Destroy(hitSound.gameObject, 5);
             }
         }
     }
