@@ -14,6 +14,8 @@ namespace com.DungeonPad
         public SpiderBehavior spiderBehavior;
 
         bool attacking = false;
+        public Animator SpriteAnimator;
+
         void Start()
         {
             ReCD();
@@ -38,12 +40,14 @@ namespace com.DungeonPad
                     }
                     GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                     GetComponent<Rigidbody2D>().angularDrag = 0;
+                    SpriteAnimator.SetBool("Stop", true);
                 }
                 else
                 {
                     Move();
                     Stuck(2, 1);
                     attacking = false;
+                    SpriteAnimator.SetBool("Stop", false);
                 }
             }
             ArmorBar.gameObject.SetActive(Armor > 0);
