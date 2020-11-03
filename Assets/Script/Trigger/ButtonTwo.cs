@@ -8,14 +8,12 @@ namespace com.DungeonPad
     {
         public static int useButtonNum = 0;
         int usethisNum = 0;
+        SpriteRenderer spriteRenderer;
+        public Sprite non, used;
+
         void Start()
         {
-
-        }
-
-        void Update()
-        {
-
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -25,6 +23,7 @@ namespace com.DungeonPad
                 if (usethisNum++ == 0)
                 {
                     useButtonNum++;
+                    spriteRenderer.sprite = used;
                 }
             }
         }
@@ -36,6 +35,7 @@ namespace com.DungeonPad
                 if (--usethisNum == 0)
                 {
                     useButtonNum--;
+                    spriteRenderer.sprite = non;
                 }
             }
         }
