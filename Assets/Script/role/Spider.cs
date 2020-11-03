@@ -61,5 +61,11 @@ namespace com.DungeonPad
             ArmorBar.gameObject.SetActive(Armor > 0);
             ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
         }
+
+        public override void beforeDied()
+        {
+            SpriteAnimator.transform.parent = null;
+            SpriteAnimator.SetTrigger("Destroy");
+        }
     }
 }

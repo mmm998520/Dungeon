@@ -175,5 +175,10 @@ namespace com.DungeonPad
                 StuckPos = transform.position;
             }
         }
+
+        public virtual void beforeDied()
+        {
+
+        }
     }
 }

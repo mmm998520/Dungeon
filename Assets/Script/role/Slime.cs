@@ -54,6 +54,7 @@ namespace com.DungeonPad
             ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
         }
 
+        bool Blew = false;
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.collider.GetComponent<PlayerManager>())
@@ -62,7 +63,17 @@ namespace com.DungeonPad
                 attackSource.Play();
                 attackSource.transform.parent = null;
                 Destroy(gameObject);
+                Blew = true;
                 Destroy(attackSource.gameObject, 5);
+            }
+        }
+
+        public override void beforeDied()
+        {
+            if (!Blew)
+            {
+                SpriteAnimator.transform.parent = null;
+                SpriteAnimator.SetTrigger("Destroy");
             }
         }
     }

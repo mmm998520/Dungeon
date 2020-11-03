@@ -19,6 +19,7 @@ namespace com.DungeonPad
                 {
                     if (collider.GetComponent<MonsterManager>().Armor <= 0)
                     {
+                        collider.GetComponent<MonsterManager>().beforeDied();
                         Destroy(collider.gameObject);
                     }
                 }
