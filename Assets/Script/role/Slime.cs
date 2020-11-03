@@ -56,7 +56,9 @@ namespace com.DungeonPad
             {
                 collision.collider.GetComponent<PlayerManager>().StickTimer = 0;
                 attackSource.Play();
+                attackSource.transform.parent = null;
                 Destroy(gameObject);
+                Destroy(attackSource.gameObject, 5);
             }
         }
     }

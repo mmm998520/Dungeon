@@ -174,11 +174,6 @@ namespace com.DungeonPad
                 {
                     randomTarget();
                     findRoad();
-                    Debug.Log("a");
-                }
-                else
-                {
-                    Debug.Log("b");
                 }
                 StuckPos = transform.position;
             }
