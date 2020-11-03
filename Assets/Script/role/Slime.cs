@@ -6,80 +6,48 @@ namespace com.DungeonPad
 {
     public class Slime : MonsterManager
     {
-        float timer;
+        public enum SlimeBehavior
+        {
+            ramdomMove = 0,
+            stop = 1
+        }
+        public SlimeBehavior slimeBehavior;
+
+        bool stoping = false;
         void Start()
         {
-            RepTime = new WaitForSeconds(repTimer);
+            ReCD();
             startRoomRow = Mathf.RoundToInt(transform.position.x) / GameManager.mazeCreater.objectCountRowNum;
             startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
             arriveNewRoom(startRoomRow, startRoomCol);
             randomTarget();
             ArmorBar = transform.GetChild(1);
-            findRoadWait = new WaitForSeconds(Random.Range(0.7f, 1f));
+            findRoadWait = new WaitForSeconds(Random.Range(0.3f, 0.5f));
         }
 
         void Update()
         {
-            if (TauntTarge == null)
+            if (slimeBehavior == SlimeBehavior.ramdomMove)
             {
-                randomMove();
-            }
-            else
-            {
-                endRow = new int[] { Mathf.RoundToInt(TauntTarge.position.x) };
-                endCol = new int[] { Mathf.RoundToInt(TauntTarge.position.y) };
-            }
-
-
-            StartCoroutine("findRoad");
-            if (nextPos == null)
-            {
-                if (TauntTarge == null)
+                if ((CDTimer += Time.deltaTime) >= CD)
                 {
-                    randomMove();
+                    if (!stoping)
+                    {
+                        stoping = true;
+                        GetComponent<Animator>().SetTrigger("Stop");
+                    }
+                    rigidbody.velocity = Vector3.zero;
+                    rigidbody.angularDrag = 0;
                 }
                 else
                 {
-                    endRow = new int[] { Mathf.RoundToInt(TauntTarge.position.x) };
-                    endCol = new int[] { Mathf.RoundToInt(TauntTarge.position.y) };
+                    Move();
+                    Stuck(1, 1);
+                    stoping = false;
                 }
-                StartCoroutine("findRoad");
             }
-            moveToTarget();
-
             ArmorBar.gameObject.SetActive(Armor > 0);
             ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
-        }
-
-        void randomTarget()
-        {
-            int r = Random.Range(0, canGo.Count);
-            endRow = new int[] { canGo[r] / MazeCreater.totalCol };
-            endCol = new int[] { canGo[r] % MazeCreater.totalCol };
-        }
-
-        void randomMove()
-        {
-            if ((timer += Time.deltaTime) > 5)
-            {
-                timer = 0;
-                randomTarget();
-            }
-            if (nextPos != null)
-            {
-                if (nextPos.Length > 1)
-                {
-                    if (Vector3.Distance(new Vector3(endRow[0], endCol[0], 0), transform.position) < 0.5f)
-                    {
-                        timer = 0;
-                        randomTarget();
-                    }
-                }
-            }
-            else
-            {
-                randomTarget();
-            }
         }
 
         private void OnCollisionEnter2D(Collision2D collision)

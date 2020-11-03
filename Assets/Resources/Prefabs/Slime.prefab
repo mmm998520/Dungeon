@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1061855195541407033}
   - component: {fileID: 1061855195541407038}
   - component: {fileID: 1061855195541407039}
+  - component: {fileID: 2661153825494566779}
   m_Layer: 9
   m_Name: Slime
   m_TagString: Untagged
@@ -121,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1061855195541407039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +147,8 @@ MonoBehaviour:
   ATK: 2
   CD: 0.01
   CDTimer: 0
+  CDMin: 3
+  CDMax: 4
   preparation1: 0
   preparation2: 0
   preparationTimer: 0
@@ -161,6 +164,27 @@ MonoBehaviour:
   difference: 10
   repTimes: 2
   repTimer: 0.3
+  rigidbody: {fileID: 1061855195541407038}
+  slimeBehavior: 0
+--- !u!95 &2661153825494566779
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061855195541407036}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae4bb54ffde0a454ca0e985a8e9d30f8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2024092426772932681
 GameObject:
   m_ObjectHideFlags: 0

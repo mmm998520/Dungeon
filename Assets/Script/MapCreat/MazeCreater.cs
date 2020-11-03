@@ -606,7 +606,6 @@ namespace com.DungeonPad
             {
                 for (j = 0; j < objectDatas.GetUpperBound(1) + 1; j++)
                 {
-                    print(objectDatas[i, j]);
                     instantiateGameObject(objectDatas[i, j], roomRow * objectCountRowNum + i, roomCol * objectCountColNum + j);
                 }
             }

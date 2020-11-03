@@ -11,7 +11,6 @@ namespace com.DungeonPad
         protected int prepare = 0;
         protected Transform ArmorBar;
 
-        bool firstUpdateInThisAttack = true;
         public AudioSource prepareSource, attackSource;
         public GameObject attack;
         /// <summary> 守備區域 </summary>
@@ -26,14 +25,12 @@ namespace com.DungeonPad
         public float difference, repTimes, repTimer;
         protected bool attacked = false;
 
-        protected enum Stat
-        {
-            guard,
-            pursue,
-            back
-        }
-        protected Stat stat = Stat.guard;
+        protected float ChasePlayerWaitTimer;
 
+        public Rigidbody2D rigidbody;
+
+        protected float StuckTimer;
+        protected Vector2 StuckPos = Vector2.zero;
 
         /// <summary> 獲取最近玩家 </summary>
         public Transform MinDisPlayer()
@@ -74,123 +71,12 @@ namespace com.DungeonPad
             return minDisPlayerCube;
         }
 
-
-        /// <summary> 轉向並向下一個目標點前進 </summary>
-        protected void moveToTarget()
-        {
-            if (prepare == 0)
-            {
-                if (nextPos != null && nextPos.Length > 1)
-                {
-                    Vector3 endPos = new Vector3(nextPos[0], nextPos[1], 0);
-                    GetComponent<Rigidbody2D>().velocity = Vector3.Normalize(endPos - transform.position) * speed;
-                    if (GetComponent<Rigidbody2D>().velocity.x > 0)
-                    {
-                        transform.rotation = Quaternion.Euler(0, 0, 0);
-                    }
-                    if (GetComponent<Rigidbody2D>().velocity.x < 0)
-                    {
-                        transform.rotation = Quaternion.Euler(0, 180, 0);
-                    }
-                }
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                GetComponent<Rigidbody2D>().angularVelocity = 0;
-            }
-        }
-
-        protected void attackCD()
-        {
-            if ((CDTimer += Time.deltaTime) >= CD)
-            {
-                if (Vector3.Distance(transform.position * Vector2.one, MinDisPlayer().position * Vector2.one) < hand)
-                {
-                    if (prepare == 0)
-                    {
-                        prepare = 1;
-                        if (firstUpdateInThisAttack)
-                        {
-                            prepareSource.Play();
-                            firstUpdateInThisAttack = false;
-                        }
-                    }
-                }
-                else
-                {
-                    preparationTimer = 0;
-                    prepare = 0;
-                    firstUpdateInThisAttack = true;
-                }
-            }
-        }
-
-        protected void prepareAttack()
-        {
-            if (stat != Stat.back)
-            {
-                if ((preparationTimer += Time.deltaTime) >= preparation1)
-                {
-                    prepare = 2;
-                }
-                if ((preparationTimer += Time.deltaTime) >= preparation1 + preparation2)
-                {
-                    if (!attacked)
-                    {
-                        Attack();
-                        attacked = true;
-                    }
-                }
-            }
-            else
-            {
-                CDTimer = 0;
-                preparationTimer = 0;
-                prepare = 0;
-                firstUpdateInThisAttack = true;
-            }
-        }
-
         protected virtual void Attack()
         {
             attackSource.Play();
             float angle = Vector3.SignedAngle(Vector3.right, MinDisPlayer().position - transform.position, Vector3.forward);
             MonsterAttack monsterAttack = Instantiate(attack, transform.position, Quaternion.Euler(0, 0, angle + Random.Range(-difference, difference))).GetComponent<MonsterAttack>();
             Destroy(monsterAttack.gameObject, atkTime);
-        }
-
-        protected WaitForSeconds RepTime;
-
-        protected IEnumerator AttackRep()
-        {
-            for (int i = 0; i < repTimes; i++)
-            {
-                attackSource.Play();
-                float angle = Vector3.SignedAngle(Vector3.right, MinDisPlayer().position - transform.position, Vector3.forward);
-                MonsterAttack monsterAttack = Instantiate(attack, transform.position, Quaternion.Euler(0, 0, angle + Random.Range(-difference, difference))).GetComponent<MonsterAttack>();
-                Destroy(monsterAttack.gameObject, atkTime);
-                monsterAttack.ATK = ATK;
-                CDTimer = 0;
-                Armor -= ArmorConsumption;
-                if (Armor <= 0)
-                {
-                    energyDeficiencyTimer = 0;
-                    Armor = 0;
-                }
-                yield return RepTime;
-            }
-            nextGrardNum = Random.Range(0, guardPoint.Length);
-            preparationTimer = 0;
-            prepare = 0;
-            firstUpdateInThisAttack = true;
-            attacked = false;
-            afterAttack();
-        }
-
-        protected virtual void afterAttack()
-        {
-
         }
 
         public void useArmor(int cost)
@@ -201,6 +87,101 @@ namespace com.DungeonPad
         protected void ArmorReCharge()
         {
             Armor = MaxArmor;
+        }
+
+        public void ReCD()
+        {
+            CDTimer = 0;
+            CD = Random.Range(CDMin, CDMax);
+        }
+
+        protected void randomTarget()
+        {
+            if (endRow != null && endRow.Length > 0)
+            {
+                Debug.Log(endRow[0] + "," + endCol[0]);
+            }
+            int r = Random.Range(0, canGo.Count);
+            endRow = new int[] { canGo[r] / MazeCreater.totalCol };
+            endCol = new int[] { canGo[r] % MazeCreater.totalCol };
+            Debug.Log(endRow[0] + "," + endCol[0]);
+        }
+
+        protected void randomMove()
+        {
+            if (roads.Count == 0)
+            {
+                randomTarget();
+                findRoad();
+            }
+            else
+            {
+                Vector3 nextPos = new Vector3(roads[roads.Count - 1][0], roads[roads.Count - 1][1]);
+                rigidbody.velocity = Vector3.Normalize(nextPos - transform.position) * speed;
+                if (Vector3.Distance(transform.position, nextPos) < 0.3f)
+                {
+                    roads.RemoveAt(roads.Count - 1);
+                }
+            }
+        }
+
+        protected void Move()
+        {
+            if (TauntTarge == null)
+            {
+                randomMove();
+            }
+            else if ((ChasePlayerWaitTimer += Time.deltaTime) > 0.3f)
+            {
+                ChasePlayerWaitTimer = 0;
+                findRoad();
+                Vector3 nextPos = new Vector3(roads[roads.Count - 1][0], roads[roads.Count - 1][1]);
+                rigidbody.velocity = Vector3.Normalize(nextPos - transform.position) * speed;
+                if (Vector3.Distance(transform.position, nextPos) < 0.3f)
+                {
+                    roads.RemoveAt(roads.Count - 1);
+                }
+            }
+            if (rigidbody.velocity.x > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            if (rigidbody.velocity.x < 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
+
+        protected void Stuck(float wait, float dis)
+        {
+            if ((StuckTimer += Time.deltaTime) >= wait)
+            {
+                StuckTimer = 0;
+                if (Vector2.Distance(StuckPos, transform.position) < dis)
+                {
+                    randomTarget();
+                    findRoad();
+                }
+                StuckPos = transform.position;
+            }
+        }
+        protected void Stuck(int wait, int dis)
+        {
+            if ((StuckTimer += Time.deltaTime) >= wait)
+            {
+                StuckTimer = 0;
+                if (Vector2.Distance(StuckPos, transform.position) < dis)
+                {
+                    randomTarget();
+                    findRoad();
+                    Debug.Log("a");
+                }
+                else
+                {
+                    Debug.Log("b");
+                }
+                StuckPos = transform.position;
+            }
         }
     }
 }

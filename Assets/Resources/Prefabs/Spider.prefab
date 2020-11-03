@@ -548,6 +548,7 @@ MonoBehaviour:
   difference: 0
   repTimes: 1
   repTimer: 1
+  rigidbody: {fileID: 5652301302069140118}
   spiderBehavior: 0
 --- !u!95 &4203273497549478462
 Animator:
