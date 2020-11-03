@@ -29,6 +29,7 @@ namespace com.DungeonPad
 
         public Rigidbody2D rigidbody;
 
+        protected int StuckTimes;
         protected float StuckTimer;
         protected Vector2 StuckPos = Vector2.zero;
 
@@ -137,7 +138,7 @@ namespace com.DungeonPad
                 findRoad();
                 Vector3 nextPos = new Vector3(roads[roads.Count - 1][0], roads[roads.Count - 1][1]);
                 rigidbody.velocity = Vector3.Normalize(nextPos - transform.position) * speed;
-                if (Vector3.Distance(transform.position, nextPos) < 0.3f)
+                if (Vector3.Distance(transform.position, nextPos) < 0.5f)
                 {
                     roads.RemoveAt(roads.Count - 1);
                 }
@@ -159,21 +160,17 @@ namespace com.DungeonPad
                 StuckTimer = 0;
                 if (Vector2.Distance(StuckPos, transform.position) < dis)
                 {
+                    if (StuckTimes++ > 10)
+                    {
+                        Debug.LogError("Stuck Over 10");
+                        Debug.LogErrorFormat(gameObject, "");
+                    }
                     randomTarget();
                     findRoad();
                 }
-                StuckPos = transform.position;
-            }
-        }
-        protected void Stuck(int wait, int dis)
-        {
-            if ((StuckTimer += Time.deltaTime) >= wait)
-            {
-                StuckTimer = 0;
-                if (Vector2.Distance(StuckPos, transform.position) < dis)
+                else
                 {
-                    randomTarget();
-                    findRoad();
+                    StuckTimes = 0;
                 }
                 StuckPos = transform.position;
             }

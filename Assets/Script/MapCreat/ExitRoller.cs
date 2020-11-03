@@ -9,19 +9,21 @@ namespace com.DungeonPad
     {
         float rotationZ;
         bool canUse = true;
-        float useSpeed = 30, notUseSpeed = 90;
+        float useSpeed = 30, notUseSpeed = 120;
+        public SpriteRenderer spriteRenderer;
+        public Sprite non, used;
 
         void Update()
         {
             if(ExitToucher.P1touch && ExitToucher.P2touch && canUse)
             {
+                spriteRenderer.sprite = used;
                 rotationZ += Time.deltaTime * useSpeed;
-                print("a");
             }
             else
             {
+                spriteRenderer.sprite = non;
                 rotationZ -= Time.deltaTime * notUseSpeed;
-                print("b");
                 canUse = false;
             }
             rotationZ = Mathf.Clamp(rotationZ, 0, 370);
