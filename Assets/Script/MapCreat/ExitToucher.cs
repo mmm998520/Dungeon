@@ -6,9 +6,10 @@ namespace com.DungeonPad
 {
     public class ExitToucher : MonoBehaviour
     {
-        public static int touchNum;
+        public static bool P1touch, P2touch;
+        bool haveTouch = false;
         public string playerName;
-        public Rigidbody2D rigidbody2D;
+
         void Start()
         {
 
@@ -16,32 +17,35 @@ namespace com.DungeonPad
 
         void Update()
         {
-            transform.parent.parent.GetChild(2).gameObject.GetComponent<ParticleSystem>().emissionRate = rigidbody2D.angularVelocity;
-            if (touchNum >= 2)
+            haveTouch = false;
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.35f);
+            for(int i = 0; i < colliders.Length; i++)
             {
-                rigidbody2D.mass = 0.2f;
+                if(colliders[i].name == playerName)
+                {
+                    if(playerName == "p1")
+                    {
+                        P1touch = true;
+                    }
+                    if (playerName == "p2")
+                    {
+                        P2touch = true;
+                    }
+                    haveTouch = true;
+                }
             }
-            else
+            if(!haveTouch)
             {
-                rigidbody2D.mass = 1000000;
-                rigidbody2D.velocity = Vector3.zero;
-                rigidbody2D.angularVelocity = 0;
+                if (playerName == "p1")
+                {
+                    P1touch = false;
+                }
+                if (playerName == "p2")
+                {
+                    P2touch = false;
+                }
             }
-        }
 
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.collider.name == playerName)
-            {
-                touchNum++;
-            }
-        }
-        private void OnCollisionExit2D(Collision2D collision)
-        {
-            if (collision.collider.name == playerName)
-            {
-                touchNum--;
-            }
         }
     }
 }
