@@ -38,8 +38,16 @@ namespace com.DungeonPad
                         attacking = true;
                         GetComponent<Animator>().SetTrigger("Attack");
                     }
-                    GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                    GetComponent<Rigidbody2D>().angularDrag = 0;
+                    rigidbody.velocity = Vector3.zero;
+                    rigidbody.angularDrag = 0;
+                    if (MinDisPlayer().transform.position.x > transform.position.x)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
+                    }
+                    if (MinDisPlayer().transform.position.x < transform.position.x)
+                    {
+                        transform.rotation = Quaternion.Euler(0, 180, 0);
+                    }
                     SpriteAnimator.SetBool("Stop", true);
                 }
                 else

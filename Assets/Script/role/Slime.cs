@@ -14,6 +14,8 @@ namespace com.DungeonPad
         public SlimeBehavior slimeBehavior;
 
         bool stoping = false;
+        public Animator SpriteAnimator;
+
         void Start()
         {
             ReCD();
@@ -38,12 +40,14 @@ namespace com.DungeonPad
                     }
                     rigidbody.velocity = Vector3.zero;
                     rigidbody.angularDrag = 0;
+                    SpriteAnimator.SetBool("Stop", true);
                 }
                 else
                 {
                     Move();
                     Stuck(1, 1);
                     stoping = false;
+                    SpriteAnimator.SetBool("Stop", false);
                 }
             }
             ArmorBar.gameObject.SetActive(Armor > 0);
