@@ -30,12 +30,15 @@ namespace com.DungeonPad
         public SpriteRenderer ConfusionUIRenderer;
         public ConfusionUIcontroler ConfusionUIcontroler;
 
-        public float lightRotateTimer = 0, lightRotateTimerStoper = 0.5f;
+        float lastUpdateHp;
+        List<float> timerRecord = new List<float>(), recoveryRecord = new List<float>();
+        public float lightRotateTimer, lightRotateTimerStoper;
         public Sprite[] lightSprites;
         private void Start()
         {
             lastPos = transform.position;
             hp = transform.GetChild(0);
+            lastUpdateHp = HP;
         }
 
         void Update()
@@ -58,6 +61,7 @@ namespace com.DungeonPad
                 {
                     HP = MaxHP;
                 }
+                recoveryRate();
                 transform.GetChild(5).localScale = Vector3.one * (HP + 5) / 3;
                 transform.GetChild(6).localScale = Vector3.one * (HP + 5) / 3;
                 if ((lightRotateTimer += Time.deltaTime) >= lightRotateTimerStoper)
@@ -97,8 +101,6 @@ namespace com.DungeonPad
                     {
                         brightness *= 1f;
                     }
-                    //transform.parent.GetChild(0).GetChild(5).GetComponent<Light>().intensity = 0;
-                    //transform.parent.GetChild(1).GetChild(5).GetComponent<Light>().intensity = 0;
                 }
                 transform.GetChild(4).gameObject.SetActive(StickTimer < 5);
 
@@ -353,6 +355,40 @@ namespace com.DungeonPad
                     flashTimer = 0;
                 }
             }
+        }
+
+        void recoveryRate()
+        {
+            timerRecord.Add(Time.time);
+            if (HP == MaxHP)
+            {
+                recoveryRecord.Add(0.3f);
+            }
+            else
+            {
+                recoveryRecord.Add(HP - lastUpdateHp);
+            }
+            lastUpdateHp = HP;
+            while (Time.time - timerRecord[0] > 0.2f)
+            {
+                timerRecord.RemoveAt(0);
+                recoveryRecord.RemoveAt(0);
+            }
+            lightRotateTimerStoper = (countAverage(recoveryRecord) + 0.12f) * 5;
+            if (lightRotateTimerStoper < 0.15f + HP * 0.005f)
+            {
+                lightRotateTimerStoper = 0.15f + HP * 0.005f;
+            }
+        }
+
+        float countAverage(List<float> counted)
+        {
+            float total = 0;
+            for(int i = 0; i < counted.Count; i++)
+            {
+                total += counted[i];
+            }
+            return total / counted.Count;
         }
     }
 }
