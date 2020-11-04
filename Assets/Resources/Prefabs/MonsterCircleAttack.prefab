@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edf42f0ff0f9084596a2c5a66d2e079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ATK: 2
+  ATK: 5
   continued: 0
 --- !u!114 &2888608939692655006
 MonoBehaviour:
@@ -270,9 +270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe8f4503fa8c0040bff023f554e0844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 6
   timer: 0
-  timerStoper: 2
+  timerStoper: 1
   destoryTime: 0.3
   hitSound: {fileID: 6761128484382667410}
 --- !u!60 &2570544022315494922

@@ -25,7 +25,8 @@ namespace com.DungeonPad
         public bool lastDirRight;
         public Vector2 v = Vector2.zero, a = Vector2.zero;
 
-        public float StickTimer = 10;
+
+        public float StickTimer = 10, HardStraightTimer = 10;
         public float ConfusionTimer = 100;
         public SpriteRenderer ConfusionUIRenderer;
         public ConfusionUIcontroler ConfusionUIcontroler;
@@ -56,7 +57,7 @@ namespace com.DungeonPad
             else
             {
                 float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
-                HP += (2f - dis) * Time.deltaTime * 2;
+                HP += (2.5f - dis) * Time.deltaTime * 2;
                 if (HP > MaxHP)
                 {
                     HP = MaxHP;
@@ -332,6 +333,10 @@ namespace com.DungeonPad
             {
                 v = v.normalized * 3;
             }
+            if((HardStraightTimer+=Time.deltaTime) < 0.3f)
+            {
+                v = Vector2.zero;
+            }
             v += a;
             GetComponent<Rigidbody2D>().velocity = v;
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent <ParticleSystem>().shape.arc/2+180);
@@ -340,7 +345,14 @@ namespace com.DungeonPad
         private void FixedUpdate()
         {
             v *= 0.9f;
-            a *= 0.9f;
+            if (a.magnitude > 0.8f)
+            {
+                a -= (Vector2)Vector3.Normalize(a)*0.8f;
+            }
+            else
+            {
+                a = Vector3.zero;
+            }
         }
 
         void timer()
@@ -374,10 +386,10 @@ namespace com.DungeonPad
                 timerRecord.RemoveAt(0);
                 recoveryRecord.RemoveAt(0);
             }
-            lightRotateTimerStoper = (countAverage(recoveryRecord) + 0.12f) * 5;
-            if (lightRotateTimerStoper < 0.15f + HP * 0.005f)
+            lightRotateTimerStoper = (countAverage(recoveryRecord) + 0.1f) * 5;
+            if (lightRotateTimerStoper < 0.05f + HP * 0.005f)
             {
-                lightRotateTimerStoper = 0.15f + HP * 0.005f;
+                lightRotateTimerStoper = 0.05f + HP * 0.005f;
             }
         }
 
@@ -389,6 +401,19 @@ namespace com.DungeonPad
                 total += counted[i];
             }
             return total / counted.Count;
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.GetComponent<MonsterManager>() && !collision.collider.GetComponent<Slime>())
+            {
+                if (HardStraightTimer > 0.3f)
+                {
+                    HardStraightTimer = 0;
+                    a = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
+                    HP -= 5;
+                }
+            }
         }
     }
 }

@@ -61,7 +61,7 @@ namespace com.DungeonPad
         }
         bool addCanGoRoom(int roomRow,int roomCol)
         {
-            if (Mathf.Abs(roomRow - startRoomRow) < 2 && Mathf.Abs(roomCol - startRoomCol) < 2)
+            if (Mathf.Abs(roomRow - startRoomRow) < 1 && Mathf.Abs(roomCol - startRoomCol) < 1)
             {
                 int[,] roomPasswayDatas = GameManager.mazeCreater.roomPasswayDatas;
                 if (canGoRoom[roomRow, roomCol] == -1)

@@ -561,18 +561,13 @@ MonoBehaviour:
   rotateSpeed: 200
   MaxArmor: 1
   Armor: 1
-  ArmorConsumption: 1
-  ATK: 7
   CD: 3
   CDTimer: 0
   CDMin: 3
   CDMax: 4
-  preparation1: 0.7
-  preparation2: 0
-  preparationTimer: 0
   hand: 10
   atkTime: 2
-  speed: 1
+  speed: 2
   prepareSource: {fileID: 6431428174509040607}
   attackSource: {fileID: 7020226564661491114}
   attack: {fileID: 6355018383450350413, guid: e70d5eab1d8f6f7488c5e117357c0d83, type: 3}

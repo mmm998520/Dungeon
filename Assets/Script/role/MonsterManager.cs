@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class MonsterManager : Navigate
     {
-        public float MaxArmor, Armor, ArmorConsumption, ATK, CD, CDTimer, CDMin, CDMax, preparation1, preparation2, preparationTimer, hand, atkTime, speed;
+        public float MaxArmor, Armor, CD, CDTimer, CDMin, CDMax, hand, atkTime, speed;
         protected float energyDeficiencyTimer = 10;
         protected int prepare = 0;
         protected Transform ArmorBar;

@@ -18,7 +18,7 @@ namespace com.DungeonPad
         void Update()
         {
             haveTouch = false;
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.66f);
             for(int i = 0; i < colliders.Length; i++)
             {
                 if(colliders[i].name == playerName)
