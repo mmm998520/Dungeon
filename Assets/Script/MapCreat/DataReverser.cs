@@ -23,7 +23,7 @@ namespace com.DungeonPad
             {
                 for (int i = 0; i < textAsset.Length; i++)
                 {
-                    string[,] newArray = DataLoader.LoadData(textAsset[i]);
+                    string[,] newArray = DataLoader.LoadData_Create(textAsset[i]);
                     passwayNum = int.Parse(textAsset[i].name.Split('開')[0]);
                     if (passwayNum == 4)
                     {

@@ -45,12 +45,35 @@ namespace com.DungeonPad
                     num[j] = int.Parse(sArray[j]);
                 }
                 k = 0;
-                AllRoomDatas[num[k++], num[k++], num[k++], num[k++]].Add(num[k++], LoadData(files[i]));
+                AllRoomDatas[num[k++], num[k++], num[k++], num[k++]].Add(num[k++], LoadData_Use(files[i]));
             }
             files = null;
         }
 
-        public static string[,] LoadData(TextAsset file)
+        public static string[,] LoadData_Create(TextAsset file)
+        {
+            //讀取csv二進位制檔案
+            //讀取每一行的內容
+            string[] lineArray = file.text.Split("\r"[0]);
+            //建立二維陣列
+            int i, j;
+            string[,] dataArray = new string[lineArray.Length, lineArray[0].Split(',').Length];
+            //把csv中的資料儲存在二位陣列中
+            for (i = 0; i < lineArray.Length; i++)
+            {
+                if (lineArray[i].Split('\n').Length != 1)
+                {
+                    lineArray[i] = lineArray[i].Split('\n')[1];
+                }
+                string[] data = lineArray[i].Split(',');
+                for (j = 0; j < data.Length; j++)
+                {
+                    dataArray[i, j] = data[j];
+                }
+            }
+            return dataArray;
+        }
+        public static string[,] LoadData_Use(TextAsset file)
         {
             //讀取csv二進位制檔案
             //讀取每一行的內容

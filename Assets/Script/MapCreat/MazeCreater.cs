@@ -606,6 +606,10 @@ namespace com.DungeonPad
             {
                 for (j = 0; j < objectDatas.GetUpperBound(1) + 1; j++)
                 {
+                    if(objectDatas[i, j] ==null || objectDatas[i, j] == "")
+                    {
+                        Debug.Log(objectDatas[i, j] + "," + i + "," + j);
+                    }
                     instantiateGameObject(objectDatas[i, j], roomRow * objectCountRowNum + i, roomCol * objectCountColNum + j);
                 }
             }
