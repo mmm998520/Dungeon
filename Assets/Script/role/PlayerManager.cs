@@ -62,19 +62,7 @@ namespace com.DungeonPad
                 if (HP > MaxHP)
                 {
                     HP = MaxHP;
-                    GamePad.SetVibration(PlayerIndex.One, 0.5f, 0.5f);
-                    GamePad.SetVibration(PlayerIndex.Two, 0.5f, 0.5f);
-                    GamePad.SetVibration(PlayerIndex.Three, 0.5f, 0.5f);
-                    GamePad.SetVibration(PlayerIndex.Four, 0.5f, 0.5f);
-                }
-                else
-                {
-                    /*
-                    GamePad.SetVibration((PlayerIndex)1, 0f, 0f);
-                    GamePad.SetVibration((PlayerIndex)2, 0f, 0f);
-                    GamePad.SetVibration((PlayerIndex)3, 0f, 0f);
-                    GamePad.SetVibration((PlayerIndex)4, 0f, 0f);
-                    */
+                    //GamePad.SetVibration(PlayerIndex.One, 0.5f, 0.5f);
                 }
                 recoveryRate();
                 transform.GetChild(5).localScale = Vector3.one * (HP + 5) / 3;
