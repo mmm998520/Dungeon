@@ -159,7 +159,6 @@ namespace com.DungeonPad
         #endregion
 
         bool findingRoad;
-        public WaitForSeconds findRoadWait;
         #region//尋路
         public void findRoad()
         {

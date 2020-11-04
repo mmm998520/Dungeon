@@ -24,7 +24,6 @@ namespace com.DungeonPad
             arriveNewRoom(startRoomRow, startRoomCol);
             randomTarget();
             ArmorBar = transform.GetChild(1);
-            findRoadWait = new WaitForSeconds(Random.Range(0.3f, 0.5f));
         }
 
         void Update()
