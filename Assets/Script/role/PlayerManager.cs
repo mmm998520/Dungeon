@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Experimental.Rendering.Universal;
-using XInputDotNetPure; // Required in C#
 
 namespace com.DungeonPad
 {
@@ -26,6 +25,7 @@ namespace com.DungeonPad
         public bool lastDirRight;
         public Vector2 v = Vector2.zero, a = Vector2.zero;
 
+        PlayerJoyVibration playerJoyVibration;
 
         public float StickTimer = 10, HardStraightTimer = 10;
         public float ConfusionTimer = 100;
@@ -38,6 +38,7 @@ namespace com.DungeonPad
         public Sprite[] lightSprites;
         private void Start()
         {
+            playerJoyVibration = GetComponent<PlayerJoyVibration>();
             lastPos = transform.position;
             hp = transform.GetChild(0);
             lastUpdateHp = HP;
@@ -62,7 +63,6 @@ namespace com.DungeonPad
                 if (HP > MaxHP)
                 {
                     HP = MaxHP;
-                    //GamePad.SetVibration(PlayerIndex.One, 0.5f, 0.5f);
                 }
                 recoveryRate();
                 transform.GetChild(5).localScale = Vector3.one * (HP + 5) / 3;
@@ -414,6 +414,7 @@ namespace com.DungeonPad
                     HardStraightTimer = 0;
                     a = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
                     HP -= 5;
+                    playerJoyVibration.hurt();
                 }
             }
         }
