@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XInputDotNetPure; // Required in C#
 
 public class SelectRole : MonoBehaviour
 {
     public static string p1Joy, p2Joy;
+    public static PlayerIndex P1PlayerIndex, P2PlayerIndex;
     public bool selectP1 = true;
 
     void Update()
@@ -32,6 +34,12 @@ public class SelectRole : MonoBehaviour
                     {
                         p1Joy = "" + i;
                         print(((KeyCode)330 + 20 * i).ToString());
+                        if (i <= 4)
+                        {
+                            P1PlayerIndex = (PlayerIndex)i;
+                            print(i + "," + P1PlayerIndex);
+                            StartCoroutine("waitForVP1");
+                        }
                         selectP1 = false;
                         break;
                     }
@@ -83,11 +91,36 @@ public class SelectRole : MonoBehaviour
                     {
                         p2Joy = "" + i;
                         print(((KeyCode)330 + 20 * i).ToString());
-                        SceneManager.LoadScene("Game 1");
+                        if (i <= 4)
+                        {
+                            P2PlayerIndex = (PlayerIndex)i;
+                            print(i + "," + P2PlayerIndex);
+                            StartCoroutine("waitForVP2");
+                            StartCoroutine("waitForLoadScene");
+                        }
                         break;
                     }
                 }
             }
         }
+    }
+
+    IEnumerator waitForLoadScene()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Game 1");
+    }
+
+    IEnumerator waitForVP1()
+    {
+        GamePad.SetVibration(P1PlayerIndex, 1, 1);
+        yield return new WaitForSeconds(0.5f);
+        GamePad.SetVibration(P1PlayerIndex, 0, 0);
+    }
+    IEnumerator waitForVP2()
+    {
+        GamePad.SetVibration(P2PlayerIndex, 1, 1);
+        yield return new WaitForSeconds(0.5f);
+        GamePad.SetVibration(P2PlayerIndex, 0, 0);
     }
 }
