@@ -8,12 +8,11 @@ namespace com.DungeonPad
     {
         float localX, localXMax, speed = 1.5f;
         Transform doorSprite, doorCollider;
-        SpriteRenderer spriteRenderer;
+        public SpriteRenderer spriteRenderer;
         public Sprite non, used;
 
         void Start()
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
             doorSprite = transform.GetChild(0);
             localX = localXMax = doorSprite.localPosition.x;
             doorCollider = transform.GetChild(1);

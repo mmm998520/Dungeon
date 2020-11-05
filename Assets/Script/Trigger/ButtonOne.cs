@@ -8,12 +8,12 @@ namespace com.DungeonPad
     {
         public static int useButtonNum = 0;
         int usethisNum = 0;
-        SpriteRenderer spriteRenderer;
+        public SpriteRenderer spriteRenderer;
         public Sprite non, used;
 
         void Start()
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
+
         }
 
         private void OnTriggerEnter2D(Collider2D collider)

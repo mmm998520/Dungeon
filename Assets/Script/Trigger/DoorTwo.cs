@@ -8,12 +8,11 @@ namespace com.DungeonPad
     {
         float localX, localXMax, speed = 1.5f;
         Transform doorSprite, doorCollider;
-        SpriteRenderer spriteRenderer;
-        public Sprite non, one, two;
+        public SpriteRenderer spriteRenderer;
+        public Sprite non, p1, p2, p1_p2;
 
         void Start()
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
             doorSprite = transform.GetChild(0);
             localX = localXMax = doorSprite.localPosition.x;
             doorCollider = transform.GetChild(1);
@@ -22,17 +21,21 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (ButtonTwo.useButtonNum >= 2)
+            if (ButtonTwo.p1used && ButtonTwo.p2used)
             {
                 localX -= Time.deltaTime * speed;
-                spriteRenderer.sprite = two;
+                spriteRenderer.sprite = p1_p2;
             }
             else
             {
                 localX += Time.deltaTime * speed;
-                if(ButtonTwo.useButtonNum >= 1)
+                if(ButtonTwo.p1used)
                 {
-                    spriteRenderer.sprite = one;
+                    spriteRenderer.sprite = p1;
+                }
+                else if(ButtonTwo.p2used)
+                {
+                    spriteRenderer.sprite = p2;
                 }
                 else
                 {
