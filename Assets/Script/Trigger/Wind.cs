@@ -21,7 +21,7 @@ namespace com.DungeonPad
         {
             if (collider.GetComponent<PlayerManager>())
             {
-                collider.GetComponent<PlayerManager>().a += (Vector2)transform.right * windSize;
+                collider.GetComponent<PlayerManager>().HardStraightA += (Vector2)transform.right * windSize;
             }
         }
     }

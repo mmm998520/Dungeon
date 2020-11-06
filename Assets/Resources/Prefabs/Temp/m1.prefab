@@ -231,6 +231,8 @@ GameObject:
   - component: {fileID: 8185120618111368951}
   - component: {fileID: 7912006759052465808}
   - component: {fileID: 86797445269324943}
+  - component: {fileID: 1642926524707286342}
+  - component: {fileID: 9015651522774529355}
   m_Layer: 0
   m_Name: m1
   m_TagString: Untagged
@@ -303,6 +305,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!114 &86797445269324943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7537428500985072579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc1010409cca854b985f4f94977144c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  created: {fileID: 6479620777946499375, guid: 39e244b0efd12714686013cd90825bea, type: 3}
+  monster: 1
+--- !u!114 &1642926524707286342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7537428500985072579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc1010409cca854b985f4f94977144c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  created: {fileID: 6479620777946499375, guid: 39e244b0efd12714686013cd90825bea, type: 3}
+  monster: 1
+--- !u!114 &9015651522774529355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

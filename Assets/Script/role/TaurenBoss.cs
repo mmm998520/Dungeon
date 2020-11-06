@@ -119,7 +119,7 @@ namespace com.DungeonPad
             }
             if (collision.GetComponent<PlayerManager>())
             {
-                collision.GetComponent<PlayerManager>().a += (Vector2)transform.right;
+                collision.GetComponent<PlayerManager>().HardStraightA += (Vector2)transform.right;
                 print("player");
             }
         }

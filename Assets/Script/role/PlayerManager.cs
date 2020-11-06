@@ -23,11 +23,11 @@ namespace com.DungeonPad
 
         public bool p1;
         public bool lastDirRight;
-        public Vector2 v = Vector2.zero, a = Vector2.zero;
+        public Vector2 v = Vector2.zero, HardStraightA = Vector2.zero, DashA = Vector2.zero;
 
         PlayerJoyVibration playerJoyVibration;
 
-        public float StickTimer = 10, HardStraightTimer = 10;
+        public float StickTimer = 10, HardStraightTimer = 10, DashTimer = 10;
         public float ConfusionTimer = 100;
         public SpriteRenderer ConfusionUIRenderer;
         public ConfusionUIcontroler ConfusionUIcontroler;
@@ -337,9 +337,31 @@ namespace com.DungeonPad
             }
             if((HardStraightTimer+=Time.deltaTime) < 0.3f)
             {
-                v = Vector2.zero;
+                v = HardStraightA;
             }
-            v += a;
+            if ((Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy) + 1)) && p1))
+            {
+                DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy);
+                DashA.y = Input.GetAxis("VerticalJoy" + SelectRole.p1Joy);
+                DashA = Vector3.Normalize(DashA) *15;
+                DashTimer = 0;
+            }
+            if(Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy) + 1)) && !p1)
+            {
+                DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy);
+                DashA.y = Input.GetAxis("VerticalJoy" + SelectRole.p2Joy);
+                DashA = Vector3.Normalize(DashA) * 15;
+                DashTimer = 0;
+            }
+            if ((DashTimer += Time.deltaTime) < 0.3f)
+            {
+                v = DashA;
+                gameObject.layer = 16;
+            }
+            else
+            {
+                gameObject.layer = 8;
+            }
             GetComponent<Rigidbody2D>().velocity = v;
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent <ParticleSystem>().shape.arc/2+180);
         }
@@ -347,13 +369,21 @@ namespace com.DungeonPad
         private void FixedUpdate()
         {
             v *= 0.9f;
-            if (a.magnitude > 0.8f)
+            if (HardStraightA.magnitude > 0.8f)
             {
-                a -= (Vector2)Vector3.Normalize(a)*0.8f;
+                HardStraightA -= (Vector2)Vector3.Normalize(HardStraightA)*0.8f;
             }
             else
             {
-                a = Vector3.zero;
+                HardStraightA = Vector3.zero;
+            }
+            if (DashA.magnitude > 1.2f)
+            {
+                DashA -= (Vector2)Vector3.Normalize(HardStraightA) * 1.2f;
+            }
+            else
+            {
+                DashA = Vector3.zero;
             }
         }
 
@@ -412,7 +442,7 @@ namespace com.DungeonPad
                 if (HardStraightTimer > 0.3f)
                 {
                     HardStraightTimer = 0;
-                    a = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
+                    HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
                     HP -= 5;
                     playerJoyVibration.hurt();
                 }
