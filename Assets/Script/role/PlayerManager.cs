@@ -344,120 +344,125 @@ namespace com.DungeonPad
             {
                 v = HardStraightA;
             }
+
             #region//衝刺
-            if (DashTimer > DashCD && HardStraightTimer >= 0.3f && ConfusionTimer>= 10 && StickTimer >= 5)
+            if (HardStraightTimer >= 0.3f && ConfusionTimer>= 10 && StickTimer >= 5)
             {
-                if (p1)
+                if(DashTimer > DashCD)
                 {
-                    switch (SelectRole.p1Joy)
+                    if (p1)
                     {
-                        case "WASD":
-                            if (Input.GetKeyDown(KeyCode.J))
-                            {
-                                DashA.x = Input.GetAxis("HorizontalWASD");
-                                DashA.y = Input.GetAxis("VerticalWASD");
-                                DashA = Vector3.Normalize(DashA) * 11;
-                                if (DashA.magnitude > 10)
+                        switch (SelectRole.p1Joy)
+                        {
+                            case "WASD":
+                                if (Input.GetKeyDown(KeyCode.J))
                                 {
-                                    DashTimer = 0;
+                                    DashA.x = Input.GetAxis("HorizontalWASD");
+                                    DashA.y = Input.GetAxis("VerticalWASD");
+                                    DashA = Vector3.Normalize(DashA) * 11;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                    }
                                 }
-                            }
-                            break;
-                        case "ArrowKey":
-                            if (Input.GetKeyDown(KeyCode.Keypad1))
-                            {
-                                DashA.x = Input.GetAxis("HorizontalArrowKey");
-                                DashA.y = Input.GetAxis("VerticalArrowKey");
-                                DashA = Vector3.Normalize(DashA) * 11;
-                                if (DashA.magnitude > 10)
+                                break;
+                            case "ArrowKey":
+                                if (Input.GetKeyDown(KeyCode.Keypad1))
                                 {
-                                    DashTimer = 0;
+                                    DashA.x = Input.GetAxis("HorizontalArrowKey");
+                                    DashA.y = Input.GetAxis("VerticalArrowKey");
+                                    DashA = Vector3.Normalize(DashA) * 11;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                    }
                                 }
-                            }
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy))))
-                            {
-                                DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy);
-                                DashA.y = -Input.GetAxis("VerticalJoy" + SelectRole.p1Joy);
-                                DashA = Vector3.Normalize(DashA) * 11;
-                                if (DashA.magnitude > 10)
+                                break;
+                            case "1":
+                            case "2":
+                            case "3":
+                            case "4":
+                            case "5":
+                            case "6":
+                            case "7":
+                            case "8":
+                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy))))
                                 {
-                                    DashTimer = 0;
-                                    playerJoyVibration.DashVibration = 0.8f;
+                                    DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy);
+                                    DashA.y = -Input.GetAxis("VerticalJoy" + SelectRole.p1Joy);
+                                    DashA = Vector3.Normalize(DashA) * 11;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                        playerJoyVibration.DashVibration = 0.8f;
+                                    }
                                 }
-                            }
-                            break;
+                                break;
+                        }
                     }
+                    else
+                    {
+                        switch (SelectRole.p2Joy)
+                        {
+                            case "WASD":
+                                if (Input.GetKeyDown(KeyCode.J))
+                                {
+                                    DashA.x = Input.GetAxis("HorizontalWASD");
+                                    DashA.y = Input.GetAxis("VerticalWASD");
+                                    DashA = Vector3.Normalize(DashA) * 11;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                    }
+                                }
+                                break;
+                            case "ArrowKey":
+                                if (Input.GetKeyDown(KeyCode.Keypad1))
+                                {
+                                    DashA.x = Input.GetAxis("HorizontalArrowKey");
+                                    DashA.y = Input.GetAxis("VerticalArrowKey");
+                                    DashA = Vector3.Normalize(DashA) * 11;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                    }
+                                }
+                                break;
+                            case "1":
+                            case "2":
+                            case "3":
+                            case "4":
+                            case "5":
+                            case "6":
+                            case "7":
+                            case "8":
+                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy))))
+                                {
+                                    DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy);
+                                    DashA.y = -Input.GetAxis("VerticalJoy" + SelectRole.p2Joy);
+                                    DashA = Vector3.Normalize(DashA) * 11;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                        playerJoyVibration.DashVibration = 0.8f;
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                }
+                if ((DashTimer += Time.deltaTime) < 0.3f)
+                {
+                    v = DashA;
+                    //gameObject.layer = 16;
                 }
                 else
                 {
-                    switch (SelectRole.p2Joy)
-                    {
-                        case "WASD":
-                            if (Input.GetKeyDown(KeyCode.J))
-                            {
-                                DashA.x = Input.GetAxis("HorizontalWASD");
-                                DashA.y = Input.GetAxis("VerticalWASD");
-                                DashA = Vector3.Normalize(DashA) * 11;
-                                if (DashA.magnitude > 10)
-                                {
-                                    DashTimer = 0;
-                                }
-                            }
-                            break;
-                        case "ArrowKey":
-                            if (Input.GetKeyDown(KeyCode.Keypad1))
-                            {
-                                DashA.x = Input.GetAxis("HorizontalArrowKey");
-                                DashA.y = Input.GetAxis("VerticalArrowKey");
-                                DashA = Vector3.Normalize(DashA) * 11;
-                                if (DashA.magnitude > 10)
-                                {
-                                    DashTimer = 0;
-                                }
-                            }
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy))))
-                            {
-                                DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy);
-                                DashA.y = -Input.GetAxis("VerticalJoy" + SelectRole.p2Joy);
-                                DashA = Vector3.Normalize(DashA) * 11;
-                                if (DashA.magnitude > 10)
-                                {
-                                    DashTimer = 0;
-                                    playerJoyVibration.DashVibration = 0.8f;
-                                }
-                            }
-                            break;
-                    }
+                    //gameObject.layer = 8;
                 }
             }
-            if ((DashTimer += Time.deltaTime) < 0.3f)
-            {
-                v = DashA;
-                gameObject.layer = 16;
-            }
-            else
-            {
-                gameObject.layer = 8;
-            }
             #endregion
+
             GetComponent<Rigidbody2D>().velocity = v;
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent <ParticleSystem>().shape.arc/2+180);
         }
