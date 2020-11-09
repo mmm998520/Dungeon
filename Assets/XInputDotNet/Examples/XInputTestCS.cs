@@ -26,7 +26,7 @@ public class XInputTestCS : MonoBehaviour
     {
         // Find a PlayerIndex, for a single player game
         // Will find the first controller that is connected ans use it
-        /*
+        
         if (!playerIndexSet || !prevState.IsConnected)
         {
             for (int i = 0; i < 4; ++i)
@@ -41,22 +41,24 @@ public class XInputTestCS : MonoBehaviour
                 }
             }
         }
-        prevState = state;*/
+        prevState = state;
         state = GamePad.GetState(playerIndex);
-        /*
+        
         // Detect if a button was pressed this frame
         if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
+            print("a was pressed this frame");
             GetComponent<Renderer>().material.color = new Color(Random.value, Random.value, Random.value, 1.0f);
-        }*/
+        }
         // Detect if a button was released this frame
-        /*
+        
         if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Released)
         {
+            print("a was released this frame");
             GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         }
-        */
+        
         // Make the current object turn
-        //transform.localRotation *= Quaternion.Euler(0.0f, state.ThumbSticks.Left.X * 25.0f * Time.deltaTime, 0.0f);
+        transform.localRotation *= Quaternion.Euler(0.0f, state.ThumbSticks.Left.X * 25.0f * Time.deltaTime, 0.0f);
     }
 }

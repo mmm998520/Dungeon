@@ -34,13 +34,19 @@ namespace com.DungeonPad
                     {
                         if (Input.GetKeyDown((KeyCode)330 + 20 * i))
                         {
+
                             p1Joy = "" + i;
                             print(((KeyCode)330 + 20 * i).ToString());
-                            if (i <= 4)
+                            for (int j = 0; j < 4; j++)
                             {
-                                P1PlayerIndex = (PlayerIndex)i;
-                                print(i + "," + P1PlayerIndex);
-                                StartCoroutine("waitForVP1");
+                                if (GamePad.GetState((PlayerIndex)j).Buttons.A == ButtonState.Pressed)
+                                {
+                                    P1PlayerIndex = (PlayerIndex)j;
+                                    print(i + "," + P1PlayerIndex);
+                                    StartCoroutine("waitForVP1");
+                                    break;
+                                }
+                                print(j);
                             }
                             selectP1 = false;
                             break;
@@ -93,12 +99,16 @@ namespace com.DungeonPad
                         {
                             p2Joy = "" + i;
                             print(((KeyCode)330 + 20 * i).ToString());
-                            if (i <= 4)
+                            for (int j = 0; j < 4; j++)
                             {
-                                P2PlayerIndex = (PlayerIndex)i;
-                                print(i + "," + P2PlayerIndex);
-                                StartCoroutine("waitForVP2");
-                                StartCoroutine("waitForLoadScene");
+                                if (GamePad.GetState((PlayerIndex)j).Buttons.A == ButtonState.Pressed && (PlayerIndex)j != P1PlayerIndex)
+                                {
+                                    P2PlayerIndex = (PlayerIndex)j;
+                                    print(i + "," + P2PlayerIndex);
+                                    StartCoroutine("waitForVP2");
+                                    StartCoroutine("waitForLoadScene");
+                                    break;
+                                }
                             }
                             break;
                         }

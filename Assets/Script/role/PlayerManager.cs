@@ -381,7 +381,7 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy))))
                             {
                                 DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy);
-                                DashA.y = Input.GetAxis("VerticalJoy" + SelectRole.p1Joy);
+                                DashA.y = -Input.GetAxis("VerticalJoy" + SelectRole.p1Joy);
                                 DashA = Vector3.Normalize(DashA) * 11;
                                 if (DashA.magnitude > 10)
                                 {
@@ -430,7 +430,7 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy))))
                             {
                                 DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy);
-                                DashA.y = Input.GetAxis("VerticalJoy" + SelectRole.p2Joy);
+                                DashA.y = -Input.GetAxis("VerticalJoy" + SelectRole.p2Joy);
                                 DashA = Vector3.Normalize(DashA) * 11;
                                 if (DashA.magnitude > 10)
                                 {
