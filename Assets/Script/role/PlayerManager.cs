@@ -391,6 +391,7 @@ namespace com.DungeonPad
                                 if (DashA.magnitude > 10)
                                 {
                                     DashTimer = 0;
+                                    playerJoyVibration.DashVibration = 0.8f;
                                 }
                             }
                             break;
@@ -440,6 +441,7 @@ namespace com.DungeonPad
                                 if (DashA.magnitude > 10)
                                 {
                                     DashTimer = 0;
+                                    playerJoyVibration.DashVibration = 0.8f;
                                 }
                             }
                             break;
