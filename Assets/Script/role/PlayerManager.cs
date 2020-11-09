@@ -340,7 +340,7 @@ namespace com.DungeonPad
                 v = HardStraightA;
             }
             #region//衝刺
-            if (DashTimer > DashCD && HardStraightTimer >= 0.3f && ConfusionTimer>= 10)
+            if (DashTimer > DashCD && HardStraightTimer >= 0.3f && ConfusionTimer>= 10 && StickTimer >= 5)
             {
                 if (p1)
                 {
