@@ -339,19 +339,25 @@ namespace com.DungeonPad
             {
                 v = HardStraightA;
             }
-            if ((Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy) + 1)) && p1))
+            if(SelectRole.p1Joy!= "WASD" && SelectRole.p1Joy != "ArrowKey")
             {
-                DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy);
-                DashA.y = Input.GetAxis("VerticalJoy" + SelectRole.p1Joy);
-                DashA = Vector3.Normalize(DashA) *15;
-                DashTimer = 0;
+                if ((Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy) + 1)) && p1))
+                {
+                    DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy);
+                    DashA.y = Input.GetAxis("VerticalJoy" + SelectRole.p1Joy);
+                    DashA = Vector3.Normalize(DashA) * 15;
+                    DashTimer = 0;
+                }
             }
-            if(Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy) + 1)) && !p1)
+            if (SelectRole.p2Joy != "WASD" && SelectRole.p2Joy != "ArrowKey")
             {
-                DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy);
-                DashA.y = Input.GetAxis("VerticalJoy" + SelectRole.p2Joy);
-                DashA = Vector3.Normalize(DashA) * 15;
-                DashTimer = 0;
+                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy) + 1)) && !p1)
+                {
+                    DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy);
+                    DashA.y = Input.GetAxis("VerticalJoy" + SelectRole.p2Joy);
+                    DashA = Vector3.Normalize(DashA) * 15;
+                    DashTimer = 0;
+                }
             }
             if ((DashTimer += Time.deltaTime) < 0.3f)
             {
