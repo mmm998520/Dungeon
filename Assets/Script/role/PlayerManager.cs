@@ -257,7 +257,7 @@ namespace com.DungeonPad
                     }
                 }
             }
-            if ((ConfusionTimer+=Time.deltaTime) <= 10)
+            if ((ConfusionTimer+=Time.deltaTime) < 10)
             {
                 ConfusionUIRenderer.enabled = true;
                 ConfusionUIcontroler.enabled = true;
@@ -340,7 +340,7 @@ namespace com.DungeonPad
                 v = HardStraightA;
             }
             #region//衝刺
-            if (DashTimer > DashCD)
+            if (DashTimer > DashCD && HardStraightTimer >= 0.3f && ConfusionTimer>= 10)
             {
                 if (p1)
                 {
