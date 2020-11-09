@@ -25,7 +25,7 @@ namespace com.DungeonPad
         public bool lastDirRight;
         public Vector2 v = Vector2.zero, HardStraightA = Vector2.zero, DashA = Vector2.zero;
 
-        PlayerJoyVibration playerJoyVibration;
+        public PlayerJoyVibration playerJoyVibration;
 
         public float StickTimer = 10, HardStraightTimer = 10, DashTimer = 10, DashCD = 0.5f;
         public float ConfusionTimer = 100;
@@ -524,7 +524,7 @@ namespace com.DungeonPad
             return total / counted.Count;
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
             if (collision.collider.GetComponent<MonsterManager>() && !collision.collider.GetComponent<Slime>())
             {

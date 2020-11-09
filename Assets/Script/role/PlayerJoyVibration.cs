@@ -8,12 +8,10 @@ namespace com.DungeonPad
     public class PlayerJoyVibration : MonoBehaviour
     {
         public float weight = 1;
-        PlayerIndex playerIndex;
+        public PlayerIndex playerIndex;
         PlayerManager playerManager;
         public PlayerJoyVibration otherPlayerJoyVibration;
         public float HurtVibration_Main, HurtVibration_notMain;
-        float HurtTimer_Main, HurtTimer_notMain;
-        float HurtTimerStoper_Main, HurtTimerStoper_notMain;
 
         void Start()
         {
@@ -44,8 +42,8 @@ namespace com.DungeonPad
 
         public void hurt()
         {
-            HurtVibration_Main = 0.1f;
-            otherPlayerJoyVibration.HurtVibration_notMain = 0.2f;
+            HurtVibration_Main = 0.6f;
+            otherPlayerJoyVibration.HurtVibration_notMain = 0.15f;
         }
     }
 }

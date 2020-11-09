@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1415,6 +1415,7 @@ GameObject:
   - component: {fileID: 632563978}
   - component: {fileID: 632563977}
   - component: {fileID: 632563976}
+  - component: {fileID: 632563979}
   - component: {fileID: 632563975}
   - component: {fileID: 632563974}
   m_Layer: 8
@@ -1519,9 +1520,11 @@ MonoBehaviour:
   v: {x: 0, y: 0}
   HardStraightA: {x: 0, y: 0}
   DashA: {x: 0, y: 0}
+  playerJoyVibration: {fileID: 632563979}
   StickTimer: 14.678697
   HardStraightTimer: 10
   DashTimer: 10
+  DashCD: 0.5
   ConfusionTimer: 104.67871
   ConfusionUIRenderer: {fileID: 439814663}
   ConfusionUIcontroler: {fileID: 439814662}
@@ -1586,6 +1589,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632563972}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &632563979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632563972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e4c40fbccd6c54e880dbe602f2f6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  playerIndex: 0
+  otherPlayerJoyVibration: {fileID: 1812166079}
+  HurtVibration_Main: 0
+  HurtVibration_notMain: 0
 --- !u!1 &725564953
 GameObject:
   m_ObjectHideFlags: 0
@@ -13962,6 +13982,7 @@ GameObject:
   - component: {fileID: 1812166078}
   - component: {fileID: 1812166077}
   - component: {fileID: 1812166076}
+  - component: {fileID: 1812166079}
   - component: {fileID: 1812166075}
   - component: {fileID: 1812166074}
   m_Layer: 8
@@ -14069,9 +14090,11 @@ MonoBehaviour:
   v: {x: 0, y: 0}
   HardStraightA: {x: 0, y: 0}
   DashA: {x: 0, y: 0}
+  playerJoyVibration: {fileID: 1812166079}
   StickTimer: 14.678697
   HardStraightTimer: 10
   DashTimer: 10
+  DashCD: 0.5
   ConfusionTimer: 104.67871
   ConfusionUIRenderer: {fileID: 982310474}
   ConfusionUIcontroler: {fileID: 982310473}
@@ -14136,6 +14159,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812166072}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1812166079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812166072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e4c40fbccd6c54e880dbe602f2f6f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  playerIndex: 0
+  otherPlayerJoyVibration: {fileID: 632563979}
+  HurtVibration_Main: 0
+  HurtVibration_notMain: 0
 --- !u!1 &1938054455
 GameObject:
   m_ObjectHideFlags: 0

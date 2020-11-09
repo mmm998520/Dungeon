@@ -15,10 +15,11 @@ namespace com.DungeonPad
                 if (collider.gameObject.layer == 8)
                 {
                     PlayerManager.HP -= ATK;
-                    if (collider.transform.childCount>2)
+                    collider.GetComponent<PlayerJoyVibration>().hurt();
+                    /*if (collider.transform.childCount>2)
                     {
                         collider.transform.GetChild(2).gameObject.SetActive(true);
-                    }
+                    }*/
                 }
             }
         }
@@ -31,7 +32,7 @@ namespace com.DungeonPad
                 {
                     PlayerManager.HP -= ATK * Time.deltaTime;
                     print(collider.transform.GetChild(2).name);
-                    collider.transform.GetChild(2).gameObject.SetActive(true);
+                    //collider.transform.GetChild(2).gameObject.SetActive(true);
                 }
             }
         }
