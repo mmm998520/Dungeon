@@ -11,7 +11,7 @@ namespace com.DungeonPad
         public PlayerIndex playerIndex;
         PlayerManager playerManager;
         public PlayerJoyVibration otherPlayerJoyVibration;
-        public float HurtVibration_Main, HurtVibration_notMain;
+        public float HurtVibration_Main, HurtVibration_notMain, ConfusionVibration;
 
         void Start()
         {
@@ -36,7 +36,16 @@ namespace com.DungeonPad
             {
                 HurtVibration_notMain = 0;
             }
-            float maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain);
+            if (playerManager.ConfusionTimer < 10)
+            {
+                ConfusionVibration += Time.deltaTime;
+            }
+            else
+            {
+                ConfusionVibration -= Time.deltaTime;
+            }
+            ConfusionVibration = Mathf.Clamp(ConfusionVibration, 0f, 0.6f);
+            float maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, ConfusionVibration);
             GamePad.SetVibration(playerIndex, maxer * weight, maxer * weight);
         }
 
