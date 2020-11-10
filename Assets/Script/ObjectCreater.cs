@@ -8,11 +8,16 @@ namespace com.DungeonPad
     {
         public GameObject created;
         public bool monster;
+        public int num;
+
         void Start()
         {
             if (monster)
             {
-                created = Instantiate(created, transform.position, Quaternion.identity, GameManager.monsters);
+                for(int i = 0; i < num; i++)
+                {
+                    created = Instantiate(created, transform.position, Quaternion.identity, GameManager.monsters);
+                }
             }
             else
             {
