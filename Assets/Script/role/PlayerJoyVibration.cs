@@ -8,7 +8,7 @@ namespace com.DungeonPad
     public class PlayerJoyVibration : MonoBehaviour
     {
         public float weight = 1;
-        public PlayerIndex playerIndex;
+        public PlayerIndex? playerIndex;
         PlayerManager playerManager;
         public PlayerJoyVibration otherPlayerJoyVibration;
         public float HurtVibration_Main, HurtVibration_notMain, ConfusionVibration, DashVibration;
@@ -19,11 +19,25 @@ namespace com.DungeonPad
             playerManager = GetComponent<PlayerManager>();
             if (playerManager.p1)
             {
-                playerIndex = SelectRole.P1PlayerIndex;
+                if(SelectRole.P1PlayerIndex == null)
+                {
+                    enabled = false;
+                }
+                else
+                {
+                    playerIndex = SelectRole.P1PlayerIndex;
+                }
             }
             else
             {
-                playerIndex = SelectRole.P2PlayerIndex;
+                if (SelectRole.P2PlayerIndex == null)
+                {
+                    enabled = false;
+                }
+                else
+                {
+                    playerIndex = SelectRole.P2PlayerIndex;
+                }
             }
         }
 
@@ -34,10 +48,10 @@ namespace com.DungeonPad
             //CountLowHPVibration();
             CountDashVibration();
             float maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, ConfusionVibration, LowHPVibration, DashVibration);
-            GamePad.SetVibration(playerIndex, maxer * weight, maxer * weight);
+            GamePad.SetVibration(playerIndex.Value, maxer * weight, maxer * weight);
             if (PlayerManager.HP <= 0)
             {
-                GamePad.SetVibration(playerIndex, 0, 0);
+                GamePad.SetVibration(playerIndex.Value, 0, 0);
             }
         }
 

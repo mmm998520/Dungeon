@@ -9,7 +9,7 @@ namespace com.DungeonPad
     public class SelectRole : MonoBehaviour
     {
         public static string p1Joy, p2Joy;
-        public static PlayerIndex P1PlayerIndex, P2PlayerIndex;
+        public static PlayerIndex? P1PlayerIndex = null, P2PlayerIndex = null;
         public bool selectP1 = true;
 
         void Update()
@@ -125,15 +125,15 @@ namespace com.DungeonPad
 
         IEnumerator waitForVP1()
         {
-            GamePad.SetVibration(P1PlayerIndex, 1, 1);
+            GamePad.SetVibration(P1PlayerIndex.Value, 1, 1);
             yield return new WaitForSeconds(0.5f);
-            GamePad.SetVibration(P1PlayerIndex, 0, 0);
+            GamePad.SetVibration(P1PlayerIndex.Value, 0, 0);
         }
         IEnumerator waitForVP2()
         {
-            GamePad.SetVibration(P2PlayerIndex, 1, 1);
+            GamePad.SetVibration(P2PlayerIndex.Value, 1, 1);
             yield return new WaitForSeconds(0.5f);
-            GamePad.SetVibration(P2PlayerIndex, 0, 0);
+            GamePad.SetVibration(P2PlayerIndex.Value, 0, 0);
         }
     }
 }
