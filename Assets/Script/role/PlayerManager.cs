@@ -59,6 +59,7 @@ namespace com.DungeonPad
                 {
                     GamePad.SetVibration((PlayerIndex)i, 0, 0);
                 }
+                GameManager.PlayTime = Time.time;
                 SceneManager.LoadScene("Died");
             }
             else
@@ -558,6 +559,30 @@ namespace com.DungeonPad
                     HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
                     HP -= 5;
                     playerJoyVibration.hurt();
+                }
+                if (collision.collider.GetComponent<Spider>())
+                {
+                    if (p1)
+                    {
+                        GameManager.P1SpiderHit++;
+                    }
+                    else
+                    {
+                        GameManager.P2SpiderHit++;
+                    }
+                    GameManager.DiedBecause = "SpiderHit";
+                    GameManager.DiedBecauseTimer = 0;
+                }
+            }
+            else if (collision.collider.GetComponent<Slime>())
+            {
+                if (p1)
+                {
+                    GameManager.P1SlimeHit++;
+                }
+                else
+                {
+                    GameManager.P2SlimeHit++;
                 }
             }
         }

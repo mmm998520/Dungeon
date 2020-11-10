@@ -71,6 +71,7 @@ namespace com.DungeonPad
         {
             if (!Blew)
             {
+                GameManager.KillSpider++;
                 SpriteAnimator.transform.parent = null;
                 SpriteAnimator.SetTrigger("Destroy");
             }

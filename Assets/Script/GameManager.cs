@@ -11,6 +11,14 @@ namespace com.DungeonPad
         public static MazeCreater mazeCreater;
         public static SmallMap smallMap;
         public static float Gammar = 1;
+
+        public static float DiedBecauseTimer;
+        public static string DiedBecause = "Distance";
+        public static float PlayTime;
+        public static int KillSpider, KillSlime;
+        public static int P1SpiderShooted, P1SpiderHit, P1SlimeHit, P1BubbleTimes;
+        public static int P2SpiderShooted, P2SpiderHit, P2SlimeHit, P2BubbleTimes;
+
         void Awake()
         {
             players = GameObject.Find("Players").transform;
@@ -27,7 +35,7 @@ namespace com.DungeonPad
 
         void Update()
         {
-
+            DiedBecauseTimer += Time.deltaTime;
         }
     }
 }

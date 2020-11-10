@@ -63,6 +63,7 @@ namespace com.DungeonPad
 
         public override void beforeDied()
         {
+            GameManager.KillSpider++;
             SpriteAnimator.transform.parent = null;
             SpriteAnimator.SetTrigger("Destroy");
         }

@@ -258,6 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ATK: 5
   continued: 0
+  MonsterType: Spider
 --- !u!114 &2888608939692655006
 MonoBehaviour:
   m_ObjectHideFlags: 0
