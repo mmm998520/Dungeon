@@ -100,12 +100,10 @@ namespace com.DungeonPad
         {
             if (endRow != null && endRow.Length > 0)
             {
-                Debug.Log(endRow[0] + "," + endCol[0]);
             }
             int r = Random.Range(0, canGo.Count);
             endRow = new int[] { canGo[r] / MazeCreater.totalCol };
             endCol = new int[] { canGo[r] % MazeCreater.totalCol };
-            Debug.Log(endRow[0] + "," + endCol[0]);
         }
 
         protected void randomMove()
