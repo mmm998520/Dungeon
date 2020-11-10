@@ -30,33 +30,35 @@ namespace com.DungeonPad
         {
             if(spiderBehavior == SpiderBehavior.ramdomMove)
             {
-                if ((CDTimer += Time.deltaTime) >= CD && Vector3.Distance(transform.position * Vector2.one, MinDisPlayer().position * Vector2.one) < hand)
-                {
-                    if (!attacking)
-                    {
-                        attacking = true;
-                        GetComponent<Animator>().SetTrigger("Attack");
-                    }
-                    rigidbody.velocity = Vector3.zero;
-                    rigidbody.angularDrag = 0;
-                    if (MinDisPlayer().transform.position.x > transform.position.x)
-                    {
-                        transform.rotation = Quaternion.Euler(0, 0, 0);
-                    }
-                    if (MinDisPlayer().transform.position.x < transform.position.x)
-                    {
-                        transform.rotation = Quaternion.Euler(0, 180, 0);
-                    }
-                    SpriteAnimator.SetBool("Stop", true);
-                }
-                else
-                {
-                    Move();
-                    Stuck(2, 1);
-                    attacking = false;
-                    SpriteAnimator.SetBool("Stop", false);
-                }
+                Move();
+                Stuck(2, 1);
+                attacking = false;
+                SpriteAnimator.SetBool("Stop", false);
             }
+            else
+            {
+                attack();
+            }
+        }
+
+        public new void attack()
+        {
+            if (!attacking)
+            {
+                attacking = true;
+                GetComponent<Animator>().SetTrigger("Attack");
+            }
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularDrag = 0;
+            if (MinDisPlayer().transform.position.x > transform.position.x)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            if (MinDisPlayer().transform.position.x < transform.position.x)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            SpriteAnimator.SetBool("Stop", true);
         }
 
         public override void beforeDied()
