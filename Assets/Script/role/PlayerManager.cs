@@ -83,7 +83,7 @@ namespace com.DungeonPad
                 float transition = lightRotateTimer / lightRotateTimerStoper, brightness = HP / MaxHP;
                 brightness *= GameManager.Gammar;
 
-                if (StickTimer < 5)
+                if (StickTimer < 10)
                 {
                     if ((int)(StickTimer * 10) % 6 < 1)
                     {
@@ -110,7 +110,7 @@ namespace com.DungeonPad
                         brightness *= 1f;
                     }
                 }
-                transform.GetChild(4).gameObject.SetActive(StickTimer < 5);
+                transform.GetChild(4).gameObject.SetActive(StickTimer < 10);
 
                 transform.GetChild(5).GetChild(0).GetComponent<Light2D>().intensity = transition * brightness;
                 transform.GetChild(6).GetChild(0).GetComponent<Light2D>().intensity = (1 - transition) * brightness;
@@ -130,6 +130,7 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown(KeyCode.D))
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = true;
                             }
                             break;
@@ -137,6 +138,7 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown(KeyCode.RightArrow))
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = true;
                             }
                             break;
@@ -151,6 +153,7 @@ namespace com.DungeonPad
                             if (Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy) > 0.8f)
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = true;
                             }
                             break;
@@ -164,6 +167,7 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown(KeyCode.A))
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = false;
                             }
                             break;
@@ -171,6 +175,7 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown(KeyCode.LeftArrow))
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = false;
                             }
                             break;
@@ -185,6 +190,7 @@ namespace com.DungeonPad
                             if (Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy) < -0.8f)
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = false;
                             }
                             break;
@@ -201,6 +207,7 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown(KeyCode.D))
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = true;
                             }
                             break;
@@ -208,6 +215,7 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown(KeyCode.RightArrow))
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = true;
                             }
                             break;
@@ -222,6 +230,7 @@ namespace com.DungeonPad
                             if (Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy) > 0.8f)
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = true;
                             }
                             break;
@@ -235,6 +244,7 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown(KeyCode.A))
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = false;
                             }
                             break;
@@ -242,6 +252,7 @@ namespace com.DungeonPad
                             if (Input.GetKeyDown(KeyCode.LeftArrow))
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = false;
                             }
                             break;
@@ -256,6 +267,7 @@ namespace com.DungeonPad
                             if (Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy) < -0.8f)
                             {
                                 ConfusionTimer++;
+                                StickTimer++;
                                 lastDirRight = false;
                             }
                             break;
@@ -329,7 +341,7 @@ namespace com.DungeonPad
                 }
                 #endregion
             }
-            if ((StickTimer += Time.deltaTime) < 5)
+            if ((StickTimer += Time.deltaTime) < 10)
             {
                 if (v.magnitude > 0.5f)
                 {
