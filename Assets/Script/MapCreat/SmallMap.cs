@@ -9,10 +9,11 @@ namespace com.DungeonPad
     {
         public int unitLong;
         public RectTransform playerPos;
+        Color StartColor;
         public void start()
         {
-            playerPos = transform.parent.GetChild(1).GetComponent<RectTransform>();
             transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(unitLong, unitLong);
+            StartColor = transform.GetChild(0).GetComponent<Image>().color;
             RectTransform temp;
             int i, j;
             for(i = 0; i < 48; i++)
@@ -45,7 +46,7 @@ namespace com.DungeonPad
                 temp = transform.GetChild(Mathf.RoundToInt(colliders[i].transform.position.x) * MazeCreater.totalCol + Mathf.RoundToInt(colliders[i].transform.position.y));
                 if (temp.GetComponent<Image>().color.a > 0.75f)
                 {
-                    temp.GetComponent<Image>().color = new Color(1, 1, 1, 0.75f);
+                    temp.GetComponent<Image>().color = new Color(StartColor.r, StartColor.g, StartColor.b, 0.75f);
                 }
             }
             colliders = Physics2D.OverlapCircleAll(CameraManager.center, 6, 1 << 15);
@@ -54,14 +55,14 @@ namespace com.DungeonPad
                 temp = transform.GetChild(Mathf.RoundToInt(colliders[i].transform.position.x) * MazeCreater.totalCol + Mathf.RoundToInt(colliders[i].transform.position.y));
                 if (temp.GetComponent<Image>().color.a > 0.5f)
                 {
-                    temp.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+                    temp.GetComponent<Image>().color = new Color(StartColor.r, StartColor.g, StartColor.b, 0.5f);
                 }
             }
             colliders = Physics2D.OverlapCircleAll(CameraManager.center, 5, 1 << 15);
             for (int i = 0; i < colliders.Length; i++)
             {
                 temp = transform.GetChild(Mathf.RoundToInt(colliders[i].transform.position.x) * MazeCreater.totalCol + Mathf.RoundToInt(colliders[i].transform.position.y));
-                temp.GetComponent<Image>().color = new Color(1, 1, 1, 0.25f);
+                temp.GetComponent<Image>().color = new Color(StartColor.r, StartColor.g, StartColor.b, 0.25f);
             }
             playerPos.anchoredPosition = new Vector2(unitLong * CameraManager.center.x, unitLong * CameraManager.center.y);
         }

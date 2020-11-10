@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5725190928116251864}
   - component: {fileID: 706875174284944889}
   m_Layer: 15
-  m_Name: Cube
+  m_Name: SmallMapUsed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,3 +249,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   created: {fileID: 4674237558007018189, guid: d8d600deb5492ac4e9777555399d06a9, type: 3}
   monster: 0
+  num: 0

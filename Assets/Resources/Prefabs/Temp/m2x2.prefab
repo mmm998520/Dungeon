@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5576646595267270083}
   - component: {fileID: 3667834495725337244}
   m_Layer: 15
-  m_Name: Cube
+  m_Name: SmallMapUsed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
