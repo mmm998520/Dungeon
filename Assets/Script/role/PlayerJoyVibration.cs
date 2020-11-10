@@ -68,13 +68,11 @@ namespace com.DungeonPad
 
         void CountLowHPVibration()
         {
-            
             LowHPVibration = Mathf.Clamp(PlayerManager.HP / 30, 0, 1);
             LowHPVibration -= 1;
             LowHPVibration *= -0.2f;
             
             LowHPVibration += Mathf.Clamp(PlayerManager.countAverage(PlayerManager.recoveryRecord) * -2, 0, 0.4f)/2;
-            print(LowHPVibration);
         }
 
         void CountDashVibration()
