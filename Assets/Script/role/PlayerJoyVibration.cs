@@ -31,7 +31,7 @@ namespace com.DungeonPad
         {
             CountHurtVibration();
             CountConfusionVibration();
-            CountLowHPVibration();
+            //CountLowHPVibration();
             CountDashVibration();
             float maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, ConfusionVibration, LowHPVibration, DashVibration);
             GamePad.SetVibration(playerIndex, maxer * weight, maxer * weight);
