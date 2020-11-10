@@ -23,16 +23,11 @@ namespace com.DungeonPad
             smallMap = GameObject.Find("SmallMap").GetComponent<SmallMap>();
             smallMap.start();
             UI = smallMap.transform.parent;
-            UI.gameObject.SetActive(false);
         }
 
         void Update()
         {
             smallMap.update();
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                UI.gameObject.SetActive(!UI.gameObject.activeSelf);
-            }
         }
     }
 }
