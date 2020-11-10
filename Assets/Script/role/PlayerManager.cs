@@ -34,7 +34,7 @@ namespace com.DungeonPad
         public ConfusionUIcontroler ConfusionUIcontroler;
 
         float lastUpdateHp;
-        List<float> timerRecord = new List<float>(), recoveryRecord = new List<float>();
+        public static List<float> timerRecord = new List<float>(), recoveryRecord = new List<float>();
         public float lightRotateTimer, lightRotateTimerStoper;
         public Sprite[] lightSprites;
         private void Start()
@@ -526,7 +526,7 @@ namespace com.DungeonPad
             }
         }
 
-        float countAverage(List<float> counted)
+        public static float countAverage(List<float> counted)
         {
             float total = 0;
             for(int i = 0; i < counted.Count; i++)
