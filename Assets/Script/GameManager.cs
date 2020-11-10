@@ -27,7 +27,7 @@ namespace com.DungeonPad
 
         void Update()
         {
-            smallMap.update();
+
         }
     }
 }

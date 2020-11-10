@@ -29,7 +29,7 @@ namespace com.DungeonPad
             }
         }
 
-        public void update()
+        void Update()
         {
             Transform temp;
             Collider2D[] colliders = Physics2D.OverlapCircleAll(CameraManager.center, 4, 1 << 15);
