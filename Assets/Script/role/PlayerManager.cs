@@ -491,9 +491,9 @@ namespace com.DungeonPad
             {
                 HardStraightA = Vector3.zero;
             }
-            if (DashA.magnitude > 1.5f)
+            if (DashA.magnitude >0.5f)
             {
-                DashA -= (Vector2)Vector3.Normalize(HardStraightA) * 1.5f;
+                DashA -= (Vector2)Vector3.Normalize(DashA) * 0.5f;
             }
             else
             {
