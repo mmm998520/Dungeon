@@ -123,156 +123,76 @@ namespace com.DungeonPad
         {
             if (p1)
             {
-                if (!lastDirRight)
+                switch (SelectRole.p1Joy)
                 {
-                    switch (SelectRole.p1Joy)
-                    {
-                        case "WASD":
-                            if (Input.GetKeyDown(KeyCode.D))
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = true;
-                            }
-                            break;
-                        case "ArrowKey":
-                            if (Input.GetKeyDown(KeyCode.RightArrow))
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = true;
-                            }
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy) > 0.8f)
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = true;
-                            }
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (SelectRole.p1Joy)
-                    {
-                        case "WASD":
-                            if (Input.GetKeyDown(KeyCode.A))
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = false;
-                            }
-                            break;
-                        case "ArrowKey":
-                            if (Input.GetKeyDown(KeyCode.LeftArrow))
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = false;
-                            }
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy) < -0.8f)
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = false;
-                            }
-                            break;
-                    }
+                    case "WASD":
+                        if (Input.GetKeyDown(KeyCode.K))
+                        {
+                            ConfusionTimer += 0.5f;
+                            StickTimer += 0.5f;
+                            lastDirRight = true;
+                        }
+                        break;
+                    case "ArrowKey":
+                        if (Input.GetKeyDown(KeyCode.Keypad2))
+                        {
+                            ConfusionTimer += 0.5f;
+                            StickTimer += 0.5f;
+                            lastDirRight = true;
+                        }
+                        break;
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "8":
+                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy) + 1)))
+                        {
+                            ConfusionTimer += 0.5f;
+                            StickTimer += 0.5f;
+                            lastDirRight = true;
+                        }
+                        break;
                 }
             }
             else
             {
-                if (!lastDirRight)
+                switch (SelectRole.p2Joy)
                 {
-                    switch (SelectRole.p2Joy)
-                    {
-                        case "WASD":
-                            if (Input.GetKeyDown(KeyCode.D))
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = true;
-                            }
-                            break;
-                        case "ArrowKey":
-                            if (Input.GetKeyDown(KeyCode.RightArrow))
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = true;
-                            }
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy) > 0.8f)
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = true;
-                            }
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (SelectRole.p2Joy)
-                    {
-                        case "WASD":
-                            if (Input.GetKeyDown(KeyCode.A))
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = false;
-                            }
-                            break;
-                        case "ArrowKey":
-                            if (Input.GetKeyDown(KeyCode.LeftArrow))
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = false;
-                            }
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy) < -0.8f)
-                            {
-                                ConfusionTimer++;
-                                StickTimer++;
-                                lastDirRight = false;
-                            }
-                            break;
-                    }
+                    case "WASD":
+                        if (Input.GetKeyDown(KeyCode.K))
+                        {
+                            ConfusionTimer += 0.5f;
+                            StickTimer += 0.5f;
+                            lastDirRight = true;
+                        }
+                        break;
+                    case "ArrowKey":
+                        if (Input.GetKeyDown(KeyCode.Keypad2))
+                        {
+                            ConfusionTimer += 0.5f;
+                            StickTimer += 0.5f;
+                            lastDirRight = true;
+                        }
+                        break;
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "8":
+                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy) + 1)))
+                        {
+                            ConfusionTimer += 0.5f;
+                            StickTimer += 0.5f;
+                            lastDirRight = true;
+                        }
+                        break;
                 }
             }
             if ((ConfusionTimer+=Time.deltaTime) < 10)
