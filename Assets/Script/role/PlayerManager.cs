@@ -126,18 +126,18 @@ namespace com.DungeonPad
                 switch (SelectRole.p1Joy)
                 {
                     case "WASD":
-                        if (Input.GetKeyDown(KeyCode.K))
+                        if (Input.GetKeyDown(KeyCode.J))
                         {
-                            ConfusionTimer += 0.5f;
-                            StickTimer += 0.5f;
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
                             lastDirRight = true;
                         }
                         break;
                     case "ArrowKey":
-                        if (Input.GetKeyDown(KeyCode.Keypad2))
+                        if (Input.GetKeyDown(KeyCode.Keypad1))
                         {
-                            ConfusionTimer += 0.5f;
-                            StickTimer += 0.5f;
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
                             lastDirRight = true;
                         }
                         break;
@@ -149,10 +149,10 @@ namespace com.DungeonPad
                     case "6":
                     case "7":
                     case "8":
-                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy) + 1)))
+                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy) +1 )))
                         {
-                            ConfusionTimer += 0.5f;
-                            StickTimer += 0.5f;
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
                             lastDirRight = true;
                         }
                         break;
@@ -163,18 +163,18 @@ namespace com.DungeonPad
                 switch (SelectRole.p2Joy)
                 {
                     case "WASD":
-                        if (Input.GetKeyDown(KeyCode.K))
+                        if (Input.GetKeyDown(KeyCode.J))
                         {
-                            ConfusionTimer += 0.5f;
-                            StickTimer += 0.5f;
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
                             lastDirRight = true;
                         }
                         break;
                     case "ArrowKey":
-                        if (Input.GetKeyDown(KeyCode.Keypad2))
+                        if (Input.GetKeyDown(KeyCode.Keypad1))
                         {
-                            ConfusionTimer += 0.5f;
-                            StickTimer += 0.5f;
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
                             lastDirRight = true;
                         }
                         break;
@@ -186,29 +186,34 @@ namespace com.DungeonPad
                     case "6":
                     case "7":
                     case "8":
-                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy) + 1)))
+                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy) + 1 )))
                         {
-                            ConfusionTimer += 0.5f;
-                            StickTimer += 0.5f;
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
                             lastDirRight = true;
                         }
                         break;
                 }
             }
-            if ((ConfusionTimer+=Time.deltaTime) < 10)
+            if ((ConfusionTimer += Time.deltaTime) < 10 || (StickTimer += Time.deltaTime) < 10)
             {
                 ConfusionUIRenderer.enabled = true;
                 ConfusionUIcontroler.enabled = true;
-                float tempVX = v.x + Random.Range(-6f, 6f);
-                float tempVY = v.y + Random.Range(-6f, 6f);
-
-                v.x += (tempVX + v.x) / 3;
-                v.y += (tempVY + v.y) / 3;
             }
             else
             {
                 ConfusionUIRenderer.enabled = false;
                 ConfusionUIcontroler.enabled = false;
+            }
+            if ((ConfusionTimer += Time.deltaTime) < 10)
+            { 
+                float tempVX = v.x + Random.Range(-6f, 6f);
+                float tempVY = v.y + Random.Range(-6f, 6f);
+                v.x += (tempVX + v.x) / 3;
+                v.y += (tempVY + v.y) / 3;
+            }
+            else
+            {
                 #region//操作移動
                 if (p1)
                 {
@@ -262,7 +267,7 @@ namespace com.DungeonPad
                 }
                 #endregion
             }
-            if ((StickTimer += Time.deltaTime) < 10)
+            if ((StickTimer) < 10)
             {
                 if (v.magnitude > 0.5f)
                 {
@@ -279,7 +284,7 @@ namespace com.DungeonPad
             }
 
             #region//衝刺
-            if (HardStraightTimer >= 0.3f && ConfusionTimer>= 10 && StickTimer >= 5)
+            if (HardStraightTimer >= 0.3f && ConfusionTimer>= 10 && StickTimer >= 10)
             {
                 if(DashTimer > DashCD)
                 {

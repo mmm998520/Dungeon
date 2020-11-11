@@ -972,9 +972,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439814660}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.89, z: -1}
+  m_LocalScale: {x: 0.061217, y: 0.061217, z: 0.061217}
   m_Children: []
   m_Father: {fileID: 632563973}
   m_RootOrder: 9
@@ -992,8 +992,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConfusionUISprites:
-  - {fileID: 21300000, guid: 749d9cfca6641084abe2c64cb7579edc, type: 3}
-  - {fileID: 21300000, guid: de5b0384e4eb0c847bcd051dad95186c, type: 3}
+  - {fileID: 21300000, guid: d976df651833ac04e80fe20916238aac, type: 3}
+  - {fileID: 21300000, guid: a5a7ad5989389b9448faef0eb8475cf9, type: 3}
 --- !u!212 &439814663
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1033,7 +1033,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 749d9cfca6641084abe2c64cb7579edc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d976df651833ac04e80fe20916238aac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2136,7 +2136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &978047670
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2169,7 +2169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5660378, g: 0.5448555, b: 0.5366679, a: 1}
+  m_Color: {r: 0.5660378, g: 0.5448555, b: 0.5366679, a: 0.19607843}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2219,8 +2219,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982310471}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.89, z: -1}
+  m_LocalScale: {x: 0.061217, y: 0.061217, z: 0.061217}
   m_Children: []
   m_Father: {fileID: 1812166073}
   m_RootOrder: 9
@@ -2238,8 +2238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConfusionUISprites:
-  - {fileID: 21300000, guid: 749d9cfca6641084abe2c64cb7579edc, type: 3}
-  - {fileID: 21300000, guid: de5b0384e4eb0c847bcd051dad95186c, type: 3}
+  - {fileID: 21300000, guid: d976df651833ac04e80fe20916238aac, type: 3}
+  - {fileID: 21300000, guid: a5a7ad5989389b9448faef0eb8475cf9, type: 3}
 --- !u!212 &982310474
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2279,7 +2279,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 749d9cfca6641084abe2c64cb7579edc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d976df651833ac04e80fe20916238aac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14131,7 +14131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6320754, g: 0.5704128, b: 0.5277234, a: 1}
+  m_Color: {r: 0.6320754, g: 0.5704128, b: 0.5277234, a: 0.19607843}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -14455,7 +14455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+  m_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0.6313726}
   m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
