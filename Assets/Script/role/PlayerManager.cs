@@ -282,6 +282,11 @@ namespace com.DungeonPad
             {
                 v = HardStraightA;
             }
+            //玩家解除無敵狀態
+            else if (HardStraightTimer > 0.5f)
+            {
+                gameObject.layer = 8;
+            }
 
             #region//衝刺
             if (HardStraightTimer >= 0.3f && ConfusionTimer>= 10 && StickTimer >= 10)
@@ -481,22 +486,27 @@ namespace com.DungeonPad
                 if (HardStraightTimer > 0.3f)
                 {
                     HardStraightTimer = 0;
+                    DashA = Vector3.zero;
                     HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
                     HP -= 5;
                     playerJoyVibration.hurt();
-                }
-                if (collision.collider.GetComponent<Spider>())
-                {
-                    if (p1)
+
+                    //玩家進入無敵狀態
+                    gameObject.layer = 16;
+
+                    if (collision.collider.GetComponent<Spider>())
                     {
-                        GameManager.P1SpiderHit++;
+                        if (p1)
+                        {
+                            GameManager.P1SpiderHit++;
+                        }
+                        else
+                        {
+                            GameManager.P2SpiderHit++;
+                        }
+                        GameManager.DiedBecause = "SpiderHit";
+                        GameManager.DiedBecauseTimer = 0;
                     }
-                    else
-                    {
-                        GameManager.P2SpiderHit++;
-                    }
-                    GameManager.DiedBecause = "SpiderHit";
-                    GameManager.DiedBecauseTimer = 0;
                 }
             }
             else if (collision.collider.GetComponent<Slime>())

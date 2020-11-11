@@ -8,7 +8,7 @@ namespace com.DungeonPad
     public class SmallMap : MonoBehaviour
     {
         public int unitLong;
-        public RectTransform playerPos;
+        public RectTransform playerPos, endPos;
         Color StartColor;
         public void start()
         {
@@ -65,6 +65,7 @@ namespace com.DungeonPad
                 temp.GetComponent<Image>().color = new Color(StartColor.r, StartColor.g, StartColor.b, StartColor.a * 0.25f);
             }
             playerPos.anchoredPosition = new Vector2(unitLong * CameraManager.center.x, unitLong * CameraManager.center.y);
+            //endPos.anchoredPosition = new Vector2(unitLong * GameObject.Find("旋鈕(Clone)").transform.position.x, unitLong * GameObject.Find("旋鈕(Clone)").transform.position.y);
         }
     }
 }
