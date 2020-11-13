@@ -115,6 +115,7 @@ namespace com.DungeonPad
 
                 transform.GetChild(5).GetChild(0).GetComponent<Light2D>().intensity = transition * brightness;
                 transform.GetChild(6).GetChild(0).GetComponent<Light2D>().intensity = (1 - transition) * brightness;
+                transform.GetChild(7).GetComponent<Light2D>().pointLightOuterRadius = brightness * 4f;
             }
             timer();
         }

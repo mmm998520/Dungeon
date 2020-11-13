@@ -22,19 +22,19 @@ namespace com.DungeonPad
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.gameObject.layer == 8 && collider.transform != transform.parent)
+            if ((collider.gameObject.layer == 8 || collider.gameObject.layer == 12) && collider.transform != transform.parent)
             {
                 if (collider.GetComponent<PlayerManager>())
                 {
                     collider.GetComponent<PlayerManager>().ConfusionTimer = 0;
-                }
-                if (collider.GetComponent<PlayerManager>().p1)
-                {
-                    GameManager.P1BubbleTimes++;
-                }
-                else
-                {
-                    GameManager.P2BubbleTimes++;
+                    if (collider.GetComponent<PlayerManager>().p1)
+                    {
+                        GameManager.P1BubbleTimes++;
+                    }
+                    else
+                    {
+                        GameManager.P2BubbleTimes++;
+                    }
                 }
                 Destroy(gameObject);
             }
