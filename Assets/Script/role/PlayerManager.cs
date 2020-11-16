@@ -65,7 +65,13 @@ namespace com.DungeonPad
             else
             {
                 float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
-                HP += (2.5f - dis) * Time.deltaTime * 2;
+                float hpUpRate = (2.5f - dis) * 2;
+                if (hpUpRate > 1 && Players.fightingTimer >= 5)
+                {
+                    hpUpRate *= hpUpRate;
+                    print(hpUpRate);
+                }
+                HP += hpUpRate * Time.deltaTime;
                 if (HP > MaxHP)
                 {
                     HP = MaxHP;
@@ -520,6 +526,18 @@ namespace com.DungeonPad
                 {
                     GameManager.P2SlimeHit++;
                 }
+            }
+            if(collision.collider.GetComponent<MonsterManager>())
+            {
+                Players.fightingTimer = 0;
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.GetComponent<MonsterAttack>())
+            {
+                Players.fightingTimer = 0;
             }
         }
     }
