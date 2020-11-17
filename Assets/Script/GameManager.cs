@@ -10,6 +10,7 @@ namespace com.DungeonPad
         public static int layers = 1, level = 1;
         public static MazeCreater mazeCreater;
         public static SmallMap smallMap;
+        public static TutorialManager tutorialManager;
         public static float Gammar = 1;
 
         public static float DiedBecauseTimer;
@@ -28,9 +29,16 @@ namespace com.DungeonPad
             {
                 mazeCreater = GameObject.Find("MazeCreater").GetComponent<MazeCreater>();
             }
-            smallMap = GameObject.Find("SmallMap").GetComponent<SmallMap>();
-            smallMap.start();
-            UI = smallMap.transform.parent;
+            if (GameObject.Find("SmallMap"))
+            {
+                smallMap = GameObject.Find("SmallMap").GetComponent<SmallMap>();
+                smallMap.start();
+                UI = smallMap.transform.parent;
+            }
+            if (GameObject.Find("TutorialManager"))
+            {
+                tutorialManager = GameObject.Find("TutorialManager").GetComponent<TutorialManager>();
+            }
         }
 
         void Update()
