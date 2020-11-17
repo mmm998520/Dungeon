@@ -21,12 +21,11 @@ namespace com.DungeonPad
                 float disX = Mathf.Abs(player.position.x - pos.x), disY = Mathf.Abs(player.position.y - pos.y);
                 if(disX < 0.5f && disY < 0.5f && playerManager.DashTimer > 0.4f)
                 {
-                    player.position = playerManager.nextPosBeforeIntoHole;
+                    player.position = playerManager.nextPosBeforeIntoHole[0];
                     playerManager.v = Vector3.zero;
                     playerManager.HardStraightA = Vector3.zero;
                     playerManager.DashA = Vector3.zero;
                     playerManager.HardStraightTimer = -1;
-                    Debug.LogError(playerManager.nextPosBeforeIntoHole);
                     PlayerManager.HP -= 30;
                 }
                 if (!playerManager.IntoHole && disX < 0.5f && disY < 0.5f)

@@ -38,7 +38,8 @@ namespace com.DungeonPad
         public float lightRotateTimer, lightRotateTimerStoper;
         public Sprite[] lightSprites;
 
-        public Vector3 nextPosBeforeIntoHole;
+        public List<Vector3> nextPosBeforeIntoHole = new List<Vector3>();
+        public List<float> nextPosBeforeIntoHoleTimer = new List<float>();
         public bool IntoHole = false;
         private void Start()
         {
@@ -133,12 +134,18 @@ namespace com.DungeonPad
         {
             if (!IntoHole)
             {
-                nextPosBeforeIntoHole = transform.position;
+                nextPosBeforeIntoHole.Add(transform.position);
+                nextPosBeforeIntoHoleTimer.Add(Time.time);
             }
             else
             {
                 IntoHole = false;
                 Debug.LogWarning("");
+            }
+            while (nextPosBeforeIntoHoleTimer[0] < Time.time - 0.3f)
+            {
+                nextPosBeforeIntoHole.RemoveAt(0);
+                nextPosBeforeIntoHoleTimer.RemoveAt(0);
             }
         }
 
