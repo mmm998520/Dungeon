@@ -17,12 +17,25 @@ namespace com.DungeonPad
             for (int i = 0; i < GameManager.players.childCount; i++)
             {
                 Transform player = GameManager.players.GetChild(i);
-                
-
-
+                PlayerManager playerManager = player.GetComponent<PlayerManager>();
+                float disX = Mathf.Abs(player.position.x - pos.x), disY = Mathf.Abs(player.position.y - pos.y);
+                if(disX < 0.5f && disY < 0.5f && playerManager.DashTimer > 0.4f)
+                {
+                    player.position = playerManager.nextPosBeforeIntoHole;
+                    playerManager.v = Vector3.zero;
+                    playerManager.HardStraightA = Vector3.zero;
+                    playerManager.DashA = Vector3.zero;
+                    playerManager.HardStraightTimer = -1;
+                    Debug.LogError(playerManager.nextPosBeforeIntoHole);
+                    PlayerManager.HP -= 30;
+                }
+                if (!playerManager.IntoHole && disX < 0.5f && disY < 0.5f)
+                {
+                    playerManager.IntoHole = true;
+                }
             }
         }
-
+        /*
         private void OnTriggerStay2D(Collider2D collider)
         {
             if (collider.GetComponent<PlayerManager>())
@@ -30,10 +43,6 @@ namespace com.DungeonPad
                 Transform player = collider.transform;
                 PlayerManager playerManager = player.GetComponent<PlayerManager>();
                 float disX = Mathf.Abs(player.position.x - pos.x), disY = Mathf.Abs(player.position.y - pos.y);
-                if (!playerManager.IntoHole)
-                {
-                    playerManager.IntoHole = true;
-                }
                 if ((disX < 0.15f && disY < 0.15f) && playerManager.DashTimer > 0.3f)
                 {
                     player.position = playerManager.nextPosBeforeIntoHole;
@@ -41,6 +50,6 @@ namespace com.DungeonPad
                     PlayerManager.HP -= 1;
                 }
             }
-        }
+        }*/
     }
 }

@@ -50,15 +50,6 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (!IntoHole)
-            {
-                nextPosBeforeIntoHole = transform.position;
-            }
-            else
-            {
-                IntoHole = false;
-                Debug.LogWarning("");
-            }
             if (lockedHP)
             {
                 HP = 40;
@@ -136,6 +127,19 @@ namespace com.DungeonPad
                 transform.GetChild(7).GetComponent<Light2D>().pointLightOuterRadius = brightness * 4f;
             }
             timer();
+        }
+
+        private void LateUpdate()
+        {
+            if (!IntoHole)
+            {
+                nextPosBeforeIntoHole = transform.position;
+            }
+            else
+            {
+                IntoHole = false;
+                Debug.LogWarning("");
+            }
         }
 
         void Behavior()
