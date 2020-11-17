@@ -37,6 +37,9 @@ namespace com.DungeonPad
         public static List<float> timerRecord = new List<float>(), recoveryRecord = new List<float>();
         public float lightRotateTimer, lightRotateTimerStoper;
         public Sprite[] lightSprites;
+
+        public Vector3 nextPosBeforeIntoHole;
+        public bool IntoHole = false;
         private void Start()
         {
             playerJoyVibration = GetComponent<PlayerJoyVibration>();
@@ -47,6 +50,15 @@ namespace com.DungeonPad
 
         void Update()
         {
+            if (!IntoHole)
+            {
+                nextPosBeforeIntoHole = transform.position;
+            }
+            else
+            {
+                IntoHole = false;
+                Debug.LogWarning("");
+            }
             if (lockedHP)
             {
                 HP = 40;

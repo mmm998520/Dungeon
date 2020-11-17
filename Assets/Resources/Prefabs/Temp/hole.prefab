@@ -164,7 +164,8 @@ GameObject:
   - component: {fileID: 1691314572940453475}
   - component: {fileID: 7730386463483904343}
   - component: {fileID: 3267021353135234283}
-  - component: {fileID: 2377192144346340909}
+  - component: {fileID: 7474572150869476501}
+  - component: {fileID: 7313977353975708231}
   m_Layer: 0
   m_Name: hole
   m_TagString: Untagged
@@ -235,7 +236,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!61 &2377192144346340909
+--- !u!114 &7474572150869476501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8977524532833046415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c781bf24b9933e4691966625093d509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &7313977353975708231
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

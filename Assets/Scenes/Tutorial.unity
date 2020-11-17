@@ -1146,6 +1146,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9f081ca180844bd4c8540b142895fc12, type: 3}
   - {fileID: 21300000, guid: c319b024360d3aa46939960075a929bd, type: 3}
   - {fileID: 21300000, guid: 2540063c2c50eb04e82616ba6d883180, type: 3}
+  nextPosBeforeIntoHole: {x: 0, y: 0, z: 0}
+  IntoHole: 0
 --- !u!23 &16301439
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -67618,7 +67620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301589162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 874834318}
@@ -77989,6 +77991,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9f081ca180844bd4c8540b142895fc12, type: 3}
   - {fileID: 21300000, guid: c319b024360d3aa46939960075a929bd, type: 3}
   - {fileID: 21300000, guid: 2540063c2c50eb04e82616ba6d883180, type: 3}
+  nextPosBeforeIntoHole: {x: 0, y: 0, z: 0}
+  IntoHole: 0
 --- !u!23 &1533407261
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbe20f758e94454a9910a68ef04289d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NextScene: Tutorial
   selectP1: 1
 --- !u!1 &959969930
 GameObject:
