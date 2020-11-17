@@ -32,6 +32,7 @@ namespace com.DungeonPad
                     if (transform.GetChild(i).GetComponent<Spider>())
                     {
                         transform.GetChild(i).GetComponent<Spider>().spiderBehavior = Spider.SpiderBehavior.attack;
+                        Debug.LogWarning(0);
                     }
                 }
             }
