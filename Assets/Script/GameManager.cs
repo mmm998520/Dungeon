@@ -44,6 +44,14 @@ namespace com.DungeonPad
         void Update()
         {
             DiedBecauseTimer += Time.deltaTime;
+
+            if (PlayerManager.HP <= 0)
+            {
+                if (GameObject.Find("lineAttacks"))
+                {
+                    Destroy(GameObject.Find("lineAttacks"));
+                }
+            }
         }
     }
 }

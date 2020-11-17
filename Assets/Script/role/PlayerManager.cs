@@ -41,6 +41,9 @@ namespace com.DungeonPad
         public List<Vector3> nextPosBeforeIntoHole = new List<Vector3>();
         public List<float> nextPosBeforeIntoHoleTimer = new List<float>();
         public bool IntoHole = false;
+
+        public Animator TutorialAnimator;
+
         private void Start()
         {
             playerJoyVibration = GetComponent<PlayerJoyVibration>();
@@ -64,7 +67,17 @@ namespace com.DungeonPad
                     GamePad.SetVibration((PlayerIndex)i, 0, 0);
                 }
                 GameManager.PlayTime = Time.time;
-                SceneManager.LoadScene("Died");
+                if (SceneManager.GetActiveScene().name != "Tutorial1" && SceneManager.GetActiveScene().name != "Tutorial2" && SceneManager.GetActiveScene().name != "Tutorial3")
+                {
+                    SceneManager.LoadScene("Died");
+                }
+                else
+                {
+                    TutorialAnimator.SetTrigger("Died");
+                    Destroy(GameManager.players.gameObject);
+                    Camera.main.GetComponent<CameraManager>().enabled = false;
+                    Destroy(GameObject.Find("lineAttacks"));
+                }
             }
             else
             {

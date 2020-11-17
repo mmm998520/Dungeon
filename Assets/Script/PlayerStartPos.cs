@@ -8,7 +8,7 @@ namespace com.DungeonPad
     {
         static int playerNum = 1;
         public Transform player;
-        void Start()
+        public void Start()
         {
             player = GameObject.Find("p"+playerNum++).transform;
             player.position = transform.position;

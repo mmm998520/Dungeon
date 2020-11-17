@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
     public class TutorialManager : MonoBehaviour
     {
-        public GameObject[] tutorialScenes;
         public Transform[] targetPoses;
-        public int tutorialScenesNum, targetPosesNum;
+        public int targetPosesNum;
+        public string nextSceneName;
+        float NextTargetTimer;
 
         void Start()
         {
@@ -17,23 +19,30 @@ namespace com.DungeonPad
 
         void Update()
         {
-
+            NextTargetTimer += Time.deltaTime;
+            if (GameManager.monsters.childCount <= 0 &&SceneManager.GetActiveScene().name == "Tutorial3")
+            {
+                SceneManager.LoadScene(nextSceneName);
+            }
         }
 
         public void NextTarget(Transform target)
         {
-            if(++targetPosesNum < targetPoses.Length)
+            if (NextTargetTimer > 0.3f)
             {
-                target.position = targetPoses[targetPosesNum].position;
-            }
-            else
-            {
-                Destroy(target.gameObject);
-            }
-            if (targetPosesNum == 4 || targetPosesNum == 8)
-            {
-                tutorialScenes[tutorialScenesNum].SetActive(false);
-                tutorialScenes[++tutorialScenesNum].SetActive(true);
+                NextTargetTimer = 0;
+                if (++targetPosesNum < targetPoses.Length)
+                {
+                    target.position = targetPoses[targetPosesNum].position;
+                }
+                else
+                {
+                    Destroy(target.gameObject);
+                }
+                if (targetPosesNum == 4)
+                {
+                    SceneManager.LoadScene(nextSceneName);
+                }
             }
         }
     }
