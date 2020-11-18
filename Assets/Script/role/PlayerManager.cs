@@ -83,9 +83,9 @@ namespace com.DungeonPad
             {
                 float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
                 float hpUpRate = (2.5f - dis) * 2;
-                if (hpUpRate > 1 && Players.fightingTimer >= 5)
+                if (hpUpRate > 0 && Players.fightingTimer >= 5)
                 {
-                    hpUpRate *= hpUpRate;
+                    hpUpRate *= 4;
                     print(hpUpRate);
                 }
                 HP += hpUpRate * Time.deltaTime;
@@ -531,7 +531,7 @@ namespace com.DungeonPad
                     HardStraightTimer = 0;
                     DashA = Vector3.zero;
                     HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
-                    HP -= 5;
+                    HP -= 10;
                     playerJoyVibration.hurt();
 
                     //玩家進入無敵狀態
