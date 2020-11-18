@@ -8,7 +8,9 @@ namespace com.DungeonPad
     {
         public int startRoomRow, startRoomCol;
         int[,] canGoRoom;
-        public Dictionary<int, int> canGo;
+        public Dictionary<int, int> canGo = new Dictionary<int, int>();
+        [SerializeField]
+        private AddCanGoByHandList.AddCanGoByHandListUnit[] addCanGoByHandList;
 
         int startRow, startCol;
         public int[] endRow, endCol;
@@ -352,5 +354,18 @@ namespace com.DungeonPad
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
             }
         }*/
+    }
+
+    /// <summary> 儲存資料用 </summary>
+    [System.Serializable]
+    public class AddCanGoByHandList
+    {
+        /// <summary> 儲存資料用 </summary>
+        [System.Serializable]
+        public struct AddCanGoByHandListUnit
+        {
+            public int MinRow, MinCol;
+            public int MaxRow, MaxCol;
+        }
     }
 }
