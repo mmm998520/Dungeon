@@ -8,6 +8,7 @@ namespace com.DungeonPad
 {
     public class SelectRole : MonoBehaviour
     {
+        public string NextScene;
         public static string p1Joy, p2Joy;
         public static PlayerIndex? P1PlayerIndex = null, P2PlayerIndex = null;
         public bool selectP1 = true;
@@ -83,13 +84,13 @@ namespace com.DungeonPad
                 {
                     p2Joy = "WASD";
                     print("WASD");
-                    SceneManager.LoadScene("Game 1");
+                    SceneManager.LoadScene(NextScene);
                 }
                 else if (Input.GetKeyDown(KeyCode.Keypad1) && p1Joy != "ArrowKey")
                 {
                     p2Joy = "ArrowKey";
                     print("ArrowKey");
-                    SceneManager.LoadScene("Game 1");
+                    SceneManager.LoadScene(NextScene);
                 }
                 else
                 {
@@ -120,7 +121,7 @@ namespace com.DungeonPad
         IEnumerator waitForLoadScene()
         {
             yield return new WaitForSeconds(2);
-            SceneManager.LoadScene("Game 1");
+            SceneManager.LoadScene(NextScene);
         }
 
         IEnumerator waitForVP1()

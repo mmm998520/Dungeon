@@ -13,16 +13,22 @@ namespace com.DungeonPad
         
         void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.gameObject.layer == 9 || collider.gameObject.layer == 11)
+            if (collider.gameObject.layer == 9)
             {
                 if (collider.GetComponent<MonsterManager>())
                 {
                     if (collider.GetComponent<MonsterManager>().Armor <= 0)
                     {
+                        Debug.LogWarning("hitTimes");
+                        PlayerManager.HP += 5;
                         collider.GetComponent<MonsterManager>().beforeDied();
                         Destroy(collider.gameObject);
                     }
                 }
+            }
+            if (collider.GetComponent<Bubble>() || collider.GetComponent<MonsterShooter>())
+            {
+                Destroy(collider.gameObject);
             }
         }
     }

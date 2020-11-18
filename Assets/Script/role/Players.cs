@@ -15,6 +15,7 @@ namespace com.DungeonPad
         public bool draw = false;
         public float MP;
         public Transform ShowMP;
+        public static float fightingTimer = 10;
 
         private void Awake()
         {
@@ -25,6 +26,7 @@ namespace com.DungeonPad
         }
         void Update()
         {
+            fightingTimer += Time.deltaTime;
             MP += Time.deltaTime;
             MP = Mathf.Clamp(MP, 0, 30);
             if (draw)

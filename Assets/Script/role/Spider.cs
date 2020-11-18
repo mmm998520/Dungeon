@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -19,19 +20,25 @@ namespace com.DungeonPad
         void Start()
         {
             ReCD();
-            startRoomRow = Mathf.RoundToInt(transform.position.x) / GameManager.mazeCreater.objectCountRowNum;
-            startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
-            arriveNewRoom(startRoomRow, startRoomCol);
-            randomTarget();
-            ArmorBar = transform.GetChild(1);
+            if (SceneManager.GetActiveScene().name != "Tutorial3")
+            {
+                startRoomRow = Mathf.RoundToInt(transform.position.x) / GameManager.mazeCreater.objectCountRowNum;
+                startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
+                arriveNewRoom(startRoomRow, startRoomCol);
+                randomTarget();
+                ArmorBar = transform.GetChild(1);
+            }
         }
 
         void Update()
         {
             if(spiderBehavior == SpiderBehavior.ramdomMove)
             {
-                Move();
-                Stuck(2, 1);
+                if(SceneManager.GetActiveScene().name != "Tutorial3")
+                {
+                    Move();
+                    Stuck(2, 1);
+                }
                 attacking = false;
                 SpriteAnimator.SetBool("Stop", false);
             }
@@ -43,10 +50,12 @@ namespace com.DungeonPad
 
         public new void attack()
         {
+            print(012345);
             if (!attacking)
             {
                 attacking = true;
                 GetComponent<Animator>().SetTrigger("Attack");
+                Debug.LogError(0);
             }
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularDrag = 0;

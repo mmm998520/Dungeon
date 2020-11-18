@@ -7,22 +7,24 @@ namespace com.DungeonPad
     public class MonsterShooter : MonoBehaviour
     {
         public float speed, timer, timerStoper, destoryTime;
-        public WaitForSeconds destoryTimer;
         public AudioSource hitSound;
+        public Animator animator;
 
         void Start()
         {
-            destoryTimer = new WaitForSeconds(destoryTime);
+
         }
+
         void Update()
         {
             transform.Translate(Vector3.right * Time.deltaTime * speed);
             if ((timer += Time.deltaTime) > timerStoper)
             {
                 speed = 0;
-                Destroy(gameObject, destoryTime);
+                animator.SetTrigger("Hit");
                 hitSound.Play();
                 hitSound.transform.parent = null;
+                Destroy(gameObject, destoryTime);
                 Destroy(hitSound.gameObject, 5);
             }
         }
@@ -32,9 +34,10 @@ namespace com.DungeonPad
             if (collider.gameObject.layer == 8 || collider.gameObject.layer == 12)
             {
                 speed = 0;
-                Destroy(gameObject, destoryTime);
+                animator.SetTrigger("Hit");
                 hitSound.Play();
                 hitSound.transform.parent = null;
+                Destroy(gameObject, destoryTime);
                 Destroy(hitSound.gameObject, 5);
             }
         }

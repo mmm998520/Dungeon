@@ -37,6 +37,13 @@ namespace com.DungeonPad
         public static List<float> timerRecord = new List<float>(), recoveryRecord = new List<float>();
         public float lightRotateTimer, lightRotateTimerStoper;
         public Sprite[] lightSprites;
+
+        public List<Vector3> nextPosBeforeIntoHole = new List<Vector3>();
+        public List<float> nextPosBeforeIntoHoleTimer = new List<float>();
+        public bool IntoHole = false;
+
+        public Animator TutorialAnimator;
+
         private void Start()
         {
             playerJoyVibration = GetComponent<PlayerJoyVibration>();
@@ -60,12 +67,28 @@ namespace com.DungeonPad
                     GamePad.SetVibration((PlayerIndex)i, 0, 0);
                 }
                 GameManager.PlayTime = Time.time;
-                SceneManager.LoadScene("Died");
+                if (SceneManager.GetActiveScene().name != "Tutorial1" && SceneManager.GetActiveScene().name != "Tutorial2" && SceneManager.GetActiveScene().name != "Tutorial3")
+                {
+                    SceneManager.LoadScene("Died");
+                }
+                else
+                {
+                    TutorialAnimator.SetTrigger("Died");
+                    Destroy(GameManager.players.gameObject);
+                    Camera.main.GetComponent<CameraManager>().enabled = false;
+                    Destroy(GameObject.Find("lineAttacks"));
+                }
             }
             else
             {
                 float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
-                HP += (2.5f - dis) * Time.deltaTime * 2;
+                float hpUpRate = (2.5f - dis) * 2;
+                if (hpUpRate > 1 && Players.fightingTimer >= 5)
+                {
+                    hpUpRate *= hpUpRate;
+                    print(hpUpRate);
+                }
+                HP += hpUpRate * Time.deltaTime;
                 if (HP > MaxHP)
                 {
                     HP = MaxHP;
@@ -115,8 +138,28 @@ namespace com.DungeonPad
 
                 transform.GetChild(5).GetChild(0).GetComponent<Light2D>().intensity = transition * brightness;
                 transform.GetChild(6).GetChild(0).GetComponent<Light2D>().intensity = (1 - transition) * brightness;
+                transform.GetChild(7).GetComponent<Light2D>().pointLightOuterRadius = brightness * 4f;
             }
             timer();
+        }
+
+        private void LateUpdate()
+        {
+            if (!IntoHole)
+            {
+                nextPosBeforeIntoHole.Add(transform.position);
+                nextPosBeforeIntoHoleTimer.Add(Time.time);
+            }
+            else
+            {
+                IntoHole = false;
+                Debug.LogWarning("");
+            }
+            while (nextPosBeforeIntoHoleTimer[0] < Time.time - 0.3f)
+            {
+                nextPosBeforeIntoHole.RemoveAt(0);
+                nextPosBeforeIntoHoleTimer.RemoveAt(0);
+            }
         }
 
         void Behavior()
@@ -519,6 +562,18 @@ namespace com.DungeonPad
                 {
                     GameManager.P2SlimeHit++;
                 }
+            }
+            if(collision.collider.GetComponent<MonsterManager>())
+            {
+                Players.fightingTimer = 0;
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.GetComponent<MonsterAttack>())
+            {
+                Players.fightingTimer = 0;
             }
         }
     }
