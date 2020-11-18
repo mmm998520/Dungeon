@@ -82,10 +82,10 @@ namespace com.DungeonPad
             else
             {
                 float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
-                float hpUpRate = (2.5f - dis) * 2;
-                if (hpUpRate > 1 && Players.fightingTimer >= 5)
+                float hpUpRate = (2f - dis) * 2;
+                if (hpUpRate > 0 && Players.fightingTimer >= 5)
                 {
-                    hpUpRate *= hpUpRate;
+                    hpUpRate *= 6;
                     print(hpUpRate);
                 }
                 HP += hpUpRate * Time.deltaTime;
@@ -466,7 +466,7 @@ namespace com.DungeonPad
             }
             if (DashA.magnitude >0.5f)
             {
-                DashA -= (Vector2)Vector3.Normalize(DashA) * 0.5f;
+                DashA -= (Vector2)Vector3.Normalize(DashA) * 0.4f;
             }
             else
             {
@@ -531,7 +531,7 @@ namespace com.DungeonPad
                     HardStraightTimer = 0;
                     DashA = Vector3.zero;
                     HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
-                    HP -= 5;
+                    HP -= 10;
                     playerJoyVibration.hurt();
 
                     //玩家進入無敵狀態

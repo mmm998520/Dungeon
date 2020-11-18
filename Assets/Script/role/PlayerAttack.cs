@@ -20,7 +20,7 @@ namespace com.DungeonPad
                     if (collider.GetComponent<MonsterManager>().Armor <= 0)
                     {
                         Debug.LogWarning("hitTimes");
-                        PlayerManager.HP += 5;
+                        PlayerManager.HP += 25;
                         collider.GetComponent<MonsterManager>().beforeDied();
                         Destroy(collider.gameObject);
                     }
