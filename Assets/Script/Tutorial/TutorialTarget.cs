@@ -18,7 +18,7 @@ namespace com.DungeonPad
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            GameManager.tutorialManager.NextTarget(transform);
+            GameManager.tutorialManager.NextTarget(gameObject);
         }
     }
 }
