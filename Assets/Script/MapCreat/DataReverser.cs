@@ -40,7 +40,7 @@ namespace com.DungeonPad
                     for (int j = 0; j < 8; j++)
                     {
                         name = layers + "_" + passwayType + "_" + level + "_" + function + "_" + num;
-                        writeFile("D:/yumi/Dungeon/Assets/Resources/RoomDatas/" + layers + "/" + passwayType + "/" + level + "/" + function, name, arrayToString(newArray));
+                        writeFile(Application.dataPath +  "/Resources/RoomDatas/" + layers + "/" + passwayType + "/" + level + "/" + function, name, arrayToString(newArray));
                         newArray = Rotate(newArray);
                         if (j == 3)
                         {
