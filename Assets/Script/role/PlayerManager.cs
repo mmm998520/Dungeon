@@ -348,8 +348,8 @@ namespace com.DungeonPad
                             case "WASD":
                                 if (Input.GetKeyDown(KeyCode.J))
                                 {
-                                    DashA.x = Input.GetAxis("HorizontalWASD");
-                                    DashA.y = Input.GetAxis("VerticalWASD");
+                                    DashA.x = Input.GetAxisRaw("HorizontalWASD");
+                                    DashA.y = Input.GetAxisRaw("VerticalWASD");
                                     DashA = Vector3.Normalize(DashA) * 11;
                                     if (DashA.magnitude > 10)
                                     {
@@ -360,8 +360,8 @@ namespace com.DungeonPad
                             case "ArrowKey":
                                 if (Input.GetKeyDown(KeyCode.Keypad1))
                                 {
-                                    DashA.x = Input.GetAxis("HorizontalArrowKey");
-                                    DashA.y = Input.GetAxis("VerticalArrowKey");
+                                    DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
+                                    DashA.y = Input.GetAxisRaw("VerticalArrowKey");
                                     DashA = Vector3.Normalize(DashA) * 11;
                                     if (DashA.magnitude > 10)
                                     {
@@ -379,8 +379,8 @@ namespace com.DungeonPad
                             case "8":
                                 if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy))))
                                 {
-                                    DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy);
-                                    DashA.y = -Input.GetAxis("VerticalJoy" + SelectRole.p1Joy);
+                                    DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectRole.p1Joy);
+                                    DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectRole.p1Joy);
                                     DashA = Vector3.Normalize(DashA) * 11;
                                     if (DashA.magnitude > 10)
                                     {
@@ -398,8 +398,8 @@ namespace com.DungeonPad
                             case "WASD":
                                 if (Input.GetKeyDown(KeyCode.J))
                                 {
-                                    DashA.x = Input.GetAxis("HorizontalWASD");
-                                    DashA.y = Input.GetAxis("VerticalWASD");
+                                    DashA.x = Input.GetAxisRaw("HorizontalWASD");
+                                    DashA.y = Input.GetAxisRaw("VerticalWASD");
                                     DashA = Vector3.Normalize(DashA) * 11;
                                     if (DashA.magnitude > 10)
                                     {
@@ -410,8 +410,8 @@ namespace com.DungeonPad
                             case "ArrowKey":
                                 if (Input.GetKeyDown(KeyCode.Keypad1))
                                 {
-                                    DashA.x = Input.GetAxis("HorizontalArrowKey");
-                                    DashA.y = Input.GetAxis("VerticalArrowKey");
+                                    DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
+                                    DashA.y = Input.GetAxisRaw("VerticalArrowKey");
                                     DashA = Vector3.Normalize(DashA) * 11;
                                     if (DashA.magnitude > 10)
                                     {
@@ -429,8 +429,8 @@ namespace com.DungeonPad
                             case "8":
                                 if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy))))
                                 {
-                                    DashA.x = Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy);
-                                    DashA.y = -Input.GetAxis("VerticalJoy" + SelectRole.p2Joy);
+                                    DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectRole.p2Joy);
+                                    DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectRole.p2Joy);
                                     DashA = Vector3.Normalize(DashA) * 11;
                                     if (DashA.magnitude > 10)
                                     {
