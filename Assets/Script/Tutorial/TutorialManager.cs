@@ -28,7 +28,7 @@ namespace com.DungeonPad
 
         public void NextTarget(GameObject target)
         {
-            if (Time.time - NextTargetTime > 0.1f)
+            if (Time.time - NextTargetTime > 0.3f)
             {
                 Destroy(target);
                 NextTargetTime = Time.deltaTime;
