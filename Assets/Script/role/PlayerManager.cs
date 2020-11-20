@@ -10,7 +10,7 @@ namespace com.DungeonPad
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 40, HP = 40;
-        public static bool lockedHP = true;
+        public static bool lockedHP = false;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -19,7 +19,6 @@ namespace com.DungeonPad
         public bool locked = true, flash = false;
         public float beganTouchedTimer, flashTimer, flashTimerStoper;
         public float speed = 3;
-        Transform hp;
         public List<Vector3> startRayPoss;
 
         public bool p1;
@@ -44,11 +43,12 @@ namespace com.DungeonPad
 
         public Animator TutorialAnimator;
 
+        public GameObject reStatUI, fightingStatUI, confusionStatUI, stickStatUI;
+
         private void Start()
         {
             playerJoyVibration = GetComponent<PlayerJoyVibration>();
             lastPos = transform.position;
-            hp = transform.GetChild(0);
             lastUpdateHp = HP;
         }
 
@@ -58,7 +58,6 @@ namespace com.DungeonPad
             {
                 HP = 40;
             }
-            hp.localScale = new Vector3(HP / MaxHP, hp.localScale.y, hp.localScale.z);
             Behavior();
             if (HP <= 0)
             {
@@ -133,7 +132,10 @@ namespace com.DungeonPad
                         brightness *= 1f;
                     }
                 }
-                transform.GetChild(4).gameObject.SetActive(StickTimer < 10);
+                reStatUI.gameObject.SetActive(Players.reTimer < 1);
+                fightingStatUI.gameObject.SetActive(Players.fightingTimer < 5);
+                confusionStatUI.gameObject.SetActive(ConfusionTimer < 10);
+                stickStatUI.gameObject.SetActive(StickTimer < 10);
 
                 transform.GetChild(5).GetChild(0).GetComponent<Light2D>().intensity = transition * brightness;
                 transform.GetChild(6).GetChild(0).GetComponent<Light2D>().intensity = (1 - transition) * brightness;

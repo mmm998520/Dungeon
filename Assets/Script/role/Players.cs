@@ -13,9 +13,7 @@ namespace com.DungeonPad
         Transform lineAttacks;
         float[] lockedTimer;
         public bool draw = false;
-        public float MP;
-        public Transform ShowMP;
-        public static float fightingTimer = 10;
+        public static float fightingTimer = 10, reTimer = 10;
 
         private void Awake()
         {
@@ -27,8 +25,7 @@ namespace com.DungeonPad
         void Update()
         {
             fightingTimer += Time.deltaTime;
-            MP += Time.deltaTime;
-            MP = Mathf.Clamp(MP, 0, 30);
+            reTimer += Time.deltaTime;
             if (draw)
             {
                 drawLine();
@@ -79,15 +76,6 @@ namespace com.DungeonPad
                 Instantiate(attack, center + (dir * k), Quaternion.Euler(0, 0, angle), lineAttacks);
                 Instantiate(attack, center - (dir * k), Quaternion.Euler(0, 0, angle), lineAttacks);
                 k++;
-            }
-        }
-
-        public void LineButton()
-        {
-            if (MP >= 10)
-            {
-                MP -= 10;
-                StartCoroutine("LineButtonWait");
             }
         }
 
