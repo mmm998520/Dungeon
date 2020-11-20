@@ -131,4 +131,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: setString
+    data: "\u5149\u6703\u96A8\u4F60\u5011\u805A\u96C6\u800C\u64F4\u5927\u3001\u5206\u958B\u800C\u7E2E\u5C0F"
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
