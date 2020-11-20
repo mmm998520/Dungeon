@@ -82,11 +82,10 @@ namespace com.DungeonPad
             else
             {
                 float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
-                float hpUpRate = (2.5f - dis) * 2;
+                float hpUpRate = (2f - dis) * 2;
                 if (hpUpRate > 0 && Players.fightingTimer >= 5)
                 {
-                    hpUpRate *= 4;
-                    print(hpUpRate);
+                    hpUpRate *= 6;
                 }
                 HP += hpUpRate * Time.deltaTime;
                 if (HP > MaxHP)
@@ -472,7 +471,7 @@ namespace com.DungeonPad
             }
             if (DashA.magnitude >0.5f)
             {
-                DashA -= (Vector2)Vector3.Normalize(DashA) * 0.5f;
+                DashA -= (Vector2)Vector3.Normalize(DashA) * 0.4f;
             }
             else
             {

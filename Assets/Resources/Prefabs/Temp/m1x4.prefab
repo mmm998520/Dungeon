@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   created: {fileID: 6479620777946499375, guid: 39e244b0efd12714686013cd90825bea, type: 3}
   monster: 1
-  num: 4
+  num: 2
 --- !u!1 &5266080859433954434
 GameObject:
   m_ObjectHideFlags: 0

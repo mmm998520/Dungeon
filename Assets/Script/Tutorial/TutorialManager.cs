@@ -7,42 +7,48 @@ namespace com.DungeonPad
 {
     public class TutorialManager : MonoBehaviour
     {
-        public Transform[] targetPoses;
-        public int targetPosesNum;
+        static int getTargetNum;
+        static float NextTargetTime;
         public string nextSceneName;
-        float NextTargetTimer;
+        public GameObject[] others;
 
         void Start()
         {
-
+            getTargetNum = 0;
+            NextTargetTime = 0;
         }
 
         void Update()
         {
-            NextTargetTimer += Time.deltaTime;
             if (GameManager.monsters.childCount <= 0 &&SceneManager.GetActiveScene().name == "Tutorial3")
             {
                 SceneManager.LoadScene(nextSceneName);
             }
         }
 
-        public void NextTarget(Transform target)
+        public void NextTarget(GameObject target)
         {
-            if (NextTargetTimer > 0.3f)
+            if (Time.time - NextTargetTime > 0.3f)
             {
-                NextTargetTimer = 0;
-                if (++targetPosesNum < targetPoses.Length)
-                {
-                    target.position = targetPoses[targetPosesNum].position;
-                }
-                else
-                {
-                    Destroy(target.gameObject);
-                }
-                if (targetPosesNum == 4)
+                Destroy(target);
+                NextTargetTime = Time.deltaTime;
+                getTargetNum++;
+                if (getTargetNum == 4)
                 {
                     SceneManager.LoadScene(nextSceneName);
                 }
+                if(getTargetNum == 2)
+                {
+                    ShowOther();
+                }
+            }
+        }
+
+        public void ShowOther()
+        {
+            for(int i = 0; i < others.Length; i++)
+            {
+                others[i].active = true;
             }
         }
     }
