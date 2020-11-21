@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 7398602966395022114}
   - component: {fileID: 8271159625319628428}
   - component: {fileID: -7895795987471299328}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DoorTwoD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

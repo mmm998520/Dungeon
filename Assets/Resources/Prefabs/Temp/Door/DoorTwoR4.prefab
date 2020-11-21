@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 8069791729033198967}
   - component: {fileID: 4776498117345335070}
   - component: {fileID: 249178442085655304}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DoorTwoR4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

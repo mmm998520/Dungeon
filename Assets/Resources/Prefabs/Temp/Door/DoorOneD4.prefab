@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 2958588621472564470}
   - component: {fileID: 2958588621472564471}
   - component: {fileID: -2258566418796928177}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DoorOneD4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

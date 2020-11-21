@@ -11,7 +11,6 @@ namespace com.DungeonPad
         float dis, unitDis = 0.18f, angle;
         public GameObject preAttack, attack ,attackCollider;
         Transform lineAttacks;
-        float[] lockedTimer;
         public bool draw = false;
         public static float fightingTimer = 10, reTimer = 10;
         public static Color32 spriteColor;
@@ -20,7 +19,6 @@ namespace com.DungeonPad
         {
             playerChildCount = transform.childCount;
             lineAttacks = new GameObject("lineAttacks").transform;
-            lockedTimer = new float[playerChildCount];
             draw = true;
         }
         void Update()

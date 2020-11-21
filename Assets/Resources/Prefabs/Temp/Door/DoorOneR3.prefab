@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2456547953570187043}
   - component: {fileID: 7523710877782674388}
   - component: {fileID: 6770901625060331355}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DoorOneR3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

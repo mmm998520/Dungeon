@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 5047293363128954071}
   - component: {fileID: 6109246649517222560}
   - component: {fileID: -2185138578615403702}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DoorOneU2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

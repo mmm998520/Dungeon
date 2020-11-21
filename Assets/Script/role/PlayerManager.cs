@@ -45,6 +45,7 @@ namespace com.DungeonPad
 
         public GameObject reStatUI, fightingStatUI, confusionStatUI, stickStatUI;
 
+        public GameObject Bullet;
         private void Start()
         {
             playerJoyVibration = GetComponent<PlayerJoyVibration>();
@@ -458,6 +459,58 @@ namespace com.DungeonPad
 
             GetComponent<Rigidbody2D>().velocity = v;
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent <ParticleSystem>().shape.arc/2+180);
+
+            #region//子彈
+
+
+            if (p1)
+            {
+                switch (SelectRole.p1Joy)
+                {
+                    case "WASD":
+                        break;
+                    case "ArrowKey":
+                        break;
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "8":
+                        if(Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy) + 5)))
+                        {
+                            shootBullet();
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                switch (SelectRole.p2Joy)
+                {
+                    case "WASD":
+                        break;
+                    case "ArrowKey":
+                        break;
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "8":
+                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy) + 5)))
+                        {
+                            shootBullet();
+                        }
+                        break;
+                }
+            }
+            //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectRole.p1Joy + "R");
+            #endregion
         }
 
         private void FixedUpdate()
@@ -527,6 +580,45 @@ namespace com.DungeonPad
                 total += counted[i];
             }
             return total / counted.Count;
+        }
+
+        public Transform minDisMonster()
+        {
+            Vector3 myPos = transform.position;
+            Transform monsters = GameManager.monsters;
+            float minDis = 20;
+            Transform minDisMonster = null;
+            for (int i = 0; i < monsters.childCount; i++)
+            {
+                float dis = Vector3.Distance(myPos, monsters.GetChild(i).position);
+                if (minDis > dis)
+                {
+                    RaycastHit2D hit = Physics2D.Raycast(myPos, monsters.GetChild(i).position - myPos, dis, 1 << 12);
+                    if (!hit)
+                    {
+                        minDisMonster = monsters.GetChild(i);
+                        minDis = dis;
+                    }
+                }
+            }
+            return minDisMonster;
+        }
+
+        void shootBullet()
+        {
+            Transform minDisMonster = this.minDisMonster();
+            float angle;
+            if (minDisMonster != null)
+            {
+                angle = Vector3.SignedAngle(transform.right, minDisMonster.position - transform.position, Vector3.forward);
+                Debug.LogFormat(minDisMonster.gameObject.name);
+                Debug.Log(angle);
+            }
+            else
+            {
+                angle = 0;
+            }
+            Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, angle));
         }
 
         private void OnCollisionStay2D(Collision2D collision)

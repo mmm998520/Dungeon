@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 402661573979431338}
   - component: {fileID: 1653018026008298511}
   - component: {fileID: 7551309524984915392}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DoorOneU4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

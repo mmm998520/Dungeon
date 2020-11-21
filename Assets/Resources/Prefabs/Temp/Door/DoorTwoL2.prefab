@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 6211110836410799441}
   - component: {fileID: 5644858328474509416}
   - component: {fileID: 8914937881552629128}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DoorTwoL2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 3091128013798409385}
   - component: {fileID: 7796100841476212070}
   - component: {fileID: -7429397989219073770}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DoorOneL4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
