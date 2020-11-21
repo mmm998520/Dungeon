@@ -19,7 +19,7 @@ namespace com.DungeonPad
                 Transform player = GameManager.players.GetChild(i);
                 PlayerManager playerManager = player.GetComponent<PlayerManager>();
                 float disX = Mathf.Abs(player.position.x - pos.x), disY = Mathf.Abs(player.position.y - pos.y);
-                if(disX < 0.5f && disY < 0.5f && playerManager.DashTimer > 0.4f)
+                if(disX < 0.5f / 3f && disY < 0.5f / 3f && playerManager.DashTimer > 0.3f)
                 {
                     player.position = playerManager.nextPosBeforeIntoHole[0];
                     playerManager.v = Vector3.zero;
@@ -28,7 +28,7 @@ namespace com.DungeonPad
                     playerManager.HardStraightTimer = -1;
                     PlayerManager.HP -= 30;
                 }
-                if (!playerManager.IntoHole && disX < 0.5f && disY < 0.5f)
+                if (!playerManager.IntoHole && disX < 0.5f / 3f && disY < 0.5f / 3f)
                 {
                     playerManager.IntoHole = true;
                 }
