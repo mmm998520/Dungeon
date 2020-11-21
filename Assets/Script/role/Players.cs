@@ -14,6 +14,7 @@ namespace com.DungeonPad
         float[] lockedTimer;
         public bool draw = false;
         public static float fightingTimer = 10, reTimer = 10;
+        public static Color32 spriteColor;
 
         private void Awake()
         {
@@ -68,6 +69,7 @@ namespace com.DungeonPad
             dis = Vector3.Distance(p1, p2);
             dir = (p2 - p1).normalized * unitDis;
             angle = Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
+            spriteColor = new Color32((byte)(Mathf.Clamp(dis,0,5) * 44), 219, 0, 114);
             Transform collider = Instantiate(attackCollider, center, Quaternion.Euler(0, 0, angle), lineAttacks).transform;
             collider.localScale = new Vector3(dis, 0.1f, 1);
             Instantiate(attack, center, Quaternion.Euler(0, 0, angle), lineAttacks);
