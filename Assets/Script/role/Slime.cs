@@ -69,6 +69,7 @@ namespace com.DungeonPad
 
         public override void beforeDied()
         {
+            base.beforeDied();
             if (!Blew)
             {
                 GameManager.KillSpider++;

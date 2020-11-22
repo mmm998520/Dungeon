@@ -575,6 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRoomRow: 0
   startRoomCol: 0
+  addCanGoByHandList: []
   endRow: 
   endCol: 
   nextPos: 
@@ -598,6 +599,8 @@ MonoBehaviour:
   repTimes: 1
   repTimer: 1
   rigidbody: {fileID: 5652301302069140118}
+  Ammunition: {fileID: 1935790135895106840, guid: 684309a045786d1478cb3d14904dd43d,
+    type: 3}
   spiderBehavior: 0
   SpriteAnimator: {fileID: 8366934025386502024}
 --- !u!95 &4203273497549478462

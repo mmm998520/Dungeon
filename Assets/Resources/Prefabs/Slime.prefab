@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRoomRow: 0
   startRoomCol: 0
+  addCanGoByHandList: []
   endRow: 
   endCol: 
   nextPos: 
@@ -161,6 +162,8 @@ MonoBehaviour:
   repTimes: 2
   repTimer: 0.3
   rigidbody: {fileID: 1061855195541407038}
+  Ammunition: {fileID: 1935790135895106840, guid: 684309a045786d1478cb3d14904dd43d,
+    type: 3}
   slimeBehavior: 0
   SpriteAnimator: {fileID: 559060358022015563}
 --- !u!95 &2661153825494566779

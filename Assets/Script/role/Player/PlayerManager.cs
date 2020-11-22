@@ -45,6 +45,7 @@ namespace com.DungeonPad
 
         public GameObject reStatUI, fightingStatUI, confusionStatUI, stickStatUI;
 
+        public int MaxBulletNum = 5, BulletNum = 5;
         public GameObject Bullet;
         private void Start()
         {
@@ -462,53 +463,56 @@ namespace com.DungeonPad
 
             #region//子彈
 
+            if (BulletNum > 0)
+            {
+                if (p1)
+                {
+                    switch (SelectRole.p1Joy)
+                    {
+                        case "WASD":
+                            break;
+                        case "ArrowKey":
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy) + 5)))
+                            {
+                                shootBullet();
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (SelectRole.p2Joy)
+                    {
+                        case "WASD":
+                            break;
+                        case "ArrowKey":
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy) + 5)))
+                            {
+                                shootBullet();
+                            }
+                            break;
+                    }
+                }
+            }
 
-            if (p1)
-            {
-                switch (SelectRole.p1Joy)
-                {
-                    case "WASD":
-                        break;
-                    case "ArrowKey":
-                        break;
-                    case "1":
-                    case "2":
-                    case "3":
-                    case "4":
-                    case "5":
-                    case "6":
-                    case "7":
-                    case "8":
-                        if(Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy) + 5)))
-                        {
-                            shootBullet();
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                switch (SelectRole.p2Joy)
-                {
-                    case "WASD":
-                        break;
-                    case "ArrowKey":
-                        break;
-                    case "1":
-                    case "2":
-                    case "3":
-                    case "4":
-                    case "5":
-                    case "6":
-                    case "7":
-                    case "8":
-                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy) + 5)))
-                        {
-                            shootBullet();
-                        }
-                        break;
-                }
-            }
             //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectRole.p1Joy + "R");
             #endregion
         }
@@ -619,6 +623,7 @@ namespace com.DungeonPad
                 angle = 0;
             }
             Instantiate(Bullet, transform.position, Quaternion.Euler(0, 0, angle));
+            BulletNum--;
         }
 
         private void OnCollisionStay2D(Collision2D collision)
@@ -673,6 +678,10 @@ namespace com.DungeonPad
             if (collider.GetComponent<MonsterAttack>())
             {
                 Players.fightingTimer = 0;
+            }
+            if (collider.GetComponent<Ammunition>())
+            {
+
             }
         }
     }

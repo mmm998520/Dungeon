@@ -33,6 +33,7 @@ namespace com.DungeonPad
         protected float StuckTimer;
         protected Vector2 StuckPos = Vector2.zero;
 
+        public GameObject Ammunition;
         /// <summary> 獲取最近玩家 </summary>
         public Transform MinDisPlayer()
         {
@@ -176,7 +177,10 @@ namespace com.DungeonPad
 
         public virtual void beforeDied()
         {
-
+            if (Random.Range(0, 3) < 1)
+            {
+                Instantiate(Ammunition, transform.position, Quaternion.identity);
+            }
         }
     }
 }
