@@ -52,9 +52,11 @@ namespace com.DungeonPad
             playerJoyVibration = GetComponent<PlayerJoyVibration>();
             lastPos = transform.position;
             lastUpdateHp = HP;
-        }
+            nextPosBeforeIntoHole = new List<Vector3>();
+            nextPosBeforeIntoHoleTimer = new List<float>();
+    }
 
-        void Update()
+    void Update()
         {
             if (lockedHP)
             {
