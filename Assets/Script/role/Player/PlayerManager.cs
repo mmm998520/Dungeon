@@ -166,7 +166,7 @@ namespace com.DungeonPad
                 IntoHole = false;
                 Debug.LogWarning("");
             }
-            while (nextPosBeforeIntoHoleTimer[0] < Time.time - 0.3f)
+            while (nextPosBeforeIntoHoleTimer[0] < Time.time - 0.3f && nextPosBeforeIntoHoleTimer.Count > 0)
             {
                 nextPosBeforeIntoHole.RemoveAt(0);
                 nextPosBeforeIntoHoleTimer.RemoveAt(0);

@@ -266,12 +266,11 @@ namespace com.DungeonPad
                             break;
                         #endregion
                         #region//翻轉洞(岸
+                        case "d上":
+                            newArray[i, j] = "d下";
                             break;
-                        case "d右":
-                            newArray[i, j] = "d左";
-                            break;
-                        case "d左":
-                            newArray[i, j] = "d右";
+                        case "d下":
+                            newArray[i, j] = "d上";
                             break;
                             #endregion
                     }
