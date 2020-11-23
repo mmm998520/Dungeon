@@ -9,9 +9,10 @@ namespace com.DungeonPad
     public class SelectRole : MonoBehaviour
     {
         public string NextScene;
-        public static string p1Joy, p2Joy;
+        public static string p1Joy = "", p2Joy = "";
         public static PlayerIndex? P1PlayerIndex = null, P2PlayerIndex = null;
         public bool selectP1 = true;
+        public bool goNext = true;
 
         void Update()
         {
@@ -44,7 +45,7 @@ namespace com.DungeonPad
                                 {
                                     P1PlayerIndex = (PlayerIndex)j;
                                     print(i + "," + P1PlayerIndex);
-                                    StartCoroutine("waitForVP1");
+                                    StartCoroutine(waitForVP1());
                                     break;
                                 }
                                 print(j);
@@ -106,8 +107,11 @@ namespace com.DungeonPad
                                 {
                                     P2PlayerIndex = (PlayerIndex)j;
                                     print(i + "," + P2PlayerIndex);
-                                    StartCoroutine("waitForVP2");
-                                    StartCoroutine("waitForLoadScene");
+                                    StartCoroutine(waitForVP2());
+                                    if (goNext)
+                                    {
+                                        StartCoroutine(waitForLoadScene());
+                                    }
                                     break;
                                 }
                             }

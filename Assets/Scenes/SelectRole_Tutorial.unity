@@ -229,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NextScene: Tutorial1
   selectP1: 1
+  goNext: 1
 --- !u!1 &959969930
 GameObject:
   m_ObjectHideFlags: 0
