@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edf42f0ff0f9084596a2c5a66d2e079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ATK: 10
+  ATK: 1
   continued: 0
   MonsterType: Spider
 --- !u!114 &2888608939692655006

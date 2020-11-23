@@ -87,7 +87,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TutorialText_First
+  m_Name: TutorialText_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -100,7 +100,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 15aec9f708be6a543b2c1d3ec22119a1, type: 2}
+  m_Motion: {fileID: 7400000, guid: 76eb8445403831845b21eb089616f563, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

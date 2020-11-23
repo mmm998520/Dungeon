@@ -10,7 +10,7 @@ namespace com.DungeonPad
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 40, HP = 40;
-        public static bool lockedHP = true;
+        public static bool lockedHP = false;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -637,7 +637,7 @@ namespace com.DungeonPad
                     HardStraightTimer = 0;
                     DashA = Vector3.zero;
                     HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
-                    HP -= 10;
+                    HP -= 1;
                     playerJoyVibration.hurt();
 
                     //玩家進入無敵狀態

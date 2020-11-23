@@ -26,7 +26,7 @@ namespace com.DungeonPad
                     playerManager.HardStraightA = Vector3.zero;
                     playerManager.DashA = Vector3.zero;
                     playerManager.HardStraightTimer = -1;
-                    PlayerManager.HP -= 30;
+                    PlayerManager.HP -= 10;
                 }
                 if (!playerManager.IntoHole && disX < 0.5f / 3f && disY < 0.5f / 3f)
                 {
