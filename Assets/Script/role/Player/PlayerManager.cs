@@ -114,15 +114,19 @@ namespace com.DungeonPad
                 }
                 else if (SceneName == "Tutorial1" && SceneName == "Tutorial2" && SceneName == "Tutorial3")
                 {
+                    Debug.LogError(0);
+                    transform.parent.GetComponent<TutorialManager2>().reset();
                     for (int i = 0; i < 4; i++)
                     {
                         GamePad.SetVibration((PlayerIndex)i, 0, 0);
                     }
+                    /*
                     GameManager.PlayTime = Time.time;
                     TutorialAnimator.SetTrigger("Died");
                     Destroy(GameManager.players.gameObject);
                     Camera.main.GetComponent<CameraManager>().enabled = false;
                     Destroy(GameObject.Find("lineAttacks"));
+                    */
                 }
                 else
                 {

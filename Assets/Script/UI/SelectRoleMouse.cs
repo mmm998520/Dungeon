@@ -8,7 +8,7 @@ namespace com.DungeonPad
     public class SelectRoleMouse : MonoBehaviour
     {
         public bool p1;
-        float mouseSpeed = 5000;
+        float mouseSpeed = 3000;
         RectTransform rectTransform;
         public bool canUse;
         public SelectMouse selectMouse;

@@ -20,7 +20,7 @@ namespace com.DungeonPad
         void Start()
         {
             ReCD();
-            if (SceneManager.GetActiveScene().name != "Tutorial3")
+            if (SceneManager.GetActiveScene().name != "Tutorial1")
             {
                 startRoomRow = Mathf.RoundToInt(transform.position.x) / GameManager.mazeCreater.objectCountRowNum;
                 startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
@@ -34,7 +34,7 @@ namespace com.DungeonPad
         {
             if(spiderBehavior == SpiderBehavior.ramdomMove)
             {
-                if(SceneManager.GetActiveScene().name != "Tutorial3")
+                if(SceneManager.GetActiveScene().name != "Tutorial1")
                 {
                     Move();
                     Stuck(2, 1);

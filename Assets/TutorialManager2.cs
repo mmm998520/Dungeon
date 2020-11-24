@@ -1,0 +1,302 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace com.DungeonPad
+{
+    public class TutorialManager2 : MonoBehaviour
+    {
+        public enum TutorialStat
+        {
+            story,
+            p1Move,
+            p1MoveCanPress,
+            p2Move,
+            p2MoveCanPress,
+            dumbMonster,
+            dumbMonsterCanPress,
+            fight,
+            slimeAndBubble,
+            presseB,
+            hole
+        }
+        public TutorialStat stat;
+        public enum PressedA
+        {
+            Non,
+            P1,
+            P2,
+            P1P2
+        }
+        public PressedA pressedA;
+        float statTimer;
+        PlayerManager p1, p2;
+        public Text TutorialText, P1Talk, P2Talk;
+
+        void Start()
+        {
+            if (transform.GetChild(0).GetComponent<PlayerManager>().p1)
+            {
+                p1 = transform.GetChild(0).GetComponent<PlayerManager>();
+                p2 = transform.GetChild(1).GetComponent<PlayerManager>();
+            }
+            else
+            {
+                p1 = transform.GetChild(1).GetComponent<PlayerManager>();
+                p2 = transform.GetChild(0).GetComponent<PlayerManager>();
+            }
+            TutorialText.text = "僅存的光之元素啊，\n\r同心協力前往地城拯救被巨龍抓走的同胞吧";
+            P1Talk.text = "是";
+            P2Talk.text = "是";
+            reset();
+        }
+
+        void Update()
+        {
+            switch (stat)
+            {
+                case TutorialStat.story:
+                    p1.playerStat = PlayerManager.PlayerStat.CantMove;
+                    p2.playerStat = PlayerManager.PlayerStat.CantMove;
+                    p1PressA();
+                    p2PressA();
+                    if (pressedA == PressedA.P1P2)
+                    {
+                        stat = TutorialStat.p1Move;
+                        p1.playerStat = PlayerManager.PlayerStat.Move;
+                        p2.playerStat = PlayerManager.PlayerStat.CantMove;
+                        TutorialText.text = "光代表你們共同的生命\n\r請P1移動看看\n\r觀察距離與光的關係";
+                        P1Talk.text = "";
+                        P2Talk.text = "";
+                        reset();
+                    }
+                    break;
+                case TutorialStat.p1Move:
+                    if ((statTimer += Time.deltaTime) > 10)
+                    {
+                        stat = TutorialStat.p1MoveCanPress;
+                        statTimer = 0;
+                        TutorialText.text = "光代表你們共同的生命\n\r請P1移動看看\n\r觀察距離與光的關係";
+                        P1Talk.text = "距離近能回復光，距離遠會耗損光";
+                        P2Talk.text = "";
+                        reset();
+                    }
+                    break;
+                case TutorialStat.p1MoveCanPress:
+                    p1PressA();
+                    if (pressedA == PressedA.P1)
+                    {
+                        stat = TutorialStat.p2Move;
+                        p1.playerStat = PlayerManager.PlayerStat.CantMove;
+                        p2.playerStat = PlayerManager.PlayerStat.Move;
+                        TutorialText.text = "光代表你們共同的生命\n\r請P2移動看看\n\r觀察距離與光的關係";
+                        P1Talk.text = "";
+                        P2Talk.text = "";
+                        reset();
+                    }
+                    break;
+                case TutorialStat.p2Move:
+                    if ((statTimer += Time.deltaTime) > 10)
+                    {
+                        stat = TutorialStat.p2MoveCanPress;
+                        statTimer = 0;
+                        TutorialText.text = "光代表你們共同的生命\n\r請P2移動看看\n\r觀察距離與光的關係";
+                        P1Talk.text = "";
+                        P2Talk.text = "要是光完全消失，我們將一同死亡";
+                        reset();
+                    }
+                    break;
+                case TutorialStat.p2MoveCanPress:
+                    p2PressA();
+                    if (pressedA == PressedA.P2)
+                    {
+                        stat = TutorialStat.dumbMonster;
+                        p1.playerStat = PlayerManager.PlayerStat.CantMove;
+                        p2.playerStat = PlayerManager.PlayerStat.CantMove;
+                        TutorialText.text = "地城裡有許多怪物\n\r但你們之間的能量線能消滅牠們\n\r消滅怪物甚至能快速回復光";
+                        P1Talk.text = "";
+                        P2Talk.text = "";
+                        reset();
+                    }
+                    break;
+                case TutorialStat.dumbMonster:
+                    if ((statTimer += Time.deltaTime) > 6)
+                    {
+                        stat = TutorialStat.dumbMonsterCanPress;
+                        statTimer = 0;
+                        TutorialText.text = "地城裡有許多怪物\n\r但你們之間的能量線能消滅牠們\n\r消滅怪物甚至能快速回復光";
+                        P1Talk.text = "好喔";
+                        P2Talk.text = "好喔";
+                        reset();
+                    }
+                    break;
+                case TutorialStat.dumbMonsterCanPress:
+                    p1PressA();
+                    p2PressA();
+                    if (pressedA == PressedA.P1P2)
+                    {
+                        stat = TutorialStat.fight;
+                        p1.playerStat = PlayerManager.PlayerStat.Move;
+                        p2.playerStat = PlayerManager.PlayerStat.Move;
+                        for(int i=0;i< GameManager.monsters.childCount; i++)
+                        {
+                            GameManager.monsters.GetChild(i).gameObject.SetActive(true);
+                        }
+                        TutorialText.text = "小心，直接碰撞蜘蛛與蛛絲將耗損你們的光";
+                        P1Talk.text = "";
+                        P2Talk.text = "";
+                        reset();
+                    }
+                    break;
+                case TutorialStat.fight:
+                    if (GameManager.monsters.childCount == 0)
+                    {
+                        stat = TutorialStat.slimeAndBubble;
+                        p1.playerStat = PlayerManager.PlayerStat.CantMove;
+                        p2.playerStat = PlayerManager.PlayerStat.CantMove;
+                        TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
+                        P1Talk.text = "";
+                        P2Talk.text = "";
+                        reset();
+                    }
+                    break;
+                case TutorialStat.slimeAndBubble:
+                    if ((statTimer += Time.deltaTime) > 5)
+                    {
+                        stat = TutorialStat.presseB;
+                        statTimer = 0;
+                        TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
+                        P1Talk.text = "";
+                        P2Talk.text = "";
+                        reset();
+                    }
+                    break;
+                case TutorialStat.presseB:
+                    if (p1.ConfusionTimer > 10 && p2.ConfusionTimer > 10)
+                    {
+                        stat = TutorialStat.hole;
+                        TutorialText.text = "最後一步，      +      衝刺\n\r這能幫助你們度過深淵";
+                        P1Talk.text = "";
+                        P2Talk.text = "";
+                        reset();
+                    }
+                    break;
+            }
+        }
+
+        void p1PressA()
+        {
+            switch (SelectMouse.p1Joy)
+            {
+                case "WASD":
+                    if (Input.GetKeyDown(KeyCode.J))
+                    {
+                        if (pressedA == PressedA.Non)
+                        {
+                            pressedA = PressedA.P1;
+                        }
+                        if (pressedA == PressedA.P2)
+                        {
+                            pressedA = PressedA.P1P2;
+                        }
+                    }
+                    break;
+                case "ArrowKey":
+                    if (Input.GetKeyDown(KeyCode.Keypad1))
+                    {
+                        if (pressedA == PressedA.Non)
+                        {
+                            pressedA = PressedA.P1;
+                        }
+                        if (pressedA == PressedA.P2)
+                        {
+                            pressedA = PressedA.P1P2;
+                        }
+                    }
+                    break;
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                    if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy))))
+                    {
+                        if (pressedA == PressedA.Non)
+                        {
+                            pressedA = PressedA.P1;
+                        }
+                        if (pressedA == PressedA.P2)
+                        {
+                            pressedA = PressedA.P1P2;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        void p2PressA()
+        {
+            switch (SelectMouse.p2Joy)
+            {
+                case "WASD":
+                    if (Input.GetKeyDown(KeyCode.J))
+                    {
+                        if (pressedA == PressedA.Non)
+                        {
+                            pressedA = PressedA.P2;
+                        }
+                        if (pressedA == PressedA.P1)
+                        {
+                            pressedA = PressedA.P1P2;
+                        }
+                    }
+                    break;
+                case "ArrowKey":
+                    if (Input.GetKeyDown(KeyCode.Keypad1))
+                    {
+                        if (pressedA == PressedA.Non)
+                        {
+                            pressedA = PressedA.P2;
+                        }
+                        if (pressedA == PressedA.P1)
+                        {
+                            pressedA = PressedA.P1P2;
+                        }
+                    }
+                    break;
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                    if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy))))
+                    {
+                        if (pressedA == PressedA.Non)
+                        {
+                            pressedA = PressedA.P2;
+                        }
+                        if (pressedA == PressedA.P1)
+                        {
+                            pressedA = PressedA.P1P2;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        public void reset()
+        {
+            pressedA = PressedA.Non;
+            p1.transform.position = new Vector3(9.3f, 1.6f, 9.6f);
+            p2.transform.position = new Vector3(11.1f, 1.6f, 9.6f);
+            PlayerManager.HP = 40;
+        }
+    }
+}
