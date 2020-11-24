@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 4914514847708437255}
   - component: {fileID: 1278798198095985787}
   m_Layer: 0
-  m_Name: p2
+  m_Name: BlueStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -47,8 +47,42 @@ namespace com.DungeonPad
 
         public int MaxBulletNum = 5, BulletNum = 5;
         public GameObject Bullet;
+
+        public enum PlayerStat
+        {
+            UnSelect,
+            CantMove,
+            Move
+        }
+        public PlayerStat playerStat;
         private void Start()
         {
+            if (!SceneManager.GetActiveScene().name.Contains("SelectRole"))
+            {
+                playerStat = PlayerStat.Move;
+                if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
+                {
+                    if (transform.name == "Blue")
+                    {
+                        p1 = true;
+                    }
+                    else
+                    {
+                        p1 = false;
+                    }
+                }
+                else
+                {
+                    if (transform.name == "Blue")
+                    {
+                        p1 = false;
+                    }
+                    else
+                    {
+                        p1 = true;
+                    }
+                }
+            }
             playerJoyVibration = GetComponent<PlayerJoyVibration>();
             lastPos = transform.position;
             lastUpdateHp = HP;
@@ -62,7 +96,10 @@ namespace com.DungeonPad
             {
                 HP = 40;
             }
-            Behavior();
+            if(playerStat == PlayerStat.Move)
+            {
+                Behavior();
+            }
             if (HP <= 0)
             {
                 for(int i = 0; i < 4; i++)
@@ -70,16 +107,21 @@ namespace com.DungeonPad
                     GamePad.SetVibration((PlayerIndex)i, 0, 0);
                 }
                 GameManager.PlayTime = Time.time;
-                if (SceneManager.GetActiveScene().name != "Tutorial1" && SceneManager.GetActiveScene().name != "Tutorial2" && SceneManager.GetActiveScene().name != "Tutorial3")
+                string SceneName = SceneManager.GetActiveScene().name;
+                if (SceneName.Contains("SelectRole"))
                 {
-                    SceneManager.LoadScene("Died");
+                    HP = 40;
                 }
-                else
+                else if (SceneName == "Tutorial1" && SceneName == "Tutorial2" && SceneName == "Tutorial3")
                 {
                     TutorialAnimator.SetTrigger("Died");
                     Destroy(GameManager.players.gameObject);
                     Camera.main.GetComponent<CameraManager>().enabled = false;
                     Destroy(GameObject.Find("lineAttacks"));
+                }
+                else
+                {
+                    SceneManager.LoadScene("Died");
                 }
             }
             else
@@ -177,7 +219,7 @@ namespace com.DungeonPad
         {
             if (p1)
             {
-                switch (SelectRole.p1Joy)
+                switch (SelectMouse.p1Joy)
                 {
                     case "WASD":
                         if (Input.GetKeyDown(KeyCode.J))
@@ -203,7 +245,7 @@ namespace com.DungeonPad
                     case "6":
                     case "7":
                     case "8":
-                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy) +1 )))
+                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) +1 )))
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -214,7 +256,7 @@ namespace com.DungeonPad
             }
             else
             {
-                switch (SelectRole.p2Joy)
+                switch (SelectMouse.p2Joy)
                 {
                     case "WASD":
                         if (Input.GetKeyDown(KeyCode.J))
@@ -240,7 +282,7 @@ namespace com.DungeonPad
                     case "6":
                     case "7":
                     case "8":
-                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy) + 1 )))
+                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 1 )))
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -271,7 +313,7 @@ namespace com.DungeonPad
                 #region//操作移動
                 if (p1)
                 {
-                    switch (SelectRole.p1Joy)
+                    switch (SelectMouse.p1Joy)
                     {
                         case "WASD":
                             v.x += Input.GetAxis("HorizontalWASD") * 2;
@@ -289,14 +331,14 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoy" + SelectRole.p1Joy) * 2;
-                            v.y -= Input.GetAxis("VerticalJoy" + SelectRole.p1Joy) * 2;
+                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p1Joy) * 2;
+                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p1Joy) * 2;
                             break;
                     }
                 }
                 else
                 {
-                    switch (SelectRole.p2Joy)
+                    switch (SelectMouse.p2Joy)
                     {
                         case "WASD":
                             v.x += Input.GetAxis("HorizontalWASD") * 2;
@@ -314,8 +356,8 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoy" + SelectRole.p2Joy) * 2;
-                            v.y -= Input.GetAxis("VerticalJoy" + SelectRole.p2Joy) * 2;
+                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p2Joy) * 2;
+                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p2Joy) * 2;
                             break;
                     }
                 }
@@ -349,7 +391,7 @@ namespace com.DungeonPad
                 {
                     if (p1)
                     {
-                        switch (SelectRole.p1Joy)
+                        switch (SelectMouse.p1Joy)
                         {
                             case "WASD":
                                 if (Input.GetKeyDown(KeyCode.J))
@@ -383,10 +425,10 @@ namespace com.DungeonPad
                             case "6":
                             case "7":
                             case "8":
-                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy))))
+                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy))))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectRole.p1Joy);
-                                    DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectRole.p1Joy);
+                                    DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy);
+                                    DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectMouse.p1Joy);
                                     DashA = Vector3.Normalize(DashA) * 11;
                                     if (DashA.magnitude > 10)
                                     {
@@ -399,7 +441,7 @@ namespace com.DungeonPad
                     }
                     else
                     {
-                        switch (SelectRole.p2Joy)
+                        switch (SelectMouse.p2Joy)
                         {
                             case "WASD":
                                 if (Input.GetKeyDown(KeyCode.J))
@@ -433,10 +475,10 @@ namespace com.DungeonPad
                             case "6":
                             case "7":
                             case "8":
-                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy))))
+                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy))))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectRole.p2Joy);
-                                    DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectRole.p2Joy);
+                                    DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p2Joy);
+                                    DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectMouse.p2Joy);
                                     DashA = Vector3.Normalize(DashA) * 11;
                                     if (DashA.magnitude > 10)
                                     {
@@ -469,7 +511,7 @@ namespace com.DungeonPad
             {
                 if (p1)
                 {
-                    switch (SelectRole.p1Joy)
+                    switch (SelectMouse.p1Joy)
                     {
                         case "WASD":
                             break;
@@ -483,7 +525,7 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p1Joy) + 5)))
+                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 5)))
                             {
                                 shootBullet();
                             }
@@ -492,7 +534,7 @@ namespace com.DungeonPad
                 }
                 else
                 {
-                    switch (SelectRole.p2Joy)
+                    switch (SelectMouse.p2Joy)
                     {
                         case "WASD":
                             break;
@@ -506,7 +548,7 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectRole.p2Joy) + 5)))
+                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 5)))
                             {
                                 shootBullet();
                             }
@@ -515,7 +557,7 @@ namespace com.DungeonPad
                 }
             }
 
-            //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectRole.p1Joy + "R");
+            //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy + "R");
             #endregion
         }
 

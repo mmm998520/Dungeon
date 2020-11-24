@@ -10,7 +10,14 @@ namespace com.DungeonPad
         public Transform player;
         public void Start()
         {
-            player = GameObject.Find("p"+playerNum++).transform;
+            if(playerNum++ == 1)
+            {
+                player = GameObject.Find("Red").transform;
+            }
+            else
+            {
+                player = GameObject.Find("Blue").transform;
+            }
             player.position = transform.position;
             if (playerNum > 2)
             {

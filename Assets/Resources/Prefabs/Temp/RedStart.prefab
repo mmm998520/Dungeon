@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 6030316737393059014}
   - component: {fileID: 8936698930054095370}
   m_Layer: 0
-  m_Name: p1
+  m_Name: RedStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

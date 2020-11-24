@@ -86,8 +86,9 @@ namespace com.DungeonPad
             }
             if (p1Stat == mouseStat.SelectedRole && p2Stat == mouseStat.SelectedRole)
             {
-                p1Stat = unSelectRole(true, p1Stat);
-                p2Stat = unSelectRole(false, p2Stat);
+                //p1Stat = unSelectRole(true, p1Stat);
+                //p2Stat = unSelectRole(false, p2Stat);
+                StartCoroutine(waitForLoadScene());
             }
         }
 
@@ -272,14 +273,14 @@ namespace com.DungeonPad
                 if (Mathf.Abs(mouse1.anchoredPosition.x - blue.anchoredPosition.x) < 50 && Mathf.Abs(mouse1.anchoredPosition.y - blue.anchoredPosition.y) < 50)
                 {
                     mouseStat = mouseStat.SelectedRole;
-                    BluePlayer.GetComponent<PlayerManager>().enabled = true;
+                    BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     BluePlayer.GetComponent<PlayerManager>().p1 = true;
                     blue.anchoredPosition = new Vector3(9999, 0, 0);
                 }
                 if (Mathf.Abs(mouse1.anchoredPosition.x - red.anchoredPosition.x) < 50 && Mathf.Abs(mouse1.anchoredPosition.y - red.anchoredPosition.y) < 50)
                 {
                     mouseStat = mouseStat.SelectedRole;
-                    RedPlayer.GetComponent<PlayerManager>().enabled = true;
+                    RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     RedPlayer.GetComponent<PlayerManager>().p1 = true;
                     red.anchoredPosition = new Vector3(9999, 0, 0);
                 }
@@ -317,14 +318,14 @@ namespace com.DungeonPad
                 if (Mathf.Abs(mouse2.anchoredPosition.x - blue.anchoredPosition.x) < 50 && Mathf.Abs(mouse2.anchoredPosition.y - blue.anchoredPosition.y) < 50)
                 {
                     mouseStat = mouseStat.SelectedRole;
-                    BluePlayer.GetComponent<PlayerManager>().enabled = true;
+                    BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     BluePlayer.GetComponent<PlayerManager>().p1 = false;
                     blue.anchoredPosition = new Vector3(9999, 0, 0);
                 }
                 if (Mathf.Abs(mouse2.anchoredPosition.x - red.anchoredPosition.x) < 50 && Mathf.Abs(mouse2.anchoredPosition.y - red.anchoredPosition.y) < 50)
                 {
                     mouseStat = mouseStat.SelectedRole;
-                    RedPlayer.GetComponent<PlayerManager>().enabled = true;
+                    RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     RedPlayer.GetComponent<PlayerManager>().p1 = false;
                     red.anchoredPosition = new Vector3(9999, 0, 0);
                 }
@@ -339,14 +340,14 @@ namespace com.DungeonPad
                 if (p1Joy == "WASD" && Input.GetKeyDown(KeyCode.K))
                 {
                     mouseStat = mouseStat.SelectedMouse;
-                    if(BluePlayer.GetComponent<PlayerManager>().enabled && BluePlayer.GetComponent<PlayerManager>().p1)
+                    if(BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && BluePlayer.GetComponent<PlayerManager>().p1)
                     {
-                        BluePlayer.GetComponent<PlayerManager>().enabled = false;
+                        BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         blue.anchoredPosition = new Vector2(-100, -300);
                     }
                     else
                     {
-                        RedPlayer.GetComponent<PlayerManager>().enabled = false;
+                        RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         red.anchoredPosition = new Vector2(100, -300);
                     }
                     print("back");
@@ -354,14 +355,14 @@ namespace com.DungeonPad
                 else if (p1Joy == "ArrowKey" && Input.GetKeyDown(KeyCode.Keypad2))
                 {
                     mouseStat = mouseStat.SelectedMouse;
-                    if (BluePlayer.GetComponent<PlayerManager>().enabled && BluePlayer.GetComponent<PlayerManager>().p1)
+                    if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && BluePlayer.GetComponent<PlayerManager>().p1)
                     {
-                        BluePlayer.GetComponent<PlayerManager>().enabled = false;
+                        BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         blue.anchoredPosition = new Vector2(-100, -300);
                     }
                     else
                     {
-                        RedPlayer.GetComponent<PlayerManager>().enabled = false;
+                        RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         red.anchoredPosition = new Vector2(100, -300);
                     }
                     print("back");
@@ -369,14 +370,14 @@ namespace com.DungeonPad
                 if (p1Joy != "WASD" && p1Joy != "ArrowKey" && Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(p1Joy) + 1)))
                 {
                     mouseStat = mouseStat.SelectedMouse;
-                    if (BluePlayer.GetComponent<PlayerManager>().enabled && BluePlayer.GetComponent<PlayerManager>().p1)
+                    if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && BluePlayer.GetComponent<PlayerManager>().p1)
                     {
-                        BluePlayer.GetComponent<PlayerManager>().enabled = false;
+                        BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         blue.anchoredPosition = new Vector2(-100, -300);
                     }
                     else
                     {
-                        RedPlayer.GetComponent<PlayerManager>().enabled = false;
+                        RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         red.anchoredPosition = new Vector2(100, -300);
                     }
                     print("back");
@@ -387,14 +388,14 @@ namespace com.DungeonPad
                 if (p2Joy == "WASD" && Input.GetKeyDown(KeyCode.K))
                 {
                     mouseStat = mouseStat.SelectedMouse;
-                    if (BluePlayer.GetComponent<PlayerManager>().enabled && !BluePlayer.GetComponent<PlayerManager>().p1)
+                    if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && !BluePlayer.GetComponent<PlayerManager>().p1)
                     {
-                        BluePlayer.GetComponent<PlayerManager>().enabled = false;
+                        BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         blue.anchoredPosition = new Vector2(-100, -300);
                     }
                     else
                     {
-                        RedPlayer.GetComponent<PlayerManager>().enabled = false;
+                        RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         red.anchoredPosition = new Vector2(100, -300);
                     }
                     print("back");
@@ -402,14 +403,14 @@ namespace com.DungeonPad
                 else if (p2Joy == "ArrowKey" && Input.GetKeyDown(KeyCode.Keypad2))
                 {
                     mouseStat = mouseStat.SelectedMouse;
-                    if (BluePlayer.GetComponent<PlayerManager>().enabled && !BluePlayer.GetComponent<PlayerManager>().p1)
+                    if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && !BluePlayer.GetComponent<PlayerManager>().p1)
                     {
-                        BluePlayer.GetComponent<PlayerManager>().enabled = false;
+                        BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         blue.anchoredPosition = new Vector2(-100, -300);
                     }
                     else
                     {
-                        RedPlayer.GetComponent<PlayerManager>().enabled = false;
+                        RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         red.anchoredPosition = new Vector2(100, -300);
                     }
                     print("back");
@@ -417,14 +418,14 @@ namespace com.DungeonPad
                 if (p2Joy != "WASD" && p2Joy != "ArrowKey" && Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(p2Joy) + 1)))
                 {
                     mouseStat = mouseStat.SelectedMouse;
-                    if (BluePlayer.GetComponent<PlayerManager>().enabled && !BluePlayer.GetComponent<PlayerManager>().p1)
+                    if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && !BluePlayer.GetComponent<PlayerManager>().p1)
                     {
-                        BluePlayer.GetComponent<PlayerManager>().enabled = false;
+                        BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         blue.anchoredPosition = new Vector2(-100, -300);
                     }
                     else
                     {
-                        RedPlayer.GetComponent<PlayerManager>().enabled = false;
+                        RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                         blue.anchoredPosition = new Vector2(100, -300);
                     }
                     print("back");

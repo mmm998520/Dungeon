@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5226,8 +5226,6 @@ MonoBehaviour:
   attackCollider: {fileID: 4194553186035810207, guid: e50d6e0a11b58df44bf09162857093c6,
     type: 3}
   draw: 1
-  MP: 30
-  ShowMP: {fileID: 0}
 --- !u!4 &441455870
 Transform:
   m_ObjectHideFlags: 0
@@ -12398,6 +12396,7 @@ MonoBehaviour:
   minY: 0
   disX: 0
   disY: 0
+  Center: {fileID: 0}
 --- !u!81 &963484128
 AudioListener:
   m_ObjectHideFlags: 0
@@ -20316,6 +20315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitLong: 10
   playerPos: {fileID: 967524234}
+  endPos: {fileID: 0}
 --- !u!4 &1647433185 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1816685645676619332, guid: 35d1326c29a02614ba76fca276269285,
@@ -26394,7 +26394,7 @@ PrefabInstance:
     - target: {fileID: 691778020512579970, guid: 0f2615ffe1832de429dd2d196e5a4d34,
         type: 3}
       propertyPath: m_Name
-      value: p2
+      value: Blue
       objectReference: {fileID: 0}
     - target: {fileID: 691778020913485096, guid: 0f2615ffe1832de429dd2d196e5a4d34,
         type: 3}
@@ -26478,7 +26478,7 @@ PrefabInstance:
     - target: {fileID: 6652142459782882192, guid: d9a29e9d3620a30438ffe6c613cc0b3f,
         type: 3}
       propertyPath: m_Name
-      value: p1
+      value: Red
       objectReference: {fileID: 0}
     - target: {fileID: 6652142459782882193, guid: d9a29e9d3620a30438ffe6c613cc0b3f,
         type: 3}
