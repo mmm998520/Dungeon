@@ -82,6 +82,11 @@ namespace com.DungeonPad
                         p1 = true;
                     }
                 }
+                HP = 40;
+            }
+            else
+            {
+                HP = 0;
             }
             playerJoyVibration = GetComponent<PlayerJoyVibration>();
             lastPos = transform.position;
@@ -102,18 +107,18 @@ namespace com.DungeonPad
             }
             if (HP <= 0)
             {
-                for(int i = 0; i < 4; i++)
-                {
-                    GamePad.SetVibration((PlayerIndex)i, 0, 0);
-                }
-                GameManager.PlayTime = Time.time;
                 string SceneName = SceneManager.GetActiveScene().name;
                 if (SceneName.Contains("SelectRole"))
                 {
-                    HP = 40;
+
                 }
                 else if (SceneName == "Tutorial1" && SceneName == "Tutorial2" && SceneName == "Tutorial3")
                 {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        GamePad.SetVibration((PlayerIndex)i, 0, 0);
+                    }
+                    GameManager.PlayTime = Time.time;
                     TutorialAnimator.SetTrigger("Died");
                     Destroy(GameManager.players.gameObject);
                     Camera.main.GetComponent<CameraManager>().enabled = false;
@@ -121,6 +126,11 @@ namespace com.DungeonPad
                 }
                 else
                 {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        GamePad.SetVibration((PlayerIndex)i, 0, 0);
+                    }
+                    GameManager.PlayTime = Time.time;
                     SceneManager.LoadScene("Died");
                 }
             }

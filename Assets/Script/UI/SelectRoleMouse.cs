@@ -8,7 +8,7 @@ namespace com.DungeonPad
     public class SelectRoleMouse : MonoBehaviour
     {
         public bool p1;
-        float mouseSpeed = 10;
+        float mouseSpeed = 5000;
         RectTransform rectTransform;
         public bool canUse;
         public SelectMouse selectMouse;
@@ -37,12 +37,12 @@ namespace com.DungeonPad
                 switch (SelectMouse.p1Joy)
                 {
                     case "WASD":
-                        mouseMove.x = Input.GetAxis("HorizontalWASD") * mouseSpeed;
-                        mouseMove.y = Input.GetAxis("VerticalWASD") * mouseSpeed;
+                        mouseMove.x = Input.GetAxis("HorizontalWASD") * Time.deltaTime * mouseSpeed;
+                        mouseMove.y = Input.GetAxis("VerticalWASD") * Time.deltaTime * mouseSpeed;
                         break;
                     case "ArrowKey":
-                        mouseMove.x = Input.GetAxis("HorizontalArrowKey") * mouseSpeed;
-                        mouseMove.y = Input.GetAxis("VerticalArrowKey") * mouseSpeed;
+                        mouseMove.x = Input.GetAxis("HorizontalArrowKey") * Time.deltaTime * mouseSpeed;
+                        mouseMove.y = Input.GetAxis("VerticalArrowKey") * Time.deltaTime * mouseSpeed;
                         break;
                     case "1":
                     case "2":
@@ -52,8 +52,8 @@ namespace com.DungeonPad
                     case "6":
                     case "7":
                     case "8":
-                        mouseMove.x = Input.GetAxis("HorizontalJoy" + SelectMouse.p1Joy) * mouseSpeed;
-                        mouseMove.y = -Input.GetAxis("VerticalJoy" + SelectMouse.p1Joy) * mouseSpeed;
+                        mouseMove.x = Input.GetAxis("HorizontalJoy" + SelectMouse.p1Joy) * Time.deltaTime * mouseSpeed;
+                        mouseMove.y = -Input.GetAxis("VerticalJoy" + SelectMouse.p1Joy) * Time.deltaTime * mouseSpeed;
                         break;
                 }
             }
@@ -62,12 +62,12 @@ namespace com.DungeonPad
                 switch (SelectMouse.p2Joy)
                 {
                     case "WASD":
-                        mouseMove.x = Input.GetAxis("HorizontalWASD") * mouseSpeed;
-                        mouseMove.y = Input.GetAxis("VerticalWASD") * mouseSpeed;
+                        mouseMove.x = Input.GetAxis("HorizontalWASD") * Time.deltaTime * mouseSpeed;
+                        mouseMove.y = Input.GetAxis("VerticalWASD") * Time.deltaTime * mouseSpeed;
                         break;
                     case "ArrowKey":
-                        mouseMove.x = Input.GetAxis("HorizontalArrowKey") * mouseSpeed;
-                        mouseMove.y = Input.GetAxis("VerticalArrowKey") * mouseSpeed;
+                        mouseMove.x = Input.GetAxis("HorizontalArrowKey") * Time.deltaTime * mouseSpeed;
+                        mouseMove.y = Input.GetAxis("VerticalArrowKey") * Time.deltaTime * mouseSpeed;
                         break;
                     case "1":
                     case "2":
@@ -77,8 +77,8 @@ namespace com.DungeonPad
                     case "6":
                     case "7":
                     case "8":
-                        mouseMove.x = Input.GetAxis("HorizontalJoy" + SelectMouse.p2Joy) * mouseSpeed;
-                        mouseMove.y = -Input.GetAxis("VerticalJoy" + SelectMouse.p2Joy) * mouseSpeed;
+                        mouseMove.x = Input.GetAxis("HorizontalJoy" + SelectMouse.p2Joy) * Time.deltaTime * mouseSpeed;
+                        mouseMove.y = -Input.GetAxis("VerticalJoy" + SelectMouse.p2Joy) * Time.deltaTime * mouseSpeed;
                         break;
                 }
             }
