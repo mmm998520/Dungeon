@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class TutorialDebuff : MonoBehaviour
     {
-        // Start is called before the first frame update
+        public GameObject diedImformation;
         public void debuff()
         {
             if (GameManager.players.GetChild(0).GetComponent<PlayerManager>().p1)
@@ -19,6 +19,17 @@ namespace com.DungeonPad
                 GameManager.players.GetChild(0).GetComponent<PlayerManager>().StickTimer = 0;
                 GameManager.players.GetChild(1).GetComponent<PlayerManager>().ConfusionTimer = 0;
             }
+        }
+
+        public void ShowDied()
+        {
+            diedImformation.SetActive(true);
+            GameManager.players.GetComponent<TutorialManager2>().reset();
+        }
+        public void UnShowDied()
+        {
+            diedImformation.SetActive(false);
+            GameManager.players.GetComponent<TutorialManager2>().reset();
         }
     }
 }

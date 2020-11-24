@@ -33,6 +33,7 @@ namespace com.DungeonPad
         float statTimer;
         PlayerManager p1, p2;
         public Text TutorialText, P1Talk, P2Talk;
+        public Animator monsterAnimator;
 
         void Start()
         {
@@ -80,7 +81,6 @@ namespace com.DungeonPad
                         TutorialText.text = "光代表你們共同的生命\n\r請P1移動看看\n\r觀察距離與光的關係";
                         P1Talk.text = "距離近能回復光，距離遠會耗損光";
                         P2Talk.text = "";
-                        reset();
                     }
                     break;
                 case TutorialStat.p1MoveCanPress:
@@ -104,7 +104,6 @@ namespace com.DungeonPad
                         TutorialText.text = "光代表你們共同的生命\n\r請P2移動看看\n\r觀察距離與光的關係";
                         P1Talk.text = "";
                         P2Talk.text = "要是光完全消失，我們將一同死亡";
-                        reset();
                     }
                     break;
                 case TutorialStat.p2MoveCanPress:
@@ -118,6 +117,7 @@ namespace com.DungeonPad
                         P1Talk.text = "";
                         P2Talk.text = "";
                         reset();
+                        monsterAnimator.SetBool("DumbSpider", true);
                     }
                     break;
                 case TutorialStat.dumbMonster:
@@ -128,7 +128,6 @@ namespace com.DungeonPad
                         TutorialText.text = "地城裡有許多怪物\n\r但你們之間的能量線能消滅牠們\n\r消滅怪物甚至能快速回復光";
                         P1Talk.text = "好喔";
                         P2Talk.text = "好喔";
-                        reset();
                     }
                     break;
                 case TutorialStat.dumbMonsterCanPress:
@@ -159,6 +158,7 @@ namespace com.DungeonPad
                         P1Talk.text = "";
                         P2Talk.text = "";
                         reset();
+                        monsterAnimator.SetBool("Bubble", true);
                     }
                     break;
                 case TutorialStat.slimeAndBubble:
@@ -166,10 +166,11 @@ namespace com.DungeonPad
                     {
                         stat = TutorialStat.presseB;
                         statTimer = 0;
+                        p1.playerStat = PlayerManager.PlayerStat.Move;
+                        p2.playerStat = PlayerManager.PlayerStat.Move;
                         TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
                         P1Talk.text = "";
                         P2Talk.text = "";
-                        reset();
                     }
                     break;
                 case TutorialStat.presseB:
@@ -297,6 +298,12 @@ namespace com.DungeonPad
             p1.transform.position = new Vector3(9.3f, 1.6f, 9.6f);
             p2.transform.position = new Vector3(11.1f, 1.6f, 9.6f);
             PlayerManager.HP = 40;
+            p1.v = Vector3.zero;
+            p1.DashA = Vector3.zero;
+            p1.HardStraightA = Vector3.zero;
+            p2.v = Vector3.zero;
+            p2.DashA = Vector3.zero;
+            p2.HardStraightA = Vector3.zero;
         }
     }
 }
