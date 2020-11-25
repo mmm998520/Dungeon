@@ -7,6 +7,15 @@ namespace com.DungeonPad
     public class TutorialDebuff : MonoBehaviour
     {
         public GameObject diedImformation;
+
+        void Update()
+        {
+            if (diedImformation.activeSelf)
+            {
+                GameManager.players.GetComponent<TutorialManager2>().reset();
+            }
+        }
+
         public void debuff()
         {
             if (GameManager.players.GetChild(0).GetComponent<PlayerManager>().p1)
@@ -24,12 +33,16 @@ namespace com.DungeonPad
         public void ShowDied()
         {
             diedImformation.SetActive(true);
-            GameManager.players.GetComponent<TutorialManager2>().reset();
         }
         public void UnShowDied()
         {
             diedImformation.SetActive(false);
-            GameManager.players.GetComponent<TutorialManager2>().reset();
+            GetComponent<Animator>().SetBool("Died", false);
+        }
+
+        public void reStartBubble()
+        {
+            GameManager.players.GetComponent<TutorialManager2>().reStartBubble();
         }
     }
 }

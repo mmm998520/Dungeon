@@ -121,7 +121,7 @@ namespace com.DungeonPad
                     }
                     break;
                 case TutorialStat.dumbMonster:
-                    if ((statTimer += Time.deltaTime) > 6)
+                    if ((statTimer += Time.deltaTime) > 11)
                     {
                         stat = TutorialStat.dumbMonsterCanPress;
                         statTimer = 0;
@@ -151,18 +151,22 @@ namespace com.DungeonPad
                 case TutorialStat.fight:
                     if (GameManager.monsters.childCount == 0)
                     {
-                        stat = TutorialStat.slimeAndBubble;
-                        p1.playerStat = PlayerManager.PlayerStat.CantMove;
-                        p2.playerStat = PlayerManager.PlayerStat.CantMove;
-                        TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
-                        P1Talk.text = "";
-                        P2Talk.text = "";
-                        reset();
-                        monsterAnimator.SetBool("Bubble", true);
+                        if((statTimer += Time.deltaTime) > 1)
+                        {
+                            stat = TutorialStat.slimeAndBubble;
+                            statTimer = 0;
+                            p1.playerStat = PlayerManager.PlayerStat.CantMove;
+                            p2.playerStat = PlayerManager.PlayerStat.CantMove;
+                            TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
+                            P1Talk.text = "";
+                            P2Talk.text = "";
+                            reset();
+                            monsterAnimator.SetBool("Bubble", true);
+                        }
                     }
                     break;
                 case TutorialStat.slimeAndBubble:
-                    if ((statTimer += Time.deltaTime) > 5)
+                    if ((statTimer += Time.deltaTime) > 10)
                     {
                         stat = TutorialStat.presseB;
                         statTimer = 0;
@@ -174,13 +178,16 @@ namespace com.DungeonPad
                     }
                     break;
                 case TutorialStat.presseB:
-                    if (p1.ConfusionTimer > 10 && p2.ConfusionTimer > 10)
+                    if (p1.ConfusionTimer > 10 && p2.ConfusionTimer > 10 && p1.StickTimer > 10 && p2.StickTimer > 10)
                     {
                         stat = TutorialStat.hole;
                         TutorialText.text = "最後一步，      +      衝刺\n\r這能幫助你們度過深淵";
                         P1Talk.text = "";
                         P2Talk.text = "";
                         reset();
+                        monsterAnimator.SetBool("Hole", true);
+                        GameObject.Find("TutorialManager").transform.GetChild(0).gameObject.SetActive(false);
+                        GameObject.Find("TutorialManager").transform.GetChild(1).gameObject.SetActive(true);
                     }
                     break;
             }
@@ -295,15 +302,38 @@ namespace com.DungeonPad
         public void reset()
         {
             pressedA = PressedA.Non;
-            p1.transform.position = new Vector3(9.3f, 1.6f, 9.6f);
-            p2.transform.position = new Vector3(11.1f, 1.6f, 9.6f);
+            p1.transform.position = new Vector3(17.75f, 6.0f, 9.6f);
+            p2.transform.position = new Vector3(17.75f, 4.2f, 9.6f);
             PlayerManager.HP = 40;
             p1.v = Vector3.zero;
             p1.DashA = Vector3.zero;
             p1.HardStraightA = Vector3.zero;
+            p1.transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             p2.v = Vector3.zero;
             p2.DashA = Vector3.zero;
             p2.HardStraightA = Vector3.zero;
+            p2.transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
+
+        public void reStartBubble()
+        {
+            reset();
+            stat = TutorialStat.slimeAndBubble;
+            statTimer = 0;
+            p1.playerStat = PlayerManager.PlayerStat.CantMove;
+            p2.playerStat = PlayerManager.PlayerStat.CantMove;
+            TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
+            P1Talk.text = "";
+            P2Talk.text = "";
+            monsterAnimator.SetBool("Bubble", true);
+            p1.ConfusionTimer = 10;
+            p1.StickTimer = 10;
+            p1.ConfusionUIRenderer.enabled = false;
+            p1.ConfusionUIcontroler.enabled = false;
+            p2.ConfusionTimer = 10;
+            p2.StickTimer = 10;
+            p2.ConfusionUIRenderer.enabled = false;
+            p2.ConfusionUIcontroler.enabled = false;
         }
     }
 }

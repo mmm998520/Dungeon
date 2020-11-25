@@ -114,7 +114,8 @@ namespace com.DungeonPad
                 }
                 else if (SceneName == "Tutorial1" || SceneName == "Tutorial2" || SceneName == "Tutorial3")
                 {
-                    GameObject.Find("MonsterAnimator").GetComponent<Animator>().SetTrigger("Died");
+                    Debug.LogError("a");
+                    GameObject.Find("MonsterAnimator").GetComponent<Animator>().SetBool("Died", true);
                     for (int i = 0; i < 4; i++)
                     {
                         GamePad.SetVibration((PlayerIndex)i, 0, 0);
