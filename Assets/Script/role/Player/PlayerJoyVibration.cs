@@ -14,45 +14,20 @@ namespace com.DungeonPad
         public float HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, DashVibration;
         public static float LowHPVibration;
 
-        void start()
+        void Start()
         {
             playerManager = GetComponent<PlayerManager>();
-            if (playerManager.p1)
-            {
-                if(SelectMouse.P1PlayerIndex == null)
-                {
-                    enabled = false;
-                }
-                else
-                {
-                    playerIndex = SelectMouse.P1PlayerIndex;
-                }
-            }
-            else
-            {
-                if (SelectMouse.P2PlayerIndex == null)
-                {
-                    enabled = false;
-                }
-                else
-                {
-                    playerIndex = SelectMouse.P2PlayerIndex;
-                }
-            }
         }
 
         void Update()
         {
-            if (Time.time < 0.01)
-            {
-                start();
-            }
             CountHurtVibration();
             CountStickVibration();
             CountConfusionVibration();
             //CountLowHPVibration();
             CountDashVibration();
             float maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, LowHPVibration, DashVibration);
+            print(maxer);
             GamePad.SetVibration(playerIndex.Value, maxer * weight, maxer * weight);
             if (PlayerManager.HP <= 0)
             {

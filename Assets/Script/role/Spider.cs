@@ -50,7 +50,6 @@ namespace com.DungeonPad
 
         public new void attack()
         {
-            print(012345);
             if (!attacking)
             {
                 attacking = true;

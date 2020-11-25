@@ -55,6 +55,7 @@ namespace com.DungeonPad
             Move
         }
         public PlayerStat playerStat;
+
         private void Start()
         {
             if (!SceneManager.GetActiveScene().name.Contains("SelectRole"))
@@ -65,10 +66,30 @@ namespace com.DungeonPad
                     if (transform.name == "Blue")
                     {
                         p1 = true;
+                        if (SelectMouse.P1PlayerIndex == null)
+                        {
+                            GetComponent<PlayerJoyVibration>().enabled = false;
+                            print(SelectMouse.P1PlayerIndex);
+                        }
+                        else
+                        {
+                            GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P1PlayerIndex;
+                            print(GetComponent<PlayerJoyVibration>().playerIndex + "p1");
+                        }
                     }
                     else
                     {
                         p1 = false;
+                        if (SelectMouse.P2PlayerIndex == null)
+                        {
+                            GetComponent<PlayerJoyVibration>().enabled = false;
+                            print(SelectMouse.P1PlayerIndex);
+                        }
+                        else
+                        {
+                            GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P2PlayerIndex;
+                            print(GetComponent<PlayerJoyVibration>().playerIndex + "p2");
+                        }
                     }
                 }
                 else
@@ -76,10 +97,30 @@ namespace com.DungeonPad
                     if (transform.name == "Blue")
                     {
                         p1 = false;
+                        if (SelectMouse.P2PlayerIndex == null)
+                        {
+                            GetComponent<PlayerJoyVibration>().enabled = false;
+                            print(SelectMouse.P2PlayerIndex);
+                        }
+                        else
+                        {
+                            GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P2PlayerIndex;
+                            print(GetComponent<PlayerJoyVibration>().playerIndex + "p2");
+                        }
                     }
                     else
                     {
                         p1 = true;
+                        if (SelectMouse.P1PlayerIndex == null)
+                        {
+                            GetComponent<PlayerJoyVibration>().enabled = false;
+                            print(SelectMouse.P1PlayerIndex);
+                        }
+                        else
+                        {
+                            GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P1PlayerIndex;
+                            print(GetComponent<PlayerJoyVibration>().playerIndex + "p1");
+                        }
                     }
                 }
                 HP = 40;
