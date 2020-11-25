@@ -270,14 +270,14 @@ namespace com.DungeonPad
                         }
                         break;
                 }
-                if (Mathf.Abs(mouse1.anchoredPosition.x - blue.anchoredPosition.x) < 50 && Mathf.Abs(mouse1.anchoredPosition.y - blue.anchoredPosition.y) < 50)
+                if (Mathf.Abs(mouse1.anchoredPosition.x - blue.anchoredPosition.x) < 50 && Mathf.Abs(mouse1.anchoredPosition.y - blue.anchoredPosition.y) < 40)
                 {
                     mouseStat = mouseStat.SelectedRole;
                     BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     BluePlayer.GetComponent<PlayerManager>().p1 = true;
                     blue.anchoredPosition = new Vector3(9999, 0, 0);
                 }
-                if (Mathf.Abs(mouse1.anchoredPosition.x - red.anchoredPosition.x) < 50 && Mathf.Abs(mouse1.anchoredPosition.y - red.anchoredPosition.y) < 50)
+                if (Mathf.Abs(mouse1.anchoredPosition.x - red.anchoredPosition.x) < 50 && Mathf.Abs(mouse1.anchoredPosition.y - red.anchoredPosition.y) < 40)
                 {
                     mouseStat = mouseStat.SelectedRole;
                     RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;

@@ -14,7 +14,7 @@ namespace com.DungeonPad
         public float HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, DashVibration;
         public static float LowHPVibration;
 
-        void Start()
+        void start()
         {
             playerManager = GetComponent<PlayerManager>();
             if (playerManager.p1)
@@ -43,6 +43,10 @@ namespace com.DungeonPad
 
         void Update()
         {
+            if (Time.time < 0.01)
+            {
+                start();
+            }
             CountHurtVibration();
             CountStickVibration();
             CountConfusionVibration();
