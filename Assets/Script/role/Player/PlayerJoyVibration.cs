@@ -19,24 +19,24 @@ namespace com.DungeonPad
             playerManager = GetComponent<PlayerManager>();
             if (playerManager.p1)
             {
-                if(SelectRole.P1PlayerIndex == null)
+                if(SelectMouse.P1PlayerIndex == null)
                 {
                     enabled = false;
                 }
                 else
                 {
-                    playerIndex = SelectRole.P1PlayerIndex;
+                    playerIndex = SelectMouse.P1PlayerIndex;
                 }
             }
             else
             {
-                if (SelectRole.P2PlayerIndex == null)
+                if (SelectMouse.P2PlayerIndex == null)
                 {
                     enabled = false;
                 }
                 else
                 {
-                    playerIndex = SelectRole.P2PlayerIndex;
+                    playerIndex = SelectMouse.P2PlayerIndex;
                 }
             }
         }
