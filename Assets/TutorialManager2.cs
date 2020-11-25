@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -19,7 +20,8 @@ namespace com.DungeonPad
             fight,
             slimeAndBubble,
             presseB,
-            hole
+            hole,
+            map
         }
         public TutorialStat stat;
         public enum PressedA
@@ -34,6 +36,8 @@ namespace com.DungeonPad
         PlayerManager p1, p2;
         public Text TutorialText, P1Talk, P2Talk;
         public Animator monsterAnimator;
+
+        public GameObject GoNextPos;
 
         void Start()
         {
@@ -188,6 +192,28 @@ namespace com.DungeonPad
                         monsterAnimator.SetBool("Hole", true);
                         GameObject.Find("TutorialManager").transform.GetChild(0).gameObject.SetActive(false);
                         GameObject.Find("TutorialManager").transform.GetChild(1).gameObject.SetActive(true);
+                        GoNextPos.SetActive(true);
+                    }
+                    break;
+                case TutorialStat.hole:
+                    if (GoNextPos.activeSelf == false)
+                    {
+                        stat = TutorialStat.map;
+                        statTimer = 0;
+                        p1.playerStat = PlayerManager.PlayerStat.CantMove;
+                        p2.playerStat = PlayerManager.PlayerStat.CantMove;
+                        TutorialText.text = "最後，相信地圖\n\r它將你們指引找到通往下一層的機關";
+                        P1Talk.text = "好的";
+                        P2Talk.text = "好的";
+                        reset();
+                    }
+                    break;
+                case TutorialStat.map:
+                    p1PressA();
+                    p2PressA();
+                    if (pressedA == PressedA.P1P2)
+                    {
+                        SceneManager.LoadScene("Game 1");
                     }
                     break;
             }
