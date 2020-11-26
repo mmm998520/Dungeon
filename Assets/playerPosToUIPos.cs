@@ -14,6 +14,11 @@ public class playerPosToUIPos : MonoBehaviour
 
     void Update()
     {
+        setPos();
+    }
+
+    public void setPos()
+    {
         if (blue)
         {
             rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(BluePlayer.position);

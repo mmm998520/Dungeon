@@ -276,6 +276,7 @@ namespace com.DungeonPad
                     BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     BluePlayer.GetComponent<PlayerManager>().p1 = true;
                     blue.anchoredPosition = new Vector3(9999, 0, 0);
+                    blue.GetComponent<playerPosToUIPos>().enabled = false;
                 }
                 if (mouse1.anchoredPosition.x - red.anchoredPosition.x < 90 && mouse1.anchoredPosition.x - red.anchoredPosition.x > 10 && mouse1.anchoredPosition.y - red.anchoredPosition.y < 90 && mouse1.anchoredPosition.y - red.anchoredPosition.y > 10)
                 {
@@ -283,6 +284,7 @@ namespace com.DungeonPad
                     RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     RedPlayer.GetComponent<PlayerManager>().p1 = true;
                     red.anchoredPosition = new Vector3(9999, 0, 0);
+                    red.GetComponent<playerPosToUIPos>().enabled = false;
                 }
             }
             else
@@ -321,6 +323,7 @@ namespace com.DungeonPad
                     BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     BluePlayer.GetComponent<PlayerManager>().p1 = false;
                     blue.anchoredPosition = new Vector3(9999, 0, 0);
+                    blue.GetComponent<playerPosToUIPos>().enabled = false;
                 }
                 if (Mathf.Abs(mouse2.anchoredPosition.x - red.anchoredPosition.x) < 50 && Mathf.Abs(mouse2.anchoredPosition.y - red.anchoredPosition.y) < 50)
                 {
@@ -328,6 +331,7 @@ namespace com.DungeonPad
                     RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     RedPlayer.GetComponent<PlayerManager>().p1 = false;
                     red.anchoredPosition = new Vector3(9999, 0, 0);
+                    red.GetComponent<playerPosToUIPos>().enabled = false;
                 }
             }
             return mouseStat;
@@ -358,12 +362,12 @@ namespace com.DungeonPad
                     if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && BluePlayer.GetComponent<PlayerManager>().p1)
                     {
                         BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
-                        blue.anchoredPosition = new Vector2(-100, -300);
+                        blue.GetComponent<playerPosToUIPos>().enabled = true;
                     }
                     else
                     {
                         RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
-                        red.anchoredPosition = new Vector2(100, -300);
+                        red.GetComponent<playerPosToUIPos>().enabled = true;
                     }
                     print("back");
                 }
@@ -373,12 +377,12 @@ namespace com.DungeonPad
                     if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && BluePlayer.GetComponent<PlayerManager>().p1)
                     {
                         BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
-                        blue.anchoredPosition = new Vector2(-100, -300);
+                        blue.GetComponent<playerPosToUIPos>().enabled = true;
                     }
                     else
                     {
                         RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
-                        red.anchoredPosition = new Vector2(100, -300);
+                        red.GetComponent<playerPosToUIPos>().enabled = true;
                     }
                     print("back");
                 }

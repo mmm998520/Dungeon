@@ -39,6 +39,7 @@ namespace com.DungeonPad
 
         public GameObject GoNextPos;
 
+        public GameObject P1TalkBox, P2TalkBox, B, A, Dir, Map;
         void Start()
         {
             if (transform.GetChild(0).GetComponent<PlayerManager>().p1)
@@ -51,9 +52,21 @@ namespace com.DungeonPad
                 p1 = transform.GetChild(1).GetComponent<PlayerManager>();
                 p2 = transform.GetChild(0).GetComponent<PlayerManager>();
             }
+            if(SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
+            {
+                P1TalkBox.GetComponent<playerPosToUIPos>().blue = true;
+                P2TalkBox.GetComponent<playerPosToUIPos>().blue = false;
+            }
+            else
+            {
+                P1TalkBox.GetComponent<playerPosToUIPos>().blue = false;
+                P2TalkBox.GetComponent<playerPosToUIPos>().blue = true;
+            }
             TutorialText.text = "僅存的光之元素啊，\n\r同心協力前往地城拯救被巨龍抓走的同胞吧";
             P1Talk.text = "是";
             P2Talk.text = "是";
+            P1TalkBox.SetActive(true);
+            P2TalkBox.SetActive(true);
             reset();
         }
 
@@ -74,6 +87,10 @@ namespace com.DungeonPad
                         TutorialText.text = "光代表你們共同的生命\n\r請P1移動看看\n\r觀察距離與光的關係";
                         P1Talk.text = "";
                         P2Talk.text = "";
+                        P1TalkBox.SetActive(false);
+                        P2TalkBox.SetActive(false);
+                        P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
+                        P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                         reset();
                     }
                     break;
@@ -83,8 +100,12 @@ namespace com.DungeonPad
                         stat = TutorialStat.p1MoveCanPress;
                         statTimer = 0;
                         TutorialText.text = "光代表你們共同的生命\n\r請P1移動看看\n\r觀察距離與光的關係";
-                        P1Talk.text = "距離近能回復光，距離遠會耗損光";
+                        P1Talk.text = "距離近能回復光\n\r距離遠會耗損光";
                         P2Talk.text = "";
+                        P1TalkBox.SetActive(true);
+                        P2TalkBox.SetActive(false);
+                        P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
+                        P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                     }
                     break;
                 case TutorialStat.p1MoveCanPress:
@@ -97,6 +118,10 @@ namespace com.DungeonPad
                         TutorialText.text = "光代表你們共同的生命\n\r請P2移動看看\n\r觀察距離與光的關係";
                         P1Talk.text = "";
                         P2Talk.text = "";
+                        P1TalkBox.SetActive(false);
+                        P2TalkBox.SetActive(false);
+                        P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
+                        P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                         reset();
                     }
                     break;
@@ -107,7 +132,11 @@ namespace com.DungeonPad
                         statTimer = 0;
                         TutorialText.text = "光代表你們共同的生命\n\r請P2移動看看\n\r觀察距離與光的關係";
                         P1Talk.text = "";
-                        P2Talk.text = "要是光完全消失，我們將一同死亡";
+                        P2Talk.text = "要是光完全消失\n\r我們將一同死亡";
+                        P1TalkBox.SetActive(false);
+                        P2TalkBox.SetActive(true);
+                        P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
+                        P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                     }
                     break;
                 case TutorialStat.p2MoveCanPress:
@@ -120,6 +149,10 @@ namespace com.DungeonPad
                         TutorialText.text = "地城裡有許多怪物\n\r但你們之間的能量線能消滅牠們\n\r消滅怪物甚至能快速回復光";
                         P1Talk.text = "";
                         P2Talk.text = "";
+                        P1TalkBox.SetActive(false);
+                        P2TalkBox.SetActive(false);
+                        P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
+                        P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                         reset();
                         monsterAnimator.SetBool("DumbSpider", true);
                     }
@@ -132,6 +165,10 @@ namespace com.DungeonPad
                         TutorialText.text = "地城裡有許多怪物\n\r但你們之間的能量線能消滅牠們\n\r消滅怪物甚至能快速回復光";
                         P1Talk.text = "好喔";
                         P2Talk.text = "好喔";
+                        P1TalkBox.SetActive(true);
+                        P2TalkBox.SetActive(true);
+                        P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
+                        P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                     }
                     break;
                 case TutorialStat.dumbMonsterCanPress:
@@ -149,7 +186,12 @@ namespace com.DungeonPad
                         TutorialText.text = "小心，直接碰撞蜘蛛與蛛絲將耗損你們的光";
                         P1Talk.text = "";
                         P2Talk.text = "";
+                        P1TalkBox.SetActive(false);
+                        P2TalkBox.SetActive(false);
+                        P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
+                        P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                         reset();
+                        monsterAnimator.SetBool("Fight", true);
                     }
                     break;
                 case TutorialStat.fight:
@@ -161,9 +203,14 @@ namespace com.DungeonPad
                             statTimer = 0;
                             p1.playerStat = PlayerManager.PlayerStat.CantMove;
                             p2.playerStat = PlayerManager.PlayerStat.CantMove;
+                            B.SetActive(true);
                             TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
                             P1Talk.text = "";
                             P2Talk.text = "";
+                            P1TalkBox.SetActive(false);
+                            P2TalkBox.SetActive(false);
+                            P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
+                            P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                             reset();
                             monsterAnimator.SetBool("Bubble", true);
                         }
@@ -172,6 +219,7 @@ namespace com.DungeonPad
                 case TutorialStat.slimeAndBubble:
                     if ((statTimer += Time.deltaTime) > 10)
                     {
+                        if((statTimer+=Time.deltaTime) >= 1)
                         stat = TutorialStat.presseB;
                         statTimer = 0;
                         p1.playerStat = PlayerManager.PlayerStat.Move;
@@ -179,15 +227,26 @@ namespace com.DungeonPad
                         TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
                         P1Talk.text = "";
                         P2Talk.text = "";
+                        P1TalkBox.SetActive(false);
+                        P2TalkBox.SetActive(false);
+                        P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
+                        P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                     }
                     break;
                 case TutorialStat.presseB:
                     if (p1.ConfusionTimer > 10 && p2.ConfusionTimer > 10 && p1.StickTimer > 10 && p2.StickTimer > 10)
                     {
                         stat = TutorialStat.hole;
+                        B.SetActive(false);
+                        A.SetActive(true);
+                        Dir.SetActive(true);
                         TutorialText.text = "最後一步，      +      衝刺\n\r這能幫助你們度過深淵";
                         P1Talk.text = "";
                         P2Talk.text = "";
+                        P1TalkBox.SetActive(false);
+                        P2TalkBox.SetActive(false);
+                        P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
+                        P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                         reset();
                         monsterAnimator.SetBool("Hole", true);
                         GameObject.Find("TutorialManager").transform.GetChild(0).gameObject.SetActive(false);
@@ -202,9 +261,16 @@ namespace com.DungeonPad
                         statTimer = 0;
                         p1.playerStat = PlayerManager.PlayerStat.CantMove;
                         p2.playerStat = PlayerManager.PlayerStat.CantMove;
+                        A.SetActive(false);
+                        Dir.SetActive(false);
+                        Map.SetActive(true);
                         TutorialText.text = "最後，相信地圖\n\r它將你們指引找到通往下一層的機關";
                         P1Talk.text = "好的";
                         P2Talk.text = "好的";
+                        P1TalkBox.SetActive(true);
+                        P2TalkBox.SetActive(true);
+                        P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
+                        P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                         reset();
                     }
                     break;
@@ -234,6 +300,7 @@ namespace com.DungeonPad
                         {
                             pressedA = PressedA.P1P2;
                         }
+                        P1TalkBox.SetActive(false);
                     }
                     break;
                 case "ArrowKey":
@@ -247,6 +314,7 @@ namespace com.DungeonPad
                         {
                             pressedA = PressedA.P1P2;
                         }
+                        P1TalkBox.SetActive(false);
                     }
                     break;
                 case "1":
@@ -267,6 +335,7 @@ namespace com.DungeonPad
                         {
                             pressedA = PressedA.P1P2;
                         }
+                        P1TalkBox.SetActive(false);
                     }
                     break;
             }
@@ -287,6 +356,7 @@ namespace com.DungeonPad
                         {
                             pressedA = PressedA.P1P2;
                         }
+                        P1TalkBox.SetActive(false);
                     }
                     break;
                 case "ArrowKey":
@@ -300,6 +370,7 @@ namespace com.DungeonPad
                         {
                             pressedA = PressedA.P1P2;
                         }
+                        P1TalkBox.SetActive(false);
                     }
                     break;
                 case "1":
@@ -320,6 +391,7 @@ namespace com.DungeonPad
                         {
                             pressedA = PressedA.P1P2;
                         }
+                        P1TalkBox.SetActive(false);
                     }
                     break;
             }
