@@ -13,12 +13,12 @@ public class loadscene : MonoBehaviour
     
     public void selestgame()
     {
-      SceneManager.LoadScene("SelectRole_Game");
+      SceneManager.LoadScene("SelectRole_Game 1");
     }
 
     public void selecttutorial()
     {
-        SceneManager.LoadScene("SelectRole_Tutorial");
+        SceneManager.LoadScene("SelectRole_Tutorial 1");
     }
 
     public void selectSetting()

@@ -9,7 +9,7 @@ namespace com.DungeonPad
         public SpriteRenderer spriteRenderer;
         void Start()
         {
-            spriteRenderer.color = Players.spriteColor;
+            //spriteRenderer.color = Players.spriteColor;
         }
     }
 }
