@@ -128,9 +128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  timerStoper: 1
-  timerStoperMin: 0.7
-  timerStoperMax: 1.3
+  timerStoper: 3
+  timerStoperMin: 2.7
+  timerStoperMax: 3.3
   Bubble: {fileID: 407797013649360980, guid: 47e9b91d322cef840918f2960e9f9275, type: 3}
   BubbleSource: {fileID: 40872026267246301}
 --- !u!61 &8574987875870668587
