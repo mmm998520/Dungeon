@@ -21,6 +21,7 @@ namespace com.DungeonPad
             slimeAndBubble,
             presseB,
             hole,
+            holeCanMove,
             map
         }
         public TutorialStat stat;
@@ -39,7 +40,7 @@ namespace com.DungeonPad
 
         public GameObject GoNextPos;
 
-        public GameObject P1TalkBox, P2TalkBox, B, A, Dir, Map;
+        public GameObject P1TalkBox, P2TalkBox, B, A, Dir, Map,BPicture,APicture;
         void Start()
         {
             if (transform.GetChild(0).GetComponent<PlayerManager>().p1)
@@ -204,6 +205,7 @@ namespace com.DungeonPad
                             p1.playerStat = PlayerManager.PlayerStat.CantMove;
                             p2.playerStat = PlayerManager.PlayerStat.CantMove;
                             B.SetActive(true);
+                            BPicture.SetActive(true);
                             TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
                             P1Talk.text = "";
                             P2Talk.text = "";
@@ -227,6 +229,7 @@ namespace com.DungeonPad
                         TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
                         P1Talk.text = "";
                         P2Talk.text = "";
+                        BPicture.SetActive(false);
                         P1TalkBox.SetActive(false);
                         P2TalkBox.SetActive(false);
                         P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
@@ -237,14 +240,19 @@ namespace com.DungeonPad
                     if (p1.ConfusionTimer > 10 && p2.ConfusionTimer > 10 && p1.StickTimer > 10 && p2.StickTimer > 10)
                     {
                         stat = TutorialStat.hole;
+                        statTimer = 0;
+                        pressedA = PressedA.Non;
+                        p1.playerStat = PlayerManager.PlayerStat.CantMove;
+                        p2.playerStat = PlayerManager.PlayerStat.CantMove;
                         B.SetActive(false);
                         A.SetActive(true);
+                        APicture.SetActive(true);
                         Dir.SetActive(true);
                         TutorialText.text = "最後一步，      +      衝刺\n\r這能幫助你們度過深淵";
-                        P1Talk.text = "";
-                        P2Talk.text = "";
-                        P1TalkBox.SetActive(false);
-                        P2TalkBox.SetActive(false);
+                        P1Talk.text = "好喔";
+                        P2Talk.text = "好喔";
+                        P1TalkBox.SetActive(true);
+                        P2TalkBox.SetActive(true);
                         P1TalkBox.GetComponent<playerPosToUIPos>().setPos();
                         P2TalkBox.GetComponent<playerPosToUIPos>().setPos();
                         reset();
@@ -255,6 +263,17 @@ namespace com.DungeonPad
                     }
                     break;
                 case TutorialStat.hole:
+                    p1PressA();
+                    p2PressA();
+                    if (pressedA == PressedA.P1P2)
+                    {
+                        stat = TutorialStat.holeCanMove;
+                        p1.playerStat = PlayerManager.PlayerStat.Move;
+                        p2.playerStat = PlayerManager.PlayerStat.Move;
+                        APicture.SetActive(false);
+                    }
+                    break;
+                case TutorialStat.holeCanMove:
                     if (GoNextPos.activeSelf == false)
                     {
                         stat = TutorialStat.map;
@@ -356,7 +375,7 @@ namespace com.DungeonPad
                         {
                             pressedA = PressedA.P1P2;
                         }
-                        P1TalkBox.SetActive(false);
+                        P2TalkBox.SetActive(false);
                     }
                     break;
                 case "ArrowKey":
@@ -370,7 +389,7 @@ namespace com.DungeonPad
                         {
                             pressedA = PressedA.P1P2;
                         }
-                        P1TalkBox.SetActive(false);
+                        P2TalkBox.SetActive(false);
                     }
                     break;
                 case "1":
@@ -391,7 +410,7 @@ namespace com.DungeonPad
                         {
                             pressedA = PressedA.P1P2;
                         }
-                        P1TalkBox.SetActive(false);
+                        P2TalkBox.SetActive(false);
                     }
                     break;
             }
