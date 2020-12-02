@@ -33,14 +33,14 @@ namespace com.DungeonPad
             P1P2
         }
         public PressedA pressedA;
-        float statTimer;
+        float statTimer,flashTimer;
         PlayerManager p1, p2;
         public Text TutorialText, P1Talk, P2Talk;
         public Animator monsterAnimator;
 
         public GameObject GoNextPos;
 
-        public GameObject P1TalkBox, P2TalkBox, B, A, Dir, Map,BPicture,APicture;
+        public GameObject P1TalkBox, P2TalkBox, B, A, Dir, Map,BPicture,APicture,redcircle;
         void Start()
         {
             if (transform.GetChild(0).GetComponent<PlayerManager>().p1)
@@ -206,6 +206,20 @@ namespace com.DungeonPad
                             p2.playerStat = PlayerManager.PlayerStat.CantMove;
                             B.SetActive(true);
                             BPicture.SetActive(true);
+                            if (BPicture.activeSelf == true)
+                            {
+                                redcircle.SetActive(true);
+                                flashTimer += Time.deltaTime;
+                                if(flashTimer >= 1 && flashTimer < 2)
+                                {
+                                    redcircle.SetActive(false);
+                                }
+                                if(flashTimer >= 2)
+                                {
+                                    flashTimer = 0;
+                                }
+                            }
+                            
                             TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
                             P1Talk.text = "";
                             P2Talk.text = "";
