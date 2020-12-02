@@ -9,22 +9,40 @@ namespace com.DungeonPad
         Transform minDisPlayer;
         void Start()
         {
+            speed = 1;
             rigidbody = GetComponent<Rigidbody2D>();
             addCanGoByHand();
             endRow = new int[1];
             endCol = new int[1];
         }
+        Vector3 RecordDir;
 
         private void Update()
         {
-            resetRoad();
-            move();
-            speed = 1;
+            minDisPlayer = MinDisPlayer();
+            if (Vector3.Distance(minDisPlayer.position, transform.position) > 3)
+            {
+                resetRoad();
+                move();
+            }
+            else
+            {
+
+            }
+        }
+
+        void prePunch()
+        {
+            rigidbody.velocity = Vector3.zero;
+        }
+
+        void punch()
+        {
+            rigidbody.velocity = RecordDir * 3;
         }
 
         void resetRoad()
         {
-            minDisPlayer = MinDisPlayer();
             endRow[0] = Mathf.RoundToInt(minDisPlayer.position.x);
             endCol[0] = Mathf.RoundToInt(minDisPlayer.position.y);
             findRoad();
@@ -46,6 +64,7 @@ namespace com.DungeonPad
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
+            RecordDir = rigidbody.velocity;
         }
     }
 }
