@@ -6,8 +6,6 @@ namespace com.DungeonPad
 {
     public class Tauren : MonsterManager
     {
-        Rigidbody2D rigidbody;
-
         void Start()
         {
             rigidbody = GetComponent<Rigidbody2D>();

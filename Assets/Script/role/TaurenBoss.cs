@@ -6,121 +6,45 @@ namespace com.DungeonPad
 {
     public class TaurenBoss : MonsterManager
     {
-        Rigidbody2D rigidbody;
-        public GameObject Axe, Tauren;
-        public Transform InsAxePos, center;
-        public bool canWalk = false , canPunch = true;
-        public int punching = 0;
-        public Animator animator, roomAnimator;
-        float timer;
-
+        Transform minDisPlayer;
         void Start()
         {
-            speed = 1;
             rigidbody = GetComponent<Rigidbody2D>();
-            ArmorBar = transform.GetChild(3);
+            addCanGoByHand();
+            endRow = new int[1];
+            endCol = new int[1];
         }
 
-        void Update()
+        private void Update()
         {
-            timer = roomAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime * 60;
-            while (timer >= 60)
-            {
-                timer -= 60;
-            }
-            if (canWalk)
-            {
-                if (punching == 1 && canPunch)
-                {
-                    rigidbody.velocity = Vector2.zero;
-                }
-                else if (punching == 2 && canPunch)
-                {
-                    rigidbody.velocity = transform.right * 5 * speed;
-                }
-                //如果回歸中點的時間不足(不足再讓BOSS亂逛)時向中點移動
-                else if((32/* 抵達時間(33) - 容錯值(1) */ - timer) <= Vector2.Distance(transform.position, center.position) / speed)
-                {
-                    if(Vector2.Distance(transform.position, center.position) > 0.01f)
-                    {
-                        rigidbody.velocity = Vector3.Normalize((center.position - transform.position) * Vector2.one) * speed;
-                        //一但觸發回程，就不會使用揮拳了
-                        canPunch = false;
-                        Debug.LogWarning("回程");
-                    }
-                    else
-                    {
-                        rigidbody.velocity = Vector2.zero;
-                    }
-                }
-                else if (punching == 0 && canPunch)
-                {
-                    rigidbody.velocity = Vector3.Normalize((MinDisPlayerCube().position - transform.position) * Vector2.one) * speed;
-                }
-                else
-                {
-                    if (Vector2.Distance(transform.position, center.position) > 0.01f)
-                    {
-                        rigidbody.velocity = Vector3.Normalize((center.position - transform.position) * Vector2.one) * speed;
-                        //一但觸發回程，就不會使用揮拳了
-                        canPunch = false;
-                        Debug.LogWarning("回程");
-                    }
-                    else
-                    {
-                        rigidbody.velocity = Vector2.zero;
-                    }
-                }
-                 
-                if (rigidbody.velocity.x > 0)
-                {
-                    transform.rotation = Quaternion.Euler(Vector3.zero);
-                }
-                if (rigidbody.velocity.x < 0)
-                {
-                    transform.rotation = Quaternion.Euler(Vector3.up * 180);
-                }
-            }
-            else
-            {
-                rigidbody.velocity = Vector2.zero;
-            }
-
-            ArmorBar.gameObject.SetActive(Armor > 0);
-            ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
+            resetRoad();
+            move();
+            speed = 1;
         }
 
-        float angle = 0;
-        public void throwAxeFaceTo()
+        void resetRoad()
         {
-            angle = Vector3.SignedAngle(Vector3.right, (MinDisPlayer().position - transform.position) * Vector2.one, Vector3.forward);
-            print(angle);
-            if (Mathf.Abs(angle) < 90)
-            {
-                transform.rotation = Quaternion.Euler(Vector3.zero);
-            }
-            else
-            {
-                transform.rotation = Quaternion.Euler(Vector3.up * 180);
-            }
+            minDisPlayer = MinDisPlayer();
+            endRow[0] = Mathf.RoundToInt(minDisPlayer.position.x);
+            endCol[0] = Mathf.RoundToInt(minDisPlayer.position.y);
+            findRoad();
         }
 
-        /// <summary> 丟斧頭 </summary>
-        public void throwAxe()
+        void move()
         {
-            Instantiate(Axe, InsAxePos.position, Quaternion.Euler(Vector3.forward * angle));
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.name == "PlayerCube" && canWalk && canPunch)
+            Vector3 nextPos = new Vector3(roads[roads.Count - 2][0], roads[roads.Count - 2][1]);
+            rigidbody.velocity = Vector3.Normalize(nextPos - transform.position) * speed;
+            if (Vector3.Distance(transform.position, nextPos) < 0.5f)
             {
-                animator.SetTrigger("Punch");
+                roads.RemoveAt(roads.Count - 1);
             }
-            if (collision.GetComponent<PlayerManager>())
+            if (rigidbody.velocity.x > 0)
             {
-                collision.GetComponent<PlayerManager>().HardStraightA += (Vector2)transform.right;
-                print("player");
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            if (rigidbody.velocity.x < 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
     }

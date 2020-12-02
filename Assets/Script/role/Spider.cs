@@ -26,7 +26,6 @@ namespace com.DungeonPad
                 startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
                 arriveNewRoom(startRoomRow, startRoomCol);
                 randomTarget();
-                ArmorBar = transform.GetChild(1);
             }
         }
 

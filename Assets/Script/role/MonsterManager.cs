@@ -9,7 +9,6 @@ namespace com.DungeonPad
         public float MaxArmor, Armor, CD, CDTimer, CDMin, CDMax, hand, atkTime, speed;
         protected float energyDeficiencyTimer = 10;
         protected int prepare = 0;
-        protected Transform ArmorBar;
 
         public AudioSource prepareSource, attackSource;
         public GameObject attack;

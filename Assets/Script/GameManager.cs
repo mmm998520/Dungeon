@@ -22,6 +22,7 @@ namespace com.DungeonPad
 
         void Awake()
         {
+            MazeCreater.setTotalRowCol();
             players = GameObject.Find("Players").transform;
             monsters = GameObject.Find("Monsters").transform;
             triggers = GameObject.Find("Triggers").transform;

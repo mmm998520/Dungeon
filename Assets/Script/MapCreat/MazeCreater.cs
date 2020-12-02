@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -29,6 +30,18 @@ namespace com.DungeonPad
 
         public GameObject sensor;
         public GameObject wall;
+
+        public static void setTotalRowCol()
+        {
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case "Game 2":
+                    totalRow = 22;
+                    totalCol = 12;
+                    break;
+            }
+        }
+
         void Awake()
         {
             totalRow = roomCountRowNum * objectCountRowNum;

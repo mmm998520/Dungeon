@@ -23,7 +23,6 @@ namespace com.DungeonPad
             startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
             arriveNewRoom(startRoomRow, startRoomCol);
             randomTarget();
-            ArmorBar = transform.GetChild(1);
         }
 
         void Update()
@@ -49,8 +48,6 @@ namespace com.DungeonPad
                     SpriteAnimator.SetBool("Stop", false);
                 }
             }
-            ArmorBar.gameObject.SetActive(Armor > 0);
-            ArmorBar.localScale = Vector3.one * ((Armor / MaxArmor) * 0.6f + 0.4f);
         }
 
         bool Blew = false;
