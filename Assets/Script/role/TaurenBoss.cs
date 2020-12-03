@@ -6,7 +6,9 @@ namespace com.DungeonPad
 {
     public class TaurenBoss : MonsterManager
     {
+        public bool punching = false;
         Transform minDisPlayer;
+
         void Start()
         {
             speed = 1;
@@ -20,14 +22,15 @@ namespace com.DungeonPad
         private void Update()
         {
             minDisPlayer = MinDisPlayer();
-            if (Vector3.Distance(minDisPlayer.position, transform.position) > 3)
+            if (Vector3.Distance(minDisPlayer.position, transform.position) > 3 && !punching)
             {
                 resetRoad();
                 move();
             }
-            else
+            else if(!punching)
             {
-
+                GetComponent<Animator>().SetTrigger("Punch");
+                punching = true;
             }
         }
 
@@ -38,7 +41,7 @@ namespace com.DungeonPad
 
         void punch()
         {
-            rigidbody.velocity = RecordDir * 3;
+            rigidbody.velocity = RecordDir * 5;
         }
 
         void resetRoad()
