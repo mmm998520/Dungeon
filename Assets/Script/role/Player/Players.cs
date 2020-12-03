@@ -68,8 +68,10 @@ namespace com.DungeonPad
             dir = (p2 - p1).normalized * unitDis;
             angle = Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
             spriteColor = new Color32((byte)(Mathf.Clamp(dis,0,5) * 44), 219, 0, (byte)(255 - Mathf.Clamp(dis, 0, 5) * 28));
-            Transform collider = Instantiate(attackCollider, center, Quaternion.Euler(0, 0, angle), lineAttacks).transform;
-            collider.localScale = new Vector3(dis, 0.1f, 1);
+            //Transform collider = Instantiate(attackCollider, center, Quaternion.Euler(0, 0, angle), lineAttacks).transform;
+            attackCollider.transform.position = center;
+            attackCollider.transform.rotation = Quaternion.Euler(0, 0, angle);
+            attackCollider.transform.localScale = new Vector3(dis, 0.1f, 1);
             Instantiate(attack, center, Quaternion.Euler(0, 0, angle), lineAttacks);
             while (unitDis * k <= dis / 2)
             {

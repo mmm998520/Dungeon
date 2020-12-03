@@ -252,7 +252,7 @@ Transform:
   m_GameObject: {fileID: 6115880101944645945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.64, y: 8.96, z: 0}
-  m_LocalScale: {x: 2.2251601, y: 2.2251601, z: 0.74172}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 6115880101781433285}
   - {fileID: 5637891530843328047}
@@ -296,22 +296,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRoomRow: 0
   startRoomCol: 0
+  addCanGoByHandList: []
   endRow: 
   endCol: 
   nextPos: 
   rotateSpeed: 200
-  MaxArmor: 1
-  Armor: 1
-  ArmorConsumption: 0
-  ATK: 0
+  MaxHP: 0
+  HP: 0
   CD: 0
   CDTimer: 0
-  preparation1: 0
-  preparation2: 0
-  preparationTimer: 0
+  CDMin: 0
+  CDMax: 0
   hand: 0
   atkTime: 0
   speed: 0
+  prepareSource: {fileID: 0}
+  attackSource: {fileID: 0}
   attack: {fileID: 0}
   guardPoint: 
   nextGrardNum: 0
@@ -319,15 +319,9 @@ MonoBehaviour:
   difference: 0
   repTimes: 0
   repTimer: 0
-  Axe: {fileID: 5683994576417963163, guid: 7249c241eb11fce43b6597adc4587c9d, type: 3}
-  Tauren: {fileID: 5881255763045435205, guid: 5bb2ce9fd60ae5a429eb04333dc7e442, type: 3}
-  InsAxePos: {fileID: 5637891530843328047}
-  center: {fileID: 0}
-  canWalk: 0
-  canPunch: 1
+  rigidbody: {fileID: 0}
+  Ammunition: {fileID: 0}
   punching: 0
-  animator: {fileID: 6115880101944645946}
-  roomAnimator: {fileID: 0}
 --- !u!95 &6115880101944645946
 Animator:
   serializedVersion: 3
@@ -453,3 +447,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ATK: 10
   continued: 0
+  MonsterType: 
