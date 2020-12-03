@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class MonsterManager : Navigate
     {
-        public float MaxArmor, Armor, CD, CDTimer, CDMin, CDMax, hand, atkTime, speed;
+        public float MaxHP, HP, CD, CDTimer, CDMin, CDMax, hand, atkTime, speed;
         protected float energyDeficiencyTimer = 10;
         protected int prepare = 0;
 
@@ -82,12 +82,12 @@ namespace com.DungeonPad
 
         public void useArmor(int cost)
         {
-            Armor -= cost;
+            HP -= cost;
         }
 
         protected void ArmorReCharge()
         {
-            Armor = MaxArmor;
+            HP = MaxHP;
         }
 
         public void ReCD()

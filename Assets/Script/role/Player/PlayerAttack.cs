@@ -17,7 +17,9 @@ namespace com.DungeonPad
             {
                 if (collider.GetComponent<MonsterManager>())
                 {
-                    if (collider.GetComponent<MonsterManager>().Armor <= 0)
+                    collider.GetComponent<MonsterManager>().HP -= 1;
+                    print(collider.gameObject.name);
+                    if(collider.GetComponent<MonsterManager>().HP <= 0)
                     {
                         Debug.LogWarning("hitTimes");
                         PlayerManager.HP += 25;
