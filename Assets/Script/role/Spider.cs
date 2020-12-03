@@ -20,7 +20,8 @@ namespace com.DungeonPad
         void Start()
         {
             ReCD();
-            if (SceneManager.GetActiveScene().name != "Tutorial1")
+            addCanGoByHand();
+            if (SceneManager.GetActiveScene().name == "Game 1")
             {
                 startRoomRow = Mathf.RoundToInt(transform.position.x) / GameManager.mazeCreater.objectCountRowNum;
                 startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;
@@ -43,6 +44,7 @@ namespace com.DungeonPad
             }
             else
             {
+                Debug.LogError(0);
                 attack();
             }
         }
@@ -53,7 +55,6 @@ namespace com.DungeonPad
             {
                 attacking = true;
                 GetComponent<Animator>().SetTrigger("Attack");
-                Debug.LogError(0);
             }
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularDrag = 0;
