@@ -23,6 +23,14 @@ namespace com.DungeonPad
                     {
                         transform.GetChild(i).GetComponent<Spider>().spiderBehavior = Spider.SpiderBehavior.ramdomMove;
                     }
+                    else if (transform.GetChild(i).GetComponent<SpiderB>())
+                    {
+                        transform.GetChild(i).GetComponent<SpiderB>().spiderBehavior = SpiderB.SpiderBehavior.ramdomMove;
+                    }
+                    else if (transform.GetChild(i).GetComponent<SpiderC>())
+                    {
+                        transform.GetChild(i).GetComponent<SpiderC>().spiderBehavior = SpiderC.SpiderBehavior.ramdomMove;
+                    }
                 }
             }
             else
@@ -32,7 +40,14 @@ namespace com.DungeonPad
                     if (transform.GetChild(i).GetComponent<Spider>())
                     {
                         transform.GetChild(i).GetComponent<Spider>().spiderBehavior = Spider.SpiderBehavior.attack;
-                        Debug.LogFormat(transform.GetChild(i).gameObject, transform.GetChild(i).gameObject.name);
+                    }
+                    else if (transform.GetChild(i).GetComponent<SpiderB>())
+                    {
+                        transform.GetChild(i).GetComponent<SpiderB>().spiderBehavior = SpiderB.SpiderBehavior.attack;
+                    }
+                    else if (transform.GetChild(i).GetComponent<SpiderC>())
+                    {
+                        transform.GetChild(i).GetComponent<SpiderC>().spiderBehavior = SpiderC.SpiderBehavior.attack;
                     }
                 }
             }
