@@ -10,6 +10,7 @@ namespace com.DungeonPad
         public bool punching = false;
         Transform minDisPlayer;
         public Text HPText;
+        public float InvincibleTimer = 10;//無敵
         void Start()
         {
             speed = 3;
@@ -22,6 +23,7 @@ namespace com.DungeonPad
 
         private void Update()
         {
+            InvincibleTimer += Time.deltaTime;
             HPText.text = HP + "";
             minDisPlayer = MinDisPlayer();
             if (Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !punching)
@@ -45,6 +47,7 @@ namespace com.DungeonPad
 
         void punch()
         {
+            InvincibleTimer = 0;
             rigidbody.velocity = RecordDir * 15;
         }
 

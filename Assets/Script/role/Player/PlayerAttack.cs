@@ -17,7 +17,10 @@ namespace com.DungeonPad
             {
                 if (collider.GetComponent<MonsterManager>())
                 {
-                    collider.GetComponent<MonsterManager>().HP -= 1;
+                    if(!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
+                    {
+                        collider.GetComponent<MonsterManager>().HP -= 1;
+                    }
                     print(collider.gameObject.name);
                     if(collider.GetComponent<MonsterManager>().HP <= 0)
                     {
