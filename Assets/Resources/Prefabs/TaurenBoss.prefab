@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 6115880101944645924}
   - component: {fileID: 6115880101944645947}
   - component: {fileID: 6115880101944645946}
-  - component: {fileID: 6115880101944645925}
+  - component: {fileID: 62172028450586239}
   m_Layer: 9
   m_Name: TaurenBoss
   m_TagString: Untagged
@@ -341,8 +341,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &6115880101944645925
-BoxCollider2D:
+--- !u!70 &62172028450586239
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -350,23 +350,13 @@ BoxCollider2D:
   m_GameObject: {fileID: 6115880101944645945}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 9e81540e6a3f11144bd0345662978b0d, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.007314142, y: -0.014628187}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.073550224, y: 0.5564438}
-  m_EdgeRadius: 0.61
+  m_Offset: {x: -0.0049031577, y: -0.03186878}
+  m_Size: {x: 0.39213562, y: 0.9362625}
+  m_Direction: 0
 --- !u!1 &6115880102486937802
 GameObject:
   m_ObjectHideFlags: 0

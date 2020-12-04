@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace com.DungeonPad
 {
@@ -8,10 +9,10 @@ namespace com.DungeonPad
     {
         public bool punching = false;
         Transform minDisPlayer;
-
+        public Text HPText;
         void Start()
         {
-            speed = 1;
+            speed = 3;
             rigidbody = GetComponent<Rigidbody2D>();
             addCanGoByHand();
             endRow = new int[1];
@@ -21,8 +22,9 @@ namespace com.DungeonPad
 
         private void Update()
         {
+            HPText.text = HP + "";
             minDisPlayer = MinDisPlayer();
-            if (Vector3.Distance(minDisPlayer.position, transform.position) > 3 && !punching)
+            if (Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !punching)
             {
                 resetRoad();
                 move();
@@ -32,16 +34,23 @@ namespace com.DungeonPad
                 GetComponent<Animator>().SetTrigger("Punch");
                 punching = true;
             }
+
         }
 
         void prePunch()
         {
+            Record();
             rigidbody.velocity = Vector3.zero;
         }
 
         void punch()
         {
-            rigidbody.velocity = RecordDir * 5;
+            rigidbody.velocity = RecordDir * 15;
+        }
+
+        void Record()
+        {
+            RecordDir = Vector3.Normalize(minDisPlayer.position - transform.position);
         }
 
         void resetRoad()
@@ -67,7 +76,6 @@ namespace com.DungeonPad
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
-            RecordDir = rigidbody.velocity;
         }
     }
 }

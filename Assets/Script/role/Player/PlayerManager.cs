@@ -746,7 +746,7 @@ namespace com.DungeonPad
             BulletNum--;
         }
 
-        private void OnCollisionStay2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.collider.GetComponent<MonsterManager>() && !collision.collider.GetComponent<Slime>())
             {
@@ -754,7 +754,14 @@ namespace com.DungeonPad
                 {
                     HardStraightTimer = 0;
                     DashA = Vector3.zero;
-                    HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
+                    if (collision.collider.GetComponent<TaurenBoss>())
+                    {
+                        HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 30;
+                    }
+                    else
+                    {
+                        HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
+                    }
                     HP -= 3;
                     playerJoyVibration.hurt();
 

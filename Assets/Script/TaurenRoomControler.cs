@@ -27,7 +27,14 @@ namespace com.DungeonPad
         {
             for(int i = 0; i < times; i++)
             {
-                Instantiate(obj, new Vector3(Random.Range(1f, 20f), Random.Range(1f, 10f), 0), Quaternion.identity, monsters).SetActive(true);
+                if (monsters.childCount < 11 + 4)
+                {
+                    Instantiate(obj, new Vector3(Random.Range(1f, 20f), Random.Range(1f, 10f), 0), Quaternion.identity, monsters).SetActive(true);
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 

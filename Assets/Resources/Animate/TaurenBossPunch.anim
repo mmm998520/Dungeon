@@ -30,7 +30,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1.5
+        time: 2.6666667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -49,7 +49,7 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: eb0d7aaef9543124392751624a6a6b97, type: 3}
-    - time: 0.8333333
+    - time: 1
       value: {fileID: 21300000, guid: 345bf3efe14c694488f5e67d46643915, type: 3}
     attribute: m_Sprite
     path: New Sprite
@@ -84,7 +84,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.5
+    m_StopTime: 2.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -113,7 +113,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1.5
+        time: 2.6666667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -139,8 +139,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.8333333
+  - time: 1
     functionName: punch
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.6666666
+    functionName: prePunch
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
