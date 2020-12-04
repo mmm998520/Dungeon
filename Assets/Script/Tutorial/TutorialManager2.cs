@@ -206,20 +206,8 @@ namespace com.DungeonPad
                             p2.playerStat = PlayerManager.PlayerStat.CantMove;
                             B.SetActive(true);
                             BPicture.SetActive(true);
-                            if (BPicture.activeSelf == true)
-                            {
-                                redcircle.SetActive(true);
-                                flashTimer += Time.deltaTime;
-                                if(flashTimer >= 1 && flashTimer < 2)
-                                {
-                                    redcircle.SetActive(false);
-                                }
-                                if(flashTimer >= 2)
-                                {
-                                    flashTimer = 0;
-                                }
-                            }
                             
+
                             TutorialText.text = "史萊姆、毒泡泡會影響你們的行動\n\r快速按      可掙扎擺脫";
                             P1Talk.text = "";
                             P2Talk.text = "";
@@ -233,6 +221,20 @@ namespace com.DungeonPad
                     }
                     break;
                 case TutorialStat.slimeAndBubble:
+                    if (BPicture.activeSelf == true)
+                    {
+                        redcircle.SetActive(true);
+                        flashTimer += Time.deltaTime;
+                        if (flashTimer >= 0.5 && flashTimer < 1)
+                        {
+                            redcircle.SetActive(false);
+                        }
+                        if (flashTimer >= 1)
+                        {
+                            flashTimer = 0;
+                        }
+                        Debug.Log(flashTimer);
+                    }
                     if ((statTimer += Time.deltaTime) > 10)
                     {
                         if((statTimer+=Time.deltaTime) >= 1)
