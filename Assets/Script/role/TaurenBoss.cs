@@ -7,10 +7,17 @@ namespace com.DungeonPad
 {
     public class TaurenBoss : MonsterManager
     {
-        public bool punching = false;
+        public bool attacking = false;
         Transform minDisPlayer;
         public Text HPText;
         public float InvincibleTimer = 10;//無敵
+        public Animator animator;
+        Vector3 RecordDir;
+
+        bool throwByClockwise;
+        float playerAngle;
+        public GameObject Axe;
+
         void Start()
         {
             speed = 3;
@@ -18,25 +25,40 @@ namespace com.DungeonPad
             addCanGoByHand();
             endRow = new int[1];
             endCol = new int[1];
+            animator = GetComponent<Animator>();
         }
-        Vector3 RecordDir;
 
         private void Update()
         {
             InvincibleTimer += Time.deltaTime;
             HPText.text = HP + "";
             minDisPlayer = MinDisPlayer();
-            if (Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !punching)
+            if (Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking)
             {
                 resetRoad();
                 move();
             }
-            else if(!punching)
+            else if(!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe") && (CDTimer += Time.deltaTime) > CD)
             {
-                GetComponent<Animator>().SetTrigger("Punch");
-                punching = true;
+                int r = Random.Range(0, 2);
+                print(r);
+                if (r > 0)
+                {
+                    animator.SetBool("Punch", true);
+                }
+                else
+                {
+                    throwByClockwise = Random.Range(0, 2) > 0;
+                    animator.SetBool("ThrowAxe", true);
+                    playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
+                }
+                attacking = true;
             }
-
+        }
+        #region//Punch
+        void Record()
+        {
+            RecordDir = Vector3.Normalize(minDisPlayer.position - transform.position);
         }
 
         void prePunch()
@@ -51,10 +73,35 @@ namespace com.DungeonPad
             rigidbody.velocity = RecordDir * 15;
         }
 
-        void Record()
+        void reSpeed()
         {
-            RecordDir = Vector3.Normalize(minDisPlayer.position - transform.position);
+            rigidbody.velocity = Vector3.zero;
         }
+
+        void endPunch()
+        {
+            animator.SetBool("Punch", false);
+            CDTimer = 0;
+        }
+        #endregion
+
+        #region//ThrowAxe
+        void ThrowAxe(float angle)
+        {
+            if (!throwByClockwise)
+            {
+                angle *= -1;
+            }
+            GameObject temp = Instantiate(Axe, transform.position, Quaternion.Euler(0, 0, angle + playerAngle));
+            Debug.LogErrorFormat(temp.name, temp);
+        }
+
+        void endThrowAxe()
+        {
+            animator.SetBool("ThrowAxe", false);
+            CDTimer = 0;
+        }
+        #endregion
 
         void resetRoad()
         {
