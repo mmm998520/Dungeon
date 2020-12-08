@@ -8,6 +8,12 @@ namespace com.DungeonPad
     {
         public Transform monsters;
         public GameObject spider, spiderB, spiderC, Boss;
+
+        private void Update()
+        {
+            print(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime * 3589);
+        }
+
         public void insSpider(int times)
         {
             ins(spider, times);
@@ -27,7 +33,7 @@ namespace com.DungeonPad
         {
             for(int i = 0; i < times; i++)
             {
-                if (monsters.childCount < 5 + 4)
+                if (monsters.childCount < 0 + 4)
                 {
                     Instantiate(obj, new Vector3(Random.Range(1f, 20f), Random.Range(1f, 10f), 0), Quaternion.identity, monsters).SetActive(true);
                 }
@@ -41,6 +47,17 @@ namespace com.DungeonPad
         public void setBossActive(int active)
         {
             Boss.SetActive(active > 0);
+        }
+
+        void setStabAttack()
+        {
+            for(int i = 0; i < GameManager.triggers.childCount; i++)
+            {
+                if (GameManager.triggers.GetChild(i).GetComponent<Stab>())
+                {
+                    GameManager.triggers.GetChild(i).GetComponent<Animator>().SetTrigger("attack");
+                }
+            }
         }
     }
 }

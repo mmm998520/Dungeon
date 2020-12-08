@@ -51,13 +51,25 @@ AnimationClip:
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
     - time: 0.6666667
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 1
+    - time: 0.78333336
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 1.3333334
+    - time: 0.9166667
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
-    - time: 1.6666666
+    - time: 1.0333333
       value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
-    - time: 2
+    - time: 1.1666666
+      value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
+    - time: 1.2833333
+      value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
+    - time: 1.4166666
+      value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
+    - time: 1.5333333
+      value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
+    - time: 1.6666666
+      value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
+    - time: 1.7833333
+      value: {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
+    - time: 1.9166666
       value: {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
     attribute: m_Sprite
     path: New Sprite
@@ -85,6 +97,12 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
+    - {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
+    - {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
+    - {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
+    - {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
+    - {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
+    - {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
     - {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
     - {fileID: 21300000, guid: 52db65bea4ef3b34ab43c71b3e5a3243, type: 3}
     - {fileID: 21300000, guid: f0cefd21536a92c40a002084e16b0e2d, type: 3}
@@ -158,14 +176,35 @@ AnimationClip:
     floatParameter: 45
     intParameter: 0
     messageOptions: 0
-  - time: 1.3333334
+  - time: 0.9166667
     functionName: ThrowAxe
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
+    floatParameter: 27
     intParameter: 0
     messageOptions: 0
-  - time: 2
+  - time: 1.1666666
+    functionName: ThrowAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 9
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.4166666
+    functionName: ThrowAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -9
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.6666666
+    functionName: ThrowAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: -27
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.9166666
     functionName: ThrowAxe
     data: 
     objectReferenceParameter: {fileID: 0}

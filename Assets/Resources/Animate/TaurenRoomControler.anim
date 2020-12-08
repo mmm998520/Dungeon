@@ -114,80 +114,66 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 3
-    functionName: insSpider
+  - time: 3.2
+    functionName: setStabAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 0
     messageOptions: 0
-  - time: 7
-    functionName: insSpider
+  - time: 6.5833335
+    functionName: setStabAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 0
     messageOptions: 0
-  - time: 11
-    functionName: insSpiderB
+  - time: 10.383333
+    functionName: setStabAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 0
     messageOptions: 0
-  - time: 15
-    functionName: insSpider
+  - time: 13.883333
+    functionName: setStabAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 0
     messageOptions: 0
-  - time: 18
-    functionName: insSpider
+  - time: 17.583334
+    functionName: setStabAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 0
     messageOptions: 0
-  - time: 22
-    functionName: insSpiderB
+  - time: 21.466667
+    functionName: setStabAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 0
     messageOptions: 0
-  - time: 25
-    functionName: insSpider
+  - time: 25.016666
+    functionName: setStabAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 0
     messageOptions: 0
-  - time: 29
-    functionName: insSpider
+  - time: 28.533333
+    functionName: setStabAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 0
     messageOptions: 0
-  - time: 33
-    functionName: insSpiderB
+  - time: 32.033333
+    functionName: setStabAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 33
-    functionName: setBossActive
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 40
-    functionName: insSpider
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 8
+    intParameter: 0
     messageOptions: 0

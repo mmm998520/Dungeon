@@ -191,14 +191,15 @@ namespace com.DungeonPad
                 */
                 if (dis < 2f)
                 {
-                    if (Players.fightingTimer >= 5)
+                    /*if (Players.fightingTimer >= 5)
                     {
                         hpUpRate = 20;
                     }
                     else
                     {
                         hpUpRate = 8;
-                    }
+                    }*/
+                    hpUpRate = 20;
                 }
                 else if (dis < 4.5f)
                 {
@@ -757,12 +758,13 @@ namespace com.DungeonPad
                     if (collision.collider.GetComponent<TaurenBoss>())
                     {
                         HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 30;
+                        HP -= 6;
                     }
                     else
                     {
                         HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
+                        HP -= 3;
                     }
-                    HP -= 3;
                     playerJoyVibration.hurt();
 
                     //玩家進入無敵狀態

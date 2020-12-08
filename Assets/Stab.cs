@@ -6,14 +6,23 @@ namespace com.DungeonPad
 {
     public class Stab : MonoBehaviour
     {
+        Animator animator;
         void Start()
         {
-
+            animator = GetComponent<Animator>();
         }
 
         void Update()
         {
-
+            if(animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+            {
+                print("yes");
+                follow();
+            }
+            else
+            {
+                print("no");
+            }
         }
 
         public Transform MinDisPlayer()
@@ -40,84 +49,14 @@ namespace com.DungeonPad
 
         void follow()
         {
-            bool up = false, right = false, down = false, left = false;
-            if((int)MinDisPlayer().position.x < (int)transform.position.x)
+            Vector3 dir = MinDisPlayer().position - transform.position;
+            if (Vector3.Magnitude(dir) > Time.deltaTime * 3)
             {
-                left = true;
+                transform.Translate(Vector3.Normalize(dir) * Time.deltaTime * 3);
             }
-            else if((int)MinDisPlayer().position.x > (int)transform.position.x)
+            else
             {
-                right = true;
-            }
-            if ((int)MinDisPlayer().position.y < (int)transform.position.y)
-            {
-                down = true;
-            }
-            else if ((int)MinDisPlayer().position.y > (int)transform.position.y)
-            {
-                up = true;
-            }
-
-            int r = Random.Range(0, 2);
-            if (up && right)
-            {
-                if (r < 1)
-                {
-                    transform.position += Vector3.up;
-                }
-                else
-                {
-                    transform.position += Vector3.right;
-                }
-            }
-            else if(up && left)
-            {
-                if (r < 1)
-                {
-                    transform.position += Vector3.up;
-                }
-                else
-                {
-                    transform.position += Vector3.left;
-                }
-            }
-            else if (down && right)
-            {
-                if (r < 1)
-                {
-                    transform.position += Vector3.down;
-                }
-                else
-                {
-                    transform.position += Vector3.right;
-                }
-            }
-            else if (down && left)
-            {
-                if (r < 1)
-                {
-                    transform.position += Vector3.down;
-                }
-                else
-                {
-                    transform.position += Vector3.left;
-                }
-            }
-            else if (up)
-            {
-                transform.position += Vector3.up;
-            }
-            else if (right)
-            {
-                transform.position += Vector3.right;
-            }
-            else if (left)
-            {
-                transform.position += Vector3.left;
-            }
-            else if (down)
-            {
-                transform.position += Vector3.down;
+                transform.Translate(dir);
             }
         }
     }
