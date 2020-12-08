@@ -6,6 +6,7 @@ namespace com.DungeonPad
 {
     public class StabTrigger : MonoBehaviour
     {
+        public Animator animator;
         void Start()
         {
 
@@ -20,7 +21,7 @@ namespace com.DungeonPad
         {
             if (collider.GetComponent<PlayerManager>())
             {
-
+                animator.SetTrigger("stab");
             }
         }
     }
