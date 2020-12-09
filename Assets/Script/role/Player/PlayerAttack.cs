@@ -25,7 +25,7 @@ namespace com.DungeonPad
                     if(collider.GetComponent<MonsterManager>().HP <= 0)
                     {
                         Debug.LogWarning("hitTimes");
-                        PlayerManager.HP += 25;
+                        PlayerManager.HP += 10;
                         Players.reTimer = 0;
                         collider.GetComponent<MonsterManager>().beforeDied();
                         Destroy(collider.gameObject);

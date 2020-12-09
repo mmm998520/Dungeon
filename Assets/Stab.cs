@@ -51,9 +51,9 @@ namespace com.DungeonPad
         void follow()
         {
             Vector3 dir = MinDisPlayer().position - transform.position;
-            if (Vector3.Magnitude(dir) > Time.deltaTime * 3)
+            if (Vector3.Magnitude(dir) > Time.deltaTime * 1.5f)
             {
-                transform.Translate(Vector3.Normalize(dir) * Time.deltaTime * 3);
+                transform.Translate(Vector3.Normalize(dir) * Time.deltaTime * 1.5f);
             }
             else
             {

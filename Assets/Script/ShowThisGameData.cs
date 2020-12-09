@@ -29,6 +29,7 @@ namespace com.DungeonPad
 
         void writeFile(string fileName, string content)
         {
+            Debug.LogWarning(content);
             FileStream fs;
             try
             {

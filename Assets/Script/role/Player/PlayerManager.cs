@@ -9,8 +9,8 @@ namespace com.DungeonPad
 {
     public class PlayerManager : MonoBehaviour
     {
-        public static float MaxHP = 40, HP = 40;
-        public static bool lockedHP = true;
+        public static float MaxHP = 60, HP = 40;
+        public static bool lockedHP = false;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -771,7 +771,7 @@ namespace com.DungeonPad
                     else
                     {
                         HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
-                        HP -= 3;
+                        HP -= 5;
                     }
                     playerJoyVibration.hurt();
 
