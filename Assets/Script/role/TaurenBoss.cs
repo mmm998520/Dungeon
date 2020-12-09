@@ -12,7 +12,7 @@ namespace com.DungeonPad
         public Text HPText;
         public float InvincibleTimer = 10;//無敵
         public Animator animator;
-        Vector3 RecordDir;
+        public Vector3 RecordDir;
 
         bool throwByClockwise;
         float playerAngle;

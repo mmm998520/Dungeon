@@ -757,7 +757,15 @@ namespace com.DungeonPad
                     DashA = Vector3.zero;
                     if (collision.collider.GetComponent<TaurenBoss>())
                     {
-                        HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 30;
+                        TaurenBoss taurenBoss = collision.collider.GetComponent<TaurenBoss>();
+                        if (taurenBoss.InvincibleTimer < 0.4f && Vector2.Angle(taurenBoss.RecordDir, transform.position - collision.transform.position) < 90)
+                        {
+                            HardStraightA = (Vector2)taurenBoss.RecordDir * 30;
+                        }
+                        else
+                        {
+                            HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
+                        }
                         HP -= 6;
                     }
                     else
