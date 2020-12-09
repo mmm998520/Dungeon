@@ -10,6 +10,7 @@ namespace com.DungeonPad
         void Start()
         {
             animator = GetComponent<Animator>();
+            randomPos();
         }
 
         void Update()

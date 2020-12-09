@@ -7,7 +7,7 @@ namespace com.DungeonPad
     public class TaurenRoomControler : MonoBehaviour
     {
         public Transform monsters;
-        public GameObject spider, spiderB, spiderC, Boss;
+        public GameObject spider, spiderB, spiderC, stab, Boss;
 
         private void Update()
         {
@@ -27,6 +27,21 @@ namespace com.DungeonPad
         public void insSpiderC(int times)
         {
             ins(spiderC, times);
+        }
+
+        public void insStab(int times)
+        {
+            for (int i = 0; i < times; i++)
+            {
+                if (GameManager.triggers.childCount < 10)
+                {
+                    Instantiate(stab, new Vector3(Random.Range(1f, 20f), Random.Range(1f, 10f), 0), Quaternion.identity, GameManager.triggers);
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         void ins(GameObject obj, int times)
