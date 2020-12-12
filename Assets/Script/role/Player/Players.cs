@@ -25,6 +25,7 @@ namespace com.DungeonPad
         {
             fightingTimer += Time.deltaTime;
             reTimer += Time.deltaTime;
+            /*
             if (GameManager.players.GetChild(0).GetComponent<PlayerManager>().DashTimer < 0.5f || GameManager.players.GetChild(1).GetComponent<PlayerManager>().DashTimer < 0.5f)
             {
                 draw = true;
@@ -43,7 +44,7 @@ namespace com.DungeonPad
                 {
                     Destroy(lineAttacks.gameObject);
                 }
-            }
+            }*/
         }
 
         void drawLine()

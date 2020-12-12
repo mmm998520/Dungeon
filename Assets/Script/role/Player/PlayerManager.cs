@@ -10,7 +10,7 @@ namespace com.DungeonPad
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 60, HP = 40;
-        public static bool lockedHP = false;
+        public static bool lockedHP = true;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -46,7 +46,7 @@ namespace com.DungeonPad
         public GameObject reStatUI, fightingStatUI, confusionStatUI, stickStatUI;
 
         public int MaxBulletNum = 5, BulletNum = 5;
-        public GameObject Bullet;
+        public GameObject Bullet, attackLine;
 
         public enum PlayerStat
         {
@@ -161,13 +161,6 @@ namespace com.DungeonPad
                     {
                         GamePad.SetVibration((PlayerIndex)i, 0, 0);
                     }
-                    /*
-                    GameManager.PlayTime = Time.time;
-                    TutorialAnimator.SetTrigger("Died");
-                    Destroy(GameManager.players.gameObject);
-                    Camera.main.GetComponent<CameraManager>().enabled = false;
-                    Destroy(GameObject.Find("lineAttacks"));
-                    */
                 }
                 else
                 {
@@ -479,6 +472,7 @@ namespace com.DungeonPad
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
+                                        LineAttack();
                                     }
                                 }
                                 break;
@@ -491,6 +485,7 @@ namespace com.DungeonPad
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
+                                        LineAttack();
                                     }
                                 }
                                 break;
@@ -510,6 +505,7 @@ namespace com.DungeonPad
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
+                                        LineAttack();
                                         playerJoyVibration.DashVibration = 0.8f;
                                     }
                                 }
@@ -529,6 +525,7 @@ namespace com.DungeonPad
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
+                                        LineAttack();
                                     }
                                 }
                                 break;
@@ -541,6 +538,7 @@ namespace com.DungeonPad
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
+                                        LineAttack();
                                     }
                                 }
                                 break;
@@ -560,6 +558,7 @@ namespace com.DungeonPad
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
+                                        LineAttack();
                                         playerJoyVibration.DashVibration = 0.8f;
                                     }
                                 }
@@ -819,6 +818,23 @@ namespace com.DungeonPad
             if (collider.GetComponent<Ammunition>())
             {
 
+            }
+        }
+
+        void LineAttack()
+        {
+            PlayerAttackLine playerAttackLine = Instantiate(attackLine).GetComponent<PlayerAttackLine>();
+            for (int i = 0; i < GameManager.players.childCount; i++)
+            {
+                Transform player = GameManager.players.GetChild(i);
+                if (player == transform)
+                {
+                    playerAttackLine.startPlayer = player;
+                }
+                else
+                {
+                    playerAttackLine.endPlayer = player;
+                }
             }
         }
     }
