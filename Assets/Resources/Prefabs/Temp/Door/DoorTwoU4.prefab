@@ -655,8 +655,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5694866630985751221}
   non: {fileID: 21300000, guid: 6dfadb0843b22ea4590c693123c42123, type: 3}
-  p1: {fileID: 21300000, guid: 92dadb9aa0ec90a4cbca149791c2df53, type: 3}
-  p2: {fileID: 21300000, guid: 631be2a15a825e447a7b60e6e019590d, type: 3}
+  blue: {fileID: 21300000, guid: 631be2a15a825e447a7b60e6e019590d, type: 3}
+  red: {fileID: 21300000, guid: 92dadb9aa0ec90a4cbca149791c2df53, type: 3}
   p1_p2: {fileID: 21300000, guid: 0e550981c0737d64fbab112597d75d3c, type: 3}
 --- !u!212 &5048988219060080903
 SpriteRenderer:

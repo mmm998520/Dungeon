@@ -18,7 +18,7 @@ namespace com.DungeonPad
 
         public static bool p1used = false, p2used = false;
         public SpriteRenderer spriteRenderer;
-        public Sprite non, p1, p2;
+        public Sprite non, blue, red;
 
         void Start()
         {
@@ -34,13 +34,27 @@ namespace com.DungeonPad
                     if (collider.GetComponent<PlayerManager>().p1)
                     {
                         buttonStat = ButtonStat.p1;
-                        spriteRenderer.sprite = p1;
+                        if(SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
+                        {
+                            spriteRenderer.sprite = blue;
+                        }
+                        else
+                        {
+                            spriteRenderer.sprite = red;
+                        }
                         p1used = true;
                     }
                     else
                     {
                         buttonStat = ButtonStat.p2;
-                        spriteRenderer.sprite = p2;
+                        if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
+                        {
+                            spriteRenderer.sprite = red;
+                        }
+                        else
+                        {
+                            spriteRenderer.sprite = blue;
+                        }
                         p2used = true;
                     }
                 }
@@ -80,14 +94,28 @@ namespace com.DungeonPad
                     if (collider.GetComponent<PlayerManager>().p1)
                     {
                         buttonStat = ButtonStat.p2;
-                        spriteRenderer.sprite = p2;
+                        if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
+                        {
+                            spriteRenderer.sprite = red;
+                        }
+                        else
+                        {
+                            spriteRenderer.sprite = blue;
+                        }
                         p1used = false;
                         p2used = true;
                     }
                     else
                     {
                         buttonStat = ButtonStat.p1;
-                        spriteRenderer.sprite = p1;
+                        if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
+                        {
+                            spriteRenderer.sprite = blue;
+                        }
+                        else
+                        {
+                            spriteRenderer.sprite = red;
+                        }
                         p1used = true;
                         p2used = false;
                     }

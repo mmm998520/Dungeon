@@ -9,7 +9,7 @@ namespace com.DungeonPad
         float localX, localXMax, speed = 1.5f;
         Transform doorSprite, doorCollider;
         public SpriteRenderer spriteRenderer;
-        public Sprite non, p1, p2, p1_p2;
+        public Sprite non, blue, red, p1_p2;
 
         void Start()
         {
@@ -31,11 +31,25 @@ namespace com.DungeonPad
                 localX += Time.deltaTime * speed;
                 if(ButtonTwo.p1used)
                 {
-                    spriteRenderer.sprite = p1;
+                    if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
+                    {
+                        spriteRenderer.sprite = blue;
+                    }
+                    else
+                    {
+                        spriteRenderer.sprite = red;
+                    }
                 }
                 else if(ButtonTwo.p2used)
                 {
-                    spriteRenderer.sprite = p2;
+                    if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
+                    {
+                        spriteRenderer.sprite = red;
+                    }
+                    else
+                    {
+                        spriteRenderer.sprite = blue;
+                    }
                 }
                 else
                 {
