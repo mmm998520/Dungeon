@@ -32,20 +32,20 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if(spiderBehavior == SpiderBehavior.ramdomMove)
+            if ((CDTimer += Time.deltaTime) >= CD && Vector2.Distance(MinDisPlayer().position, transform.position) <= 10)
             {
-                if(SceneManager.GetActiveScene().name != "Tutorial1")
+                Debug.LogError(0);
+                attack();
+            }
+            else
+            {
+                if (SceneManager.GetActiveScene().name != "Tutorial1")
                 {
                     Move();
                     Stuck(2, 1);
                 }
                 attacking = false;
                 SpriteAnimator.SetBool("Stop", false);
-            }
-            else
-            {
-                Debug.LogError(0);
-                attack();
             }
         }
 
