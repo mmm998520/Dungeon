@@ -142,9 +142,14 @@ namespace com.DungeonPad
                             for (l = 0; l < GameManager.mazeCreater.objectCountColNum; l++)
                             {
                                 col = j * GameManager.mazeCreater.objectCountColNum + l;
-                                if (GameManager.mazeCreater.mazeDatas[row, col] != "wall" && !GameManager.mazeCreater.mazeDatas[row, col].Contains("上") && !GameManager.mazeCreater.mazeDatas[row, col].Contains("下") && !GameManager.mazeCreater.mazeDatas[row, col].Contains("左") && !GameManager.mazeCreater.mazeDatas[row, col].Contains("右"))
+                                if (GameManager.mazeCreater.mazeDatas[row, col] != "wall" && !GameManager.mazeCreater.mazeDatas[row, col].Contains("Door") && !GameManager.mazeCreater.mazeDatas[row, col].Contains("上") && !GameManager.mazeCreater.mazeDatas[row, col].Contains("下") && !GameManager.mazeCreater.mazeDatas[row, col].Contains("左") && !GameManager.mazeCreater.mazeDatas[row, col].Contains("右"))
                                 {
                                     canGo.Add(canGo.Count, row * MazeCreater.totalCol + col);
+                                    print(GameManager.mazeCreater.mazeDatas[row, col]);
+                                }
+                                else
+                                {
+                                    print(GameManager.mazeCreater.mazeDatas[row, col]);
                                 }
                             }
                         }
