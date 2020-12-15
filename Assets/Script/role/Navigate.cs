@@ -130,7 +130,8 @@ namespace com.DungeonPad
             canGo = new Dictionary<int, int>();
             int row, col;
             int i, j, k, l;
-            for(i = 0; i < GameManager.mazeCreater.roomCountRowNum; i++)
+            string temp;
+            for (i = 0; i < GameManager.mazeCreater.roomCountRowNum; i++)
             {
                 for (j = 0; j < GameManager.mazeCreater.roomCountColNum; j++)
                 {
@@ -142,14 +143,10 @@ namespace com.DungeonPad
                             for (l = 0; l < GameManager.mazeCreater.objectCountColNum; l++)
                             {
                                 col = j * GameManager.mazeCreater.objectCountColNum + l;
-                                if (GameManager.mazeCreater.mazeDatas[row, col] != "wall" && !GameManager.mazeCreater.mazeDatas[row, col].Contains("Door") && !GameManager.mazeCreater.mazeDatas[row, col].Contains("上") && !GameManager.mazeCreater.mazeDatas[row, col].Contains("下") && !GameManager.mazeCreater.mazeDatas[row, col].Contains("左") && !GameManager.mazeCreater.mazeDatas[row, col].Contains("右"))
+                                temp = GameManager.mazeCreater.mazeDatas[row, col];
+                                if (temp != "wall" && !temp.Contains("Door") && !temp.Contains("上") && !temp.Contains("下") && !temp.Contains("左") && !temp.Contains("右"))
                                 {
                                     canGo.Add(canGo.Count, row * MazeCreater.totalCol + col);
-                                    print(GameManager.mazeCreater.mazeDatas[row, col]);
-                                }
-                                else
-                                {
-                                    print(GameManager.mazeCreater.mazeDatas[row, col]);
                                 }
                             }
                         }
