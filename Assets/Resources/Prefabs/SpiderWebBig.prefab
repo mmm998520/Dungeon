@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 6311440351145823934}
   - component: {fileID: 5957171386420349302}
   m_Layer: 0
-  m_Name: SpiderWeb
+  m_Name: SpiderWebBig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,7 +319,7 @@ Transform:
   m_GameObject: {fileID: 6355018383450350413}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 5712866478209859784}
   - {fileID: 671338302713214020}
@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edf42f0ff0f9084596a2c5a66d2e079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ATK: 20
+  ATK: 30
   continued: 0
   MonsterType: Spider
 --- !u!114 &2888608939692655006
@@ -354,9 +354,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe8f4503fa8c0040bff023f554e0844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 2.3
   timer: 0
-  timerStoper: 5
+  timerStoper: 6
   destoryTime: 0.6
   hitSound: {fileID: 6761128484382667410}
   animator: {fileID: 5957171386420349302}
@@ -385,10 +385,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.1568007, y: -0.0002143979}
-      - {x: 0.806582, y: 0.035521924}
-      - {x: 0.44601887, y: 0.0021796823}
-      - {x: 0.803628, y: -0.033392668}
+    - - {x: 0.9700835, y: -0.0051935012}
+      - {x: 0.80409235, y: 0.05543843}
+      - {x: 0.6003718, y: 0.0021796823}
+      - {x: 0.786201, y: -0.055798724}
 --- !u!50 &6311440351145823934
 Rigidbody2D:
   serializedVersion: 4
