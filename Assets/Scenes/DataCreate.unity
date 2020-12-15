@@ -360,7 +360,7 @@ MonoBehaviour:
   textAsset: []
   layers: 1
   passwayNum: 2
-  level: 1
+  level: 3
   function: 1
   num: 0
   passwayType: 0
