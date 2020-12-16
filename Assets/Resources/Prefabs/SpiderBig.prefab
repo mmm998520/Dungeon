@@ -580,15 +580,15 @@ MonoBehaviour:
   endCol: 
   nextPos: 
   rotateSpeed: 200
-  MaxHP: 2
-  HP: 2
+  MaxHP: 5
+  HP: 5
   CD: 3
   CDTimer: 0
   CDMin: 3
   CDMax: 4
   hand: 10
   atkTime: 2
-  speed: 3
+  speed: 2.5
   prepareSource: {fileID: 6431428174509040607}
   attackSource: {fileID: 7020226564661491114}
   attack: {fileID: 6355018383450350413, guid: c906fe2f851c0624881995cfb87edc5a, type: 3}
