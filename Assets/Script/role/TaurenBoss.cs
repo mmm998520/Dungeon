@@ -16,7 +16,7 @@ namespace com.DungeonPad
 
         bool throwByClockwise;
         float playerAngle;
-        public GameObject Axe;
+        public GameObject Axe, accurateAxe;
 
         void Start()
         {
@@ -100,6 +100,17 @@ namespace com.DungeonPad
         {
             animator.SetBool("ThrowAxe", false);
             CDTimer = 0;
+        }
+        #endregion
+
+        #region//AccurateAxe
+        void AccurateAxe()
+        {
+            for(int i = 0; i < GameManager.players.childCount; i++)
+            {
+                Transform target = GameManager.players.GetChild(i);
+                Instantiate(accurateAxe, target.position, Quaternion.identity).GetComponent<AccurateAxe>().target = target;
+            }
         }
         #endregion
 
