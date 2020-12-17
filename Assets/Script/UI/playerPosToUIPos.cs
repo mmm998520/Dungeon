@@ -22,10 +22,12 @@ public class playerPosToUIPos : MonoBehaviour
         if (blue)
         {
             rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(BluePlayer.position);
+            //rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(BluePlayer.position) + new Vector3(rectTransform.sizeDelta.x / 2, rectTransform.sizeDelta.y / 2);
         }
         else
         {
             rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(RedPlayer.position);
+            //rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(RedPlayer.position) + new Vector3(rectTransform.sizeDelta.x/2, rectTransform.sizeDelta.y/2);
         }
     }
 }
