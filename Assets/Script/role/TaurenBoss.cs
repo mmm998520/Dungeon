@@ -38,23 +38,33 @@ namespace com.DungeonPad
                 resetRoad();
                 move();
             }
-            else if(!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe") && (CDTimer += Time.deltaTime) > CD)
+            else if(!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe") && !animator.GetBool("AccurateAxe") && (CDTimer += Time.deltaTime) > CD)
             {
-                int r = Random.Range(0, 2);
+                int r = Random.Range(0, 3);
                 print(r);
-                if (r > 0)
+                if (r < -1)
                 {
                     animator.SetBool("Punch", true);
                 }
-                else
+                else if (r < -2)
                 {
-                    throwByClockwise = Random.Range(0, 2) > 0;
+                    throwByClockwise = (Random.Range(0, 2) > 0);
                     animator.SetBool("ThrowAxe", true);
                     playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
+                }
+                else
+                {
+                    animator.SetBool("AccurateAxe", true);
                 }
                 attacking = true;
             }
         }
+
+        void reSpeed()
+        {
+            rigidbody.velocity = Vector3.zero;
+        }
+
         #region//Punch
         void Record()
         {
@@ -71,11 +81,6 @@ namespace com.DungeonPad
         {
             InvincibleTimer = 0;
             rigidbody.velocity = RecordDir * 15;
-        }
-
-        void reSpeed()
-        {
-            rigidbody.velocity = Vector3.zero;
         }
 
         void endPunch()
@@ -111,6 +116,12 @@ namespace com.DungeonPad
                 Transform target = GameManager.players.GetChild(i);
                 Instantiate(accurateAxe, target.position, Quaternion.identity).GetComponent<AccurateAxe>().target = target;
             }
+        }
+
+        void endAccurateAxe()
+        {
+            animator.SetBool("AccurateAxe", false);
+            CDTimer = 0;
         }
         #endregion
 

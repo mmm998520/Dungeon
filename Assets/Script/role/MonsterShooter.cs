@@ -9,6 +9,7 @@ namespace com.DungeonPad
         public float speed, timer, timerStoper, destoryTime;
         public AudioSource hitSound;
         public Animator animator;
+        public bool canRemoveByPlayerAttack = true;
 
         void Start()
         {
