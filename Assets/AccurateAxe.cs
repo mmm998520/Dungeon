@@ -11,6 +11,7 @@ namespace com.DungeonPad
         public float speed;
         public GameObject attack;
         public float attackLength;
+        bool canFollow = true;
 
         void Start()
         {
@@ -19,7 +20,7 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("AccurateAxeFollow"))
+            if (canFollow)
             {
                 follow();
             }
@@ -40,10 +41,15 @@ namespace com.DungeonPad
 
         void Attack()
         {
+            canFollow = false;
             Instantiate(attack, transform.position + Vector3.left * attackLength, Quaternion.identity);
             Instantiate(attack, transform.position + Vector3.down * attackLength, Quaternion.Euler(0, 0, 90));
             Instantiate(attack, transform.position + Vector3.right * attackLength, Quaternion.Euler(0, 0, 180));
             Instantiate(attack, transform.position + Vector3.up * attackLength, Quaternion.Euler(0,0, 270));
+        }
+
+        void destroy()
+        {
             Destroy(gameObject);
         }
     }

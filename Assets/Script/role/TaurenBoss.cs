@@ -38,19 +38,25 @@ namespace com.DungeonPad
                 resetRoad();
                 move();
             }
-            else if(!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe") && !animator.GetBool("AccurateAxe") && (CDTimer += Time.deltaTime) > CD)
+            else if(!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe90") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("AccurateAxe") && (CDTimer += Time.deltaTime) > CD)
             {
-                int r = Random.Range(0, 3);
+                int r = Random.Range(0, 4);
                 print(r);
-                if (r < -1)
+                if (r < 1)
                 {
                     animator.SetBool("Punch", true);
                 }
-                else if (r < -2)
+                else if (r < 2)
                 {
                     throwByClockwise = (Random.Range(0, 2) > 0);
-                    animator.SetBool("ThrowAxe", true);
+                    animator.SetBool("ThrowAxe90", true);
                     playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
+                }
+                else if(r < 3)
+                {
+                    throwByClockwise = (Random.Range(0, 2) > 0);
+                    animator.SetBool("ThrowAxe180", true);
+                    playerAngle = 0;
                 }
                 else
                 {
@@ -86,6 +92,7 @@ namespace com.DungeonPad
         void endPunch()
         {
             animator.SetBool("Punch", false);
+            Debug.LogError("Punch : " + animator.GetBool("Punch"));
             CDTimer = 0;
         }
         #endregion
@@ -98,12 +105,20 @@ namespace com.DungeonPad
                 angle *= -1;
             }
             GameObject temp = Instantiate(Axe, transform.position, Quaternion.Euler(0, 0, angle + playerAngle));
-            Debug.LogErrorFormat(temp.name, temp);
+            Debug.Log(temp.transform.rotation.eulerAngles.z);
         }
 
-        void endThrowAxe()
+        void endThrowAxe90()
         {
-            animator.SetBool("ThrowAxe", false);
+            animator.SetBool("ThrowAxe90", false);
+            Debug.LogError("ThrowAxe90 : " + animator.GetBool("ThrowAxe90"));
+            CDTimer = 0;
+        }
+
+        void endThrowAxe180()
+        {
+            animator.SetBool("ThrowAxe180", false);
+            Debug.LogError("ThrowAxe180 : " + animator.GetBool("ThrowAxe180"));
             CDTimer = 0;
         }
         #endregion
@@ -121,6 +136,7 @@ namespace com.DungeonPad
         void endAccurateAxe()
         {
             animator.SetBool("AccurateAxe", false);
+            Debug.LogError("AccurateAxe : " + animator.GetBool("AccurateAxe"));
             CDTimer = 0;
         }
         #endregion

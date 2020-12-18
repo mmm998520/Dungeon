@@ -10,7 +10,7 @@ namespace com.DungeonPad
         public AudioSource hitSound;
         public Animator animator;
         public bool canRemoveByPlayerAttack = true;
-
+        public float ATKforPlayer, ATKforBoss;
         void Start()
         {
 
@@ -40,6 +40,17 @@ namespace com.DungeonPad
                 hitSound.transform.parent = null;
                 Destroy(gameObject, destoryTime);
                 Destroy(hitSound.gameObject, 5);
+
+                PlayerManager.HP -= ATKforPlayer;
+                collider.GetComponent<PlayerJoyVibration>().hurt();
+            }
+            if (collider.GetComponent<MonsterManager>())
+            {
+                collider.GetComponent<MonsterManager>().HP -= ATKforBoss;
+                if (collider.GetComponent<MonsterManager>().HP <= 0)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }

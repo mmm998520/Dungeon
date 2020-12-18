@@ -760,12 +760,13 @@ namespace com.DungeonPad
                         if (taurenBoss.InvincibleTimer < 0.4f && Vector2.Angle(taurenBoss.RecordDir, transform.position - collision.transform.position) < 90)
                         {
                             HardStraightA = (Vector2)taurenBoss.RecordDir * 30;
+                            HP -= 20;
                         }
                         else
                         {
                             HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
+                            HP -= 15;
                         }
-                        HP -= 6;
                     }
                     else
                     {

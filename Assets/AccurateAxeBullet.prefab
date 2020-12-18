@@ -218,6 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5712866478209859784}
   - component: {fileID: 2176727486813081709}
+  - component: {fileID: 3771505170880127831}
   m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
@@ -234,7 +235,7 @@ Transform:
   m_GameObject: {fileID: 4297537660864381126}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0.777, y: 0, z: 0}
-  m_LocalScale: {x: 0.6240295, y: 0.36661732, z: 0.6240295}
+  m_LocalScale: {x: 0.11266759, y: 0.11266759, z: 0.11266759}
   m_Children: []
   m_Father: {fileID: 8333136165291157766}
   m_RootOrder: 0
@@ -278,7 +279,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c016ffe100a4bbd4fbff143217229035, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1ebbe959d8593e47bf80e6d8a89c1c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -289,6 +290,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3771505170880127831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4297537660864381126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5332fff3964c14996ec9eba95a70df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6355018383450350413
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,11 +311,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8333136165291157766}
-  - component: {fileID: 4606284753064996189}
   - component: {fileID: 2210872942444335782}
-  - component: {fileID: 2570544022315494922}
   - component: {fileID: 6311440351145823934}
   - component: {fileID: 5957171386420349302}
+  - component: {fileID: 3369740175101017223}
   m_Layer: 0
   m_Name: AccurateAxeBullet
   m_TagString: Untagged
@@ -327,21 +339,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4606284753064996189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6355018383450350413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9edf42f0ff0f9084596a2c5a66d2e079, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ATK: 30
-  continued: 0
-  MonsterType: Spider
 --- !u!114 &2210872942444335782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,35 +358,8 @@ MonoBehaviour:
   hitSound: {fileID: 6761128484382667410}
   animator: {fileID: 5957171386420349302}
   canRemoveByPlayerAttack: 1
---- !u!60 &2570544022315494922
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6355018383450350413}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1.1568007, y: -0.0002143979}
-      - {x: 0.806582, y: 0.035521924}
-      - {x: 0.44601887, y: 0.0021796823}
-      - {x: 0.803628, y: -0.033392668}
+  ATKforPlayer: 10
+  ATKforBoss: 5
 --- !u!50 &6311440351145823934
 Rigidbody2D:
   serializedVersion: 4
@@ -430,3 +400,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &3369740175101017223
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355018383450350413}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.778, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2

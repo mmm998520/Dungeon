@@ -319,7 +319,7 @@ Transform:
   m_GameObject: {fileID: 6355018383450350413}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 1.58616, y: 1.58616, z: 1.58616}
   m_Children:
   - {fileID: 5712866478209859784}
   - {fileID: 671338302713214020}
@@ -360,6 +360,7 @@ MonoBehaviour:
   destoryTime: 0.6
   hitSound: {fileID: 6761128484382667410}
   animator: {fileID: 5957171386420349302}
+  canRemoveByPlayerAttack: 1
 --- !u!60 &2570544022315494922
 PolygonCollider2D:
   m_ObjectHideFlags: 0
