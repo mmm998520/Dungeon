@@ -55,6 +55,7 @@ namespace com.DungeonPad
             Move
         }
         public PlayerStat playerStat;
+        public InsAfterImages insAfterImages;
 
         private void Start()
         {
@@ -473,6 +474,7 @@ namespace com.DungeonPad
                                     {
                                         DashTimer = 0;
                                         LineAttack();
+                                        insAfterImages.timer = 0;
                                     }
                                 }
                                 break;
@@ -486,6 +488,7 @@ namespace com.DungeonPad
                                     {
                                         DashTimer = 0;
                                         LineAttack();
+                                        insAfterImages.timer = 0;
                                     }
                                 }
                                 break;
@@ -507,6 +510,7 @@ namespace com.DungeonPad
                                         DashTimer = 0;
                                         LineAttack();
                                         playerJoyVibration.DashVibration = 0.8f;
+                                        insAfterImages.timer = 0;
                                     }
                                 }
                                 break;
@@ -526,6 +530,7 @@ namespace com.DungeonPad
                                     {
                                         DashTimer = 0;
                                         LineAttack();
+                                        insAfterImages.timer = 0;
                                     }
                                 }
                                 break;
@@ -539,6 +544,7 @@ namespace com.DungeonPad
                                     {
                                         DashTimer = 0;
                                         LineAttack();
+                                        insAfterImages.timer = 0;
                                     }
                                 }
                                 break;
@@ -560,6 +566,7 @@ namespace com.DungeonPad
                                         DashTimer = 0;
                                         LineAttack();
                                         playerJoyVibration.DashVibration = 0.8f;
+                                        insAfterImages.timer = 0;
                                     }
                                 }
                                 break;
