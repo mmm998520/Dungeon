@@ -18,6 +18,7 @@ namespace com.DungeonPad
         float playerAngle;
         public GameObject Axe, accurateAxe;
 
+        public float punchCD, punchCDTimer, throwAxe90CD, throwAxe90CDTimer, throwAxe180CD, throwAxe180CDTimer, accurateAxeCD, accurateAxeCDTimer;
         void Start()
         {
             speed = 3;
@@ -30,39 +31,79 @@ namespace com.DungeonPad
 
         private void Update()
         {
+            punchCDTimer += Time.deltaTime;
+            throwAxe90CDTimer += Time.deltaTime;
+            throwAxe180CDTimer += Time.deltaTime;
+            accurateAxeCDTimer += Time.deltaTime;
             InvincibleTimer += Time.deltaTime;
             HPText.text = HP + "";
             minDisPlayer = MinDisPlayer();
-            if (Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking)
+            if (Vector3.Distance(minDisPlayer.position, transform.position) > 10 && !attacking)
             {
                 resetRoad();
                 move();
             }
-            else if(!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe90") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("AccurateAxe") && (CDTimer += Time.deltaTime) > CD)
+            else if (!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe90") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("AccurateAxe") && (CDTimer += Time.deltaTime) > CD)
             {
-                int r = Random.Range(0, 4);
-                print(r);
-                if (r < 1)
+                List<string> CDs = new List<string>() { "Punch", "ThrowAxe90", "ThrowAxe180", "AccurateAxe" };
+                int r;
+                bool canUseThisAttack = false;
+                do
                 {
-                    animator.SetBool("Punch", true);
-                }
-                else if (r < 2)
-                {
-                    throwByClockwise = (Random.Range(0, 2) > 0);
-                    animator.SetBool("ThrowAxe90", true);
-                    playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
-                }
-                else if(r < 3)
-                {
-                    throwByClockwise = (Random.Range(0, 2) > 0);
-                    animator.SetBool("ThrowAxe180", true);
-                    playerAngle = 0;
-                }
-                else
-                {
-                    animator.SetBool("AccurateAxe", true);
-                }
-                attacking = true;
+                    if (CDs.Count > 0)
+                    {
+                        r = Random.Range(0, CDs.Count);
+                        switch (CDs[r])
+                        {
+                            case "Punch":
+                                if (punchCDTimer > punchCD)
+                                {
+                                    animator.SetBool("Punch", true);
+                                    canUseThisAttack = true;
+                                }
+                                break;
+                            case "ThrowAxe90":
+                                if (throwAxe90CDTimer > throwAxe90CD)
+                                {
+                                    throwByClockwise = (Random.Range(0, 2) > 0);
+                                    animator.SetBool("ThrowAxe90", true);
+                                    playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
+                                    canUseThisAttack = true;
+                                }
+                                break;
+                            case "ThrowAxe180":
+                                if (throwAxe180CDTimer > throwAxe180CD)
+                                {
+                                    throwByClockwise = (Random.Range(0, 2) > 0);
+                                    animator.SetBool("ThrowAxe180", true);
+                                    playerAngle = 0;
+                                    canUseThisAttack = true;
+                                }
+                                break;
+                            case "AccurateAxe":
+                                if (accurateAxeCDTimer > accurateAxeCD)
+                                {
+                                    animator.SetBool("AccurateAxe", true);
+                                    canUseThisAttack = true;
+                                }
+                                break;
+                        }
+                        if (!canUseThisAttack)
+                        {
+                            CDs.RemoveAt(r);
+                            attacking = true;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("沒有可用的攻擊");
+                        break;
+                    }
+                } while (true);
             }
         }
 
@@ -94,6 +135,7 @@ namespace com.DungeonPad
             animator.SetBool("Punch", false);
             Debug.LogError("Punch : " + animator.GetBool("Punch"));
             CDTimer = 0;
+            punchCDTimer = 0;
         }
         #endregion
 
@@ -113,6 +155,7 @@ namespace com.DungeonPad
             animator.SetBool("ThrowAxe90", false);
             Debug.LogError("ThrowAxe90 : " + animator.GetBool("ThrowAxe90"));
             CDTimer = 0;
+            throwAxe90CDTimer = 0;
         }
 
         void endThrowAxe180()
@@ -120,13 +163,48 @@ namespace com.DungeonPad
             animator.SetBool("ThrowAxe180", false);
             Debug.LogError("ThrowAxe180 : " + animator.GetBool("ThrowAxe180"));
             CDTimer = 0;
+            throwAxe180CDTimer = 0;
         }
         #endregion
 
         #region//AccurateAxe
+
+        public static T FindKeyByValue<T, W>(Dictionary<T, W> dict, W val)
+        {
+            T key = default;
+            foreach (KeyValuePair<T, W> pair in dict)
+            {
+                if (EqualityComparer<W>.Default.Equals(pair.Value, val))
+                {
+                    key = pair.Key;
+                    return key;
+                }
+            }
+            Debug.LogError("not found key");
+            return key;
+        }
+
+        void removeCanGo(int row, int col)
+        {
+            int value = row * MazeCreater.totalCol + col;
+            int key = FindKeyByValue(canGo, value);
+            canGo.Remove(key);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        void addSton()
+        {
+            
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         void AccurateAxe()
         {
-            for(int i = 0; i < GameManager.players.childCount; i++)
+            for (int i = 0; i < GameManager.players.childCount; i++)
             {
                 Transform target = GameManager.players.GetChild(i);
                 Instantiate(accurateAxe, target.position, Quaternion.identity).GetComponent<AccurateAxe>().target = target;
@@ -138,6 +216,7 @@ namespace com.DungeonPad
             animator.SetBool("AccurateAxe", false);
             Debug.LogError("AccurateAxe : " + animator.GetBool("AccurateAxe"));
             CDTimer = 0;
+            accurateAxeCDTimer = 0;
         }
         #endregion
 
