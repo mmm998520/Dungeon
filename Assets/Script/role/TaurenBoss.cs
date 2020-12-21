@@ -35,15 +35,21 @@ namespace com.DungeonPad
             throwAxe90CDTimer += Time.deltaTime;
             throwAxe180CDTimer += Time.deltaTime;
             accurateAxeCDTimer += Time.deltaTime;
+            CDTimer += Time.deltaTime;
             InvincibleTimer += Time.deltaTime;
             HPText.text = HP + "";
             minDisPlayer = MinDisPlayer();
-            if (Vector3.Distance(minDisPlayer.position, transform.position) > 10 && !attacking)
+            if (Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking)
             {
                 resetRoad();
                 move();
             }
-            else if (!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe90") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("AccurateAxe") && (CDTimer += Time.deltaTime) > CD)
+            else if (CDTimer < CD)
+            {
+                resetRoad();
+                move();
+            }
+            else if (!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe90") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("AccurateAxe"))
             {
                 List<string> CDs = new List<string>() { "Punch", "ThrowAxe90", "ThrowAxe180", "AccurateAxe" };
                 int r;
@@ -101,6 +107,8 @@ namespace com.DungeonPad
                     else
                     {
                         Debug.LogError("沒有可用的攻擊");
+                        resetRoad();
+                        move();
                         break;
                     }
                 } while (true);
