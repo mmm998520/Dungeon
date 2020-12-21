@@ -72,11 +72,11 @@ namespace com.DungeonPad
             return minDisPlayerCube;
         }
 
-        protected virtual void Attack()
+        protected virtual void Attack(int additionalAngle)
         {
             attackSource.Play();
             float angle = Vector3.SignedAngle(Vector3.right, MinDisPlayer().position - transform.position, Vector3.forward);
-            MonsterAttack monsterAttack = Instantiate(attack, transform.position, Quaternion.Euler(0, 0, angle + Random.Range(-difference, difference))).GetComponent<MonsterAttack>();
+            MonsterAttack monsterAttack = Instantiate(attack, transform.position, Quaternion.Euler(0, 0, angle + Random.Range(-difference, difference) + additionalAngle)).GetComponent<MonsterAttack>();
             //Destroy(monsterAttack.gameObject, atkTime);
         }
 

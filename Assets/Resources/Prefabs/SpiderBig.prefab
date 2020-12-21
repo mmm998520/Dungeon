@@ -817,8 +817,8 @@ MonoBehaviour:
   HP: 5
   CD: 1
   CDTimer: 0
-  CDMin: 0.5
-  CDMax: 1.5
+  CDMin: 1.5
+  CDMax: 2.5
   hand: 10
   atkTime: 2
   speed: 2.5
