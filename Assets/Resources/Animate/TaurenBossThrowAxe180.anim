@@ -259,151 +259,60 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5
-    functionName: ThrowAxe
+  - time: 0.48333332
+    functionName: CountThrowAxeCircleAxeNum
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: -90
-    intParameter: 0
+    floatParameter: 0
+    intParameter: 10
     messageOptions: 0
-  - time: 0.75
-    functionName: ThrowAxe
+  - time: 0.5
+    functionName: ThrowAxeCircle
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: -54
+    floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1
-    functionName: ThrowAxe
+    functionName: ThrowAxeCircle
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: -18
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.25
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 18
+    floatParameter: 12
     intParameter: 0
     messageOptions: 0
   - time: 1.5
-    functionName: ThrowAxe
+    functionName: ThrowAxeCircle
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 54
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.75
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 90
+    floatParameter: 24
     intParameter: 0
     messageOptions: 0
   - time: 2
-    functionName: ThrowAxe
+    functionName: ThrowAxeCircle
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 126
-    intParameter: 0
-    messageOptions: 0
-  - time: 2.25
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 162
-    intParameter: 0
-    messageOptions: 0
-  - time: 2.5
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 198
-    intParameter: 0
-    messageOptions: 0
-  - time: 2.75
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 234
+    floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 3
-    functionName: ThrowAxe
+    functionName: ThrowAxeCircle
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 279
-    intParameter: 0
-    messageOptions: 0
-  - time: 3.25
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 315
+    floatParameter: 12
     intParameter: 0
     messageOptions: 0
   - time: 3.5
-    functionName: ThrowAxe
+    functionName: ThrowAxeCircle
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 351
-    intParameter: 0
-    messageOptions: 0
-  - time: 3.75
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 27
+    floatParameter: 24
     intParameter: 0
     messageOptions: 0
   - time: 4
-    functionName: ThrowAxe
+    functionName: ThrowAxeCircle
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 63
-    intParameter: 0
-    messageOptions: 0
-  - time: 4.25
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 99
-    intParameter: 0
-    messageOptions: 0
-  - time: 4.5
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 135
-    intParameter: 0
-    messageOptions: 0
-  - time: 4.75
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 171
-    intParameter: 0
-    messageOptions: 0
-  - time: 5
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 207
-    intParameter: 0
-    messageOptions: 0
-  - time: 5.25
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 243
-    intParameter: 0
-    messageOptions: 0
-  - time: 5.5
-    functionName: ThrowAxe
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 279
+    floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 5.516667
