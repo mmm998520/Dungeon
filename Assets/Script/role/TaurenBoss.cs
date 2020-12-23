@@ -160,6 +160,27 @@ namespace com.DungeonPad
             Debug.Log(temp.transform.rotation.eulerAngles.z);
         }
 
+        float axeNum;
+        void CountThrowAxeCircleAxeNum(int _axeNum)
+        {
+            axeNum = _axeNum;
+        }
+
+        void ThrowAxeCircle(float angle)
+        {
+            if (!throwByClockwise)
+            {
+                angle *= -1;
+            }
+            float preAngle = 360f / axeNum;
+            for (int i = 0; i < axeNum; i++)
+            {
+
+                GameObject temp = Instantiate(Axe, transform.position, Quaternion.Euler(0, 0, angle + preAngle * i));
+                Debug.Log(temp.transform.rotation.eulerAngles.z);
+            }
+        }
+
         void endThrowAxe90()
         {
             animator.SetBool("ThrowAxe90", false);
