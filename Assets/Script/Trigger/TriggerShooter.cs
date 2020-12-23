@@ -35,22 +35,16 @@ namespace com.DungeonPad
             if (collider.gameObject.layer == 8)
             {
                 speed = 0;
-                animator.SetTrigger("Hit");
-                hitSound.Play();
-                hitSound.transform.parent = null;
                 Destroy(gameObject, destoryTime);
-                Destroy(hitSound.gameObject, 5);
-
-                PlayerManager.HP -= ATKforPlayer;
+                collider.GetComponent<PlayerManager>().HardStraightTimer = -1;
+                collider.GetComponent<PlayerManager>().HardStraightA = Vector3.zero;
+                //PlayerManager.HP -= ATKforPlayer;
                 collider.GetComponent<PlayerJoyVibration>().hurt();
             }
-            if (collider.GetComponent<MonsterManager>())
+            if (collider.GetComponent<TaurenBoss>())
             {
-                collider.GetComponent<MonsterManager>().HP -= ATKforBoss;
-                if (collider.GetComponent<MonsterManager>().HP <= 0)
-                {
-                    Destroy(gameObject);
-                }
+                //collider.GetComponent<MonsterManager>().HP -= ATKforBoss;
+
             }
         }
     }

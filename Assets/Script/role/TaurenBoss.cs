@@ -19,6 +19,8 @@ namespace com.DungeonPad
         public GameObject Axe, accurateAxe;
 
         public float punchCD, punchCDTimer, throwAxe90CD, throwAxe90CDTimer, throwAxe180CD, throwAxe180CDTimer, accurateAxeCD, accurateAxeCDTimer;
+
+        public float HardStraightTimer;
         void Start()
         {
             speed = 3;
@@ -31,6 +33,7 @@ namespace com.DungeonPad
 
         private void Update()
         {
+            HardStraightTimer += Time.deltaTime;
             punchCDTimer += Time.deltaTime;
             throwAxe90CDTimer += Time.deltaTime;
             throwAxe180CDTimer += Time.deltaTime;
@@ -39,12 +42,11 @@ namespace com.DungeonPad
             InvincibleTimer += Time.deltaTime;
             HPText.text = HP + "";
             minDisPlayer = MinDisPlayer();
-            if (Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking)
+            if(HardStraightTimer < 1f)
             {
-                resetRoad();
-                move();
+
             }
-            else if (CDTimer < CD)
+            else if ((Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking) || )
             {
                 resetRoad();
                 move();
