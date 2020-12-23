@@ -19,7 +19,6 @@ namespace com.DungeonPad
 
         void Update()
         {
-            print(PlayerManager.HP);
             if (PlayerManager.HP < 30)
             {
                 if (lerpToMax)
@@ -38,7 +37,6 @@ namespace com.DungeonPad
                         lerpToMax = true;
                     }
                 }
-                print(vignette.intensity.value);
             }
             else
             {

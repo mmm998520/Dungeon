@@ -75,6 +75,12 @@ namespace com.DungeonPad
             GameManager.KillSpider++;
             SpriteAnimator.transform.parent = null;
             SpriteAnimator.SetTrigger("Destroy");
+
+            if (gameObject.name.Contains("Big"))
+            {
+                Debug.LogError("BigSpider");
+                PlayerManager.Life = Mathf.Clamp(++PlayerManager.Life, 0, PlayerManager.MaxLife);
+            }
         }
     }
 }

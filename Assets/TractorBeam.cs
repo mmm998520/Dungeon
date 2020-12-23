@@ -45,7 +45,6 @@ namespace com.DungeonPad
             }
             if (collider.gameObject == tractorBeamSide)
             {
-                Debug.LogError("幹");
                 if (++times > 1)
                 {
                     tractorBeamGen.stat = TractorBeamGen.TractorBeamStat.non;
@@ -67,7 +66,6 @@ namespace com.DungeonPad
             if (collider.gameObject == tractorBeamSide)
             {
                 canBack = true;
-                Debug.LogError("幹");
             }
         }
     }

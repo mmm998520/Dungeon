@@ -42,11 +42,13 @@ namespace com.DungeonPad
             InvincibleTimer += Time.deltaTime;
             HPText.text = HP + "";
             minDisPlayer = MinDisPlayer();
-            if(HardStraightTimer < 1f)
-            {
+            GetComponent<Animator>().SetBool("Sleep", false);
 
+            if (HardStraightTimer < 0f)
+            {
+                GetComponent<Animator>().SetBool("Sleep", true);
             }
-            else if ((Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking) || )
+            else if ((Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking) || CDTimer < CD)
             {
                 resetRoad();
                 move();
@@ -184,7 +186,6 @@ namespace com.DungeonPad
         void endThrowAxe90()
         {
             animator.SetBool("ThrowAxe90", false);
-            Debug.LogError("ThrowAxe90 : " + animator.GetBool("ThrowAxe90"));
             CDTimer = 0;
             throwAxe90CDTimer = 0;
         }
@@ -192,7 +193,6 @@ namespace com.DungeonPad
         void endThrowAxe180()
         {
             animator.SetBool("ThrowAxe180", false);
-            Debug.LogError("ThrowAxe180 : " + animator.GetBool("ThrowAxe180"));
             CDTimer = 0;
             throwAxe180CDTimer = 0;
         }

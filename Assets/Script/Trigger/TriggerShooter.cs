@@ -36,15 +36,34 @@ namespace com.DungeonPad
             {
                 speed = 0;
                 Destroy(gameObject, destoryTime);
-                collider.GetComponent<PlayerManager>().HardStraightTimer = -1;
+                GetComponent<Collider2D>().enabled = false;
+                if(collider.GetComponent<PlayerManager>().HardStraightTimer < 0)
+                {
+                    collider.GetComponent<PlayerManager>().HardStraightTimer -= 2f;
+                }
+                else
+                {
+                    collider.GetComponent<PlayerManager>().HardStraightTimer = -2f;
+                }
                 collider.GetComponent<PlayerManager>().HardStraightA = Vector3.zero;
                 //PlayerManager.HP -= ATKforPlayer;
                 collider.GetComponent<PlayerJoyVibration>().hurt();
             }
             if (collider.GetComponent<TaurenBoss>())
             {
+                speed = 0;
+                Destroy(gameObject, destoryTime);
+                GetComponent<Collider2D>().enabled = false;
                 //collider.GetComponent<MonsterManager>().HP -= ATKforBoss;
-
+                if (collider.GetComponent<TaurenBoss>().HardStraightTimer < 0)
+                {
+                    collider.GetComponent<TaurenBoss>().HardStraightTimer -= 2f;
+                }
+                else
+                {
+                    collider.GetComponent<TaurenBoss>().HardStraightTimer = -2f;
+                }
+                Debug.LogError("BOSS" + collider.GetComponent<TaurenBoss>().HardStraightTimer);
             }
         }
     }

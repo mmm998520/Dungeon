@@ -10,7 +10,9 @@ namespace com.DungeonPad
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 60, HP = 60;
-        public static bool lockedHP = true;
+        public static int Life = 2, MaxLife = 4;
+        public static bool lockedHP = false;
+        public static float lockedHPTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -124,11 +126,11 @@ namespace com.DungeonPad
                         }
                     }
                 }
-                HP = 40;
+                HP = MaxHP;
             }
             else
             {
-                HP = 0;
+                HP = MaxHP;
             }
             playerJoyVibration = GetComponent<PlayerJoyVibration>();
             lastPos = transform.position;
@@ -139,9 +141,9 @@ namespace com.DungeonPad
 
     void Update()
         {
-            if (lockedHP)
+            if (lockedHP || (lockedHPTimer += Time.deltaTime/2) <= 2)
             {
-                HP = 40;
+                HP = MaxHP;
             }
             if(playerStat == PlayerStat.Move)
             {
@@ -149,28 +151,36 @@ namespace com.DungeonPad
             }
             if (HP <= 0)
             {
-                string SceneName = SceneManager.GetActiveScene().name;
-                if (SceneName.Contains("SelectRole"))
+                if (--Life <= 0)
                 {
-
-                }
-                else if (SceneName == "Tutorial1" || SceneName == "Tutorial2" || SceneName == "Tutorial3")
-                {
-                    Debug.LogError("a");
-                    GameObject.Find("MonsterAnimator").GetComponent<Animator>().SetBool("Died", true);
-                    for (int i = 0; i < 4; i++)
+                    string SceneName = SceneManager.GetActiveScene().name;
+                    if (SceneName.Contains("SelectRole"))
                     {
-                        GamePad.SetVibration((PlayerIndex)i, 0, 0);
+
+                    }
+                    else if (SceneName == "Tutorial1" || SceneName == "Tutorial2" || SceneName == "Tutorial3")
+                    {
+                        Debug.LogError("a");
+                        GameObject.Find("MonsterAnimator").GetComponent<Animator>().SetBool("Died", true);
+                        for (int i = 0; i < 4; i++)
+                        {
+                            GamePad.SetVibration((PlayerIndex)i, 0, 0);
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            GamePad.SetVibration((PlayerIndex)i, 0, 0);
+                        }
+                        GameManager.PlayTime = Time.time;
+                        SceneManager.LoadScene("Died");
                     }
                 }
                 else
                 {
-                    for (int i = 0; i < 4; i++)
-                    {
-                        GamePad.SetVibration((PlayerIndex)i, 0, 0);
-                    }
-                    GameManager.PlayTime = Time.time;
-                    SceneManager.LoadScene("Died");
+                    HP = MaxHP;
+                    lockedHPTimer = 0;
                 }
             }
             else
@@ -759,6 +769,7 @@ namespace com.DungeonPad
             {
                 if (HardStraightTimer > 0.3f)
                 {
+                    ShowLockHP.hurtTimer = 0;
                     HardStraightTimer = 0;
                     DashA = Vector3.zero;
                     if (collision.collider.GetComponent<TaurenBoss>())
