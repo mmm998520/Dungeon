@@ -29,7 +29,7 @@ namespace com.DungeonPad
 
         public PlayerJoyVibration playerJoyVibration;
 
-        public float StickTimer = 10, HardStraightTimer = 10, DashTimer = 10, DashCD = 0.5f;
+        public float StickTimer = 10, HardStraightTimer = 10, DashTimer = 10, DashCD = 0.5f, SleepTimer = 10;
         public float ConfusionTimer = 100;
         public SpriteRenderer ConfusionUIRenderer;
         public ConfusionUIcontroler ConfusionUIcontroler;
@@ -45,7 +45,7 @@ namespace com.DungeonPad
 
         public Animator TutorialAnimator;
 
-        public GameObject reStatUI, fightingStatUI, confusionStatUI, stickStatUI;
+        public GameObject reStatUI, sleepingStatUI, confusionStatUI, stickStatUI;
 
         public int MaxBulletNum = 5, BulletNum = 5;
         public GameObject Bullet, attackLine;
@@ -260,7 +260,7 @@ namespace com.DungeonPad
                     }
                 }
                 reStatUI.gameObject.SetActive(Players.reTimer < 1);
-                fightingStatUI.gameObject.SetActive(Players.fightingTimer < 5);
+                sleepingStatUI.gameObject.SetActive(SleepTimer<0);
                 confusionStatUI.gameObject.SetActive(ConfusionTimer < 10);
                 stickStatUI.gameObject.SetActive(StickTimer < 10);
 
@@ -458,6 +458,10 @@ namespace com.DungeonPad
             if((HardStraightTimer+=Time.deltaTime) < 0.3f)
             {
                 v = HardStraightA;
+            }
+            if ((SleepTimer += Time.deltaTime) < 0f)
+            {
+                v = Vector3.zero;
             }
             //玩家解除無敵狀態
             else if (HardStraightTimer > 0.5f)

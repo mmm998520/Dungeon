@@ -20,7 +20,8 @@ namespace com.DungeonPad
 
         public float punchCD, punchCDTimer, throwAxe90CD, throwAxe90CDTimer, throwAxe180CD, throwAxe180CDTimer, accurateAxeCD, accurateAxeCDTimer;
 
-        public float HardStraightTimer;
+        public float SleepTimer;
+        public SpriteRenderer SleepUI;
         void Start()
         {
             speed = 3;
@@ -33,7 +34,7 @@ namespace com.DungeonPad
 
         private void Update()
         {
-            HardStraightTimer += Time.deltaTime;
+            SleepTimer += Time.deltaTime;
             punchCDTimer += Time.deltaTime;
             throwAxe90CDTimer += Time.deltaTime;
             throwAxe180CDTimer += Time.deltaTime;
@@ -42,11 +43,12 @@ namespace com.DungeonPad
             InvincibleTimer += Time.deltaTime;
             HPText.text = HP + "";
             minDisPlayer = MinDisPlayer();
-            GetComponent<Animator>().SetBool("Sleep", false);
 
-            if (HardStraightTimer < 0f)
+            animator.SetBool("Sleep", SleepTimer < 0f);
+            SleepUI.enabled = SleepTimer < 0f;
+            if (SleepTimer < 0f)
             {
-                GetComponent<Animator>().SetBool("Sleep", true);
+
             }
             else if ((Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking) || CDTimer < CD)
             {
