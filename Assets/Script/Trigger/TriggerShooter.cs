@@ -37,13 +37,18 @@ namespace com.DungeonPad
                 speed = 0;
                 Destroy(gameObject, destoryTime);
                 GetComponent<Collider2D>().enabled = false;
-                if(collider.GetComponent<PlayerManager>().SleepTimer < 0)
+                PlayerManager playerManager = collider.GetComponent<PlayerManager>();
+                if (playerManager.SleepTimer < 0)
                 {
-                    collider.GetComponent<PlayerManager>().SleepTimer -= 2f;
+                    playerManager.SleepTimer -= 3f;
                 }
                 else
                 {
-                    collider.GetComponent<PlayerManager>().SleepTimer = -2f;
+                    playerManager.SleepTimer = -3f;
+                }
+                if (playerManager.SleepTimer < -8)
+                {
+                    playerManager.SleepTimer = -8;
                 }
                 //PlayerManager.HP -= ATKforPlayer;
                 collider.GetComponent<PlayerJoyVibration>().hurt();
@@ -54,13 +59,18 @@ namespace com.DungeonPad
                 Destroy(gameObject, destoryTime);
                 GetComponent<Collider2D>().enabled = false;
                 //collider.GetComponent<MonsterManager>().HP -= ATKforBoss;
-                if (collider.GetComponent<TaurenBoss>().SleepTimer < 0)
+                TaurenBoss taurenBoss = collider.GetComponent<TaurenBoss>();
+                if (taurenBoss.SleepTimer < 0)
                 {
-                    collider.GetComponent<TaurenBoss>().SleepTimer -= 2f;
+                    taurenBoss.SleepTimer -= 3f;
                 }
                 else
                 {
-                    collider.GetComponent<TaurenBoss>().SleepTimer = -2f;
+                    taurenBoss.SleepTimer = -3f;
+                }
+                if (taurenBoss.SleepTimer < -8)
+                {
+                    taurenBoss.SleepTimer = -8;
                 }
                 Debug.LogError("BOSS" + collider.GetComponent<TaurenBoss>().SleepTimer);
             }

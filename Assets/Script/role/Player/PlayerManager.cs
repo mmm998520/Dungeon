@@ -470,7 +470,7 @@ namespace com.DungeonPad
             }
 
             #region//衝刺
-            if (HardStraightTimer >= 0.3f && ConfusionTimer>= 10 && StickTimer >= 10)
+            if (HardStraightTimer >= 0.3f && ConfusionTimer>= 10 && SleepTimer >= 0 && StickTimer >= 10)
             {
                 if(DashTimer > DashCD)
                 {
@@ -787,7 +787,7 @@ namespace com.DungeonPad
                         else
                         {
                             HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
-                            HP -= 15;
+                            HP -= 10;
                         }
                     }
                     else

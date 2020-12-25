@@ -43,19 +43,7 @@ namespace com.DungeonPad
             {
                 target = collider.transform;
             }
-            if (collider.gameObject == tractorBeamSide)
-            {
-                if (++times > 1)
-                {
-                    tractorBeamGen.stat = TractorBeamGen.TractorBeamStat.non;
-                    tractorBeamGen.transform.position = Vector3.right * 100;
-                    transform.localPosition = Vector3.right * -15;
-                    times = 0;
-                    target = null;
-                    canBack = false;
-                    elongation = true;
-                }
-            }
+
             if (collider.gameObject.layer == 8 || (canBack && collider.gameObject.layer == 12))
             {
                 elongation = false;
@@ -66,6 +54,19 @@ namespace com.DungeonPad
             if (collider.gameObject == tractorBeamSide)
             {
                 canBack = true;
+            }
+        }
+        private void OnTriggerStay2D(Collider2D collider)
+        {
+            if (collider.gameObject == tractorBeamSide && !elongation)
+            {
+                tractorBeamGen.stat = TractorBeamGen.TractorBeamStat.non;
+                tractorBeamGen.transform.position = Vector3.right * 100;
+                transform.localPosition = Vector3.right * -15;
+                times = 0;
+                target = null;
+                canBack = false;
+                elongation = true;
             }
         }
     }

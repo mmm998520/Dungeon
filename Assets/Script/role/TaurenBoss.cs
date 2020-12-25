@@ -48,7 +48,7 @@ namespace com.DungeonPad
             SleepUI.enabled = SleepTimer < 0f;
             if (SleepTimer < 0f)
             {
-
+                rigidbody.velocity = Vector3.zero;
             }
             else if ((Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking) || CDTimer < CD)
             {
@@ -57,7 +57,11 @@ namespace com.DungeonPad
             }
             else if (!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe90") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("AccurateAxe"))
             {
-                List<string> CDs = new List<string>() { "Punch", "ThrowAxe90", "ThrowAxe180", "AccurateAxe" };
+                List<string> CDs = new List<string>() { "Punch", "ThrowAxe90", "AccurateAxe"};
+                if (HP < MaxHP / 2)
+                {
+                    CDs.Add("ThrowAxe180");
+                }
                 int r;
                 bool canUseThisAttack = false;
                 do
