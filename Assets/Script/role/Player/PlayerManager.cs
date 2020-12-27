@@ -774,26 +774,28 @@ namespace com.DungeonPad
                 if (HardStraightTimer > 0.3f)
                 {
                     ShowLockHP.hurtTimer = 0;
-                    HardStraightTimer = 0;
                     DashA = Vector3.zero;
                     if (collision.collider.GetComponent<TaurenBoss>())
                     {
                         TaurenBoss taurenBoss = collision.collider.GetComponent<TaurenBoss>();
-                        if (taurenBoss.InvincibleTimer < 0.4f && Vector2.Angle(taurenBoss.RecordDir, transform.position - collision.transform.position) < 90)
+                        if (Vector2.Angle(taurenBoss.RecordDir, transform.position - collision.transform.position) < 90 && taurenBoss.punching)
                         {
-                            HardStraightA = (Vector2)taurenBoss.RecordDir * 30;
+                            HardStraightA = (Vector2)taurenBoss.RecordDir * 40;
                             HP -= 20;
+                            HardStraightTimer = 0.1f;
                         }
                         else
                         {
                             HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
                             HP -= 10;
+                            HardStraightTimer = 0;
                         }
                     }
                     else
                     {
                         HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
                         HP -= 15;
+                        HardStraightTimer = 0;
                     }
                     playerJoyVibration.hurt();
 

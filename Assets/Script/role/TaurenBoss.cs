@@ -14,7 +14,7 @@ namespace com.DungeonPad
         public Animator animator;
         public Vector3 RecordDir;
 
-        bool punching = false;
+        public bool punching = false;
         bool throwByClockwise;
         float playerAngle;
         public GameObject Axe, accurateAxe;
@@ -293,10 +293,9 @@ namespace com.DungeonPad
         {
             if (punching)
             {
-                punching = false;
                 animator.SetBool("Punch", false);
                 InvincibleTimer = 10;
-                rigidbody.velocity = RecordDir * -1;
+                rigidbody.velocity = RecordDir * -5;
                 animator.SetBool("Back", true);
                 if (collision.gameObject.layer == 12)
                 {
@@ -313,6 +312,7 @@ namespace com.DungeonPad
         {
             rigidbody.velocity = Vector3.zero;
             animator.SetBool("Back", false);
+            punching = false;
         }
 
         public void endBackHurt()
