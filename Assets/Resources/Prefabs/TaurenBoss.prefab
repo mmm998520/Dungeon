@@ -1,5 +1,86 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &286314265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 286314266}
+  - component: {fileID: 286314267}
+  m_Layer: 0
+  m_Name: "\u6688\u7729"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &286314266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286314265}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.031, y: -0.125, z: 0}
+  m_LocalScale: {x: 0.47148925, y: 0.47148925, z: 0.47148925}
+  m_Children: []
+  m_Father: {fileID: 6115880101944645926}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &286314267
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286314265}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 54
+  m_Sprite: {fileID: 21300000, guid: d2b393d3c64d25f45ba12901a9f43f41, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.85, y: 1.6}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &688235634
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,12 +333,13 @@ Transform:
   m_GameObject: {fileID: 6115880101944645945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.64, y: 8.96, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2.8323016, y: 2.8323016, z: 2.8323016}
   m_Children:
   - {fileID: 6115880101781433285}
   - {fileID: 5637891530843328047}
   - {fileID: 6115880102486937803}
   - {fileID: 688235635}
+  - {fileID: 286314266}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -280,7 +362,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &6115880101944645947
 MonoBehaviour:
@@ -296,17 +378,97 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRoomRow: 0
   startRoomCol: 0
-  addCanGoByHandList: []
+  addCanGoByHandList:
+  - MinRow: 1
+    MinCol: 1
+    MaxRow: 1
+    MaxCol: 10
+  - MinRow: 2
+    MinCol: 1
+    MaxRow: 2
+    MaxCol: 10
+  - MinRow: 3
+    MinCol: 1
+    MaxRow: 3
+    MaxCol: 10
+  - MinRow: 4
+    MinCol: 1
+    MaxRow: 4
+    MaxCol: 10
+  - MinRow: 5
+    MinCol: 1
+    MaxRow: 5
+    MaxCol: 10
+  - MinRow: 6
+    MinCol: 1
+    MaxRow: 6
+    MaxCol: 10
+  - MinRow: 7
+    MinCol: 1
+    MaxRow: 7
+    MaxCol: 10
+  - MinRow: 8
+    MinCol: 1
+    MaxRow: 8
+    MaxCol: 10
+  - MinRow: 9
+    MinCol: 1
+    MaxRow: 9
+    MaxCol: 10
+  - MinRow: 10
+    MinCol: 1
+    MaxRow: 10
+    MaxCol: 10
+  - MinRow: 11
+    MinCol: 1
+    MaxRow: 11
+    MaxCol: 10
+  - MinRow: 12
+    MinCol: 1
+    MaxRow: 12
+    MaxCol: 10
+  - MinRow: 13
+    MinCol: 1
+    MaxRow: 13
+    MaxCol: 10
+  - MinRow: 14
+    MinCol: 1
+    MaxRow: 14
+    MaxCol: 10
+  - MinRow: 15
+    MinCol: 1
+    MaxRow: 15
+    MaxCol: 10
+  - MinRow: 16
+    MinCol: 1
+    MaxRow: 16
+    MaxCol: 10
+  - MinRow: 17
+    MinCol: 1
+    MaxRow: 17
+    MaxCol: 10
+  - MinRow: 18
+    MinCol: 1
+    MaxRow: 18
+    MaxCol: 10
+  - MinRow: 19
+    MinCol: 1
+    MaxRow: 19
+    MaxCol: 10
+  - MinRow: 20
+    MinCol: 1
+    MaxRow: 20
+    MaxCol: 10
   endRow: 
   endCol: 
   nextPos: 
   rotateSpeed: 200
-  MaxHP: 0
-  HP: 0
-  CD: 0
-  CDTimer: 0
-  CDMin: 0
-  CDMax: 0
+  MaxHP: 50
+  HP: 50
+  CD: 2
+  CDTimer: 10
+  CDMin: 2
+  CDMax: 2
   hand: 0
   atkTime: 0
   speed: 0
@@ -326,7 +488,19 @@ MonoBehaviour:
   InvincibleTimer: 10
   animator: {fileID: 0}
   RecordDir: {x: 0, y: 0, z: 0}
-  Axe: {fileID: 0}
+  Axe: {fileID: 5683994576417963163, guid: 7249c241eb11fce43b6597adc4587c9d, type: 3}
+  accurateAxe: {fileID: 1032057078008629048, guid: 2aa139e7d9772cc44b47528a079c1720,
+    type: 3}
+  punchCD: 1.5
+  punchCDTimer: 0
+  throwAxe90CD: 2
+  throwAxe90CDTimer: 0
+  throwAxe180CD: 2
+  throwAxe180CDTimer: 0
+  accurateAxeCD: 5
+  accurateAxeCDTimer: 0
+  SleepTimer: 0
+  SleepUI: {fileID: 286314267}
 --- !u!95 &6115880101944645946
 Animator:
   serializedVersion: 3
@@ -359,8 +533,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0049031577, y: -0.03186878}
-  m_Size: {x: 0.39213562, y: 0.9362625}
+  m_Offset: {x: -0.0049031526, y: -0.08688629}
+  m_Size: {x: 0.39213562, y: 0.8262274}
   m_Direction: 0
 --- !u!1 &6115880102486937802
 GameObject:

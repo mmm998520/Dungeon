@@ -14,6 +14,7 @@ namespace com.DungeonPad
         public Animator animator;
         public Vector3 RecordDir;
 
+        bool punching = false;
         bool throwByClockwise;
         float playerAngle;
         public GameObject Axe, accurateAxe;
@@ -52,8 +53,11 @@ namespace com.DungeonPad
             }
             else if ((Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking) || CDTimer < CD)
             {
-                resetRoad();
-                move();
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("TaurenBossWalk"))
+                {
+                    resetRoad();
+                    move();
+                }
             }
             else if (!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe90") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("AccurateAxe"))
             {
@@ -128,6 +132,7 @@ namespace com.DungeonPad
         void reSpeed()
         {
             rigidbody.velocity = Vector3.zero;
+            punching = false;
         }
 
         #region//Punch
@@ -146,6 +151,7 @@ namespace com.DungeonPad
         {
             InvincibleTimer = 0;
             rigidbody.velocity = RecordDir * 15;
+            punching = true;
         }
 
         void endPunch()
@@ -281,5 +287,38 @@ namespace com.DungeonPad
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
         }
+
+        #region//Back
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (punching)
+            {
+                punching = false;
+                animator.SetBool("Punch", false);
+                InvincibleTimer = 10;
+                rigidbody.velocity = RecordDir * -1;
+                animator.SetBool("Back", true);
+                if (collision.gameObject.layer == 12)
+                {
+                    animator.SetBool("BackHurt", true);
+                }
+                else
+                {
+                    animator.SetBool("BackHurt", false);
+                }
+            }
+        }
+
+        public void endBack()
+        {
+            rigidbody.velocity = Vector3.zero;
+            animator.SetBool("Back", false);
+        }
+
+        public void endBackHurt()
+        {
+            animator.SetBool("BackHurt", false);
+        }
+        #endregion
     }
 }
