@@ -836,6 +836,8 @@ MonoBehaviour:
     type: 3}
   spiderBehavior: 0
   SpriteAnimator: {fileID: 8366934025386502024}
+  reLifeParticle: {fileID: 8905642310724304018, guid: 9b5318d5d43f925488f6abeb1ca8170f,
+    type: 3}
 --- !u!95 &4203273497549478462
 Animator:
   serializedVersion: 3

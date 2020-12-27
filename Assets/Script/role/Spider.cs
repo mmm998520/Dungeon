@@ -16,6 +16,7 @@ namespace com.DungeonPad
 
         bool attacking = false;
         public Animator SpriteAnimator;
+        public GameObject reLifeParticle;
 
         void Start()
         {
@@ -79,7 +80,7 @@ namespace com.DungeonPad
             if (gameObject.name.Contains("Big"))
             {
                 Debug.LogError("BigSpider");
-                PlayerManager.Life = Mathf.Clamp(++PlayerManager.Life, 0, PlayerManager.MaxLife);
+                Instantiate(reLifeParticle, transform.position, Quaternion.identity);
             }
         }
     }
