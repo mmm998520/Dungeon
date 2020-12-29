@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endPlayer: {fileID: 0}
   playerAttackLine: {fileID: 0}
+  reLifeParticle: {fileID: 8905642310724304018, guid: 9b5318d5d43f925488f6abeb1ca8170f,
+    type: 3}
 --- !u!58 &9028716643010737449
 CircleCollider2D:
   m_ObjectHideFlags: 0

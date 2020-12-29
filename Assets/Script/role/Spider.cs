@@ -16,7 +16,6 @@ namespace com.DungeonPad
 
         bool attacking = false;
         public Animator SpriteAnimator;
-        public GameObject reLifeParticle;
 
         void Start()
         {
@@ -76,12 +75,6 @@ namespace com.DungeonPad
             GameManager.KillSpider++;
             SpriteAnimator.transform.parent = null;
             SpriteAnimator.SetTrigger("Destroy");
-
-            if (gameObject.name.Contains("Big"))
-            {
-                Debug.LogError("BigSpider");
-                Instantiate(reLifeParticle, transform.position, Quaternion.identity);
-            }
         }
     }
 }

@@ -8,6 +8,7 @@ namespace com.DungeonPad
     {
         public Transform endPlayer;
         public PlayerAttackLine playerAttackLine;
+        public GameObject reLifeParticle;
 
         void Start()
         {
@@ -49,6 +50,30 @@ namespace com.DungeonPad
                             Players.reTimer = 0;
                             collider.GetComponent<MonsterManager>().beforeDied();
                             Destroy(collider.gameObject);
+                            if (collider.name.Contains("Big"))
+                            {
+                                PlayerManager.money += Random.Range(3, 6);
+                                if (Random.Range(0, 4) < 1)
+                                {
+                                    Instantiate(reLifeParticle, transform.position, Quaternion.identity);
+                                }
+                            }
+                            else if (collider.name.Contains("Spider"))
+                            {
+                                PlayerManager.money += Random.Range(1, 2);
+                                if (Random.Range(0, 20) < 1)
+                                {
+                                    Instantiate(reLifeParticle, transform.position, Quaternion.identity);
+                                }
+                            }
+                            else
+                            {
+                                PlayerManager.money += Random.Range(1, 2);
+                                if (Random.Range(0, 100) < 1)
+                                {
+                                    Instantiate(reLifeParticle, transform.position, Quaternion.identity);
+                                }
+                            }
                         }
                     }
                 }

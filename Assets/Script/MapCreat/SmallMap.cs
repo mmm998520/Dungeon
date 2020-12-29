@@ -16,9 +16,9 @@ namespace com.DungeonPad
             StartColor = transform.GetChild(0).GetComponent<Image>().color;
             RectTransform temp;
             int i, j;
-            for(i = 0; i < 48; i++)
+            for(i = 0; i < 64; i++)
             {
-                for(j = 0; j < 48; j++)
+                for(j = 0; j < 64; j++)
                 {
                     if (!(i == 0 && j == 0))
                     {
