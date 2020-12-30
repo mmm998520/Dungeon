@@ -20,7 +20,7 @@ namespace com.DungeonPad
         Vector3 lastPos;
         public bool locked = true, flash = false;
         public float beganTouchedTimer, flashTimer, flashTimerStoper;
-        public float speed = 3;
+        float speed = 3f;
         public List<Vector3> startRayPoss;
 
         public bool p1;
@@ -141,13 +141,14 @@ namespace com.DungeonPad
             nextPosBeforeIntoHoleTimer = new List<float>();
     }
 
-    public static float homeButtonTimer = 0;
+        public static float homeButtonTimer = 0;
 
-    void Update()
+        void Update()
         {
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /*
             if ((p1 && Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 2))) || (!p1 && Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 2))))
             {
                 if (homeButtonTimer > 0)
@@ -163,6 +164,7 @@ namespace com.DungeonPad
                 }
             }
             homeButtonTimer += Time.deltaTime;
+            */
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -422,12 +424,12 @@ namespace com.DungeonPad
                     switch (SelectMouse.p1Joy)
                     {
                         case "WASD":
-                            v.x += Input.GetAxis("HorizontalWASD") * 2;
-                            v.y += Input.GetAxis("VerticalWASD") * 2;
+                            v.x += Input.GetAxis("HorizontalWASD") * speed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalWASD") * speed * 2 / 3;
                             break;
                         case "ArrowKey":
-                            v.x += Input.GetAxis("HorizontalArrowKey") * 2;
-                            v.y += Input.GetAxis("VerticalArrowKey") * 2;
+                            v.x += Input.GetAxis("HorizontalArrowKey") * speed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalArrowKey") * speed * 2 / 3;
                             break;
                         case "1":
                         case "2":
@@ -437,8 +439,8 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p1Joy) * 2;
-                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p1Joy) * 2;
+                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p1Joy) * speed * 2 / 3;
+                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p1Joy) * speed * 2 / 3;
                             break;
                     }
                 }
@@ -447,12 +449,12 @@ namespace com.DungeonPad
                     switch (SelectMouse.p2Joy)
                     {
                         case "WASD":
-                            v.x += Input.GetAxis("HorizontalWASD") * 2;
-                            v.y += Input.GetAxis("VerticalWASD") * 2;
+                            v.x += Input.GetAxis("HorizontalWASD") * speed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalWASD") * speed * 2 / 3;
                             break;
                         case "ArrowKey":
-                            v.x += Input.GetAxis("HorizontalArrowKey") * 2;
-                            v.y += Input.GetAxis("VerticalArrowKey") * 2;
+                            v.x += Input.GetAxis("HorizontalArrowKey") * speed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalArrowKey") * speed * 2 / 3;
                             break;
                         case "1":
                         case "2":
@@ -462,8 +464,8 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p2Joy) * 2;
-                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p2Joy) * 2;
+                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p2Joy) * speed * 2 / 3;
+                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p2Joy) * speed * 2 / 3;
                             break;
                     }
                 }
@@ -476,9 +478,9 @@ namespace com.DungeonPad
                     v = v.normalized * 0.5f;
                 }
             }
-            else if (v.magnitude > 3)
+            else if (v.magnitude > speed)
             {
-                v = v.normalized * 3;
+                v = v.normalized * speed;
             }
             if((HardStraightTimer+=Time.deltaTime) < 0.3f)
             {
