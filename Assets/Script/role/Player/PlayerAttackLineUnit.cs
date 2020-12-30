@@ -53,7 +53,7 @@ namespace com.DungeonPad
                             if (collider.name.Contains("Big"))
                             {
                                 insMoney(Random.Range(3, 6));
-                                if (Random.Range(0, 4) < 1)
+                                if (Random.Range(0, 100) < 15)
                                 {
                                     Instantiate(reLifeParticle, transform.position, Quaternion.identity);
                                 }
@@ -61,7 +61,7 @@ namespace com.DungeonPad
                             else if (collider.name.Contains("Spider"))
                             {
                                 insMoney(Random.Range(1, 2));
-                                if (Random.Range(0, 20) < 1)
+                                if (Random.Range(0, 100) < 1)
                                 {
                                     Instantiate(reLifeParticle, transform.position, Quaternion.identity);
                                 }
