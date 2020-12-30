@@ -6,8 +6,6 @@ namespace com.DungeonPad
 {
     public class AbilityStore : MonoBehaviour
     {
-        Dictionary<AbilityManager.Ability, int> CanBuyList = new Dictionary<AbilityManager.Ability, int>();
-
         void Start()
         {
             
@@ -15,15 +13,6 @@ namespace com.DungeonPad
 
         void Update()
         {
-
-        }
-
-
-
-        void Refresh()
-        {
-            CanBuyList.Clear();
-            //CanBuyList.Add(AbilityManager.Ability.)
 
         }
     }
