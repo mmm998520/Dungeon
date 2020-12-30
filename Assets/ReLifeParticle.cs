@@ -9,14 +9,18 @@ namespace com.DungeonPad
         public SpriteRenderer spriteRenderer;
         bool spriteColorAlphaUp = false;
         float spriteColorAMax = 1, spriteColorAMin = 0.5f;
+        public CircleCollider2D circleCollider;
+        public Transform child;
         void Start()
         {
-            transform.eulerAngles = new Vector3(0, Random.Range(0, 2) * 180, 0);
+            transform.eulerAngles = new Vector3(0, Random.Range(0, 2) * 180, Random.Range(-20f,0f));
+            transform.position += new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
         }
 
         void Update()
         {
-            if(spriteColorAlphaUp)
+            circleCollider.offset = child.localPosition;
+            if (spriteColorAlphaUp)
             {
                 spriteRenderer.color = new Color(1, 1, 1, Mathf.Lerp(spriteRenderer.color.a, spriteColorAMax, Time.deltaTime));
                 if((spriteColorAMax - spriteRenderer.color.a) <= 0.05f)

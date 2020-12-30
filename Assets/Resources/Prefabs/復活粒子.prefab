@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8905642309494034477}
+  circleCollider: {fileID: 8819815771889162528}
+  child: {fileID: 8905642309494034476}
 --- !u!58 &8819815771889162528
 CircleCollider2D:
   m_ObjectHideFlags: 0

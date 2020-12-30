@@ -8,7 +8,7 @@ namespace com.DungeonPad
     {
         public Transform endPlayer;
         public PlayerAttackLine playerAttackLine;
-        public GameObject reLifeParticle;
+        public GameObject reLifeParticle, money;
 
         void Start()
         {
@@ -52,7 +52,7 @@ namespace com.DungeonPad
                             Destroy(collider.gameObject);
                             if (collider.name.Contains("Big"))
                             {
-                                PlayerManager.money += Random.Range(3, 6);
+                                insMoney(Random.Range(3, 6));
                                 if (Random.Range(0, 4) < 1)
                                 {
                                     Instantiate(reLifeParticle, transform.position, Quaternion.identity);
@@ -60,7 +60,7 @@ namespace com.DungeonPad
                             }
                             else if (collider.name.Contains("Spider"))
                             {
-                                PlayerManager.money += Random.Range(1, 2);
+                                insMoney(Random.Range(1, 2));
                                 if (Random.Range(0, 20) < 1)
                                 {
                                     Instantiate(reLifeParticle, transform.position, Quaternion.identity);
@@ -68,7 +68,7 @@ namespace com.DungeonPad
                             }
                             else
                             {
-                                PlayerManager.money += Random.Range(1, 2);
+                                insMoney(Random.Range(1, 2));
                                 if (Random.Range(0, 100) < 1)
                                 {
                                     Instantiate(reLifeParticle, transform.position, Quaternion.identity);
@@ -85,6 +85,14 @@ namespace com.DungeonPad
             if (collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack))
             {
                 Destroy(collider.gameObject);
+            }
+        }
+
+        void insMoney(int times)
+        {
+            for(int i = 0; i < times; i++)
+            {
+                Instantiate(money, transform.position, Quaternion.identity);
             }
         }
     }
