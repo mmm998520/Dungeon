@@ -16,7 +16,7 @@ namespace com.DungeonPad
         // Update is called once per frame
         void Update()
         {
-            int i = (int)PlayerManager.homeButtonTimer / 2;
+            int i = (int)Mathf.Floor(Mathf.Floor(PlayerManager.homeButtonTimer) / 2);
             if (i > 0)
             {
                 i = 0;

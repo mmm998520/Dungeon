@@ -155,10 +155,60 @@ namespace com.DungeonPad
             {
                 AbilityManager.myAbilitys.Add(storeAbility[ButtonNum]);
                 PlayerManager.money -= storeAbilityPrice[ButtonNum];
+                abilityGrowUp(storeAbility[ButtonNum]);
                 storeAbility[ButtonNum] = "null";
                 storeAbilityPrice[ButtonNum] = 0;
                 storeAbilityText[ButtonNum].text = "null";
                 storeAbilityPriceText[ButtonNum].text = "null";
+            }
+        }
+
+        void abilityGrowUp(string ability)
+        {
+            switch (ability)
+            {
+                case "光儲存上限增(40→60)":
+                    PlayerManager.MaxHP = 60;
+                    break;
+                case "光儲存上限增(60→80)":
+                    PlayerManager.MaxHP = 80;
+                    break;
+                case "殺怪回血10":
+                    PlayerAttackLineUnit.hpRecover = 10;
+                    break;
+                case "殺怪回血25":
+                    PlayerAttackLineUnit.hpRecover = 25;
+                    break;
+                case "原地復活光球+1":
+                    if (PlayerManager.Life < PlayerManager.MaxLife)
+                    {
+                        Destroy(gameObject);
+                        PlayerManager.Life++;
+                    }
+                    break;
+                case "原地復活上限+1(同時送1顆)":
+                    if (PlayerManager.MaxLife <= 5)
+                    {
+                        PlayerManager.MaxLife++;
+                    }
+                    if (PlayerManager.Life < PlayerManager.MaxLife)
+                    {
+                        Destroy(gameObject);
+                        PlayerManager.Life++;
+                    }
+                    break;
+                case "衝刺距離增加 4變5.5":
+                    PlayerManager.DashSpeed = 15;
+                    break;
+                case "衝刺冷卻時間降低0.1":
+                    PlayerManager.DashCD -= 0.1f;
+                    break;
+                case "一般移動速度加快":
+                    PlayerManager.moveSpeed ++;
+                    break;
+                case "瞬移回夥伴身邊(冷卻10秒)":
+                    //直接在PlayerManager寫能力了，這邊不用再寫
+                    break;
             }
         }
     }

@@ -9,7 +9,7 @@ namespace com.DungeonPad
         public Transform endPlayer;
         public PlayerAttackLine playerAttackLine;
         public GameObject reLifeParticle, money;
-
+        public static int hpRecover = 0;
         void Start()
         {
 
@@ -46,7 +46,7 @@ namespace com.DungeonPad
                         if (collider.GetComponent<MonsterManager>().HP <= 0)
                         {
                             Debug.LogWarning("hitTimes");
-                            PlayerManager.HP += 10;
+                            PlayerManager.HP += hpRecover;
                             Players.reTimer = 0;
                             collider.GetComponent<MonsterManager>().beforeDied();
                             Destroy(collider.gameObject);

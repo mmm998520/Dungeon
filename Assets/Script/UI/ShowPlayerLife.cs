@@ -6,6 +6,7 @@ namespace com.DungeonPad
 {
     public class ShowPlayerLife : MonoBehaviour
     {
+        public Transform MaxLifes, Lifes;
         void Start()
         {
 
@@ -15,7 +16,11 @@ namespace com.DungeonPad
         {
             for(int i = 0; i < PlayerManager.MaxLife; i++)
             {
-                transform.GetChild(i).gameObject.SetActive(i < PlayerManager.Life);
+                MaxLifes.GetChild(i).gameObject.SetActive(i < PlayerManager.Life);
+            }
+            for (int i = 0; i < PlayerManager.MaxLife; i++)
+            {
+                Lifes.GetChild(i).gameObject.SetActive(true);
             }
         }
     }

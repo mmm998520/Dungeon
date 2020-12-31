@@ -20,7 +20,7 @@ namespace com.DungeonPad
         Vector3 lastPos;
         public bool locked = true, flash = false;
         public float beganTouchedTimer, flashTimer, flashTimerStoper;
-        float speed = 3f;
+        public static float moveSpeed = 3f, DashSpeed = 11, DashCD = 0.5f;
         public List<Vector3> startRayPoss;
 
         public bool p1;
@@ -29,7 +29,7 @@ namespace com.DungeonPad
 
         public PlayerJoyVibration playerJoyVibration;
 
-        public float StickTimer = 10, HardStraightTimer = 10, DashTimer = 10, DashCD = 0.5f, SleepTimer = 10;
+        public float StickTimer = 10, HardStraightTimer = 10, DashTimer = 10, SleepTimer = 10;
         public float ConfusionTimer = 100;
         public SpriteRenderer ConfusionUIRenderer;
         public ConfusionUIcontroler ConfusionUIcontroler;
@@ -145,29 +145,9 @@ namespace com.DungeonPad
 
         void Update()
         {
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /*
-            if ((p1 && Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 2))) || (!p1 && Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 2))))
-            {
-                if (homeButtonTimer > 0)
-                {
-                    homeButtonTimer = -10*2;
-                    for (int i = 0; i < GameManager.players.childCount; i++)
-                    {
-                        if (GameManager.players.GetChild(i) != transform)
-                        {
-                            transform.position = GameManager.players.GetChild(i).position;
-                        }
-                    }
-                }
-            }
-            homeButtonTimer += Time.deltaTime;
-            */
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            
+
             if (lockedHP || (lockedHPTimer += Time.deltaTime/2) <= 2)
             {
                 HP = MaxHP;
@@ -424,12 +404,12 @@ namespace com.DungeonPad
                     switch (SelectMouse.p1Joy)
                     {
                         case "WASD":
-                            v.x += Input.GetAxis("HorizontalWASD") * speed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalWASD") * speed * 2 / 3;
+                            v.x += Input.GetAxis("HorizontalWASD") * moveSpeed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalWASD") * moveSpeed * 2 / 3;
                             break;
                         case "ArrowKey":
-                            v.x += Input.GetAxis("HorizontalArrowKey") * speed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalArrowKey") * speed * 2 / 3;
+                            v.x += Input.GetAxis("HorizontalArrowKey") * moveSpeed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalArrowKey") * moveSpeed * 2 / 3;
                             break;
                         case "1":
                         case "2":
@@ -439,8 +419,8 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p1Joy) * speed * 2 / 3;
-                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p1Joy) * speed * 2 / 3;
+                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p1Joy) * moveSpeed * 2 / 3;
+                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p1Joy) * moveSpeed * 2 / 3;
                             break;
                     }
                 }
@@ -449,12 +429,12 @@ namespace com.DungeonPad
                     switch (SelectMouse.p2Joy)
                     {
                         case "WASD":
-                            v.x += Input.GetAxis("HorizontalWASD") * speed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalWASD") * speed * 2 / 3;
+                            v.x += Input.GetAxis("HorizontalWASD") * moveSpeed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalWASD") * moveSpeed * 2 / 3;
                             break;
                         case "ArrowKey":
-                            v.x += Input.GetAxis("HorizontalArrowKey") * speed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalArrowKey") * speed * 2 / 3;
+                            v.x += Input.GetAxis("HorizontalArrowKey") * moveSpeed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalArrowKey") * moveSpeed * 2 / 3;
                             break;
                         case "1":
                         case "2":
@@ -464,8 +444,8 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p2Joy) * speed * 2 / 3;
-                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p2Joy) * speed * 2 / 3;
+                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p2Joy) * moveSpeed * 2 / 3;
+                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p2Joy) * moveSpeed * 2 / 3;
                             break;
                     }
                 }
@@ -478,9 +458,9 @@ namespace com.DungeonPad
                     v = v.normalized * 0.5f;
                 }
             }
-            else if (v.magnitude > speed)
+            else if (v.magnitude > moveSpeed)
             {
-                v = v.normalized * speed;
+                v = v.normalized * moveSpeed;
             }
             if((HardStraightTimer+=Time.deltaTime) < 0.3f)
             {
@@ -499,7 +479,7 @@ namespace com.DungeonPad
             #region//衝刺
             if (HardStraightTimer >= 0.3f && ConfusionTimer>= 10 && SleepTimer >= 0 && StickTimer >= 10)
             {
-                if(DashTimer > 0.5f)
+                if(DashTimer > DashCD)
                 {
                     if (p1)
                     {
@@ -510,8 +490,7 @@ namespace com.DungeonPad
                                 {
                                     DashA.x = Input.GetAxisRaw("HorizontalWASD");
                                     DashA.y = Input.GetAxisRaw("VerticalWASD");
-                                    DashA = Vector3.Normalize(DashA) * 11;
-                                    //DashA = Vector3.Normalize(DashA) * 15;衝刺距離增加
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
@@ -525,8 +504,7 @@ namespace com.DungeonPad
                                 {
                                     DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
                                     DashA.y = Input.GetAxisRaw("VerticalArrowKey");
-                                    DashA = Vector3.Normalize(DashA) * 11;
-                                    //DashA = Vector3.Normalize(DashA) * 15;衝刺距離增加
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
@@ -547,8 +525,7 @@ namespace com.DungeonPad
                                 {
                                     DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy);
                                     DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectMouse.p1Joy);
-                                    DashA = Vector3.Normalize(DashA) * 11;
-                                    //DashA = Vector3.Normalize(DashA) * 15;衝刺距離增加
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
@@ -569,8 +546,7 @@ namespace com.DungeonPad
                                 {
                                     DashA.x = Input.GetAxisRaw("HorizontalWASD");
                                     DashA.y = Input.GetAxisRaw("VerticalWASD");
-                                    DashA = Vector3.Normalize(DashA) * 11;
-                                    //DashA = Vector3.Normalize(DashA) * 15;衝刺距離增加
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
@@ -584,8 +560,7 @@ namespace com.DungeonPad
                                 {
                                     DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
                                     DashA.y = Input.GetAxisRaw("VerticalArrowKey");
-                                    DashA = Vector3.Normalize(DashA) * 11;
-                                    //DashA = Vector3.Normalize(DashA) * 15;衝刺距離增加
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
@@ -606,8 +581,7 @@ namespace com.DungeonPad
                                 {
                                     DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p2Joy);
                                     DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectMouse.p2Joy);
-                                    DashA = Vector3.Normalize(DashA) * 11;
-                                    //DashA = Vector3.Normalize(DashA) * 15;衝刺距離增加
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
                                     if (DashA.magnitude > 10)
                                     {
                                         DashTimer = 0;
@@ -623,15 +597,34 @@ namespace com.DungeonPad
                 if ((DashTimer += Time.deltaTime) < 0.3f)
                 {
                     v = DashA;
-                    //gameObject.layer = 16;
-                }
-                else
-                {
-                    //gameObject.layer = 8;
                 }
             }
             #endregion
 
+            #region//傳送
+            if (AbilityManager.myAbilitys.Contains("瞬移回夥伴身邊(冷卻10秒)"))
+            {
+                homeButtonTimer += Time.deltaTime;
+
+                if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
+                {
+                    if ((p1 && Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 2))) || (!p1 && Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 2))))
+                    {
+                        if (homeButtonTimer > 0)
+                        {
+                            homeButtonTimer = -10 * 2;
+                            for (int i = 0; i < GameManager.players.childCount; i++)
+                            {
+                                if (GameManager.players.GetChild(i) != transform)
+                                {
+                                    transform.position = GameManager.players.GetChild(i).position;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
             GetComponent<Rigidbody2D>().velocity = v;
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent <ParticleSystem>().shape.arc/2+180);
 
