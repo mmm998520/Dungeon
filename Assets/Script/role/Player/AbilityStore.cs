@@ -16,12 +16,19 @@ namespace com.DungeonPad
         int storeCanbuyNum = 3;
         void Start()
         {
-            
+
         }
 
         void Update()
         {
-
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                showStore();
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                closeStore();
+            }
         }
 
         void showStore()
@@ -33,17 +40,23 @@ namespace com.DungeonPad
             showOnStore();
         }
 
+        void closeStore()
+        {
+            panel.SetActive(false);
+        }
+
         void setCanBuyAbilitys()
         {
-            canBuys = AbilityManager.allAbility;
-            for(int i = 0; i < AbilityManager.myAbilitys.Count; i++)
+            canBuys = new List<string>(AbilityManager.allAbility.Keys);
+            foreach (string ability in AbilityManager.allAbility.Keys)
             {
-                if (canBuys.Contains(AbilityManager.myAbilitys[i]))
+                if (AbilityManager.myAbilitys.FindAll(x => x.Equals(ability)).Count >= AbilityManager.allAbility[ability])
                 {
-                    canBuys.Remove(AbilityManager.myAbilitys[i]);
+                    canBuys.Remove(ability);
                 }
             }
             canBuys = canBuyRemoveCantHave(canBuys, "光儲存上限增(40→60)", "光儲存上限增(60→80)");
+            canBuys = canBuyRemoveCantHave(canBuys, "殺怪回血10", "殺怪回血25");
         }
 
         List<string> canBuyRemoveCantHave(List<string> canBuys, string first, string next)
@@ -58,7 +71,7 @@ namespace com.DungeonPad
         void randomAbility()
         {
             storeAbility.Clear();
-            for(int i = 0; i < storeCanbuyNum; i++)
+            for (int i = 0; i < storeCanbuyNum; i++)
             {
                 int r = Random.Range(0, canBuys.Count);
                 storeAbility.Add(canBuys[r]);
@@ -121,10 +134,9 @@ namespace com.DungeonPad
 
         void showOnStore()
         {
-            storeAbilityPrice.Clear();
             for (int i = 0; i < storeCanbuyNum; i++)
             {
-                if(i< storeAbility.Count)
+                if (i < storeAbility.Count)
                 {
                     storeAbilityText[i].text = storeAbility[i];
                     storeAbilityPriceText[i].text = "" + storeAbilityPrice[i];
@@ -134,6 +146,19 @@ namespace com.DungeonPad
                     storeAbilityText[i].text = "null";
                     storeAbilityPriceText[i].text = "null";
                 }
+            }
+        }
+
+        public void seletAbilityButton(int ButtonNum)
+        {
+            if (storeAbilityText[ButtonNum].text != "null"/* && PlayerManager.money - storeAbilityPrice[ButtonNum] > 0*/)
+            {
+                AbilityManager.myAbilitys.Add(storeAbility[ButtonNum]);
+                PlayerManager.money -= storeAbilityPrice[ButtonNum];
+                storeAbility[ButtonNum] = "null";
+                storeAbilityPrice[ButtonNum] = 0;
+                storeAbilityText[ButtonNum].text = "null";
+                storeAbilityPriceText[ButtonNum].text = "null";
             }
         }
     }
