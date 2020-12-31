@@ -6,9 +6,10 @@ namespace com.DungeonPad
 {
     public class AbilityManager : MonoBehaviour
     {
-        //public static List<string> allAbility = new List<string>();
         public static Dictionary<string, byte> allAbility = new Dictionary<string, byte>();
         public static List<string> myAbilitys = new List<string>();
+        public static Dictionary<string, byte> myAbilityLevels = new Dictionary<string, byte>();
+
         void Awake()
         {
             setAllAbility();
@@ -17,6 +18,15 @@ namespace com.DungeonPad
         void Update()
         {
 
+        }
+
+        void replaceMyAbilityLevels()
+        {
+            myAbilityLevels.Clear();
+            myAbilityLevels.Add("原地復活光球+1", (byte)myAbilitys.FindAll(x => x.Equals("原地復活光球+1")).Count);
+            myAbilityLevels.Add("原地復活上限+1(同時送1顆)", (byte)myAbilitys.FindAll(x => x.Equals("原地復活上限+1(同時送1顆)")).Count);
+            myAbilityLevels.Add("衝刺冷卻時間降低0.1", (byte)myAbilitys.FindAll(x => x.Equals("衝刺冷卻時間降低0.1")).Count);
+            myAbilityLevels.Add("一般移動速度加快", (byte)myAbilitys.FindAll(x => x.Equals("一般移動速度加快")).Count);
         }
 
         void setAllAbility()
