@@ -12,11 +12,18 @@ namespace com.DungeonPad
         List<int> storeAbilityPrice = new List<int>();
         public Text[] storeAbilityText;
         public Text[] storeAbilityPriceText;
-        public GameObject panel;
+        public GameObject panel, RDButton, CRButton;
         int storeCanbuyNum = 3;
         void Start()
         {
-
+            if (PlayerManager.reducesDamage >= 50)
+            {
+                RDButton.SetActive(false);
+            }
+            if (PlayerManager.criticalRate >= 50)
+            {
+                CRButton.SetActive(false);
+            }
         }
 
         void Update()
@@ -160,6 +167,31 @@ namespace com.DungeonPad
                 storeAbilityPrice[ButtonNum] = 0;
                 storeAbilityText[ButtonNum].text = "null";
                 storeAbilityPriceText[ButtonNum].text = "null";
+            }
+        }
+
+        public void reducesDamageButton()
+        {
+            if(true/* && PlayerManager.money - 1 > 0*/)
+            {
+                PlayerManager.reducesDamage += 0.5f;
+                PlayerManager.money--;
+                if (PlayerManager.reducesDamage >= 50)
+                {
+                    RDButton.SetActive(false);
+                }
+            }
+        }
+        public void criticalRateButton()
+        {
+            if (true/* && PlayerManager.money - 1 > 0*/)
+            {
+                PlayerManager.criticalRate += 0.5f;
+                PlayerManager.money--;
+                if (PlayerManager.criticalRate >= 50)
+                {
+                    CRButton.SetActive(false);
+                }
             }
         }
 
