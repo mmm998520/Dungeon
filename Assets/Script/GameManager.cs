@@ -19,6 +19,9 @@ namespace com.DungeonPad
         public static int P1SpiderShooted, P1SpiderHit, P1SlimeHit, P1BubbleTimes;
         public static int P2SpiderShooted, P2SpiderHit, P2SlimeHit, P2BubbleTimes;
 
+        public static AbilityStore abilityStore;
+        float emptyRoomNumCountTimer;
+
         void Awake()
         {
             MazeCreater.setTotalRowCol();
@@ -35,10 +38,28 @@ namespace com.DungeonPad
                 smallMap.start();
                 UI = smallMap.transform.parent;
             }
+            if (GameObject.Find("AbilityStore"))
+            {
+                abilityStore = GameObject.Find("AbilityStore").GetComponent<AbilityStore>();
+                abilityStore.initialStore();
+            }
         }
 
         void Update()
         {
+            if ((emptyRoomNumCountTimer += Time.deltaTime) >= 1)
+            {
+                if (abilityStore.appearRoomNum < 9999 || Sensor.finalRoomIsEmpty())
+                {
+                    emptyRoomNumCountTimer = 0;
+                    if (Sensor.emptyRoomNum() >= abilityStore.appearRoomNum)
+                    {
+                        abilityStore.showStore();
+                        abilityStore.appearRoomNum = 9999;
+                    }
+                }
+            }
+
             DiedBecauseTimer += Time.deltaTime;
 
             if (PlayerManager.HP <= 0)

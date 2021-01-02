@@ -14,6 +14,13 @@ namespace com.DungeonPad
         public Text[] storeAbilityPriceText;
         public GameObject panel, RDButton, CRButton;
         int storeCanbuyNum = 3;
+        public int appearRoomNum;
+
+        private void Awake()
+        {
+            appearRoomNum = Random.Range(6, 10);
+        }
+
         void Start()
         {
             if (PlayerManager.reducesDamage >= 50)
@@ -26,20 +33,9 @@ namespace com.DungeonPad
             }
         }
 
-        void Update()
+        public void showStore()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                showStore();
-            }
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                closeStore();
-            }
-        }
-
-        void showStore()
-        {
+            Time.timeScale = 0;
             panel.SetActive(true);
             setCanBuyAbilitys();
             randomAbility();
@@ -47,8 +43,24 @@ namespace com.DungeonPad
             showOnStore();
         }
 
-        void closeStore()
+        public void initialStore()
         {
+            Time.timeScale = 0;
+            panel.SetActive(true);
+            storeAbility.Clear();
+            storeAbility.Add("光儲存上限增(40→60)");
+            storeAbility.Add("殺怪回血10");
+            storeAbility.Add("原地復活光球+1");
+            storeAbilityPrice.Clear();
+            storeAbilityPrice.Add(0);
+            storeAbilityPrice.Add(0);
+            storeAbilityPrice.Add(0);
+            showOnStore();
+        }
+
+        public void closeStore()
+        {
+            Time.timeScale = 1;
             panel.SetActive(false);
         }
 
@@ -214,7 +226,6 @@ namespace com.DungeonPad
                 case "原地復活光球+1":
                     if (PlayerManager.Life < PlayerManager.MaxLife)
                     {
-                        Destroy(gameObject);
                         PlayerManager.Life++;
                     }
                     break;
@@ -225,7 +236,6 @@ namespace com.DungeonPad
                     }
                     if (PlayerManager.Life < PlayerManager.MaxLife)
                     {
-                        Destroy(gameObject);
                         PlayerManager.Life++;
                     }
                     break;
