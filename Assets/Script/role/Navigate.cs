@@ -178,6 +178,7 @@ namespace com.DungeonPad
         #region//尋路
         public void findRoad()
         {
+            roads.Clear();
             if (!findingRoad)
             {
                 findingRoad = true;
