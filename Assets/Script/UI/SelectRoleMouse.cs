@@ -83,6 +83,22 @@ namespace com.DungeonPad
                 }
             }
             rectTransform.anchoredPosition += mouseMove;
+            if (rectTransform.anchoredPosition.x > Screen.width)
+            {
+                rectTransform.anchoredPosition = new Vector2(Screen.width, rectTransform.anchoredPosition.y);
+            }
+            if (rectTransform.anchoredPosition.x < 100)
+            {
+                rectTransform.anchoredPosition = new Vector2(100, rectTransform.anchoredPosition.y);
+            }
+            if (rectTransform.anchoredPosition.y > Screen.height)
+            {
+                rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, Screen.height);
+            }
+            if (rectTransform.anchoredPosition.y < 100)
+            {
+                rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, 100);
+            }
         }
     }
 }
