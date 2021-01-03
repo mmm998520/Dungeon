@@ -14,13 +14,13 @@ namespace com.DungeonPad
 
         void Update()
         {
-            for(int i = 0; i < PlayerManager.MaxLife; i++)
+            for(int i = 0; i < 5; i++)
             {
-                MaxLifes.GetChild(i).gameObject.SetActive(i < PlayerManager.Life);
+                MaxLifes.GetChild(i).gameObject.SetActive(i < PlayerManager.MaxLife);
             }
             for (int i = 0; i < PlayerManager.MaxLife; i++)
             {
-                Lifes.GetChild(i).gameObject.SetActive(true);
+                Lifes.GetChild(i).gameObject.SetActive(i < PlayerManager.Life);
             }
         }
     }

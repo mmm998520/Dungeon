@@ -36,6 +36,7 @@ namespace com.DungeonPad
                     {
                         if(minDis > Vector3.Distance(Exit.transform.position, sensors[i].transform.position))
                         {
+                            minDis = Vector3.Distance(Exit.transform.position, sensors[i].transform.position);
                             exitSensor = sensors[i].GetComponent<Sensor>();
                         }
                     }
@@ -52,6 +53,7 @@ namespace com.DungeonPad
                 {
                     child.GetComponent<Navigate>().arriveNewRoom(row, col);
                 }
+                if (exitSensor != this) { }
                 Destroy(gameObject.GetComponent<BoxCollider2D>());
             }
         }
@@ -64,6 +66,9 @@ namespace com.DungeonPad
         
         public static bool finalRoomIsEmpty()
         {
+            Debug.LogError(exitSensor,exitSensor.gameObject);
+            Debug.LogError(!exitSensor.GetComponent<Collider2D>());
+            Debug.LogError(exitSensor.checkEmpty());
             return exitSensor && !exitSensor.GetComponent<Collider2D>() && exitSensor.checkEmpty();
         }
 

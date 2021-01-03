@@ -47,9 +47,9 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if ((emptyRoomNumCountTimer += Time.deltaTime) >= 1)
+            if (abilityStore)
             {
-                if (abilityStore.appearRoomNum < 9999 || Sensor.finalRoomIsEmpty())
+                if ((emptyRoomNumCountTimer += Time.deltaTime) >= 1)
                 {
                     emptyRoomNumCountTimer = 0;
                     if (Sensor.emptyRoomNum() >= abilityStore.appearRoomNum)
@@ -57,6 +57,12 @@ namespace com.DungeonPad
                         abilityStore.showStore();
                         abilityStore.appearRoomNum = 9999;
                     }
+                    /*if (Sensor.finalRoomIsEmpty())
+                    {
+                        Debug.LogError(2312312132132);
+                        abilityStore.showStore();
+                        abilityStore.appearRoomNum = 9999;
+                    }*/
                 }
             }
 

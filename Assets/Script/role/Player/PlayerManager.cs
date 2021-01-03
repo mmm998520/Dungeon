@@ -9,7 +9,7 @@ namespace com.DungeonPad
 {
     public class PlayerManager : MonoBehaviour
     {
-        public static float MaxHP = 60, HP = 60;
+        public static float MaxHP = 40, HP = 40;
         public static int Life = 2, MaxLife = 4;
         public static bool lockedHP = false;
         public static float lockedHPTimer = 10;
@@ -608,18 +608,123 @@ namespace com.DungeonPad
 
                 if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
                 {
-                    if ((p1 && Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 2))) || (!p1 && Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 2))))
+                    if (p1)
                     {
-                        if (homeButtonTimer > 0)
+                        switch (SelectMouse.p1Joy)
                         {
-                            homeButtonTimer = -10 * 2;
-                            for (int i = 0; i < GameManager.players.childCount; i++)
-                            {
-                                if (GameManager.players.GetChild(i) != transform)
+                            case "WASD":
+                                if (Input.GetKeyDown(KeyCode.M))
                                 {
-                                    transform.position = GameManager.players.GetChild(i).position;
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
                                 }
-                            }
+                                break;
+                            case "ArrowKey":
+                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case "1":
+                            case "2":
+                            case "3":
+                            case "4":
+                            case "5":
+                            case "6":
+                            case "7":
+                            case "8":
+                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 2)))
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                        switch (SelectMouse.p2Joy)
+                        {
+                            case "WASD":
+                                if (Input.GetKeyDown(KeyCode.M))
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case "ArrowKey":
+                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case "1":
+                            case "2":
+                            case "3":
+                            case "4":
+                            case "5":
+                            case "6":
+                            case "7":
+                            case "8":
+                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 2)))
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
                         }
                     }
                 }

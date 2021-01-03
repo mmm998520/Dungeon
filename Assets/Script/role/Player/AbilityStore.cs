@@ -66,7 +66,12 @@ namespace com.DungeonPad
             {
                 PlayerManager.money -= RefreshCost;
                 setStoreText(totalCanChooseNum, --RefreshTimes);
-                showStore();
+                Time.timeScale = 0;
+                panel.SetActive(true);
+                setCanBuyAbilitys();
+                randomAbility();
+                setPrice();
+                showOnStore();
             }
         }
 
@@ -214,7 +219,7 @@ namespace com.DungeonPad
 
         public void seletAbilityButton(int ButtonNum)
         {
-            if (storeAbilityText[ButtonNum].text != "null"/* && PlayerManager.money - storeAbilityPrice[ButtonNum] >= 0 && totalCanChooseNum > 0*/)
+            if (storeAbilityText[ButtonNum].text != "null"/* && PlayerManager.money - storeAbilityPrice[ButtonNum] >= 0*/ && totalCanChooseNum > 0)
             {
                 setStoreText(--totalCanChooseNum, RefreshTimes);
                 AbilityManager.myAbilitys.Add(storeAbility[ButtonNum]);
