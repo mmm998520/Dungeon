@@ -10,10 +10,10 @@ namespace com.DungeonPad
         List<string> storeAbility = new List<string>();
         List<string> canBuys;
         List<int> storeAbilityPrice = new List<int>();
-        public Text[] storeAbilityText;
-        public Text[] storeAbilityPriceText;
+        public Text[] storeAbilityText, storeAbilityPriceText;
+        public Text totalCanChooseNumText, RefreshTimesText, RefreshCostText;
         public GameObject panel, RDButton, CRButton;
-        int storeCanbuyNum = 3;
+        int storeCanbuyNum = 3, totalCanChooseNum, RefreshTimes, RefreshCost = 5;
         public int appearRoomNum;
 
         private void Awake()
@@ -35,6 +35,7 @@ namespace com.DungeonPad
 
         public void showStore()
         {
+            setStoreText(999, 2);
             Time.timeScale = 0;
             panel.SetActive(true);
             setCanBuyAbilitys();
@@ -45,6 +46,7 @@ namespace com.DungeonPad
 
         public void initialStore()
         {
+            setStoreText(2,0);
             Time.timeScale = 0;
             panel.SetActive(true);
             storeAbility.Clear();
@@ -58,10 +60,52 @@ namespace com.DungeonPad
             showOnStore();
         }
 
+        public void RefreshStore()
+        {
+            if (RefreshTimes > 0 /*&& PlayerManager.money - RefreshCost >= 0*/)
+            {
+                PlayerManager.money -= RefreshCost;
+                setStoreText(totalCanChooseNum, --RefreshTimes);
+                showStore();
+            }
+        }
+
         public void closeStore()
         {
             Time.timeScale = 1;
             panel.SetActive(false);
+        }
+
+        void setStoreText(int _totalCanChooseNum, int _RefreshTimes, int _RefreshCost)
+        {
+            totalCanChooseNum = _totalCanChooseNum;
+            RefreshTimes = _RefreshTimes;
+            RefreshCost = _RefreshCost;
+            if (totalCanChooseNum < 500)
+            {
+                totalCanChooseNumText.text = "還可選" + totalCanChooseNum + "個";
+            }
+            else
+            {
+                totalCanChooseNumText.text = "";
+            }
+            RefreshTimesText.text = "剩" + RefreshTimes + "次";
+            RefreshCostText.text = RefreshCost + "元";
+        }
+        void setStoreText(int _totalCanChooseNum, int _RefreshTimes)
+        {
+            totalCanChooseNum = _totalCanChooseNum;
+            RefreshTimes = _RefreshTimes;
+            if (totalCanChooseNum < 500)
+            {
+                totalCanChooseNumText.text = "還可選" + totalCanChooseNum + "個";
+            }
+            else
+            {
+                totalCanChooseNumText.text = "";
+            }
+            RefreshTimesText.text = "剩" + RefreshTimes + "次";
+            RefreshCostText.text = RefreshCost + "元";
         }
 
         void setCanBuyAbilitys()
@@ -170,8 +214,9 @@ namespace com.DungeonPad
 
         public void seletAbilityButton(int ButtonNum)
         {
-            if (storeAbilityText[ButtonNum].text != "null"/* && PlayerManager.money - storeAbilityPrice[ButtonNum] > 0*/)
+            if (storeAbilityText[ButtonNum].text != "null"/* && PlayerManager.money - storeAbilityPrice[ButtonNum] >= 0 && totalCanChooseNum > 0*/)
             {
+                setStoreText(--totalCanChooseNum, RefreshTimes);
                 AbilityManager.myAbilitys.Add(storeAbility[ButtonNum]);
                 PlayerManager.money -= storeAbilityPrice[ButtonNum];
                 abilityGrowUp(storeAbility[ButtonNum]);
@@ -184,7 +229,7 @@ namespace com.DungeonPad
 
         public void reducesDamageButton()
         {
-            if(true/* && PlayerManager.money - 1 > 0*/)
+            if(true/* && PlayerManager.money - 1 >= 0*/)
             {
                 PlayerManager.reducesDamage += 0.5f;
                 PlayerManager.money--;
@@ -196,7 +241,7 @@ namespace com.DungeonPad
         }
         public void criticalRateButton()
         {
-            if (true/* && PlayerManager.money - 1 > 0*/)
+            if (true/* && PlayerManager.money - 1 >= 0*/)
             {
                 PlayerManager.criticalRate += 0.5f;
                 PlayerManager.money--;
@@ -250,6 +295,9 @@ namespace com.DungeonPad
                     break;
                 case "瞬移回夥伴身邊(冷卻10秒)":
                     //直接在PlayerManager寫能力了，這邊不用再寫
+                    break;
+                default:
+                    Debug.LogError("商品名稱錯誤 : \""+ ability + "\"");
                     break;
             }
         }
