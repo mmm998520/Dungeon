@@ -9,7 +9,7 @@ namespace com.DungeonPad
     {
         public bool attacking = false;
         Transform minDisPlayer;
-        public Text HPText;
+        public RectTransform HPBar;
         public float InvincibleTimer = 10;//無敵
         public Animator animator;
         public Vector3 RecordDir;
@@ -42,7 +42,7 @@ namespace com.DungeonPad
             accurateAxeCDTimer += Time.deltaTime;
             CDTimer += Time.deltaTime;
             InvincibleTimer += Time.deltaTime;
-            HPText.text = HP + "";
+            HPBar.localScale = new Vector3(HP / MaxHP, 1, 1);
             minDisPlayer = MinDisPlayer();
 
             animator.SetBool("Sleep", SleepTimer < 0f);
@@ -57,6 +57,7 @@ namespace com.DungeonPad
                 {
                     resetRoad();
                     move();
+                    Debug.LogError("statB");
                 }
             }
             else if (!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe90") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("AccurateAxe"))
@@ -72,6 +73,14 @@ namespace com.DungeonPad
                 {
                     if (CDs.Count > 0)
                     {
+                        if (MinDisPlayer().position.x - transform.position.x > 0)
+                        {
+                            transform.rotation = Quaternion.Euler(0, 0, 0);
+                        }
+                        else
+                        {
+                            transform.rotation = Quaternion.Euler(0, 180, 0);
+                        }
                         r = Random.Range(0, CDs.Count);
                         switch (CDs[r])
                         {
@@ -272,12 +281,21 @@ namespace com.DungeonPad
 
         void move()
         {
-            Vector3 nextPos = new Vector3(roads[roads.Count - 2][0], roads[roads.Count - 2][1]);
-            rigidbody.velocity = Vector3.Normalize(nextPos - transform.position) * speed;
-            if (Vector3.Distance(transform.position, nextPos) < 0.5f)
+            if (roads.Count>1)
             {
-                roads.RemoveAt(roads.Count - 1);
+                Vector3 nextPos = new Vector3(roads[roads.Count - 2][0], roads[roads.Count - 2][1]);
+                rigidbody.velocity = Vector3.Normalize(nextPos - transform.position) * speed;
+                if (Vector3.Distance(transform.position, nextPos) < 0.5f)
+                {
+                    roads.RemoveAt(roads.Count - 1);
+                }
             }
+            else
+            {
+                rigidbody.velocity = Vector3.zero;
+            }
+            Debug.LogError(roads.Count);
+
             if (rigidbody.velocity.x > 0)
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -320,5 +338,10 @@ namespace com.DungeonPad
             animator.SetBool("BackHurt", false);
         }
         #endregion
+
+        private void OnDestroy()
+        {
+            HPBar.localScale = Vector3.zero;
+        }
     }
 }
