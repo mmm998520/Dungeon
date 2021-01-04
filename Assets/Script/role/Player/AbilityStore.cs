@@ -11,10 +11,11 @@ namespace com.DungeonPad
         List<string> canBuys;
         List<int> storeAbilityPrice = new List<int>();
         public Text[] storeAbilityText, storeAbilityPriceText;
-        public Text totalCanChooseNumText, RefreshTimesText, RefreshCostText;
+        public Text totalCanChooseNumText, RefreshTimesText, RefreshCostText, reducesDamageText, criticalRateText, onSellText;
         public GameObject panel, RDButton, CRButton;
         int storeCanbuyNum = 3, totalCanChooseNum, RefreshTimes, RefreshCost = 5;
         public int appearRoomNum;
+        bool Refreshed = false;
 
         private void Awake()
         {
@@ -37,6 +38,8 @@ namespace com.DungeonPad
         {
             setStoreText(999, 2);
             Time.timeScale = 0;
+            Refreshed = false;
+            onSellText.enabled = !Refreshed;
             panel.SetActive(true);
             setCanBuyAbilitys();
             randomAbility();
@@ -48,11 +51,13 @@ namespace com.DungeonPad
         {
             setStoreText(2,0);
             Time.timeScale = 0;
+            Refreshed = true;
+            onSellText.enabled = !Refreshed;
             panel.SetActive(true);
             storeAbility.Clear();
-            storeAbility.Add("光儲存上限增(40→60)");
-            storeAbility.Add("殺怪回血10");
-            storeAbility.Add("原地復活光球+1");
+            storeAbility.Add("血量上限增加LV1");
+            storeAbility.Add("殺怪回血LV1");
+            storeAbility.Add("復活光球+1");
             storeAbilityPrice.Clear();
             storeAbilityPrice.Add(0);
             storeAbilityPrice.Add(0);
@@ -67,6 +72,8 @@ namespace com.DungeonPad
                 PlayerManager.money -= RefreshCost;
                 setStoreText(totalCanChooseNum, --RefreshTimes);
                 Time.timeScale = 0;
+                Refreshed = true;
+                onSellText.enabled = !Refreshed;
                 panel.SetActive(true);
                 setCanBuyAbilitys();
                 randomAbility();
@@ -123,8 +130,10 @@ namespace com.DungeonPad
                     canBuys.Remove(ability);
                 }
             }
-            canBuys = canBuyRemoveCantHave(canBuys, "光儲存上限增(40→60)", "光儲存上限增(60→80)");
-            canBuys = canBuyRemoveCantHave(canBuys, "殺怪回血10", "殺怪回血25");
+            canBuys = canBuyRemoveCantHave(canBuys, "血量上限增加LV1", "血量上限增加LV2");
+            canBuys = canBuyRemoveCantHave(canBuys, "殺怪回血LV1", "殺怪回血LV2");
+            canBuys = canBuyRemoveCantHave(canBuys, "降低衝刺冷卻LV1", "降低衝刺冷卻LV2");
+            canBuys = canBuyRemoveCantHave(canBuys, "加快移動LV1", "加快移動LV2");
         }
 
         List<string> canBuyRemoveCantHave(List<string> canBuys, string first, string next)
@@ -157,45 +166,54 @@ namespace com.DungeonPad
             storeAbilityPrice.Clear();
             for (int i = 0; i < storeCanbuyNum; i++)
             {
-                if (i < storeAbility.Count)
+                if (Refreshed)
                 {
                     switch (storeAbility[i])
                     {
-                        case "光儲存上限增(40→60)":
-                            storeAbilityPrice.Add(Random.Range(20, 21));
+                        case "血量上限增加LV1":
+                        case "殺怪回血LV1":
+                        case "復活光球+1":
+                            storeAbilityPrice.Add(Random.Range(15, 16));
                             break;
-                        case "光儲存上限增(60→80)":
-                            storeAbilityPrice.Add(Random.Range(25, 26));
-                            break;
-                        case "殺怪回血10":
-                            storeAbilityPrice.Add(Random.Range(20, 21));
-                            break;
-                        case "殺怪回血25":
-                            storeAbilityPrice.Add(Random.Range(25, 26));
-                            break;
-                        case "原地復活光球+1":
-                            storeAbilityPrice.Add(Random.Range(20, 21));
-                            break;
-                        case "原地復活上限+1(同時送1顆)":
-                            storeAbilityPrice.Add(Random.Range(35, 36));
-                            break;
-                        case "衝刺距離增加 4變5.5":
-                            storeAbilityPrice.Add(Random.Range(30, 41));
-                            break;
-                        case "衝刺冷卻時間降低0.1":
-                            storeAbilityPrice.Add(Random.Range(30, 41));
-                            break;
-                        case "一般移動速度加快":
-                            storeAbilityPrice.Add(Random.Range(30, 41));
-                            break;
-                        case "瞬移回夥伴身邊(冷卻10秒)":
-                            storeAbilityPrice.Add(Random.Range(35, 46));
+                        default:
+                            storeAbilityPrice.Add(Random.Range(30, 45));
                             break;
                     }
                 }
                 else
                 {
-                    storeAbilityPrice.Add(Random.Range(0, 1));
+                    if (i < storeAbility.Count - 1)
+                    {
+                        switch (storeAbility[i])
+                        {
+                            case "血量上限增加LV1":
+                            case "殺怪回血LV1":
+                            case "復活光球+1":
+                                storeAbilityPrice.Add(Random.Range(15, 16));
+                                break;
+                            default:
+                                storeAbilityPrice.Add(Random.Range(30, 46));
+                                break;
+                        }
+                    }
+                    else if (i < storeAbility.Count)
+                    {
+                        switch (storeAbility[i])
+                        {
+                            case "血量上限增加LV1":
+                            case "殺怪回血LV1":
+                            case "復活光球+1":
+                                storeAbilityPrice.Add(Random.Range(15, 16));
+                                break;
+                            default:
+                                storeAbilityPrice.Add(Random.Range(20, 21));
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        storeAbilityPrice.Add(Random.Range(0, 1));
+                    }
                 }
             }
         }
@@ -238,6 +256,7 @@ namespace com.DungeonPad
             {
                 PlayerManager.reducesDamage += 0.5f;
                 PlayerManager.money--;
+                reducesDamageText.text = "現在" + PlayerManager.reducesDamage + "%";
                 if (PlayerManager.reducesDamage >= 50)
                 {
                     RDButton.SetActive(false);
@@ -250,6 +269,7 @@ namespace com.DungeonPad
             {
                 PlayerManager.criticalRate += 0.5f;
                 PlayerManager.money--;
+                criticalRateText.text = "現在" + PlayerManager.criticalRate + "%";
                 if (PlayerManager.criticalRate >= 50)
                 {
                     CRButton.SetActive(false);
@@ -261,25 +281,25 @@ namespace com.DungeonPad
         {
             switch (ability)
             {
-                case "光儲存上限增(40→60)":
+                case "血量上限增加LV1":
                     PlayerManager.MaxHP = 60;
                     break;
-                case "光儲存上限增(60→80)":
+                case "血量上限增加LV2":
                     PlayerManager.MaxHP = 80;
                     break;
-                case "殺怪回血10":
+                case "殺怪回血LV1":
                     PlayerAttackLineUnit.hpRecover = 10;
                     break;
-                case "殺怪回血25":
+                case "殺怪回血LV2":
                     PlayerAttackLineUnit.hpRecover = 25;
                     break;
-                case "原地復活光球+1":
+                case "復活光球+1":
                     if (PlayerManager.Life < PlayerManager.MaxLife)
                     {
                         PlayerManager.Life++;
                     }
                     break;
-                case "原地復活上限+1(同時送1顆)":
+                case "復活上限+1(送1顆復活光球)":
                     if (PlayerManager.MaxLife <= 5)
                     {
                         PlayerManager.MaxLife++;
@@ -289,16 +309,18 @@ namespace com.DungeonPad
                         PlayerManager.Life++;
                     }
                     break;
-                case "衝刺距離增加 4變5.5":
+                case "衝刺距離增加":
                     PlayerManager.DashSpeed = 15;
                     break;
-                case "衝刺冷卻時間降低0.1":
+                case "降低衝刺冷卻LV1":
+                case "降低衝刺冷卻LV2":
                     PlayerManager.DashCD -= 0.1f;
                     break;
-                case "一般移動速度加快":
+                case "加快移動LV1":
+                case "加快移動LV2":
                     PlayerManager.moveSpeed ++;
                     break;
-                case "瞬移回夥伴身邊(冷卻10秒)":
+                case "按X傳送到隊友身邊(冷卻10秒)":
                     //直接在PlayerManager寫能力了，這邊不用再寫
                     break;
                 default:

@@ -10,6 +10,8 @@ namespace com.DungeonPad
         public bool attacking = false;
         Transform minDisPlayer;
         public RectTransform HPBar;
+        public Image hpBar, hpBarBottom;
+        public Sprite GreenHP, GreenHPBottom, YellowHP, YellowHPBottom, RedHP, RedHPBottom;
         public float InvincibleTimer = 10;//無敵
         public Animator animator;
         public Vector3 RecordDir;
@@ -42,7 +44,23 @@ namespace com.DungeonPad
             accurateAxeCDTimer += Time.deltaTime;
             CDTimer += Time.deltaTime;
             InvincibleTimer += Time.deltaTime;
-            HPBar.localScale = new Vector3(HP / MaxHP, 1, 1);
+            float scale = HP / MaxHP;
+            HPBar.localScale = new Vector3(scale, 1, 1);
+            if (scale < 0.3333f)
+            {
+                hpBar.sprite = RedHP;
+                hpBarBottom.sprite = RedHPBottom;
+            }
+            else if (scale < 0.6666f)
+            {
+                hpBar.sprite = YellowHP;
+                hpBarBottom.sprite = YellowHPBottom;
+            }
+            else
+            {
+                hpBar.sprite = GreenHP;
+                hpBarBottom.sprite = GreenHPBottom;
+            }
             minDisPlayer = MinDisPlayer();
 
             animator.SetBool("Sleep", SleepTimer < 0f);

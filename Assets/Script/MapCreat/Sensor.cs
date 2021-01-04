@@ -69,7 +69,8 @@ namespace com.DungeonPad
             Debug.LogError(exitSensor,exitSensor.gameObject);
             Debug.LogError(!exitSensor.GetComponent<Collider2D>());
             Debug.LogError(exitSensor.checkEmpty());
-            return exitSensor && !exitSensor.GetComponent<Collider2D>() && exitSensor.checkEmpty();
+            bool IamHere = Physics2D.BoxCast(exitSensor.transform.position, exitSensor.transform.localScale, 0, Vector2.right, 0, 1 << 8);
+            return exitSensor && !exitSensor.GetComponent<Collider2D>() && exitSensor.checkEmpty() && IamHere;
         }
 
         public static int  emptyRoomNum()

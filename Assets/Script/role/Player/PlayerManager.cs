@@ -145,9 +145,6 @@ namespace com.DungeonPad
 
         void Update()
         {
-
-            
-
             if (lockedHP || (lockedHPTimer += Time.deltaTime/2) <= 2)
             {
                 HP = MaxHP;
@@ -602,7 +599,7 @@ namespace com.DungeonPad
             #endregion
 
             #region//傳送
-            if (AbilityManager.myAbilitys.Contains("瞬移回夥伴身邊(冷卻10秒)"))
+            if (AbilityManager.myAbilitys.Contains("按X傳送到隊友身邊(冷卻10秒)"))
             {
                 homeButtonTimer += Time.deltaTime;
 

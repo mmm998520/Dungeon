@@ -57,12 +57,6 @@ namespace com.DungeonPad
                         abilityStore.showStore();
                         abilityStore.appearRoomNum = 9999;
                     }
-                    /*if (Sensor.finalRoomIsEmpty())
-                    {
-                        Debug.LogError(2312312132132);
-                        abilityStore.showStore();
-                        abilityStore.appearRoomNum = 9999;
-                    }*/
                 }
             }
 

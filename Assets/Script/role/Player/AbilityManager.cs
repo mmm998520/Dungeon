@@ -23,25 +23,25 @@ namespace com.DungeonPad
         void replaceMyAbilityLevels()
         {
             myAbilityLevels.Clear();
-            myAbilityLevels.Add("原地復活光球+1", (byte)myAbilitys.FindAll(x => x.Equals("原地復活光球+1")).Count);
-            myAbilityLevels.Add("原地復活上限+1(同時送1顆)", (byte)myAbilitys.FindAll(x => x.Equals("原地復活上限+1(同時送1顆)")).Count);
-            myAbilityLevels.Add("衝刺冷卻時間降低0.1", (byte)myAbilitys.FindAll(x => x.Equals("衝刺冷卻時間降低0.1")).Count);
-            myAbilityLevels.Add("一般移動速度加快", (byte)myAbilitys.FindAll(x => x.Equals("一般移動速度加快")).Count);
+            myAbilityLevels.Add("復活光球+1", (byte)myAbilitys.FindAll(x => x.Equals("復活光球+1")).Count);
+            myAbilityLevels.Add("復活上限+1(送1顆復活光球)", (byte)myAbilitys.FindAll(x => x.Equals("復活上限+1(送1顆復活光球)")).Count);
         }
 
         void setAllAbility()
         {
             allAbility.Clear();
-            allAbility.Add("光儲存上限增(40→60)", 1);
-            allAbility.Add("光儲存上限增(60→80)", 1);
-            allAbility.Add("殺怪回血10", 1);
-            allAbility.Add("殺怪回血25", 1);
-            allAbility.Add("原地復活光球+1", 255);
-            allAbility.Add("原地復活上限+1(同時送1顆)", 2);
-            allAbility.Add("衝刺距離增加 4變5.5", 1);
-            allAbility.Add("衝刺冷卻時間降低0.1", 2);
-            allAbility.Add("一般移動速度加快", 2);
-            allAbility.Add("瞬移回夥伴身邊(冷卻10秒)", 1);
+            allAbility.Add("血量上限增加LV1", 1);
+            allAbility.Add("血量上限增加LV2", 1);
+            allAbility.Add("殺怪回血LV1", 1);
+            allAbility.Add("殺怪回血LV2", 1);
+            allAbility.Add("復活光球+1", 255);
+            allAbility.Add("復活上限+1(送1顆復活光球)", 2);
+            allAbility.Add("衝刺距離增加", 1);
+            allAbility.Add("降低衝刺冷卻LV1", 1);
+            allAbility.Add("降低衝刺冷卻LV2", 1);
+            allAbility.Add("加快移動LV1", 1);
+            allAbility.Add("加快移動LV2", 1);
+            allAbility.Add("按X傳送到隊友身邊(冷卻10秒)", 1);
         }
     }
 }

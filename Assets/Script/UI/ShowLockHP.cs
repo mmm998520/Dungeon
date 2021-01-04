@@ -16,7 +16,7 @@ namespace com.DungeonPad
 
         void Update()
         {
-            float lockHPLight = 0.9f - PlayerManager.lockedHPTimer * 0.45f;
+            float lockHPLight = 0.9f - PlayerManager.lockedHPTimer * 0.3f;
             //float hurtLight = 0.25f - hurtTimer;
             //hurtTimer += Time.deltaTime;
             if (lockHPLight > 0)
