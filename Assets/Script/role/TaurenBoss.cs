@@ -166,6 +166,14 @@ namespace com.DungeonPad
         void Record()
         {
             RecordDir = Vector3.Normalize(minDisPlayer.position - transform.position);
+            if (RecordDir.x > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
         }
 
         void prePunch()
@@ -312,8 +320,6 @@ namespace com.DungeonPad
             {
                 rigidbody.velocity = Vector3.zero;
             }
-            Debug.LogError(roads.Count);
-
             if (rigidbody.velocity.x > 0)
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);

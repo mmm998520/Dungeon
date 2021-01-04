@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 40, HP = 40;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = false;
+        public static bool lockedHP = true;
         public static float lockedHPTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
