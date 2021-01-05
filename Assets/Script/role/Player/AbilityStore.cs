@@ -45,6 +45,7 @@ namespace com.DungeonPad
             randomAbility();
             setPrice();
             showOnStore();
+            PlayerJoyVibration.canVibration = false;
         }
 
         public void initialStore()
@@ -63,6 +64,7 @@ namespace com.DungeonPad
             storeAbilityPrice.Add(0);
             storeAbilityPrice.Add(0);
             showOnStore();
+            PlayerJoyVibration.canVibration = false;
         }
 
         public void RefreshStore()
@@ -86,6 +88,7 @@ namespace com.DungeonPad
         {
             Time.timeScale = 1;
             panel.SetActive(false);
+            PlayerJoyVibration.canVibration = true;
         }
 
         void setStoreText(int _totalCanChooseNum, int _RefreshTimes, int _RefreshCost)
@@ -164,7 +167,7 @@ namespace com.DungeonPad
         void setPrice()
         {
             storeAbilityPrice.Clear();
-            for (int i = 0; i < storeCanbuyNum; i++)
+            for (int i = 0; i < storeAbility.Count; i++)
             {
                 if (Refreshed)
                 {

@@ -53,7 +53,6 @@ namespace com.DungeonPad
                 {
                     child.GetComponent<Navigate>().arriveNewRoom(row, col);
                 }
-                if (exitSensor != this) { }
                 Destroy(gameObject.GetComponent<BoxCollider2D>());
             }
         }
@@ -64,13 +63,11 @@ namespace com.DungeonPad
             return empty;
         }
         
-        public static bool finalRoomIsEmpty()
+        public static bool WeAreInEmptyFinalRoom()
         {
-            Debug.LogError(exitSensor,exitSensor.gameObject);
-            Debug.LogError(!exitSensor.GetComponent<Collider2D>());
-            Debug.LogError(exitSensor.checkEmpty());
-            bool IamHere = Physics2D.BoxCast(exitSensor.transform.position, exitSensor.transform.localScale, 0, Vector2.right, 0, 1 << 8);
-            return exitSensor && !exitSensor.GetComponent<Collider2D>() && exitSensor.checkEmpty() && IamHere;
+            RaycastHit2D[] hits = Physics2D.BoxCastAll(exitSensor.transform.position, exitSensor.transform.localScale, 0, Vector2.right, 0, 1 << 8);
+            bool WeAreHere = (hits.Length >= 2);
+            return exitSensor && exitSensor.checkEmpty() && WeAreHere;
         }
 
         public static int  emptyRoomNum()

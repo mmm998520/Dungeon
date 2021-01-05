@@ -302,6 +302,7 @@ namespace com.DungeonPad
 
         void Behavior()
         {
+            #region//掙脫
             if (p1)
             {
                 switch (SelectMouse.p1Joy)
@@ -376,6 +377,7 @@ namespace com.DungeonPad
                         break;
                 }
             }
+            #endregion
             if ((ConfusionTimer += Time.deltaTime) < 10 || (StickTimer += Time.deltaTime) < 10)
             {
                 ConfusionUIRenderer.enabled = true;
@@ -665,6 +667,9 @@ namespace com.DungeonPad
                                 }
                                 break;
                         }
+                    }
+                    else
+                    {
                         switch (SelectMouse.p2Joy)
                         {
                             case "WASD":
@@ -784,8 +789,113 @@ namespace com.DungeonPad
 
             //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy + "R");
             #endregion
+
+            #region//商人
+            if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
+            {
+                if (p1)
+                {
+                    switch (SelectMouse.p1Joy)
+                    {
+                        case "WASD":
+                            if (Input.GetKeyDown(KeyCode.L))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                        case "ArrowKey":
+                            if (Input.GetKeyDown(KeyCode.Keypad3))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 3)))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (SelectMouse.p2Joy)
+                    {
+                        case "WASD":
+                            if (Input.GetKeyDown(KeyCode.L))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                        case "ArrowKey":
+                            if (Input.GetKeyDown(KeyCode.Keypad3))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 3)))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
+            #endregion
         }
 
+        void OnDrawGizmos()
+        {
+            Gizmos.color = new Color(1f, 1f, 0f, 1f);
+            Gizmos.DrawWireSphere(transform.position, 1);
+            Gizmos.color = new Color(1f, 1f, 0f, 0.1f);
+            Gizmos.DrawSphere(transform.position, 1);
+        }
         private void FixedUpdate()
         {
             v *= 0.9f;

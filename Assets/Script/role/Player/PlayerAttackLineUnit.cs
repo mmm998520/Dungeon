@@ -20,7 +20,7 @@ namespace com.DungeonPad
             float angle = Vector3.SignedAngle(transform.right, endPlayer.position - transform.position, Vector3.forward);
             transform.Rotate(0, 0, angle * 1f);
             transform.Translate(Vector3.right * Time.deltaTime * 40);
-            if (Vector3.Distance(transform.position, endPlayer.position) < 0.35f)
+            if (Vector3.Distance(transform.position, endPlayer.position) < 1f)
             {
                 Destroy(gameObject);
             }

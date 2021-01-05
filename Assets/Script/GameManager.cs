@@ -22,6 +22,7 @@ namespace com.DungeonPad
         public static AbilityStore abilityStore;
         float emptyRoomNumCountTimer;
 
+        public GameObject seller;
         void Awake()
         {
             MazeCreater.setTotalRowCol();
@@ -52,10 +53,24 @@ namespace com.DungeonPad
                 if ((emptyRoomNumCountTimer += Time.deltaTime) >= 1)
                 {
                     emptyRoomNumCountTimer = 0;
-                    if (Sensor.emptyRoomNum() >= abilityStore.appearRoomNum)
+                    if (Sensor.emptyRoomNum() >= abilityStore.appearRoomNum || Sensor.WeAreInEmptyFinalRoom())
                     {
-                        abilityStore.showStore();
-                        abilityStore.appearRoomNum = 9999;
+                        Vector3 sellerPos;
+                        for (int i = 0; i < 10; i++)
+                        {
+                            sellerPos = CameraManager.center + new Vector3(Random.Range(3, -3), Random.Range(3, -3), 10);
+                            RaycastHit2D hit = Physics2D.BoxCast(sellerPos, Vector3.one, 0, Vector2.right, 0, 0<<13);
+                            if (!hit)
+                            {
+                                Instantiate(seller, sellerPos, Quaternion.identity);
+                                abilityStore.appearRoomNum = 9999;
+                                break;
+                            }
+                            if (i >= 9)
+                            {
+                                Debug.LogError(sellerPos + hit.collider.name, hit.collider.gameObject);
+                            }
+                        }
                     }
                 }
             }
