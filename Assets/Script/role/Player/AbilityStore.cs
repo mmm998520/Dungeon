@@ -36,6 +36,14 @@ namespace com.DungeonPad
             }
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.JoystickButton1))
+            {
+                closeStore();
+            }
+        }
+
         public void showStore()
         {
             setStoreText(999, 2);

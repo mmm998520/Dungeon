@@ -226,8 +226,8 @@ namespace com.DungeonPad
                     lightRotateTimer = 0;
                     transform.GetChild(6).rotation = transform.GetChild(5).rotation;
                     transform.GetChild(5).rotation = Quaternion.Euler(Vector3.forward * Random.Range(0, 360));
-                    transform.GetChild(6).GetChild(0).GetComponent<Light2D>().lightCookieSprite = transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite;
-                    transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite = lightSprites[Random.Range(0, lightSprites.Length)];
+                    transform.GetChild(6).GetChild(0).GetComponent<Light2D>().lightCookieSprite = transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite;//要用Bug處理器解決
+                    transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite = lightSprites[Random.Range(0, lightSprites.Length)];//要用Bug處理器解決
                 }
                 float transition = lightRotateTimer / lightRotateTimerStoper, brightness = HP / MaxHP;
                 brightness *= GameManager.Gammar;
@@ -453,7 +453,7 @@ namespace com.DungeonPad
             }
 
             #region//衝刺
-            if (HardStraightTimer >= 0.3f && ConfusionTimer>= 10 && SleepTimer >= 0 && StickTimer >= 10)
+            if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10)
             {
                 if(DashTimer > DashCD)
                 {

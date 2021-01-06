@@ -32,7 +32,7 @@ namespace com.DungeonPad
             #endregion
 
             #region//根據行為換圖
-            if (playerManager.DashTimer < 0.3)
+            if (playerManager.DashTimer < 0.3 && playerManager.HardStraightTimer >= 0.3f && playerManager.ConfusionTimer >= 10 && playerManager.SleepTimer >= 0 && playerManager.StickTimer >= 10)
             {
                 animator.enabled = false;
                 spriteRenderer.enabled = false;
