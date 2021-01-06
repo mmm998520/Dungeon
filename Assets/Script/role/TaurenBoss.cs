@@ -19,7 +19,7 @@ namespace com.DungeonPad
         public bool punching = false;
         bool throwByClockwise;
         float playerAngle;
-        public GameObject Axe, accurateAxe;
+        public GameObject Axe, AxeAll, accurateAxe;
 
         public float punchCD, punchCDTimer, throwAxe90CD, throwAxe90CDTimer, throwAxe180CD, throwAxe180CDTimer, accurateAxeCD, accurateAxeCDTimer;
 
@@ -225,7 +225,7 @@ namespace com.DungeonPad
             for (int i = 0; i < axeNum; i++)
             {
 
-                GameObject temp = Instantiate(Axe, transform.position, Quaternion.Euler(0, 0, angle + preAngle * i));
+                GameObject temp = Instantiate(AxeAll, transform.position, Quaternion.Euler(0, 0, angle + preAngle * i));
                 Debug.Log(temp.transform.rotation.eulerAngles.z);
             }
         }

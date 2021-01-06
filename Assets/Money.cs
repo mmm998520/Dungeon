@@ -10,6 +10,7 @@ namespace com.DungeonPad
         public Collider2D GetCollider;
         public Animator animator;
         float timer = 0;
+        public Transform sound;
 
         void Start()
         {
@@ -28,7 +29,10 @@ namespace com.DungeonPad
             if (distance < 0.3f)
             {
                 PlayerManager.money++;
+                sound.SetParent(null);
+                sound.GetComponent<AudioSource>().Play();
                 Destroy(gameObject);
+                Destroy(sound.gameObject,2);
                 print(1);
             }
             else if (distance < 3)

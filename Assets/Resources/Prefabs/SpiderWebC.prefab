@@ -38,7 +38,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 462886665767936694}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5643cdd68828bee4eb0844284293683d, type: 3}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 6311440351145823934}
   - component: {fileID: 5957171386420349302}
   m_Layer: 0
-  m_Name: SpiderWeb
+  m_Name: SpiderWebC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,6 +360,7 @@ MonoBehaviour:
   destoryTime: 0.6
   hitSound: {fileID: 6761128484382667410}
   animator: {fileID: 5957171386420349302}
+  canRemoveByPlayerAttack: 1
 --- !u!60 &2570544022315494922
 PolygonCollider2D:
   m_ObjectHideFlags: 0

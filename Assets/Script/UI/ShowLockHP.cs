@@ -8,6 +8,7 @@ namespace com.DungeonPad
     public class ShowLockHP : MonoBehaviour
     {
         public Image image;
+        public Color origialColor;
         //public static float hurtTimer;
         void Start()
         {
@@ -21,7 +22,7 @@ namespace com.DungeonPad
             //hurtTimer += Time.deltaTime;
             if (lockHPLight > 0)
             {
-                image.color = new Color(1, 1, 1, lockHPLight);
+                image.color = new Color(origialColor.r, origialColor.g, origialColor.b, lockHPLight);
             }
             /*
             else if (hurtLight > 0)
