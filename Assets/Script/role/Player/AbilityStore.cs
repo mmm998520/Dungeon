@@ -59,8 +59,8 @@ namespace com.DungeonPad
             onSellText.enabled = !Refreshed;
             panel.SetActive(true);
             storeAbility.Clear();
-            storeAbility.Add("血量上限增加LV1");
-            storeAbility.Add("殺怪回血LV1");
+            storeAbility.Add("血量上限增加 LV0→LV1");
+            storeAbility.Add("殺怪回血 LV0→LV1");
             storeAbility.Add("復活光球+1");
             storeAbilityPrice.Clear();
             storeAbilityPrice.Add(0);
@@ -137,10 +137,10 @@ namespace com.DungeonPad
                     canBuys.Remove(ability);
                 }
             }
-            canBuys = canBuyRemoveCantHave(canBuys, "血量上限增加LV1", "血量上限增加LV2");
-            canBuys = canBuyRemoveCantHave(canBuys, "殺怪回血LV1", "殺怪回血LV2");
-            canBuys = canBuyRemoveCantHave(canBuys, "降低衝刺冷卻LV1", "降低衝刺冷卻LV2");
-            canBuys = canBuyRemoveCantHave(canBuys, "加快移動LV1", "加快移動LV2");
+            canBuys = canBuyRemoveCantHave(canBuys, "血量上限增加 LV0→LV1", "血量上限增加 LV1→LV2");
+            canBuys = canBuyRemoveCantHave(canBuys, "殺怪回血 LV0→LV1", "殺怪回血 LV1→LV2");
+            canBuys = canBuyRemoveCantHave(canBuys, "降低衝刺冷卻 LV0→LV1", "降低衝刺冷卻 LV1→LV2");
+            canBuys = canBuyRemoveCantHave(canBuys, "加快移動 LV1→LV2", "加快移動 LV1→LV2");
         }
 
         List<string> canBuyRemoveCantHave(List<string> canBuys, string first, string next)
@@ -177,8 +177,8 @@ namespace com.DungeonPad
                 {
                     switch (storeAbility[i])
                     {
-                        case "血量上限增加LV1":
-                        case "殺怪回血LV1":
+                        case "血量上限增加 LV0→LV1":
+                        case "殺怪回血 LV0→LV1":
                         case "復活光球+1":
                             storeAbilityPrice.Add(Random.Range(15, 16));
                             break;
@@ -193,8 +193,8 @@ namespace com.DungeonPad
                     {
                         switch (storeAbility[i])
                         {
-                            case "血量上限增加LV1":
-                            case "殺怪回血LV1":
+                            case "血量上限增加 LV0→LV1":
+                            case "殺怪回血 LV0→LV1":
                             case "復活光球+1":
                                 storeAbilityPrice.Add(Random.Range(15, 16));
                                 break;
@@ -207,8 +207,8 @@ namespace com.DungeonPad
                     {
                         switch (storeAbility[i])
                         {
-                            case "血量上限增加LV1":
-                            case "殺怪回血LV1":
+                            case "血量上限增加 LV0→LV1":
+                            case "殺怪回血 LV0→LV1":
                             case "復活光球+1":
                                 storeAbilityPrice.Add(Random.Range(15, 16));
                                 break;
@@ -288,16 +288,16 @@ namespace com.DungeonPad
         {
             switch (ability)
             {
-                case "血量上限增加LV1":
+                case "血量上限增加 LV0→LV1":
                     PlayerManager.MaxHP = 60;
                     break;
-                case "血量上限增加LV2":
+                case "血量上限增加 LV1→LV2":
                     PlayerManager.MaxHP = 80;
                     break;
-                case "殺怪回血LV1":
+                case "殺怪回血 LV0→LV1":
                     PlayerAttackLineUnit.hpRecover = 10;
                     break;
-                case "殺怪回血LV2":
+                case "殺怪回血 LV1→LV2":
                     PlayerAttackLineUnit.hpRecover = 25;
                     break;
                 case "復活光球+1":
@@ -319,12 +319,12 @@ namespace com.DungeonPad
                 case "衝刺距離增加":
                     PlayerManager.DashSpeed = 15;
                     break;
-                case "降低衝刺冷卻LV1":
-                case "降低衝刺冷卻LV2":
+                case "降低衝刺冷卻 LV0→LV1":
+                case "降低衝刺冷卻 LV1→LV2":
                     PlayerManager.DashCD -= 0.1f;
                     break;
-                case "加快移動LV1":
-                case "加快移動LV2":
+                case "加快移動 LV0→LV1":
+                case "加快移動 LV1→LV2":
                     PlayerManager.moveSpeed ++;
                     break;
                 case "按X傳送到隊友身邊(冷卻10秒)":
