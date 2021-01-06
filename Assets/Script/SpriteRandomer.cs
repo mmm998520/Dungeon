@@ -7,10 +7,18 @@ public class SpriteRandomer : MonoBehaviour
     public Sprite[] sprites;
     public bool wall;
     public bool randomRotate;
+    public bool holeSide;
     void Start()
     {
         GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
-        if (!wall)
+        if (holeSide)
+        {
+            Transform child = transform.GetChild(0);
+            child.SetParent(null);
+            transform.Rotate(0, 0, 90 * Random.Range(0, 4));
+            child.SetParent(transform);
+        }
+        else if (!wall)
         {
             transform.rotation = Quaternion.Euler(0, 180 * Random.Range(0, 2), 0);
         }
@@ -24,10 +32,11 @@ public class SpriteRandomer : MonoBehaviour
         {
             transform.Rotate(0, 0, 90 * Random.Range(0, 4));
         }
+
     }
 
     void Update()
     {
-        
+
     }
 }
