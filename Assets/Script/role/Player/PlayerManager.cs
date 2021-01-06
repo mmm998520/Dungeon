@@ -39,9 +39,7 @@ namespace com.DungeonPad
         public float lightRotateTimer, lightRotateTimerStoper;
         public Sprite[] lightSprites;
 
-        public List<Vector3> nextPosBeforeIntoHole = new List<Vector3>();
-        public List<float> nextPosBeforeIntoHoleTimer = new List<float>();
-        public bool IntoHole = false;
+        public Transform nextHoleSide;
 
         public Animator TutorialAnimator;
 
@@ -137,8 +135,6 @@ namespace com.DungeonPad
             playerJoyVibration = GetComponent<PlayerJoyVibration>();
             lastPos = transform.position;
             lastUpdateHp = HP;
-            nextPosBeforeIntoHole = new List<Vector3>();
-            nextPosBeforeIntoHoleTimer = new List<float>();
     }
 
         public static float homeButtonTimer = 0;
@@ -279,25 +275,6 @@ namespace com.DungeonPad
 
             }
             timer();
-        }
-
-        private void LateUpdate()
-        {
-            if (!IntoHole)
-            {
-                nextPosBeforeIntoHole.Add(transform.position);
-                nextPosBeforeIntoHoleTimer.Add(Time.time);
-            }
-            else
-            {
-                IntoHole = false;
-                Debug.LogWarning("");
-            }
-            while (nextPosBeforeIntoHoleTimer[0] < Time.time - 0.3f && nextPosBeforeIntoHoleTimer.Count > 0)
-            {
-                nextPosBeforeIntoHole.RemoveAt(0);
-                nextPosBeforeIntoHoleTimer.RemoveAt(0);
-            }
         }
 
         void Behavior()

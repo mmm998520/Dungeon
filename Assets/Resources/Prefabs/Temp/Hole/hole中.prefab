@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 134254883
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c781bf24b9933e4691966625093d509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 1
 --- !u!114 &9118888993190339613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +111,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   wall: 0
+  randomRotate: 0
 --- !u!1 &420660188388229732
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +239,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 134254883
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -262,6 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c781bf24b9933e4691966625093d509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 1
 --- !u!114 &4689615702392263704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +280,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   wall: 0
+  randomRotate: 0
 --- !u!1 &1660374734069798865
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +351,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 134254883
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -372,6 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c781bf24b9933e4691966625093d509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 1
 --- !u!114 &4380096636866440738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,6 +392,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   wall: 0
+  randomRotate: 0
 --- !u!1 &4092855239811314347
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +463,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 134254883
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -482,6 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c781bf24b9933e4691966625093d509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 1
 --- !u!114 &5670230911809377727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +504,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   wall: 0
+  randomRotate: 0
 --- !u!1 &6367845404437678122
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +575,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 134254883
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -592,6 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c781bf24b9933e4691966625093d509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 1
 --- !u!114 &4296216372230242328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,6 +616,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   wall: 0
+  randomRotate: 0
 --- !u!1 &6569923315346090140
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +687,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 134254883
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -702,6 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c781bf24b9933e4691966625093d509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 1
 --- !u!114 &8067950640122484144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,6 +728,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   wall: 0
+  randomRotate: 0
 --- !u!1 &6663824787721039438
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +797,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 134254883
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: b32b11418a2f65e4a9840694078976d7, type: 3}
   m_Color: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 1}
@@ -868,7 +880,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 134254883
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -893,6 +905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c781bf24b9933e4691966625093d509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 1
 --- !u!114 &5541989221282709972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -908,6 +921,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   wall: 0
+  randomRotate: 0
 --- !u!1 &7133249709589141854
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,7 +992,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 134254883
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1003,6 +1017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c781bf24b9933e4691966625093d509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 1
 --- !u!114 &1777499066052864325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,6 +1033,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   wall: 0
+  randomRotate: 0
 --- !u!1 &7911321398122339640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,7 +1104,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 134254883
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1113,6 +1129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c781bf24b9933e4691966625093d509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHole: 1
 --- !u!114 &6215617680851688989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1128,6 +1145,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: 382d430e28bf1f3478fc80599b297505, type: 3}
   wall: 0
+  randomRotate: 0
 --- !u!1 &8977524532833046415
 GameObject:
   m_ObjectHideFlags: 0

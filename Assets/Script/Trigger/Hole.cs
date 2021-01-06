@@ -6,6 +6,7 @@ namespace com.DungeonPad
 {
     public class Hole : MonoBehaviour
     {
+        public bool isHole;
         Vector3 pos;
         void Start()
         {
@@ -21,34 +22,26 @@ namespace com.DungeonPad
                 float disX = Mathf.Abs(player.position.x - pos.x), disY = Mathf.Abs(player.position.y - pos.y);
                 if(disX < 0.5f / 3f && disY < 0.5f / 3f && playerManager.DashTimer > 0.3f)
                 {
-                    player.position = playerManager.nextPosBeforeIntoHole[0];
-                    playerManager.v = Vector3.zero;
-                    playerManager.HardStraightA = Vector3.zero;
-                    playerManager.DashA = Vector3.zero;
-                    playerManager.HardStraightTimer = -1;
-                    PlayerManager.HP -= 10;
+                    if (isHole)
+                    {
+                        player.position = playerManager.nextHoleSide.position;
+                        playerManager.v = Vector3.zero;
+                        playerManager.HardStraightA = Vector3.zero;
+                        playerManager.DashA = Vector3.zero;
+                        playerManager.HardStraightTimer = -1;
+                        PlayerManager.HP -= 10;
+                        Debug.LogError("死");
+                    }
                 }
-                if (!playerManager.IntoHole && disX < 0.5f / 3f && disY < 0.5f / 3f)
+                if(disX < 0.5f / 3 * 2.5f && disY < 0.5f / 3 * 2.5f)
                 {
-                    playerManager.IntoHole = true;
+                    if (!isHole)
+                    {
+                        playerManager.nextHoleSide = transform;
+                        Debug.LogError("紀錄");
+                    }
                 }
             }
         }
-        /*
-        private void OnTriggerStay2D(Collider2D collider)
-        {
-            if (collider.GetComponent<PlayerManager>())
-            {
-                Transform player = collider.transform;
-                PlayerManager playerManager = player.GetComponent<PlayerManager>();
-                float disX = Mathf.Abs(player.position.x - pos.x), disY = Mathf.Abs(player.position.y - pos.y);
-                if ((disX < 0.15f && disY < 0.15f) && playerManager.DashTimer > 0.3f)
-                {
-                    player.position = playerManager.nextPosBeforeIntoHole;
-                    Debug.LogError(playerManager.nextPosBeforeIntoHole);
-                    PlayerManager.HP -= 1;
-                }
-            }
-        }*/
     }
 }

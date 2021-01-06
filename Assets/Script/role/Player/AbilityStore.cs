@@ -340,7 +340,6 @@ namespace com.DungeonPad
         {
             EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
             eventSystem.SetSelectedGameObject(firstSelectButton);
-            Debug.LogError("");
         }
     }
 }
