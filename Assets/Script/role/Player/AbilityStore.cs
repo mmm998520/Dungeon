@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace com.DungeonPad
 {
@@ -16,6 +17,7 @@ namespace com.DungeonPad
         int storeCanbuyNum = 3, totalCanChooseNum, RefreshTimes, RefreshCost = 5;
         public int appearRoomNum;
         bool Refreshed = false;
+        public GameObject firstSelectButton;
 
         private void Awake()
         {
@@ -46,6 +48,7 @@ namespace com.DungeonPad
             setPrice();
             showOnStore();
             PlayerJoyVibration.canVibration = false;
+            resetEvenSystem();
         }
 
         public void initialStore()
@@ -65,6 +68,7 @@ namespace com.DungeonPad
             storeAbilityPrice.Add(0);
             showOnStore();
             PlayerJoyVibration.canVibration = false;
+            resetEvenSystem();
         }
 
         public void RefreshStore()
@@ -330,6 +334,13 @@ namespace com.DungeonPad
                     Debug.LogError("商品名稱錯誤 : \""+ ability + "\"");
                     break;
             }
+        }
+
+        void resetEvenSystem()
+        {
+            EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+            eventSystem.SetSelectedGameObject(firstSelectButton);
+            Debug.LogError("");
         }
     }
 }
