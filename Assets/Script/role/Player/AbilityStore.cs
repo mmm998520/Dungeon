@@ -38,7 +38,7 @@ namespace com.DungeonPad
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.JoystickButton1))
+            if (Input.GetKeyDown(KeyCode.JoystickButton1) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Escape))
             {
                 closeStore();
             }
