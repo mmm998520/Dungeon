@@ -59,8 +59,10 @@ namespace com.DungeonPad
         public PlayerStat playerStat;
         public InsAfterImages insAfterImages;
 
+        Animator playerStatAnimator;
         private void Start()
         {
+            playerStatAnimator = GetComponent<Animator>();
             if (!SceneManager.GetActiveScene().name.Contains("SelectRole"))
             {
                 playerStat = PlayerStat.Move;
@@ -141,138 +143,147 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (lockedHP || (lockedHPTimer += Time.deltaTime/2) <= 2)
+            if (playerStatAnimator.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle"))
             {
-                HP = MaxHP;
-            }
-            if(playerStat == PlayerStat.Move)
-            {
-                Behavior();
-            }
-            if (HP <= 0)
-            {
-                if (--Life <= 0)
+                if (lockedHP || lockedHPTimer <= 2)
                 {
-                    string SceneName = SceneManager.GetActiveScene().name;
-                    if (SceneName.Contains("SelectRole"))
+                    HP = MaxHP;
+                }
+                if (playerStat == PlayerStat.Move)
+                {
+                    Behavior();
+                }
+                if (HP <= 0)
+                {
+                    if (--Life <= 0)
                     {
-
-                    }
-                    else if (SceneName == "Tutorial1" || SceneName == "Tutorial2" || SceneName == "Tutorial3")
-                    {
-                        Debug.LogError("a");
-                        GameObject.Find("MonsterAnimator").GetComponent<Animator>().SetBool("Died", true);
-                        for (int i = 0; i < 4; i++)
+                        string SceneName = SceneManager.GetActiveScene().name;
+                        if (SceneName.Contains("SelectRole"))
                         {
-                            GamePad.SetVibration((PlayerIndex)i, 0, 0);
+
+                        }
+                        else if (SceneName == "Tutorial1" || SceneName == "Tutorial2" || SceneName == "Tutorial3")
+                        {
+                            Debug.LogError("a");
+                            GameObject.Find("MonsterAnimator").GetComponent<Animator>().SetBool("Died", true);
+                            for (int i = 0; i < 4; i++)
+                            {
+                                GamePad.SetVibration((PlayerIndex)i, 0, 0);
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 4; i++)
+                            {
+                                GamePad.SetVibration((PlayerIndex)i, 0, 0);
+                            }
+                            GameManager.PlayTime = Time.time;
+                            SceneManager.LoadScene("Died");
                         }
                     }
                     else
                     {
-                        for (int i = 0; i < 4; i++)
-                        {
-                            GamePad.SetVibration((PlayerIndex)i, 0, 0);
-                        }
-                        GameManager.PlayTime = Time.time;
-                        SceneManager.LoadScene("Died");
+                        HP = MaxHP;
+                        lockedHPTimer = 0;
                     }
                 }
                 else
                 {
-                    HP = MaxHP;
-                    lockedHPTimer = 0;
+                    float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
+                    float hpUpRate;
+                    /*= (2f - dis) * 2;
+                    if (hpUpRate > 0 && Players.fightingTimer >= 5)
+                    {
+                        hpUpRate *= 6;
+                    }
+                    */
+                    if (dis < 2f)
+                    {
+                        /*if (Players.fightingTimer >= 5)
+                        {
+                            hpUpRate = 20;
+                        }
+                        else
+                        {
+                            hpUpRate = 8;
+                        }*/
+                        hpUpRate = 20;
+                    }
+                    else if (dis < 4.5f)
+                    {
+                        hpUpRate = 0;
+                    }
+                    else
+                    {
+                        hpUpRate = -6f;
+                    }
+                    HP += hpUpRate * Time.deltaTime;
+                    if (HP > MaxHP)
+                    {
+                        HP = MaxHP;
+                    }
+                    recoveryRate();
+                    transform.GetChild(5).localScale = Vector3.one * (HP + 5) / 3;
+                    transform.GetChild(6).localScale = Vector3.one * (HP + 5) / 3;
+                    if (lightRotateTimer >= lightRotateTimerStoper)
+                    {
+                        lightRotateTimer = 0;
+                        transform.GetChild(6).rotation = transform.GetChild(5).rotation;
+                        transform.GetChild(5).rotation = Quaternion.Euler(Vector3.forward * Random.Range(0, 360));
+                        transform.GetChild(6).GetChild(0).GetComponent<Light2D>().lightCookieSprite = transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite;//要用Bug處理器解決
+                        transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite = lightSprites[Random.Range(0, lightSprites.Length)];//要用Bug處理器解決
+                    }
+                    float transition = lightRotateTimer / lightRotateTimerStoper, brightness = HP / MaxHP;
+                    brightness *= GameManager.Gammar;
+
+                    if (StickTimer < 10)
+                    {
+                        if ((int)(StickTimer * 10) % 6 < 1)
+                        {
+                            brightness *= 1f;
+                        }
+                        else if ((int)(StickTimer * 10) % 6 < 2)
+                        {
+                            brightness *= 0.6f;
+                        }
+                        else if ((int)(StickTimer * 10) % 6 < 3)
+                        {
+                            brightness *= 0.4f;
+                        }
+                        else if ((int)(StickTimer * 10) % 6 < 4)
+                        {
+                            brightness *= 0.4f;
+                        }
+                        else if ((int)(StickTimer * 10) % 6 < 5)
+                        {
+                            brightness *= 0.6f;
+                        }
+                        else if ((int)(StickTimer * 10) % 6 < 6)
+                        {
+                            brightness *= 1f;
+                        }
+                    }
+                    reStatUI.gameObject.SetActive(Players.reTimer < 1);
+                    sleepingStatUI.gameObject.SetActive(SleepTimer < 0);
+                    confusionStatUI.gameObject.SetActive(ConfusionTimer < 10);
+                    stickStatUI.gameObject.SetActive(StickTimer < 10);
+
+                    transform.GetChild(5).GetChild(0).GetComponent<Light2D>().intensity = transition * brightness;
+                    transform.GetChild(6).GetChild(0).GetComponent<Light2D>().intensity = (1 - transition) * brightness;
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    transform.GetChild(7).GetComponent<Light2D>().pointLightOuterRadius = brightness * 4f;
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
                 }
             }
             else
             {
-                float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
-                float hpUpRate;
-                /*= (2f - dis) * 2;
-                if (hpUpRate > 0 && Players.fightingTimer >= 5)
-                {
-                    hpUpRate *= 6;
-                }
-                */
-                if (dis < 2f)
-                {
-                    /*if (Players.fightingTimer >= 5)
-                    {
-                        hpUpRate = 20;
-                    }
-                    else
-                    {
-                        hpUpRate = 8;
-                    }*/
-                    hpUpRate = 20;
-                }
-                else if (dis < 4.5f)
-                {
-                    hpUpRate = 0;
-                }
-                else
-                {
-                    hpUpRate = -6f;
-                }
-                HP += hpUpRate * Time.deltaTime;
-                if (HP > MaxHP)
-                {
-                    HP = MaxHP;
-                }
-                recoveryRate();
-                transform.GetChild(5).localScale = Vector3.one * (HP + 5) / 3;
-                transform.GetChild(6).localScale = Vector3.one * (HP + 5) / 3;
-                if ((lightRotateTimer += Time.deltaTime) >= lightRotateTimerStoper)
-                {
-                    lightRotateTimer = 0;
-                    transform.GetChild(6).rotation = transform.GetChild(5).rotation;
-                    transform.GetChild(5).rotation = Quaternion.Euler(Vector3.forward * Random.Range(0, 360));
-                    transform.GetChild(6).GetChild(0).GetComponent<Light2D>().lightCookieSprite = transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite;//要用Bug處理器解決
-                    transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite = lightSprites[Random.Range(0, lightSprites.Length)];//要用Bug處理器解決
-                }
-                float transition = lightRotateTimer / lightRotateTimerStoper, brightness = HP / MaxHP;
-                brightness *= GameManager.Gammar;
-
-                if (StickTimer < 10)
-                {
-                    if ((int)(StickTimer * 10) % 6 < 1)
-                    {
-                        brightness *= 1f;
-                    }
-                    else if ((int)(StickTimer * 10) % 6 < 2)
-                    {
-                        brightness *= 0.6f;
-                    }
-                    else if ((int)(StickTimer * 10) % 6 < 3)
-                    {
-                        brightness *= 0.4f;
-                    }
-                    else if ((int)(StickTimer * 10) % 6 < 4)
-                    {
-                        brightness *= 0.4f;
-                    }
-                    else if ((int)(StickTimer * 10) % 6 < 5)
-                    {
-                        brightness *= 0.6f;
-                    }
-                    else if ((int)(StickTimer * 10) % 6 < 6)
-                    {
-                        brightness *= 1f;
-                    }
-                }
-                reStatUI.gameObject.SetActive(Players.reTimer < 1);
-                sleepingStatUI.gameObject.SetActive(SleepTimer<0);
-                confusionStatUI.gameObject.SetActive(ConfusionTimer < 10);
-                stickStatUI.gameObject.SetActive(StickTimer < 10);
-
-                transform.GetChild(5).GetChild(0).GetComponent<Light2D>().intensity = transition * brightness;
-                transform.GetChild(6).GetChild(0).GetComponent<Light2D>().intensity = (1 - transition) * brightness;
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                transform.GetChild(7).GetComponent<Light2D>().pointLightOuterRadius = brightness * 4f;
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+                Debug.LogError("????????????????????");
+                v = Vector3.zero;
+                GetComponent<Rigidbody2D>().velocity = v;
             }
             timer();
         }
@@ -355,7 +366,7 @@ namespace com.DungeonPad
                 }
             }
             #endregion
-            if ((ConfusionTimer += Time.deltaTime) < 10 || (StickTimer += Time.deltaTime) < 10)
+            if (ConfusionTimer < 10 || StickTimer < 10)
             {
                 ConfusionUIRenderer.enabled = true;
                 ConfusionUIcontroler.enabled = true;
@@ -365,7 +376,7 @@ namespace com.DungeonPad
                 ConfusionUIRenderer.enabled = false;
                 ConfusionUIcontroler.enabled = false;
             }
-            if ((ConfusionTimer += Time.deltaTime) < 10)
+            if (ConfusionTimer < 10)
             { 
                 float tempVX = v.x + Random.Range(-6f, 6f);
                 float tempVY = v.y + Random.Range(-6f, 6f);
@@ -438,11 +449,11 @@ namespace com.DungeonPad
             {
                 v = v.normalized * moveSpeed;
             }
-            if((HardStraightTimer+=Time.deltaTime) < 0.3f)
+            if(HardStraightTimer < 0.3f)
             {
                 v = HardStraightA;
             }
-            if ((SleepTimer += Time.deltaTime) < 0f)
+            if (SleepTimer < 0f)
             {
                 v = Vector3.zero;
             }
@@ -570,7 +581,7 @@ namespace com.DungeonPad
                         }
                     }
                 }
-                if ((DashTimer += Time.deltaTime) < 0.3f)
+                if (DashTimer < 0.3f)
                 {
                     v = DashA;
                 }
@@ -580,7 +591,6 @@ namespace com.DungeonPad
             #region//傳送
             if (AbilityManager.myAbilitys.Contains("按X傳送到隊友身邊(冷卻10秒)"))
             {
-                homeButtonTimer += Time.deltaTime;
 
                 if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
                 {
@@ -898,6 +908,14 @@ namespace com.DungeonPad
         {
             CDTimer += Time.deltaTime;
             beganTouchedTimer += Time.deltaTime;
+            homeButtonTimer += Time.deltaTime;
+            DashTimer += Time.deltaTime;
+            HardStraightTimer += Time.deltaTime;
+            SleepTimer += Time.deltaTime;
+            ConfusionTimer += Time.deltaTime;
+            StickTimer += Time.deltaTime;
+            lightRotateTimer += Time.deltaTime;
+            lockedHPTimer += Time.deltaTime / 2;
             if (flash)
             {
                 if ((flashTimer += Time.deltaTime) > flashTimerStoper)
@@ -1075,6 +1093,16 @@ namespace com.DungeonPad
                 {
                     playerAttackLine.endPlayer = player;
                 }
+            }
+        }
+
+        public void getOutHole()
+        {
+            Debug.LogError(nextHoleSide.parent.parent.name, nextHoleSide.gameObject);
+            Debug.LogError(nextHoleSide.position);
+            if (nextHoleSide)
+            {
+                transform.position = nextHoleSide.position;
             }
         }
     }
