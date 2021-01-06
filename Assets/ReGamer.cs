@@ -16,12 +16,17 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if ((timer += Time.deltaTime) > 5)
+            if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.JoystickButton0))
             {
-                PlayerManager.money /= 2;
-                AbilityManager.myAbilitys.Clear();
-                SceneManager.LoadScene("Game 1");
+                Re();
             }
+        }
+
+        void Re()
+        {
+            PlayerManager.money /= 2;
+            AbilityManager.myAbilitys.Clear();
+            SceneManager.LoadScene("Game 1");
         }
     }
 }

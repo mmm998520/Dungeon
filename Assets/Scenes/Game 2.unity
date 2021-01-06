@@ -10423,7 +10423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 668087187}
-  origialColor: {r: 0.20784314, g: 0.07058824, b: 0.07058824, a: 0}
+  origialColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &668087187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30992,6 +30992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seller: {fileID: 0}
+  haveFinalRoomStore: 0
 --- !u!4 &1796510344
 Transform:
   m_ObjectHideFlags: 0

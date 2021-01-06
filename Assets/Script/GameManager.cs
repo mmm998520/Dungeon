@@ -23,6 +23,7 @@ namespace com.DungeonPad
         float emptyRoomNumCountTimer;
 
         public GameObject seller;
+        public bool haveFinalRoomStore;
         void Awake()
         {
             MazeCreater.setTotalRowCol();
@@ -53,8 +54,9 @@ namespace com.DungeonPad
                 if ((emptyRoomNumCountTimer += Time.deltaTime) >= 1)
                 {
                     emptyRoomNumCountTimer = 0;
-                    if (Sensor.emptyRoomNum() >= abilityStore.appearRoomNum || Sensor.WeAreInEmptyFinalRoom())
+                    if (Sensor.emptyRoomNum() >= abilityStore.appearRoomNum || (Sensor.WeAreInEmptyFinalRoom() && !haveFinalRoomStore))
                     {
+                        haveFinalRoomStore = true;
                         Vector3 sellerPos;
                         for (int i = 0; i < 10; i++)
                         {
@@ -65,6 +67,10 @@ namespace com.DungeonPad
                                 Instantiate(seller, sellerPos, Quaternion.identity);
                                 abilityStore.appearRoomNum = 9999;
                                 break;
+                            }
+                            else
+                            {
+                                Debug.LogError("撞牆");
                             }
                             if (i >= 9)
                             {
