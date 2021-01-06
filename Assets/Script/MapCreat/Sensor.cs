@@ -8,9 +8,9 @@ namespace com.DungeonPad
     {
         public MazeCreater mazeCreater;
         public int row, col;
-        static List<GameObject> sensors = new List<GameObject>();
+        public static List<GameObject> sensors = new List<GameObject>();
         public static GameObject Exit;
-        static Sensor exitSensor;
+        public static Sensor exitSensor;
         private void Awake()
         {
             sensors.Clear();

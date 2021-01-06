@@ -20,6 +20,7 @@ namespace com.DungeonPad
         Vector3 lastPos;
         public bool locked = true, flash = false;
         public float beganTouchedTimer, flashTimer, flashTimerStoper;
+        public static float homeButtonTimer = 0;
         public static float moveSpeed = 3f, DashSpeed = 11, DashCD = 0.5f, reducesDamage = 0, criticalRate=0;
         public List<Vector3> startRayPoss;
 
@@ -137,7 +138,6 @@ namespace com.DungeonPad
             lastUpdateHp = HP;
     }
 
-        public static float homeButtonTimer = 0;
 
         void Update()
         {

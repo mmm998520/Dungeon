@@ -6,7 +6,7 @@ namespace com.DungeonPad
 {
     public class GameManager : MonoBehaviour
     {
-        public static Transform players, maze, monsters, triggers, UI;
+        public static Transform players, monsters, triggers, UI;
         public static int layers = 1, level = 1;
         public static MazeCreater mazeCreater;
         public static SmallMap smallMap;

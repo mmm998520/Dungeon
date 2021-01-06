@@ -9,7 +9,7 @@ namespace com.DungeonPad
     {
 
         bool hited = false;
-        static HashSet<PlayerManager> playerList = new HashSet<PlayerManager>();
+        public static HashSet<PlayerManager> playerList = new HashSet<PlayerManager>();
         Vector2[] rayPos = new Vector2[4];
 
         void Start()

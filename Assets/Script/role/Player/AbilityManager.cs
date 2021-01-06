@@ -8,7 +8,6 @@ namespace com.DungeonPad
     {
         public static Dictionary<string, byte> allAbility = new Dictionary<string, byte>();
         public static List<string> myAbilitys = new List<string>();
-        public static Dictionary<string, byte> myAbilityLevels = new Dictionary<string, byte>();
 
         void Awake()
         {
@@ -18,13 +17,6 @@ namespace com.DungeonPad
         void Update()
         {
 
-        }
-
-        void replaceMyAbilityLevels()
-        {
-            myAbilityLevels.Clear();
-            myAbilityLevels.Add("復活光球+1", (byte)myAbilitys.FindAll(x => x.Equals("復活光球+1")).Count);
-            myAbilityLevels.Add("復活上限+1(送1顆復活光球)", (byte)myAbilitys.FindAll(x => x.Equals("復活上限+1(送1顆復活光球)")).Count);
         }
 
         void setAllAbility()
