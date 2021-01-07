@@ -10,8 +10,8 @@ namespace com.DungeonPad
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 40, HP = 40;
-        public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = true;
+        public static int Life = 4, MaxLife = 4;
+        public static bool lockedHP = false;
         public static float lockedHPTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -151,6 +151,7 @@ namespace com.DungeonPad
             }
             if (HP <= 0)
             {
+                Players.DiedAudioSource.Play();
                 if (--Life <= 0)
                 {
                     string SceneName = SceneManager.GetActiveScene().name;
@@ -158,7 +159,7 @@ namespace com.DungeonPad
                     {
 
                     }
-                    else if (SceneName == "Tutorial1" || SceneName == "Tutorial2" || SceneName == "Tutorial3")
+                    /*else if (SceneName == "Tutorial1" || SceneName == "Tutorial2" || SceneName == "Tutorial3")
                     {
                         Debug.LogError("a");
                         GameObject.Find("MonsterAnimator").GetComponent<Animator>().SetBool("Died", true);
@@ -166,7 +167,7 @@ namespace com.DungeonPad
                         {
                             GamePad.SetVibration((PlayerIndex)i, 0, 0);
                         }
-                    }
+                    }*/
                     else
                     {
                         for (int i = 0; i < 4; i++)

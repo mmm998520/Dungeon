@@ -14,12 +14,14 @@ namespace com.DungeonPad
         public bool draw = false;
         public static float fightingTimer = 10, reTimer = 10;
         public static Color32 spriteColor;
+        public static AudioSource DiedAudioSource;
 
         private void Awake()
         {
             playerChildCount = transform.childCount;
             lineAttacks = new GameObject("lineAttacks").transform;
             draw = true;
+            DiedAudioSource = GetComponent<AudioSource>();
         }
         void Update()
         {
