@@ -81,7 +81,7 @@ namespace com.DungeonPad
 
         public void RefreshStore()
         {
-            if (RefreshTimes > 0 /*&& PlayerManager.money - RefreshCost >= 0*/)
+            if (RefreshTimes > 0 && PlayerManager.money - RefreshCost >= 0)
             {
                 PlayerManager.money -= RefreshCost;
                 setStoreText(totalCanChooseNum, --RefreshTimes);
@@ -252,7 +252,7 @@ namespace com.DungeonPad
 
         public void seletAbilityButton(int ButtonNum)
         {
-            if (storeAbilityText[ButtonNum].text != "null"/* && PlayerManager.money - storeAbilityPrice[ButtonNum] >= 0*/ && totalCanChooseNum > 0)
+            if (storeAbilityText[ButtonNum].text != "null" && PlayerManager.money - storeAbilityPrice[ButtonNum] >= 0 && totalCanChooseNum > 0)
             {
                 setStoreText(--totalCanChooseNum, RefreshTimes);
                 AbilityManager.myAbilitys.Add(storeAbility[ButtonNum]);
@@ -267,7 +267,7 @@ namespace com.DungeonPad
 
         public void reducesDamageButton()
         {
-            if(true/* && PlayerManager.money - 1 >= 0*/)
+            if(true && PlayerManager.money - 1 >= 0)
             {
                 PlayerManager.reducesDamage += 0.5f;
                 PlayerManager.money--;
@@ -280,7 +280,7 @@ namespace com.DungeonPad
         }
         public void criticalRateButton()
         {
-            if (true/* && PlayerManager.money - 1 >= 0*/)
+            if (true && PlayerManager.money - 1 >= 0)
             {
                 PlayerManager.criticalRate += 0.5f;
                 PlayerManager.money--;

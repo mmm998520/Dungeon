@@ -10,7 +10,7 @@ namespace com.DungeonPad
     public class PlayerManager : MonoBehaviour
     {
         public static float MaxHP = 40, HP = 40;
-        public static int Life = 4, MaxLife = 4;
+        public static int Life = 2, MaxLife = 4;
         public static bool lockedHP = false;
         public static float lockedHPTimer = 10;
         public float ATK, hand, atkTime;
@@ -1093,6 +1093,16 @@ namespace com.DungeonPad
                 {
                     playerAttackLine.endPlayer = player;
                 }
+            }
+        }
+
+        public void getOutHole()
+        {
+            Debug.LogError(nextHoleSide.parent.parent.name, nextHoleSide.gameObject);
+            Debug.LogError(nextHoleSide.position);
+            if (nextHoleSide)
+            {
+                transform.position = nextHoleSide.position;
             }
         }
     }

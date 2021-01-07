@@ -29,7 +29,7 @@ namespace com.DungeonPad
                         playerManager.v = Vector3.zero;
                         playerManager.HardStraightA = Vector3.zero;
                         playerManager.DashA = Vector3.zero;
-                        playerManager.HardStraightTimer = -1;
+                        playerManager.HardStraightTimer = -0.5f;
                         PlayerManager.HP -= 10;
                     }
                 }
