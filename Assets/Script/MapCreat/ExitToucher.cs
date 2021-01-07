@@ -36,6 +36,20 @@ namespace com.DungeonPad
             if (collision.collider.name == playerName)
             {
                 touchNum++;
+            }
+        }
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if (collision.collider.name == playerName)
+            {
+                touchNum--;
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.name == playerName)
+            {
                 if (playerName == "Red")
                 {
                     if (spriteRenderer.sprite == Null)
@@ -58,14 +72,13 @@ namespace com.DungeonPad
                         spriteRenderer.sprite = Red_Blue;
                     }
                 }
-                
             }
         }
-        private void OnCollisionExit2D(Collision2D collision)
+
+        private void OnTriggerExit2D(Collider2D collider)
         {
-            if (collision.collider.name == playerName)
+            if (collider.name == playerName)
             {
-                touchNum--;
                 if (playerName == "Red")
                 {
                     if (spriteRenderer.sprite == Red_Blue)
