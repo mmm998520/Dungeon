@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Home.unity
     guid: 26804c7f50141de45b65241c870ad4f4
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: be182a5f4f314244785cf249c7e90268
+  - enabled: 1
     path: Assets/Scenes/SelectRole_Tutorial.unity
     guid: e98a33b1084e9bb4ea6695b06339f66a
   - enabled: 1
@@ -27,17 +30,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial1.unity
     guid: e2a7875ae1c489741969818fb41cac1e
   - enabled: 1
-    path: Assets/Scenes/Tutorial2.unity
-    guid: 9f8588564e42e2c4c8254c6a28df0c86
-  - enabled: 1
-    path: Assets/Scenes/Tutorial3.unity
-    guid: 805e32fccaf6f964c80d489f052bb163
-  - enabled: 1
     path: Assets/Scenes/Game 1.unity
     guid: 7c15ccdbdbc328f4987716e01b972dac
-  - enabled: 1
-    path: Assets/Scenes/Game 1_1.unity
-    guid: 875abda4a4e670e4bb2943ceb298ab2b
   - enabled: 1
     path: Assets/Scenes/Game 2.unity
     guid: 2036eb2e78598b245a554fa3bf976a51
