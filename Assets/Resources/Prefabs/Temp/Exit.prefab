@@ -540,11 +540,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3765935366986667324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c60872e5ce1b20f4eb16c9b3baacbbc9, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d88be5dda705f54e80738f0baa4cf1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: Blue
   rigidbody2D: {fileID: 7078725498500812327}
+  spriteRenderer: {fileID: 7068677307377721628}
+  Null: {fileID: 21300000, guid: e0e6591dfb712214a90cbbdd1a07afb5, type: 3}
+  Red: {fileID: 21300000, guid: 8c8e315c40e8e2f4ebdeb0be84d4eb8c, type: 3}
+  Blue: {fileID: 21300000, guid: 53d6d71710b52994b82c7aab53fac3e2, type: 3}
+  Red_Blue: {fileID: 21300000, guid: 3bcbfb60cf13c8a49bd81b476de52ea2, type: 3}
 --- !u!1 &4964467260455437492
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,11 +953,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7078725499153392800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c60872e5ce1b20f4eb16c9b3baacbbc9, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d88be5dda705f54e80738f0baa4cf1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: Red
   rigidbody2D: {fileID: 7078725498500812327}
+  spriteRenderer: {fileID: 7068677307377721628}
+  Null: {fileID: 21300000, guid: e0e6591dfb712214a90cbbdd1a07afb5, type: 3}
+  Red: {fileID: 21300000, guid: 8c8e315c40e8e2f4ebdeb0be84d4eb8c, type: 3}
+  Blue: {fileID: 21300000, guid: 53d6d71710b52994b82c7aab53fac3e2, type: 3}
+  Red_Blue: {fileID: 21300000, guid: 3bcbfb60cf13c8a49bd81b476de52ea2, type: 3}
 --- !u!1 &7078725500035745592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,7 +1026,7 @@ GameObject:
   - component: {fileID: 7421935053694502399}
   - component: {fileID: 92992081985291344}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
