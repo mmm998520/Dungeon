@@ -3098,6 +3098,7 @@ GameObject:
   - component: {fileID: 252037859}
   - component: {fileID: 252037858}
   - component: {fileID: 252037857}
+  - component: {fileID: 252037863}
   m_Layer: 8
   m_Name: Blue
   m_TagString: Untagged
@@ -3304,6 +3305,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252037855}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &252037863
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252037855}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6df879890e7082b47b043f3e512c496c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &255885399
 GameObject:
   m_ObjectHideFlags: 0
@@ -19110,6 +19130,7 @@ GameObject:
   - component: {fileID: 1179144345}
   - component: {fileID: 1179144344}
   - component: {fileID: 1179144350}
+  - component: {fileID: 1179144351}
   m_Layer: 8
   m_Name: Red
   m_TagString: Untagged
@@ -19329,6 +19350,25 @@ CapsuleCollider2D:
   m_Offset: {x: 0.09253571, y: -0.000000011031116}
   m_Size: {x: 1.1850944, y: 1.0000001}
   m_Direction: 1
+--- !u!95 &1179144351
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179144342}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6df879890e7082b47b043f3e512c496c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1198376001
 PrefabInstance:
   m_ObjectHideFlags: 0
