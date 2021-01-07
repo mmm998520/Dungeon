@@ -8,6 +8,7 @@ namespace com.DungeonPad
     {
         List<PlayerManager> inRange = new List<PlayerManager>();
         new Rigidbody2D rigidbody;
+        public GameObject talk;
         void Start()
         {
             rigidbody = GetComponent<Rigidbody2D>();
@@ -16,6 +17,11 @@ namespace com.DungeonPad
         void Update()
         {
             rigidbody.velocity = Vector3.zero;
+        }
+
+        private void OnDestroy()
+        {
+            Destroy(talk);
         }
     }
 }
