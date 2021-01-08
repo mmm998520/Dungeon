@@ -54,11 +54,10 @@ namespace com.DungeonPad
                 if ((emptyRoomNumCountTimer += Time.deltaTime) >= 1)
                 {
                     emptyRoomNumCountTimer = 0;
-                    if (Sensor.emptyRoomNum() >= abilityStore.appearRoomNum || (Sensor.WeAreInEmptyFinalRoom() && !haveFinalRoomStore))
+                    if (Sensor.emptyRoomNum() >= abilityStore.appearRoomNum)
                     {
-                        haveFinalRoomStore = true;
                         Vector3 sellerPos;
-                        for (int i = 0; i < 10; i++)
+                        for (int i = 0; i < 51; i++)
                         {
                             sellerPos = CameraManager.center + new Vector3(Random.Range(3, -3), Random.Range(3, -3), 10);
                             RaycastHit2D hit = Physics2D.BoxCast(sellerPos, Vector3.one, 0, Vector2.right, 0, 0<<13);
@@ -72,7 +71,31 @@ namespace com.DungeonPad
                             {
                                 Debug.LogError("撞牆");
                             }
-                            if (i >= 9)
+                            if (i >= 50)
+                            {
+                                Debug.LogError(sellerPos + hit.collider.name, hit.collider.gameObject);
+                            }
+                        }
+                    }
+                    else if((Sensor.WeAreInEmptyFinalRoom() && !haveFinalRoomStore))
+                    {
+                        haveFinalRoomStore = true;
+                        Vector3 sellerPos;
+                        for (int i = 0; i < 51; i++)
+                        {
+                            sellerPos = CameraManager.center + new Vector3(Random.Range(3, -3), Random.Range(3, -3), 10);
+                            RaycastHit2D hit = Physics2D.BoxCast(sellerPos, Vector3.one, 0, Vector2.right, 0, 0 << 13);
+                            if (!hit)
+                            {
+                                Instantiate(seller, sellerPos, Quaternion.identity);
+                                abilityStore.appearRoomNum = 9999;
+                                break;
+                            }
+                            else
+                            {
+                                Debug.LogError("撞牆");
+                            }
+                            if (i >= 50)
                             {
                                 Debug.LogError(sellerPos + hit.collider.name, hit.collider.gameObject);
                             }

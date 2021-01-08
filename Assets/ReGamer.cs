@@ -36,7 +36,7 @@ namespace com.DungeonPad
             PlayerManager.MaxHP = 40;
             PlayerManager.HP = 40;
             PlayerManager.Life = 2;
-            PlayerManager.MaxLife = 2;
+            PlayerManager.MaxLife = 4;
             PlayerManager.moveSpeed = 3;
             PlayerManager.DashSpeed = 11;
             PlayerManager.DashCD = 0.5f;
@@ -67,7 +67,7 @@ namespace com.DungeonPad
             PlayerManager.MaxHP = 40;
             PlayerManager.HP = 40;
             PlayerManager.Life = 2;
-            PlayerManager.MaxLife = 2;
+            PlayerManager.MaxLife = 4;
             PlayerManager.moveSpeed = 3;
             PlayerManager.DashSpeed = 11;
             PlayerManager.DashCD = 0.5f;
