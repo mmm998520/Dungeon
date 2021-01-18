@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace com.DungeonPad
 {
-    public class TaurenBoss : MonsterManager
+    public class DragonBoss : MonsterManager
     {
         public bool attacking = false;
         Transform minDisPlayer;
@@ -71,20 +71,22 @@ namespace com.DungeonPad
             }
             else if ((Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking) || CDTimer < CD)
             {
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName("TaurenBossWalk"))
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("DragonBossWalk"))
                 {
                     resetRoad();
                     move();
                     print("statB");
                 }
             }
-            else if (!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe90") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("AccurateAxe"))
+            else if (!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe90") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("ThrowAxe180"))
             {
-                List<string> CDs = new List<string>() { "Punch", "ThrowAxe90", "AccurateAxe"};
+                List<string> CDs = new List<string>() { "Punch", "ThrowAxe90", "ThrowAxe180" };
+                /*
                 if (HP < MaxHP / 2)
                 {
-                    CDs.Add("ThrowAxe180");
+                    CDs.Add("AccurateAxe");
                 }
+                */
                 int r;
                 bool canUseThisAttack = false;
                 do

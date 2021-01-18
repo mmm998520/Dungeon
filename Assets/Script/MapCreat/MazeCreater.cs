@@ -36,6 +36,7 @@ namespace com.DungeonPad
             switch (SceneManager.GetActiveScene().name)
             {
                 case "Game 2":
+                case "Game 3":
                     totalRow = 22;
                     totalCol = 12;
                     break;

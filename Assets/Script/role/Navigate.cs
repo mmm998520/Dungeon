@@ -166,7 +166,7 @@ namespace com.DungeonPad
         {
             for(int i = 0; i < addCanGoByHandList.Length; i++)
             {
-                for(int j = addCanGoByHandList[i].MinRow * MazeCreater.totalCol + addCanGoByHandList[i].MinCol; j <= addCanGoByHandList[i].MaxRow * MazeCreater.totalCol + addCanGoByHandList[i].MaxCol; j++)
+                for (int j = addCanGoByHandList[i].MinRow * MazeCreater.totalCol + addCanGoByHandList[i].MinCol; j <= addCanGoByHandList[i].MaxRow * MazeCreater.totalCol + addCanGoByHandList[i].MaxCol; j++)
                 {
                     canGo.Add(canGo.Count, j);
                 }
