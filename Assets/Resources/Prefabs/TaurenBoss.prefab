@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 0.47148925, y: 0.47148925, z: 0.47148925}
   m_Children: []
   m_Father: {fileID: 6115880101944645926}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &286314267
 SpriteRenderer:
@@ -110,7 +110,7 @@ Transform:
   m_Children:
   - {fileID: 1759013435}
   m_Father: {fileID: 6115880101944645926}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1759013434
 GameObject:
@@ -337,7 +337,6 @@ Transform:
   m_Children:
   - {fileID: 6115880101781433285}
   - {fileID: 5637891530843328047}
-  - {fileID: 6115880102486937803}
   - {fileID: 688235635}
   - {fileID: 286314266}
   m_Father: {fileID: 0}
@@ -484,11 +483,21 @@ MonoBehaviour:
   rigidbody: {fileID: 0}
   Ammunition: {fileID: 0}
   attacking: 0
-  HPText: {fileID: 0}
+  HPBar: {fileID: 0}
+  hpBar: {fileID: 0}
+  hpBarBottom: {fileID: 0}
+  GreenHP: {fileID: 0}
+  GreenHPBottom: {fileID: 0}
+  YellowHP: {fileID: 0}
+  YellowHPBottom: {fileID: 0}
+  RedHP: {fileID: 0}
+  RedHPBottom: {fileID: 0}
   InvincibleTimer: 10
   animator: {fileID: 0}
   RecordDir: {x: 0, y: 0, z: 0}
+  punching: 0
   Axe: {fileID: 5683994576417963163, guid: 7249c241eb11fce43b6597adc4587c9d, type: 3}
+  AxeAll: {fileID: 0}
   accurateAxe: {fileID: 1032057078008629048, guid: 2aa139e7d9772cc44b47528a079c1720,
     type: 3}
   punchCD: 1.5
@@ -536,84 +545,3 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0049031526, y: -0.08688629}
   m_Size: {x: 0.39213562, y: 0.8262274}
   m_Direction: 0
---- !u!1 &6115880102486937802
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6115880102486937803}
-  - component: {fileID: 6115880102486937845}
-  - component: {fileID: 6115880102486937844}
-  m_Layer: 0
-  m_Name: PunchAttack
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &6115880102486937803
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6115880102486937802}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6115880101944645926}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &6115880102486937845
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6115880102486937802}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.13240719, y: 0.4938144}
-      - {x: 0.40120724, y: 0.42558235}
-      - {x: 0.5803203, y: 0.24300745}
-      - {x: 0.6503731, y: -0.0008617147}
-      - {x: 0.6577717, y: -0.02642146}
-      - {x: 0.6577716, y: -0.02642145}
-      - {x: 0.55723345, y: -0.28729814}
-      - {x: 0.38620627, y: -0.41887754}
-      - {x: 0.13185239, y: -0.48578998}
---- !u!114 &6115880102486937844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6115880102486937802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9edf42f0ff0f9084596a2c5a66d2e079, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ATK: 10
-  continued: 0
-  MonsterType: 

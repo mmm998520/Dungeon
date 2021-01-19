@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2026925606197622377}
   - component: {fileID: 3343121514145411655}
   - component: {fileID: 2026925606197622391}
-  - component: {fileID: 5197734186848620850}
+  - component: {fileID: 6115880101964909886}
   m_Layer: 9
   m_Name: DragonBoss
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2026925606197622388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.52, y: 5.39, z: 0}
-  m_LocalScale: {x: 2.8323016, y: 2.8323016, z: 2.8323016}
+  m_LocalScale: {x: 4.0999894, y: 4.0999894, z: 4.0999894}
   m_Children:
   - {fileID: 2026925607031981192}
   - {fileID: 487302371657818466}
@@ -193,13 +193,13 @@ MonoBehaviour:
   InvincibleTimer: 10
   animator: {fileID: 0}
   RecordDir: {x: 0, y: 0, z: 0}
-  punching: 0
+  normalAttacking: 0
   Axe: {fileID: 5683994576417963163, guid: 7249c241eb11fce43b6597adc4587c9d, type: 3}
   AxeAll: {fileID: 5683994576417963163, guid: 5bbf507e07a8f764aa96b7df0a990200, type: 3}
   accurateAxe: {fileID: 1032057078008629048, guid: 2aa139e7d9772cc44b47528a079c1720,
     type: 3}
-  punchCD: 1.5
-  punchCDTimer: 0
+  normalAttackCD: 0
+  normalAttackCDTimer: 0
   throwAxe90CD: 2
   throwAxe90CDTimer: 0
   throwAxe180CD: 2
@@ -227,8 +227,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!70 &5197734186848620850
-CapsuleCollider2D:
+--- !u!61 &6115880101964909886
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -240,9 +240,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0049031526, y: -0.08688629}
-  m_Size: {x: 0.39213562, y: 0.8262274}
-  m_Direction: 0
+  m_Offset: {x: -0.03, y: -0.03}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.42, y: 0.42}
+  m_EdgeRadius: 1
 --- !u!1 &2026925607031981193
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +279,7 @@ Transform:
   m_GameObject: {fileID: 2026925607031981193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.058, y: 0, z: 0}
-  m_LocalScale: {x: 0.17448156, y: 0.17448156, z: 0.17448156}
+  m_LocalScale: {x: 0.294, y: 0.17448156, z: 0.17448156}
   m_Children: []
   m_Father: {fileID: 2026925606197622379}
   m_RootOrder: 0
@@ -336,7 +346,7 @@ GameObject:
   - component: {fileID: 2026925607804878776}
   - component: {fileID: 2026925607804878777}
   m_Layer: 0
-  m_Name: PunchAttack
+  m_Name: NormalAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

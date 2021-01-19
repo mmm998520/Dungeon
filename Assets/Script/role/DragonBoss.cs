@@ -16,12 +16,12 @@ namespace com.DungeonPad
         public Animator animator;
         public Vector3 RecordDir;
 
-        public bool punching = false;
+        public bool normalAttacking = false;
         bool throwByClockwise;
         float playerAngle;
         public GameObject Axe, AxeAll, accurateAxe;
 
-        public float punchCD, punchCDTimer, throwAxe90CD, throwAxe90CDTimer, throwAxe180CD, throwAxe180CDTimer, accurateAxeCD, accurateAxeCDTimer;
+        public float normalAttackCD, normalAttackCDTimer, fireBallCD, fireBallCDTimer, throwAxe180CD, throwAxe180CDTimer, accurateAxeCD, accurateAxeCDTimer;
 
         public float SleepTimer;
         public SpriteRenderer SleepUI;
@@ -38,8 +38,8 @@ namespace com.DungeonPad
         private void Update()
         {
             SleepTimer += Time.deltaTime;
-            punchCDTimer += Time.deltaTime;
-            throwAxe90CDTimer += Time.deltaTime;
+            normalAttackCDTimer += Time.deltaTime;
+            fireBallCDTimer += Time.deltaTime;
             throwAxe180CDTimer += Time.deltaTime;
             accurateAxeCDTimer += Time.deltaTime;
             CDTimer += Time.deltaTime;
@@ -78,15 +78,9 @@ namespace com.DungeonPad
                     print("statB");
                 }
             }
-            else if (!animator.GetBool("Punch") && !animator.GetBool("ThrowAxe90") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("ThrowAxe180"))
+            else if (!animator.GetBool("Normal Attack") && !animator.GetBool("FireBall") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("ThrowAxe180"))
             {
-                List<string> CDs = new List<string>() { "Punch", "ThrowAxe90", "ThrowAxe180" };
-                /*
-                if (HP < MaxHP / 2)
-                {
-                    CDs.Add("AccurateAxe");
-                }
-                */
+                List<string> CDs = new List<string>() { /*"Normal Attack",*/ "FireBall"/*, "ThrowAxe180" */};
                 int r;
                 bool canUseThisAttack = false;
                 do
@@ -104,18 +98,18 @@ namespace com.DungeonPad
                         r = Random.Range(0, CDs.Count);
                         switch (CDs[r])
                         {
-                            case "Punch":
-                                if (punchCDTimer > punchCD)
+                            case "Normal Attack":
+                                if (normalAttackCDTimer > normalAttackCD)
                                 {
-                                    animator.SetBool("Punch", true);
+                                    animator.SetBool("Normal Attack", true);
                                     canUseThisAttack = true;
                                 }
                                 break;
-                            case "ThrowAxe90":
-                                if (throwAxe90CDTimer > throwAxe90CD)
+                            case "FireBall":
+                                if (fireBallCDTimer > fireBallCD)
                                 {
                                     throwByClockwise = (Random.Range(0, 2) > 0);
-                                    animator.SetBool("ThrowAxe90", true);
+                                    animator.SetBool("FireBall", true);
                                     playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
                                     canUseThisAttack = true;
                                 }
@@ -161,10 +155,10 @@ namespace com.DungeonPad
         void reSpeed()
         {
             rigidbody.velocity = Vector3.zero;
-            punching = false;
+            normalAttacking = false;
         }
 
-        #region//Punch
+        #region//Normal Attack
         void Record()
         {
             RecordDir = Vector3.Normalize(minDisPlayer.position - transform.position);
@@ -178,25 +172,25 @@ namespace com.DungeonPad
             }
         }
 
-        void prePunch()
+        void preNormalAttack()
         {
             Record();
             rigidbody.velocity = Vector3.zero;
         }
 
-        void punch()
+        void normalAttack()
         {
             InvincibleTimer = 0;
             rigidbody.velocity = RecordDir * 15;
-            punching = true;
+            normalAttacking = true;
         }
 
-        void endPunch()
+        void endNormalAttack()
         {
-            animator.SetBool("Punch", false);
-            Debug.LogError("Punch : " + animator.GetBool("Punch"));
+            animator.SetBool("Normal Attack", false);
+            Debug.LogError("Normal Attack : " + animator.GetBool("Normal Attack"));
             CDTimer = 0;
-            punchCDTimer = 0;
+            normalAttackCDTimer = 0;
         }
         #endregion
 
@@ -232,11 +226,11 @@ namespace com.DungeonPad
             }
         }
 
-        void endThrowAxe90()
+        void endFireBall()
         {
-            animator.SetBool("ThrowAxe90", false);
+            animator.SetBool("FireBall", false);
             CDTimer = 0;
-            throwAxe90CDTimer = 0;
+            fireBallCDTimer = 0;
         }
 
         void endThrowAxe180()
@@ -300,6 +294,13 @@ namespace com.DungeonPad
         }
         #endregion
 
+        #region//FireBall
+        void fireBall(float positionOffset)
+        {
+            Instantiate(Axe, transform.position + Quaternion.Euler(0, 0,playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
+        }
+        #endregion
+
         void resetRoad()
         {
             endRow[0] = Mathf.RoundToInt(minDisPlayer.position.x);
@@ -335,9 +336,9 @@ namespace com.DungeonPad
         #region//Back
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (punching)
+            if (normalAttacking)
             {
-                animator.SetBool("Punch", false);
+                animator.SetBool("Normal Attack", false);
                 InvincibleTimer = 10;
                 rigidbody.velocity = RecordDir * -5;
                 animator.SetBool("Back", true);
@@ -356,7 +357,7 @@ namespace com.DungeonPad
         {
             rigidbody.velocity = Vector3.zero;
             animator.SetBool("Back", false);
-            punching = false;
+            normalAttacking = false;
         }
 
         public void endBackHurt()
