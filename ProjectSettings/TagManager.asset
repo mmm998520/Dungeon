@@ -22,8 +22,8 @@ TagManager:
   - valve
   - SmallMapFog
   - PlayerHurt
-  - 
-  - 
+  - HitWallCollider
+  - HitRoleCollider
   - 
   - 
   - 
