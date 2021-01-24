@@ -40,6 +40,25 @@ namespace com.DungeonPad
                     totalRow = 22;
                     totalCol = 12;
                     break;
+                case "Game 3a":
+                    totalRow = 32;
+                    totalCol = 32;
+                    break;
+                case "Game 3b":
+                    totalRow = 32;
+                    totalCol = 20;
+                    break;
+                case "Game 3c":
+                    totalRow = 42;
+                    totalCol = 42;
+                    break;
+                case "Game 3d":
+                    totalRow = 27;
+                    totalCol = 27;
+                    break;
+                default:
+                    Debug.LogError("新scene要記得先設定我");
+                    break;
             }
         }
 
