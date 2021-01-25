@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 namespace com.DungeonPad
 {
-    public class PlayerHPVolumeSet : MonoBehaviour
+    public class PlayerHPVolumeAlarm : MonoBehaviour
     {
         Vignette vignette;
         float speed = 5;

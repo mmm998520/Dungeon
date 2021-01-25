@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 40, HP = 40;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = true;
+        public static bool lockedHP = false;
         public static float lockedHPTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -156,23 +156,15 @@ namespace com.DungeonPad
                 if (HP <= 0)
                 {
                     Players.DiedAudioSource.Play();
-                    if (--Life <= 0)
+                    string SceneName = SceneManager.GetActiveScene().name;
+                    if (SceneName.Contains("SelectRole"))
                     {
-                        string SceneName = SceneManager.GetActiveScene().name;
-                        if (SceneName.Contains("SelectRole"))
-                        {
-
-                        }
-                        /*else if (SceneName == "Tutorial1" || SceneName == "Tutorial2" || SceneName == "Tutorial3")
-                        {
-                            Debug.LogError("a");
-                            GameObject.Find("MonsterAnimator").GetComponent<Animator>().SetBool("Died", true);
-                            for (int i = 0; i < 4; i++)
-                            {
-                                GamePad.SetVibration((PlayerIndex)i, 0, 0);
-                            }
-                        }*/
-                        else
+                        HP = MaxHP;
+                        lockedHPTimer = 0;
+                    }
+                    else
+                    {
+                        if (--Life <= 0)
                         {
                             for (int i = 0; i < 4; i++)
                             {
@@ -181,12 +173,13 @@ namespace com.DungeonPad
                             GameManager.PlayTime = Time.time;
                             SceneManager.LoadScene("Died");
                         }
+                        else
+                        {
+                            HP = MaxHP;
+                            lockedHPTimer = 0;
+                        }
                     }
-                    else
-                    {
-                        HP = MaxHP;
-                        lockedHPTimer = 0;
-                    }
+
                 }
                 else
                 {
@@ -234,8 +227,8 @@ namespace com.DungeonPad
                         transform.GetChild(6).GetChild(0).GetComponent<Light2D>().lightCookieSprite = transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite;//要用Bug處理器解決
                         transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite = lightSprites[Random.Range(0, lightSprites.Length)];//要用Bug處理器解決
                     }
-                    float transition = lightRotateTimer / lightRotateTimerStoper, brightness = HP / MaxHP;
-                    brightness *= GameManager.Gammar;
+                    float transition = lightRotateTimer / lightRotateTimerStoper, /*brightness = HP / MaxHP*/brightness = GameManager.Gammar; ;
+                    //brightness *= GameManager.Gammar;
 
                     if (StickTimer < 10)
                     {
@@ -264,6 +257,8 @@ namespace com.DungeonPad
                             brightness *= 1f;
                         }
                     }
+
+                    
                     reStatUI.gameObject.SetActive(Players.reTimer < 1);
                     sleepingStatUI.gameObject.SetActive(SleepTimer < 0);
                     confusionStatUI.gameObject.SetActive(ConfusionTimer < 10);
