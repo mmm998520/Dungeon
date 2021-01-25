@@ -217,8 +217,16 @@ namespace com.DungeonPad
                         HP = MaxHP;
                     }
                     recoveryRate();
-                    transform.GetChild(5).localScale = Vector3.one * (HP + 5) / 3;
-                    transform.GetChild(6).localScale = Vector3.one * (HP + 5) / 3;
+                    if (HP > 20)
+                    {
+                        transform.GetChild(5).localScale = Vector3.one * (HP - 15) / 1.5f;
+                        transform.GetChild(6).localScale = Vector3.one * (HP - 15) / 1.5f;
+                    }
+                    else
+                    {
+                        transform.GetChild(5).localScale = Vector3.one * (5) / 1.5f;
+                        transform.GetChild(6).localScale = Vector3.one * (5) / 1.5f;
+                    }
                     if (lightRotateTimer >= lightRotateTimerStoper)
                     {
                         lightRotateTimer = 0;
@@ -227,7 +235,7 @@ namespace com.DungeonPad
                         transform.GetChild(6).GetChild(0).GetComponent<Light2D>().lightCookieSprite = transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite;//要用Bug處理器解決
                         transform.GetChild(5).GetChild(0).GetComponent<Light2D>().lightCookieSprite = lightSprites[Random.Range(0, lightSprites.Length)];//要用Bug處理器解決
                     }
-                    float transition = lightRotateTimer / lightRotateTimerStoper, /*brightness = HP / MaxHP*/brightness = GameManager.Gammar; ;
+                    float transition = lightRotateTimer / lightRotateTimerStoper, /*brightness = HP / MaxHP*/brightness = GameManager.Gammar * 1.5f;
                     //brightness *= GameManager.Gammar;
 
                     if (StickTimer < 10)
