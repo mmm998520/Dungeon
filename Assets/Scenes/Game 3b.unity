@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -69908,6 +69908,54 @@ PrefabInstance:
       propertyPath: fireBall
       value: 
       objectReference: {fileID: 5683994576417963163, guid: 2a2a4f6834269eb4aa386a0f6ee86ae4,
+        type: 3}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: normalAttackCD
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: fireBallCD
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: fireBallBounceCD
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: fireBallFastCD
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: fireRainCD
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: fireBallBounce
+      value: 
+      objectReference: {fileID: 5683994576417963163, guid: 9dcfac928c8b1a64b9439a5b26448c2a,
+        type: 3}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: fireRainInser
+      value: 
+      objectReference: {fileID: 6843125598540700410, guid: 58a575caee7fe9d4ab60673d22e18792,
+        type: 3}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: fireRainCDTimer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: crystalInser
+      value: 
+      objectReference: {fileID: 6843125598540700410, guid: 7140cf97e21e29f468b6b731ed8caf30,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9f61054ac700b14583a5b5e78b31a05, type: 3}

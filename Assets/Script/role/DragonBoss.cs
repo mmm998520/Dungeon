@@ -19,9 +19,9 @@ namespace com.DungeonPad
         public bool normalAttacking = false;
         bool throwByClockwise;
         float playerAngle;
-        public GameObject Axe, AxeAll, accurateAxe, fireBallFast, fireBall;
+        public GameObject fireBall, fireBallBounce, fireBallFast, fireRainInser, crystalInser;
 
-        public float normalAttackCD, normalAttackCDTimer, fireBallCD, fireBallCDTimer, throwAxe180CD, throwAxe180CDTimer, accurateAxeCD, accurateAxeCDTimer;
+        public float normalAttackCD, normalAttackCDTimer, fireBallCD, fireBallCDTimer, fireBallBounceCD, fireBallBounceCDTimer, fireBallFastCD, fireBallFastCDTimer, fireRainCD, fireRainCDTimer;
 
         public float SleepTimer;
         public SpriteRenderer SleepUI;
@@ -40,8 +40,9 @@ namespace com.DungeonPad
             SleepTimer += Time.deltaTime;
             normalAttackCDTimer += Time.deltaTime;
             fireBallCDTimer += Time.deltaTime;
-            throwAxe180CDTimer += Time.deltaTime;
-            accurateAxeCDTimer += Time.deltaTime;
+            fireBallBounceCDTimer += Time.deltaTime;
+            fireBallFastCDTimer += Time.deltaTime;
+            fireRainCDTimer += Time.deltaTime;
             CDTimer += Time.deltaTime;
             InvincibleTimer += Time.deltaTime;
             float scale = HP / MaxHP;
@@ -78,9 +79,9 @@ namespace com.DungeonPad
                     print("statB");
                 }
             }
-            else if (!animator.GetBool("Normal Attack") && !animator.GetBool("FireBall") && !animator.GetBool("FireBallFast") && !animator.GetBool("FireBallBounce"))
+            else if (!animator.GetBool("Normal Attack") && !animator.GetBool("FireBall") && !animator.GetBool("FireBallFast") && !animator.GetBool("FireBallBounce") && !animator.GetBool("FireRain"))
             {
-                List<string> CDs = new List<string>() {"Normal Attack", "FireBall", "FireBallFast", "FireBallBounce" };
+                List<string> CDs = new List<string>() {"Normal Attack", "FireBall", "FireBallFast", "FireBallBounce", "FireRain" };
                 int r;
                 bool canUseThisAttack = false;
                 do
@@ -114,8 +115,17 @@ namespace com.DungeonPad
                                     canUseThisAttack = true;
                                 }
                                 break;
+                            case "FireBallBounce":
+                                if (fireBallBounceCDTimer > fireBallBounceCD)
+                                {
+                                    throwByClockwise = (Random.Range(0, 2) > 0);
+                                    animator.SetBool("FireBallBounce", true);
+                                    playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
+                                    canUseThisAttack = true;
+                                }
+                                break;
                             case "FireBallFast":
-                                if (fireBallCDTimer > fireBallCD)
+                                if (fireBallFastCDTimer > fireBallFastCD)
                                 {
                                     throwByClockwise = (Random.Range(0, 2) > 0);
                                     animator.SetBool("FireBallFast", true);
@@ -123,11 +133,11 @@ namespace com.DungeonPad
                                     canUseThisAttack = true;
                                 }
                                 break;
-                            case "FireBallBounce":
-                                if (fireBallCDTimer > fireBallCD)
+                            case "FireRain":
+                                if (fireRainCDTimer > fireRainCD)
                                 {
                                     throwByClockwise = (Random.Range(0, 2) > 0);
-                                    animator.SetBool("FireBallBounce", true);
+                                    animator.SetBool("FireRain", true);
                                     playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
                                     canUseThisAttack = true;
                                 }
@@ -196,122 +206,10 @@ namespace com.DungeonPad
         }
         #endregion
 
-        #region//ThrowAxe
-        void ThrowAxe(float angle)
-        {
-            if (!throwByClockwise)
-            {
-                angle *= -1;
-            }
-            GameObject temp = Instantiate(Axe, transform.position, Quaternion.Euler(0, 0, angle + playerAngle));
-            Debug.Log(temp.transform.rotation.eulerAngles.z);
-        }
-
-        float axeNum;
-        void CountThrowAxeCircleAxeNum(int _axeNum)
-        {
-            axeNum = _axeNum;
-        }
-
-        void ThrowAxeCircle(float angle)
-        {
-            if (!throwByClockwise)
-            {
-                angle *= -1;
-            }
-            float preAngle = 360f / axeNum;
-            for (int i = 0; i < axeNum; i++)
-            {
-
-                GameObject temp = Instantiate(AxeAll, transform.position, Quaternion.Euler(0, 0, angle + preAngle * i));
-                Debug.Log(temp.transform.rotation.eulerAngles.z);
-            }
-        }
-
-        void endFireBall()
-        {
-            animator.SetBool("FireBall", false);
-            CDTimer = 0;
-            fireBallCDTimer = 0;
-        }
-        void endFireBallBounce()
-        {
-            animator.SetBool("FireBallBounce", false);
-            CDTimer = 0;
-            fireBallCDTimer = 0;
-        }
-        void endFireBallFast()
-        {
-            animator.SetBool("FireBallFast", false);
-            CDTimer = 0;
-            fireBallCDTimer = 0;
-        }
-
-        void endThrowAxe180()
-        {
-            animator.SetBool("ThrowAxe180", false);
-            CDTimer = 0;
-            throwAxe180CDTimer = 0;
-        }
-        #endregion
-
-        #region//AccurateAxe
-
-        public static T FindKeyByValue<T, W>(Dictionary<T, W> dict, W val)
-        {
-            T key = default;
-            foreach (KeyValuePair<T, W> pair in dict)
-            {
-                if (EqualityComparer<W>.Default.Equals(pair.Value, val))
-                {
-                    key = pair.Key;
-                    return key;
-                }
-            }
-            Debug.LogError("not found key");
-            return key;
-        }
-
-        void removeCanGo(int row, int col)
-        {
-            int value = row * MazeCreater.totalCol + col;
-            int key = FindKeyByValue(canGo, value);
-            canGo.Remove(key);
-        }
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        void addSton()
-        {
-            
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        void AccurateAxe()
-        {
-            for (int i = 0; i < GameManager.players.childCount; i++)
-            {
-                Transform target = GameManager.players.GetChild(i);
-                Instantiate(accurateAxe, target.position, Quaternion.identity).GetComponent<AccurateAxe>().target = target;
-            }
-        }
-
-        void endAccurateAxe()
-        {
-            animator.SetBool("AccurateAxe", false);
-            Debug.LogError("AccurateAxe : " + animator.GetBool("AccurateAxe"));
-            CDTimer = 0;
-            accurateAxeCDTimer = 0;
-        }
-        #endregion
-
         #region//FireBall
         void FireBallBounce(float positionOffset)
         {
-            Instantiate(Axe, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
+            Instantiate(fireBallBounce, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
         }
 
         void FireBall(float positionOffset)
@@ -322,6 +220,41 @@ namespace com.DungeonPad
         void FireBallFsat(float positionOffset)
         {
             Instantiate(fireBallFast, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
+        }
+        void endFireBall()
+        {
+            animator.SetBool("FireBall", false);
+            CDTimer = 0;
+            fireBallCDTimer = 0;
+        }
+        void endFireBallBounce()
+        {
+            animator.SetBool("FireBallBounce", false);
+            CDTimer = 0;
+            fireBallBounceCDTimer = 0;
+        }
+        void endFireBallFast()
+        {
+            animator.SetBool("FireBallFast", false);
+            CDTimer = 0;
+            fireBallFastCDTimer = 0;
+        }
+        #endregion
+
+        #region//FireRain
+        void FireRain()
+        {
+            Instantiate(fireRainInser);
+        }
+        void CrystalRain()
+        {
+            Instantiate(crystalInser);
+        }
+        void endFireRain()
+        {
+            animator.SetBool("FireRain", false);
+            CDTimer = 0;
+            fireRainCDTimer = 0;
         }
         #endregion
 

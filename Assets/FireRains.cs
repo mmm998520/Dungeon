@@ -41,8 +41,9 @@ namespace com.DungeonPad
 
             for (i = 0; i < hited.Count; i++)
             {
-                PlayerManager.HP -= 1 * Time.deltaTime;
+                PlayerManager.HP -= 20 * Time.deltaTime;
             }
+            Debug.LogError(i);
         }
     }
 }

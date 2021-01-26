@@ -229,8 +229,8 @@ MonoBehaviour:
   timer: 0
   timerStoper: 10
   destoryTime: 0.1
-  hitSound: {fileID: 0}
-  animator: {fileID: 0}
+  hitSound: {fileID: 7666238381042606450}
+  animator: {fileID: 6112969817920692478}
   canRemoveByPlayerAttack: 1
   focusPlayer: 0
 --- !u!50 &-5336453407065358462
