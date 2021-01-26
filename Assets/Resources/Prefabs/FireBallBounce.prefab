@@ -183,13 +183,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1686301535390967890}
-  - component: {fileID: -122114897098246812}
+  - component: {fileID: 153837728535324526}
   - component: {fileID: -5336453407065358462}
   - component: {fileID: 5616089049018737428}
   - component: {fileID: 6112969817920692478}
   - component: {fileID: 2592998443464043394}
   m_Layer: 0
-  m_Name: FireBall
+  m_Name: FireBallBounce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,7 +213,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-122114897098246812
+--- !u!114 &153837728535324526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,17 +222,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5683994576417963163}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fe8f4503fa8c0040bff023f554e0844, type: 3}
+  m_Script: {fileID: 11500000, guid: 326040e79d9c18b498f4b0ad1bf55c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
   timer: 0
   timerStoper: 10
   destoryTime: 0.1
-  hitSound: {fileID: 0}
-  animator: {fileID: 0}
+  hitSound: {fileID: 7666238381042606450}
+  animator: {fileID: 6112969817920692478}
   canRemoveByPlayerAttack: 1
-  focusPlayer: 0
 --- !u!50 &-5336453407065358462
 Rigidbody2D:
   serializedVersion: 4
@@ -398,7 +397,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d1ebbe959d8593e47bf80e6d8a89c1c9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.3233118, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

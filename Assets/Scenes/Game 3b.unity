@@ -14596,7 +14596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &563086206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69852,6 +69852,18 @@ PrefabInstance:
       propertyPath: addCanGoByHandList.Array.data[29].MaxCol
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: fireBallFast
+      value: 
+      objectReference: {fileID: 5683994576417963163, guid: f8c66763a847c69499bad30cc532a1ae,
+        type: 3}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: fireBall
+      value: 
+      objectReference: {fileID: 5683994576417963163, guid: 2a2a4f6834269eb4aa386a0f6ee86ae4,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9f61054ac700b14583a5b5e78b31a05, type: 3}
 --- !u!4 &6115880101964909858 stripped

@@ -19,7 +19,7 @@ namespace com.DungeonPad
         public bool normalAttacking = false;
         bool throwByClockwise;
         float playerAngle;
-        public GameObject Axe, AxeAll, accurateAxe;
+        public GameObject Axe, AxeAll, accurateAxe, fireBallFast, fireBall;
 
         public float normalAttackCD, normalAttackCDTimer, fireBallCD, fireBallCDTimer, throwAxe180CD, throwAxe180CDTimer, accurateAxeCD, accurateAxeCDTimer;
 
@@ -78,9 +78,9 @@ namespace com.DungeonPad
                     print("statB");
                 }
             }
-            else if (!animator.GetBool("Normal Attack") && !animator.GetBool("FireBall") && !animator.GetBool("ThrowAxe180") && !animator.GetBool("ThrowAxe180"))
+            else if (!animator.GetBool("Normal Attack") && !animator.GetBool("FireBall") && !animator.GetBool("FireBallFast") && !animator.GetBool("FireBallBounce"))
             {
-                List<string> CDs = new List<string>() { /*"Normal Attack",*/ "FireBall"/*, "ThrowAxe180" */};
+                List<string> CDs = new List<string>() {"Normal Attack", "FireBall", "FireBallFast", "FireBallBounce" };
                 int r;
                 bool canUseThisAttack = false;
                 do
@@ -114,19 +114,21 @@ namespace com.DungeonPad
                                     canUseThisAttack = true;
                                 }
                                 break;
-                            case "ThrowAxe180":
-                                if (throwAxe180CDTimer > throwAxe180CD)
+                            case "FireBallFast":
+                                if (fireBallCDTimer > fireBallCD)
                                 {
                                     throwByClockwise = (Random.Range(0, 2) > 0);
-                                    animator.SetBool("ThrowAxe180", true);
-                                    playerAngle = 0;
+                                    animator.SetBool("FireBallFast", true);
+                                    playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
                                     canUseThisAttack = true;
                                 }
                                 break;
-                            case "AccurateAxe":
-                                if (accurateAxeCDTimer > accurateAxeCD)
+                            case "FireBallBounce":
+                                if (fireBallCDTimer > fireBallCD)
                                 {
-                                    animator.SetBool("AccurateAxe", true);
+                                    throwByClockwise = (Random.Range(0, 2) > 0);
+                                    animator.SetBool("FireBallBounce", true);
+                                    playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
                                     canUseThisAttack = true;
                                 }
                                 break;
@@ -232,6 +234,18 @@ namespace com.DungeonPad
             CDTimer = 0;
             fireBallCDTimer = 0;
         }
+        void endFireBallBounce()
+        {
+            animator.SetBool("FireBallBounce", false);
+            CDTimer = 0;
+            fireBallCDTimer = 0;
+        }
+        void endFireBallFast()
+        {
+            animator.SetBool("FireBallFast", false);
+            CDTimer = 0;
+            fireBallCDTimer = 0;
+        }
 
         void endThrowAxe180()
         {
@@ -295,9 +309,19 @@ namespace com.DungeonPad
         #endregion
 
         #region//FireBall
-        void fireBall(float positionOffset)
+        void FireBallBounce(float positionOffset)
         {
-            Instantiate(Axe, transform.position + Quaternion.Euler(0, 0,playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
+            Instantiate(Axe, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
+        }
+
+        void FireBall(float positionOffset)
+        {
+            Instantiate(fireBall, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
+        }
+
+        void FireBallFsat(float positionOffset)
+        {
+            Instantiate(fireBallFast, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
         }
         #endregion
 
