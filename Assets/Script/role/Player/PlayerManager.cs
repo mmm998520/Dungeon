@@ -35,6 +35,7 @@ namespace com.DungeonPad
         public SpriteRenderer ConfusionUIRenderer;
         public ConfusionUIcontroler ConfusionUIcontroler;
 
+        const float LightRangeMinSize = 2.5f, LightRangeMaxSize = 20;
         float lastUpdateHp;
         public static List<float> timerRecord = new List<float>(), recoveryRecord = new List<float>();
         public float lightRotateTimer, lightRotateTimerStoper;
@@ -179,7 +180,6 @@ namespace com.DungeonPad
                             lockedHPTimer = 0;
                         }
                     }
-
                 }
                 else
                 {
@@ -217,15 +217,19 @@ namespace com.DungeonPad
                         HP = MaxHP;
                     }
                     recoveryRate();
-                    if (HP > 20)
+                    if (HP / MaxHP > 0.4f)//(HP > 20)
                     {
-                        transform.GetChild(5).localScale = Vector3.one * (HP - 15) / 1.5f;
-                        transform.GetChild(6).localScale = Vector3.one * (HP - 15) / 1.5f;
+                        transform.GetChild(5).localScale = Vector3.one * ((HP/MaxHP - 0.4f) / 0.6f * (LightRangeMaxSize - LightRangeMinSize) + LightRangeMinSize);
+                        transform.GetChild(6).localScale = Vector3.one * ((HP/MaxHP - 0.4f) / 0.6f * (LightRangeMaxSize - LightRangeMinSize) + LightRangeMinSize);
+                        //transform.GetChild(5).localScale = Vector3.one * (HP - 15) / 1.5f;//50 : 23.3333
+                        //transform.GetChild(6).localScale = Vector3.one * (HP - 15) / 1.5f;
                     }
                     else
                     {
-                        transform.GetChild(5).localScale = Vector3.one * (5) / 1.5f;
-                        transform.GetChild(6).localScale = Vector3.one * (5) / 1.5f;
+                        transform.GetChild(5).localScale = Vector3.one * LightRangeMinSize;
+                        transform.GetChild(6).localScale = Vector3.one * LightRangeMinSize;
+                        //transform.GetChild(5).localScale = Vector3.one * (5) / 1.5f;//20 : 3.3333
+                        //transform.GetChild(6).localScale = Vector3.one * (5) / 1.5f;
                     }
                     if (lightRotateTimer >= lightRotateTimerStoper)
                     {
