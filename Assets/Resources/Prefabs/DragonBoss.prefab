@@ -79,83 +79,123 @@ MonoBehaviour:
   - MinRow: 1
     MinCol: 1
     MaxRow: 1
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 2
     MinCol: 1
     MaxRow: 2
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 3
     MinCol: 1
     MaxRow: 3
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 4
     MinCol: 1
     MaxRow: 4
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 5
     MinCol: 1
     MaxRow: 5
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 6
     MinCol: 1
     MaxRow: 6
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 7
     MinCol: 1
     MaxRow: 7
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 8
     MinCol: 1
     MaxRow: 8
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 9
     MinCol: 1
     MaxRow: 9
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 10
     MinCol: 1
     MaxRow: 10
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 11
     MinCol: 1
     MaxRow: 11
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 12
     MinCol: 1
     MaxRow: 12
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 13
     MinCol: 1
     MaxRow: 13
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 14
     MinCol: 1
     MaxRow: 14
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 15
     MinCol: 1
     MaxRow: 15
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 16
     MinCol: 1
     MaxRow: 16
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 17
     MinCol: 1
     MaxRow: 17
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 18
     MinCol: 1
     MaxRow: 18
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 19
     MinCol: 1
     MaxRow: 19
-    MaxCol: 10
+    MaxCol: 18
   - MinRow: 20
     MinCol: 1
     MaxRow: 20
-    MaxCol: 10
+    MaxCol: 18
+  - MinRow: 21
+    MinCol: 1
+    MaxRow: 21
+    MaxCol: 18
+  - MinRow: 22
+    MinCol: 1
+    MaxRow: 22
+    MaxCol: 18
+  - MinRow: 23
+    MinCol: 1
+    MaxRow: 23
+    MaxCol: 18
+  - MinRow: 24
+    MinCol: 1
+    MaxRow: 24
+    MaxCol: 18
+  - MinRow: 25
+    MinCol: 1
+    MaxRow: 25
+    MaxCol: 18
+  - MinRow: 26
+    MinCol: 1
+    MaxRow: 26
+    MaxCol: 18
+  - MinRow: 27
+    MinCol: 1
+    MaxRow: 27
+    MaxCol: 18
+  - MinRow: 28
+    MinCol: 1
+    MaxRow: 28
+    MaxCol: 18
+  - MinRow: 29
+    MinCol: 1
+    MaxRow: 29
+    MaxCol: 18
+  - MinRow: 30
+    MinCol: 1
+    MaxRow: 30
+    MaxCol: 18
   endRow: 
   endCol: 
   nextPos: 
@@ -194,18 +234,26 @@ MonoBehaviour:
   animator: {fileID: 0}
   RecordDir: {x: 0, y: 0, z: 0}
   normalAttacking: 0
-  Axe: {fileID: 5683994576417963163, guid: 7249c241eb11fce43b6597adc4587c9d, type: 3}
-  AxeAll: {fileID: 5683994576417963163, guid: 5bbf507e07a8f764aa96b7df0a990200, type: 3}
-  accurateAxe: {fileID: 1032057078008629048, guid: 2aa139e7d9772cc44b47528a079c1720,
+  fireBall: {fileID: 5683994576417963163, guid: 2a2a4f6834269eb4aa386a0f6ee86ae4,
     type: 3}
-  normalAttackCD: 0
+  fireBallBounce: {fileID: 5683994576417963163, guid: 9dcfac928c8b1a64b9439a5b26448c2a,
+    type: 3}
+  fireBallFast: {fileID: 5683994576417963163, guid: f8c66763a847c69499bad30cc532a1ae,
+    type: 3}
+  fireRainInser: {fileID: 6843125598540700410, guid: 58a575caee7fe9d4ab60673d22e18792,
+    type: 3}
+  crystalInser: {fileID: 6843125598540700410, guid: 7140cf97e21e29f468b6b731ed8caf30,
+    type: 3}
+  normalAttackCD: 0.1
   normalAttackCDTimer: 0
-  throwAxe90CD: 2
-  throwAxe90CDTimer: 0
-  throwAxe180CD: 2
-  throwAxe180CDTimer: 0
-  accurateAxeCD: 5
-  accurateAxeCDTimer: 0
+  fireBallCD: 200
+  fireBallCDTimer: 0
+  fireBallBounceCD: 200
+  fireBallBounceCDTimer: 0
+  fireBallFastCD: 200
+  fireBallFastCDTimer: 0
+  fireRainCD: 10
+  fireRainCDTimer: 10
   SleepTimer: 0
   SleepUI: {fileID: 5259903739402641494}
 --- !u!95 &2026925606197622391

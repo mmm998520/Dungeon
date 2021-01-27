@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  stopeTimer: 2
+  stopeTimer: 3
   destoryTimer: 5
   CanHit: 0
   spriteRenderer: {fileID: 8789394122180470914}

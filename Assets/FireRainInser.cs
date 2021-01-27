@@ -13,12 +13,12 @@ namespace com.DungeonPad
 
         private void Start()
         {
-            for(int i = 0; i < 30; i++)
+            fireRains = GameObject.Find("FireRains").transform;
+            for(int i = fireRains.childCount; (i < 30 && i < fireRains.childCount + 5); i++)
             {
                 insTimes.Add(Random.Range(0.5f, 1.5f));
             }
             insTimes.Sort();//List升冪排序
-            fireRains = GameObject.Find("FireRains").transform;
         }
 
         void Update()
