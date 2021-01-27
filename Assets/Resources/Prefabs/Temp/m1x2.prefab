@@ -69,7 +69,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 134254883
-  m_SortingLayer: -1
+  m_SortingLayer: -4
   m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: ee7b326f590233a49b903ab6432f8341, type: 3}
   m_Color: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
@@ -97,6 +97,9 @@ MonoBehaviour:
   sprites:
   - {fileID: 21300000, guid: ee7b326f590233a49b903ab6432f8341, type: 3}
   - {fileID: 21300000, guid: b32b11418a2f65e4a9840694078976d7, type: 3}
+  wall: 0
+  randomRotate: 0
+  holeSide: 0
 --- !u!1 &3537629124769412361
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc1010409cca854b985f4f94977144c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  created: {fileID: 6479620777946499375, guid: 39e244b0efd12714686013cd90825bea, type: 3}
+  created: {fileID: 1061855195541407036, guid: 15a0e6ac502a95f47bca6e99dbbadcd8, type: 3}
   monster: 1
   num: 2

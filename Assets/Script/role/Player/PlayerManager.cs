@@ -62,6 +62,8 @@ namespace com.DungeonPad
         public InsAfterImages insAfterImages;
         Animator playerStatAnimator;
 
+        public Vector2? batPos = null;
+        public Transform sticksBat;
         private void Start()
         {
             playerStatAnimator = GetComponent<Animator>();

@@ -38,7 +38,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 462886665767936694}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5643cdd68828bee4eb0844284293683d, type: 3}
@@ -361,6 +361,7 @@ MonoBehaviour:
   hitSound: {fileID: 6761128484382667410}
   animator: {fileID: 5957171386420349302}
   canRemoveByPlayerAttack: 1
+  focusPlayer: 0
 --- !u!60 &2570544022315494922
 PolygonCollider2D:
   m_ObjectHideFlags: 0

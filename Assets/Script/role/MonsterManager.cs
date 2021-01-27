@@ -20,7 +20,7 @@ namespace com.DungeonPad
         public int nextGrardNum;
 
         //仇恨目標
-        public Transform TauntTarge;
+        public Transform TauntTarget;
         public float difference, repTimes, repTimer;
         protected bool attacked = false;
 
@@ -126,7 +126,7 @@ namespace com.DungeonPad
 
         protected void Move()
         {
-            if (TauntTarge == null)
+            if (TauntTarget == null)
             {
                 randomMove();
             }
