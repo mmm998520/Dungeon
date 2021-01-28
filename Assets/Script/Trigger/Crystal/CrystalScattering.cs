@@ -8,9 +8,9 @@ namespace com.DungeonPad
     {
         public GameObject crystalScatteringLight;
         float scatteringLightCount = 6;
-        void Start()
+        protected override void Start()
         {
-
+            base.Start();
         }
 
         void Update()
@@ -18,11 +18,12 @@ namespace com.DungeonPad
 
         }
 
-        public override void OnTriggerEnter2D(Collider2D collider)
+        protected override void OnTriggerEnter2D(Collider2D collider)
         {
             if (collider.GetComponent<PlayerAttackLineUnit>())
             {
                 base.OnTriggerEnter2D(collider);
+                End();
                 int startAngle = Random.Range(0, 360);
                 for (int i = 0; i < scatteringLightCount; i++)
                 {

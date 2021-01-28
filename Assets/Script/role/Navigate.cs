@@ -9,6 +9,9 @@ namespace com.DungeonPad
         public int startRoomRow, startRoomCol;
         int[,] canGoRoom;
         public Dictionary<int, int> canGo = new Dictionary<int, int>();
+        public static Dictionary<int, int> CrystalPos = new Dictionary<int, int>(), CrystalSidePos = new Dictionary<int, int>();
+        public bool Boss;
+
         [SerializeField]
         private AddCanGoByHandList.AddCanGoByHandListUnit[] addCanGoByHandList;
 
@@ -201,9 +204,10 @@ namespace com.DungeonPad
                         g[i, j] = 99999;
                         h[i, j] = 99999;
                         f[i, j] = 999999;
-                        if (!canGo.ContainsValue(i * MazeCreater.totalCol + j))
+                        int pos = i * MazeCreater.totalCol + j;
+                        if (!canGo.ContainsValue(pos) || CrystalPos.ContainsValue(pos) || (Boss && CrystalSidePos.ContainsValue(pos)))
                         {
-                            close.Add(i * MazeCreater.totalCol + j);
+                            close.Add(pos);
                         }
                     }
                 }

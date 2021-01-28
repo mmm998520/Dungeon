@@ -3258,6 +3258,7 @@ MonoBehaviour:
     type: 3}
   playerStat: 0
   insAfterImages: {fileID: 1611169916}
+  sticksBat: {fileID: 0}
 --- !u!23 &252037861
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5431,7 +5432,7 @@ MonoBehaviour:
   mouse2: {fileID: 503378752}
   BluePlayer: {fileID: 252037856}
   RedPlayer: {fileID: 1179144343}
-  NextScene: Game 1
+  NextScene: Game 3b
 --- !u!1001 &448056398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19287,6 +19288,7 @@ MonoBehaviour:
     type: 3}
   playerStat: 0
   insAfterImages: {fileID: 534531181}
+  sticksBat: {fileID: 0}
 --- !u!23 &1179144348
 MeshRenderer:
   m_ObjectHideFlags: 0
