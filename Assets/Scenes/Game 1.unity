@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -14951,8 +14951,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40c27d6d8e81f14eb8975d4fef03926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomCountRowNum: 5
-  roomCountColNum: 5
+  roomCountRowNum: 3
+  roomCountColNum: 3
   objectCountRowNum: 16
   objectCountColNum: 16
   startRow: 0
@@ -17736,7 +17736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431a5787f35a0414fb6f7a5353a86962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitLong: 6
+  unitLong: 10
   playerPos: {fileID: 1307679434}
   endPos: {fileID: 559279127}
 --- !u!1 &1742543170
@@ -18457,6 +18457,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seller: {fileID: 5771640717856095605, guid: 8633a5e00a51b40439788d5012299d25, type: 3}
+  reLifeParticle: {fileID: 8905642310724304018, guid: 9b5318d5d43f925488f6abeb1ca8170f,
+    type: 3}
+  money: {fileID: 4535775244995362372, guid: 0ee17a5ec2c561c4496459da162e0d2d, type: 3}
   haveFinalRoomStore: 0
 --- !u!4 &1938054457
 Transform:
@@ -18750,7 +18753,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 12, y: 12}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1943676872
 MonoBehaviour:

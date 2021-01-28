@@ -8,8 +8,6 @@ namespace com.DungeonPad
     {
         public Transform endPlayer;
         public PlayerAttackLine playerAttackLine;
-        public GameObject reLifeParticle, money;
-        public static int hpRecover = 0;
         void Start()
         {
 
@@ -49,35 +47,8 @@ namespace com.DungeonPad
                         print(collider.gameObject.name);
                         if (collider.GetComponent<MonsterManager>().HP <= 0)
                         {
-                            Debug.LogWarning("hitTimes");
-                            PlayerManager.HP += hpRecover;
-                            Players.reTimer = 0;
                             collider.GetComponent<MonsterManager>().beforeDied();
-                            Destroy(collider.gameObject);
-                            if (collider.name.Contains("Big"))
-                            {
-                                insMoney(Random.Range(3, 6));
-                                if (Random.Range(0, 100) < 15)
-                                {
-                                    Instantiate(reLifeParticle, transform.position, Quaternion.identity);
-                                }
-                            }
-                            else if (collider.name.Contains("Spider"))
-                            {
-                                insMoney(Random.Range(1, 2));
-                                if (Random.Range(0, 100) < 1)
-                                {
-                                    Instantiate(reLifeParticle, transform.position, Quaternion.identity);
-                                }
-                            }
-                            else
-                            {
-                                insMoney(Random.Range(1, 2));
-                                if (Random.Range(0, 100) < 1)
-                                {
-                                    Instantiate(reLifeParticle, transform.position, Quaternion.identity);
-                                }
-                            }
+                            Debug.LogWarning("hitTimes");
                         }
                     }
                 }
@@ -89,14 +60,6 @@ namespace com.DungeonPad
             if (collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
             {
                 Destroy(collider.gameObject);
-            }
-        }
-
-        void insMoney(int times)
-        {
-            for(int i = 0; i < times; i++)
-            {
-                Instantiate(money, transform.position, Quaternion.identity);
             }
         }
     }

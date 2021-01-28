@@ -42,7 +42,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Game 3a.unity
     guid: 73d14ceffdd96774cbe57ee674293c3e
   - enabled: 1
-    path: Assets/Scenes/Game 3b.unity
+    path: Assets/Scenes/Game 4.unity
     guid: 699998c1d87c9154582ce611e4c6ccdd
   - enabled: 1
     path: Assets/Scenes/Game 3c.unity

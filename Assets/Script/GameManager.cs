@@ -6,6 +6,7 @@ namespace com.DungeonPad
 {
     public class GameManager : MonoBehaviour
     {
+        public static GameManager gameManager;
         public static Transform players, monsters, triggers, UI;
         public static int layers = 1, level = 1;
         public static MazeCreater mazeCreater;
@@ -22,11 +23,12 @@ namespace com.DungeonPad
         public static AbilityStore abilityStore;
         float emptyRoomNumCountTimer;
 
-        public GameObject seller;
+        public GameObject seller, reLifeParticle, money;
         public bool haveFinalRoomStore;
         void Awake()
         {
             MazeCreater.setTotalRowCol();
+            gameManager = this;
             players = GameObject.Find("Players").transform;
             monsters = GameObject.Find("Monsters").transform;
             triggers = GameObject.Find("Triggers").transform;

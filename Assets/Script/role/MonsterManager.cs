@@ -180,6 +180,41 @@ namespace com.DungeonPad
             {
                 Instantiate(Ammunition, transform.position, Quaternion.identity);
             }
+            PlayerManager.HP += PlayerManager.killHpRecover;
+            Players.reTimer = 0;
+            Destroy(gameObject);
+            if (gameObject.name.Contains("Big"))
+            {
+                insMoney(Random.Range(3, 6));
+                if (Random.Range(0, 100) < 15)
+                {
+                    Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
+                }
+            }
+            else if (gameObject.name.Contains("Spider"))
+            {
+                insMoney(Random.Range(1, 2));
+                if (Random.Range(0, 100) < 1)
+                {
+                    Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
+                }
+            }
+            else
+            {
+                insMoney(Random.Range(1, 2));
+                if (Random.Range(0, 100) < 1)
+                {
+                    Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
+                }
+            }
+        }
+
+        void insMoney(int times)
+        {
+            for (int i = 0; i < times; i++)
+            {
+                Instantiate(GameManager.gameManager.money, transform.position, Quaternion.identity);
+            }
         }
     }
 }

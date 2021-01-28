@@ -60,11 +60,10 @@ namespace com.DungeonPad
             }
             if (collider2D.GetComponent<MonsterManager>())
             {
-                collider2D.GetComponent<MonsterManager>().HP -= 1;
+                collider2D.GetComponent<MonsterManager>().HP -= 3;
                 if (collider2D.GetComponent<MonsterManager>().HP <= 0)
                 {
                     collider2D.GetComponent<MonsterManager>().beforeDied();
-                    Destroy(collider2D.gameObject);
                 }
             }
         }

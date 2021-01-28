@@ -303,10 +303,10 @@ namespace com.DungeonPad
                     PlayerManager.MaxHP = 80;
                     break;
                 case "殺怪回血 LV0→LV1":
-                    PlayerAttackLineUnit.hpRecover = 10;
+                    PlayerManager.killHpRecover = 10;
                     break;
                 case "殺怪回血 LV1→LV2":
-                    PlayerAttackLineUnit.hpRecover = 25;
+                    PlayerManager.killHpRecover = 25;
                     break;
                 case "復活光球+1":
                     if (PlayerManager.Life < PlayerManager.MaxLife)

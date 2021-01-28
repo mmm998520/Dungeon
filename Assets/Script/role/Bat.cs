@@ -14,6 +14,7 @@ namespace com.DungeonPad
 
         void Start()
         {
+            speed += Random.Range(-0.5f, 0.5f);
             ReCD();
             startRoomRow = Mathf.RoundToInt(transform.position.x) / GameManager.mazeCreater.objectCountRowNum;
             startRoomCol = Mathf.RoundToInt(transform.position.y) / GameManager.mazeCreater.objectCountColNum;

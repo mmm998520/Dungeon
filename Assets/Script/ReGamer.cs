@@ -45,7 +45,7 @@ namespace com.DungeonPad
             PlayerManager.timerRecord = new List<float>();
             PlayerManager.recoveryRecord = new List<float>();
             PlayerJoyVibration.canVibration = true;
-            PlayerAttackLineUnit.hpRecover = 0;
+            PlayerManager.killHpRecover = 0;
             GameManager.layers = 1;
             GameManager.level = 1;
             GameManager.DiedBecause = "Distance";
@@ -76,7 +76,7 @@ namespace com.DungeonPad
             PlayerManager.timerRecord = new List<float>();
             PlayerManager.recoveryRecord = new List<float>();
             PlayerJoyVibration.canVibration = true;
-            PlayerAttackLineUnit.hpRecover = 0;
+            PlayerManager.killHpRecover = 0;
             GameManager.layers = 1;
             GameManager.level = 1;
             GameManager.DiedBecause = "Distance";

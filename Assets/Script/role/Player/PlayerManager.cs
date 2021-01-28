@@ -16,6 +16,7 @@ namespace com.DungeonPad
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
+        public static int killHpRecover = 0;
         public GameObject attack, regener, ridiculeWind;
         Vector3 lastPos;
         public bool locked = true, flash = false;
