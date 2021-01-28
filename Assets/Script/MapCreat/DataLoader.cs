@@ -12,7 +12,7 @@ namespace com.DungeonPad
         /// <summary> 通道型態list->難度list->功能list->關卡設計list ->關卡內容array </summary>
         public static Dictionary<int, string[,]>[,,,] AllRoomDatas;
         /// <summary> 層數 </summary>
-        int layers = 2;
+        int layers = 3;
         /// <summary> 通道型態總數，0 ┼，1 ├，2 ┬，3 ┤，4 ┴，5 ─，6 │ </summary>
         int passwayTypeNum = 7;
         /// <summary> 難度分級數 </summary>

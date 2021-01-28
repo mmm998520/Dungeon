@@ -65,7 +65,9 @@ namespace com.DungeonPad
                 temp.GetComponent<Image>().color = new Color(StartColor.r, StartColor.g, StartColor.b, StartColor.a * 0.25f);
             }
             playerPos.anchoredPosition = new Vector2(unitLong * CameraManager.center.x, unitLong * CameraManager.center.y);
-            endPos.anchoredPosition = new Vector2(unitLong * GameObject.Find("旋鈕(Clone)").transform.position.x, unitLong * GameObject.Find("旋鈕(Clone)").transform.position.y);
+            GameObject RotatedButton;
+            RotatedButton = GameObject.Find("旋鈕(Clone)");
+            endPos.anchoredPosition = new Vector2(unitLong * RotatedButton.transform.position.x, unitLong * RotatedButton.transform.position.y);
         }
     }
 }

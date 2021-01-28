@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc1010409cca854b985f4f94977144c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  created: {fileID: 1061855195541407036, guid: 15a0e6ac502a95f47bca6e99dbbadcd8, type: 3}
+  created: {fileID: 6479620777946499375, guid: 39e244b0efd12714686013cd90825bea, type: 3}
   monster: 1
   num: 4
 --- !u!1 &5266080859433954434

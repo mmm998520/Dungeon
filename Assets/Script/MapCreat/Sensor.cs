@@ -97,7 +97,6 @@ namespace com.DungeonPad
             {
                 hidedMonster[i].SetActive(false);
             }
-            Debug.LogError(num);
             return num;
         }
     }

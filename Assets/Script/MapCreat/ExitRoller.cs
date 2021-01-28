@@ -12,7 +12,14 @@ namespace com.DungeonPad
             transform.localPosition = Vector3.zero;
             if (transform.rotation.eulerAngles.z > 180 && transform.rotation.eulerAngles.z < 200)
             {
-                SceneManager.LoadScene("Game 2");
+                if (GameManager.layers == 1)
+                {
+                    SceneManager.LoadScene("Game 2");
+                }
+                else
+                {
+                    SceneManager.LoadScene("Game 4");
+                }
             }
         }
     }

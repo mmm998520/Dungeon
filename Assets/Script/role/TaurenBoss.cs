@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -366,6 +367,8 @@ namespace com.DungeonPad
         private void OnDestroy()
         {
             HPBar.localScale = Vector3.zero;
+            GameManager.layers = 2;
+            SceneManager.LoadScene("Game 1");
         }
     }
 }
