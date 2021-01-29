@@ -358,10 +358,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAsset: []
-  layers: 2
+  layers: 1
   passwayNum: 2
   level: 3
-  function: 2
+  function: 1
   num: 0
   passwayType: 0
 --- !u!4 &1533619235

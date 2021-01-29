@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 40, HP = 40;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = true;
+        public static bool lockedHP = false;
         public static float lockedHPTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -204,7 +204,7 @@ namespace com.DungeonPad
                         {
                             hpUpRate = 8;
                         }*/
-                        hpUpRate = 20;
+                        hpUpRate = 20;//共回40;
                     }
                     else if (dis < 4.5f)
                     {
@@ -212,7 +212,7 @@ namespace com.DungeonPad
                     }
                     else
                     {
-                        hpUpRate = -6f;
+                        hpUpRate = -6f;//共扣12;
                     }
                     HP += hpUpRate * Time.deltaTime;
                     if (HP > MaxHP)

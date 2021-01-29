@@ -23,7 +23,7 @@ namespace com.DungeonPad
             if (collider.GetComponent<PlayerAttackLineUnit>())
             {
                 base.OnTriggerEnter2D(collider);
-                End();
+
                 int startAngle = Random.Range(0, 360);
                 for (int i = 0; i < scatteringLightCount; i++)
                 {

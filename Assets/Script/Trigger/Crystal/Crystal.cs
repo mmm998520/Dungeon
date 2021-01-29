@@ -60,6 +60,7 @@ namespace com.DungeonPad
             }
             crystalLight.enabled = false;
             crystalStat = CrystalStat.use;
+            End();
         }
     }
 }

@@ -185,7 +185,7 @@ namespace com.DungeonPad
             Destroy(gameObject);
             if (gameObject.name.Contains("Big"))
             {
-                insMoney(Random.Range(3, 6));
+                insMoney(Random.Range(7, 11));
                 if (Random.Range(0, 100) < 15)
                 {
                     Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
@@ -199,8 +199,17 @@ namespace com.DungeonPad
                     Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
                 }
             }
+            else if (gameObject.name.Contains("Slime"))
+            {
+                insMoney(Random.Range(1, 3));
+                if (Random.Range(0, 100) < 1)
+                {
+                    Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
+                }
+            }
             else
             {
+                Debug.LogError(gameObject.name + " : 未定掉落金錢");
                 insMoney(Random.Range(1, 2));
                 if (Random.Range(0, 100) < 1)
                 {
