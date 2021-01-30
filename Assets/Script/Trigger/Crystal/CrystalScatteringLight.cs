@@ -11,7 +11,7 @@ namespace com.DungeonPad
         float maxDistance = 10, minDistance = 0.5f;
         void Start()
         {
-            setLight();
+
         }
 
         void Update()
@@ -21,8 +21,8 @@ namespace com.DungeonPad
 
         void setLight()
         {
-            RaycastHit2D hit1 = Physics2D.Raycast(rayPos1.position, transform.right, 1000, 1 << 8 | 1 << 9 | 1 << 12);
-            RaycastHit2D hit2 = Physics2D.Raycast(rayPos2.position, transform.right, 1000, 1 << 8 | 1 << 9 | 1 << 12);
+            RaycastHit2D hit1 = Physics2D.Raycast(rayPos1.position, transform.right, 1000, 1 << 9 | 1 << 12);
+            RaycastHit2D hit2 = Physics2D.Raycast(rayPos2.position, transform.right, 1000, 1 << 9 | 1 << 12);
             Collider2D hited;
             if (hit1.distance < hit2.distance)
             {
@@ -54,13 +54,9 @@ namespace com.DungeonPad
 
         void setHited(Collider2D collider2D)
         {
-            if (collider2D.GetComponent<PlayerManager>())
-            {
-                PlayerManager.HP += 10;
-            }
             if (collider2D.GetComponent<MonsterManager>())
             {
-                collider2D.GetComponent<MonsterManager>().HP -= 3;
+                collider2D.GetComponent<MonsterManager>().HP -= 1;
                 if (collider2D.GetComponent<MonsterManager>().HP <= 0)
                 {
                     collider2D.GetComponent<MonsterManager>().beforeDied();

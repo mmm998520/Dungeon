@@ -7,7 +7,7 @@ namespace com.DungeonPad
     public class CrystalScattering : Crystal
     {
         public GameObject crystalScatteringLight;
-        float scatteringLightCount = 4;
+        float scatteringLightCount = 8;
         protected override void Start()
         {
             base.Start();

@@ -75,6 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRoomRow: 0
   startRoomCol: 0
+  Boss: 0
   addCanGoByHandList:
   - MinRow: 1
     MinCol: 1
@@ -214,7 +215,7 @@ MonoBehaviour:
   attack: {fileID: 0}
   guardPoint: 
   nextGrardNum: 0
-  TauntTarge: {fileID: 0}
+  TauntTarget: {fileID: 0}
   difference: 0
   repTimes: 0
   repTimer: 0
@@ -246,11 +247,11 @@ MonoBehaviour:
     type: 3}
   normalAttackCD: 0.1
   normalAttackCDTimer: 0
-  fireBallCD: 200
+  fireBallCD: 2
   fireBallCDTimer: 0
-  fireBallBounceCD: 200
+  fireBallBounceCD: 2
   fireBallBounceCDTimer: 0
-  fireBallFastCD: 200
+  fireBallFastCD: 2
   fireBallFastCDTimer: 0
   fireRainCD: 10
   fireRainCDTimer: 10

@@ -14,7 +14,7 @@ namespace com.DungeonPad
         private void Start()
         {
             fireRains = GameObject.Find("FireRains").transform;
-            for(int i = fireRains.childCount; (i < 30 && i < fireRains.childCount + 5); i++)
+            for(int i = fireRains.childCount; (i < 30 && i < fireRains.childCount + 10); i++)
             {
                 insTimes.Add(Random.Range(0.5f, 1.5f));
             }
