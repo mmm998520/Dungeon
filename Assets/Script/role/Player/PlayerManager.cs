@@ -50,6 +50,7 @@ namespace com.DungeonPad
 
         public int MaxBulletNum = 5, BulletNum = 5;
         public GameObject Bullet, attackLine;
+        public Animator playerAttackLineAnimator;
 
         public static int money = 0;
 
@@ -1091,19 +1092,7 @@ namespace com.DungeonPad
 
         void LineAttack()
         {
-            PlayerAttackLine playerAttackLine = Instantiate(attackLine).GetComponent<PlayerAttackLine>();
-            for (int i = 0; i < GameManager.players.childCount; i++)
-            {
-                Transform player = GameManager.players.GetChild(i);
-                if (player == transform)
-                {
-                    playerAttackLine.startPlayer = player;
-                }
-                else
-                {
-                    playerAttackLine.endPlayer = player;
-                }
-            }
+            playerAttackLineAnimator.SetTrigger("LineAttack");
         }
 
         public void getOutHole()

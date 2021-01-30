@@ -6,11 +6,6 @@ namespace com.DungeonPad
 {
     public class PlayerAttackLine : MonoBehaviour
     {
-        float insTimer, destroyTimer;
-        public Transform startPlayer, endPlayer;
-        public GameObject attackPicture;
-        public List<Collider2D> attackedColliders = new List<Collider2D>();
-
         void Start()
         {
 
@@ -18,23 +13,37 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if ((destroyTimer += Time.deltaTime) >= 0.5f)
-            {
-                Destroy(gameObject);
-            }
-            if ((insTimer += Time.deltaTime) >= 0.1f)
-            {
-                insTimer = 0;
-                draw();
-            }
+
         }
 
-        public void draw()
+
+        private void OnTriggerEnter2D(Collider2D collider)
         {
-            float angle = Vector3.SignedAngle(startPlayer.right, endPlayer.position - startPlayer.position, Vector3.forward);
-            PlayerAttackLineUnit playerAttackLineUnit = Instantiate(attackPicture, startPlayer.position, Quaternion.Euler(0, 0, angle)).GetComponent<PlayerAttackLineUnit>();
-            playerAttackLineUnit.endPlayer = endPlayer;
-            playerAttackLineUnit.playerAttackLine = this;
+            if (collider.gameObject.layer == 9)
+            {
+                if (collider.GetComponent<MonsterManager>())
+                {
+                    if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
+                    {
+                        collider.GetComponent<MonsterManager>().HP -= 1;
+                        if (Random.Range(0, 100) < PlayerManager.criticalRate)
+                        {
+                            collider.GetComponent<MonsterManager>().HP -= 1;
+                        }
+                    }
+                    print(collider.gameObject.name);
+                    if (collider.GetComponent<MonsterManager>().HP <= 0)
+                    {
+                        collider.GetComponent<MonsterManager>().beforeDied();
+                        Debug.LogWarning("hitTimes");
+                    }
+                }
+            }
+
+            if (collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
+            {
+                Destroy(collider.gameObject);
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace com.DungeonPad
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.GetComponent<PlayerAttackLineUnit>())
+            if (collider.GetComponent<PlayerAttackLine>())
             {
                 Destroy(gameObject);
             }

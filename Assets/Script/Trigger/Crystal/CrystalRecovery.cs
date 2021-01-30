@@ -18,7 +18,7 @@ namespace com.DungeonPad
 
         protected override void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.GetComponent<PlayerAttackLineUnit>())
+            if (collider.GetComponent<PlayerAttackLine>())
             {
                 base.OnTriggerEnter2D(collider);
 
