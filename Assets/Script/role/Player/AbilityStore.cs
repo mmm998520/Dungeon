@@ -46,6 +46,8 @@ namespace com.DungeonPad
 
         public void showStore()
         {
+            initialStore();
+            /*
             setStoreText(999, 2);
             Time.timeScale = 0;
             Refreshed = false;
@@ -57,6 +59,7 @@ namespace com.DungeonPad
             showOnStore();
             PlayerJoyVibration.canVibration = false;
             resetEvenSystem();
+            */
         }
 
         public void initialStore()
@@ -67,13 +70,13 @@ namespace com.DungeonPad
             onSellText.enabled = !Refreshed;
             panel.SetActive(true);
             storeAbility.Clear();
-            storeAbility.Add("血量上限增加 LV0→LV1");
-            storeAbility.Add("殺怪回血 LV0→LV1");
+            //storeAbility.Add("血量上限增加 LV0→LV1");
+            //storeAbility.Add("殺怪回血 LV0→LV1");
             storeAbility.Add("復活光球+1");
             storeAbilityPrice.Clear();
             storeAbilityPrice.Add(0);
-            storeAbilityPrice.Add(0);
-            storeAbilityPrice.Add(0);
+            //storeAbilityPrice.Add(0);
+            //storeAbilityPrice.Add(0);
             showOnStore();
             PlayerJoyVibration.canVibration = false;
             resetEvenSystem();
@@ -252,6 +255,13 @@ namespace com.DungeonPad
 
         public void seletAbilityButton(int ButtonNum)
         {
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            PlayerManager.money -= 1;
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             if (storeAbilityText[ButtonNum].text != "null" && PlayerManager.money - storeAbilityPrice[ButtonNum] >= 0 && totalCanChooseNum > 0)
             {
                 setStoreText(--totalCanChooseNum, RefreshTimes);

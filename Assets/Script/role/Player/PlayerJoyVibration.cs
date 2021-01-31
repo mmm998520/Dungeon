@@ -11,7 +11,7 @@ namespace com.DungeonPad
         public PlayerIndex? playerIndex;
         PlayerManager playerManager;
         public PlayerJoyVibration otherPlayerJoyVibration;
-        public float HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, DashVibration;
+        public float HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, DashVibration, maxer;
         public static float LowHPVibration;
 
         public static bool canVibration = true;
@@ -29,12 +29,8 @@ namespace com.DungeonPad
                 CountConfusionVibration();
                 //CountLowHPVibration();
                 CountDashVibration();
-                float maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, LowHPVibration, DashVibration);
-                GamePad.SetVibration(playerIndex.Value, maxer * weight, maxer * weight);
-                if (PlayerManager.HP <= 0)
-                {
-                    GamePad.SetVibration(playerIndex.Value, 0, 0);
-                }
+                maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, LowHPVibration, DashVibration);
+                maxer = Mathf.Max(maxer, otherPlayerJoyVibration.maxer);
             }
             else
             {
@@ -45,6 +41,15 @@ namespace com.DungeonPad
                 ConfusionVibration = 0;
                 LowHPVibration = 0;
                 DashVibration = 0;
+            }
+        }
+
+        private void LateUpdate()
+        {
+            GamePad.SetVibration(playerIndex.Value, maxer * weight, maxer * weight);
+            if (PlayerManager.HP <= 0)
+            {
+                GamePad.SetVibration(playerIndex.Value, 0, 0);
             }
         }
 
