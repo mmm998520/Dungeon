@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 40, HP = 40;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = false;
+        public static bool lockedHP = true;
         public static float lockedHPTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -156,7 +156,7 @@ namespace com.DungeonPad
                 }
                 if (playerStat == PlayerStat.Move)
                 {
-                    Behavior();
+                    OnePlayerBehavior();
                 }
                 if (HP <= 0)
                 {
@@ -299,7 +299,611 @@ namespace com.DungeonPad
             timer();
         }
 
-        void Behavior()
+        bool canUseTriggerButton = true;
+        void OnePlayerBehavior()
+        {
+            #region//掙脫
+            if (p1)
+            {
+                switch (SelectMouse.p1Joy)
+                {
+                    case "WASD":
+                        if (Input.GetKeyDown(KeyCode.LeftAlt))
+                        {
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
+                            lastDirRight = true;
+                        }
+                        break;
+                    case "ArrowKey":
+                        if (Input.GetKeyDown(KeyCode.Keypad1))
+                        {
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
+                            lastDirRight = true;
+                        }
+                        break;
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "8":
+                        if (Input.GetAxis("RT")>0.1f)
+                        {
+                            if (canUseTriggerButton)
+                            {
+                                ConfusionTimer += 0.7f;
+                                StickTimer += 0.7f;
+                                lastDirRight = true;
+                                canUseTriggerButton = false;
+                            }
+                        }
+                        else
+                        {
+                            canUseTriggerButton = true;
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                switch (SelectMouse.p2Joy)
+                {
+                    case "WASD":
+                        if (Input.GetKeyDown(KeyCode.LeftAlt))
+                        {
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
+                            lastDirRight = true;
+                        }
+                        break;
+                    case "ArrowKey":
+                        if (Input.GetKeyDown(KeyCode.Keypad1))
+                        {
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
+                            lastDirRight = true;
+                        }
+                        break;
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "8":
+                        if (Input.GetAxis("LT") > 0.1f)
+                        {
+                            if (canUseTriggerButton)
+                            {
+                                ConfusionTimer += 0.7f;
+                                StickTimer += 0.7f;
+                                lastDirRight = true;
+                                canUseTriggerButton = false;
+                            }
+                        }
+                        else
+                        {
+                            canUseTriggerButton = true;
+                        }
+                        break;
+                }
+            }
+            #endregion
+            if (ConfusionTimer < 10 || StickTimer < 10)
+            {
+                ConfusionUIRenderer.enabled = true;
+                ConfusionUIcontroler.enabled = true;
+            }
+            else
+            {
+                ConfusionUIRenderer.enabled = false;
+                ConfusionUIcontroler.enabled = false;
+            }
+            if (ConfusionTimer < 10)
+            {
+                float tempVX = v.x + Random.Range(-6f, 6f);
+                float tempVY = v.y + Random.Range(-6f, 6f);
+                v.x += (tempVX + v.x) / 3;
+                v.y += (tempVY + v.y) / 3;
+            }
+            else
+            {
+                #region//操作移動
+                if (p1)
+                {
+                    switch (SelectMouse.p1Joy)
+                    {
+                        case "WASD":
+                            v.x += Input.GetAxis("HorizontalWASD") * moveSpeed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalWASD") * moveSpeed * 2 / 3;
+                            break;
+                        case "ArrowKey":
+                            v.x += Input.GetAxis("HorizontalArrowKey") * moveSpeed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalArrowKey") * moveSpeed * 2 / 3;
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            v.x += Input.GetAxis("HorizontalJoyP1") * moveSpeed * 2 / 3;
+                            v.y -= Input.GetAxis("VerticalJoyP1") * moveSpeed * 2 / 3;
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (SelectMouse.p2Joy)
+                    {
+                        case "WASD":
+                            v.x += Input.GetAxis("HorizontalWASD") * moveSpeed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalWASD") * moveSpeed * 2 / 3;
+                            break;
+                        case "ArrowKey":
+                            v.x += Input.GetAxis("HorizontalArrowKey") * moveSpeed * 2 / 3;
+                            v.y += Input.GetAxis("VerticalArrowKey") * moveSpeed * 2 / 3;
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            v.x += Input.GetAxis("HorizontalJoyP2") * moveSpeed * 2 / 3;
+                            v.y -= Input.GetAxis("VerticalJoyP2") * moveSpeed * 2 / 3;
+                            break;
+                    }
+                }
+                #endregion
+            }
+            if ((StickTimer) < 10)
+            {
+                if (v.magnitude > 0.5f)
+                {
+                    v = v.normalized * 0.5f;
+                }
+            }
+            else if (v.magnitude > moveSpeed)
+            {
+                v = v.normalized * moveSpeed;
+            }
+            if (HardStraightTimer < 0.3f)
+            {
+                v = HardStraightA;
+            }
+            if (SleepTimer < 0f)
+            {
+                v = Vector3.zero;
+            }
+            //玩家解除無敵狀態
+            else if (HardStraightTimer > 0.5f)
+            {
+                gameObject.layer = 8;
+            }
+
+            #region//衝刺
+            if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10)
+            {
+                if (DashTimer > DashCD)
+                {
+                    if (p1)
+                    {
+                        switch (SelectMouse.p1Joy)
+                        {
+                            case "WASD":
+                                if (Input.GetKeyDown(KeyCode.Space))
+                                {
+                                    DashA.x = Input.GetAxisRaw("HorizontalWASD");
+                                    DashA.y = Input.GetAxisRaw("VerticalWASD");
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                        LineAttack();
+                                        insAfterImages.timer = 0;
+                                    }
+                                }
+                                break;
+                            case "ArrowKey":
+                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                {
+                                    DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
+                                    DashA.y = Input.GetAxisRaw("VerticalArrowKey");
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                        LineAttack();
+                                        insAfterImages.timer = 0;
+                                    }
+                                }
+                                break;
+                            case "1":
+                            case "2":
+                            case "3":
+                            case "4":
+                            case "5":
+                            case "6":
+                            case "7":
+                            case "8":
+                                if (Input.GetKeyDown(KeyCode.JoystickButton4))
+                                {
+                                    DashA.x = Input.GetAxisRaw("HorizontalJoyP1");
+                                    DashA.y = -Input.GetAxisRaw("VerticalJoyP1");
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                        LineAttack();
+                                        playerJoyVibration.DashVibration = 0.8f;
+                                        insAfterImages.timer = 0;
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (SelectMouse.p2Joy)
+                        {
+                            case "WASD":
+                                if (Input.GetKeyDown(KeyCode.Space))
+                                {
+                                    DashA.x = Input.GetAxisRaw("HorizontalWASD");
+                                    DashA.y = Input.GetAxisRaw("VerticalWASD");
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                        LineAttack();
+                                        insAfterImages.timer = 0;
+                                    }
+                                }
+                                break;
+                            case "ArrowKey":
+                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                {
+                                    DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
+                                    DashA.y = Input.GetAxisRaw("VerticalArrowKey");
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                        LineAttack();
+                                        insAfterImages.timer = 0;
+                                    }
+                                }
+                                break;
+                            case "1":
+                            case "2":
+                            case "3":
+                            case "4":
+                            case "5":
+                            case "6":
+                            case "7":
+                            case "8":
+                                if (Input.GetKeyDown(KeyCode.JoystickButton5))
+                                {
+                                    DashA.x = Input.GetAxisRaw("HorizontalJoyP2");
+                                    DashA.y = -Input.GetAxisRaw("VerticalJoyP2");
+                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
+                                    if (DashA.magnitude > 10)
+                                    {
+                                        DashTimer = 0;
+                                        LineAttack();
+                                        playerJoyVibration.DashVibration = 0.8f;
+                                        insAfterImages.timer = 0;
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                }
+                if (DashTimer < 0.3f)
+                {
+                    v = DashA;
+                }
+            }
+            #endregion
+
+            #region//傳送
+            if (AbilityManager.myAbilitys.Contains("按X傳送到隊友身邊(冷卻10秒)"))
+            {
+                if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
+                {
+                    if (p1)
+                    {
+                        switch (SelectMouse.p1Joy)
+                        {
+                            case "WASD":
+                                if (Input.GetKeyDown(KeyCode.M))
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case "ArrowKey":
+                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case "1":
+                            case "2":
+                            case "3":
+                            case "4":
+                            case "5":
+                            case "6":
+                            case "7":
+                            case "8":
+                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 2)))
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (SelectMouse.p2Joy)
+                        {
+                            case "WASD":
+                                if (Input.GetKeyDown(KeyCode.M))
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case "ArrowKey":
+                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case "1":
+                            case "2":
+                            case "3":
+                            case "4":
+                            case "5":
+                            case "6":
+                            case "7":
+                            case "8":
+                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 2)))
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -10 * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+            #endregion
+            GetComponent<Rigidbody2D>().velocity = v;
+            transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent<ParticleSystem>().shape.arc / 2 + 180);
+
+            #region//子彈
+            /*
+            if (BulletNum > 0)
+            {
+                if (p1)
+                {
+                    switch (SelectMouse.p1Joy)
+                    {
+                        case "WASD":
+                            break;
+                        case "ArrowKey":
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 5)))
+                            {
+                                shootBullet();
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (SelectMouse.p2Joy)
+                    {
+                        case "WASD":
+                            break;
+                        case "ArrowKey":
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 5)))
+                            {
+                                shootBullet();
+                            }
+                            break;
+                    }
+                }
+            }
+
+            //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy + "R");
+            */
+            #endregion
+
+            #region//商人
+            if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
+            {
+                if (p1)
+                {
+                    switch (SelectMouse.p1Joy)
+                    {
+                        case "WASD":
+                            if (Input.GetKeyDown(KeyCode.L))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                        case "ArrowKey":
+                            if (Input.GetKeyDown(KeyCode.Keypad3))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetKeyDown(KeyCode.JoystickButton3))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (SelectMouse.p2Joy)
+                    {
+                        case "WASD":
+                            if (Input.GetKeyDown(KeyCode.L))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                        case "ArrowKey":
+                            if (Input.GetKeyDown(KeyCode.Keypad3))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (Input.GetKeyDown(KeyCode.JoystickButton3))
+                            {
+                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
+                                if (hit && hit.collider.name == "Seller(Clone)")
+                                {
+                                    GameManager.abilityStore.showStore();
+                                    Destroy(hit.collider.gameObject);
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
+            #endregion
+        }
+        void TwoPlayerBehavior()
         {
             #region//掙脫
             if (p1)

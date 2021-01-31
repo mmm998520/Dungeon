@@ -16,14 +16,15 @@ namespace com.DungeonPad
         {
         }
 
-        protected override void OnTriggerEnter2D(Collider2D collider)
+        public override void hited()
         {
-            if (collider.GetComponent<PlayerAttackLine>())
+            if (crystalStat == CrystalStat.use)
             {
-                base.OnTriggerEnter2D(collider);
-
-                Instantiate(crystalRecoveryLight, transform.position, Quaternion.identity, GameManager.triggers);
+                return;
             }
+            base.hited();
+
+            Instantiate(crystalRecoveryLight, transform.position, Quaternion.identity, GameManager.triggers);
         }
     }
 }

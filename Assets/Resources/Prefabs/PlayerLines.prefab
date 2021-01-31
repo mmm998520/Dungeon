@@ -306,7 +306,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8050423244345459471}
   - component: {fileID: 8050423244345459465}
-  - component: {fileID: 8050423244345459464}
   m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
@@ -378,32 +377,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8050423244345459464
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8050423244345459470}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.13, y: 0.64}
-    newSize: {x: 0.64, y: 0.64}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.035, y: 0.64}
-  m_EdgeRadius: 0
 --- !u!1 &8050423244587248123
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +419,7 @@ GameObject:
   - component: {fileID: 8050423244940267684}
   - component: {fileID: 8050423244940267686}
   - component: {fileID: 8050423244940267685}
+  - component: {fileID: 6598550781853808036}
   m_Layer: 0
   m_Name: BlueLine
   m_TagString: Untagged
@@ -480,6 +454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93875edf4a0bb844bb5db9d14b475ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayPos1: {fileID: 1528204906547828533}
+  rayPos2: {fileID: 731698811075761437}
+  hit: 0
 --- !u!95 &8050423244940267685
 Animator:
   serializedVersion: 3
@@ -499,6 +476,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &6598550781853808036
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050423244940267707}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8050423245038140880
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +507,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8050423245038140881}
   - component: {fileID: 8050423245038140882}
-  - component: {fileID: 8050423245038140883}
   m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
@@ -581,32 +578,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8050423245038140883
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8050423245038140880}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.13, y: 0.64}
-    newSize: {x: 0.64, y: 0.64}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.035, y: 0.64}
-  m_EdgeRadius: 0
 --- !u!1 &8050423245400602395
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,8 +634,8 @@ MonoBehaviour:
   attackSprite:
   - {fileID: 8050423245038140881}
   - {fileID: 8050423244345459471}
-  p1AttackLight: {fileID: 8050423244587248100}
-  p2AttackLight: {fileID: 8050423245495191252}
+  p1AttackLight: {fileID: 1528204906547828533}
+  p2AttackLight: {fileID: 731698811075761437}
 --- !u!1 &8050423245495191275
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,6 +678,7 @@ GameObject:
   - component: {fileID: 8050423245697464069}
   - component: {fileID: 8050423245697464070}
   - component: {fileID: 8050423245697464071}
+  - component: {fileID: 7506895873463897347}
   m_Layer: 0
   m_Name: RedLine
   m_TagString: Untagged
@@ -741,6 +713,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93875edf4a0bb844bb5db9d14b475ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayPos1: {fileID: 1528204906547828533}
+  rayPos2: {fileID: 731698811075761437}
+  hit: 0
 --- !u!95 &8050423245697464071
 Animator:
   serializedVersion: 3
@@ -760,3 +735,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &7506895873463897347
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050423245697464068}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

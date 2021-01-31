@@ -18,22 +18,23 @@ namespace com.DungeonPad
 
         }
 
-        protected override void OnTriggerEnter2D(Collider2D collider)
+        public override void hited()
         {
-            if (collider.GetComponent<PlayerAttackLine>())
+            if (crystalStat == CrystalStat.use)
             {
-                base.OnTriggerEnter2D(collider);
+                return;
+            }
+            base.hited();
 
-                int startAngle = Random.Range(0, 360);
-                for (int i = 0; i < scatteringLightCount; i++)
+            int startAngle = Random.Range(0, 360);
+            for (int i = 0; i < scatteringLightCount; i++)
+            {
+                float angle = startAngle + (360 / scatteringLightCount * i);
+                while (angle >= 360)
                 {
-                    float angle = startAngle + (360 / scatteringLightCount * i);
-                    while (angle >= 360)
-                    {
-                        angle -= 360;
-                    }
-                    Instantiate(crystalScatteringLight, transform.position, Quaternion.Euler(0, 0, angle));
+                    angle -= 360;
                 }
+                Instantiate(crystalScatteringLight, transform.position, Quaternion.Euler(0, 0, angle));
             }
         }
     }

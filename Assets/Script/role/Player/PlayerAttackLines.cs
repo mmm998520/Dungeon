@@ -44,13 +44,13 @@ namespace com.DungeonPad
             p2AttackLight.rotation = Quaternion.Euler(0, 0, angle);
             if(attackSprite[0].localScale.x > attackSprite[1].localScale.x)
             {
-                p1AttackLight.localScale = Vector3.one * attackSprite[0].localScale.x;
-                p2AttackLight.localScale = Vector3.one * attackSprite[0].localScale.x;
+                p1AttackLight.GetChild(0).localScale = Vector3.one * attackSprite[0].localScale.x;
+                p2AttackLight.GetChild(0).localScale = Vector3.one * attackSprite[0].localScale.x;
             }
             else
             {
-                p1AttackLight.localScale = Vector3.one * attackSprite[1].localScale.x;
-                p2AttackLight.localScale = Vector3.one * attackSprite[1].localScale.x;
+                p1AttackLight.GetChild(0).localScale = Vector3.one * attackSprite[1].localScale.x;
+                p2AttackLight.GetChild(0).localScale = Vector3.one * attackSprite[1].localScale.x;
             }
         }
     }

@@ -49,7 +49,7 @@ namespace com.DungeonPad
             }
         }
 
-        protected virtual void OnTriggerEnter2D(Collider2D collider)
+        public virtual void hited()
         {
             mySpriteRendererBottom.sprite = breakSprite;
             mySpriteRendererBottom.transform.Translate(Vector3.down);
