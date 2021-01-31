@@ -71,7 +71,6 @@ namespace com.DungeonPad
             {
                 if (collider.GetComponent<MonsterManager>())
                 {
-                    Debug.LogError("你到底觸發了幾次 ??");
                     if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
                     {
                         collider.GetComponent<MonsterManager>().HP -= 1;

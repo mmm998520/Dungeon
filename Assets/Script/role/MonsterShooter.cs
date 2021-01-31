@@ -47,16 +47,43 @@ namespace com.DungeonPad
             }
         }
 
-        void OnTriggerEnter2D(Collider2D collider)
+        protected virtual void OnTriggerEnter2D(Collider2D collider)
         {
             if (collider.gameObject.layer == 8 || collider.gameObject.layer == 12)
             {
                 speed = 0;
-                animator.SetTrigger("Hit");
-                hitSound.Play();
-                hitSound.transform.parent = null;
+                try
+                {
+                    animator.SetTrigger("Hit");
+                    hitSound.Play();
+                    hitSound.transform.parent = null;
+                    Destroy(hitSound.gameObject, 5);
+                }
+                catch
+                {
+
+                }
                 Destroy(gameObject, destoryTime);
-                Destroy(hitSound.gameObject, 5);
+            }
+        }
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.gameObject.layer == 8 || collision.collider.gameObject.layer == 12)
+            {
+                speed = 0;
+                try
+                {
+                    animator.SetTrigger("Hit");
+                    hitSound.Play();
+                    hitSound.transform.parent = null;
+                    Destroy(hitSound.gameObject, 5);
+                }
+                catch
+                {
+
+                }
+                Destroy(gameObject, destoryTime);
             }
         }
 

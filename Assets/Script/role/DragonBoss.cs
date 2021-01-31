@@ -19,9 +19,9 @@ namespace com.DungeonPad
         public bool normalAttacking = false;
         bool throwByClockwise;
         float playerAngle;
-        public GameObject fireBall, fireBallBounce, fireBallFast, fireRainInser, crystalInser;
+        public GameObject fireBall, fireBallBounce, fireBallFast, fireBallTrack, fireRainInser, crystalInser;
 
-        public float normalAttackCD, normalAttackCDTimer, fireBallCD, fireBallCDTimer, fireBallBounceCD, fireBallBounceCDTimer, fireBallFastCD, fireBallFastCDTimer, fireRainCD, fireRainCDTimer;
+        public float normalAttackCD, normalAttackCDTimer, fireBallCD, fireBallCDTimer, fireBallBounceCD, fireBallBounceCDTimer, fireBallFastCD, fireBallFastCDTimer, fireBallTrackCD, fireBallTrackCDTimer, fireRainCD, fireRainCDTimer;
 
         public float SleepTimer;
         public SpriteRenderer SleepUI;
@@ -42,6 +42,7 @@ namespace com.DungeonPad
             fireBallCDTimer += Time.deltaTime;
             fireBallBounceCDTimer += Time.deltaTime;
             fireBallFastCDTimer += Time.deltaTime;
+            fireBallTrackCDTimer += Time.deltaTime;
             fireRainCDTimer += Time.deltaTime;
             CDTimer += Time.deltaTime;
             InvincibleTimer += Time.deltaTime;
@@ -79,9 +80,9 @@ namespace com.DungeonPad
                     print("statB");
                 }
             }
-            else if (!animator.GetBool("Normal Attack") && !animator.GetBool("FireBall") && !animator.GetBool("FireBallFast") && !animator.GetBool("FireBallBounce") && !animator.GetBool("FireRain"))
+            else if (!animator.GetBool("Normal Attack") && !animator.GetBool("FireBall") && !animator.GetBool("FireBallBounce") && !animator.GetBool("FireBallFast") && !animator.GetBool("FireBallTrack") && !animator.GetBool("FireRain"))
             {
-                List<string> CDs = new List<string>() {"Normal Attack", "FireBall", "FireBallFast", "FireRain" };
+                List<string> CDs = new List<string>() {"Normal Attack", "FireBall", "FireBallFast", "FireBallTrack", "FireRain" };
                 int r;
                 if (HP < MaxHP / 2)
                 {
@@ -133,6 +134,15 @@ namespace com.DungeonPad
                                 {
                                     throwByClockwise = (Random.Range(0, 2) > 0);
                                     animator.SetBool("FireBallFast", true);
+                                    playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
+                                    canUseThisAttack = true;
+                                }
+                                break;
+                            case "FireBallTrack":
+                                if (fireBallTrackCDTimer > fireBallTrackCD)
+                                {
+                                    throwByClockwise = (Random.Range(0, 2) > 0);
+                                    animator.SetBool("FireBallTrack", true);
                                     playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
                                     canUseThisAttack = true;
                                 }
@@ -225,23 +235,38 @@ namespace com.DungeonPad
         {
             Instantiate(fireBallFast, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
         }
+
+        void FireBallTrack(float positionOffset)
+        {
+            Instantiate(fireBallTrack, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle + Random.Range(-10, 10))).GetComponent<Track>().Target = GameManager.players.GetChild(Random.Range(0,2));
+        }
+
         void endFireBall()
         {
             animator.SetBool("FireBall", false);
             CDTimer = 0;
             fireBallCDTimer = 0;
         }
+
         void endFireBallBounce()
         {
             animator.SetBool("FireBallBounce", false);
             CDTimer = 0;
             fireBallBounceCDTimer = 0;
         }
+
         void endFireBallFast()
         {
             animator.SetBool("FireBallFast", false);
             CDTimer = 0;
             fireBallFastCDTimer = 0;
+        }
+
+        void endFireBallTrack()
+        {
+            animator.SetBool("FireBallTrack", false);
+            CDTimer = 0;
+            fireBallTrackCDTimer = 0;
         }
         #endregion
 
