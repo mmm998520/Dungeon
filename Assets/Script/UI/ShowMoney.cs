@@ -7,6 +7,7 @@ namespace com.DungeonPad
 {
     public class ShowMoney : MonoBehaviour
     {
+        public bool moneyB;
         void Start()
         {
 
@@ -14,7 +15,14 @@ namespace com.DungeonPad
 
         void Update()
         {
-            GetComponent<Text>().text = "" + PlayerManager.money;
+            if (!moneyB)
+            {
+                GetComponent<Text>().text = "" + PlayerManager.money;
+            }
+            else
+            {
+                GetComponent<Text>().text = "" + PlayerManager.moneyB;
+            }
         }
     }
 }

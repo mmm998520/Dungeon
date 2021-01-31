@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4535775244995362371}
   - component: {fileID: 4535775244995362370}
   m_Layer: 0
-  m_Name: money
+  m_Name: moneyB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ MonoBehaviour:
   GetCollider: {fileID: 4535775244995362371}
   animator: {fileID: 4535775244995362369}
   sound: {fileID: 3694377445020159880}
-  moneyB: 0
+  moneyB: 1
 --- !u!1 &4535775245015503822
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cb5c3192d99537749aca737e25c05146, type: 3}
-  m_Color: {r: 1, g: 0.5137318, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.91764706, b: 0.61960787, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

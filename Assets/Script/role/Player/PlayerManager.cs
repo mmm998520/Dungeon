@@ -52,7 +52,7 @@ namespace com.DungeonPad
         public GameObject Bullet, attackLine;
         public Animator playerAttackLineAnimator;
 
-        public static int money = 0;
+        public static int money = 0, moneyB = 0;
 
         public enum PlayerStat
         {

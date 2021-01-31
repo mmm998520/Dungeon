@@ -39,6 +39,10 @@ namespace com.DungeonPad
                     totalRow = 0;
                     totalCol = 0;
                     break;
+                case "Game 0":
+                    totalRow = 88;
+                    totalCol = 13;
+                    break;
                 case "Game 2":
                     totalRow = 22;
                     totalCol = 12;

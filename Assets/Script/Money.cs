@@ -11,6 +11,7 @@ namespace com.DungeonPad
         public Animator animator;
         float timer = 0;
         public Transform sound;
+        public bool moneyB;
 
         void Start()
         {
@@ -28,7 +29,14 @@ namespace com.DungeonPad
             print(0);
             if (distance < 0.3f)
             {
-                PlayerManager.money++;
+                if (!moneyB)
+                {
+                    PlayerManager.money++;
+                }
+                else
+                {
+                    PlayerManager.money++;
+                }
                 sound.SetParent(null);
                 sound.GetComponent<AudioSource>().Play();
                 Destroy(gameObject);
