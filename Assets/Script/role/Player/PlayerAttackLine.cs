@@ -53,7 +53,7 @@ namespace com.DungeonPad
                         Debug.LogWarning("hitTimes");
                     }
                 }
-                if (collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
+                if (collider.GetComponent<BatSticked>() || collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
                 {
                     Destroy(collider.gameObject);
                 }
@@ -92,6 +92,11 @@ namespace com.DungeonPad
             {
                 Destroy(collider.gameObject);
             }
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+
         }
     }
 }

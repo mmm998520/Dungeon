@@ -84,7 +84,7 @@ namespace com.DungeonPad
             {
                 List<string> CDs = new List<string>() {"Normal Attack", "FireBall", "FireBallFast", "FireBallTrack", "FireRain" };
                 int r;
-                if (HP < MaxHP / 2)
+                if (HP <= MaxHP)
                 {
                     CDs.Add("FireBallBounce");
                 }
@@ -228,12 +228,12 @@ namespace com.DungeonPad
 
         void FireBall(float positionOffset)
         {
-            Instantiate(fireBall, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
+            Instantiate(fireBall, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle)).GetComponent<Track>().Target = GameManager.players.GetChild(Random.Range(0, 2));
         }
 
         void FireBallFsat(float positionOffset)
         {
-            Instantiate(fireBallFast, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
+            Instantiate(fireBallFast, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle)).GetComponent<Track>().Target = GameManager.players.GetChild(Random.Range(0, 2));
         }
 
         void FireBallTrack(float positionOffset)

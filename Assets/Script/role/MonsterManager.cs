@@ -188,6 +188,10 @@ namespace com.DungeonPad
                 insMoney(Random.Range(7, 11));
                 if (Random.Range(0, 100) < 15)
                 {
+                    insMoney(1);
+                }
+                if (Random.Range(0, 100) < 15)
+                {
                     Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
                 }
             }
@@ -223,6 +227,14 @@ namespace com.DungeonPad
             for (int i = 0; i < times; i++)
             {
                 Instantiate(GameManager.gameManager.money, transform.position, Quaternion.identity);
+            }
+        }
+
+        void insMoneyB(int times)
+        {
+            for (int i = 0; i < times; i++)
+            {
+                Instantiate(GameManager.gameManager.moneyB, transform.position, Quaternion.identity);
             }
         }
     }

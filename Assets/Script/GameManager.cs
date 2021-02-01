@@ -23,7 +23,7 @@ namespace com.DungeonPad
         public static AbilityStore abilityStore;
         float emptyRoomNumCountTimer;
 
-        public GameObject seller, reLifeParticle, money;
+        public GameObject seller, reLifeParticle, money, moneyB;
         public bool haveFinalRoomStore;
         void Awake()
         {

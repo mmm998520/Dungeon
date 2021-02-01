@@ -46,7 +46,8 @@ namespace com.DungeonPad
 
         private void LateUpdate()
         {
-            GamePad.SetVibration(playerIndex.Value, maxer * weight, maxer * weight);
+            //GamePad.SetVibration(playerIndex.Value, maxer * weight, maxer * weight);
+            GamePad.SetVibration(playerIndex.Value, 0, 0);
             if (PlayerManager.HP <= 0)
             {
                 GamePad.SetVibration(playerIndex.Value, 0, 0);

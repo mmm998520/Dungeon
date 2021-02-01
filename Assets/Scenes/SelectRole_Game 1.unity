@@ -1556,6 +1556,7 @@ MonoBehaviour:
   reLifeParticle: {fileID: 8905642310724304018, guid: 9b5318d5d43f925488f6abeb1ca8170f,
     type: 3}
   money: {fileID: 4535775244995362372, guid: 0ee17a5ec2c561c4496459da162e0d2d, type: 3}
+  moneyB: {fileID: 0}
   haveFinalRoomStore: 0
 --- !u!4 &119475068
 Transform:
@@ -3281,6 +3282,7 @@ MonoBehaviour:
   StickVibration: 0
   ConfusionVibration: 0
   DashVibration: 0
+  maxer: 0
 --- !u!114 &252037860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5599,7 +5601,7 @@ MonoBehaviour:
   mouse2: {fileID: 503378752}
   BluePlayer: {fileID: 252037856}
   RedPlayer: {fileID: 1179144343}
-  NextScene: Game 0
+  NextScene: Game 4
 --- !u!1001 &448056398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19387,6 +19389,7 @@ MonoBehaviour:
   StickVibration: 0
   ConfusionVibration: 0
   DashVibration: 0
+  maxer: 0
 --- !u!114 &1179144347
 MonoBehaviour:
   m_ObjectHideFlags: 0

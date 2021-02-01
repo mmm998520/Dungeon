@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c61fbce27a32041a3aade004f1affa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
   timer: 0
   timerStoper: 5
   destoryTime: 0
@@ -56,7 +56,7 @@ MonoBehaviour:
   canRemoveByPlayerAttack: 1
   focusPlayer: 0
   Target: {fileID: 0}
-  RotateSpeed: 150
+  RotateSpeed: 60
 --- !u!114 &5832881625152555993
 MonoBehaviour:
   m_ObjectHideFlags: 0

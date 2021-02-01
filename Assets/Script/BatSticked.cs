@@ -10,13 +10,5 @@ namespace com.DungeonPad
         {
             PlayerManager.HP -= Time.deltaTime * 10;
         }
-
-        private void OnTriggerEnter2D(Collider2D collider)
-        {
-            if (collider.GetComponent<PlayerAttackLine>())
-            {
-                Destroy(gameObject);
-            }
-        }
     }
 }

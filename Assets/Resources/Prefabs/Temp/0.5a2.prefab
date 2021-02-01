@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   created: {fileID: 4766997793669485104, guid: 183a8dfff441e9345ad7f32c057ba5b3, type: 3}
   monster: 0
-  ramdomUperCreated: 0
+  ramdomUperCreated: 1
   num: 1
 --- !u!1 &5266080859433954434
 GameObject:

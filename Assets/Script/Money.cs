@@ -35,7 +35,7 @@ namespace com.DungeonPad
                 }
                 else
                 {
-                    PlayerManager.money++;
+                    PlayerManager.moneyB++;
                 }
                 sound.SetParent(null);
                 sound.GetComponent<AudioSource>().Play();
