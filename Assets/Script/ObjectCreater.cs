@@ -28,6 +28,7 @@ namespace com.DungeonPad
                     if(Random.Range(0f,1f) < ramdomNum)
                     {
                         ramdomNum = 0.5f;
+                        created = Instantiate(created, transform.position, Quaternion.identity, GameManager.triggers);
                     }
                     else
                     {
