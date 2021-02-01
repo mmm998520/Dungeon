@@ -25,6 +25,7 @@ namespace com.DungeonPad
         protected List<int[]> roads = new List<int[]>();
         public int[] nextPos;
         public float rotateSpeed = 200;
+        public bool canFly;
 
         #region//設定可通行路徑，每次開新房都要刷新
         public void arriveNewRoom(int roomRow, int roomCol)
@@ -147,7 +148,11 @@ namespace com.DungeonPad
                             {
                                 col = j * GameManager.mazeCreater.objectCountColNum + l;
                                 temp = GameManager.mazeCreater.mazeDatas[row, col];
-                                if (temp != "wall" && temp != "nm" && !temp.Contains("Door") && !temp.Contains("上") && !temp.Contains("下") && !temp.Contains("左") && !temp.Contains("右"))
+                                if (!(temp == "wall" || temp == "nm" || temp.Contains("Door") || temp.Contains("Hole")))
+                                {
+                                    canGo.Add(canGo.Count, row * MazeCreater.totalCol + col);
+                                }
+                                else if(canFly && temp.Contains("CanFly"))
                                 {
                                     canGo.Add(canGo.Count, row * MazeCreater.totalCol + col);
                                 }

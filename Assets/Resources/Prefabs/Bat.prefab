@@ -85,11 +85,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRoomRow: 0
   startRoomCol: 0
+  Boss: 0
   addCanGoByHandList: []
   endRow: 
   endCol: 
   nextPos: 
   rotateSpeed: 300
+  canFly: 1
   MaxHP: 0
   HP: 0
   CD: 0.01

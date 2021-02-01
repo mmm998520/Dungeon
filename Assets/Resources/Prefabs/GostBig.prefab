@@ -581,6 +581,7 @@ MonoBehaviour:
   endCol: 
   nextPos: 
   rotateSpeed: 200
+  canFly: 1
   MaxHP: 5
   HP: 5
   CD: 3
