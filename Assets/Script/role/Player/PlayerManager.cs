@@ -47,6 +47,7 @@ namespace com.DungeonPad
         public Animator TutorialAnimator;
 
         public GameObject reStatUI, sleepingStatUI, confusionStatUI, stickStatUI;
+        public SpriteRenderer HPMaxCircleLight;
 
         public int MaxBulletNum = 5, BulletNum = 5;
         public GameObject Bullet, attackLine;
@@ -220,6 +221,8 @@ namespace com.DungeonPad
                     {
                         HP = MaxHP;
                     }
+                    HPMaxCircleLight.color = new Color(1, 1, 1, 0.1f * (HP - MaxHP * 0.8f) / (MaxHP * 0.2f));
+                    HPMaxCircleLight.transform.Rotate(0, 0, Time.deltaTime * 7);
                     recoveryRate();
                     if (HP / MaxHP > 0.4f)//(HP > 20)
                     {
@@ -274,11 +277,12 @@ namespace com.DungeonPad
                         }
                     }
 
-                    
-                    reStatUI.gameObject.SetActive(Players.reTimer < 1);
-                    sleepingStatUI.gameObject.SetActive(SleepTimer < 0);
-                    confusionStatUI.gameObject.SetActive(ConfusionTimer < 10);
-                    stickStatUI.gameObject.SetActive(StickTimer < 10);
+
+                    //reStatUI.SetActive(Players.reTimer < 1);
+                    reStatUI.GetComponent<Animator>().SetBool("re", Players.reTimer < 0.5f);
+                    sleepingStatUI.SetActive(SleepTimer < 0);
+                    confusionStatUI.SetActive(ConfusionTimer < 10);
+                    stickStatUI.SetActive(StickTimer < 10);
 
                     transform.GetChild(5).GetChild(0).GetComponent<Light2D>().intensity = transition * brightness;
                     transform.GetChild(6).GetChild(0).GetComponent<Light2D>().intensity = (1 - transition) * brightness;
