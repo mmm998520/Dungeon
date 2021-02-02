@@ -15264,6 +15264,21 @@ MonoBehaviour:
   - name: "fd\u4E2D"
     prefabs:
     - {fileID: 8977524532833046415, guid: 4d3d509ca66a8904bbdd18595ee6e30c, type: 3}
+  - name: c
+    prefabs:
+    - {fileID: 8551561247025135919, guid: 5bef5ace59fcb924a830815c91e098a8, type: 3}
+  - name: buy1
+    prefabs:
+    - {fileID: 5280081687595512778, guid: def8f33f9c14e314e9a69235d8867dcf, type: 3}
+  - name: buy2
+    prefabs:
+    - {fileID: 5280081687595512778, guid: f034642234050e04b98d374750427611, type: 3}
+  - name: buy3
+    prefabs:
+    - {fileID: 5280081687595512778, guid: 4bf43d7435ae8aa409634b4f1c06ebfe, type: 3}
+  - name: buy4
+    prefabs:
+    - {fileID: 5280081687595512778, guid: feaa469f8ffd9e24d9996fbe3879440c, type: 3}
   sensor: {fileID: 3727972926308268955, guid: 9900bfb2f1940324c970f22615fb2c02, type: 3}
   wall: {fileID: 422931602908215896, guid: 35d1326c29a02614ba76fca276269285, type: 3}
 --- !u!4 &1200599303

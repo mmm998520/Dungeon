@@ -47,14 +47,6 @@ namespace com.DungeonPad
         {
             //if (abilityStore)
             {
-                if (Input.GetKeyDown(KeyCode.F1))
-                {
-                    PlayerManager.Life += 1;
-                }
-                if (Input.GetKeyDown(KeyCode.F2))
-                {
-                    PlayerManager.money -= 5;
-                }
                 if ((emptyRoomNumCountTimer += Time.deltaTime) >= 1)
                 {
                     emptyRoomNumCountTimer = 0;
