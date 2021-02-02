@@ -52,7 +52,6 @@ namespace com.DungeonPad
             ButtonOne.useButtonNum = 0;
             ButtonTwo.p1used = false;
             ButtonTwo.p2used = false;
-            AbilityManager.myAbilitys.Clear();
 
             PlayerManager.money /= 2;
             SceneManager.LoadScene("Game 1");
@@ -83,7 +82,6 @@ namespace com.DungeonPad
             ButtonOne.useButtonNum = 0;
             ButtonTwo.p1used = false;
             ButtonTwo.p2used = false;
-            AbilityManager.myAbilitys.Clear();
             PlayerManager.money = 0;
             SceneManager.LoadScene("Home");
         }

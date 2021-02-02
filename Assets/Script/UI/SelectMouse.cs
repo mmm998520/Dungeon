@@ -88,7 +88,18 @@ namespace com.DungeonPad
             {
                 //p1Stat = unSelectRole(true, p1Stat);
                 //p2Stat = unSelectRole(false, p2Stat);
-                StartCoroutine(waitForLoadScene());
+                if(GameManager.players.GetChild(0).position.x>20.2f&& GameManager.players.GetChild(1).position.x > 20.2f)
+                {
+                    if (BluePlayer.GetComponent<PlayerManager>().p1)
+                    {
+                        playerColor = PlayerColor.P1Blue_P2Red;
+                    }
+                    else
+                    {
+                        playerColor = PlayerColor.P1Red_P2Blue;
+                    }
+                    SceneManager.LoadScene(NextScene);
+                }
             }
         }
 

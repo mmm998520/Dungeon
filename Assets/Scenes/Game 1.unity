@@ -14809,7 +14809,7 @@ GameObject:
   - component: {fileID: 1109932156}
   - component: {fileID: 1109932155}
   m_Layer: 5
-  m_Name: ShowMoney (1)
+  m_Name: ShowMoneyB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14846,7 +14846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f92d90666dac9f4b862a2b0dea2cc88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyB: 0
+  moneyB: 1
 --- !u!114 &1109932156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19346,6 +19346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5e58909aafadb458420959650e294d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilitys: []
 --- !u!1 &1920679874
 GameObject:
   m_ObjectHideFlags: 0
@@ -19681,7 +19682,7 @@ MonoBehaviour:
   reLifeParticle: {fileID: 8905642310724304018, guid: 9b5318d5d43f925488f6abeb1ca8170f,
     type: 3}
   money: {fileID: 4535775244995362372, guid: 0ee17a5ec2c561c4496459da162e0d2d, type: 3}
-  moneyB: {fileID: 0}
+  moneyB: {fileID: 4535775244995362372, guid: 6f6ddaf2e8dc40e4892882c1f19ec62d, type: 3}
   haveFinalRoomStore: 0
 --- !u!4 &1938054457
 Transform:

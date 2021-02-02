@@ -188,7 +188,7 @@ namespace com.DungeonPad
                 insMoney(Random.Range(7, 11));
                 if (Random.Range(0, 100) < 15)
                 {
-                    insMoney(1);
+                    insMoneyB(1);
                 }
                 if (Random.Range(0, 100) < 15)
                 {

@@ -20,7 +20,6 @@ namespace com.DungeonPad
         public static int P1SpiderShooted, P1SpiderHit, P1SlimeHit, P1BubbleTimes;
         public static int P2SpiderShooted, P2SpiderHit, P2SlimeHit, P2BubbleTimes;
 
-        public static AbilityStore abilityStore;
         float emptyRoomNumCountTimer;
 
         public GameObject seller, reLifeParticle, money, moneyB;
@@ -42,44 +41,16 @@ namespace com.DungeonPad
                 smallMap.start();
                 UI = smallMap.transform.parent;
             }
-            if (GameObject.Find("AbilityStore"))
-            {
-                abilityStore = GameObject.Find("AbilityStore").GetComponent<AbilityStore>();
-                abilityStore.initialStore();
-            }
         }
 
         void Update()
         {
-            if (abilityStore)
+            //if (abilityStore)
             {
                 if ((emptyRoomNumCountTimer += Time.deltaTime) >= 1)
                 {
                     emptyRoomNumCountTimer = 0;
-                    if (Sensor.emptyRoomNum() >= abilityStore.appearRoomNum)
-                    {
-                        Vector3 sellerPos;
-                        for (int i = 0; i < 51; i++)
-                        {
-                            sellerPos = CameraManager.center + new Vector3(Random.Range(3, -3), Random.Range(3, -3), 10);
-                            RaycastHit2D hit = Physics2D.BoxCast(sellerPos, Vector3.one, 0, Vector2.right, 0, 0<<13);
-                            if (!hit)
-                            {
-                                Instantiate(seller, sellerPos, Quaternion.identity);
-                                abilityStore.appearRoomNum = 9999;
-                                break;
-                            }
-                            else
-                            {
-                                Debug.LogError("撞牆");
-                            }
-                            if (i >= 50)
-                            {
-                                Debug.LogError(sellerPos + hit.collider.name, hit.collider.gameObject);
-                            }
-                        }
-                    }
-                    else if((Sensor.WeAreInEmptyFinalRoom() && !haveFinalRoomStore))
+                    if((Sensor.WeAreInEmptyFinalRoom() && !haveFinalRoomStore))
                     {
                         haveFinalRoomStore = true;
                         Vector3 sellerPos;
@@ -90,7 +61,6 @@ namespace com.DungeonPad
                             if (!hit)
                             {
                                 Instantiate(seller, sellerPos, Quaternion.identity);
-                                abilityStore.appearRoomNum = 9999;
                                 break;
                             }
                             else

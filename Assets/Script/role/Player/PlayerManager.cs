@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = false;
+        public static bool lockedHP = true;
         public static float lockedHPTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -619,7 +619,7 @@ namespace com.DungeonPad
                 }
             }
             #endregion
-
+            /*
             #region//傳送
             if (AbilityManager.myAbilitys.Contains("按X傳送到隊友身邊(冷卻10秒)"))
             {
@@ -749,7 +749,7 @@ namespace com.DungeonPad
                     }
                 }
             }
-            #endregion
+            #endregion*/
             GetComponent<Rigidbody2D>().velocity = v;
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent<ParticleSystem>().shape.arc / 2 + 180);
 
@@ -808,7 +808,7 @@ namespace com.DungeonPad
             //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy + "R");
             */
             #endregion
-
+            /*
             #region//商人
             if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
             {
@@ -905,7 +905,7 @@ namespace com.DungeonPad
                     }
                 }
             }
-            #endregion
+            #endregion*/
         }
         void TwoPlayerBehavior()
         {
@@ -1206,7 +1206,7 @@ namespace com.DungeonPad
                 }
             }
             #endregion
-
+            /*
             #region//傳送
             if (AbilityManager.myAbilitys.Contains("按X傳送到隊友身邊(冷卻10秒)"))
             {
@@ -1336,7 +1336,7 @@ namespace com.DungeonPad
                     }
                 }
             }
-            #endregion
+            #endregion*/
             GetComponent<Rigidbody2D>().velocity = v;
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent<ParticleSystem>().shape.arc / 2 + 180);
 
@@ -1394,7 +1394,7 @@ namespace com.DungeonPad
 
             //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy + "R");
             #endregion
-
+            /*
             #region//商人
             if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
             {
@@ -1491,7 +1491,7 @@ namespace com.DungeonPad
                     }
                 }
             }
-            #endregion
+            #endregion*/
         }
 
         void OnDrawGizmos()
