@@ -11,8 +11,8 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = true;
-        public static float lockedHPTimer = 10;
+        public static bool lockedHP = false;
+        public static float lockedHPTimer = 10, DiedTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -170,19 +170,14 @@ namespace com.DungeonPad
                     }
                     else
                     {
-                        if (--Life <= 0)
-                        {
-                            for (int i = 0; i < 4; i++)
-                            {
-                                GamePad.SetVibration((PlayerIndex)i, 0, 0);
-                            }
-                            GameManager.PlayTime = Time.time;
-                            SceneManager.LoadScene("Died");
-                        }
-                        else
+                        if (--Life > 0)
                         {
                             HP = MaxHP;
                             lockedHPTimer = 0;
+                        }
+                        else
+                        {
+                            DiedTimer = 0;
                         }
                     }
                 }
@@ -1533,7 +1528,6 @@ namespace com.DungeonPad
             ConfusionTimer += Time.deltaTime;
             StickTimer += Time.deltaTime;
             lightRotateTimer += Time.deltaTime;
-            lockedHPTimer += Time.deltaTime / 2;
 
             if (flash)
             {

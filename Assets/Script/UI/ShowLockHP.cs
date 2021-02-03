@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using XInputDotNetPure; // Required in C#
 
 namespace com.DungeonPad
 {
@@ -17,19 +19,97 @@ namespace com.DungeonPad
 
         void Update()
         {
-            float lockHPLight = 0.9f - PlayerManager.lockedHPTimer * 0.3f;
+            #region//死亡效果
+            PlayerManager.DiedTimer += Time.deltaTime;
+            if (PlayerManager.DiedTimer < 1)
+            {
+                PlayerManager playerManager;
+                Rigidbody2D rigidbody;
+                for (int i = 0; i < GameManager.players.childCount; i++)
+                {
+                    playerManager = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
+                    rigidbody = GameManager.players.GetChild(i).GetComponent<Rigidbody2D>();
+                    rigidbody.velocity = Vector3.zero;
+                    playerManager.DashTimer = 10;
+                    playerManager.enabled = false;
+                }
+                image.color = new Color(origialColor.r, origialColor.g, origialColor.b, Mathf.Pow(PlayerManager.DiedTimer, 2));
+                return;
+            }
+            else if(PlayerManager.DiedTimer < 2)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    GamePad.SetVibration((PlayerIndex)i, 0, 0);
+                }
+                if (SceneManager.GetActiveScene().name == "Game 0")
+                {
+                    PlayerManager.DiedTimer = 10;
+                    SceneManager.LoadScene("AfterGame 0");
+                }
+                else
+                {
+                    GameManager.PlayTime = Time.time;
+                    PlayerManager.DiedTimer = 10;
+                    SceneManager.LoadScene("Died");
+                }
+                return;
+            }
+            #endregion
+
+            #region//復活效果
+            float lockHPLight = 1 - PlayerManager.lockedHPTimer;
+            PlayerManager.lockedHPTimer += Time.deltaTime;
+            if (lockHPLight > 0.6f)
+            {
+                PlayerManager playerManager;
+                Rigidbody2D rigidbody;
+                for(int i=0;i< GameManager.players.childCount; i++)
+                {
+                    playerManager = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
+                    rigidbody = GameManager.players.GetChild(i).GetComponent<Rigidbody2D>();
+                    if (rigidbody.velocity.magnitude > PlayerManager.moveSpeed)
+                    {
+                        rigidbody.velocity = rigidbody.velocity.normalized * PlayerManager.moveSpeed;
+                    }
+                    playerManager.DashTimer = 10;
+                    playerManager.enabled = false;
+                }
+                Time.timeScale = 0.3f;
+                Time.fixedDeltaTime = 0.02F * Time.timeScale;
+            }
+            else if (lockHPLight > 0.3f)
+            {
+                PlayerManager playerManager;
+                Rigidbody2D rigidbody;
+                for (int i = 0; i < GameManager.players.childCount; i++)
+                {
+                    playerManager = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
+                    rigidbody = GameManager.players.GetChild(i).GetComponent<Rigidbody2D>();
+                    if (rigidbody.velocity.magnitude > PlayerManager.moveSpeed)
+                    {
+                        rigidbody.velocity = rigidbody.velocity.normalized * PlayerManager.moveSpeed;
+                    }
+                    playerManager.DashTimer = 10;
+                    playerManager.enabled = false;
+                }
+                Time.timeScale = 0.7f;
+                Time.fixedDeltaTime = 0.02F * Time.timeScale;
+            }
+            else if (lockHPLight > 0.1f)
+            {
+                GameManager.players.GetChild(0).GetComponent<PlayerManager>().enabled = true;
+                GameManager.players.GetChild(1).GetComponent<PlayerManager>().enabled = true;
+                Time.timeScale = 1;
+                Time.fixedDeltaTime = 0.02F * Time.timeScale;
+            }
+            #endregion
             //float hurtLight = 0.25f - hurtTimer;
             //hurtTimer += Time.deltaTime;
             if (lockHPLight > 0)
             {
-                image.color = new Color(origialColor.r, origialColor.g, origialColor.b, lockHPLight);
+                image.color = new Color(origialColor.r, origialColor.g, origialColor.b, Mathf.Pow(lockHPLight, 3));
             }
-            /*
-            else if (hurtLight > 0)
-            {
-                image.color = new Color(0.5f, 0.3f, 0.3f, hurtLight);
-            }
-            */
             else
             {
                 image.color = Color.clear;

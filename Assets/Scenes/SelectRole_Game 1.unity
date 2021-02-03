@@ -1634,7 +1634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8e367059cb6114db5d9fd00e8364b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seller: {fileID: 5771640717856095605, guid: 8633a5e00a51b40439788d5012299d25, type: 3}
   reLifeParticle: {fileID: 8905642310724304018, guid: 9b5318d5d43f925488f6abeb1ca8170f,
     type: 3}
   money: {fileID: 4535775244995362372, guid: 0ee17a5ec2c561c4496459da162e0d2d, type: 3}
@@ -5972,7 +5971,7 @@ MonoBehaviour:
   mouse2: {fileID: 503378752}
   BluePlayer: {fileID: 252037856}
   RedPlayer: {fileID: 1179144343}
-  NextScene: Game 1
+  NextScene: Game 0
 --- !u!1001 &448056398
 PrefabInstance:
   m_ObjectHideFlags: 0

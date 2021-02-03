@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace com.DungeonPad
@@ -21,13 +22,23 @@ namespace com.DungeonPad
         // Update is called once per frame
         void Update()
         {
+            Color color;
             for(int i = 0; i < texts.Length; i++)
             {
-                texts[i].color = new Color(textColor.r, textColor.g, textColor.b, 1 - Mathf.Abs(CameraManager.center.x - ShowTextCenters[i]) * 0.2f);
+                color = new Color(textColor.r, textColor.g, textColor.b, 1 - Mathf.Abs(CameraManager.center.x - ShowTextCenters[i]) * 0.2f);
+                texts[i].color = color;
+                for(int j=0; j < texts[i].transform.childCount; j++)
+                {
+                    texts[i].transform.GetChild(j).GetComponent<Image>().color = color;
+                }
             }
             for(int i = 0; i < images.Length; i++)
             {
                 images[i].color = new Color(images[i].color.r, images[i].color.g, images[i].color.b, (ShowHPLine - CameraManager.center.x) / ShowHPLine);
+            }
+            if(CameraManager.center.x > 87.7f)
+            {
+                SceneManager.LoadScene("Home");
             }
         }
     }

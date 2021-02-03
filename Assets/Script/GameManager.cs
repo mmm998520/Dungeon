@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -40,6 +41,10 @@ namespace com.DungeonPad
                 smallMap = GameObject.Find("SmallMap").GetComponent<SmallMap>();
                 smallMap.start();
                 UI = smallMap.transform.parent;
+            }
+            if (SceneManager.GetActiveScene().name == "Game 0")
+            {
+                PlayerManager.Life = 1;
             }
         }
 
