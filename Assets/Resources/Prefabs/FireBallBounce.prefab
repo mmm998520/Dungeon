@@ -227,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   timer: 0
-  timerStoper: 10
+  timerStoper: 20
   destoryTime: 0.1
   hitSound: {fileID: 7666238381042606450}
   animator: {fileID: 6112969817920692478}

@@ -10,7 +10,7 @@ namespace com.DungeonPad
         public bool monster;
         public bool ramdomUperCreated;
         public int num;
-        static float ramdomNum = 0.5f;
+        static float ramdomNum = 0.2f;
 
         void Start()
         {
@@ -27,7 +27,7 @@ namespace com.DungeonPad
                 {
                     if(Random.Range(0f,1f) < ramdomNum)
                     {
-                        ramdomNum = 0.5f;
+                        ramdomNum = 0.2f;
                         created = Instantiate(created, transform.position, Quaternion.identity, GameManager.triggers);
                     }
                     else

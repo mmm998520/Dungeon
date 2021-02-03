@@ -8,7 +8,7 @@ namespace com.DungeonPad
     {
         public static GameManager gameManager;
         public static Transform players, monsters, triggers, UI;
-        public static int layers = 1, level = 1;
+        public static int layers = 2, level = 1;
         public static MazeCreater mazeCreater;
         public static SmallMap smallMap;
         public static float Gammar = 1;
@@ -22,7 +22,7 @@ namespace com.DungeonPad
 
         float emptyRoomNumCountTimer;
 
-        public GameObject seller, reLifeParticle, money, moneyB;
+        public GameObject reLifeParticle, money, moneyB;
         public bool haveFinalRoomStore;
         void Awake()
         {
@@ -46,6 +46,7 @@ namespace com.DungeonPad
         void Update()
         {
             //if (abilityStore)
+            /*
             {
                 if ((emptyRoomNumCountTimer += Time.deltaTime) >= 1)
                 {
@@ -74,7 +75,7 @@ namespace com.DungeonPad
                         }
                     }
                 }
-            }
+            }*/
 
             DiedBecauseTimer += Time.deltaTime;
 

@@ -207,6 +207,42 @@ namespace com.DungeonPad
                         case "d左":
                             rotated[newRow, newColumn] = "d上";
                             break;
+                        case "d上右":
+                            rotated[newRow, newColumn] = "d右下";
+                            break;
+                        case "d右下":
+                            rotated[newRow, newColumn] = "d下左";
+                            break;
+                        case "d下左":
+                            rotated[newRow, newColumn] = "d左上";
+                            break;
+                        case "d左上":
+                            rotated[newRow, newColumn] = "d上右";
+                            break;
+                        case "fd上":
+                            rotated[newRow, newColumn] = "fd右";
+                            break;
+                        case "fd右":
+                            rotated[newRow, newColumn] = "fd下";
+                            break;
+                        case "fd下":
+                            rotated[newRow, newColumn] = "fd左";
+                            break;
+                        case "fd左":
+                            rotated[newRow, newColumn] = "fd上";
+                            break;
+                        case "fd上右":
+                            rotated[newRow, newColumn] = "fd右下";
+                            break;
+                        case "fd右下":
+                            rotated[newRow, newColumn] = "fd下左";
+                            break;
+                        case "fd下左":
+                            rotated[newRow, newColumn] = "fd左上";
+                            break;
+                        case "fd左上":
+                            rotated[newRow, newColumn] = "fd上右";
+                            break;
                             #endregion
                     }
                     newColumn++;
@@ -271,6 +307,36 @@ namespace com.DungeonPad
                             break;
                         case "d下":
                             newArray[i, j] = "d上";
+                            break;
+                        case "d上右":
+                            newArray[i, j] = "d右下";
+                            break;
+                        case "d右下":
+                            newArray[i, j] = "d上右";
+                            break;
+                        case "d下左":
+                            newArray[i, j] = "d左上";
+                            break;
+                        case "d左上":
+                            newArray[i, j] = "d下左";
+                            break;
+                        case "fd上":
+                            newArray[i, j] = "fd下";
+                            break;
+                        case "fd下":
+                            newArray[i, j] = "fd上";
+                            break;
+                        case "fd上右":
+                            newArray[i, j] = "fd右下";
+                            break;
+                        case "fd右下":
+                            newArray[i, j] = "fd上右";
+                            break;
+                        case "fd下左":
+                            newArray[i, j] = "fd左上";
+                            break;
+                        case "fd左上":
+                            newArray[i, j] = "fd下左";
                             break;
                             #endregion
                     }

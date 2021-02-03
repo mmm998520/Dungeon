@@ -82,7 +82,7 @@ namespace com.DungeonPad
             }
             else if (!animator.GetBool("Normal Attack") && !animator.GetBool("FireBall") && !animator.GetBool("FireBallBounce") && !animator.GetBool("FireBallFast") && !animator.GetBool("FireBallTrack") && !animator.GetBool("FireRain"))
             {
-                List<string> CDs = new List<string>() {"Normal Attack", "FireBall", "FireBallFast", "FireBallTrack", "FireRain" };
+                List<string> CDs = new List<string>() {"Normal Attack",/* "FireBall",*/ "FireBallFast", "FireBallTrack", "FireRain" };
                 int r;
                 if (HP <= MaxHP)
                 {
