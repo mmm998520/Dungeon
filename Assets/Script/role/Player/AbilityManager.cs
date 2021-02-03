@@ -8,20 +8,23 @@ namespace com.DungeonPad
     public class AbilityManager : MonoBehaviour
     {
         public Ability.ability[] abilitys;
+        public Dictionary<string, int> AbilityCurrentLevel = new Dictionary<string, int>();
+        public Dictionary<string, int> AbilityCanUseLevel = new Dictionary<string, int>();
+        public Dictionary<string, int> AbilityCanBuyLevel = new Dictionary<string, int>();
 
         void Awake()
         {
             Ability ability = new Ability();
-            ability.AbilityCurrentLevel = new Dictionary<string, int>() { { "123", 1 } };
-
-            if (PlayerPrefs.HasKey("data"))
+            /*
+            if (PlayerPrefs.HasKey("data1_AbilityCurrentLevel"))
             {
-                loadDictionary("data", ability.AbilityCurrentLevel);
+                loadDictionary("data1_AbilityCurrentLevel", AbilityCurrentLevel);
             }
             else
             {
-                saveDictionary("data", ability.AbilityCurrentLevel);
+                saveDictionary("data1_AbilityCurrentLevel", AbilityCurrentLevel);
             }
+            */
         }
 
         #region//存、讀檔
@@ -126,15 +129,14 @@ namespace com.DungeonPad
     [System.Serializable]
     public class Ability
     {
-        public Dictionary<string, int> AbilityCurrentLevel = new Dictionary<string, int>();
-        public Dictionary<string, int> AbilityCanUseLevel = new Dictionary<string, int>();
-        public Dictionary<string, int> AbilityCanBuyLevel = new Dictionary<string, int>();
+        
         [System.Serializable]
         public struct ability
         {
             public string name;
-            public string[] depiction;
+            public string[] depiction;//描述
             public int[] moneyA, moneyB, cost;
+            public bool forever;
         }
     }
 }
