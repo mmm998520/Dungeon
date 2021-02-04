@@ -27,6 +27,7 @@ namespace com.DungeonPad
                     myAbilitys.Add(i);
                 }
             }
+            DataSaver.awake();
         }
 
         void setDictionary()

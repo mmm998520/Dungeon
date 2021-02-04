@@ -8,14 +8,14 @@ namespace com.DungeonPad
     public class DataSaver : MonoBehaviour
     {
 
-        void Awake()
+        public static void awake()
         {
             if (PlayerPrefs.HasKey("data1_AbilityCurrentLevel"))
             {
                 Debug.LogError("HasData1_AbilityCurrentLevel");
-                loadDictionary("data1_AbilityCurrentLevel", AbilityManager.AbilityCurrentLevel);
-                loadDictionary("data1_AbilityCanUseLevel", AbilityManager.AbilityCanUseLevel);
-                loadDictionary("data1_AbilityCanBuyLevel", AbilityManager.AbilityCanBuyLevel);
+                AbilityManager.AbilityCurrentLevel = loadDictionary("data1_AbilityCurrentLevel");
+                AbilityManager.AbilityCanUseLevel = loadDictionary("data1_AbilityCanUseLevel");
+                AbilityManager.AbilityCanBuyLevel = loadDictionary("data1_AbilityCanBuyLevel");
                 Debug.LogError(0);
             }
             else
@@ -63,12 +63,17 @@ namespace com.DungeonPad
             Debug.LogError(datastr);
             SaveData(dataNum, datastr);
         }
-        static void loadDictionary(string dataNum, Dictionary<string, int> dictionary)
+        static Dictionary<string, int> loadDictionary(string dataNum)
         {
             string loadstr = LoadData(dataNum);
+            Debug.LogError(loadstr);
             if (loadstr != "")
             {
-                dictionary = Deserialization(loadstr);
+                return Deserialization(loadstr);
+            }
+            else
+            {
+                return null;
             }
         }
         /// <summary>
