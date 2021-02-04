@@ -89,7 +89,7 @@ namespace com.DungeonPad
             Num.text = ability.Num[AbilityManager.AbilityCurrentLevel[ability.name]];
         }
 
-        void setDetail()
+        public void setDetail()
         {
             detailName.text = ability.name;
             detail.text = ability.detail[AbilityManager.AbilityCurrentLevel[ability.name]];
@@ -127,9 +127,10 @@ namespace com.DungeonPad
 
         public void Add()
         {
-            if(AbilityManager.AbilityCurrentLevel[abilityName] < AbilityManager.AbilityCanUseLevel[abilityName])
+            if(AbilityManager.AbilityCurrentLevel[abilityName] < AbilityManager.AbilityCanUseLevel[abilityName] && AbilityManager.Costed + ability.cost[AbilityManager.AbilityCurrentLevel[abilityName] + 1] <= AbilityManager.TotalCost)
             {
                 AbilityManager.AbilityCurrentLevel[abilityName]++;
+                AbilityManager.Costed += ability.cost[AbilityManager.AbilityCurrentLevel[abilityName]];
             }
             setAbilityBar();
             setDetail();
@@ -139,6 +140,7 @@ namespace com.DungeonPad
         {
             if (AbilityManager.AbilityCurrentLevel[abilityName] > 0 && !ability.forever)
             {
+                AbilityManager.Costed -= ability.cost[AbilityManager.AbilityCurrentLevel[abilityName]];
                 AbilityManager.AbilityCurrentLevel[abilityName]--;
             }
             setAbilityBar();

@@ -7,6 +7,7 @@ namespace com.DungeonPad
 {
     public class AbilityManager : MonoBehaviour
     {
+        public static int Costed,TotalCost = 5;
         public Ability.ability[] abilitys;
         public static Ability.ability[] Abilitys;
         public static List<int> myAbilitys = new List<int>();
@@ -18,12 +19,7 @@ namespace com.DungeonPad
         {
             Abilitys = abilitys;
             abilitys = null;
-            AbilityCurrentLevel.Add("爆擊率", 0);
-            AbilityCurrentLevel.Add("血量上限增加", 0);
-            AbilityCanUseLevel.Add("爆擊率", 0);
-            AbilityCanUseLevel.Add("血量上限增加", 0);
-            AbilityCanBuyLevel.Add("爆擊率", 19);
-            AbilityCanBuyLevel.Add("血量上限增加", 2);
+            setDictionary();
             for (int i = 0; i < Abilitys.Length; i++)
             {
                 if (AbilityCurrentLevel.ContainsKey(Abilitys[i].name))
@@ -43,104 +39,48 @@ namespace com.DungeonPad
             */
         }
 
-        #region//存、讀檔
-        void saveDictionary(string dataNum, Dictionary<string, int> dictionary)
+        void setDictionary()
         {
-            string datastr = Serialization(dictionary);
-            Debug.LogError(datastr);
-            SaveData(dataNum, datastr);
-        }
-        void loadDictionary(string dataNum, Dictionary<string, int> dictionary)
-        {
-            string loadstr = LoadData(dataNum);
-            if (loadstr != "")
-            {
-                dictionary = Deserialization(loadstr);
-            }
-        }
-        /// <summary>
-        /// 數值文字化 json格式
-        /// </summary>
-        /// <param name="abilityLevels"></param>
-        /// <returns></returns>
-        public string Serialization(Dictionary<string, int> dictionary)
-        {
-            return JsonUtility.ToJson(new Serialization<string, int>(dictionary));
-        }
+            #region//當前等級
+            AbilityCurrentLevel.Add("爆擊率", 0);
+            AbilityCurrentLevel.Add("傷害減輕", 0);
+            AbilityCurrentLevel.Add("復活上限", 0);
+            AbilityCurrentLevel.Add("負載上限", 0);
+            AbilityCurrentLevel.Add("血量上限增加", 0);
+            AbilityCurrentLevel.Add("吸收", 0);
+            AbilityCurrentLevel.Add("強力衝刺", 0);
+            AbilityCurrentLevel.Add("連續衝刺", 0);
+            AbilityCurrentLevel.Add("疾行", 0);
+            AbilityCurrentLevel.Add("召回", 0);
+            #endregion
 
-        /// <summary>
-        /// 文字數值化 json格式
-        /// </summary>
-        /// <param name="datastr"></param>
-        /// <returns></returns>
-        public Dictionary<string, int> Deserialization(string datastr)
-        {
-            return JsonUtility.FromJson<Serialization<string, int>>(datastr).ToDictionary();
-        }
+            #region//已購買的等級
+            AbilityCanUseLevel.Add("爆擊率", 0);
+            AbilityCanUseLevel.Add("傷害減輕", 0);
+            AbilityCanUseLevel.Add("復活上限", 0);
+            AbilityCanUseLevel.Add("負載上限", 0);
+            AbilityCanUseLevel.Add("血量上限增加", 0);
+            AbilityCanUseLevel.Add("吸收", 0);
+            AbilityCanUseLevel.Add("強力衝刺", 0);
+            AbilityCanUseLevel.Add("連續衝刺", 0);
+            AbilityCanUseLevel.Add("疾行", 0);
+            AbilityCanUseLevel.Add("召回", 0);
+            #endregion
 
-        public bool SaveData(string key, string savestr)
-        {
-            PlayerPrefs.SetString(key, savestr);
-            PlayerPrefs.Save();
-            return PlayerPrefs.HasKey(key);
-        }
-
-        public string LoadData(string key)
-        {
-            return PlayerPrefs.HasKey(key) ? PlayerPrefs.GetString(key) : "";
-        }
-        #endregion
-    }
-
-#region//unity擴充(讓Dictionary可以json化)
-    // List<T>
-    [Serializable]
-    public class Serialization<T>
-    {
-        [SerializeField]
-        List<T> target;
-        public List<T> ToList() { return target; }
-
-        public Serialization(List<T> target)
-        {
-            this.target = target;
+            #region//可買的等級上限
+            AbilityCanBuyLevel.Add("爆擊率", 19);
+            AbilityCanBuyLevel.Add("傷害減輕", 19);
+            AbilityCanBuyLevel.Add("復活上限", 2);
+            AbilityCanBuyLevel.Add("負載上限", 4);
+            AbilityCanBuyLevel.Add("血量上限增加", 2);
+            AbilityCanBuyLevel.Add("吸收", 2);
+            AbilityCanBuyLevel.Add("強力衝刺", 1);
+            AbilityCanBuyLevel.Add("連續衝刺", 2);
+            AbilityCanBuyLevel.Add("疾行", 2);
+            AbilityCanBuyLevel.Add("召回", 2);
+            #endregion
         }
     }
-
-    // Dictionary<TKey, TValue>
-    [Serializable]
-    public class Serialization<TKey, TValue> : ISerializationCallbackReceiver
-    {
-        [SerializeField]
-        List<TKey> keys;
-        [SerializeField]
-        List<TValue> values;
-
-        Dictionary<TKey, TValue> target;
-        public Dictionary<TKey, TValue> ToDictionary() { return target; }
-
-        public Serialization(Dictionary<TKey, TValue> target)
-        {
-            this.target = target;
-        }
-
-        public void OnBeforeSerialize()
-        {
-            keys = new List<TKey>(target.Keys);
-            values = new List<TValue>(target.Values);
-        }
-
-        public void OnAfterDeserialize()
-        {
-            var count = Math.Min(keys.Count, values.Count);
-            target = new Dictionary<TKey, TValue>(count);
-            for (var i = 0; i < count; ++i)
-            {
-                target.Add(keys[i], values[i]);
-            }
-        }
-    }
-    #endregion
 
     [System.Serializable]
     public class Ability
