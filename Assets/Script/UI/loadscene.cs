@@ -18,7 +18,7 @@ public class loadscene : MonoBehaviour
 
     public void selecttutorial()
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("SelectRole_Game 0");
     }
 
     public void selectSetting()

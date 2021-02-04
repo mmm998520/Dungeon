@@ -212,7 +212,10 @@ namespace com.DungeonPad
                     {
                         hpUpRate = -6f;//共扣12;
                     }
-                    HP += hpUpRate * Time.deltaTime;
+                    if(SceneManager.GetActiveScene().name != "SelectRole_Game 0")
+                    {
+                        HP += hpUpRate * Time.deltaTime;
+                    }
                     if (HP > MaxHP)
                     {
                         HP = MaxHP;
