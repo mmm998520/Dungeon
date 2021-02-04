@@ -9,7 +9,7 @@ namespace com.DungeonPad
 {
     public class PlayerManager : MonoBehaviour
     {
-        public static float MaxHP = 60, HP = 60;
+        public static float MaxHP = 40, HP = 40;
         public static int Life = 2, MaxLife = 4;
         public static bool lockedHP = false;
         public static float lockedHPTimer = 10, DiedTimer = 10;
@@ -21,8 +21,9 @@ namespace com.DungeonPad
         Vector3 lastPos;
         public bool locked = true, flash = false;
         public float beganTouchedTimer, flashTimer, flashTimerStoper;
-        public static float homeButtonTimer = 0;
+        public static float homeButtonTimer = 0, homeButtonTimerStoper = 12;
         public static float moveSpeed = 3f, DashSpeed = 11, DashCD = 0.5f, reducesDamage = 0, criticalRate = 0;
+        public static bool homeButton = false;
         public List<Vector3> startRayPoss;
 
         public bool p1;
@@ -614,9 +615,9 @@ namespace com.DungeonPad
                 }
             }
             #endregion
-            /*
+            
             #region//傳送
-            if (AbilityManager.myAbilitys.Contains("按X傳送到隊友身邊(冷卻10秒)"))
+            if (homeButton)
             {
                 if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
                 {
@@ -629,7 +630,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -645,7 +646,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -668,7 +669,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -690,7 +691,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -706,7 +707,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -729,7 +730,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -744,7 +745,7 @@ namespace com.DungeonPad
                     }
                 }
             }
-            #endregion*/
+            #endregion
             GetComponent<Rigidbody2D>().velocity = v;
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent<ParticleSystem>().shape.arc / 2 + 180);
 
@@ -1201,9 +1202,9 @@ namespace com.DungeonPad
                 }
             }
             #endregion
-            /*
+            
             #region//傳送
-            if (AbilityManager.myAbilitys.Contains("按X傳送到隊友身邊(冷卻10秒)"))
+            if (homeButton)
             {
                 if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
                 {
@@ -1216,7 +1217,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -1232,7 +1233,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -1255,7 +1256,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -1277,7 +1278,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -1293,7 +1294,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -1316,7 +1317,7 @@ namespace com.DungeonPad
                                 {
                                     if (homeButtonTimer > 0)
                                     {
-                                        homeButtonTimer = -10 * 2;
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
                                         for (int i = 0; i < GameManager.players.childCount; i++)
                                         {
                                             if (GameManager.players.GetChild(i) != transform)
@@ -1331,7 +1332,7 @@ namespace com.DungeonPad
                     }
                 }
             }
-            #endregion*/
+            #endregion
             GetComponent<Rigidbody2D>().velocity = v;
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent<ParticleSystem>().shape.arc / 2 + 180);
 

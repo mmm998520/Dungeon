@@ -8,13 +8,13 @@ namespace com.DungeonPad
 {
     public class AbilityDatas : MonoBehaviour
     {
-        public GameObject firstSelected, BuyDetail;
+        public GameObject firstSelected, BuyDetail, selectMouse;
         public Image[] TotalCosts;
         public Sprite Loaded, UnLoad;
 
         private void Start()
         {
-            start();
+            
         }
 
         public void start()
@@ -37,6 +37,34 @@ namespace com.DungeonPad
                 {
                     TotalCosts[i].sprite = UnLoad;
                 }
+            }
+            if (Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1))
+            {
+                transform.parent.gameObject.SetActive(false);
+                selectMouse.SetActive(true);
+                GameManager.players.gameObject.SetActive(true);
+            }
+            else
+            {
+                transform.parent.gameObject.SetActive(true);
+                selectMouse.SetActive(false);
+                GameManager.players.gameObject.SetActive(false);
+            }
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                PlayerManager.money++;
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                PlayerManager.money--;
+            }
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                PlayerManager.moneyB++;
+            }
+            if (Input.GetKeyDown(KeyCode.F4))
+            {
+                PlayerManager.moneyB--;
             }
         }
     }

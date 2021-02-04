@@ -66,7 +66,7 @@ namespace com.DungeonPad
             }
             playerPos.anchoredPosition = new Vector2(unitLong * CameraManager.center.x, unitLong * CameraManager.center.y);
             GameObject RotatedButton;
-            RotatedButton = GameObject.Find("Exit(Clone)");
+            RotatedButton = GameObject.Find("旋鈕(Clone)");
             endPos.anchoredPosition = new Vector2(unitLong * RotatedButton.transform.position.x, unitLong * RotatedButton.transform.position.y);
         }
     }

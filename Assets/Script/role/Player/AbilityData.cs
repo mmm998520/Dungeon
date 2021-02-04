@@ -24,8 +24,6 @@ namespace com.DungeonPad
 
         void Start()
         {
-            PlayerManager.money = 9999;
-            PlayerManager.moneyB = 9999;
             if (dataNum >= AbilityManager.AbilityCurrentLevel.Count)
             {
                 gameObject.SetActive(false);
@@ -97,8 +95,8 @@ namespace com.DungeonPad
             {
                 detailMoneyA.transform.parent.gameObject.SetActive(true);
                 detailMoneyB.transform.parent.gameObject.SetActive(true);
-                detailMoneyA.text = "" + ability.moneyA[AbilityManager.AbilityCanBuyLevel[ability.name]];
-                detailMoneyB.text = "" + ability.moneyB[AbilityManager.AbilityCanBuyLevel[ability.name]];
+                detailMoneyA.text = "" + ability.moneyA[AbilityManager.AbilityCanUseLevel[ability.name] + 1];
+                detailMoneyB.text = "" + ability.moneyB[AbilityManager.AbilityCanUseLevel[ability.name] + 1];
             }
             else
             {
@@ -134,6 +132,7 @@ namespace com.DungeonPad
             }
             setAbilityBar();
             setDetail();
+            setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
         }
 
         public void Less()
@@ -145,16 +144,19 @@ namespace com.DungeonPad
             }
             setAbilityBar();
             setDetail();
+            setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
         }
 
         public void Unlock()
         {
             if(AbilityManager.AbilityCanUseLevel[abilityName] < AbilityManager.AbilityCanBuyLevel[abilityName])
             {
-                bool moneyA = PlayerManager.money > ability.moneyA[AbilityManager.AbilityCanUseLevel[abilityName] + 1];
-                bool moneyB = PlayerManager.moneyB > ability.moneyB[AbilityManager.AbilityCanUseLevel[abilityName] + 1];
+                bool moneyA = PlayerManager.money >= ability.moneyA[AbilityManager.AbilityCanUseLevel[abilityName] + 1];
+                bool moneyB = PlayerManager.moneyB >= ability.moneyB[AbilityManager.AbilityCanUseLevel[abilityName] + 1];
                 if (moneyA && moneyB)
                 {
+                    PlayerManager.money -= ability.moneyA[AbilityManager.AbilityCanUseLevel[abilityName] + 1];
+                    PlayerManager.moneyB -= ability.moneyB[AbilityManager.AbilityCanUseLevel[abilityName] + 1];
                     AbilityManager.AbilityCanUseLevel[abilityName]++;
                     if (ability.forever)
                     {
@@ -162,7 +164,73 @@ namespace com.DungeonPad
                     }
                     setAbilityBar();
                     setDetail();
+                    setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
                 }
+            }
+        }
+
+        void setPlayerAbility(string abilityName, int abilityLevel)
+        {
+            switch (abilityName)
+            {
+                case "爆擊率":
+                    PlayerManager.criticalRate = abilityLevel * 0.5f;
+                    break;
+                case "傷害減輕":
+                    PlayerManager.reducesDamage = abilityLevel * 0.5f;
+                    break;
+                case "復活上限":
+                    PlayerManager.MaxLife = 4 + abilityLevel;
+                    break;
+                case "負載上限":
+                    AbilityManager.TotalCost = 2 + abilityLevel;
+                    break;
+                case "血量上限增加":
+                    PlayerManager.MaxHP = 40 + abilityLevel * 20;
+                    break;
+                case "吸收":
+                    if(abilityLevel == 0)
+                    {
+                        PlayerManager.killHpRecover = 0;
+                    }
+                    else if (abilityLevel == 1)
+                    {
+                        PlayerManager.killHpRecover = 10;
+                    }
+                    else
+                    {
+                        PlayerManager.killHpRecover = 25;
+                    }
+                    break;
+                case "強力衝刺":
+                    PlayerManager.DashSpeed = 11 + abilityLevel * 4;
+                    break;
+                case "連續衝刺":
+                    PlayerManager.DashCD = 0.5f - abilityLevel * 0.1f;
+                    break;
+                case "疾行":
+                    PlayerManager.moveSpeed = 3 + abilityLevel;
+                    break;
+                case "召回":
+                    if (abilityLevel == 0)
+                    {
+                        PlayerManager.homeButton = false;
+                        PlayerManager.homeButtonTimer = 12;
+                    }
+                    else if (abilityLevel == 1)
+                    {
+                        PlayerManager.homeButton = true;
+                        PlayerManager.homeButtonTimer = 12;
+                    }
+                    else
+                    {
+                        PlayerManager.homeButton = true;
+                        PlayerManager.homeButtonTimer = 6;
+                    }
+                    break;
+                default:
+                    Debug.LogError("沒有這個能力 : " + abilityName);
+                    break;
             }
         }
     }

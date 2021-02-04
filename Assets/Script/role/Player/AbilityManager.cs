@@ -7,7 +7,7 @@ namespace com.DungeonPad
 {
     public class AbilityManager : MonoBehaviour
     {
-        public static int Costed,TotalCost = 5;
+        public static int Costed = 0,TotalCost = 2;
         public Ability.ability[] abilitys;
         public static Ability.ability[] Abilitys;
         public static List<int> myAbilitys = new List<int>();

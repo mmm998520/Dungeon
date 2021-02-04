@@ -9,6 +9,7 @@ namespace com.DungeonPad
         public Transform rayPos1, rayPos2;
         public bool hit = false;
         HashSet<MonsterManager> monsterManagers = new HashSet<MonsterManager>();
+        HashSet<Transform> sellers = new HashSet<Transform>();
         void Start()
         {
 
@@ -25,6 +26,7 @@ namespace com.DungeonPad
         void clearMonsterManagers()
         {
             monsterManagers.Clear();
+            sellers.Clear();
         }
 
         void Hit()
@@ -63,6 +65,19 @@ namespace com.DungeonPad
                 if (collider.GetComponent<Crystal>())
                 {
                     collider.GetComponent<Crystal>().hited();
+                }
+                if(collider.name == "場外商人")
+                {
+                    GameObject.Find("shop").transform.GetChild(0).gameObject.SetActive(true);
+                    GameObject.Find("shop").transform.GetChild(0).GetChild(0).GetComponent<AbilityDatas>().start();
+                }
+                else if(collider.GetComponent<LifeSeller>())
+                {
+                    if (!sellers.Contains(collider.transform))
+                    {
+                        sellers.Add(collider.transform);
+                        collider.GetComponent<LifeSeller>().buy();
+                    }
                 }
             }
         }

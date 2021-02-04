@@ -7,22 +7,21 @@ namespace com.DungeonPad
     public class LifeSeller : MonoBehaviour
     {
         public int price;
-
+        public int times;
         private void Update()
         {
-            for(int i = 0; i < GameManager.players.childCount; i++)
+
+        }
+        public void buy()
+        {
+            if (PlayerManager.money >= 5 && PlayerManager.Life < PlayerManager.MaxLife)
             {
-                if (Vector2.Distance(GameManager.players.GetChild(i).position, transform.position) < 1.5f)
+                times++;
+                PlayerManager.money -= 5;
+                if (times >= price / 5)
                 {
-                    if (Input.GetKeyDown(KeyCode.F1))
-                    {
-                        if (PlayerManager.money >= price && PlayerManager.Life < PlayerManager.MaxLife)
-                        {
-                            PlayerManager.money -= price;
-                            PlayerManager.Life += 1;
-                            break;
-                        }
-                    }
+                    times = 0;
+                    PlayerManager.Life += 1;
                 }
             }
         }
