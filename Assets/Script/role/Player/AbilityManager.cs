@@ -8,13 +8,29 @@ namespace com.DungeonPad
     public class AbilityManager : MonoBehaviour
     {
         public Ability.ability[] abilitys;
-        public Dictionary<string, int> AbilityCurrentLevel = new Dictionary<string, int>();
-        public Dictionary<string, int> AbilityCanUseLevel = new Dictionary<string, int>();
-        public Dictionary<string, int> AbilityCanBuyLevel = new Dictionary<string, int>();
+        public static Ability.ability[] Abilitys;
+        public static List<int> myAbilitys = new List<int>();
+        public static Dictionary<string, int> AbilityCurrentLevel = new Dictionary<string, int>();
+        public static Dictionary<string, int> AbilityCanUseLevel = new Dictionary<string, int>();
+        public static Dictionary<string, int> AbilityCanBuyLevel = new Dictionary<string, int>();
 
         void Awake()
         {
-            Ability ability = new Ability();
+            Abilitys = abilitys;
+            abilitys = null;
+            AbilityCurrentLevel.Add("爆擊率", 0);
+            AbilityCurrentLevel.Add("血量上限增加", 0);
+            AbilityCanUseLevel.Add("爆擊率", 0);
+            AbilityCanUseLevel.Add("血量上限增加", 0);
+            AbilityCanBuyLevel.Add("爆擊率", 19);
+            AbilityCanBuyLevel.Add("血量上限增加", 2);
+            for (int i = 0; i < Abilitys.Length; i++)
+            {
+                if (AbilityCurrentLevel.ContainsKey(Abilitys[i].name))
+                {
+                    myAbilitys.Add(i);
+                }
+            }
             /*
             if (PlayerPrefs.HasKey("data1_AbilityCurrentLevel"))
             {
@@ -134,7 +150,9 @@ namespace com.DungeonPad
         public struct ability
         {
             public string name;
-            public string[] depiction;//描述
+            public string[] detail;
+            public string[] UnLockDetail;
+            public string[] Num;//小面板上顯示的數值
             public int[] moneyA, moneyB, cost;
             public bool forever;
         }
