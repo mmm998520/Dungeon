@@ -24,6 +24,10 @@ namespace com.DungeonPad
 
         void Update()
         {
+            if (EventSystem.current.currentSelectedGameObject == null)
+            {
+                EventSystem.current.SetSelectedGameObject(firstSelected);
+            }
             EventSystem.current.currentSelectedGameObject.transform.parent.GetComponent<AbilityData>().setDetail();
             BuyDetail.SetActive(EventSystem.current.currentSelectedGameObject.name == "解鎖");
             for(int i = 0; i < TotalCosts.Length; i++)
@@ -65,6 +69,18 @@ namespace com.DungeonPad
             if (Input.GetKeyDown(KeyCode.F4))
             {
                 PlayerManager.moneyB--;
+            }
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                PlayerManager.money+=10;
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                PlayerManager.money-= 10;
+            }
+            if (Input.GetKeyDown(KeyCode.F12))
+            {
+                PlayerPrefs.DeleteAll();
             }
         }
     }

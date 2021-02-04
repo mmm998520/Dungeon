@@ -7,27 +7,24 @@ namespace com.DungeonPad
 {
     public class DataSaver : MonoBehaviour
     {
-
-        public static void awake()
+        public AbilityData[] abilityDatas;
+        public static void tryLoad()
         {
+            //PlayerPrefs.DeleteAll();
             if (PlayerPrefs.HasKey("data1_AbilityCurrentLevel"))
             {
-                Debug.LogError("HasData1_AbilityCurrentLevel");
                 AbilityManager.AbilityCurrentLevel = loadDictionary("data1_AbilityCurrentLevel");
                 AbilityManager.AbilityCanUseLevel = loadDictionary("data1_AbilityCanUseLevel");
                 AbilityManager.AbilityCanBuyLevel = loadDictionary("data1_AbilityCanBuyLevel");
-                Debug.LogError(0);
             }
             else
             {
-                Debug.LogError(1);
                 saveDictionary("data1_AbilityCurrentLevel", AbilityManager.AbilityCurrentLevel);
                 saveDictionary("data1_AbilityCanUseLevel", AbilityManager.AbilityCanUseLevel);
                 saveDictionary("data1_AbilityCanBuyLevel", AbilityManager.AbilityCanBuyLevel);
             }
             if (PlayerPrefs.HasKey("moneyA"))
             {
-                Debug.LogError("HasMoneyA");
                 PlayerManager.money = PlayerPrefs.GetInt("moneyA");
             }
             else
@@ -37,13 +34,41 @@ namespace com.DungeonPad
             }
             if (PlayerPrefs.HasKey("moneyB"))
             {
-                Debug.LogError("HasMoneyB");
                 PlayerManager.moneyB = PlayerPrefs.GetInt("moneyB");
             }
             else
             {
                 PlayerPrefs.SetInt("moneyB", PlayerManager.moneyB);
                 PlayerPrefs.Save();
+            }
+            if (PlayerPrefs.HasKey("Costed"))
+            {
+                AbilityManager.Costed = PlayerPrefs.GetInt("Costed");
+            }
+            else
+            {
+                PlayerPrefs.SetInt("Costed", AbilityManager.Costed);
+                PlayerPrefs.Save();
+            }
+            if (PlayerPrefs.HasKey("TotalCost"))
+            {
+                AbilityManager.TotalCost = PlayerPrefs.GetInt("TotalCost");
+            }
+            else
+            {
+                PlayerPrefs.SetInt("TotalCost", AbilityManager.TotalCost);
+                PlayerPrefs.Save();
+            }
+        }
+
+        void Start()
+        {
+            for (int i = 0; i < abilityDatas.Length; i++)
+            {
+                if (abilityDatas[i].dataNum < AbilityManager.AbilityCurrentLevel.Count)
+                {
+                    abilityDatas[i].awake();
+                }
             }
         }
         public static void Save()
@@ -53,6 +78,8 @@ namespace com.DungeonPad
             saveDictionary("data1_AbilityCanBuyLevel", AbilityManager.AbilityCanBuyLevel);
             PlayerPrefs.SetInt("moneyA", PlayerManager.money);
             PlayerPrefs.SetInt("moneyB", PlayerManager.moneyB);
+            PlayerPrefs.SetInt("Costed", AbilityManager.Costed);
+            PlayerPrefs.SetInt("TotalCost", AbilityManager.TotalCost);
             PlayerPrefs.Save();
         }
 
@@ -60,13 +87,11 @@ namespace com.DungeonPad
         static void saveDictionary(string dataNum, Dictionary<string, int> dictionary)
         {
             string datastr = Serialization(dictionary);
-            Debug.LogError(datastr);
             SaveData(dataNum, datastr);
         }
         static Dictionary<string, int> loadDictionary(string dataNum)
         {
             string loadstr = LoadData(dataNum);
-            Debug.LogError(loadstr);
             if (loadstr != "")
             {
                 return Deserialization(loadstr);

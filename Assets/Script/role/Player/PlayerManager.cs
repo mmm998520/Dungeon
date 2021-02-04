@@ -68,8 +68,10 @@ namespace com.DungeonPad
 
         public Vector2? batPos = null;
         public Transform sticksBat;
+        string SceneName;
         private void Start()
         {
+            SceneName = SceneManager.GetActiveScene().name;
             playerStatAnimator = GetComponent<Animator>();
             if (!SceneManager.GetActiveScene().name.Contains("SelectRole"))
             {
@@ -163,7 +165,7 @@ namespace com.DungeonPad
                 if (HP <= 0)
                 {
                     Players.DiedAudioSource.Play();
-                    string SceneName = SceneManager.GetActiveScene().name;
+                    
                     if (SceneName.Contains("SelectRole"))
                     {
                         HP = MaxHP;
@@ -212,7 +214,7 @@ namespace com.DungeonPad
                     {
                         hpUpRate = -6f;//共扣12;
                     }
-                    if(SceneManager.GetActiveScene().name != "SelectRole_Game 0")
+                    if(!SceneName.Contains("SelectRole"))
                     {
                         HP += hpUpRate * Time.deltaTime;
                     }

@@ -20,9 +20,9 @@ namespace com.DungeonPad
         public Text Num;
 
         Ability.ability ability;
-        string abilityName;
+        public string abilityName;
 
-        private void Awake()
+        public void awake()
         {
             if (dataNum >= AbilityManager.AbilityCurrentLevel.Count)
             {

@@ -273,8 +273,9 @@ MonoBehaviour:
   - {fileID: 8194065505075866012}
   mySpriteRendererBottom: {fileID: 3201714044128028583}
   mySpriteRendererTop: {fileID: 6626667032248893269}
-  breakSprite: {fileID: 21300000, guid: cf74d24e6d0acf244abfc9fcca512326, type: 3}
+  breakSprite: {fileID: 21300000, guid: be7a28bcca660864b92a52870ccb1292, type: 3}
   crystalLight: {fileID: 5348147694506867229}
+  CircleLight: {fileID: 8760750764245187747}
   crystalScatteringLight: {fileID: 6089583897553511087, guid: 5618f625d31b9574ca88234ec9ee1afc,
     type: 3}
 --- !u!61 &1980852825

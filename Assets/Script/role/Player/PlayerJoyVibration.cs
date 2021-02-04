@@ -11,7 +11,7 @@ namespace com.DungeonPad
         public PlayerIndex? playerIndex;
         PlayerManager playerManager;
         public PlayerJoyVibration otherPlayerJoyVibration;
-        public float HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, DashVibration, maxer;
+        public float HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, DashVibration;
         public static float LowHPVibration;
 
         public static bool canVibration = true;
@@ -29,8 +29,12 @@ namespace com.DungeonPad
                 CountConfusionVibration();
                 //CountLowHPVibration();
                 CountDashVibration();
-                maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, LowHPVibration, DashVibration);
-                maxer = Mathf.Max(maxer, otherPlayerJoyVibration.maxer);
+                float maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, LowHPVibration, DashVibration);
+                GamePad.SetVibration(playerIndex.Value, maxer * weight, maxer * weight);
+                if (PlayerManager.HP <= 0)
+                {
+                    GamePad.SetVibration(playerIndex.Value, 0, 0);
+                }
             }
             else
             {
@@ -41,16 +45,6 @@ namespace com.DungeonPad
                 ConfusionVibration = 0;
                 LowHPVibration = 0;
                 DashVibration = 0;
-            }
-        }
-
-        private void LateUpdate()
-        {
-            //GamePad.SetVibration(playerIndex.Value, maxer * weight, maxer * weight);
-            GamePad.SetVibration(playerIndex.Value, 0, 0);
-            if (PlayerManager.HP <= 0)
-            {
-                GamePad.SetVibration(playerIndex.Value, 0, 0);
             }
         }
 
@@ -97,8 +91,8 @@ namespace com.DungeonPad
             LowHPVibration = Mathf.Clamp(PlayerManager.HP / 30, 0, 1);
             LowHPVibration -= 1;
             LowHPVibration *= -0.2f;
-            
-            LowHPVibration += Mathf.Clamp(PlayerManager.countAverage(PlayerManager.recoveryRecord) * -2, 0, 0.4f)/2;
+
+            LowHPVibration += Mathf.Clamp(PlayerManager.countAverage(PlayerManager.recoveryRecord) * -2, 0, 0.4f) / 2;
         }
 
         void CountDashVibration()

@@ -11,6 +11,7 @@ namespace com.DungeonPad
         public SpriteRenderer mySpriteRendererBottom, mySpriteRendererTop;
         public Sprite breakSprite;
         public Light2D crystalLight;
+        public SpriteRenderer CircleLight;
         Dictionary<int, int> myCrystalPos = new Dictionary<int, int>(), myCrystalSidePos = new Dictionary<int, int>();
         static int myCrystalPosKeyNum;
 
@@ -59,6 +60,7 @@ namespace com.DungeonPad
                 myCollider2d[i].enabled = false;
             }
             crystalLight.enabled = false;
+            CircleLight.enabled = false;
             crystalStat = CrystalStat.use;
             End();
         }

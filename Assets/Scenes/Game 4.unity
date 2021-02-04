@@ -3837,7 +3837,6 @@ MonoBehaviour:
   StickVibration: 0
   ConfusionVibration: 0
   DashVibration: 0
-  maxer: 0
 --- !u!50 &170081934
 Rigidbody2D:
   serializedVersion: 4
@@ -25436,6 +25435,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4549514130076901301, guid: bef00c705379fad4fb2edc56c0ea1d87,
+        type: 3}
+      propertyPath: p1
+      value: 
+      objectReference: {fileID: 170081939}
+    - target: {fileID: 4549514130076901301, guid: bef00c705379fad4fb2edc56c0ea1d87,
+        type: 3}
+      propertyPath: p2
+      value: 
+      objectReference: {fileID: 1308180490}
     - target: {fileID: 8050423245400602372, guid: bef00c705379fad4fb2edc56c0ea1d87,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -40728,7 +40737,6 @@ MonoBehaviour:
   StickVibration: 0
   ConfusionVibration: 0
   DashVibration: 0
-  maxer: 0
 --- !u!114 &1308180494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54880,7 +54888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8e367059cb6114db5d9fd00e8364b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seller: {fileID: 5771640717856095605, guid: 8633a5e00a51b40439788d5012299d25, type: 3}
   reLifeParticle: {fileID: 8905642310724304018, guid: 9b5318d5d43f925488f6abeb1ca8170f,
     type: 3}
   money: {fileID: 4535775244995362372, guid: 0ee17a5ec2c561c4496459da162e0d2d, type: 3}
