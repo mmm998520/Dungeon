@@ -7,7 +7,7 @@ namespace com.DungeonPad
 {
     public class AbilityManager : MonoBehaviour
     {
-        public static int Costed = 0,TotalCost = 2;
+        public static int Costed = 0, TotalCost = 2;
         public Ability.ability[] abilitys;
         public static Ability.ability[] Abilitys;
         public static List<int> myAbilitys = new List<int>();
@@ -27,16 +27,6 @@ namespace com.DungeonPad
                     myAbilitys.Add(i);
                 }
             }
-            /*
-            if (PlayerPrefs.HasKey("data1_AbilityCurrentLevel"))
-            {
-                loadDictionary("data1_AbilityCurrentLevel", AbilityCurrentLevel);
-            }
-            else
-            {
-                saveDictionary("data1_AbilityCurrentLevel", AbilityCurrentLevel);
-            }
-            */
         }
 
         void setDictionary()

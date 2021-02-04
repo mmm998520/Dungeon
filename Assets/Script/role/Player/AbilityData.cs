@@ -22,7 +22,7 @@ namespace com.DungeonPad
         Ability.ability ability;
         string abilityName;
 
-        void Start()
+        private void Awake()
         {
             if (dataNum >= AbilityManager.AbilityCurrentLevel.Count)
             {
@@ -32,11 +32,7 @@ namespace com.DungeonPad
             ability = AbilityManager.Abilitys[AbilityManager.myAbilitys[dataNum]];
             abilityName = ability.name;
             setAbilityBar();
-        }
-
-        void Update()
-        {
-
+            setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
         }
 
         void setAbilityBar()
@@ -133,6 +129,7 @@ namespace com.DungeonPad
             setAbilityBar();
             setDetail();
             setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
+            DataSaver.Save();
         }
 
         public void Less()
@@ -145,6 +142,7 @@ namespace com.DungeonPad
             setAbilityBar();
             setDetail();
             setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
+            DataSaver.Save();
         }
 
         public void Unlock()
@@ -165,11 +163,12 @@ namespace com.DungeonPad
                     setAbilityBar();
                     setDetail();
                     setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
+                    DataSaver.Save();
                 }
             }
         }
 
-        void setPlayerAbility(string abilityName, int abilityLevel)
+        public void setPlayerAbility(string abilityName, int abilityLevel)
         {
             switch (abilityName)
             {

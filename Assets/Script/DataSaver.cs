@@ -7,24 +7,63 @@ namespace com.DungeonPad
 {
     public class DataSaver : MonoBehaviour
     {
-        void Start()
-        {
 
+        void Awake()
+        {
+            if (PlayerPrefs.HasKey("data1_AbilityCurrentLevel"))
+            {
+                Debug.LogError("HasData1_AbilityCurrentLevel");
+                loadDictionary("data1_AbilityCurrentLevel", AbilityManager.AbilityCurrentLevel);
+                loadDictionary("data1_AbilityCanUseLevel", AbilityManager.AbilityCanUseLevel);
+                loadDictionary("data1_AbilityCanBuyLevel", AbilityManager.AbilityCanBuyLevel);
+                Debug.LogError(0);
+            }
+            else
+            {
+                Debug.LogError(1);
+                saveDictionary("data1_AbilityCurrentLevel", AbilityManager.AbilityCurrentLevel);
+                saveDictionary("data1_AbilityCanUseLevel", AbilityManager.AbilityCanUseLevel);
+                saveDictionary("data1_AbilityCanBuyLevel", AbilityManager.AbilityCanBuyLevel);
+            }
+            if (PlayerPrefs.HasKey("moneyA"))
+            {
+                Debug.LogError("HasMoneyA");
+                PlayerManager.money = PlayerPrefs.GetInt("moneyA");
+            }
+            else
+            {
+                PlayerPrefs.SetInt("moneyA", PlayerManager.money);
+                PlayerPrefs.Save();
+            }
+            if (PlayerPrefs.HasKey("moneyB"))
+            {
+                Debug.LogError("HasMoneyB");
+                PlayerManager.moneyB = PlayerPrefs.GetInt("moneyB");
+            }
+            else
+            {
+                PlayerPrefs.SetInt("moneyB", PlayerManager.moneyB);
+                PlayerPrefs.Save();
+            }
+        }
+        public static void Save()
+        {
+            saveDictionary("data1_AbilityCurrentLevel", AbilityManager.AbilityCurrentLevel);
+            saveDictionary("data1_AbilityCanUseLevel", AbilityManager.AbilityCanUseLevel);
+            saveDictionary("data1_AbilityCanBuyLevel", AbilityManager.AbilityCanBuyLevel);
+            PlayerPrefs.SetInt("moneyA", PlayerManager.money);
+            PlayerPrefs.SetInt("moneyB", PlayerManager.moneyB);
+            PlayerPrefs.Save();
         }
 
-        void Update()
-        {
-
-        }
-
-        #region//存、讀檔
-        void saveDictionary(string dataNum, Dictionary<string, int> dictionary)
+        #region//讓Dictionary變成Json檔，幫助存、讀檔
+        static void saveDictionary(string dataNum, Dictionary<string, int> dictionary)
         {
             string datastr = Serialization(dictionary);
             Debug.LogError(datastr);
             SaveData(dataNum, datastr);
         }
-        void loadDictionary(string dataNum, Dictionary<string, int> dictionary)
+        static void loadDictionary(string dataNum, Dictionary<string, int> dictionary)
         {
             string loadstr = LoadData(dataNum);
             if (loadstr != "")
@@ -37,7 +76,7 @@ namespace com.DungeonPad
         /// </summary>
         /// <param name="abilityLevels"></param>
         /// <returns></returns>
-        public string Serialization(Dictionary<string, int> dictionary)
+        public static string Serialization(Dictionary<string, int> dictionary)
         {
             return JsonUtility.ToJson(new Serialization<string, int>(dictionary));
         }
@@ -47,19 +86,19 @@ namespace com.DungeonPad
         /// </summary>
         /// <param name="datastr"></param>
         /// <returns></returns>
-        public Dictionary<string, int> Deserialization(string datastr)
+        public static Dictionary<string, int> Deserialization(string datastr)
         {
             return JsonUtility.FromJson<Serialization<string, int>>(datastr).ToDictionary();
         }
 
-        public bool SaveData(string key, string savestr)
+        public static bool SaveData(string key, string savestr)
         {
             PlayerPrefs.SetString(key, savestr);
             PlayerPrefs.Save();
             return PlayerPrefs.HasKey(key);
         }
 
-        public string LoadData(string key)
+        public static string LoadData(string key)
         {
             return PlayerPrefs.HasKey(key) ? PlayerPrefs.GetString(key) : "";
         }

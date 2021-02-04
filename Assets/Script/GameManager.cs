@@ -48,6 +48,11 @@ namespace com.DungeonPad
             }
         }
 
+        private void Start()
+        {
+            DataSaver.Save();
+        }
+
         void Update()
         {
             //if (abilityStore)
