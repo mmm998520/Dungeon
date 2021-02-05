@@ -59,8 +59,8 @@ namespace com.DungeonPad
             #endregion
 
             #region//可買的等級上限
-            AbilityCanBuyLevel.Add("爆擊率", 19);
-            AbilityCanBuyLevel.Add("傷害減輕", 19);
+            AbilityCanBuyLevel.Add("爆擊率", 60);
+            AbilityCanBuyLevel.Add("傷害減輕", 60);
             AbilityCanBuyLevel.Add("復活上限", 2);
             AbilityCanBuyLevel.Add("負載上限", 4);
             AbilityCanBuyLevel.Add("血量上限增加", 2);

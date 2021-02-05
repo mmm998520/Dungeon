@@ -14,7 +14,7 @@ namespace com.DungeonPad
 
         void Update()
         {
-            for(int i = 0; i < 5; i++)
+            for(int i = 0; i < 6; i++)
             {
                 MaxLifes.GetChild(i).gameObject.SetActive(i < PlayerManager.MaxLife);
             }

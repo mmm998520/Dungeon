@@ -179,7 +179,9 @@ namespace com.DungeonPad
                     PlayerManager.reducesDamage = abilityLevel * 0.5f;
                     break;
                 case "復活上限":
+                    Debug.LogError(abilityName + " : 4 +" + abilityLevel);
                     PlayerManager.MaxLife = 4 + abilityLevel;
+                    Debug.LogError(PlayerManager.MaxLife);
                     break;
                 case "負載上限":
                     AbilityManager.TotalCost = 2 + abilityLevel;

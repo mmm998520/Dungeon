@@ -148,7 +148,7 @@ namespace com.DungeonPad
                             {
                                 col = j * GameManager.mazeCreater.objectCountColNum + l;
                                 temp = GameManager.mazeCreater.mazeDatas[row, col];
-                                if (!(temp == "wall" || temp == "nm" || temp.Contains("Door") || temp.Contains("Hole")))
+                                if (!(temp == "wall" || temp == "nm" || temp.Contains("Door") || temp.Contains("Hole") || temp.Contains("hole")))
                                 {
                                     canGo.Add(canGo.Count, row * MazeCreater.totalCol + col);
                                 }
