@@ -338,12 +338,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4464449932015884489}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.541, y: 0.71961904, z: 0}
+  m_LocalPosition: {x: -0.541, y: 0.7196191, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2280035329368292306}
-  m_Father: {fileID: 3559873842348209455}
-  m_RootOrder: 6
+  m_Father: {fileID: 8320068050903115892}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7504638626094845421
 MonoBehaviour:
@@ -386,10 +386,10 @@ Transform:
   m_GameObject: {fileID: 4590626959944870277}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.072, y: 0.709, z: 0}
-  m_LocalScale: {x: 1.23, y: 0.105, z: 0.149348}
+  m_LocalScale: {x: 1.2300001, y: 0.105, z: 0.149348}
   m_Children: []
-  m_Father: {fileID: 3559873842348209455}
-  m_RootOrder: 5
+  m_Father: {fileID: 8320068050903115892}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6105269939943672314
 MeshFilter:
@@ -566,6 +566,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a926fba534643704e9a9cd72cf0fcf09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5772921081329648361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8320068050903115892}
+  m_Layer: 0
+  m_Name: HP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8320068050903115892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5772921081329648361}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1650977387370682887}
+  - {fileID: 3445736654972107919}
+  m_Father: {fileID: 3559873842348209455}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5818680420876036263
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,8 +737,7 @@ Transform:
   - {fileID: 1484978287746171733}
   - {fileID: 1082796012095686719}
   - {fileID: 419509084113688037}
-  - {fileID: 1650977387370682887}
-  - {fileID: 3445736654972107919}
+  - {fileID: 8320068050903115892}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -808,11 +839,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRoomRow: 0
   startRoomCol: 0
+  Boss: 0
   addCanGoByHandList: []
   endRow: 
   endCol: 
   nextPos: 
   rotateSpeed: 200
+  canFly: 0
   MaxHP: 5
   HP: 5
   CD: 1
@@ -827,7 +860,7 @@ MonoBehaviour:
   attack: {fileID: 6355018383450350413, guid: c906fe2f851c0624881995cfb87edc5a, type: 3}
   guardPoint: 0a0000000b0000000c0000000d0000000e0000000f00000010000000130000001400000015000000160000001700000018000000190000001c0000001d0000001e0000001f00000020000000210000002200000025000000260000002700000028000000290000002a0000002b0000002e0000002f00000030000000310000003200000033000000340000003700000038000000390000003a0000003b0000003c0000003d00000040000000410000004200000043000000440000004500000046000000490000004a0000004b0000004c0000004d0000004e0000004f000000520000005300000054000000550000005600000057000000580000005b0000005c0000005d0000005e0000005f0000006000000061000000
   nextGrardNum: 0
-  TauntTarge: {fileID: 0}
+  TauntTarget: {fileID: 0}
   difference: 0
   repTimes: 1
   repTimer: 1
@@ -836,8 +869,6 @@ MonoBehaviour:
     type: 3}
   spiderBehavior: 0
   SpriteAnimator: {fileID: 8366934025386502024}
-  reLifeParticle: {fileID: 8905642310724304018, guid: 9b5318d5d43f925488f6abeb1ca8170f,
-    type: 3}
 --- !u!95 &4203273497549478462
 Animator:
   serializedVersion: 3
