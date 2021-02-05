@@ -219,6 +219,18 @@ namespace com.DungeonPad
                         case "d左上":
                             rotated[newRow, newColumn] = "d上右";
                             break;
+                        case "上右d":
+                            rotated[newRow, newColumn] = "右下d";
+                            break;
+                        case "右下d":
+                            rotated[newRow, newColumn] = "下左d";
+                            break;
+                        case "下左d":
+                            rotated[newRow, newColumn] = "左上d";
+                            break;
+                        case "左上d":
+                            rotated[newRow, newColumn] = "上右d";
+                            break;
                         case "fd上":
                             rotated[newRow, newColumn] = "fd右";
                             break;
@@ -242,6 +254,18 @@ namespace com.DungeonPad
                             break;
                         case "fd左上":
                             rotated[newRow, newColumn] = "fd上右";
+                            break;
+                        case "上右fd":
+                            rotated[newRow, newColumn] = "右下fd";
+                            break;
+                        case "右下fd":
+                            rotated[newRow, newColumn] = "下左fd";
+                            break;
+                        case "下左fd":
+                            rotated[newRow, newColumn] = "左上fd";
+                            break;
+                        case "左上fd":
+                            rotated[newRow, newColumn] = "上右fd";
                             break;
                             #endregion
                     }
