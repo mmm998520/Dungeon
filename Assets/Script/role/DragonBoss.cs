@@ -352,9 +352,13 @@ namespace com.DungeonPad
         }
         #endregion
 
+        public GameObject DestoryWall;
+        public GameObject NewWall;
         private void OnDestroy()
         {
             HPBar.localScale = Vector3.zero;
+            DestoryWall.SetActive(false);
+            NewWall.SetActive(true);
         }
     }
 }

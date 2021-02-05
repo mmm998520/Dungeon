@@ -183,7 +183,7 @@ namespace com.DungeonPad
             PlayerManager.HP += PlayerManager.killHpRecover;
             Players.reTimer = 0;
             Destroy(gameObject);
-            if (gameObject.name.Contains("Big"))
+            if (gameObject.name.Contains("SpiderBig"))
             {
                 insMoney(Random.Range(7, 11));
                 if (Random.Range(0, 100) < 15)
@@ -197,13 +197,50 @@ namespace com.DungeonPad
             }
             else if (gameObject.name.Contains("Spider"))
             {
-                insMoney(Random.Range(1, 2));
+                insMoney(1);
                 if (Random.Range(0, 100) < 1)
                 {
                     Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
                 }
             }
             else if (gameObject.name.Contains("Slime"))
+            {
+                insMoney(Random.Range(1, 3));
+                if (Random.Range(0, 100) < 1)
+                {
+                    Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
+                }
+            }
+            else if(gameObject.name.Contains("TaurenBoss"))
+            {
+                insMoney(50);
+                insMoneyB(3);
+                if (Random.Range(0, 100) < 15)
+                {
+                    Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
+                }
+            }
+            else if (gameObject.name.Contains("GostBig"))
+            {
+                insMoney(Random.Range(9, 13));
+                if (Random.Range(0, 100) < 15)
+                {
+                    insMoneyB(1);
+                }
+                if (Random.Range(0, 100) < 15)
+                {
+                    Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
+                }
+            }
+            else if (gameObject.name.Contains("Gost"))
+            {
+                insMoney(2);
+                if (Random.Range(0, 100) < 1)
+                {
+                    Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
+                }
+            }
+            else if (gameObject.name.Contains("Bat"))
             {
                 insMoney(Random.Range(1, 3));
                 if (Random.Range(0, 100) < 1)

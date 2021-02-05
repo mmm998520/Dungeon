@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -12,6 +13,22 @@ namespace com.DungeonPad
         private void Update()
         {
             print(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime * 3589);
+            if (CameraManager.center.x > 20.55f)
+            {
+                if(SceneManager.GetActiveScene().name =="Game 2")
+                {
+                    GameManager.layers = 2;
+                    SceneManager.LoadScene("Game 1");
+                }
+            }
+            if (CameraManager.center.x > 30.64f)
+            {
+                if (SceneManager.GetActiveScene().name == "Game 4")
+                {
+                    ReGamer.ReGame();
+                    SceneManager.LoadScene("SelectRole_Game 1");
+                }
+            }
         }
 
         public void insSpider(int times)

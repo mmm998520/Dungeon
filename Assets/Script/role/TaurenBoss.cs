@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -363,12 +362,14 @@ namespace com.DungeonPad
             animator.SetBool("BackHurt", false);
         }
         #endregion
-
+        public GameObject[] DestoryWall;
         private void OnDestroy()
         {
             HPBar.localScale = Vector3.zero;
-            GameManager.layers = 2;
-            SceneManager.LoadScene("Game 1");
+            for(int i = 0; i < DestoryWall.Length; i++)
+            {
+                Destroy(DestoryWall[i]);
+            }
         }
     }
 }

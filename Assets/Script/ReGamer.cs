@@ -28,7 +28,7 @@ namespace com.DungeonPad
             }
         }
 
-        void ReGame()
+        public static void ReGame()
         {
             Sensor.sensors = new List<GameObject>();
             Sensor.Exit = null;
@@ -45,6 +45,7 @@ namespace com.DungeonPad
             ButtonOne.useButtonNum = 0;
             ButtonTwo.p1used = false;
             ButtonTwo.p2used = false;
+            DataSaver.Save();
         }
     }
 }
