@@ -13983,7 +13983,6 @@ MonoBehaviour:
   StickVibration: 0
   ConfusionVibration: 0
   DashVibration: 0
-  maxer: 0
 --- !u!50 &1042426415
 Rigidbody2D:
   serializedVersion: 4
@@ -15282,6 +15281,30 @@ MonoBehaviour:
   - name: 0.5a2
     prefabs:
     - {fileID: 4240385852959541880, guid: d98e4591a2c98f04c8a6cd5b9ef8a928, type: 3}
+  - name: "\u4E0A\u53F3d"
+    prefabs:
+    - {fileID: 8977524532833046415, guid: 0866a511ee4a64741b8281e80cf07e7f, type: 3}
+  - name: "\u53F3\u4E0Bd"
+    prefabs:
+    - {fileID: 8977524532833046415, guid: de3eac49f0c345145b1fc8f3c571b86c, type: 3}
+  - name: "\u4E0B\u5DE6d"
+    prefabs:
+    - {fileID: 8977524532833046415, guid: 3b1fbe18cc9905440b9f7aef07901950, type: 3}
+  - name: "\u5DE6\u4E0Ad"
+    prefabs:
+    - {fileID: 8977524532833046415, guid: 16fe6e7c7e596f74c9ee42f66e36cc71, type: 3}
+  - name: "\u4E0A\u53F3fd"
+    prefabs:
+    - {fileID: 8977524532833046415, guid: 25dd2ab79c5f12743900b6cd764f876f, type: 3}
+  - name: "\u53F3\u4E0Bfd"
+    prefabs:
+    - {fileID: 8977524532833046415, guid: 480688ed6068a434e95efbea17669c62, type: 3}
+  - name: "\u4E0B\u5DE6fd"
+    prefabs:
+    - {fileID: 8977524532833046415, guid: d8ca8ed55feed3d4c91f5676e691dfb3, type: 3}
+  - name: "\u5DE6\u4E0Afd"
+    prefabs:
+    - {fileID: 8977524532833046415, guid: 25dd2ab79c5f12743900b6cd764f876f, type: 3}
   sensor: {fileID: 3727972926308268955, guid: 9900bfb2f1940324c970f22615fb2c02, type: 3}
   wall: {fileID: 422931602908215896, guid: 35d1326c29a02614ba76fca276269285, type: 3}
 --- !u!4 &1200599303
@@ -19039,7 +19062,6 @@ MonoBehaviour:
   StickVibration: 0
   ConfusionVibration: 0
   DashVibration: 0
-  maxer: 0
 --- !u!114 &1942137163
 MonoBehaviour:
   m_ObjectHideFlags: 0
