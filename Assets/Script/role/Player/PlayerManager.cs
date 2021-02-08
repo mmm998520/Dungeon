@@ -50,6 +50,8 @@ namespace com.DungeonPad
         public GameObject reStatUI, sleepingStatUI, confusionStatUI, stickStatUI;
         public SpriteRenderer HPMaxCircleLight;
 
+        SpriteRenderer head;
+
         public int MaxBulletNum = 5, BulletNum = 5;
         public GameObject Bullet, attackLine;
         public Animator playerAttackLineAnimator;
@@ -71,6 +73,7 @@ namespace com.DungeonPad
         string SceneName;
         private void Start()
         {
+            head = transform.GetChild(0).GetComponent<SpriteRenderer>();
             SceneName = SceneManager.GetActiveScene().name;
             playerStatAnimator = GetComponent<Animator>();
             if (!SceneManager.GetActiveScene().name.Contains("SelectRole"))
@@ -511,12 +514,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalWASD");
                                     DashA.y = Input.GetAxisRaw("VerticalWASD");
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                             case "ArrowKey":
@@ -525,12 +536,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
                                     DashA.y = Input.GetAxisRaw("VerticalArrowKey");
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                             case "1":
@@ -546,13 +565,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalJoyP1");
                                     DashA.y = -Input.GetAxisRaw("VerticalJoyP1");
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        playerJoyVibration.DashVibration = 0.8f;
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                         }
@@ -567,12 +593,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalWASD");
                                     DashA.y = Input.GetAxisRaw("VerticalWASD");
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                             case "ArrowKey":
@@ -581,12 +615,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
                                     DashA.y = Input.GetAxisRaw("VerticalArrowKey");
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                             case "1":
@@ -602,13 +644,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalJoyP2");
                                     DashA.y = -Input.GetAxisRaw("VerticalJoyP2");
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        playerJoyVibration.DashVibration = 0.8f;
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                         }
@@ -1098,12 +1147,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalWASD");
                                     DashA.y = Input.GetAxisRaw("VerticalWASD");
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                             case "ArrowKey":
@@ -1112,12 +1169,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
                                     DashA.y = Input.GetAxisRaw("VerticalArrowKey");
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                             case "1":
@@ -1133,13 +1198,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy);
                                     DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectMouse.p1Joy);
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        playerJoyVibration.DashVibration = 0.8f;
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                         }
@@ -1154,12 +1226,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalWASD");
                                     DashA.y = Input.GetAxisRaw("VerticalWASD");
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                             case "ArrowKey":
@@ -1168,12 +1248,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
                                     DashA.y = Input.GetAxisRaw("VerticalArrowKey");
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                             case "1":
@@ -1189,13 +1277,20 @@ namespace com.DungeonPad
                                     DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p2Joy);
                                     DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectMouse.p2Joy);
                                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude > 10)
+                                    if (DashA.magnitude <= 10)
                                     {
-                                        DashTimer = 0;
-                                        LineAttack();
-                                        playerJoyVibration.DashVibration = 0.8f;
-                                        insAfterImages.timer = 0;
+                                        if (head.flipX)
+                                        {
+                                            DashA = Vector3.right * DashSpeed;
+                                        }
+                                        else
+                                        {
+                                            DashA = Vector3.left * DashSpeed;
+                                        }
                                     }
+                                    DashTimer = 0;
+                                    LineAttack();
+                                    insAfterImages.timer = 0;
                                 }
                                 break;
                         }
