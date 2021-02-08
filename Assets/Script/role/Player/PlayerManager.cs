@@ -9,7 +9,7 @@ namespace com.DungeonPad
 {
     public class PlayerManager : MonoBehaviour
     {
-        public static float MaxHP = 40, HP = 40;
+        public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
         public static bool lockedHP = false;
         public static float lockedHPTimer = 10, DiedTimer = 10;

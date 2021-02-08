@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -63,11 +64,28 @@ namespace com.DungeonPad
 
         void Start()
         {
-            for (int i = 0; i < abilityDatas.Length; i++)
+            if(SceneManager.GetActiveScene().name == "SelectRole_Game 0")
             {
-                if (abilityDatas[i].dataNum < AbilityManager.AbilityCurrentLevel.Count)
+                PlayerManager.money = 0;
+                PlayerManager.moneyB = 0;
+                PlayerManager.criticalRate = 0;
+                PlayerManager.reducesDamage = 0;
+                PlayerManager.MaxLife = 4;
+                PlayerManager.MaxHP = 60;
+                PlayerManager.killHpRecover = 0;
+                PlayerManager.DashSpeed = 11;
+                PlayerManager.DashCD = 0.5f;
+                PlayerManager.moveSpeed = 3;
+                PlayerManager.homeButton = false;
+            }
+            else
+            {
+                for (int i = 0; i < abilityDatas.Length; i++)
                 {
-                    abilityDatas[i].awake();
+                    if (abilityDatas[i].dataNum < AbilityManager.AbilityCurrentLevel.Count)
+                    {
+                        abilityDatas[i].awake();
+                    }
                 }
             }
         }
