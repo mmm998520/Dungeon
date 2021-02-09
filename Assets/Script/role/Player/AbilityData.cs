@@ -22,6 +22,11 @@ namespace com.DungeonPad
         Ability.ability ability;
         public string abilityName;
 
+        public Button plusButton, minusButton, unlockButton;
+        public Sprite canUsePlus, cantUsePlus, canUsePlusSelected, cantUsePlusSelected;
+        public Sprite canUseMinus, cantUseMinus, canUseMinusSelected, cantUseMinusSelected;
+        public Sprite canUseUnlock, cantUseUnlock, canUseUnlockSelected, cantUseUnlockSelected;
+
         public void awake()
         {
             if (dataNum >= AbilityManager.AbilityCurrentLevel.Count)
@@ -33,6 +38,7 @@ namespace com.DungeonPad
             abilityName = ability.name;
             setAbilityBar();
             setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
+            setButtonSpriteState();
         }
 
         void setAbilityBar()
@@ -130,6 +136,8 @@ namespace com.DungeonPad
             setDetail();
             setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
             DataSaver.Save();
+
+            setButtonSpriteState();
         }
 
         public void Less()
@@ -143,6 +151,8 @@ namespace com.DungeonPad
             setDetail();
             setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
             DataSaver.Save();
+
+            setButtonSpriteState();
         }
 
         public void Unlock()
@@ -164,7 +174,61 @@ namespace com.DungeonPad
                     setDetail();
                     setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
                     DataSaver.Save();
+                    setButtonSpriteState();
                 }
+            }
+        }
+
+        void setButtonSpriteState()
+        {
+            SpriteState spriteState;
+            if (AbilityManager.AbilityCurrentLevel[abilityName] < AbilityManager.AbilityCanUseLevel[abilityName] && AbilityManager.Costed + ability.cost[AbilityManager.AbilityCurrentLevel[abilityName] + 1] <= AbilityManager.TotalCost)
+            {
+                plusButton.image.sprite = canUsePlus;
+                spriteState = plusButton.spriteState;
+                spriteState.highlightedSprite = canUsePlusSelected;
+                plusButton.spriteState = spriteState;
+                plusButton.transform.GetChild(0).GetComponent<Text>().color = new Color32(50, 50, 50, 255);
+            }
+            else
+            {
+                plusButton.image.sprite = cantUsePlus;
+                spriteState = plusButton.spriteState;
+                spriteState.highlightedSprite = cantUsePlusSelected;
+                plusButton.spriteState = spriteState;
+                plusButton.transform.GetChild(0).GetComponent<Text>().color = new Color32(128, 128, 128, 128);
+            }
+            if (AbilityManager.AbilityCurrentLevel[abilityName] > 0 && !ability.forever)
+            {
+                minusButton.image.sprite = canUseMinus;
+                spriteState = minusButton.spriteState;
+                spriteState.highlightedSprite = canUseMinusSelected;
+                minusButton.spriteState = spriteState;
+                minusButton.transform.GetChild(0).GetComponent<Text>().color = new Color32(50, 50, 50, 255);
+            }
+            else
+            {
+                minusButton.image.sprite = cantUseMinus;
+                spriteState = minusButton.spriteState;
+                spriteState.highlightedSprite = cantUseMinusSelected;
+                minusButton.spriteState = spriteState;
+                minusButton.transform.GetChild(0).GetComponent<Text>().color = new Color32(128, 128, 128, 128);
+            }
+            if (AbilityManager.AbilityCanUseLevel[abilityName] < AbilityManager.AbilityCanBuyLevel[abilityName])
+            {
+                unlockButton.image.sprite = canUseUnlock;
+                spriteState = unlockButton.spriteState;
+                spriteState.highlightedSprite = canUseUnlockSelected;
+                unlockButton.spriteState = spriteState;
+                unlockButton.transform.GetChild(0).GetComponent<Text>().color = new Color32(50, 50, 50, 255);
+            }
+            else
+            {
+                unlockButton.image.sprite = cantUseUnlock;
+                spriteState = unlockButton.spriteState;
+                spriteState.highlightedSprite = cantUseUnlockSelected;
+                unlockButton.spriteState = spriteState;
+                unlockButton.transform.GetChild(0).GetComponent<Text>().color = new Color32(128, 128, 128, 128);
             }
         }
 

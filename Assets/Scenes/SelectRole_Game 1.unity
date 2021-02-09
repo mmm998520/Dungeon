@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -26611,11 +26611,6 @@ PrefabInstance:
       propertyPath: detailCosts
       value: 
       objectReference: {fileID: 1134144979}
-    - target: {fileID: 3078659684129978809, guid: 03157c6ce52868c4bbc40112c634937a,
-        type: 3}
-      propertyPath: dataNum
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03157c6ce52868c4bbc40112c634937a, type: 3}
 --- !u!1 &1320810021
@@ -42580,24 +42575,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3078659684129978809, guid: 03157c6ce52868c4bbc40112c634937a,
         type: 3}
-      propertyPath: detailName
-      value: 
-      objectReference: {fileID: 1558068275}
+      propertyPath: dataNum
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3078659684129978809, guid: 03157c6ce52868c4bbc40112c634937a,
         type: 3}
-      propertyPath: detail
+      propertyPath: detailCosts
       value: 
-      objectReference: {fileID: 2147434019}
-    - target: {fileID: 3078659684129978809, guid: 03157c6ce52868c4bbc40112c634937a,
-        type: 3}
-      propertyPath: detailMoneyA
-      value: 
-      objectReference: {fileID: 1589042973}
-    - target: {fileID: 3078659684129978809, guid: 03157c6ce52868c4bbc40112c634937a,
-        type: 3}
-      propertyPath: detailMoneyB
-      value: 
-      objectReference: {fileID: 1250636495}
+      objectReference: {fileID: 1134144979}
     - target: {fileID: 3078659684129978809, guid: 03157c6ce52868c4bbc40112c634937a,
         type: 3}
       propertyPath: detailForever
@@ -42605,8 +42590,23 @@ PrefabInstance:
       objectReference: {fileID: 164484592}
     - target: {fileID: 3078659684129978809, guid: 03157c6ce52868c4bbc40112c634937a,
         type: 3}
-      propertyPath: detailCosts
+      propertyPath: detailMoneyB
       value: 
-      objectReference: {fileID: 1134144979}
+      objectReference: {fileID: 1250636495}
+    - target: {fileID: 3078659684129978809, guid: 03157c6ce52868c4bbc40112c634937a,
+        type: 3}
+      propertyPath: detailMoneyA
+      value: 
+      objectReference: {fileID: 1589042973}
+    - target: {fileID: 3078659684129978809, guid: 03157c6ce52868c4bbc40112c634937a,
+        type: 3}
+      propertyPath: detail
+      value: 
+      objectReference: {fileID: 2147434019}
+    - target: {fileID: 3078659684129978809, guid: 03157c6ce52868c4bbc40112c634937a,
+        type: 3}
+      propertyPath: detailName
+      value: 
+      objectReference: {fileID: 1558068275}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03157c6ce52868c4bbc40112c634937a, type: 3}
