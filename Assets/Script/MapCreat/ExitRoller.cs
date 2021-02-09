@@ -14,6 +14,7 @@ namespace com.DungeonPad
             {
                 if (GameManager.layers == 1)
                 {
+                    GameManager.passLayerOneTimes += 1;
                     SceneManager.LoadScene("Game 2");
                 }
                 else
