@@ -180,8 +180,12 @@ namespace com.DungeonPad
             {
                 Instantiate(Ammunition, transform.position, Quaternion.identity);
             }
-            PlayerManager.HP += PlayerManager.killHpRecover;
-            Players.reTimer = 0;
+            if (PlayerManager.killHpRecover > 0)
+            {
+                PlayerManager.HP += PlayerManager.killHpRecover;
+                Players.reTimer = 0;
+            }
+
             Destroy(gameObject);
             if (gameObject.name.Contains("SpiderBig"))
             {
