@@ -91,7 +91,7 @@ namespace com.DungeonPad
             {
                 for (j = -1; j <= 1; j++)
                 {
-                    level = levelRamdomer(GameManager.layers);
+                    level = levelRateSetter(GameManager.layers);
 
                     row = startRow + i;
                     col = startCol + j;
@@ -110,7 +110,7 @@ namespace com.DungeonPad
                     }
                 }
             }
-            level = levelRamdomer(GameManager.layers);
+            level = levelRateSetter(GameManager.layers);
 
             mazeCreat(GameManager.layers, roomPasswayDatas[endRow, endCol], level, 2, endRow, endCol);
             created[endRow, endCol] = true;
@@ -606,7 +606,7 @@ namespace com.DungeonPad
             {
                 for (j = -1; j <= 1; j++)
                 {
-                    level = levelRamdomer(GameManager.layers);
+                    level = levelRateSetter(GameManager.layers);
 
                     row = currentRow + i;
                     col = currentCol + j;
@@ -622,103 +622,52 @@ namespace com.DungeonPad
             }
         }
 
-        int levelRamdomer(int layer)
+        int levelRamdomer(int[] levelRate)
         {
-            int r, level;
+            int total = 0, i, r;
+            for(i = 0; i < levelRate.Length; i++)
+            {
+                total += levelRate[i];
+            }
+            r = Random.Range(0, total);
+            for(i = 0; i < levelRate.Length; i++)
+            {
+                if (r >= levelRate[i])
+                {
+                    r -= levelRate[i];
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return i;
+        }
+        int levelRateSetter(int layer)
+        {
+            int level;
             #region//第一層
             if (layer == 1)
             {
                 if (GameManager.passLayerOneTimes < 1)
                 {
-                    r = Random.Range(0, 3);
-                    if (r < 1)
-                    {
-                        level = 1;
-                    }
-                    else if (r < 2)
-                    {
-                        level = 2;
-                    }
-                    else
-                    {
-                        level = 3;
-                    }
+                    level = levelRamdomer(new int[] { 0, 1, 1, 1 });
                 }
                 else if (GameManager.passLayerOneTimes < 3)
                 {
-                    r = Random.Range(0, 4);
-                    if (r < 1)
-                    {
-                        level = 1;
-                    }
-                    else if (r < 3)
-                    {
-                        level = 3;
-                    }
-                    else
-                    {
-                        level = 5;
-                    }
+                    level = levelRamdomer(new int[] { 0, 1, 0, 2, 0, 1 });
                 }
                 else if (GameManager.passLayerOneTimes < 5)
                 {
-                    r = Random.Range(0, 3);
-                    if (r < 1)
-                    {
-                        level = 1;
-                    }
-                    else if (r < 2)
-                    {
-                        level = 4;
-                    }
-                    else
-                    {
-                        level = 5;
-                    }
+                    level = levelRamdomer(new int[] { 0, 1, 0, 0, 1, 1 });
                 }
                 else if (GameManager.passLayerOneTimes < 7)
                 {
-                    r = Random.Range(0, 5);
-                    if (r < 1)
-                    {
-                        level = 1;
-                    }
-                    else if (r < 2)
-                    {
-                        level = 4;
-                    }
-                    else if (r < 4)
-                    {
-                        level = 5;
-                    }
-                    else
-                    {
-                        level = 6;
-                    }
+                    level = levelRamdomer(new int[] { 0, 1, 0, 0, 1, 2, 1 });
                 }
                 else
                 {
-                    r = Random.Range(0, 7);
-                    if (r < 1)
-                    {
-                        level = 1;
-                    }
-                    else if (r < 2)
-                    {
-                        level = 2;
-                    }
-                    else if (r < 3)
-                    {
-                        level = 5;
-                    }
-                    else if (r < 5)
-                    {
-                        level = 6;
-                    }
-                    else
-                    {
-                        level = 7;
-                    }
+                    level = levelRamdomer(new int[] { 0, 1, 1, 0, 0, 1, 2, 2 });
                 }
             }
             #endregion
@@ -726,24 +675,11 @@ namespace com.DungeonPad
             else
             {
                 Debug.LogError("未編輯該層難度序列");
-                r = Random.Range(0, 5);
-                if (r < 1)
-                {
-                    level = 1;
-                }
-                else if (r < 3)
-                {
-                    level = 2;
-                }
-                else
-                {
-                    level = 3;
-                }
+                level = levelRamdomer(new int[] { 0, 1, 2, 2 });
             }
             #endregion
             return level;
         }
-
 
         /// <summary> 根據狀態補全對應房間資訊 </summary>
         public void mazeCreat(int layers, int passwayType, int level, int functionTypeNum, int roomRow, int roomCol)
