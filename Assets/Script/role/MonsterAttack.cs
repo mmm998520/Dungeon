@@ -10,7 +10,7 @@ namespace com.DungeonPad
         public bool continued = false;
         public string MonsterType;
 
-        void OnTriggerEnter2D(Collider2D collider)
+        protected virtual void OnTriggerEnter2D(Collider2D collider)
         {
             if (!continued)
             {
