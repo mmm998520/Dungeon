@@ -344,6 +344,18 @@ namespace com.DungeonPad
                         case "d左上":
                             newArray[i, j] = "d下左";
                             break;
+                        case "上右d":
+                            newArray[i, j] = "右下d";
+                            break;
+                        case "右下d":
+                            newArray[i, j] = "上右d";
+                            break;
+                        case "下左d":
+                            newArray[i, j] = "左上d";
+                            break;
+                        case "左上d":
+                            newArray[i, j] = "下左d";
+                            break;
                         case "fd上":
                             newArray[i, j] = "fd下";
                             break;
@@ -361,6 +373,18 @@ namespace com.DungeonPad
                             break;
                         case "fd左上":
                             newArray[i, j] = "fd下左";
+                            break;
+                        case "上右fd":
+                            newArray[i, j] = "右下fd";
+                            break;
+                        case "右下fd":
+                            newArray[i, j] = "上右fd";
+                            break;
+                        case "下左fd":
+                            newArray[i, j] = "左上fd";
+                            break;
+                        case "左上fd":
+                            newArray[i, j] = "下左fd";
                             break;
                             #endregion
                     }
