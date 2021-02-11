@@ -225,20 +225,24 @@ namespace com.DungeonPad
                     {
                         HP = MaxHP;
                     }
-                    HPMaxCircleLight.color = new Color(1, 1, 1, 0.1f * (HP - MaxHP * 0.8f) / (MaxHP * 0.2f));
+                    HPMaxCircleLight.color = new Color(1, 1, 1, 0.15f * Mathf.Clamp01(Mathf.InverseLerp(MaxHP*0.9f,MaxHP,HP)) + 0.07f);
                     HPMaxCircleLight.transform.Rotate(0, 0, Time.deltaTime * 7);
                     recoveryRate();
                     if (HP / MaxHP > 0.4f)//(HP > 20)
                     {
-                        transform.GetChild(5).localScale = Vector3.one * ((HP/MaxHP - 0.4f) / 0.6f * (LightRangeMaxSize - LightRangeMinSize) + LightRangeMinSize);
-                        transform.GetChild(6).localScale = Vector3.one * ((HP/MaxHP - 0.4f) / 0.6f * (LightRangeMaxSize - LightRangeMinSize) + LightRangeMinSize);
+                        Vector3 size = Vector3.one * ((HP / MaxHP - 0.4f) / 0.6f * (LightRangeMaxSize - LightRangeMinSize) + LightRangeMinSize);
+                        transform.GetChild(5).localScale = size;
+                        transform.GetChild(6).localScale = size;
+                        HPMaxCircleLight.transform.localScale = size;
                         //transform.GetChild(5).localScale = Vector3.one * (HP - 15) / 1.5f;//50 : 23.3333
                         //transform.GetChild(6).localScale = Vector3.one * (HP - 15) / 1.5f;
                     }
                     else
                     {
-                        transform.GetChild(5).localScale = Vector3.one * LightRangeMinSize;
-                        transform.GetChild(6).localScale = Vector3.one * LightRangeMinSize;
+                        Vector3 size = Vector3.one * LightRangeMinSize;
+                        transform.GetChild(5).localScale = size;
+                        transform.GetChild(6).localScale = size;
+                        HPMaxCircleLight.transform.localScale = size;
                         //transform.GetChild(5).localScale = Vector3.one * (5) / 1.5f;//20 : 3.3333
                         //transform.GetChild(6).localScale = Vector3.one * (5) / 1.5f;
                     }

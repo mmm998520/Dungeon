@@ -12456,10 +12456,10 @@ Transform:
   m_GameObject: {fileID: 665368115}
   m_LocalRotation: {x: -0, y: -0, z: 0.9925462, w: -0.121869296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8733174, y: 0.8733174, z: 0.8733174}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
-  m_Father: {fileID: 1042426420}
-  m_RootOrder: 12
+  m_Father: {fileID: 1775814301}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &665368117
 SpriteRenderer:
@@ -12770,6 +12770,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706845489}
   m_CullTransparentMesh: 0
+--- !u!1 &721212987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721212988}
+  m_Layer: 8
+  m_Name: HPMaxCircleLight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &721212988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721212987}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.04366587, y: 0.04366587, z: 0.04366587}
+  m_Children:
+  - {fileID: 1580106403}
+  m_Father: {fileID: 1942137159}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &737255140
 GameObject:
   m_ObjectHideFlags: 0
@@ -14476,7 +14507,7 @@ Transform:
   - {fileID: 2086616379}
   - {fileID: 1061877084}
   - {fileID: 1814879191}
-  - {fileID: 665368116}
+  - {fileID: 1775814301}
   m_Father: {fileID: 342662066}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17937,10 +17968,10 @@ Transform:
   m_GameObject: {fileID: 1580106402}
   m_LocalRotation: {x: -0, y: -0, z: 0.9925462, w: -0.121869296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8733174, y: 0.8733174, z: 0.8733174}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
-  m_Father: {fileID: 1942137159}
-  m_RootOrder: 12
+  m_Father: {fileID: 721212988}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1580106404
 SpriteRenderer:
@@ -18770,6 +18801,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742543170}
   m_CullTransparentMesh: 0
+--- !u!1 &1775814300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1775814301}
+  m_Layer: 8
+  m_Name: HPMaxCircleLight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1775814301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775814300}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.04366587, y: 0.04366587, z: 0.04366587}
+  m_Children:
+  - {fileID: 665368116}
+  m_Father: {fileID: 1042426420}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1784559585
 GameObject:
   m_ObjectHideFlags: 0
@@ -19391,7 +19453,7 @@ Transform:
   - {fileID: 1928414751}
   - {fileID: 1190443607}
   - {fileID: 60170270}
-  - {fileID: 1580106403}
+  - {fileID: 721212988}
   m_Father: {fileID: 342662066}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
