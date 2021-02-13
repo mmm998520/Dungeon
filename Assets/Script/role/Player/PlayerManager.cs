@@ -312,6 +312,8 @@ namespace com.DungeonPad
         }
 
         bool canUseTriggerButton = true;
+
+        #region//操作模式
         void OnePlayerBehavior()
         {
             #region//掙脫
@@ -515,45 +517,14 @@ namespace com.DungeonPad
                             case "WASD":
                                 if (Input.GetKeyDown(KeyCode.Space))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalWASD");
-                                    DashA.y = Input.GetAxisRaw("VerticalWASD");
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p1Joy, 1));
+                                    
                                 }
                                 break;
                             case "ArrowKey":
                                 if (Input.GetKeyDown(KeyCode.Keypad0))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
-                                    DashA.y = Input.GetAxisRaw("VerticalArrowKey");
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p1Joy, 1));
                                 }
                                 break;
                             case "1":
@@ -566,23 +537,7 @@ namespace com.DungeonPad
                             case "8":
                                 if (Input.GetKeyDown(KeyCode.JoystickButton4))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalJoyP1");
-                                    DashA.y = -Input.GetAxisRaw("VerticalJoyP1");
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p1Joy, 1));
                                 }
                                 break;
                         }
@@ -594,45 +549,13 @@ namespace com.DungeonPad
                             case "WASD":
                                 if (Input.GetKeyDown(KeyCode.Space))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalWASD");
-                                    DashA.y = Input.GetAxisRaw("VerticalWASD");
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p2Joy, 2));
                                 }
                                 break;
                             case "ArrowKey":
                                 if (Input.GetKeyDown(KeyCode.Keypad0))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
-                                    DashA.y = Input.GetAxisRaw("VerticalArrowKey");
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p2Joy, 2));
                                 }
                                 break;
                             case "1":
@@ -645,23 +568,7 @@ namespace com.DungeonPad
                             case "8":
                                 if (Input.GetKeyDown(KeyCode.JoystickButton5))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalJoyP2");
-                                    DashA.y = -Input.GetAxisRaw("VerticalJoyP2");
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p2Joy, 2));
                                 }
                                 break;
                         }
@@ -862,104 +769,6 @@ namespace com.DungeonPad
             //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy + "R");
             */
             #endregion
-            /*
-            #region//商人
-            if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
-            {
-                if (p1)
-                {
-                    switch (SelectMouse.p1Joy)
-                    {
-                        case "WASD":
-                            if (Input.GetKeyDown(KeyCode.L))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
-                        case "ArrowKey":
-                            if (Input.GetKeyDown(KeyCode.Keypad3))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetKeyDown(KeyCode.JoystickButton3))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (SelectMouse.p2Joy)
-                    {
-                        case "WASD":
-                            if (Input.GetKeyDown(KeyCode.L))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
-                        case "ArrowKey":
-                            if (Input.GetKeyDown(KeyCode.Keypad3))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetKeyDown(KeyCode.JoystickButton3))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
-                    }
-                }
-            }
-            #endregion*/
         }
         void TwoPlayerBehavior()
         {
@@ -1148,45 +957,13 @@ namespace com.DungeonPad
                             case "WASD":
                                 if (Input.GetKeyDown(KeyCode.J))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalWASD");
-                                    DashA.y = Input.GetAxisRaw("VerticalWASD");
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p1Joy, 0));
                                 }
                                 break;
                             case "ArrowKey":
                                 if (Input.GetKeyDown(KeyCode.Keypad1))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
-                                    DashA.y = Input.GetAxisRaw("VerticalArrowKey");
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p1Joy, 0));
                                 }
                                 break;
                             case "1":
@@ -1199,23 +976,7 @@ namespace com.DungeonPad
                             case "8":
                                 if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy))))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy);
-                                    DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectMouse.p1Joy);
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p1Joy, 0));
                                 }
                                 break;
                         }
@@ -1227,45 +988,13 @@ namespace com.DungeonPad
                             case "WASD":
                                 if (Input.GetKeyDown(KeyCode.J))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalWASD");
-                                    DashA.y = Input.GetAxisRaw("VerticalWASD");
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p2Joy, 0));
                                 }
                                 break;
                             case "ArrowKey":
                                 if (Input.GetKeyDown(KeyCode.Keypad1))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
-                                    DashA.y = Input.GetAxisRaw("VerticalArrowKey");
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p2Joy, 0));
                                 }
                                 break;
                             case "1":
@@ -1278,23 +1007,7 @@ namespace com.DungeonPad
                             case "8":
                                 if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy))))
                                 {
-                                    DashA.x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p2Joy);
-                                    DashA.y = -Input.GetAxisRaw("VerticalJoy" + SelectMouse.p2Joy);
-                                    DashA = Vector3.Normalize(DashA) * DashSpeed;
-                                    if (DashA.magnitude <= 10)
-                                    {
-                                        if (head.flipX)
-                                        {
-                                            DashA = Vector3.right * DashSpeed;
-                                        }
-                                        else
-                                        {
-                                            DashA = Vector3.left * DashSpeed;
-                                        }
-                                    }
-                                    DashTimer = 0;
-                                    LineAttack();
-                                    insAfterImages.timer = 0;
+                                    StartCoroutine(dash(SelectMouse.p2Joy, 0));
                                 }
                                 break;
                         }
@@ -1494,113 +1207,60 @@ namespace com.DungeonPad
 
             //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy + "R");
             #endregion
-            /*
-            #region//商人
-            if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
+        }
+        #endregion
+
+        IEnumerator dash(string p1p2joy, int TwoPlayerModeORp1p2)
+        {
+            yield return new WaitForSeconds(0.05f);
+            switch (p1p2joy)
             {
-                if (p1)
-                {
-                    switch (SelectMouse.p1Joy)
+                case "WASD":
+                    DashA.x = Input.GetAxisRaw("HorizontalWASD");
+                    DashA.y = Input.GetAxisRaw("VerticalWASD");
+                    break;
+                case "ArrowKey":
+                    DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
+                    DashA.y = Input.GetAxisRaw("VerticalArrowKey");
+                    break;
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                    if (TwoPlayerModeORp1p2 == 0)
                     {
-                        case "WASD":
-                            if (Input.GetKeyDown(KeyCode.L))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
-                        case "ArrowKey":
-                            if (Input.GetKeyDown(KeyCode.Keypad3))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 3)))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
+                        DashA.x = Input.GetAxisRaw("HorizontalJoy" + p1p2joy);
+                        DashA.y = -Input.GetAxisRaw("VerticalJoy" + p1p2joy);
                     }
+                    else
+                    {
+                        DashA.x = Input.GetAxisRaw("HorizontalJoyP" + TwoPlayerModeORp1p2);
+                        DashA.y = -Input.GetAxisRaw("VerticalJoyP" + TwoPlayerModeORp1p2);
+                    }
+
+                    break;
+            }
+            DashA = Vector3.Normalize(DashA) * DashSpeed;
+            if (DashA.magnitude <= 10)
+            {
+                if (head.flipX)
+                {
+                    DashA = Vector3.right * DashSpeed;
                 }
                 else
                 {
-                    switch (SelectMouse.p2Joy)
-                    {
-                        case "WASD":
-                            if (Input.GetKeyDown(KeyCode.L))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
-                        case "ArrowKey":
-                            if (Input.GetKeyDown(KeyCode.Keypad3))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 3)))
-                            {
-                                RaycastHit2D hit = Physics2D.CircleCast(transform.position, 1, Vector3.zero, 0, 1 << 9);
-                                if (hit && hit.collider.name == "Seller(Clone)")
-                                {
-                                    GameManager.abilityStore.showStore();
-                                    Destroy(hit.collider.gameObject);
-                                }
-                            }
-                            break;
-                    }
+                    DashA = Vector3.left * DashSpeed;
                 }
             }
-            #endregion*/
+            DashTimer = 0;
+            LineAttack();
+            insAfterImages.timer = 0;
         }
 
-        void OnDrawGizmos()
-        {
-            Gizmos.color = new Color(1f, 1f, 0f, 1f);
-            Gizmos.DrawWireSphere(transform.position, 1);
-            Gizmos.color = new Color(1f, 1f, 0f, 0.1f);
-            Gizmos.DrawSphere(transform.position, 1);
-        }
         private void FixedUpdate()
         {
             v *= 0.9f;
