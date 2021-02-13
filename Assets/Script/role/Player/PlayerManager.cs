@@ -30,6 +30,8 @@ namespace com.DungeonPad
         public bool lastDirRight;
         public Vector2 v = Vector2.zero, HardStraightA = Vector2.zero, DashA = Vector2.zero;
 
+        public Vector2 posBeforeDash, posAfterDash;
+
         public PlayerJoyVibration playerJoyVibration;
 
         public float StickTimer = 10, HardStraightTimer = 10, DashTimer = 10, SleepTimer = 10;
@@ -577,6 +579,15 @@ namespace com.DungeonPad
                 if (DashTimer < 0.3f)
                 {
                     v = DashA;
+                    posAfterDash = transform.position;
+                }
+                if (DashTimer < 1f)
+                {
+                    MagneticField.useMagneticField = true;
+                }
+                else
+                {
+                    posAfterDash = posBeforeDash;
                 }
             }
             #endregion
@@ -1016,6 +1027,16 @@ namespace com.DungeonPad
                 if (DashTimer < 0.3f)
                 {
                     v = DashA;
+                    posAfterDash = transform.position;
+                }
+                if (DashTimer < 1f)
+                {
+                    MagneticField.useMagneticField = true;
+                }
+                else
+                {
+                    posBeforeDash = transform.position;
+                    posAfterDash = posBeforeDash;
                 }
             }
             #endregion
@@ -1284,10 +1305,10 @@ namespace com.DungeonPad
                             break;
                     }
                     DashA = Vector3.Normalize(DashA) * DashSpeed;
-                    if (DashA.magnitude > 10)
-                    {
-                        break;
-                    }
+                }
+                if (DashA.magnitude > 10)
+                {
+                    break;
                 }
             }
 
@@ -1306,6 +1327,9 @@ namespace com.DungeonPad
             DashTimer = 0;
             LineAttack();
             insAfterImages.timer = 0;
+
+            posBeforeDash = transform.position;
+            posAfterDash = transform.position;
         }
 
         private void FixedUpdate()
