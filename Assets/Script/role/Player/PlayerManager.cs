@@ -1210,9 +1210,11 @@ namespace com.DungeonPad
         }
         #endregion
 
+        static WaitForSeconds waitForPress = new WaitForSeconds(0.05f);
+        static WaitForSeconds waitForMinut = new WaitForSeconds(0.01f);
         IEnumerator dash(string p1p2joy, int TwoPlayerModeORp1p2)
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return waitForPress;
             switch (p1p2joy)
             {
                 case "WASD":
@@ -1245,8 +1247,53 @@ namespace com.DungeonPad
                     break;
             }
             DashA = Vector3.Normalize(DashA) * DashSpeed;
+            for(int i = 0; i < 3; i++)
+            {
+                if (DashA.magnitude <= 10)
+                {
+                    yield return waitForPress;
+                    switch (p1p2joy)
+                    {
+                        case "WASD":
+                            DashA.x = Input.GetAxisRaw("HorizontalWASD");
+                            DashA.y = Input.GetAxisRaw("VerticalWASD");
+                            break;
+                        case "ArrowKey":
+                            DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
+                            DashA.y = Input.GetAxisRaw("VerticalArrowKey");
+                            break;
+                        case "1":
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "5":
+                        case "6":
+                        case "7":
+                        case "8":
+                            if (TwoPlayerModeORp1p2 == 0)
+                            {
+                                DashA.x = Input.GetAxisRaw("HorizontalJoy" + p1p2joy);
+                                DashA.y = -Input.GetAxisRaw("VerticalJoy" + p1p2joy);
+                            }
+                            else
+                            {
+                                DashA.x = Input.GetAxisRaw("HorizontalJoyP" + TwoPlayerModeORp1p2);
+                                DashA.y = -Input.GetAxisRaw("VerticalJoyP" + TwoPlayerModeORp1p2);
+                            }
+
+                            break;
+                    }
+                    DashA = Vector3.Normalize(DashA) * DashSpeed;
+                    if (DashA.magnitude > 10)
+                    {
+                        break;
+                    }
+                }
+            }
+
             if (DashA.magnitude <= 10)
             {
+
                 if (head.flipX)
                 {
                     DashA = Vector3.right * DashSpeed;
