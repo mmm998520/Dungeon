@@ -7,14 +7,16 @@ namespace com.DungeonPad
     public class PlayerAttack : MonoBehaviour
     {
         public HashSet<MonsterManager> monsterManagers = new HashSet<MonsterManager>();
-        protected virtual void attack(Collider2D collider, float damage)
+        protected virtual bool attack(Collider2D collider, float damage)
         {
+            bool attack = false;
             if (collider.GetComponent<MonsterManager>() && !monsterManagers.Contains(collider.GetComponent<MonsterManager>()))
             {
                 monsterManagers.Add(collider.GetComponent<MonsterManager>());
                 if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
                 {
                     collider.GetComponent<MonsterManager>().HP -= damage;
+                    attack = true;
                 }
                 print(collider.gameObject.name);
                 if (collider.GetComponent<MonsterManager>().HP <= 0)
@@ -31,6 +33,7 @@ namespace com.DungeonPad
             {
                 Destroy(collider.transform.parent.gameObject);
             }
+            return attack;
         }
     }
 }

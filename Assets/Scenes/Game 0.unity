@@ -61017,6 +61017,8 @@ MonoBehaviour:
   beganTouchedTimer: 8202.872
   flashTimer: 0
   flashTimerStoper: 0.1
+  playerTrack: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
+    type: 3}
   startRayPoss: []
   p1: 1
   lastDirRight: 0
@@ -102052,6 +102054,8 @@ MonoBehaviour:
   beganTouchedTimer: 8208.844
   flashTimer: 0
   flashTimerStoper: 0.1
+  playerTrack: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
+    type: 3}
   startRayPoss:
   - {x: 0.35, y: 0.35, z: 0}
   - {x: 0.35, y: 0, z: 0}

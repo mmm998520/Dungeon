@@ -41,14 +41,16 @@ namespace com.DungeonPad
             }
         }
 
-        protected override void attack(Collider2D collider, float damage)
+        protected override bool attack(Collider2D collider, float damage)
         {
+            bool attack = false;
             if (collider.GetComponent<MonsterManager>() && !monsterManagers.Contains(collider.GetComponent<MonsterManager>()))
             {
                 monsterManagers.Add(collider.GetComponent<MonsterManager>());
                 if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
                 {
                     collider.GetComponent<MonsterManager>().HP -= damage;
+                    attack = true;
                     if (Random.Range(0, 100) < PlayerManager.criticalRate)
                     {
                         collider.GetComponent<MonsterManager>().HP -= 1;
@@ -98,6 +100,7 @@ namespace com.DungeonPad
                     collider.GetComponent<LifeSeller>().buy();
                 }
             }
+            return attack;
         }
     }
 }

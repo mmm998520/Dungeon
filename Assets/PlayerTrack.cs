@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace com.DungeonPad
 {
-    public class Track : MonsterShooter
+    public class PlayerTrack : PlayerAttack
     {
         public Transform Target;
         public float RotateSpeed;
+        [SerializeField] float timer, timerStoper, speed;
 
         private void Update()
         {
             timer += Time.deltaTime;
-            // 為更加逼真，0.5秒前只前進和減速不進行追蹤
-            if (timer < 0.5f)
+            // 為更加逼真，0.2秒前只前進和減速不進行追蹤
+            if (timer < 0.2f)
             {
                 speed -= 1 * Time.deltaTime;
                 transform.position += transform.right * speed * Time.deltaTime;
@@ -26,7 +28,7 @@ namespace com.DungeonPad
 
                 if (a > 0.1f || a < -0.1f)
                 {
-                    transform.right = Vector2.Lerp(transform.right, targetDir, Time.deltaTime / a).normalized;
+                    transform.right = Vector2.Lerp(transform.right, targetDir, Time.deltaTime * RotateSpeed).normalized;
                 }
                 else
                 {
@@ -42,9 +44,12 @@ namespace com.DungeonPad
             }
         }
 
-        protected override void OnTriggerEnter2D(Collider2D collider)
+        void OnTriggerEnter2D(Collider2D collider)
         {
-            base.OnTriggerEnter2D(collider);
+            if(attack(collider, 1))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

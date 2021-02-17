@@ -229,17 +229,17 @@ namespace com.DungeonPad
 
         void FireBall(float positionOffset)
         {
-            Instantiate(fireBall, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle)).GetComponent<Track>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            Instantiate(fireBall, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
         }
 
         void FireBallFsat(float positionOffset)
         {
-            Instantiate(fireBallFast, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle)).GetComponent<Track>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            Instantiate(fireBallFast, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
         }
 
         void FireBallTrack(float positionOffset)
         {
-            Instantiate(fireBallTrack, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle + Random.Range(-10, 10))).GetComponent<Track>().Target = GameManager.players.GetChild(Random.Range(0,2));
+            Instantiate(fireBallTrack, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle + Random.Range(-10, 10))).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0,2));
         }
 
         void endFireBall()
