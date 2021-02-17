@@ -30,6 +30,7 @@ namespace com.DungeonPad
         public bool lastDirRight;
         public Vector2 v = Vector2.zero, HardStraightA = Vector2.zero, DashA = Vector2.zero;
 
+        PlayerManager otherPlayer;
         public Vector2 posBeforeDash, posAfterDash;
 
         public PlayerJoyVibration playerJoyVibration;
@@ -73,8 +74,22 @@ namespace com.DungeonPad
         public Vector2? batPos = null;
         public Transform sticksBat;
         string SceneName;
+
+        private void Awake()
+        {
+            posBeforeDash = transform.position;
+            posAfterDash = transform.position;
+        }
+
         private void Start()
         {
+            for (int i = 0; i < GameManager.players.childCount; i++)
+            {
+                if (GameManager.players.GetChild(i).GetComponent<PlayerManager>() != this)
+                {
+                    otherPlayer = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
+                }
+            }
             head = transform.GetChild(0).GetComponent<SpriteRenderer>();
             SceneName = SceneManager.GetActiveScene().name;
             playerStatAnimator = GetComponent<Animator>();
@@ -585,8 +600,9 @@ namespace com.DungeonPad
                 {
                     MagneticField.useMagneticField = true;
                 }
-                else
+                else if (otherPlayer.DashTimer > 1f)
                 {
+                    posBeforeDash = transform.position;
                     posAfterDash = posBeforeDash;
                 }
             }
@@ -1033,7 +1049,7 @@ namespace com.DungeonPad
                 {
                     MagneticField.useMagneticField = true;
                 }
-                else
+                else if (otherPlayer.DashTimer > 1f)
                 {
                     posBeforeDash = transform.position;
                     posAfterDash = posBeforeDash;

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6986,7 +6986,7 @@ RectTransform:
   - {fileID: 1109932154}
   - {fileID: 1842500679}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12233,7 +12233,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &469899901
 MonoBehaviour:
@@ -14121,7 +14121,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1021561402
 MonoBehaviour:
@@ -14488,6 +14488,8 @@ MonoBehaviour:
   v: {x: 0, y: 0}
   HardStraightA: {x: 0, y: 0}
   DashA: {x: 0, y: 0}
+  posBeforeDash: {x: 0, y: 0}
+  posAfterDash: {x: 0, y: 0}
   playerJoyVibration: {fileID: 1042426414}
   StickTimer: 5320.3853
   HardStraightTimer: 4754.4785
@@ -15754,7 +15756,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1200599304
 MonoBehaviour:
@@ -16611,7 +16613,7 @@ PrefabInstance:
     - target: {fileID: 4194553186035810211, guid: e50d6e0a11b58df44bf09162857093c6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4194553186035810211, guid: e50d6e0a11b58df44bf09162857093c6,
         type: 3}
@@ -17811,6 +17813,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483688504}
   m_CullTransparentMesh: 0
+--- !u!1001 &1500914279
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2323811627200118044, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_Name
+      value: MagneticField
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2323811627200118051, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: p1
+      value: 
+      objectReference: {fileID: 1042426417}
+    - target: {fileID: 2323811627200118051, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+        type: 3}
+      propertyPath: p2
+      value: 
+      objectReference: {fileID: 1942137163}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 600a65a0f51aeca4ca22d7cfcde6826f, type: 3}
 --- !u!1 &1518453994
 GameObject:
   m_ObjectHideFlags: 0
@@ -19638,6 +19719,8 @@ MonoBehaviour:
   v: {x: 0, y: 0}
   HardStraightA: {x: 0, y: 0}
   DashA: {x: 0, y: 0}
+  posBeforeDash: {x: 0, y: 0}
+  posAfterDash: {x: 0, y: 0}
   playerJoyVibration: {fileID: 1942137162}
   StickTimer: 8213.414
   HardStraightTimer: 5283.437
@@ -20115,7 +20198,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2016837062
 GameObject:
@@ -20926,7 +21009,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2122359451
 GameObject:
