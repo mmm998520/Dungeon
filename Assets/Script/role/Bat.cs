@@ -21,8 +21,9 @@ namespace com.DungeonPad
             arriveNewRoom(startRoomRow, startRoomCol);
         }
 
-        void Update()
+        protected override void Update()
         {
+            base.Update();
             minDisPlayerPos = MinDisPlayer().position;
             float distance = Vector2.Distance(minDisPlayerPos, transform.position);
             if (distance < 2)

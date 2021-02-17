@@ -35,8 +35,9 @@ namespace com.DungeonPad
             animator = GetComponent<Animator>();
         }
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
             SleepTimer += Time.deltaTime;
             punchCDTimer += Time.deltaTime;
             throwAxe90CDTimer += Time.deltaTime;

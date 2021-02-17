@@ -23,7 +23,7 @@ namespace com.DungeonPad
         public float beganTouchedTimer, flashTimer, flashTimerStoper;
         public static float homeButtonTimer = 0, homeButtonTimerStoper = 12;
         public static float moveSpeed = 3f, DashSpeed = 11, DashCD = 0.5f, reducesDamage = 0, criticalRate = 0;
-        public static bool homeButton = false, magneticField = false, circleAttack = false;
+        public static bool homeButton = false, magneticField = false, circleAttack = false, poison = true, bullet = false;
         public List<Vector3> startRayPoss;
 
         public bool p1;

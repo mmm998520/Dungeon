@@ -30,8 +30,9 @@ namespace com.DungeonPad
             }
         }
 
-        void Update()
+        protected override void Update()
         {
+            base.Update();
             if (spiderBehavior == SpiderBehavior.ramdomMove)
             {
                 if (SceneManager.GetActiveScene().name != "Tutorial1")

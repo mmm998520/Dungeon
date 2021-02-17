@@ -32,7 +32,13 @@ namespace com.DungeonPad
         protected float StuckTimer;
         protected Vector2 StuckPos = Vector2.zero;
 
+        public List<float> poisonTimers = new List<float>();
         public GameObject Ammunition;
+
+        protected virtual void Update()
+        {
+            poison();
+        }
         /// <summary> 獲取最近玩家 </summary>
         public Transform MinDisPlayer()
         {
@@ -276,6 +282,23 @@ namespace com.DungeonPad
             for (int i = 0; i < times; i++)
             {
                 Instantiate(GameManager.gameManager.moneyB, transform.position, Quaternion.identity);
+            }
+        }
+
+        void poison()
+        {
+            for(int i = poisonTimers.Count - 1 ; i >= 0; i--)
+            {
+                poisonTimers[i] += Time.deltaTime;
+                if (poisonTimers[i] > 5)
+                {
+                    poisonTimers.RemoveAt(i);
+                }
+            }
+            HP -= Time.deltaTime * 0.3f * poisonTimers.Count;
+            if (HP < 0)
+            {
+                beforeDied();
             }
         }
     }

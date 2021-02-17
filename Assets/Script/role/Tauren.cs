@@ -11,8 +11,9 @@ namespace com.DungeonPad
             rigidbody = GetComponent<Rigidbody2D>();
         }
 
-        void Update()
+        protected override void Update()
         {
+            base.Update();
             rigidbody.velocity = Vector3.Normalize((MinDisPlayer().position - transform.position) * Vector2.one);
             if (rigidbody.velocity.x > 0)
             {

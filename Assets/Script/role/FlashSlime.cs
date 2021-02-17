@@ -28,8 +28,9 @@ namespace com.DungeonPad
             randomTarget();
         }
 
-        void Update()
+        protected override void Update()
         {
+            base.Update();
             if (slimeBehavior == SlimeBehavior.ramdomMove)
             {
                 if ((CDTimer += Time.deltaTime) >= CD)

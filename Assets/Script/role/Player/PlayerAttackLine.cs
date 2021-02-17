@@ -49,13 +49,21 @@ namespace com.DungeonPad
                 if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
                 {
                     collider.GetComponent<MonsterManager>().HP -= damage;
+                    if (Random.Range(0, 100) < PlayerManager.criticalRate)
+                    {
+                        collider.GetComponent<MonsterManager>().HP -= 1;
+                    }
                     if (PlayerManager.circleAttack)
                     {
                         Instantiate(AttackCircle, collider.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerCircleAttack>().monsterManagers.Add(collider.GetComponent<MonsterManager>());
                     }
-                    if (Random.Range(0, 100) < PlayerManager.criticalRate)
+                    if (PlayerManager.poison)
                     {
-                        collider.GetComponent<MonsterManager>().HP -= 1;
+                        collider.GetComponent<MonsterManager>().poisonTimers.Add(0);
+                        if (collider.GetComponent<MonsterManager>().poisonTimers.Count > 10)
+                        {
+                            collider.GetComponent<MonsterManager>().poisonTimers.RemoveAt(0);
+                        }
                     }
                 }
                 print(collider.gameObject.name);
