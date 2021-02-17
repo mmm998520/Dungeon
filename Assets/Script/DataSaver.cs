@@ -86,6 +86,8 @@ namespace com.DungeonPad
                 PlayerManager.DashCD = 0.5f;
                 PlayerManager.moveSpeed = 3;
                 PlayerManager.homeButton = false;
+                PlayerManager.magneticField = false;
+                PlayerManager.circleAttack = false;
             }
             else
             {

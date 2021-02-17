@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace com.DungeonPad
 {
-    public class PlayerAttackLine : MonoBehaviour
+    public class PlayerAttackLine : PlayerAttack
     {
         public Transform rayPos1, rayPos2;
         public bool hit = false;
-        HashSet<MonsterManager> monsterManagers = new HashSet<MonsterManager>();
         HashSet<Transform> sellers = new HashSet<Transform>();
+
+        [SerializeField] GameObject AttackCircle;
         void Start()
         {
 
@@ -36,48 +37,57 @@ namespace com.DungeonPad
             for (int i = 0; i < hits.Length; i++)
             {
                 collider = hits[i].collider;
-                if (collider.GetComponent<MonsterManager>() && !monsterManagers.Contains(collider.GetComponent<MonsterManager>()))
+                attack(collider, 1);
+            }
+        }
+
+        protected override void attack(Collider2D collider, float damage)
+        {
+            if (collider.GetComponent<MonsterManager>() && !monsterManagers.Contains(collider.GetComponent<MonsterManager>()))
+            {
+                monsterManagers.Add(collider.GetComponent<MonsterManager>());
+                if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
                 {
-                    monsterManagers.Add(collider.GetComponent<MonsterManager>());
-                    if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
+                    collider.GetComponent<MonsterManager>().HP -= damage;
+                    if (PlayerManager.circleAttack)
+                    {
+                        Instantiate(AttackCircle, collider.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerCircleAttack>().monsterManagers.Add(collider.GetComponent<MonsterManager>());
+                    }
+                    if (Random.Range(0, 100) < PlayerManager.criticalRate)
                     {
                         collider.GetComponent<MonsterManager>().HP -= 1;
-                        if (Random.Range(0, 100) < PlayerManager.criticalRate)
-                        {
-                            collider.GetComponent<MonsterManager>().HP -= 1;
-                        }
-                    }
-                    print(collider.gameObject.name);
-                    if (collider.GetComponent<MonsterManager>().HP <= 0)
-                    {
-                        collider.GetComponent<MonsterManager>().beforeDied();
-                        Debug.LogWarning("hitTimes");
                     }
                 }
-                if (collider.GetComponent<BatSticked>() || collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
+                print(collider.gameObject.name);
+                if (collider.GetComponent<MonsterManager>().HP <= 0)
                 {
-                    Destroy(collider.gameObject);
+                    collider.GetComponent<MonsterManager>().beforeDied();
+                    Debug.LogWarning("hitTimes");
                 }
-                if (collider.name == "hit role collider")
+            }
+            if (collider.GetComponent<BatSticked>() || collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
+            {
+                Destroy(collider.gameObject);
+            }
+            if (collider.name == "hit role collider")
+            {
+                Destroy(collider.transform.parent.gameObject);
+            }
+            if (collider.GetComponent<Crystal>())
+            {
+                collider.GetComponent<Crystal>().hited();
+            }
+            if (collider.name == "場外商人")
+            {
+                GameObject.Find("shop").transform.GetChild(0).gameObject.SetActive(true);
+                GameObject.Find("shop").transform.GetChild(0).GetChild(0).GetComponent<AbilityDatas>().start();
+            }
+            else if (collider.GetComponent<LifeSeller>())
+            {
+                if (!sellers.Contains(collider.transform))
                 {
-                    Destroy(collider.transform.parent.gameObject);
-                }
-                if (collider.GetComponent<Crystal>())
-                {
-                    collider.GetComponent<Crystal>().hited();
-                }
-                if (collider.name == "場外商人")
-                {
-                    GameObject.Find("shop").transform.GetChild(0).gameObject.SetActive(true);
-                    GameObject.Find("shop").transform.GetChild(0).GetChild(0).GetComponent<AbilityDatas>().start();
-                }
-                else if (collider.GetComponent<LifeSeller>())
-                {
-                    if (!sellers.Contains(collider.transform))
-                    {
-                        sellers.Add(collider.transform);
-                        collider.GetComponent<LifeSeller>().buy();
-                    }
+                    sellers.Add(collider.transform);
+                    collider.GetComponent<LifeSeller>().buy();
                 }
             }
         }

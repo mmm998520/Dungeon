@@ -43,6 +43,8 @@ namespace com.DungeonPad
             AbilityCurrentLevel.Add("連續衝刺", 0);
             AbilityCurrentLevel.Add("疾行", 0);
             AbilityCurrentLevel.Add("召回", 0);
+            AbilityCurrentLevel.Add("磁場", 0);
+            AbilityCurrentLevel.Add("濺射", 0);
             #endregion
 
             #region//已購買的等級
@@ -56,6 +58,8 @@ namespace com.DungeonPad
             AbilityCanUseLevel.Add("連續衝刺", 0);
             AbilityCanUseLevel.Add("疾行", 0);
             AbilityCanUseLevel.Add("召回", 0);
+            AbilityCanUseLevel.Add("磁場", 0);
+            AbilityCanUseLevel.Add("濺射", 0);
             #endregion
 
             #region//可買的等級上限
@@ -69,6 +73,8 @@ namespace com.DungeonPad
             AbilityCanBuyLevel.Add("連續衝刺", 2);
             AbilityCanBuyLevel.Add("疾行", 2);
             AbilityCanBuyLevel.Add("召回", 2);
+            AbilityCanBuyLevel.Add("磁場", 1);
+            AbilityCanBuyLevel.Add("濺射", 1);
             #endregion
         }
     }

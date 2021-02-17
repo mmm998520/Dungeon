@@ -291,6 +291,13 @@ namespace com.DungeonPad
                         PlayerManager.homeButtonTimer = 6;
                     }
                     break;
+                    /*
+                case "磁場":
+                    PlayerManager.magneticField = (abilityLevel != 0);
+                    break;
+                case "濺射":
+                    PlayerManager.circleAttack = (abilityLevel != 0);
+                    break;*/
                 default:
                     Debug.LogError("沒有這個能力 : " + abilityName);
                     break;

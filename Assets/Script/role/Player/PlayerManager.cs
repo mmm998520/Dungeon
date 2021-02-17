@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = false;
+        public static bool lockedHP = true;
         public static float lockedHPTimer = 10, DiedTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -23,7 +23,7 @@ namespace com.DungeonPad
         public float beganTouchedTimer, flashTimer, flashTimerStoper;
         public static float homeButtonTimer = 0, homeButtonTimerStoper = 12;
         public static float moveSpeed = 3f, DashSpeed = 11, DashCD = 0.5f, reducesDamage = 0, criticalRate = 0;
-        public static bool homeButton = false;
+        public static bool homeButton = false, magneticField = false, circleAttack = false;
         public List<Vector3> startRayPoss;
 
         public bool p1;
@@ -596,14 +596,17 @@ namespace com.DungeonPad
                     v = DashA;
                     posAfterDash = transform.position;
                 }
-                if (DashTimer < 1f)
+                if (magneticField)
                 {
-                    MagneticField.useMagneticField = true;
-                }
-                else if (otherPlayer.DashTimer > 1f)
-                {
-                    posBeforeDash = transform.position;
-                    posAfterDash = posBeforeDash;
+                    if (DashTimer < 1f)
+                    {
+                        MagneticField.useMagneticField = true;
+                    }
+                    else if (otherPlayer.DashTimer > 1f)
+                    {
+                        posBeforeDash = transform.position;
+                        posAfterDash = posBeforeDash;
+                    }
                 }
             }
             #endregion
@@ -1045,14 +1048,17 @@ namespace com.DungeonPad
                     v = DashA;
                     posAfterDash = transform.position;
                 }
-                if (DashTimer < 1f)
+                if (magneticField)
                 {
-                    MagneticField.useMagneticField = true;
-                }
-                else if (otherPlayer.DashTimer > 1f)
-                {
-                    posBeforeDash = transform.position;
-                    posAfterDash = posBeforeDash;
+                    if (DashTimer < 1f)
+                    {
+                        MagneticField.useMagneticField = true;
+                    }
+                    else if (otherPlayer.DashTimer > 1f)
+                    {
+                        posBeforeDash = transform.position;
+                        posAfterDash = posBeforeDash;
+                    }
                 }
             }
             #endregion

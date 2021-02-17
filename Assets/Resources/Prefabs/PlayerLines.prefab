@@ -456,6 +456,8 @@ MonoBehaviour:
   rayPos1: {fileID: 1528204906547828533}
   rayPos2: {fileID: 731698811075761437}
   hit: 0
+  AttackCircle: {fileID: 6455063450704125964, guid: 8d974714af0868f408c5fb85e4ce685f,
+    type: 3}
 --- !u!95 &8050423244940267685
 Animator:
   serializedVersion: 3
@@ -693,6 +695,8 @@ MonoBehaviour:
   rayPos1: {fileID: 1528204906547828533}
   rayPos2: {fileID: 731698811075761437}
   hit: 0
+  AttackCircle: {fileID: 6455063450704125964, guid: 8d974714af0868f408c5fb85e4ce685f,
+    type: 3}
 --- !u!95 &8050423245697464071
 Animator:
   serializedVersion: 3
