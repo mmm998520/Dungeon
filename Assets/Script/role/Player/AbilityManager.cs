@@ -45,6 +45,8 @@ namespace com.DungeonPad
             AbilityCurrentLevel.Add("召回", 0);
             AbilityCurrentLevel.Add("磁場", 0);
             AbilityCurrentLevel.Add("濺射", 0);
+            AbilityCurrentLevel.Add("毒", 0);
+            AbilityCurrentLevel.Add("光鏢", 0);
             #endregion
 
             #region//已購買的等級
@@ -60,6 +62,8 @@ namespace com.DungeonPad
             AbilityCanUseLevel.Add("召回", 0);
             AbilityCanUseLevel.Add("磁場", 0);
             AbilityCanUseLevel.Add("濺射", 0);
+            AbilityCanUseLevel.Add("毒", 0);
+            AbilityCanUseLevel.Add("光鏢", 0);
             #endregion
 
             #region//可買的等級上限
@@ -75,6 +79,8 @@ namespace com.DungeonPad
             AbilityCanBuyLevel.Add("召回", 2);
             AbilityCanBuyLevel.Add("磁場", 1);
             AbilityCanBuyLevel.Add("濺射", 1);
+            AbilityCanBuyLevel.Add("毒", 1);
+            AbilityCanBuyLevel.Add("光鏢", 1);
             #endregion
         }
     }

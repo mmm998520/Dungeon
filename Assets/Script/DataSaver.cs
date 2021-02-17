@@ -88,6 +88,8 @@ namespace com.DungeonPad
                 PlayerManager.homeButton = false;
                 PlayerManager.magneticField = false;
                 PlayerManager.circleAttack = false;
+                PlayerManager.poison = false;
+                PlayerManager.trackBullet = false;
             }
             else
             {

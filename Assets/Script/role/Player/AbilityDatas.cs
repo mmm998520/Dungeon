@@ -11,10 +11,13 @@ namespace com.DungeonPad
         public GameObject firstSelected, BuyDetail, selectMouse;
         public Image[] TotalCosts;
         public Sprite Loaded, UnLoad;
+        float AbilityTop, AbilityBottom, dis;
 
         private void Start()
         {
-            
+            AbilityTop = transform.GetChild(0).GetComponent<RectTransform>().position.y;
+            AbilityBottom = transform.GetChild(9).GetComponent<RectTransform>().position.y;
+            dis = (AbilityTop - AbilityBottom) / 9;
         }
 
         public void start()
@@ -27,6 +30,23 @@ namespace com.DungeonPad
             if (EventSystem.current.currentSelectedGameObject == null)
             {
                 EventSystem.current.SetSelectedGameObject(firstSelected);
+            }
+            if (EventSystem.current.currentSelectedGameObject != null)
+            {
+                if(EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().position.y > AbilityTop)
+                {
+                    for(int i = 0; i < transform.childCount; i++)
+                    {
+                        transform.GetChild(i).GetComponent<RectTransform>().position += Vector3.down * dis;
+                    }
+                }
+                if (EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().position.y < AbilityBottom)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        transform.GetChild(i).GetComponent<RectTransform>().position += Vector3.up * dis;
+                    }
+                }
             }
             EventSystem.current.currentSelectedGameObject.transform.parent.GetComponent<AbilityData>().setDetail();
             BuyDetail.SetActive(EventSystem.current.currentSelectedGameObject.name == "解鎖");

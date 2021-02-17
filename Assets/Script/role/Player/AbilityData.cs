@@ -38,6 +38,10 @@ namespace com.DungeonPad
             abilityName = ability.name;
             setAbilityBar();
             setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
+        }
+
+        public void Update()
+        {
             setButtonSpriteState();
         }
 
@@ -137,7 +141,6 @@ namespace com.DungeonPad
             setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
             DataSaver.Save();
 
-            setButtonSpriteState();
         }
 
         public void Less()
@@ -152,7 +155,6 @@ namespace com.DungeonPad
             setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
             DataSaver.Save();
 
-            setButtonSpriteState();
         }
 
         public void Unlock()
@@ -174,12 +176,11 @@ namespace com.DungeonPad
                     setDetail();
                     setPlayerAbility(abilityName, AbilityManager.AbilityCurrentLevel[abilityName]);
                     DataSaver.Save();
-                    setButtonSpriteState();
                 }
             }
         }
 
-        void setButtonSpriteState()
+        public void setButtonSpriteState()
         {
             SpriteState spriteState;
             if (AbilityManager.AbilityCurrentLevel[abilityName] < AbilityManager.AbilityCanUseLevel[abilityName] && AbilityManager.Costed + ability.cost[AbilityManager.AbilityCurrentLevel[abilityName] + 1] <= AbilityManager.TotalCost)
@@ -291,13 +292,18 @@ namespace com.DungeonPad
                         PlayerManager.homeButtonTimer = 6;
                     }
                     break;
-                    /*
                 case "磁場":
                     PlayerManager.magneticField = (abilityLevel != 0);
                     break;
                 case "濺射":
                     PlayerManager.circleAttack = (abilityLevel != 0);
-                    break;*/
+                    break;
+                case "毒":
+                    PlayerManager.magneticField = (abilityLevel != 0);
+                    break;
+                case "光鏢":
+                    PlayerManager.circleAttack = (abilityLevel != 0);
+                    break;
                 default:
                     Debug.LogError("沒有這個能力 : " + abilityName);
                     break;
