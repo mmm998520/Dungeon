@@ -30,8 +30,7 @@ namespace com.DungeonPad
         public bool lastDirRight;
         public Vector2 v = Vector2.zero, HardStraightA = Vector2.zero, DashA = Vector2.zero;
 
-        PlayerManager otherPlayer;
-        public Vector2 posBeforeDash, posAfterDash;
+        Transform otherPlayer;
 
         public PlayerJoyVibration playerJoyVibration;
 
@@ -56,7 +55,7 @@ namespace com.DungeonPad
         SpriteRenderer head;
 
         public int MaxBulletNum = 5, BulletNum = 5;
-        public GameObject Bullet, attackLine;
+        public GameObject Bullet, attackLine, magneticFieldPrefab;
         public Animator playerAttackLineAnimator;
 
         public static int money = 0, moneyB = 0;
@@ -75,19 +74,13 @@ namespace com.DungeonPad
         public Transform sticksBat;
         string SceneName;
 
-        private void Awake()
-        {
-            posBeforeDash = transform.position;
-            posAfterDash = transform.position;
-        }
-
         private void Start()
         {
             for (int i = 0; i < GameManager.players.childCount; i++)
             {
                 if (GameManager.players.GetChild(i).GetComponent<PlayerManager>() != this)
                 {
-                    otherPlayer = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
+                    otherPlayer = GameManager.players.GetChild(i);
                 }
             }
             head = transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -599,13 +592,6 @@ namespace com.DungeonPad
                 {
                     v = DashA;
                 }
-                if (magneticField)
-                {
-                    if (MagneticField.MagneticFieldTimer < 5)
-                    {
-                        MagneticField.useMagneticField = true;
-                    }
-                }
             }
             #endregion
             
@@ -1045,13 +1031,6 @@ namespace com.DungeonPad
                 {
                     v = DashA;
                 }
-                if (magneticField)
-                {
-                    if (MagneticField.MagneticFieldTimer < 5f)
-                    {
-                        MagneticField.useMagneticField = true;
-                    }
-                }
             }
             #endregion
             
@@ -1342,11 +1321,13 @@ namespace com.DungeonPad
             LineAttack();
             insAfterImages.timer = 0;
 
-            if (MagneticField.MagneticFieldTimer > 5)
+            if (magneticField)
             {
-                MagneticField.MagneticFieldTimer = 0;
-                posBeforeDash = transform.position;
-                posAfterDash = transform.position;
+                MagneticField magneticField = Instantiate(magneticFieldPrefab).GetComponent<MagneticField>();
+                magneticField.PosA.position = transform.position;
+                magneticField.PosB.position = transform.position;
+                magneticField.PosC.position = otherPlayer.position;
+                magneticField.InsPlayer = transform;
             }
         }
 

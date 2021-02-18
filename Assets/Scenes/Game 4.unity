@@ -1428,7 +1428,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &76192642
 PrefabInstance:
@@ -4554,8 +4554,6 @@ MonoBehaviour:
   v: {x: 0, y: 0}
   HardStraightA: {x: 0, y: 0}
   DashA: {x: 0, y: 0}
-  posBeforeDash: {x: 0, y: 0}
-  posAfterDash: {x: 0, y: 0}
   playerJoyVibration: {fileID: 170081933}
   StickTimer: 5320.3853
   HardStraightTimer: 4754.4785
@@ -4589,6 +4587,8 @@ MonoBehaviour:
   BulletNum: 5
   Bullet: {fileID: 323923915377658229, guid: 630a53c73085f8b4091220d634e477ae, type: 3}
   attackLine: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
+    type: 3}
+  magneticFieldPrefab: {fileID: 2323811627200118044, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
     type: 3}
   playerAttackLineAnimator: {fileID: 935135449}
   playerStat: 0
@@ -13872,7 +13872,7 @@ Transform:
   - {fileID: 1239733529}
   - {fileID: 832547681}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &470661069
 Animator:
@@ -14280,7 +14280,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &492332594 stripped
 Transform:
@@ -15288,7 +15288,7 @@ Transform:
   - {fileID: 1493826597}
   - {fileID: 900060117}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &528658087
 PrefabInstance:
@@ -16357,7 +16357,7 @@ Transform:
   - {fileID: 1415755739}
   - {fileID: 192921664}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &563914186
 PrefabInstance:
@@ -23629,85 +23629,6 @@ Transform:
   m_Father: {fileID: 1308180490}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &796658943
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2323811627200118044, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_Name
-      value: MagneticField
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118050, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2323811627200118051, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: p1
-      value: 
-      objectReference: {fileID: 170081936}
-    - target: {fileID: 2323811627200118051, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
-        type: 3}
-      propertyPath: p2
-      value: 
-      objectReference: {fileID: 1308180494}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 600a65a0f51aeca4ca22d7cfcde6826f, type: 3}
 --- !u!1001 &796939152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40258,7 +40179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1140084142
 GameObject:
@@ -41561,7 +41482,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1184411843
 PrefabInstance:
@@ -45967,8 +45888,6 @@ MonoBehaviour:
   v: {x: 0, y: 0}
   HardStraightA: {x: 0, y: 0}
   DashA: {x: 0, y: 0}
-  posBeforeDash: {x: 0, y: 0}
-  posAfterDash: {x: 0, y: 0}
   playerJoyVibration: {fileID: 1308180493}
   StickTimer: 8213.414
   HardStraightTimer: 5283.437
@@ -46002,6 +45921,8 @@ MonoBehaviour:
   BulletNum: 5
   Bullet: {fileID: 323923915377658229, guid: 630a53c73085f8b4091220d634e477ae, type: 3}
   attackLine: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
+    type: 3}
+  magneticFieldPrefab: {fileID: 2323811627200118044, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
     type: 3}
   playerAttackLineAnimator: {fileID: 935135448}
   playerStat: 0
@@ -55576,7 +55497,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1594897392 stripped
 Transform:
@@ -72739,7 +72660,7 @@ RectTransform:
   - {fileID: 2028230734}
   - {fileID: 1020542516}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

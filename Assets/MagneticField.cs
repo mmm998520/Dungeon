@@ -6,40 +6,32 @@ namespace com.DungeonPad
 {
     public class MagneticField : PlayerAttack
     {
-        public static bool useMagneticField;
-        public PlayerManager p1, p2;
-        public Transform P1Before_P1After, P2Before_P2After, P1Before_P2Before, P1After_P2After;
-        public Transform PosA, PosB, PosC, PosD;
-        public static float MagneticFieldTimer;
+        [HideInInspector] public Transform InsPlayer;
+        public Transform LineA, LineB, LineC;
+        public Transform PosA, PosB, PosC;
+        public float MagneticFieldTimer;
 
-        void LateUpdate()
+        void Update()
         {
             MagneticFieldTimer += Time.deltaTime;
-
-            P1Before_P1After.gameObject.SetActive(useMagneticField);
-            P2Before_P2After.gameObject.SetActive(useMagneticField);
-            P1Before_P2Before.gameObject.SetActive(useMagneticField);
-            P1After_P2After.gameObject.SetActive(useMagneticField);
-            PosA.gameObject.SetActive(useMagneticField);
-            PosB.gameObject.SetActive(useMagneticField);
-            PosC.gameObject.SetActive(useMagneticField);
-            PosD.gameObject.SetActive(useMagneticField);
-            if (useMagneticField)
+            if (InsPlayer && InsPlayer.GetComponent<PlayerManager>().DashTimer < 0.3f)
             {
-                setPos(P1Before_P1After, p1.posBeforeDash, p1.posAfterDash);
-                setPos(P2Before_P2After, p2.posBeforeDash, p2.posAfterDash);
-                setPos(P1Before_P2Before, p1.posBeforeDash, p2.posBeforeDash);
-                setPos(P1After_P2After, p1.posAfterDash, p2.posAfterDash);
-                PosA.position = p1.posBeforeDash;
-                PosB.position = p1.posAfterDash;
-                PosC.position = p2.posBeforeDash;
-                PosD.position = p2.posAfterDash;
-                Hit(p1.posBeforeDash, p1.posAfterDash);
-                Hit(p2.posBeforeDash, p2.posAfterDash);
-                Hit(p1.posBeforeDash, p2.posBeforeDash);
-                Hit(p1.posAfterDash, p2.posAfterDash);
-                monsterManagers.Clear();
-                useMagneticField = false;
+                PosB.position = InsPlayer.position;
+            }
+            else
+            {
+                InsPlayer = null;
+            }
+            setPos(LineA, PosA.position, PosB.position);
+            setPos(LineB, PosB.position, PosC.position);
+            setPos(LineC, PosA.position, PosC.position);
+            Hit(PosA.position, PosB.position);
+            Hit(PosB.position, PosC.position);
+            Hit(PosA.position, PosC.position);
+            monsterManagers.Clear();
+            if (MagneticFieldTimer >= 3)
+            {
+                Destroy(gameObject);
             }
         }
 
