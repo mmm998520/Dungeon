@@ -299,10 +299,10 @@ namespace com.DungeonPad
                     PlayerManager.circleAttack = (abilityLevel != 0);
                     break;
                 case "毒":
-                    PlayerManager.magneticField = (abilityLevel != 0);
+                    PlayerManager.poison = (abilityLevel != 0);
                     break;
                 case "光鏢":
-                    PlayerManager.circleAttack = (abilityLevel != 0);
+                    PlayerManager.trackBullet = (abilityLevel != 0);
                     break;
                 default:
                     Debug.LogError("沒有這個能力 : " + abilityName);

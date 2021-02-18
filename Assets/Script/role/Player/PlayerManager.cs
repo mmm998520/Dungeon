@@ -227,51 +227,47 @@ namespace com.DungeonPad
                             hpUpRate = 8;
                         }*/
                         hpUpRate = 20;//共回40;
-                        if (trackBullet)
-                        {
-                            trackBulletTimer -= Time.deltaTime * 2;
-                            trackBulletTimer = Mathf.Clamp(trackBulletTimer, 0, 2);
-                        }
                     }
                     else if (dis < 4.5f)
                     {
                         hpUpRate = 0;
+                        trackBulletTimer += Time.deltaTime;
                     }
                     else
                     {
                         hpUpRate = -6f;//共扣12;
-                        if (trackBullet)
+                        trackBulletTimer += Time.deltaTime;
+                    }
+                    if (trackBullet)
+                    {
+                        if (trackBulletTimer > 3 && HP > 30)
                         {
-                            trackBulletTimer += Time.deltaTime;
-                            if (trackBulletTimer > 2)
+                            trackBulletTimer = Mathf.Clamp(trackBulletTimer, 0, 2);
+                            Transform minDisMonster = null;
+                            float minDis = 5;//距離至少要5以下才會觸發攻擊
+                            for (int i = 0; i < GameManager.monsters.childCount; i++)
                             {
-                                trackBulletTimer = Mathf.Clamp(trackBulletTimer, 0, 2);
-                                Transform minDisMonster = null;
-                                float minDis = 5;//距離至少要5以下才會觸發攻擊
-                                for (int i = 0; i < GameManager.monsters.childCount; i++)
+                                Transform monster = GameManager.monsters.GetChild(i);
+                                if (monster.gameObject.activeSelf)
                                 {
-                                    Transform monster = GameManager.monsters.GetChild(i);
-                                    if (monster.gameObject.activeSelf)
+                                    if (Vector2.Distance(monster.position, transform.position) < minDis)
                                     {
-                                        if (Vector2.Distance(monster.position, transform.position) < minDis)
-                                        {
-                                            float Dis = Vector2.Distance(monster.position, transform.position);
-                                            minDisMonster = monster;
-                                            minDis = 0;
-                                        }
+                                        float Dis = Vector2.Distance(monster.position, transform.position);
+                                        minDisMonster = monster;
+                                        minDis = 0;
                                     }
                                 }
-                                if (minDisMonster != null)
-                                {
-                                    trackBulletTimer = 0;
-                                    Instantiate(playerTrack, transform.position, Quaternion.Euler(0,0,Random.Range(0,360))).GetComponent<PlayerTrack>().Target = minDisMonster;
-                                }
+                            }
+                            if (minDisMonster != null)
+                            {
+                                trackBulletTimer = 0;
+                                HP -= 10;
+                                Instantiate(playerTrack, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerTrack>().Target = minDisMonster;
                             }
                         }
-                        
                     }
 
-                    if(!SceneName.Contains("SelectRole"))
+                    if (!SceneName.Contains("SelectRole"))
                     {
                         HP += hpUpRate * Time.deltaTime;
                     }
@@ -631,18 +627,12 @@ namespace com.DungeonPad
                 if (DashTimer < 0.3f)
                 {
                     v = DashA;
-                    posAfterDash = transform.position;
                 }
                 if (magneticField)
                 {
-                    if (DashTimer < 1f)
+                    if (MagneticField.MagneticFieldTimer < 5)
                     {
                         MagneticField.useMagneticField = true;
-                    }
-                    else if (otherPlayer.DashTimer > 1f)
-                    {
-                        posBeforeDash = transform.position;
-                        posAfterDash = posBeforeDash;
                     }
                 }
             }
@@ -1083,18 +1073,12 @@ namespace com.DungeonPad
                 if (DashTimer < 0.3f)
                 {
                     v = DashA;
-                    posAfterDash = transform.position;
                 }
                 if (magneticField)
                 {
-                    if (DashTimer < 1f)
+                    if (MagneticField.MagneticFieldTimer < 5f)
                     {
                         MagneticField.useMagneticField = true;
-                    }
-                    else if (otherPlayer.DashTimer > 1f)
-                    {
-                        posBeforeDash = transform.position;
-                        posAfterDash = posBeforeDash;
                     }
                 }
             }
@@ -1387,8 +1371,12 @@ namespace com.DungeonPad
             LineAttack();
             insAfterImages.timer = 0;
 
-            posBeforeDash = transform.position;
-            posAfterDash = transform.position;
+            if (MagneticField.MagneticFieldTimer > 5)
+            {
+                MagneticField.MagneticFieldTimer = 0;
+                posBeforeDash = transform.position;
+                posAfterDash = transform.position;
+            }
         }
 
         private void FixedUpdate()

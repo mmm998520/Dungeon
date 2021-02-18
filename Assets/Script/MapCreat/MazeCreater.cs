@@ -649,6 +649,7 @@ namespace com.DungeonPad
             #region//第一層
             if (layer == 1)
             {
+                Debug.LogError(GameManager.passLayerOneTimes);
                 if (GameManager.passLayerOneTimes < 1)
                 {
                     level = levelRamdomer(new int[] { 0, 1, 1, 1 });
@@ -689,7 +690,12 @@ namespace com.DungeonPad
             int r = Random.Range(0, roomData.Count);
             if (!roomData.TryGetValue(r, out objectDatas))
             {
-                Debug.LogError(r);
+                Debug.LogError("roomData : " + roomData);
+                Debug.LogError("layers : " + layers);
+                Debug.LogError("passwayType : " + passwayType);
+                Debug.LogError("level : " + level);
+                Debug.LogError("functionTypeNum : " + functionTypeNum);
+                Debug.LogError("r : " + r);
             }
             int i, j;
             for (i = 0; i < objectDatas.GetUpperBound(0) + 1; i++)
@@ -700,13 +706,36 @@ namespace com.DungeonPad
                     {
                         Debug.Log(objectDatas[i, j] + "," + i + "," + j);
                     }
-                    instantiateGameObject(objectDatas[i, j], roomRow * objectCountRowNum + i, roomCol * objectCountColNum + j);
+                    instantiateGameObject(objectDatas[i, j], roomRow * objectCountRowNum + i, roomCol * objectCountColNum + j, level);
                 }
             }
         }
         /// <summary> 根據生成物件敘述生成對應物件 </summary>
-        void instantiateGameObject(string objectData, int insPosRow, int insPosCol)
+        void instantiateGameObject(string objectData, int insPosRow, int insPosCol, int level)
         {
+            switch (objectData)
+            {
+                case "難度1-3是m1x2_難度4-7是m1x4":
+                    if (level < 4)
+                    {
+                        objectData = "m1x2";
+                    }
+                    else
+                    {
+                        objectData = "m2x2";
+                    }
+                    break;
+                case "難度1-5是bm1x1_難度6-7是bm1x2":
+                    if (level < 6)
+                    {
+                        objectData = "bm1x1";
+                    }
+                    else
+                    {
+                        objectData = "bm1x2";
+                    }
+                    break;
+            }
             if (insPosRow <= 0 || insPosCol <= 0 || insPosRow >= roomCountRowNum * objectCountRowNum - 1 || insPosCol >= roomCountColNum * objectCountColNum - 1)
             {
                 Instantiate(wall, new Vector3(insPosRow, insPosCol, 0), wall.transform.rotation, transform);

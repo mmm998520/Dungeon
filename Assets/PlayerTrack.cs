@@ -46,7 +46,11 @@ namespace com.DungeonPad
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-            if(attack(collider, 1))
+            if(attack(collider, 0.3f))
+            {
+                Destroy(gameObject);
+            }
+            if (collider.gameObject.layer == 12)
             {
                 Destroy(gameObject);
             }

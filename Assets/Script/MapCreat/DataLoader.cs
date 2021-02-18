@@ -16,7 +16,7 @@ namespace com.DungeonPad
         /// <summary> 通道型態總數，0 ┼，1 ├，2 ┬，3 ┤，4 ┴，5 ─，6 │ </summary>
         int passwayTypeNum = 7;
         /// <summary> 難度分級數 </summary>
-        int level = 3;
+        int level = 7;
         /// <summary> 功能種類數 </summary>
         int functionTypeNum = 3;
         public void LoadAll()

@@ -8,6 +8,14 @@ namespace com.DungeonPad
 {
     public class DataReverser : MonoBehaviour
     {
+        public enum InputType
+        {
+            手動輸入,
+            自動輸入_起點,
+            自動輸入_過程,
+            自動輸入_終點,
+        }
+        public InputType inputType;
         public TextAsset[] textAsset;
         string name = "";
         public int layers, passwayNum, level, function;
@@ -19,62 +27,116 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            switch (inputType)
             {
-                for (int i = 0; i < textAsset.Length; i++)
+                case InputType.自動輸入_起點:
+                    function = 0;
+                    break;
+                case InputType.自動輸入_過程:
+                    function = 1;
+                    break;
+                case InputType.自動輸入_終點:
+                    function = 2;
+                    break;
+            }
+                    if (Input.GetKeyDown(KeyCode.R))
+            {
+                switch (inputType)
                 {
-                    string[,] newArray = DataLoader.LoadData_Create(textAsset[i]);
-                    passwayNum = int.Parse(textAsset[i].name.Split('開')[0]);
+                    case InputType.手動輸入:
+                        input();
+                        break;
+                    case InputType.自動輸入_起點:
+                        function = 0;
+                        num = 0;
+                        for (level = 1; level < 8; level++)
+                        {
+                            input();
+                            num = 0;
+                        }
+                        textAsset = new TextAsset[0];
+                        passwayNum++;
+                        level = 1;
+                        break;
+                    case InputType.自動輸入_過程:
+                        function = 1;
+                        input();
+                        textAsset = new TextAsset[0];
+                        passwayNum++;
+                        num = 0;
+                        break;
+                    case InputType.自動輸入_終點:
+                        function = 2;
+                        num = 0;
+                        for (level = 1; level < 8; level++)
+                        {
+                            input();
+                            num = 0;
+                        }
+                        textAsset = new TextAsset[0];
+                        passwayNum++;
+                        level = 1;
+                        break;
+                }
+
+            }
+        }
+
+        void input()
+        {
+            for (int i = 0; i < textAsset.Length; i++)
+            {
+                string[,] newArray = DataLoader.LoadData_Create(textAsset[i]);
+                passwayNum = int.Parse(textAsset[i].name.Split('開')[0]);
+                if (passwayNum == 4)
+                {
+                    passwayType = 0;
+                }
+                else if (passwayNum == 3)
+                {
+                    passwayType = 1;
+                }
+                else if (passwayNum == 2)
+                {
+                    passwayType = 5;
+                }
+                for (int j = 0; j < 8; j++)
+                {
+                    name = layers + "_" + passwayType + "_" + level + "_" + function + "_" + num;
+                    writeFile(Application.dataPath + "/Resources/RoomDatas/" + layers + "/" + passwayType + "/" + level + "/" + function, name, arrayToString(newArray));
+                    newArray = Rotate(newArray);
+                    if (j == 3)
+                    {
+                        newArray = reverserArray(newArray);
+                    }
                     if (passwayNum == 4)
                     {
-                        passwayType = 0;
+                        num++;
                     }
                     else if (passwayNum == 3)
                     {
-                        passwayType = 1;
-                    }
-                    else if (passwayNum == 2)
-                    {
-                        passwayType = 5;
-                    }
-                    for (int j = 0; j < 8; j++)
-                    {
-                        name = layers + "_" + passwayType + "_" + level + "_" + function + "_" + num;
-                        writeFile(Application.dataPath +  "/Resources/RoomDatas/" + layers + "/" + passwayType + "/" + level + "/" + function, name, arrayToString(newArray));
-                        newArray = Rotate(newArray);
-                        if (j == 3)
+                        if (++passwayType >= 5)
                         {
-                            newArray = reverserArray(newArray);
+                            passwayType = 1;
                         }
-                        if (passwayNum == 4)
+                        if (j % 4 == 3)
                         {
                             num++;
                         }
-                        else if (passwayNum == 3)
+                    }
+                    else if (passwayNum == 2)
+                    {
+                        if (++passwayType >= 7)
                         {
-                            if (++passwayType >= 5)
-                            {
-                                passwayType = 1;
-                            }
-                            if (j % 4 == 3)
-                            {
-                                num++;
-                            }
+                            passwayType = 5;
                         }
-                        else if (passwayNum == 2)
+                        if (j % 2 == 1)
                         {
-                            if (++passwayType >= 7)
-                            {
-                                passwayType = 5;
-                            }
-                            if (j % 2 == 1)
-                            {
-                                num++;
-                            }
+                            num++;
                         }
                     }
-                    Debug.LogError("k");
                 }
+                Debug.LogError("k");
             }
         }
 

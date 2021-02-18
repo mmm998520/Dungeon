@@ -10,9 +10,12 @@ namespace com.DungeonPad
         public PlayerManager p1, p2;
         public Transform P1Before_P1After, P2Before_P2After, P1Before_P2Before, P1After_P2After;
         public Transform PosA, PosB, PosC, PosD;
+        public static float MagneticFieldTimer;
 
         void LateUpdate()
         {
+            MagneticFieldTimer += Time.deltaTime;
+
             P1Before_P1After.gameObject.SetActive(useMagneticField);
             P2Before_P2After.gameObject.SetActive(useMagneticField);
             P1Before_P2Before.gameObject.SetActive(useMagneticField);
