@@ -25,9 +25,22 @@ namespace com.DungeonPad
                     Debug.LogWarning("hitTimes");
                 }
             }
-            if (collider.GetComponent<BatSticked>() || collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
+            if (collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
             {
                 Destroy(collider.gameObject);
+            }
+            if (collider.GetComponent<BatSticked>())
+            {
+                Destroy(collider.gameObject);
+                int r = Random.Range(1, 3);
+                for(int i = 0; i < r; i++)
+                {
+                    Instantiate(GameManager.gameManager.money, transform.position, Quaternion.identity);
+                }
+                if (Random.Range(0, 100) < 1)
+                {
+                    Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
+                }
             }
             if (collider.name == "hit role collider")
             {

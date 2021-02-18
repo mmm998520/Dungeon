@@ -51,33 +51,6 @@ namespace com.DungeonPad
                 {
                     collider.GetComponent<MonsterManager>().HP -= damage;
                     attack = true;
-                    /*
-                    if (PlayerManager.trackBullet)
-                    {
-                        Transform minDisMonster = null;
-                        float minDis = 5;//距離至少要5以下才會觸發攻擊
-                        for (int i = 0; i < GameManager.monsters.childCount; i++)
-                        {
-                            Transform monster = GameManager.monsters.GetChild(i);
-                            if (monster.gameObject.activeSelf)
-                            {
-                                if (Vector2.Distance(monster.position, transform.position) < minDis)
-                                {
-                                    float Dis = Vector2.Distance(monster.position, transform.position);
-                                    minDisMonster = monster;
-                                    minDis = 0;
-                                }
-                            }
-                        }
-                        if (minDisMonster != null)
-                        {
-                            for(int i = 0; i < GameManager.players.childCount; i++)
-                            {
-                                Instantiate(playerTrack, GameManager.players.GetChild(i).position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerTrack>().Target = minDisMonster;
-                            }
-                        }
-                    }
-                    */
                     if (Random.Range(0, 100) < PlayerManager.criticalRate)
                     {
                         collider.GetComponent<MonsterManager>().HP -= 1;
@@ -102,7 +75,32 @@ namespace com.DungeonPad
                     Debug.LogWarning("hitTimes");
                 }
             }
-            if (collider.GetComponent<BatSticked>() || collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
+            if (collider.GetComponent<BatSticked>())
+            {
+                Destroy(collider.gameObject);
+                if (PlayerManager.circleAttack)
+                {
+                    Instantiate(AttackCircle, collider.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerCircleAttack>().monsterManagers.Add(collider.GetComponent<MonsterManager>());
+                }
+                if (PlayerManager.poison)
+                {
+                    collider.GetComponent<MonsterManager>().poisonTimers.Add(0);
+                    if (collider.GetComponent<MonsterManager>().poisonTimers.Count > 10)
+                    {
+                        collider.GetComponent<MonsterManager>().poisonTimers.RemoveAt(0);
+                    }
+                }
+                int r = Random.Range(1, 3);
+                for (int i = 0; i < r; i++)
+                {
+                    Instantiate(GameManager.gameManager.money, transform.position, Quaternion.identity);
+                }
+                if (Random.Range(0, 100) < 1)
+                {
+                    Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
+                }
+            }
+            if (collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
             {
                 Destroy(collider.gameObject);
             }
