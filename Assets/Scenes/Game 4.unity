@@ -4548,8 +4548,6 @@ MonoBehaviour:
   beganTouchedTimer: 8202.872
   flashTimer: 0
   flashTimerStoper: 0.1
-  playerTrack: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
-    type: 3}
   startRayPoss: []
   p1: 1
   lastDirRight: 0
@@ -45960,8 +45958,6 @@ MonoBehaviour:
   beganTouchedTimer: 8208.844
   flashTimer: 0
   flashTimerStoper: 0.1
-  playerTrack: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
-    type: 3}
   startRayPoss:
   - {x: 0.35, y: 0.35, z: 0}
   - {x: 0.35, y: 0, z: 0}
@@ -48659,6 +48655,9 @@ MonoBehaviour:
   attack: {fileID: 6887112125340408767, guid: cc0e89c33dcb1ed4e9baa8ff77dfdc3d, type: 3}
   attackCollider: {fileID: 515374005}
   draw: 1
+  trackBulletTimer: 0
+  playerTrack: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
+    type: 3}
 --- !u!4 &1393462516
 Transform:
   m_ObjectHideFlags: 0

@@ -21,8 +21,33 @@ namespace com.DungeonPad
             }
             else
             {
+                Vector2 targetDir;
                 // 開始追蹤敵人
-                Vector2 targetDir = (Target.position - transform.position).normalized;
+                if (Target == null)
+                {
+                    float minDis = 4;//距離至少要5以下才會觸發攻擊
+                    for (int i = 0; i < GameManager.monsters.childCount; i++)
+                    {
+                        Transform monster = GameManager.monsters.GetChild(i);
+                        if (monster.gameObject.activeSelf)
+                        {
+                            if (Vector2.Distance(monster.position, transform.position + transform.right * 3) < minDis)
+                            {
+                                float Dis = Vector2.Distance(monster.position, transform.position + transform.right * 3);
+                                Target = monster;
+                                minDis = Dis;
+                            }
+                        }
+                    }
+                }
+                if (Target == null)
+                {
+                    targetDir = transform.right;
+                }
+                else
+                {
+                    targetDir = (Target.position - transform.position).normalized;
+                }
                 float a = Vector2.Angle(transform.right, targetDir) / RotateSpeed;
                 speed += 0.5f * Time.deltaTime;
 

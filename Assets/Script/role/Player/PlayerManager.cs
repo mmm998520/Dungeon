@@ -24,8 +24,6 @@ namespace com.DungeonPad
         public static float homeButtonTimer = 0, homeButtonTimerStoper = 12;
         public static float moveSpeed = 3f, DashSpeed = 11, DashCD = 0.5f, reducesDamage = 0, criticalRate = 0;
         public static bool homeButton = false, magneticField = false, circleAttack = false, poison = false, trackBullet = false;
-        float trackBulletTimer;
-        [SerializeField] GameObject playerTrack;
         public List<Vector3> startRayPoss;
 
         public bool p1;
@@ -227,44 +225,17 @@ namespace com.DungeonPad
                             hpUpRate = 8;
                         }*/
                         hpUpRate = 20;//共回40;
+                        Players.canTrack = false;
                     }
                     else if (dis < 4.5f)
                     {
                         hpUpRate = 0;
-                        trackBulletTimer += Time.deltaTime;
+                        Players.canTrack = true;
                     }
                     else
                     {
                         hpUpRate = -6f;//共扣12;
-                        trackBulletTimer += Time.deltaTime;
-                    }
-                    if (trackBullet)
-                    {
-                        if (trackBulletTimer > 3 && HP > 30)
-                        {
-                            trackBulletTimer = Mathf.Clamp(trackBulletTimer, 0, 2);
-                            Transform minDisMonster = null;
-                            float minDis = 5;//距離至少要5以下才會觸發攻擊
-                            for (int i = 0; i < GameManager.monsters.childCount; i++)
-                            {
-                                Transform monster = GameManager.monsters.GetChild(i);
-                                if (monster.gameObject.activeSelf)
-                                {
-                                    if (Vector2.Distance(monster.position, transform.position) < minDis)
-                                    {
-                                        float Dis = Vector2.Distance(monster.position, transform.position);
-                                        minDisMonster = monster;
-                                        minDis = 0;
-                                    }
-                                }
-                            }
-                            if (minDisMonster != null)
-                            {
-                                trackBulletTimer = 0;
-                                HP -= 10;
-                                Instantiate(playerTrack, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerTrack>().Target = minDisMonster;
-                            }
-                        }
+                        Players.canTrack = true;
                     }
 
                     if (!SceneName.Contains("SelectRole"))
