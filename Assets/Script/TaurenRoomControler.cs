@@ -13,7 +13,7 @@ namespace com.DungeonPad
         private void Update()
         {
             print(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime * 3589);
-            if (CameraManager.center.x > 20.55f)
+            if (CameraManager.center.x > 20.55f && Boss == null)
             {
                 if(SceneManager.GetActiveScene().name =="Game 2")
                 {
@@ -21,7 +21,7 @@ namespace com.DungeonPad
                     SceneManager.LoadScene("Game 1");
                 }
             }
-            if (CameraManager.center.x > 30.64f)
+            if (CameraManager.center.x > 30.64f && Boss == null)
             {
                 if (SceneManager.GetActiveScene().name == "Game 4")
                 {
