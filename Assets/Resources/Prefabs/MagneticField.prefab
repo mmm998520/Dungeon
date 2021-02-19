@@ -319,6 +319,8 @@ GameObject:
   - component: {fileID: 4503739070879029681}
   - component: {fileID: 9115244302326445742}
   - component: {fileID: 4961191836853006283}
+  - component: {fileID: 8063959583800705942}
+  - component: {fileID: 4407604075631129582}
   m_Layer: 0
   m_Name: MagneticField
   m_TagString: Untagged
@@ -366,7 +368,13 @@ MonoBehaviour:
   PosA: {fileID: 2542500258170748006}
   PosB: {fileID: 1751912904035640373}
   PosC: {fileID: 5927087531112647119}
-  MagneticFieldTimer: 0
+  monsters: []
+  materials:
+  - {fileID: 2100000, guid: 8a17020fe4cf4d64d8ba99ed4a1abdd8, type: 2}
+  - {fileID: 2100000, guid: 4dc50d218056c3049a9f13ab3b513ed0, type: 2}
+  - {fileID: 2100000, guid: fdfede64d46817c4792479680b367f79, type: 2}
+  - {fileID: 2100000, guid: 8c3f15fed88791846a78721f4fcc3547, type: 2}
+  - {fileID: 2100000, guid: eea51499590ce114db671aa6da850720, type: 2}
 --- !u!60 &1390124826901246365
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -423,7 +431,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eea51499590ce114db671aa6da850720, type: 2}
+  - {fileID: 2100000, guid: 8a17020fe4cf4d64d8ba99ed4a1abdd8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -454,6 +462,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcd128ba146cc864990c5f11f7bc6350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &8063959583800705942
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2323811627200118044}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 96d7722efaf69874883d7d6728e1ca18, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4407604075631129582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2323811627200118044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a926fba534643704e9a9cd72cf0fcf09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2323811627580119403

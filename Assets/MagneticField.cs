@@ -9,17 +9,21 @@ namespace com.DungeonPad
         [HideInInspector] public Transform InsPlayer;
         public Transform LineA, LineB, LineC;
         public Transform PosA, PosB, PosC;
-        public float MagneticFieldTimer;
         PolygonCollider2D polygon;
+        MeshRenderer meshRenderer;
         public List<Collider2D> monsters = new List<Collider2D>();
+        float timer;
+
+        [SerializeField] Material[] materials;
+
         private void Start()
         {
             polygon = GetComponent<PolygonCollider2D>();
+            meshRenderer = GetComponent<MeshRenderer>();
         }
 
         void Update()
         {
-            MagneticFieldTimer += Time.deltaTime;
             if (InsPlayer && InsPlayer.GetComponent<PlayerManager>().DashTimer < 0.3f)
             {
                 PosB.position = InsPlayer.position;
@@ -38,10 +42,18 @@ namespace com.DungeonPad
             //Hit(PosB.position, PosC.position);
             //Hit(PosA.position, PosC.position);
             monsterManagers.Clear();
-            if (MagneticFieldTimer >= 3)
+
+            timer += Time.deltaTime;
+            if (timer > 3)
             {
-                Destroy(gameObject);
+                GetComponent<Animator>().SetTrigger("end");
             }
+
+            for (int i = 0; i < monsters.Count; i++)
+            {
+                attack(monsters[i], 0.1f * Time.deltaTime);
+            }
+            monsterManagers.Clear();
         }
 
         void setPos(Transform line, Vector2 posA, Vector2 posB)
@@ -84,6 +96,11 @@ namespace com.DungeonPad
                 collider = hits[i].collider;
                 attack(collider, 3 * Time.deltaTime);
             }
+        }
+
+        void switchMaterial(int materialNum)
+        {
+            meshRenderer.material = materials[materialNum];
         }
     }
 }
