@@ -10,6 +10,12 @@ namespace com.DungeonPad
         public Transform LineA, LineB, LineC;
         public Transform PosA, PosB, PosC;
         public float MagneticFieldTimer;
+        PolygonCollider2D polygon;
+        public List<Collider2D> monsters = new List<Collider2D>();
+        private void Start()
+        {
+            polygon = GetComponent<PolygonCollider2D>();
+        }
 
         void Update()
         {
@@ -17,6 +23,9 @@ namespace com.DungeonPad
             if (InsPlayer && InsPlayer.GetComponent<PlayerManager>().DashTimer < 0.3f)
             {
                 PosB.position = InsPlayer.position;
+                Vector2[] poses = new Vector2[] { PosA.position, PosB.position, PosC.position };
+                polygon.SetPath(0, poses);
+                GetComponent<ColliderToMesh>().start();
             }
             else
             {
@@ -25,9 +34,9 @@ namespace com.DungeonPad
             setPos(LineA, PosA.position, PosB.position);
             setPos(LineB, PosB.position, PosC.position);
             setPos(LineC, PosA.position, PosC.position);
-            Hit(PosA.position, PosB.position);
-            Hit(PosB.position, PosC.position);
-            Hit(PosA.position, PosC.position);
+            //Hit(PosA.position, PosB.position);
+            //Hit(PosB.position, PosC.position);
+            //Hit(PosA.position, PosC.position);
             monsterManagers.Clear();
             if (MagneticFieldTimer >= 3)
             {
@@ -48,6 +57,22 @@ namespace com.DungeonPad
             line.position = center;
             line.rotation = Quaternion.Euler(0, 0, angle);
             line.localScale = new Vector3(distance, 1, 1);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.GetComponent<MonsterManager>())
+            {
+                monsters.Add(collider);
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collider)
+        {
+            if (collider.GetComponent<MonsterManager>())
+            {
+                monsters.Remove(collider);
+            }
         }
 
         void Hit(Vector2 posA, Vector2 posB)

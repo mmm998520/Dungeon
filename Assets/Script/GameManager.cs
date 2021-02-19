@@ -8,7 +8,7 @@ namespace com.DungeonPad
     public class GameManager : MonoBehaviour
     {
         public static GameManager gameManager;
-        public static Transform players, monsters, triggers, UI;
+        public static Transform players, monsters, triggers, UI, magneticFields;
         public static int layers = 1, level = 1, passLayerOneTimes = 0;
         public static MazeCreater mazeCreater;
         public static SmallMap smallMap;
@@ -32,6 +32,7 @@ namespace com.DungeonPad
             players = GameObject.Find("Players").transform;
             monsters = GameObject.Find("Monsters").transform;
             triggers = GameObject.Find("Triggers").transform;
+            magneticFields = GameObject.Find("MagneticFields").transform;
             if (GameObject.Find("MazeCreater"))
             {
                 mazeCreater = GameObject.Find("MazeCreater").GetComponent<MazeCreater>();

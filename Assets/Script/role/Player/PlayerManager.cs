@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = false;
+        public static bool lockedHP = true;
         public static float lockedHPTimer = 10, DiedTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -1323,7 +1323,7 @@ namespace com.DungeonPad
 
             if (magneticField)
             {
-                MagneticField magneticField = Instantiate(magneticFieldPrefab).GetComponent<MagneticField>();
+                MagneticField magneticField = Instantiate(magneticFieldPrefab, GameManager.magneticFields).GetComponent<MagneticField>();
                 magneticField.PosA.position = transform.position;
                 magneticField.PosB.position = transform.position;
                 magneticField.PosC.position = otherPlayer.position;
