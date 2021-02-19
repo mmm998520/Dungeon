@@ -687,7 +687,7 @@ MonoBehaviour:
   speed: 1
   prepareSource: {fileID: 6431428174509040607}
   attackSource: {fileID: 7020226564661491114}
-  attack: {fileID: 6355018383450350413, guid: 56a1cf3ab75303749866ecbadfd15769, type: 3}
+  attack: {fileID: 1513955079076276854, guid: ca01a40824ff67b468920c18a1ecd512, type: 3}
   guardPoint: 
   nextGrardNum: 0
   TauntTarget: {fileID: 0}
@@ -695,6 +695,7 @@ MonoBehaviour:
   repTimes: 1
   repTimer: 1
   rigidbody: {fileID: 5652301302069140118}
+  poisonTimers: []
   Ammunition: {fileID: 1935790135895106840, guid: 684309a045786d1478cb3d14904dd43d,
     type: 3}
   gostBehavior: 0

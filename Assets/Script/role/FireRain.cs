@@ -6,17 +6,17 @@ namespace com.DungeonPad
 {
     public class FireRain : MonoBehaviour
     {
-        public float timer, stopeTimer, destoryTimer;
+        public float timer, stopTimer, destoryTimer;
         public bool CanHit = false;
         public SpriteRenderer spriteRenderer;
         void Update()
         {
             timer += Time.deltaTime;
-            if (timer >= stopeTimer + destoryTimer)
+            if (timer >= stopTimer + destoryTimer)
             {
                 Destroy(gameObject);
             }
-            else if(timer >= stopeTimer)
+            else if(timer >= stopTimer)
             {
                 CanHit = true;
                 spriteRenderer.color = Color.white;

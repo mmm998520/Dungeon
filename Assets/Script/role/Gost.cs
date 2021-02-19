@@ -73,9 +73,18 @@ namespace com.DungeonPad
         protected override void Attack(int additionalAngle)
         {
             attackSource.Play();
-            for(int i = 0; i < 3; i++)
+            string AtttackType;
+            if (gameObject.name.Contains("Big"))
             {
-                Instantiate(base.attack, transform.position + Quaternion.Euler(0, 0, Random.Range(0, 360)) * Vector3.right * Random.Range(0.5f, 5f), Quaternion.identity).GetComponent<MonsterAttack>();
+                AtttackType = "FireRainsBigGost";
+            }
+            else
+            {
+                AtttackType = "FireRainsGost";
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                Instantiate(base.attack, transform.position + Quaternion.Euler(0, 0, Random.Range(0, 360)) * Vector3.right * Random.Range(0.5f, 5f), Quaternion.identity, GameObject.Find(AtttackType).transform).GetComponent<MonsterAttack>();
             }
         }
 

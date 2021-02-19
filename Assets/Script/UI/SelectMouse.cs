@@ -98,7 +98,15 @@ namespace com.DungeonPad
                     {
                         playerColor = PlayerColor.P1Red_P2Blue;
                     }
-                    SceneManager.LoadScene(NextScene);
+                    if(NextScene == "Game 3")
+                    {
+                        GameManager.layers = 2;
+                        SceneManager.LoadScene("Game 1");
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(NextScene);
+                    }
                 }
             }
         }
