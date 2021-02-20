@@ -25,8 +25,11 @@ namespace com.DungeonPad
 
         public GameObject reLifeParticle, money, moneyB;
         public bool haveFinalRoomStore;
+        public static AsyncOperation asyncOperation;
+
         void Awake()
         {
+            Debug.LogError("我是awake");
             MazeCreater.setTotalRowCol();
             gameManager = this;
             players = GameObject.Find("Players").transform;

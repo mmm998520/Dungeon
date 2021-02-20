@@ -14,9 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectRole_Tutorial.unity
     guid: e98a33b1084e9bb4ea6695b06339f66a
-  - enabled: 0
-    path: Assets/Scenes/SelectRole_Tutorial 1.unity
-    guid: 983128c7946221347aca7b1b3dce0d0a
   - enabled: 1
     path: Assets/Scenes/SelectRole_Game.unity
     guid: b36dd8e7b9c90f143ad478d46075dbd9

@@ -27,10 +27,15 @@ namespace com.DungeonPad
             P1Red_P2Blue
         }
         public static PlayerColor playerColor;
-
         void Start()
         {
-
+            if (NextScene == "Game 3")
+            {
+                GameManager.layers = 2;
+                NextScene = "Game 1";
+            }
+            GameManager.asyncOperation = SceneManager.LoadSceneAsync(NextScene);
+            GameManager.asyncOperation.allowSceneActivation = false;
         }
 
         void Update()
@@ -98,14 +103,9 @@ namespace com.DungeonPad
                     {
                         playerColor = PlayerColor.P1Red_P2Blue;
                     }
-                    if(NextScene == "Game 3")
+                    if (GameManager.asyncOperation.progress >= 0.9f)
                     {
-                        GameManager.layers = 2;
-                        SceneManager.LoadScene("Game 1");
-                    }
-                    else
-                    {
-                        SceneManager.LoadScene(NextScene);
+                        GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                     }
                 }
             }
