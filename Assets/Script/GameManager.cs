@@ -27,7 +27,7 @@ namespace com.DungeonPad
         public bool haveFinalRoomStore;
         public static AsyncOperation asyncOperation;
         public static GameObject Hurted;
-
+        public static ShowAbilityDetail showAbilityDetail;
         void Awake()
         {
             MazeCreater.setTotalRowCol();
@@ -51,6 +51,14 @@ namespace com.DungeonPad
                 PlayerManager.Life = 1;
             }
             Hurted = Resources.Load<GameObject>("Prefabs/Hurted");
+            try
+            {
+                showAbilityDetail = GameObject.Find("能力敘述文字").GetComponent<ShowAbilityDetail>();
+            }
+            catch
+            {
+                
+            }
         }
 
         void Update()

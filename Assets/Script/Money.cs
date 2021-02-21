@@ -65,7 +65,7 @@ namespace com.DungeonPad
                     }
                     try
                     {
-                        GameObject.Find("能力敘述文字").GetComponent<ShowAbilityDetail>().showDetail(AbilityManager.Abilitys[r].detail[AbilityManager.AbilityCurrentLevel[abilityName]]);
+                        GameManager.showAbilityDetail.showDetail(abilityName + " : " + AbilityManager.Abilitys[r].detail[AbilityManager.AbilityCurrentLevel[abilityName]]);
                     }
                     catch
                     {
