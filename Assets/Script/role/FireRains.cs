@@ -52,6 +52,7 @@ namespace com.DungeonPad
                     {
                         hitedTimer[playerManager][0] = 0;
                         PlayerManager.HP -= ++hitedTimer[playerManager][1] * SingleDamage;
+                        Instantiate(GameManager.Hurted, playerManager.transform.position, Quaternion.identity, playerManager.transform);
                     }
                 }
                 else

@@ -26,6 +26,8 @@ namespace com.DungeonPad
         public static bool homeButton = false, magneticField = false, circleAttack = false, poison = false, trackBullet = false;
         public List<Vector3> startRayPoss;
 
+        public static int batStickedNum = 0;
+
         public bool p1;
         public bool lastDirRight;
         public Vector2 v = Vector2.zero, HardStraightA = Vector2.zero, DashA = Vector2.zero;
@@ -76,6 +78,7 @@ namespace com.DungeonPad
 
         private void Start()
         {
+            batStickedNum = 0;
             for (int i = 0; i < GameManager.players.childCount; i++)
             {
                 if (GameManager.players.GetChild(i).GetComponent<PlayerManager>() != this)
@@ -200,24 +203,13 @@ namespace com.DungeonPad
                 else
                 {
                     float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
-                    float hpUpRate;
-                    /*= (2f - dis) * 2;
-                    if (hpUpRate > 0 && Players.fightingTimer >= 5)
-                    {
-                        hpUpRate *= 6;
-                    }
-                    */
+                    float hpUpRate = 0;
                     if (dis < 2f)
                     {
-                        /*if (Players.fightingTimer >= 5)
+                        if (batStickedNum <= 0)
                         {
-                            hpUpRate = 20;
+                            hpUpRate = 20;//共回40;
                         }
-                        else
-                        {
-                            hpUpRate = 8;
-                        }*/
-                        hpUpRate = 20;//共回40;
                         Players.canTrack = false;
                     }
                     else if (dis < 4.5f)
@@ -1450,7 +1442,7 @@ namespace com.DungeonPad
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.collider.GetComponent<MonsterManager>() && !collision.collider.GetComponent<Slime>())
+            if (collision.collider.GetComponent<MonsterManager>() && !collision.collider.GetComponent<Slime>() && !collision.collider.GetComponent<Bat>())
             {
                 if (HardStraightTimer > 0.3f)
                 {
@@ -1463,12 +1455,14 @@ namespace com.DungeonPad
                         {
                             HardStraightA = (Vector2)taurenBoss.RecordDir * 40;
                             HP -= 20 * (100f - reducesDamage) / 100f;
+                            Instantiate(GameManager.Hurted, transform.position, Quaternion.identity, transform);
                             HardStraightTimer = 0.1f;
                         }
                         else
                         {
                             HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
                             HP -= 10 * (100f - reducesDamage) / 100f;
+                            Instantiate(GameManager.Hurted, transform.position, Quaternion.identity, transform);
                             HardStraightTimer = 0;
                         }
                     }
@@ -1476,6 +1470,7 @@ namespace com.DungeonPad
                     {
                         HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
                         HP -= 15 * (100f - reducesDamage) / 100f;
+                        Instantiate(GameManager.Hurted,transform.position,Quaternion.identity, transform);
                         HardStraightTimer = 0;
                     }
                     playerJoyVibration.hurt();

@@ -25,6 +25,7 @@ namespace com.DungeonPad
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                     PlayerManager.HP -= ATK * (100f - PlayerManager.reducesDamage) / 100f;
+                    Instantiate(GameManager.Hurted, collider.transform.position, Quaternion.identity, collider.transform);
 
                     collider.GetComponent<PlayerJoyVibration>().hurt();
                     if(MonsterType == "Spider")
@@ -52,6 +53,7 @@ namespace com.DungeonPad
         {
             if (continued)
             {
+                Debug.LogError("現在不應該有持續傷害了，如果有請改掉!!" + gameObject.name, gameObject);
                 if (collider.gameObject.layer == 8)
                 {
                     PlayerManager.HP -= ATK * Time.deltaTime;

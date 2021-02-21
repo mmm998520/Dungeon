@@ -6,9 +6,27 @@ namespace com.DungeonPad
 {
     public class BatSticked : MonoBehaviour
     {
+        [SerializeField] float timer, timerStoper, SingleDamage;
+
+        private void Start()
+        {
+            PlayerManager.batStickedNum++;
+        }
+
         private void Update()
         {
-            PlayerManager.HP -= Time.deltaTime * 10;
+            timer += Time.deltaTime;
+            if (timer > timerStoper)
+            {
+                timer = 0;
+                PlayerManager.HP -= SingleDamage;
+                Instantiate(GameManager.Hurted, transform.parent.position, Quaternion.identity, transform.parent);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            PlayerManager.batStickedNum--;
         }
     }
 }

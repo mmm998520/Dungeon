@@ -31,6 +31,7 @@ namespace com.DungeonPad
                         playerManager.DashA = Vector3.zero;
                         playerManager.HardStraightTimer = -0.5f;
                         PlayerManager.HP -= 10;
+                        Instantiate(GameManager.Hurted, player.position, Quaternion.identity, player);
                     }
                 }
                 if(disX < 0.5f / 3 * 2.5f && disY < 0.5f / 3 * 2.5f)

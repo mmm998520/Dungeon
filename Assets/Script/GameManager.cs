@@ -26,6 +26,7 @@ namespace com.DungeonPad
         public GameObject reLifeParticle, money, moneyB;
         public bool haveFinalRoomStore;
         public static AsyncOperation asyncOperation;
+        public static GameObject Hurted;
 
         void Awake()
         {
@@ -50,6 +51,7 @@ namespace com.DungeonPad
             {
                 PlayerManager.Life = 1;
             }
+            Hurted = Resources.Load<GameObject>("Prefabs/Hurted");
         }
 
         void Update()
