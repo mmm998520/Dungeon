@@ -13,6 +13,7 @@ namespace com.DungeonPad
         public int[] ShowTextCenters;
         public int ShowHPLine;
         public Image[] images;
+        public GameObject[] doors;
         // Start is called before the first frame update
         void Start()
         {
@@ -35,6 +36,13 @@ namespace com.DungeonPad
             for(int i = 0; i < images.Length; i++)
             {
                 images[i].color = new Color(images[i].color.r, images[i].color.g, images[i].color.b, (ShowHPLine - CameraManager.center.x) / ShowHPLine);
+            }
+            if (GameManager.monsters.childCount <= 0)
+            {
+                for(int i = 0; i < doors.Length; i++)
+                {
+                    Destroy(doors[i]);
+                }
             }
             if(CameraManager.center.x > 87.7f)
             {
