@@ -19,6 +19,7 @@ namespace com.DungeonPad
         {
             Abilitys = abilitys;
             abilitys = null;
+
             setDictionary();
             for (int i = 0; i < Abilitys.Length; i++)
             {

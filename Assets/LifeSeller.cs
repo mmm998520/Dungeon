@@ -17,6 +17,13 @@ namespace com.DungeonPad
         }
         public void buy()
         {
+            if (times == 0)
+            {
+                Instantiate(GameManager.gameManager.moneyB,transform.position,Quaternion.identity);
+                Destroy(gameObject);
+            }
+            times++;
+            /*
             if (PlayerManager.money >= 5 && PlayerManager.Life < PlayerManager.MaxLife)
             {
                 for(int i = 0; i < brightOrder[times].childCount; i++)
@@ -38,6 +45,7 @@ namespace com.DungeonPad
                     }
                 }
             }
+            */
         }
     }
 }

@@ -61,8 +61,6 @@ namespace com.DungeonPad
                     hitedTimer[playerManager][1] = 0;
                 }
             }
-
-            Debug.LogError(i);
         }
     }
 }
