@@ -224,7 +224,7 @@ namespace com.DungeonPad
             else if(gameObject.name.Contains("TaurenBoss"))
             {
                 insMoney(50);
-                insMoneyB(3);
+                //insMoneyB(3);
                 if (Random.Range(0, 100) < 15)
                 {
                     Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);

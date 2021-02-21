@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace com.DungeonPad
 {
@@ -37,28 +38,38 @@ namespace com.DungeonPad
                 else
                 {
                     PlayerManager.moneyB++;
-                    string r = "";
+                    int r = 0;
+                    string abilityName = "";
                     int times = 0;
                     do
                     {
-                        r = AbilityManager.Abilitys[Random.Range(4, AbilityManager.Abilitys.Length)].name;
+                        r = Random.Range(4, AbilityManager.Abilitys.Length);
+                        abilityName = AbilityManager.Abilitys[r].name;
                         times++;
-                    } while ((r == "吸收" || AbilityManager.AbilityCurrentLevel[r] >= AbilityManager.AbilityCanBuyLevel[r]) && times < 1000);
+                    } while ((abilityName == "吸收" || AbilityManager.AbilityCurrentLevel[abilityName] >= AbilityManager.AbilityCanBuyLevel[abilityName]) && times < 1000);
                     if (times >= 1000)
                     {
                         Debug.LogError("能力都滿了");
                     }
-                    if(r == "吸收")
+                    if(abilityName == "吸收")
                     {
                         Debug.LogError("...怎麼會有吸收");
                     }
                     try
                     {
-                        AbilityData.setPlayerAbility(r, ++AbilityManager.AbilityCurrentLevel[r]);
+                        AbilityData.setPlayerAbility(abilityName, ++AbilityManager.AbilityCurrentLevel[abilityName]);
                     }
                     catch
                     {
                         Debug.LogError("能力有問題");
+                    }
+                    try
+                    {
+                        GameObject.Find("能力敘述文字").GetComponent<ShowAbilityDetail>().showDetail(AbilityManager.Abilitys[r].detail[AbilityManager.AbilityCurrentLevel[abilityName]]);
+                    }
+                    catch
+                    {
+                        Debug.LogError("找不到 : 能力敘述文字");
                     }
                 }
                 sound.SetParent(null);
