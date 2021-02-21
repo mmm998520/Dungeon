@@ -90,6 +90,9 @@ namespace com.DungeonPad
                 }
 
             }
+            Debug.LogError(Num.text);
+            Debug.LogError(ability.name);
+            Debug.LogError(AbilityManager.AbilityCurrentLevel[ability.name]);
             Num.text = ability.Num[AbilityManager.AbilityCurrentLevel[ability.name]];
         }
 
@@ -238,16 +241,38 @@ namespace com.DungeonPad
             switch (abilityName)
             {
                 case "爆擊率":
-                    PlayerManager.criticalRate = abilityLevel * 0.5f;
+                    if (abilityLevel <= 0)
+                    {
+                        PlayerManager.criticalRate = 0;
+                    }
+                    else if (abilityLevel <= 1)
+                    {
+                        PlayerManager.criticalRate = 15;
+                    }
+                    else
+                    {
+                        PlayerManager.criticalRate = 35;
+                    }
                     break;
                 case "傷害減輕":
-                    PlayerManager.reducesDamage = abilityLevel * 0.5f;
+                    if (abilityLevel <= 0)
+                    {
+                        PlayerManager.reducesDamage = 0;
+                    }
+                    else if (abilityLevel <= 1)
+                    {
+                        PlayerManager.reducesDamage = 15;
+                    }
+                    else
+                    {
+                        PlayerManager.reducesDamage = 35;
+                    }
                     break;
-                case "復活上限":
-                    PlayerManager.MaxLife = 4 + abilityLevel;
+                case "放射水晶線條數":
+                    CrystalScattering.scatteringLightCount = 4 + abilityLevel;
                     break;
-                case "負載上限":
-                    AbilityManager.TotalCost = 2 + abilityLevel;
+                case "放射水晶線條加寬":
+                    CrystalScatteringLight.Large = (abilityLevel == 1);
                     break;
                 case "血量上限增加":
                     PlayerManager.MaxHP = 60 + abilityLevel * 20;

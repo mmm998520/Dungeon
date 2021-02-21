@@ -6,12 +6,16 @@ namespace com.DungeonPad
 {
     public class CrystalScatteringLight : MonoBehaviour
     {
+        public static bool Large;
         public Transform rayPos1, rayPos2, mask;
         float distance;
         float maxDistance = 10, minDistance = 0.5f;
         void Start()
         {
-
+            if (Large)
+            {
+                GetComponent<Animator>().SetTrigger("Large");
+            }
         }
 
         void Update()

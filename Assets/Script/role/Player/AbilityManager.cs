@@ -36,8 +36,8 @@ namespace com.DungeonPad
             #region//當前等級
             AbilityCurrentLevel.Add("爆擊率", 0);
             AbilityCurrentLevel.Add("傷害減輕", 0);
-            AbilityCurrentLevel.Add("復活上限", 0);
-            AbilityCurrentLevel.Add("負載上限", 0);
+            AbilityCurrentLevel.Add("放射水晶線條數", 0);
+            AbilityCurrentLevel.Add("放射水晶線條加寬", 0);
             AbilityCurrentLevel.Add("血量上限增加", 0);
             AbilityCurrentLevel.Add("吸收", 0);
             AbilityCurrentLevel.Add("強力衝刺", 0);
@@ -53,8 +53,8 @@ namespace com.DungeonPad
             #region//已購買的等級
             AbilityCanUseLevel.Add("爆擊率", 0);
             AbilityCanUseLevel.Add("傷害減輕", 0);
-            AbilityCanUseLevel.Add("復活上限", 0);
-            AbilityCanUseLevel.Add("負載上限", 0);
+            AbilityCanUseLevel.Add("放射水晶線條數", 0);
+            AbilityCanUseLevel.Add("放射水晶線條加寬", 0);
             AbilityCanUseLevel.Add("血量上限增加", 0);
             AbilityCanUseLevel.Add("吸收", 0);
             AbilityCanUseLevel.Add("強力衝刺", 0);
@@ -68,11 +68,11 @@ namespace com.DungeonPad
             #endregion
 
             #region//可買的等級上限
-            AbilityCanBuyLevel.Add("爆擊率", 60);
-            AbilityCanBuyLevel.Add("傷害減輕", 60);
-            AbilityCanBuyLevel.Add("復活上限", 2);
-            AbilityCanBuyLevel.Add("負載上限", 4);
-            AbilityCanBuyLevel.Add("血量上限增加", 2);
+            AbilityCanBuyLevel.Add("爆擊率", 2);
+            AbilityCanBuyLevel.Add("傷害減輕", 2);
+            AbilityCanBuyLevel.Add("放射水晶線條數", 2);
+            AbilityCanBuyLevel.Add("放射水晶線條加寬", 1);
+            AbilityCanBuyLevel.Add("血量上限增加", 1);
             AbilityCanBuyLevel.Add("吸收", 2);
             AbilityCanBuyLevel.Add("強力衝刺", 1);
             AbilityCanBuyLevel.Add("連續衝刺", 2);

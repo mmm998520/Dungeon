@@ -19,7 +19,7 @@ namespace com.DungeonPad
             if (timer > timerStoper)
             {
                 timer = 0;
-                PlayerManager.HP -= SingleDamage;
+                PlayerManager.HP -= SingleDamage * (100f - PlayerManager.reducesDamage) / 100f;
                 Instantiate(GameManager.Hurted, transform.parent.position, Quaternion.identity, transform.parent);
             }
         }

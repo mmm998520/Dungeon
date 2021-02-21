@@ -43,7 +43,7 @@ namespace com.DungeonPad
                     int times = 0;
                     do
                     {
-                        r = Random.Range(4, AbilityManager.Abilitys.Length);
+                        r = Random.Range(0, AbilityManager.Abilitys.Length);
                         abilityName = AbilityManager.Abilitys[r].name;
                         times++;
                     } while ((abilityName == "吸收" || AbilityManager.AbilityCurrentLevel[abilityName] >= AbilityManager.AbilityCanBuyLevel[abilityName]) && times < 1000);

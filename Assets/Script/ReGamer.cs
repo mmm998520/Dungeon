@@ -54,6 +54,7 @@ namespace com.DungeonPad
         {
             for(int i=0;i< AbilityManager.Abilitys.Length; i++)
             {
+                AbilityManager.AbilityCurrentLevel[AbilityManager.Abilitys[i].name] = 0;
                 AbilityData.setPlayerAbility(AbilityManager.Abilitys[i].name, 0);
             }
         }
