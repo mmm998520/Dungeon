@@ -201,6 +201,7 @@ MonoBehaviour:
   endCol: 
   nextPos: 
   rotateSpeed: 200
+  canFly: 0
   MaxHP: 50
   HP: 50
   CD: 2
@@ -220,6 +221,7 @@ MonoBehaviour:
   repTimes: 0
   repTimer: 0
   rigidbody: {fileID: 0}
+  poisonTimers: []
   Ammunition: {fileID: 0}
   attacking: 0
   HPBar: {fileID: 0}
@@ -241,6 +243,7 @@ MonoBehaviour:
     type: 3}
   fireBallFast: {fileID: 5683994576417963163, guid: f8c66763a847c69499bad30cc532a1ae,
     type: 3}
+  fireBallTrack: {fileID: 0}
   fireRainInser: {fileID: 6843125598540700410, guid: 58a575caee7fe9d4ab60673d22e18792,
     type: 3}
   crystalInser: {fileID: 6843125598540700410, guid: 7140cf97e21e29f468b6b731ed8caf30,
@@ -253,10 +256,14 @@ MonoBehaviour:
   fireBallBounceCDTimer: 0
   fireBallFastCD: 2
   fireBallFastCDTimer: 0
+  fireBallTrackCD: 0
+  fireBallTrackCDTimer: 0
   fireRainCD: 10
   fireRainCDTimer: 10
   SleepTimer: 0
   SleepUI: {fileID: 5259903739402641494}
+  DestoryWall: {fileID: 0}
+  NewWall: {fileID: 0}
 --- !u!95 &2026925606197622391
 Animator:
   serializedVersion: 3
@@ -326,13 +333,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2026925607031981193}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.058, y: 0, z: 0}
-  m_LocalScale: {x: 0.294, y: 0.17448156, z: 0.17448156}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.069, y: 0.048, z: 0}
+  m_LocalScale: {x: 0.13052653, y: 0.1305265, z: 0.1305265}
   m_Children: []
   m_Father: {fileID: 2026925606197622379}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!212 &2026925607031981195
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -372,7 +379,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 08599eebdfcf7fd408ab1f6da7811073, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b917a0516ed9b5b4db9e884b0149794a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
