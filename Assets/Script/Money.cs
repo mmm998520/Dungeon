@@ -32,10 +32,34 @@ namespace com.DungeonPad
                 if (!moneyB)
                 {
                     PlayerManager.money++;
+                    PlayerManager.HP += 10;
                 }
                 else
                 {
                     PlayerManager.moneyB++;
+                    string r = "";
+                    int times = 0;
+                    do
+                    {
+                        r = AbilityManager.Abilitys[Random.Range(4, AbilityManager.Abilitys.Length)].name;
+                        times++;
+                    } while ((r == "吸收" || AbilityManager.AbilityCurrentLevel[r] >= AbilityManager.AbilityCanBuyLevel[r]) && times < 1000);
+                    if (times >= 1000)
+                    {
+                        Debug.LogError("能力都滿了");
+                    }
+                    if(r == "吸收")
+                    {
+                        Debug.LogError("...怎麼會有吸收");
+                    }
+                    try
+                    {
+                        AbilityData.setPlayerAbility(r, ++AbilityManager.AbilityCurrentLevel[r]);
+                    }
+                    catch
+                    {
+                        Debug.LogError("能力有問題");
+                    }
                 }
                 sound.SetParent(null);
                 sound.GetComponent<AudioSource>().Play();

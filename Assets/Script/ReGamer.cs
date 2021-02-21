@@ -19,11 +19,13 @@ namespace com.DungeonPad
             if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.JoystickButton0))
             {
                 ReGame();
+                ReAbility();
                 SceneManager.LoadScene("Game 1");
             }
             else if (Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.JoystickButton1))
             {
                 ReGame();
+                ReAbility();
                 SceneManager.LoadScene("Home");
             }
         }
@@ -46,6 +48,14 @@ namespace com.DungeonPad
             ButtonTwo.p1used = false;
             ButtonTwo.p2used = false;
             DataSaver.Save();
+        }
+
+        public static void ReAbility()
+        {
+            for(int i=0;i< AbilityManager.Abilitys.Length; i++)
+            {
+                AbilityData.setPlayerAbility(AbilityManager.Abilitys[i].name, 0);
+            }
         }
     }
 }

@@ -25,7 +25,6 @@ namespace com.DungeonPad
                 if (i >= 3)
                 {
                     transform.GetChild(transform.childCount -1 - i).GetComponent<Animator>().SetTrigger("end");
-                    Debug.LogError(transform.childCount);
                 }
             }
             //monsterManagers.Clear();

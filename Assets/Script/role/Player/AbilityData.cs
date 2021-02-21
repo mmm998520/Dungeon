@@ -233,7 +233,7 @@ namespace com.DungeonPad
             }
         }
 
-        public void setPlayerAbility(string abilityName, int abilityLevel)
+        public static void setPlayerAbility(string abilityName, int abilityLevel)
         {
             switch (abilityName)
             {

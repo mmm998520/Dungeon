@@ -30,7 +30,6 @@ namespace com.DungeonPad
 
         void Awake()
         {
-            Debug.LogError("我是awake");
             MazeCreater.setTotalRowCol();
             gameManager = this;
             players = GameObject.Find("Players").transform;
