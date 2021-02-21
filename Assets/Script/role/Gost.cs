@@ -46,7 +46,7 @@ namespace com.DungeonPad
                     Stuck(2, 1);
                 }
                 attacking = false;
-                SpriteAnimator.SetBool("Stop", false);
+                SpriteAnimator.SetBool("Attack", false);
             }
         }
 
@@ -67,7 +67,7 @@ namespace com.DungeonPad
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
-            SpriteAnimator.SetBool("Stop", true);
+            SpriteAnimator.SetBool("Attack", true);
         }
 
         protected override void Attack(int additionalAngle)

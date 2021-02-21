@@ -144,4 +144,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   timerStoper: 1
-  SingleDamage: 0
+  SingleDamage: 10
