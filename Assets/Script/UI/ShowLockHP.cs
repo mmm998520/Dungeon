@@ -45,13 +45,15 @@ namespace com.DungeonPad
                 if (SceneManager.GetActiveScene().name == "Game 0")
                 {
                     PlayerManager.DiedTimer = 10;
-                    SceneManager.LoadScene("AfterGame 0");
+                    SwitchScenePanel.NextScene = "AfterGame 0";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
                 else
                 {
                     GameManager.PlayTime = Time.time;
                     PlayerManager.DiedTimer = 10;
-                    SceneManager.LoadScene("Died");
+                    SwitchScenePanel.NextScene = "Died";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
                 return;
             }

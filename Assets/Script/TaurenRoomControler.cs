@@ -18,7 +18,8 @@ namespace com.DungeonPad
                 if(SceneManager.GetActiveScene().name =="Game 2")
                 {
                     GameManager.layers = 2;
-                    SceneManager.LoadScene("Game 1");
+                    SwitchScenePanel.NextScene = "Game 1";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
             }
             if (CameraManager.center.x > 30.64f && Boss == null)
@@ -26,7 +27,8 @@ namespace com.DungeonPad
                 if (SceneManager.GetActiveScene().name == "Game 4")
                 {
                     ReGamer.ReGame();
-                    SceneManager.LoadScene("SelectRole_Game 1");
+                    SwitchScenePanel.NextScene = "SelectRole_Game 1";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
             }
         }

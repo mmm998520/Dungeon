@@ -25,7 +25,6 @@ namespace com.DungeonPad
 
         public GameObject reLifeParticle, money, moneyB;
         public bool haveFinalRoomStore;
-        public static AsyncOperation asyncOperation;
         public static GameObject Hurted;
         public static ShowAbilityDetail showAbilityDetail;
         void Awake()

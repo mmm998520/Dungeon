@@ -314,7 +314,8 @@ namespace com.DungeonPad
                     p2PressA();
                     if (pressedA == PressedA.P1P2)
                     {
-                        SceneManager.LoadScene("Game 1");
+                        SwitchScenePanel.NextScene = "Game 1";
+                        GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                     }
                     break;
             }

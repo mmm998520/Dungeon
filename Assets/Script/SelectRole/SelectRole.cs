@@ -85,13 +85,15 @@ namespace com.DungeonPad
                 {
                     p2Joy = "WASD";
                     print("WASD");
-                    SceneManager.LoadScene(NextScene);
+                    SwitchScenePanel.NextScene = NextScene;
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
                 else if (Input.GetKeyDown(KeyCode.Keypad1) && p1Joy != "ArrowKey")
                 {
                     p2Joy = "ArrowKey";
                     print("ArrowKey");
-                    SceneManager.LoadScene(NextScene);
+                    SwitchScenePanel.NextScene = NextScene;
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
                 else
                 {
@@ -125,7 +127,8 @@ namespace com.DungeonPad
         IEnumerator waitForLoadScene()
         {
             yield return new WaitForSeconds(2);
-            SceneManager.LoadScene(NextScene);
+            SwitchScenePanel.NextScene = NextScene;
+            GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
         }
 
         IEnumerator waitForVP1()

@@ -22,7 +22,8 @@ namespace com.DungeonPad
             {
                 if (++currentPPTNum >= PPTs.Length)
                 {
-                    SceneManager.LoadScene("SelectRole_Game 1");
+                    SwitchScenePanel.NextScene = "SelectRole_Game 1";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
                 else
                 {
@@ -33,7 +34,8 @@ namespace com.DungeonPad
             {
                 if (--currentPPTNum < 0)
                 {
-                    SceneManager.LoadScene("Home");
+                    SwitchScenePanel.NextScene = "Home";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
                 else
                 {

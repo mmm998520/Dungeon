@@ -25,7 +25,8 @@ namespace com.DungeonPad
             }
             else
             {
-                SceneManager.LoadScene("game 0");
+                SwitchScenePanel.NextScene = "game 0";
+                GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 PlayerManager.HP = PlayerManager.MaxHP;
                 PlayerManager.Life = 1;
             }

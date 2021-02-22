@@ -15,11 +15,13 @@ namespace com.DungeonPad
                 if (GameManager.layers == 1)
                 {
                     GameManager.passLayerOneTimes += 1;
-                    SceneManager.LoadScene("Game 2");
+                    SwitchScenePanel.NextScene = "Game 2";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
                 else
                 {
-                    SceneManager.LoadScene("Game 4");
+                    SwitchScenePanel.NextScene = "Game 4";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
             }
         }

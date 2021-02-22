@@ -20,7 +20,8 @@ namespace com.DungeonPad
 
         public void died()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SwitchScenePanel.NextScene = SceneManager.GetActiveScene().name;
+            GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             PlayerManager.HP = PlayerManager.MaxHP;
         }
 

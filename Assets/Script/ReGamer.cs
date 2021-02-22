@@ -20,13 +20,15 @@ namespace com.DungeonPad
             {
                 ReGame();
                 ReAbility();
-                SceneManager.LoadScene("Game 1");
+                SwitchScenePanel.NextScene = "Game 1";
+                GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }
             else if (Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.JoystickButton1))
             {
                 ReGame();
                 ReAbility();
-                SceneManager.LoadScene("Home");
+                SwitchScenePanel.NextScene = "Home";
+                GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }
         }
 

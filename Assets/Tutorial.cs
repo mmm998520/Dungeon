@@ -18,8 +18,6 @@ namespace com.DungeonPad
         void Start()
         {
             textColor = texts[0].color;
-            GameManager.asyncOperation = SceneManager.LoadSceneAsync("Home");
-            GameManager.asyncOperation.allowSceneActivation = false;
         }
 
         // Update is called once per frame
@@ -48,6 +46,7 @@ namespace com.DungeonPad
             }
             if(CameraManager.center.x > 87.7f)
             {
+                SwitchScenePanel.NextScene = "Home";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }
         }
