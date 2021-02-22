@@ -1216,7 +1216,7 @@ namespace com.DungeonPad
         }
         #endregion
 
-        static WaitForSeconds waitForPress = new WaitForSeconds(0.05f);
+        static WaitForSeconds waitForPress = new WaitForSeconds(0.03f);
         static WaitForSeconds waitForMinut = new WaitForSeconds(0.01f);
         IEnumerator dash(string p1p2joy, int TwoPlayerModeORp1p2)
         {
@@ -1253,11 +1253,11 @@ namespace com.DungeonPad
                     break;
             }
             DashA = Vector3.Normalize(DashA) * DashSpeed;
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < 5; i++)
             {
                 if (DashA.magnitude <= 10)
                 {
-                    yield return waitForPress;
+                    yield return waitForMinut;
                     switch (p1p2joy)
                     {
                         case "WASD":
