@@ -277,18 +277,11 @@ namespace com.DungeonPad
                 case "血量上限增加":
                     PlayerManager.MaxHP = 60 + abilityLevel * 20;
                     break;
-                case "吸收":
-                    if(abilityLevel == 0)
+                case "復活光球":
+                    if (abilityLevel > 0)
                     {
-                        PlayerManager.killHpRecover = 0;
-                    }
-                    else if (abilityLevel == 1)
-                    {
-                        PlayerManager.killHpRecover = 10;
-                    }
-                    else
-                    {
-                        PlayerManager.killHpRecover = 25;
+                        PlayerManager.Life++;
+                        AbilityManager.AbilityCanUseLevel[abilityName] = 0;
                     }
                     break;
                 case "強力衝刺":

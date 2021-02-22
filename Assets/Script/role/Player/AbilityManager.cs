@@ -39,7 +39,7 @@ namespace com.DungeonPad
             AbilityCurrentLevel.Add("放射水晶線條數", 0);
             AbilityCurrentLevel.Add("放射水晶線條加寬", 0);
             AbilityCurrentLevel.Add("血量上限增加", 0);
-            AbilityCurrentLevel.Add("吸收", 0);
+            AbilityCurrentLevel.Add("復活光球", 0);
             AbilityCurrentLevel.Add("強力衝刺", 0);
             AbilityCurrentLevel.Add("連續衝刺", 0);
             AbilityCurrentLevel.Add("疾行", 0);
@@ -56,7 +56,7 @@ namespace com.DungeonPad
             AbilityCanUseLevel.Add("放射水晶線條數", 0);
             AbilityCanUseLevel.Add("放射水晶線條加寬", 0);
             AbilityCanUseLevel.Add("血量上限增加", 0);
-            AbilityCanUseLevel.Add("吸收", 0);
+            AbilityCanUseLevel.Add("復活光球", 0);
             AbilityCanUseLevel.Add("強力衝刺", 0);
             AbilityCanUseLevel.Add("連續衝刺", 0);
             AbilityCanUseLevel.Add("疾行", 0);
@@ -73,7 +73,7 @@ namespace com.DungeonPad
             AbilityCanBuyLevel.Add("放射水晶線條數", 2);
             AbilityCanBuyLevel.Add("放射水晶線條加寬", 1);
             AbilityCanBuyLevel.Add("血量上限增加", 1);
-            AbilityCanBuyLevel.Add("吸收", 2);
+            AbilityCanBuyLevel.Add("復活光球", 1);
             AbilityCanBuyLevel.Add("強力衝刺", 1);
             AbilityCanBuyLevel.Add("連續衝刺", 2);
             AbilityCanBuyLevel.Add("疾行", 2);

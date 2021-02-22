@@ -103,10 +103,7 @@ namespace com.DungeonPad
                     {
                         playerColor = PlayerColor.P1Red_P2Blue;
                     }
-                    if (GameManager.asyncOperation.progress >= 0.9f)
-                    {
-                        GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
-                    }
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
             }
         }
