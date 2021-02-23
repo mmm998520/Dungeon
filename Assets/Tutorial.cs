@@ -44,7 +44,7 @@ namespace com.DungeonPad
                     Destroy(doors[i]);
                 }
             }
-            if(CameraManager.center.x > 87.7f)
+            if(CameraManager.center.x > 103.7f)
             {
                 SwitchScenePanel.NextScene = "Home";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
