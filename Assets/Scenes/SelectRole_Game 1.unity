@@ -7115,7 +7115,7 @@ MonoBehaviour:
   mouse2: {fileID: 503378752}
   BluePlayer: {fileID: 252037856}
   RedPlayer: {fileID: 1179144343}
-  NextScene: Game 1
+  NextScene: Game 4
 --- !u!1 &447325375
 GameObject:
   m_ObjectHideFlags: 0

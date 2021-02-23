@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2026925606197622388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.52, y: 5.39, z: 0}
-  m_LocalScale: {x: 4.0999894, y: 4.0999894, z: 4.0999894}
+  m_LocalScale: {x: 3.035386, y: 3.035386, z: 3.035386}
   m_Children:
   - {fileID: 2026925607031981192}
   - {fileID: 487302371657818466}
@@ -56,7 +56,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9e81540e6a3f11144bd0345662978b0d, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startRoomRow: 0
   startRoomCol: 0
-  Boss: 0
+  Boss: 1
   addCanGoByHandList:
   - MinRow: 1
     MinCol: 1
@@ -202,8 +202,8 @@ MonoBehaviour:
   nextPos: 
   rotateSpeed: 200
   canFly: 0
-  MaxHP: 50
-  HP: 50
+  MaxHP: 90
+  HP: 90
   CD: 2
   CDTimer: 10
   CDMin: 2
@@ -226,13 +226,8 @@ MonoBehaviour:
   attacking: 0
   HPBar: {fileID: 0}
   hpBar: {fileID: 0}
-  hpBarBottom: {fileID: 0}
-  GreenHP: {fileID: 21300000, guid: b229b27f5980f0e478e22fb96b684317, type: 3}
-  GreenHPBottom: {fileID: 21300000, guid: e4ef57febb49b354797286c43ff6e2fb, type: 3}
-  YellowHP: {fileID: 21300000, guid: 7c27fdd7f664c4f43b599f7f2e393c02, type: 3}
-  YellowHPBottom: {fileID: 21300000, guid: fc65b52a3b9146b4dbb4f13bf5239c64, type: 3}
-  RedHP: {fileID: 21300000, guid: 56c60717fb4078541b960212d6fb3b5f, type: 3}
-  RedHPBottom: {fileID: 21300000, guid: 0e5fc5a6b4df8ba4b9203113717b6238, type: 3}
+  YellowHP: {fileID: 21300000, guid: 97519575998f62445bf038df6b222f23, type: 3}
+  RedHP: {fileID: 21300000, guid: 7e4c4e0c8c79b1e4190011bd017ee860, type: 3}
   InvincibleTimer: 10
   animator: {fileID: 0}
   RecordDir: {x: 0, y: 0, z: 0}
@@ -243,7 +238,8 @@ MonoBehaviour:
     type: 3}
   fireBallFast: {fileID: 5683994576417963163, guid: f8c66763a847c69499bad30cc532a1ae,
     type: 3}
-  fireBallTrack: {fileID: 0}
+  fireBallTrack: {fileID: 5832881625152555986, guid: eea79ab2eb2b42a439e75d4158e34229,
+    type: 3}
   fireRainInser: {fileID: 6843125598540700410, guid: 58a575caee7fe9d4ab60673d22e18792,
     type: 3}
   crystalInser: {fileID: 6843125598540700410, guid: 7140cf97e21e29f468b6b731ed8caf30,
@@ -256,9 +252,9 @@ MonoBehaviour:
   fireBallBounceCDTimer: 0
   fireBallFastCD: 2
   fireBallFastCDTimer: 0
-  fireBallTrackCD: 0
+  fireBallTrackCD: 2
   fireBallTrackCDTimer: 0
-  fireRainCD: 10
+  fireRainCD: 3
   fireRainCDTimer: 10
   SleepTimer: 0
   SleepUI: {fileID: 5259903739402641494}
@@ -307,7 +303,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.42, y: 0.42}
+  m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 1
 --- !u!1 &2026925607031981193
 GameObject:

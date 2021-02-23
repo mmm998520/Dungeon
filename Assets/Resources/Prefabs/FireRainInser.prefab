@@ -43,5 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722fb44637b9905409893fea41fcf4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRain: {fileID: 1513955079076276854, guid: 2cd4e4cabd33b9f449284f49a3635ee7,
+  fireRain: {fileID: 1513955079076276854, guid: bbcd98b54b17da240ba2ee5bdc24ce53,
     type: 3}
+  fireRainNum: 0

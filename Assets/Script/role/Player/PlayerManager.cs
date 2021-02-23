@@ -1461,6 +1461,11 @@ namespace com.DungeonPad
                             {
                                 HP -= 20 * (100f - reducesDamage) / 100f;
                             }
+                            else
+                            {
+                                HP -= 20;
+                            }
+
                             Instantiate(GameManager.Hurted, transform.position, Quaternion.identity, transform);
                             HardStraightTimer = 0.1f;
                         }
@@ -1470,6 +1475,10 @@ namespace com.DungeonPad
                             if (HP <= MaxHP * 0.3f)
                             {
                                 HP -= 10 * (100f - reducesDamage) / 100f;
+                            }
+                            else
+                            {
+                                HP -= 10;
                             }
                             Instantiate(GameManager.Hurted, transform.position, Quaternion.identity, transform);
                             HardStraightTimer = 0;
@@ -1481,6 +1490,10 @@ namespace com.DungeonPad
                         if (HP <= MaxHP * 0.3f)
                         {
                             HP -= 15 * (100f - reducesDamage) / 100f;
+                        }
+                        else
+                        {
+                            HP -= 15;
                         }
                         Instantiate(GameManager.Hurted,transform.position,Quaternion.identity, transform);
                         HardStraightTimer = 0;

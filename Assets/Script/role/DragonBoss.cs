@@ -76,7 +76,7 @@ namespace com.DungeonPad
             }
             else if (!animator.GetBool("Normal Attack") && !animator.GetBool("FireBall") && !animator.GetBool("FireBallBounce") && !animator.GetBool("FireBallFast") && !animator.GetBool("FireBallTrack") && !animator.GetBool("FireRain"))
             {
-                List<string> CDs = new List<string>() {"Normal Attack",/* "FireBall",*/ "FireBallFast", "FireBallTrack", "FireRain" };
+                List<string> CDs = new List<string>() {"Normal Attack", "FireBallFast", "FireBallTrack", "FireRain" };
                 int r;
                 if (HP <= MaxHP)
                 {
@@ -137,6 +137,18 @@ namespace com.DungeonPad
                                 {
                                     throwByClockwise = (Random.Range(0, 2) > 0);
                                     animator.SetBool("FireBallTrack", true);
+                                    if (HP < 30)
+                                    {
+                                        animator.SetInteger("Stat", 30);
+                                    }
+                                    else if (HP < 60)
+                                    {
+                                        animator.SetInteger("Stat", 60);
+                                    }
+                                    else
+                                    {
+                                        animator.SetInteger("Stat", 90);
+                                    }
                                     playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
                                     canUseThisAttack = true;
                                 }
@@ -267,7 +279,18 @@ namespace com.DungeonPad
         #region//FireRain
         void FireRain()
         {
-            Instantiate(fireRainInser);
+            if (HP < 30)
+            {
+                Instantiate(fireRainInser).GetComponent<FireRainInser>().fireRainNum = 6;
+            }
+            else if (HP < 60)
+            {
+                Instantiate(fireRainInser).GetComponent<FireRainInser>().fireRainNum = 4;
+            }
+            else
+            {
+                Instantiate(fireRainInser).GetComponent<FireRainInser>().fireRainNum = 2;
+            }
         }
         void CrystalRain()
         {

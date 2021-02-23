@@ -36,6 +36,10 @@ namespace com.DungeonPad
                             {
                                 PlayerManager.HP -= 10 * (100f - PlayerManager.reducesDamage) / 100f;
                             }
+                            else
+                            {
+                                PlayerManager.HP -= 10;
+                            }
                             Instantiate(GameManager.Hurted, player.position, Quaternion.identity, player);
                         }
                     }

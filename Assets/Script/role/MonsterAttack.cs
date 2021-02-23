@@ -28,6 +28,10 @@ namespace com.DungeonPad
                     {
                         PlayerManager.HP -= ATK * (100f - PlayerManager.reducesDamage) / 100f;
                     }
+                    else
+                    {
+                        PlayerManager.HP -= ATK;
+                    }
                     Instantiate(GameManager.Hurted, collider.transform.position, Quaternion.identity, collider.transform);
 
                     collider.GetComponent<PlayerJoyVibration>().hurt();

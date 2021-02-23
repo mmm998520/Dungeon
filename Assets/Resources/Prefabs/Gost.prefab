@@ -731,7 +731,7 @@ MonoBehaviour:
   speed: 1
   prepareSource: {fileID: 6431428174509040607}
   attackSource: {fileID: 7020226564661491114}
-  attack: {fileID: 1513955079076276854, guid: ca01a40824ff67b468920c18a1ecd512, type: 3}
+  attack: {fileID: 1513955079076276854, guid: a70cd1309719d6941b364fb5b5dc216b, type: 3}
   guardPoint: 
   nextGrardNum: 0
   TauntTarget: {fileID: 0}

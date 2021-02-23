@@ -10,11 +10,12 @@ namespace com.DungeonPad
         List<float> insTimes = new List<float>();
         public GameObject fireRain;
         Transform fireRains;
+        public int fireRainNum;
 
         private void Start()
         {
             fireRains = GameObject.Find("FireRains").transform;
-            for(int i = fireRains.childCount; (i < 30 && i < fireRains.childCount + 10); i++)
+            for(int i = fireRains.childCount; (i < 30 && i < fireRains.childCount + fireRainNum); i++)
             {
                 insTimes.Add(Random.Range(0.5f, 1.5f));
             }
