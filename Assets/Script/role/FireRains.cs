@@ -51,7 +51,10 @@ namespace com.DungeonPad
                     if (hitedTimer[playerManager][0] > hitedTimeSpan)
                     {
                         hitedTimer[playerManager][0] = 0;
-                        PlayerManager.HP -= (++hitedTimer[playerManager][1] * SingleDamage) * (100f - PlayerManager.reducesDamage) / 100f;
+                        if (PlayerManager.HP <= PlayerManager.MaxHP * 0.3f)
+                        {
+                            PlayerManager.HP -= (++hitedTimer[playerManager][1] * SingleDamage) * (100f - PlayerManager.reducesDamage) / 100f;
+                        }
                         Instantiate(GameManager.Hurted, playerManager.transform.position, Quaternion.identity, playerManager.transform);
                     }
                 }

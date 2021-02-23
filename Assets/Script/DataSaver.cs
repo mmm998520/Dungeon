@@ -14,15 +14,19 @@ namespace com.DungeonPad
             //PlayerPrefs.DeleteAll();
             if (PlayerPrefs.HasKey("data1_AbilityCurrentLevel"))
             {
+                /*
                 AbilityManager.AbilityCurrentLevel = loadDictionary("data1_AbilityCurrentLevel");
                 AbilityManager.AbilityCanUseLevel = loadDictionary("data1_AbilityCanUseLevel");
                 AbilityManager.AbilityCanBuyLevel = loadDictionary("data1_AbilityCanBuyLevel");
+                */
             }
             else
             {
+                /*
                 saveDictionary("data1_AbilityCurrentLevel", AbilityManager.AbilityCurrentLevel);
                 saveDictionary("data1_AbilityCanUseLevel", AbilityManager.AbilityCanUseLevel);
                 saveDictionary("data1_AbilityCanBuyLevel", AbilityManager.AbilityCanBuyLevel);
+                */
             }
             if (PlayerPrefs.HasKey("moneyA"))
             {

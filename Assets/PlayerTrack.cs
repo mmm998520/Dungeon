@@ -75,10 +75,6 @@ namespace com.DungeonPad
             {
                 Destroy(gameObject);
             }
-            if (collider.gameObject.layer == 12)
-            {
-                Destroy(gameObject);
-            }
         }
     }
 }

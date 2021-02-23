@@ -259,17 +259,13 @@ namespace com.DungeonPad
                     {
                         PlayerManager.reducesDamage = 0;
                     }
-                    else if (abilityLevel <= 1)
-                    {
-                        PlayerManager.reducesDamage = 15;
-                    }
                     else
                     {
-                        PlayerManager.reducesDamage = 35;
+                        PlayerManager.reducesDamage = 50;
                     }
                     break;
                 case "放射水晶線條數":
-                    CrystalScattering.scatteringLightCount = 4 + abilityLevel;
+                    CrystalScattering.scatteringLightCount = 4 + abilityLevel * 2;
                     break;
                 case "放射水晶線條加寬":
                     CrystalScatteringLight.Large = (abilityLevel == 1);
@@ -321,6 +317,9 @@ namespace com.DungeonPad
                     break;
                 case "光鏢":
                     PlayerManager.trackBullet = (abilityLevel != 0);
+                    break;
+                case "免疫":
+                    PlayerManager.immunity = (abilityLevel != 0);
                     break;
                 default:
                     Debug.LogError("沒有這個能力 : " + abilityName);

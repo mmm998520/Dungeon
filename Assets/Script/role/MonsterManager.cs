@@ -195,7 +195,7 @@ namespace com.DungeonPad
             Destroy(gameObject);
             if (gameObject.name.Contains("SpiderBig"))
             {
-                insMoney(Random.Range(7, 11));
+                insMoney(Random.Range(2, 4));
                 if (Random.Range(0, 100) < 15)
                 {
                     insMoneyB(1);
@@ -281,6 +281,7 @@ namespace com.DungeonPad
         {
             for (int i = 0; i < times; i++)
             {
+                Debug.LogError("whyNo???");
                 Instantiate(GameManager.gameManager.moneyB, transform.position, Quaternion.identity);
             }
         }

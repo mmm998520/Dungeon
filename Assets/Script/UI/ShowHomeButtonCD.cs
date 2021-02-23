@@ -7,21 +7,18 @@ namespace com.DungeonPad
 {
     public class ShowHomeButtonCD : MonoBehaviour
     {
-        // Start is called before the first frame update
+        RectTransform rectTransform;
+        float totalHeight;
+
         void Start()
         {
-
+            rectTransform = GetComponent<RectTransform>();
+            totalHeight = rectTransform.sizeDelta.y;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void OnGUI()
         {
-            int i = (int)Mathf.Floor(Mathf.Floor(PlayerManager.homeButtonTimer) / 2);
-            if (i > 0)
-            {
-                i = 0;
-            }
-            GetComponent<Text>().text = "" + i;
+            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, PlayerManager.homeButtonTimer * totalHeight / (-PlayerManager.homeButtonTimerStoper * 2));
         }
     }
 }

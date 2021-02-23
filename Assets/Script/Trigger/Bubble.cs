@@ -24,7 +24,7 @@ namespace com.DungeonPad
         {
             if ((collider.gameObject.layer == 8 || collider.gameObject.layer == 12) && collider.transform != transform.parent)
             {
-                if (collider.GetComponent<PlayerManager>())
+                if (collider.GetComponent<PlayerManager>() && !PlayerManager.immunity)
                 {
                     collider.GetComponent<PlayerManager>().ConfusionTimer = 0;
                     if (collider.GetComponent<PlayerManager>().p1)

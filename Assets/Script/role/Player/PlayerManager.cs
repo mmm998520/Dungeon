@@ -23,7 +23,7 @@ namespace com.DungeonPad
         public float beganTouchedTimer, flashTimer, flashTimerStoper;
         public static float homeButtonTimer = 0, homeButtonTimerStoper = 12;
         public static float moveSpeed = 3f, DashSpeed = 11, DashCD = 0.5f, reducesDamage = 0, criticalRate = 0;
-        public static bool homeButton = false, magneticField = false, circleAttack = false, poison = false, trackBullet = false;
+        public static bool homeButton = false, magneticField = false, circleAttack = false, poison = false, trackBullet = false, immunity = false;
         public List<Vector3> startRayPoss;
 
         public static int batStickedNum = 0;
@@ -1454,14 +1454,20 @@ namespace com.DungeonPad
                         if (Vector2.Angle(taurenBoss.RecordDir, transform.position - collision.transform.position) < 90 && taurenBoss.punching)
                         {
                             HardStraightA = (Vector2)taurenBoss.RecordDir * 40;
-                            HP -= 20 * (100f - reducesDamage) / 100f;
+                            if (HP <= MaxHP * 0.3f)
+                            {
+                                HP -= 20 * (100f - reducesDamage) / 100f;
+                            }
                             Instantiate(GameManager.Hurted, transform.position, Quaternion.identity, transform);
                             HardStraightTimer = 0.1f;
                         }
                         else
                         {
                             HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
-                            HP -= 10 * (100f - reducesDamage) / 100f;
+                            if (HP <= MaxHP * 0.3f)
+                            {
+                                HP -= 10 * (100f - reducesDamage) / 100f;
+                            }
                             Instantiate(GameManager.Hurted, transform.position, Quaternion.identity, transform);
                             HardStraightTimer = 0;
                         }
@@ -1469,7 +1475,10 @@ namespace com.DungeonPad
                     else
                     {
                         HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
-                        HP -= 15 * (100f - reducesDamage) / 100f;
+                        if (HP <= MaxHP * 0.3f)
+                        {
+                            HP -= 15 * (100f - reducesDamage) / 100f;
+                        }
                         Instantiate(GameManager.Hurted,transform.position,Quaternion.identity, transform);
                         HardStraightTimer = 0;
                     }

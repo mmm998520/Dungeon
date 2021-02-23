@@ -48,6 +48,7 @@ namespace com.DungeonPad
             AbilityCurrentLevel.Add("濺射", 0);
             AbilityCurrentLevel.Add("毒", 0);
             AbilityCurrentLevel.Add("光鏢", 0);
+            AbilityCurrentLevel.Add("免疫", 0);
             #endregion
 
             #region//已購買的等級
@@ -65,14 +66,15 @@ namespace com.DungeonPad
             AbilityCanUseLevel.Add("濺射", 0);
             AbilityCanUseLevel.Add("毒", 0);
             AbilityCanUseLevel.Add("光鏢", 0);
+            AbilityCanUseLevel.Add("免疫", 0);
             #endregion
 
             #region//可買的等級上限
             AbilityCanBuyLevel.Add("爆擊率", 2);
-            AbilityCanBuyLevel.Add("傷害減輕", 2);
+            AbilityCanBuyLevel.Add("傷害減輕", 1);
             AbilityCanBuyLevel.Add("放射水晶線條數", 2);
             AbilityCanBuyLevel.Add("放射水晶線條加寬", 1);
-            AbilityCanBuyLevel.Add("血量上限增加", 1);
+            AbilityCanBuyLevel.Add("血量上限增加", 2);
             AbilityCanBuyLevel.Add("復活光球", 1);
             AbilityCanBuyLevel.Add("強力衝刺", 1);
             AbilityCanBuyLevel.Add("連續衝刺", 2);
@@ -82,6 +84,7 @@ namespace com.DungeonPad
             AbilityCanBuyLevel.Add("濺射", 1);
             AbilityCanBuyLevel.Add("毒", 1);
             AbilityCanBuyLevel.Add("光鏢", 1);
+            AbilityCanBuyLevel.Add("免疫", 1);
             #endregion
         }
     }

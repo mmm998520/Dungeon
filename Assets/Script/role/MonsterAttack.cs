@@ -24,7 +24,10 @@ namespace com.DungeonPad
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                    PlayerManager.HP -= ATK * (100f - PlayerManager.reducesDamage) / 100f;
+                    if (PlayerManager.HP <= PlayerManager.MaxHP * 0.3f)
+                    {
+                        PlayerManager.HP -= ATK * (100f - PlayerManager.reducesDamage) / 100f;
+                    }
                     Instantiate(GameManager.Hurted, collider.transform.position, Quaternion.identity, collider.transform);
 
                     collider.GetComponent<PlayerJoyVibration>().hurt();

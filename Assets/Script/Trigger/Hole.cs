@@ -30,8 +30,14 @@ namespace com.DungeonPad
                         playerManager.HardStraightA = Vector3.zero;
                         playerManager.DashA = Vector3.zero;
                         playerManager.HardStraightTimer = -0.5f;
-                        PlayerManager.HP -= 10 * (100f - PlayerManager.reducesDamage) / 100f;
-                        Instantiate(GameManager.Hurted, player.position, Quaternion.identity, player);
+                        if (!PlayerManager.immunity)
+                        {
+                            if(PlayerManager.HP<= PlayerManager.MaxHP * 0.3f)
+                            {
+                                PlayerManager.HP -= 10 * (100f - PlayerManager.reducesDamage) / 100f;
+                            }
+                            Instantiate(GameManager.Hurted, player.position, Quaternion.identity, player);
+                        }
                     }
                 }
                 if(disX < 0.5f / 3 * 2.5f && disY < 0.5f / 3 * 2.5f)

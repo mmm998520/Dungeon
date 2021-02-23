@@ -11,7 +11,6 @@ namespace com.DungeonPad
         public Transform PosA, PosB, PosC;
         PolygonCollider2D polygon;
         MeshRenderer meshRenderer;
-        public List<Collider2D> monsters = new List<Collider2D>();
         float timer;
 
         [SerializeField] Material[] materials;
@@ -41,19 +40,12 @@ namespace com.DungeonPad
             //Hit(PosA.position, PosB.position);
             //Hit(PosB.position, PosC.position);
             //Hit(PosA.position, PosC.position);
-            monsterManagers.Clear();
 
             timer += Time.deltaTime;
             if (timer > 3)
             {
                 GetComponent<Animator>().SetTrigger("end");
             }
-
-            for (int i = 0; i < monsters.Count; i++)
-            {
-                attack(monsters[i], 0.1f * Time.deltaTime);
-            }
-            monsterManagers.Clear();
         }
 
         void setPos(Transform line, Vector2 posA, Vector2 posB)
@@ -73,19 +65,12 @@ namespace com.DungeonPad
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.GetComponent<MonsterManager>())
+            if (collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
             {
-                monsters.Add(collider);
+                Destroy(collider.gameObject);
             }
         }
 
-        private void OnTriggerExit2D(Collider2D collider)
-        {
-            if (collider.GetComponent<MonsterManager>())
-            {
-                monsters.Remove(collider);
-            }
-        }
 
         void Hit(Vector2 posA, Vector2 posB)
         {
@@ -95,6 +80,10 @@ namespace com.DungeonPad
             {
                 collider = hits[i].collider;
                 attack(collider, 3 * Time.deltaTime);
+                if (collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
+                {
+                    Destroy(collider.gameObject);
+                }
             }
         }
 
