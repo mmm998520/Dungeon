@@ -12,7 +12,7 @@ namespace com.DungeonPad
         public GameObject preAttack, attack ,attackCollider;
         Transform lineAttacks;
         public bool draw = false;
-        public static float fightingTimer = 10, reTimer = 10;
+        public static float fightingTimer = 10;
         public static Color32 spriteColor;
         public static AudioSource DiedAudioSource;
         public static bool canTrack;
@@ -29,7 +29,6 @@ namespace com.DungeonPad
         void Update()
         {
             fightingTimer += Time.deltaTime;
-            reTimer += Time.deltaTime;
             trackBullet();
             /*
             if (GameManager.players.GetChild(0).GetComponent<PlayerManager>().DashTimer < 0.5f || GameManager.players.GetChild(1).GetComponent<PlayerManager>().DashTimer < 0.5f)

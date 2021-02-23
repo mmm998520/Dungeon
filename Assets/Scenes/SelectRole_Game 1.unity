@@ -4658,6 +4658,7 @@ MonoBehaviour:
   - {x: 0.35, y: 0.35, z: 0}
   - {x: 0.35, y: 0, z: 0}
   - {x: 0.35, y: -0.35, z: 0}
+  reTimer: 10
   p1: 0
   lastDirRight: 0
   v: {x: 0, y: 0}
@@ -7114,7 +7115,7 @@ MonoBehaviour:
   mouse2: {fileID: 503378752}
   BluePlayer: {fileID: 252037856}
   RedPlayer: {fileID: 1179144343}
-  NextScene: Game 3
+  NextScene: Game 1
 --- !u!1 &447325375
 GameObject:
   m_ObjectHideFlags: 0
@@ -24534,6 +24535,7 @@ MonoBehaviour:
   flashTimer: 0
   flashTimerStoper: 0.1
   startRayPoss: []
+  reTimer: 10
   p1: 1
   lastDirRight: 0
   v: {x: 0, y: 0}

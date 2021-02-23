@@ -22,11 +22,12 @@ namespace com.DungeonPad
 
         void Update()
         {
+            Transform minDisPlayer = MinDisPlayer();
             if (GetCollider.enabled == true)
             {
                 animator.enabled = false;
             }
-            float distance = Vector3.Distance(child.position, MinDisPlayer().position);
+            float distance = Vector3.Distance(child.position, minDisPlayer.position);
             print(0);
             if (distance < 0.3f)
             {
@@ -34,6 +35,7 @@ namespace com.DungeonPad
                 {
                     PlayerManager.money++;
                     PlayerManager.HP += 10;
+                    minDisPlayer.GetComponent<PlayerManager>().reTimer = 0;
                 }
                 else
                 {

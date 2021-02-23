@@ -189,7 +189,7 @@ namespace com.DungeonPad
             if (PlayerManager.killHpRecover > 0)
             {
                 PlayerManager.HP += PlayerManager.killHpRecover;
-                Players.reTimer = 0;
+                //Players.reTimer = 0;
             }
 
             Destroy(gameObject);

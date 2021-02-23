@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = true;
+        public static bool lockedHP = false;
         public static float lockedHPTimer = 10, DiedTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -25,6 +25,8 @@ namespace com.DungeonPad
         public static float moveSpeed = 3f, DashSpeed = 11, DashCD = 0.5f, reducesDamage = 0, criticalRate = 0;
         public static bool homeButton = false, magneticField = false, circleAttack = false, poison = false, trackBullet = false, immunity = false;
         public List<Vector3> startRayPoss;
+
+        public float reTimer = 10;
 
         public static int batStickedNum = 0;
 
@@ -293,7 +295,7 @@ namespace com.DungeonPad
 
 
                     //reStatUI.SetActive(Players.reTimer < 1);
-                    reStatUI.GetComponent<Animator>().SetBool("re", Players.reTimer < 0.5f);
+                    reStatUI.GetComponent<Animator>().SetBool("re", reTimer < 0.5f);
                     sleepingStatUI.SetActive(SleepTimer < 0);
                     confusionStatUI.SetActive(ConfusionTimer < 10);
                     stickStatUI.SetActive(StickTimer < 10);
@@ -1355,6 +1357,7 @@ namespace com.DungeonPad
             ConfusionTimer += Time.deltaTime;
             StickTimer += Time.deltaTime;
             lightRotateTimer += Time.deltaTime;
+            reTimer += Time.deltaTime;
 
             if (flash)
             {

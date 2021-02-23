@@ -111,6 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6623143088407563352}
+  - component: {fileID: 8583829157489249235}
   m_Layer: 5
   m_Name: "\u50B3\u9001"
   m_TagString: Untagged
@@ -125,7 +126,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6623143088407563353}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.8074338, y: 1.8074338, z: 1.8074338}
   m_Children:
@@ -139,6 +140,21 @@ RectTransform:
   m_AnchoredPosition: {x: -864.4, y: -379.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8583829157489249235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6623143088407563353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41795ccb33846744c8adfbc3aa353033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowHomeButtonCDs:
+  - {fileID: 6623143088449410353}
+  - {fileID: 6623143087838965596}
 --- !u!1 &6623143088449410353
 GameObject:
   m_ObjectHideFlags: 0

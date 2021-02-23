@@ -60,6 +60,11 @@ namespace com.DungeonPad
             }
         }
 
+        private void Start()
+        {
+            Debug.LogError(passLayerOneTimes);
+        }
+
         void Update()
         {
             //if (abilityStore)

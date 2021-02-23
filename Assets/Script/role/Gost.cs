@@ -35,7 +35,6 @@ namespace com.DungeonPad
             base.Update();
             if ((CDTimer += Time.deltaTime) >= CD && Vector2.Distance(MinDisPlayer().position, transform.position) <= 10)
             {
-                Debug.LogError(0);
                 attack();
             }
             else

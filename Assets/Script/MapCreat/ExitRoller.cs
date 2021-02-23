@@ -7,6 +7,7 @@ namespace com.DungeonPad
 {
     public class ExitRoller : MonoBehaviour
     {
+        bool goNext = false;
         void Update()
         {
             transform.localPosition = Vector3.zero;
@@ -14,7 +15,11 @@ namespace com.DungeonPad
             {
                 if (GameManager.layers == 1)
                 {
-                    GameManager.passLayerOneTimes += 1;
+                    if (!goNext)
+                    {
+                        GameManager.passLayerOneTimes += 1;
+                        goNext = true;
+                    }
                     SwitchScenePanel.NextScene = "Game 2";
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }

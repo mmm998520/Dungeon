@@ -13,7 +13,7 @@ namespace com.DungeonPad
         public Sprite Null, Red, Blue, Red_Blue;
         void Start()
         {
-
+            touchNum = 0;
         }
 
         // Update is called once per frame
@@ -21,6 +21,7 @@ namespace com.DungeonPad
         {
             if (touchNum >= 2)
             {
+                Debug.LogError("???");
                 rigidbody2D.mass = 0.2f;
             }
             else
