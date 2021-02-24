@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.Experimental.Rendering.Universal;
 
 namespace com.DungeonPad
 {
@@ -137,7 +139,7 @@ namespace com.DungeonPad
             if(AbilityManager.AbilityCurrentLevel[abilityName] < AbilityManager.AbilityCanUseLevel[abilityName] && AbilityManager.Costed + ability.cost[AbilityManager.AbilityCurrentLevel[abilityName] + 1] <= AbilityManager.TotalCost)
             {
                 AbilityManager.AbilityCurrentLevel[abilityName]++;
-                AbilityManager.Costed += ability.cost[AbilityManager.AbilityCurrentLevel[abilityName]];
+                //AbilityManager.Costed += ability.cost[AbilityManager.AbilityCurrentLevel[abilityName]];
             }
             setAbilityBar();
             setDetail();
@@ -150,7 +152,7 @@ namespace com.DungeonPad
         {
             if (AbilityManager.AbilityCurrentLevel[abilityName] > 0 && !ability.forever)
             {
-                AbilityManager.Costed -= ability.cost[AbilityManager.AbilityCurrentLevel[abilityName]];
+                //AbilityManager.Costed -= ability.cost[AbilityManager.AbilityCurrentLevel[abilityName]];
                 AbilityManager.AbilityCurrentLevel[abilityName]--;
             }
             setAbilityBar();
@@ -166,7 +168,7 @@ namespace com.DungeonPad
             {
                 bool moneyA = PlayerManager.money >= ability.moneyA[AbilityManager.AbilityCanUseLevel[abilityName] + 1];
                 bool moneyB = PlayerManager.moneyB >= ability.moneyB[AbilityManager.AbilityCanUseLevel[abilityName] + 1];
-                if (moneyA && moneyB)
+                //if (moneyA && moneyB)
                 {
                     PlayerManager.money -= ability.moneyA[AbilityManager.AbilityCanUseLevel[abilityName] + 1];
                     PlayerManager.moneyB -= ability.moneyB[AbilityManager.AbilityCanUseLevel[abilityName] + 1];
@@ -247,11 +249,11 @@ namespace com.DungeonPad
                     }
                     else if (abilityLevel <= 1)
                     {
-                        PlayerManager.criticalRate = 15;
+                        PlayerManager.criticalRate = 5;
                     }
                     else
                     {
-                        PlayerManager.criticalRate = 35;
+                        PlayerManager.criticalRate = 10;
                     }
                     break;
                 case "傷害減輕":
@@ -265,7 +267,7 @@ namespace com.DungeonPad
                     }
                     break;
                 case "放射水晶線條數":
-                    CrystalScattering.scatteringLightCount = 4 + abilityLevel * 2;
+                    CrystalScattering.scatteringLightCount = 6 + abilityLevel * 2;
                     break;
                 case "放射水晶線條加寬":
                     CrystalScatteringLight.Large = (abilityLevel == 1);
@@ -312,8 +314,23 @@ namespace com.DungeonPad
                 case "濺射":
                     PlayerManager.circleAttack = (abilityLevel != 0);
                     break;
-                case "毒":
-                    PlayerManager.poison = (abilityLevel != 0);
+                case "根性":
+                    if (abilityLevel <= 0)
+                    {
+                        PlayerManager.root = false;
+                        if(SceneManager.GetActiveScene().name=="Game 1")
+                        {
+                            GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 0;
+                        }
+                    }
+                    else
+                    {
+                        PlayerManager.root = true;
+                        if (SceneManager.GetActiveScene().name == "Game 1")
+                        {
+                            GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 0.8f;
+                        }
+                    }
                     break;
                 case "光鏢":
                     PlayerManager.trackBullet = (abilityLevel != 0);

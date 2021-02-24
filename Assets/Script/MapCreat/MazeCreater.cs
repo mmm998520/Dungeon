@@ -649,7 +649,6 @@ namespace com.DungeonPad
             #region//第一層
             if (layer == 1)
             {
-                Debug.LogError(GameManager.passLayerOneTimes);
                 if (GameManager.passLayerOneTimes < 1)
                 {
                     level = levelRamdomer(new int[] { 0, 1, 1, 1 });
@@ -669,6 +668,27 @@ namespace com.DungeonPad
                 else
                 {
                     level = levelRamdomer(new int[] { 0, 1, 1, 0, 0, 1, 2, 2 });
+                }
+            }
+            #endregion
+            #region//第二層
+            else if (layer == 2)
+            {
+                if (GameManager.passLayerTwoTimes < 1)
+                {
+                    level = levelRamdomer(new int[] { 0, 1, 0, 1, 1 });
+                }
+                else if (GameManager.passLayerTwoTimes < 2)
+                {
+                    level = levelRamdomer(new int[] { 0, 1, 0, 1, 1, 2 });
+                }
+                else if (GameManager.passLayerTwoTimes < 3)
+                {
+                    level = levelRamdomer(new int[] { 0, 0, 1, 0, 0, 1, 2, 1 });
+                }
+                else
+                {
+                    level = levelRamdomer(new int[] { 0, 0, 1, 0, 0, 0, 1, 1 });
                 }
             }
             #endregion
@@ -733,6 +753,32 @@ namespace com.DungeonPad
                     else
                     {
                         objectData = "bm1x2";
+                    }
+                    break;
+                case "難度1是0_難度2-7是m5x2":
+                    Debug.LogError("難度" + level);
+                    if (level <= 1)
+                    {
+                        objectData = "0";
+                    }
+                    else
+                    {
+                        objectData = "m5x2";
+                    }
+                    break;
+                case "難度1-4是bm5x1_難度5是bm5x2_難度6-7是bm5x3":
+                    Debug.LogError("難度" + level);
+                    if (level <= 4)
+                    {
+                        objectData = "bm5x1";
+                    }
+                    else if (level <= 5)
+                    {
+                        objectData = "bm5x2";
+                    }
+                    else
+                    {
+                        objectData = "bm5x3";
                     }
                     break;
             }

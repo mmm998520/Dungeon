@@ -9,7 +9,7 @@ namespace com.DungeonPad
     {
         public static GameManager gameManager;
         public static Transform players, monsters, triggers, UI, magneticFields;
-        public static int layers = 1, level = 1, passLayerOneTimes = 0;
+        public static int layers = 1, level = 1, passLayerOneTimes = 0, passLayerTwoTimes = 0;
         public static MazeCreater mazeCreater;
         public static SmallMap smallMap;
         public static float Gammar = 1;
@@ -27,8 +27,10 @@ namespace com.DungeonPad
         public bool haveFinalRoomStore;
         public static GameObject Hurted;
         public static ShowAbilityDetail showAbilityDetail;
+        public static string CurrentSceneName;
         void Awake()
         {
+            CurrentSceneName = SceneManager.GetActiveScene().name;
             MazeCreater.setTotalRowCol();
             gameManager = this;
             players = GameObject.Find("Players").transform;
@@ -45,7 +47,7 @@ namespace com.DungeonPad
                 smallMap.start();
                 UI = smallMap.transform.parent;
             }
-            if (SceneManager.GetActiveScene().name == "Game 0")
+            if (CurrentSceneName == "Game 0")
             {
                 PlayerManager.Life = 1;
             }
@@ -58,11 +60,6 @@ namespace com.DungeonPad
             {
                 
             }
-        }
-
-        private void Start()
-        {
-            Debug.LogError(passLayerOneTimes);
         }
 
         void Update()

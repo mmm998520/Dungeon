@@ -2011,7 +2011,7 @@ MonoBehaviour:
     moneyA: 000000000100000001000000
     moneyB: 000000000000000000000000
     cost: 000000000000000000000000
-    forever: 1
+    forever: 0
   - name: "\u50B7\u5BB3\u6E1B\u8F15"
     detail:
     - "\u964D\u4F4E\u602A\u7269\u6240\u9020\u6210\u7684\u50B7\u5BB3\uFF0C\u964D\u4F4E0%"
@@ -2025,7 +2025,7 @@ MonoBehaviour:
     moneyA: 0000000001000000
     moneyB: 0000000000000000
     cost: 0000000000000000
-    forever: 1
+    forever: 0
   - name: "\u653E\u5C04\u6C34\u6676\u7DDA\u689D\u6578"
     detail:
     - "\u5207\u780D\u653E\u5C04\u6C34\u6676\u53EF\u91CB\u653E4\u689D\u653E\u5C04\u7DDA\u653B\u64CA\u6575\u4EBA"
@@ -2042,7 +2042,7 @@ MonoBehaviour:
     moneyA: 000000003200000046000000
     moneyB: 000000000000000000000000
     cost: 000000000000000000000000
-    forever: 1
+    forever: 0
   - name: "\u653E\u5C04\u6C34\u6676\u7DDA\u689D\u52A0\u5BEC"
     detail:
     - "\u5207\u780D\u653E\u5C04\u6C34\u6676\u53EF\u91CB\u653E\u7D30\u7DDA\u653B\u64CA\u6575\u4EBA"
@@ -2056,7 +2056,7 @@ MonoBehaviour:
     moneyA: 000000003c000000
     moneyB: 0000000000000000
     cost: 0000000000000000
-    forever: 1
+    forever: 0
   - name: "\u8840\u91CF\u4E0A\u9650\u589E\u52A0"
     detail:
     - "\u63D0\u5347\u8840\u91CF\u4E0A\u9650\uFF0C\u6BCF\u7D1A\u63D0\u534720\u6EF4"
@@ -2181,13 +2181,13 @@ MonoBehaviour:
     moneyB: 0000000001000000
     cost: 0000000002000000
     forever: 0
-  - name: "\u6BD2"
+  - name: "\u6839\u6027"
     detail:
-    - "\u6BD2"
-    - "\u6BD2"
+    - "\u6839\u6027"
+    - "\u6839\u6027"
     UnLockDetail:
-    - "\u6BD2"
-    - "\u6BD2"
+    - "\u6839\u6027"
+    - "\u6839\u6027"
     Num:
     - X
     - O
@@ -7115,7 +7115,7 @@ MonoBehaviour:
   mouse2: {fileID: 503378752}
   BluePlayer: {fileID: 252037856}
   RedPlayer: {fileID: 1179144343}
-  NextScene: Game 4
+  NextScene: Game 1
 --- !u!1 &447325375
 GameObject:
   m_ObjectHideFlags: 0
@@ -16789,7 +16789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -796, y: 384}
+  m_AnchoredPosition: {x: -796, y: 1003}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &751424769
@@ -32458,7 +32458,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -796, y: 319}
+  m_AnchoredPosition: {x: -796, y: 938}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1700125647
@@ -33000,6 +33000,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u50B3\u9001"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623143089228505970, guid: 62ea9b08292e3e044b0b7c6a6dfe3c25,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623143089228505970, guid: 62ea9b08292e3e044b0b7c6a6dfe3c25,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623143089228505970, guid: 62ea9b08292e3e044b0b7c6a6dfe3c25,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62ea9b08292e3e044b0b7c6a6dfe3c25, type: 3}

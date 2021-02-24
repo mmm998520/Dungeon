@@ -45,6 +45,7 @@ namespace com.DungeonPad
                 if (SceneManager.GetActiveScene().name == "Game 0")
                 {
                     PlayerManager.DiedTimer = 10;
+                    ReGamer.ReAbility();
                     SwitchScenePanel.NextScene = "AfterGame 0";
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }

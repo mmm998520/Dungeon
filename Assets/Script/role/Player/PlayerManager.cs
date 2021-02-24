@@ -23,7 +23,7 @@ namespace com.DungeonPad
         public float beganTouchedTimer, flashTimer, flashTimerStoper;
         public static float homeButtonTimer = 0, homeButtonTimerStoper = 12;
         public static float moveSpeed = 3f, DashSpeed = 11, DashCD = 0.5f, reducesDamage = 0, criticalRate = 0;
-        public static bool homeButton = false, magneticField = false, circleAttack = false, poison = false, trackBullet = false, immunity = false;
+        public static bool homeButton = false, magneticField = false, circleAttack = false, poison = false, trackBullet = false, immunity = false, root = false;
         public List<Vector3> startRayPoss;
 
         public float reTimer = 10;
@@ -80,6 +80,17 @@ namespace com.DungeonPad
 
         private void Start()
         {
+            if(SceneManager.GetActiveScene().name == "Game 1")
+            {
+                if (root)
+                {
+                    GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 0.8f;
+                }
+                else
+                {
+                    GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 0;
+                }
+            }
             batStickedNum = 0;
             for (int i = 0; i < GameManager.players.childCount; i++)
             {
@@ -228,6 +239,10 @@ namespace com.DungeonPad
                     if (!SceneName.Contains("SelectRole"))
                     {
                         HP += hpUpRate * Time.deltaTime;
+                        if (root && HP<=1)
+                        {
+                            HP = 1;
+                        }
                     }
                     if (HP > MaxHP)
                     {

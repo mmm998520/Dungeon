@@ -19,14 +19,19 @@ namespace com.DungeonPad
                     {
                         GameManager.passLayerOneTimes += 1;
                         goNext = true;
+                        SwitchScenePanel.NextScene = "Game 2";
+                        GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                     }
-                    SwitchScenePanel.NextScene = "Game 2";
-                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
                 else
                 {
-                    SwitchScenePanel.NextScene = "Game 4";
-                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+                    if (!goNext)
+                    {
+                        GameManager.passLayerTwoTimes += 1;
+                        goNext = true;
+                        SwitchScenePanel.NextScene = "Game 4";
+                        GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+                    }
                 }
             }
         }

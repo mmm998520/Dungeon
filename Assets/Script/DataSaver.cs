@@ -73,6 +73,15 @@ namespace com.DungeonPad
                 PlayerPrefs.SetInt("passLayerOneTimes", GameManager.passLayerOneTimes);
                 PlayerPrefs.Save();
             }
+            if (PlayerPrefs.HasKey("passLayerTwoTimes"))
+            {
+                GameManager.passLayerTwoTimes = PlayerPrefs.GetInt("passLayerTwoTimes");
+            }
+            else
+            {
+                PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
+                PlayerPrefs.Save();
+            }
         }
 
         void Start()
@@ -116,6 +125,7 @@ namespace com.DungeonPad
             PlayerPrefs.SetInt("Costed", AbilityManager.Costed);
             PlayerPrefs.SetInt("TotalCost", AbilityManager.TotalCost);
             PlayerPrefs.SetInt("passLayerOneTimes", GameManager.passLayerOneTimes);
+            PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
             PlayerPrefs.Save();
         }
 

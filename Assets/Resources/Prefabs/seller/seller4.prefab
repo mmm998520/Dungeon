@@ -608,6 +608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 30
   times: 0
+  final: 1
   brightOrder:
   - {fileID: 5929717073958404158}
   - {fileID: 2224490656975947871}

@@ -12,7 +12,7 @@ namespace com.DungeonPad
         PolygonCollider2D polygon;
         MeshRenderer meshRenderer;
         float timer;
-
+        List<Collider2D> monstersCollider = new List<Collider2D>();
         [SerializeField] Material[] materials;
 
         private void Start()
@@ -46,6 +46,11 @@ namespace com.DungeonPad
             {
                 GetComponent<Animator>().SetTrigger("end");
             }
+            for (int i = 0; i < monstersCollider.Count; i++)
+            {
+                attack(monstersCollider[i], 0.05f * Time.deltaTime);
+            }
+            monsters.Clear();
         }
 
         void setPos(Transform line, Vector2 posA, Vector2 posB)
@@ -65,9 +70,21 @@ namespace com.DungeonPad
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
+            /*if (collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))
             {
                 Destroy(collider.gameObject);
+            }*/
+            if (collider.GetComponent<MonsterManager>())
+            {
+                monstersCollider.Add(collider);
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collider)
+        {
+            if (collider.GetComponent<MonsterManager>())
+            {
+                monstersCollider.Remove(collider);
             }
         }
 

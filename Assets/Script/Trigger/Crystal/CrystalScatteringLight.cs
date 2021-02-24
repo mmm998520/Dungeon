@@ -66,6 +66,10 @@ namespace com.DungeonPad
                     collider2D.GetComponent<MonsterManager>().beforeDied();
                 }
             }
+            if (collider2D.GetComponent<BatSticked>())
+            {
+                Destroy(collider2D.gameObject);
+            }
         }
     }
 }

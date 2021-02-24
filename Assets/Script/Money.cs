@@ -13,7 +13,7 @@ namespace com.DungeonPad
         float timer = 0;
         public Transform sound;
         public bool moneyB;
-
+        [HideInInspector]public bool final;
         void Start()
         {
             transform.eulerAngles = new Vector3(0, Random.Range(0, 2) * 180, Random.Range(-20f,0f));
@@ -48,14 +48,22 @@ namespace com.DungeonPad
                         r = Random.Range(0, AbilityManager.Abilitys.Length);
                         abilityName = AbilityManager.Abilitys[r].name;
                         times++;
-                    } while ((AbilityManager.AbilityCurrentLevel[abilityName] >= AbilityManager.AbilityCanBuyLevel[abilityName]) && times < 1000);
+                        if (final && abilityName == "免疫")
+                        {
+                            abilityName = "重來一次";
+                        }
+                        if (GameManager.CurrentSceneName == "Game 0")
+                        {
+                            HashSet<string> abilityNames = new HashSet<string>() { "血量上限增加", "傷害減輕" };
+                            if (!abilityNames.Contains(abilityName))
+                            {
+                                abilityName = "重來一次";
+                            }
+                        }
+                    } while ((abilityName == "重來一次" || AbilityManager.AbilityCurrentLevel[abilityName] >= AbilityManager.AbilityCanBuyLevel[abilityName]) && times < 1000);
                     if (times >= 1000)
                     {
                         Debug.LogError("能力都滿了");
-                    }
-                    if(abilityName == "吸收")
-                    {
-                        Debug.LogError("...怎麼會有吸收");
                     }
                     try
                     {

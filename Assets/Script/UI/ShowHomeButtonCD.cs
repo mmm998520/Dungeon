@@ -7,18 +7,16 @@ namespace com.DungeonPad
 {
     public class ShowHomeButtonCD : MonoBehaviour
     {
-        RectTransform rectTransform;
-        float totalHeight;
+        Image image;
 
         void Start()
         {
-            rectTransform = GetComponent<RectTransform>();
-            totalHeight = rectTransform.sizeDelta.y;
+            image = GetComponent<Image>();
         }
 
         private void OnGUI()
         {
-            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, PlayerManager.homeButtonTimer * totalHeight / (-PlayerManager.homeButtonTimerStoper * 2));
+            image.fillAmount = PlayerManager.homeButtonTimer / (-PlayerManager.homeButtonTimerStoper * 2);
         }
     }
 }

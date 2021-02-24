@@ -359,7 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputType: 3
   textAsset: []
-  layers: 1
+  layers: 2
   passwayNum: 2
   level: 1
   function: 0

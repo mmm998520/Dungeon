@@ -11,7 +11,7 @@ namespace com.DungeonPad
         /// 紀錄各個玩家在岩漿中所待的時間，float[0]為計時用途，float[1]為計算傷害波數用途(每n秒觸發一次傷害，一次傷害為一波)，攻擊力隨波數提升
         /// </summary>
         public Dictionary<PlayerManager, float[]> hitedTimer = new Dictionary<PlayerManager, float[]>();
-        [SerializeField] float hitedTimeSpan, SingleDamage;
+        [SerializeField] float hitedTimeSpan, BaseDamage, SingleDamage;
 
         void Start()
         {
@@ -19,6 +19,17 @@ namespace com.DungeonPad
             for(int i = 0; i < GameManager.players.childCount; i++)
             {
                 hitedTimer.Add(GameManager.players.GetChild(i).GetComponent<PlayerManager>(), new float[2] { 0, 0 });
+            }
+        }
+
+        private void Update()
+        {
+            for(int i = 0; i < transform.childCount; i++)
+            {
+                if (!transform.GetChild(i).GetComponent<Collider2D>().enabled)
+                {
+                    transform.GetChild(i).parent = null;
+                }
             }
         }
 
@@ -53,11 +64,11 @@ namespace com.DungeonPad
                         hitedTimer[playerManager][0] = 0;
                         if (PlayerManager.HP <= PlayerManager.MaxHP * 0.3f)
                         {
-                            PlayerManager.HP -= (++hitedTimer[playerManager][1] * SingleDamage) * (100f - PlayerManager.reducesDamage) / 100f;
+                            PlayerManager.HP -= BaseDamage + (++hitedTimer[playerManager][1] * SingleDamage) * (100f - PlayerManager.reducesDamage) / 100f;
                         }
                         else
                         {
-                            PlayerManager.HP -= (++hitedTimer[playerManager][1] * SingleDamage);
+                            PlayerManager.HP -= BaseDamage + (++hitedTimer[playerManager][1] * SingleDamage);
                         }
                         Instantiate(GameManager.Hurted, playerManager.transform.position, Quaternion.identity, playerManager.transform);
                     }

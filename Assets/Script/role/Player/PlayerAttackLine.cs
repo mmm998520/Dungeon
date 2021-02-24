@@ -26,7 +26,7 @@ namespace com.DungeonPad
 
         void clearMonsterManagers()
         {
-            monsterManagers.Clear();
+            monsters.Clear();
             sellers.Clear();
         }
 
@@ -44,9 +44,9 @@ namespace com.DungeonPad
         protected override bool attack(Collider2D collider, float damage)
         {
             bool attack = false;
-            if (collider.GetComponent<MonsterManager>() && !monsterManagers.Contains(collider.GetComponent<MonsterManager>()))
+            if (collider.GetComponent<MonsterManager>() && !monsters.Contains(collider.GetComponent<MonsterManager>()))
             {
-                monsterManagers.Add(collider.GetComponent<MonsterManager>());
+                monsters.Add(collider.GetComponent<MonsterManager>());
                 if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
                 {
                     collider.GetComponent<MonsterManager>().HP -= damage;
@@ -57,7 +57,7 @@ namespace com.DungeonPad
                     }
                     if (PlayerManager.circleAttack)
                     {
-                        Instantiate(AttackCircle, collider.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerCircleAttack>().monsterManagers.Add(collider.GetComponent<MonsterManager>());
+                        Instantiate(AttackCircle, collider.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerCircleAttack>().monsters.Add(collider.GetComponent<MonsterManager>());
                     }
                     if (PlayerManager.poison)
                     {
@@ -80,7 +80,7 @@ namespace com.DungeonPad
                 Destroy(collider.gameObject);
                 if (PlayerManager.circleAttack)
                 {
-                    Instantiate(AttackCircle, collider.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerCircleAttack>().monsterManagers.Add(collider.GetComponent<MonsterManager>());
+                    Instantiate(AttackCircle, collider.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerCircleAttack>().monsters.Add(collider.GetComponent<MonsterManager>());
                 }
                 if (PlayerManager.poison)
                 {
