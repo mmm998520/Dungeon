@@ -287,6 +287,7 @@ namespace com.DungeonPad
                     mouseStat = mouseStat.SelectedRole;
                     BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     BluePlayer.GetComponent<PlayerManager>().p1 = true;
+                    BluePlayer.GetComponent<PlayerJoyVibration>().enabled = true;
                     blue.anchoredPosition = new Vector3(9999, 0, 0);
                     blue.GetComponent<playerPosToUIPos>().enabled = false;
                 }
@@ -295,6 +296,7 @@ namespace com.DungeonPad
                     mouseStat = mouseStat.SelectedRole;
                     RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     RedPlayer.GetComponent<PlayerManager>().p1 = true;
+                    RedPlayer.GetComponent<PlayerJoyVibration>().enabled = true;
                     red.anchoredPosition = new Vector3(9999, 0, 0);
                     red.GetComponent<playerPosToUIPos>().enabled = false;
                 }
@@ -334,6 +336,7 @@ namespace com.DungeonPad
                     mouseStat = mouseStat.SelectedRole;
                     BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     BluePlayer.GetComponent<PlayerManager>().p1 = false;
+                    BluePlayer.GetComponent<PlayerJoyVibration>().enabled = true;
                     blue.anchoredPosition = new Vector3(9999, 0, 0);
                     blue.GetComponent<playerPosToUIPos>().enabled = false;
                 }
@@ -342,6 +345,7 @@ namespace com.DungeonPad
                     mouseStat = mouseStat.SelectedRole;
                     RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                     RedPlayer.GetComponent<PlayerManager>().p1 = false;
+                    RedPlayer.GetComponent<PlayerJoyVibration>().enabled = true;
                     red.anchoredPosition = new Vector3(9999, 0, 0);
                     red.GetComponent<playerPosToUIPos>().enabled = false;
                 }
@@ -359,11 +363,15 @@ namespace com.DungeonPad
                     if(BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && BluePlayer.GetComponent<PlayerManager>().p1)
                     {
                         BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        BluePlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        BluePlayer.GetComponent<PlayerJoyVibration>().enabled = false;
                         blue.anchoredPosition = new Vector2(-100, -300);
                     }
                     else
                     {
                         RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        RedPlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        RedPlayer.GetComponent<PlayerJoyVibration>().enabled = false;
                         red.anchoredPosition = new Vector2(100, -300);
                     }
                     print("back");
@@ -374,11 +382,15 @@ namespace com.DungeonPad
                     if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && BluePlayer.GetComponent<PlayerManager>().p1)
                     {
                         BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        BluePlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        BluePlayer.GetComponent<PlayerJoyVibration>().enabled = false;
                         blue.GetComponent<playerPosToUIPos>().enabled = true;
                     }
                     else
                     {
                         RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        RedPlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        RedPlayer.GetComponent<PlayerJoyVibration>().enabled = false;
                         red.GetComponent<playerPosToUIPos>().enabled = true;
                     }
                     print("back");
@@ -389,11 +401,15 @@ namespace com.DungeonPad
                     if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && BluePlayer.GetComponent<PlayerManager>().p1)
                     {
                         BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        BluePlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        BluePlayer.GetComponent<PlayerJoyVibration>().enabled = false;
                         blue.GetComponent<playerPosToUIPos>().enabled = true;
                     }
                     else
                     {
                         RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        RedPlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        RedPlayer.GetComponent<PlayerJoyVibration>().enabled = false;
                         red.GetComponent<playerPosToUIPos>().enabled = true;
                     }
                     print("back");
@@ -407,11 +423,15 @@ namespace com.DungeonPad
                     if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && !BluePlayer.GetComponent<PlayerManager>().p1)
                     {
                         BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        BluePlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        BluePlayer.GetComponent<PlayerJoyVibration>().enabled = false;
                         blue.anchoredPosition = new Vector2(-100, -300);
                     }
                     else
                     {
                         RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        RedPlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        RedPlayer.GetComponent<PlayerJoyVibration>().enabled = false;
                         red.anchoredPosition = new Vector2(100, -300);
                     }
                     print("back");
@@ -422,11 +442,15 @@ namespace com.DungeonPad
                     if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && !BluePlayer.GetComponent<PlayerManager>().p1)
                     {
                         BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        BluePlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        BluePlayer.GetComponent<PlayerJoyVibration>().enabled = false;
                         blue.anchoredPosition = new Vector2(-100, -300);
                     }
                     else
                     {
                         RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        RedPlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        RedPlayer.GetComponent<PlayerJoyVibration>().enabled = false;
                         red.anchoredPosition = new Vector2(100, -300);
                     }
                     print("back");
@@ -437,11 +461,15 @@ namespace com.DungeonPad
                     if (BluePlayer.GetComponent<PlayerManager>().playerStat == PlayerManager.PlayerStat.Move && !BluePlayer.GetComponent<PlayerManager>().p1)
                     {
                         BluePlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        BluePlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        BluePlayer.GetComponent<PlayerJoyVibration>().enabled = false;
                         blue.anchoredPosition = new Vector2(-100, -300);
                     }
                     else
                     {
                         RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        RedPlayer.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                        RedPlayer.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                         blue.anchoredPosition = new Vector2(100, -300);
                     }
                     print("back");

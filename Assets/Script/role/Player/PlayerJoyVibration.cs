@@ -15,9 +15,36 @@ namespace com.DungeonPad
         public static float LowHPVibration;
 
         public static bool canVibration = true;
-        void Start()
+        void OnEnable()
         {
             playerManager = GetComponent<PlayerManager>();
+            playerManager.Start();
+            if (transform.name == "Blue")
+            {
+                if (SelectMouse.P1PlayerIndex == null)
+                {
+                    GetComponent<PlayerJoyVibration>().enabled = false;
+                    print(SelectMouse.P1PlayerIndex);
+                }
+                else
+                {
+                    GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P1PlayerIndex;
+                    print(GetComponent<PlayerJoyVibration>().playerIndex + "p1");
+                }
+            }
+            else
+            {
+                if (SelectMouse.P2PlayerIndex == null)
+                {
+                    GetComponent<PlayerJoyVibration>().enabled = false;
+                    print(SelectMouse.P1PlayerIndex);
+                }
+                else
+                {
+                    GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P2PlayerIndex;
+                    print(GetComponent<PlayerJoyVibration>().playerIndex + "p2");
+                }
+            }
         }
 
         void Update()

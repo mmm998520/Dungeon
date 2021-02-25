@@ -3482,7 +3482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  otherPlayerJoyVibration: {fileID: 0}
+  otherPlayerJoyVibration: {fileID: 1179144346}
   HurtVibration_Main: 0.6
   HurtVibration_notMain: 0.15
   StickVibration: 0
@@ -21433,7 +21433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  otherPlayerJoyVibration: {fileID: 0}
+  otherPlayerJoyVibration: {fileID: 252037859}
   HurtVibration_Main: 0.6
   HurtVibration_notMain: 0.15
   StickVibration: 0

@@ -78,7 +78,7 @@ namespace com.DungeonPad
         public Transform sticksBat;
         string SceneName;
 
-        private void Start()
+        public void Start()
         {
             if(SceneManager.GetActiveScene().name == "Game 1")
             {
@@ -1314,7 +1314,7 @@ namespace com.DungeonPad
                 }
             }
 
-            if (DashA.magnitude <= 10)
+            /*if (DashA.magnitude <= 10)
             {
 
                 if (head.flipX)
@@ -1325,6 +1325,14 @@ namespace com.DungeonPad
                 {
                     DashA = Vector3.left * DashSpeed;
                 }
+            }*/
+            if (DashA.magnitude > 10)
+            {
+                playerJoyVibration.DashVibration = 0.7f;
+            }
+            else
+            {
+                yield break;
             }
             DashTimer = 0;
             LineAttack();
