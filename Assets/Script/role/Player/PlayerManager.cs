@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = false;
+        public static bool lockedHP = true;
         public static float lockedHPTimer = 10, DiedTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -1477,7 +1477,7 @@ namespace com.DungeonPad
                     if (collision.collider.GetComponent<TaurenBoss>())
                     {
                         TaurenBoss taurenBoss = collision.collider.GetComponent<TaurenBoss>();
-                        if (Vector2.Angle(taurenBoss.RecordDir, transform.position - collision.transform.position) < 90 && taurenBoss.punching)
+                        if (taurenBoss.punching && Vector2.Angle(taurenBoss.RecordDir, transform.position - collision.transform.position) < 90)
                         {
                             HardStraightA = (Vector2)taurenBoss.RecordDir * 40;
                             if (HP <= MaxHP * 0.3f)
@@ -1560,13 +1560,10 @@ namespace com.DungeonPad
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.GetComponent<MonsterAttack>())
+            if (collider.name == "NormalAttack")
             {
-                Players.fightingTimer = 0;
-            }
-            if (collider.GetComponent<Ammunition>())
-            {
-
+                HardStraightA = (Vector2)(transform.position - collider.transform.position).normalized * 10;
+                HardStraightTimer = 0.1f;
             }
         }
 

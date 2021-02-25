@@ -61,13 +61,22 @@ namespace com.DungeonPad
 
             animator.SetBool("Sleep", SleepTimer < 0f);
             SleepUI.enabled = SleepTimer < 0f;
+            float dis = Vector3.Distance(minDisPlayer.position, transform.position);
+            Debug.LogError(dis);
             if (SleepTimer < 0f)
             {
                 rigidbody.velocity = Vector3.zero;
             }
-            else if ((Vector3.Distance(minDisPlayer.position, transform.position) > 5 && !attacking) || CDTimer < CD)
+            else if ((dis > 5 && !attacking) || CDTimer < CD)
             {
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName("DragonBossWalk"))
+                if (dis < 2.6f)
+                {
+                    if (normalAttackCDTimer > normalAttackCD && (!animator.GetBool("Normal Attack") && !animator.GetBool("FireBall") && !animator.GetBool("FireBallBounce") && !animator.GetBool("FireBallFast") && !animator.GetBool("FireBallTrack") && !animator.GetBool("FireRain")))
+                    {
+                        animator.SetBool("Normal Attack", true);
+                    }
+                }
+                else if (animator.GetCurrentAnimatorStateInfo(0).IsName("DragonBossWalk"))
                 {
                     resetRoad();
                     move();
@@ -76,7 +85,7 @@ namespace com.DungeonPad
             }
             else if (!animator.GetBool("Normal Attack") && !animator.GetBool("FireBall") && !animator.GetBool("FireBallBounce") && !animator.GetBool("FireBallFast") && !animator.GetBool("FireBallTrack") && !animator.GetBool("FireRain"))
             {
-                List<string> CDs = new List<string>() {"Normal Attack", "FireBallFast", "FireBallTrack", "FireRain" };
+                List<string> CDs = new List<string>() {"FireBallFast", "FireBallTrack", "FireRain" };
                 int r;
                 if (HP <= MaxHP)
                 {
@@ -98,13 +107,6 @@ namespace com.DungeonPad
                         r = Random.Range(0, CDs.Count);
                         switch (CDs[r])
                         {
-                            case "Normal Attack":
-                                if (normalAttackCDTimer > normalAttackCD)
-                                {
-                                    animator.SetBool("Normal Attack", true);
-                                    canUseThisAttack = true;
-                                }
-                                break;
                             case "FireBall":
                                 if (fireBallCDTimer > fireBallCD)
                                 {
@@ -175,9 +177,16 @@ namespace com.DungeonPad
                     }
                     else
                     {
-                        Debug.LogError("沒有可用的攻擊");
-                        resetRoad();
-                        move();
+                        if (dis < 2.6f && normalAttackCDTimer > normalAttackCD)
+                        {
+                            animator.SetBool("Normal Attack", true);
+                        }
+                        else
+                        {
+                            Debug.LogError("沒有可用的攻擊");
+                            resetRoad();
+                            move();
+                        }
                         break;
                     }
                 } while (true);
@@ -221,7 +230,6 @@ namespace com.DungeonPad
         {
             animator.SetBool("Normal Attack", false);
             Debug.LogError("Normal Attack : " + animator.GetBool("Normal Attack"));
-            CDTimer = 0;
             normalAttackCDTimer = 0;
         }
         #endregion

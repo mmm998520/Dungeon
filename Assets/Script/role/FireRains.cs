@@ -26,7 +26,7 @@ namespace com.DungeonPad
         {
             for(int i = 0; i < transform.childCount; i++)
             {
-                if (!transform.GetChild(i).GetComponent<Collider2D>().enabled)
+                if (transform.name == "CrystalRains" && !transform.GetChild(i).GetComponent<Collider2D>().enabled)
                 {
                     transform.GetChild(i).parent = null;
                 }

@@ -39,6 +39,22 @@ namespace com.DungeonPad
                             }
                         }
                     }
+                    if(GameManager.CurrentSceneName == "Game 1")
+                    {
+                        for (int i = 0; i < GameManager.players.childCount; i++)
+                        {
+                            Transform stickBats = GameManager.players.GetChild(i).Find("stickBats");
+                            for (int j = 0; j < stickBats.childCount; j++)
+                            {
+                                if (Vector2.Distance(stickBats.GetChild(j).position, transform.position + transform.right * 3) < minDis)
+                                {
+                                    float Dis = Vector2.Distance(stickBats.GetChild(j).position, transform.position + transform.right * 3);
+                                    Target = stickBats.GetChild(j);
+                                    minDis = Dis;
+                                }
+                            }
+                        }
+                    }
                 }
                 if (Target == null)
                 {
