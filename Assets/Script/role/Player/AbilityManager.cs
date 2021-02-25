@@ -51,20 +51,20 @@ namespace com.DungeonPad
             #endregion
 
             #region//已購買的等級
-            AbilityCanUseLevel.Add("爆擊率", 0);
-            AbilityCanUseLevel.Add("傷害減輕", 0);
-            AbilityCanUseLevel.Add("放射水晶線條數", 0);
-            AbilityCanUseLevel.Add("放射水晶線條加寬", 0);
-            AbilityCanUseLevel.Add("血量上限增加", 0);
-            AbilityCanUseLevel.Add("強力衝刺", 0);
-            AbilityCanUseLevel.Add("連續衝刺", 0);
-            AbilityCanUseLevel.Add("疾行", 0);
-            AbilityCanUseLevel.Add("召回", 0);
-            AbilityCanUseLevel.Add("磁場", 0);
-            AbilityCanUseLevel.Add("濺射", 0);
-            AbilityCanUseLevel.Add("根性", 0);
-            AbilityCanUseLevel.Add("光鏢", 0);
-            AbilityCanUseLevel.Add("免疫", 0);
+            AbilityCanUseLevel.Add("爆擊率", 2);
+            AbilityCanUseLevel.Add("傷害減輕", 1);
+            AbilityCanUseLevel.Add("放射水晶線條數", 2);
+            AbilityCanUseLevel.Add("放射水晶線條加寬", 1);
+            AbilityCanUseLevel.Add("血量上限增加", 2);
+            AbilityCanUseLevel.Add("強力衝刺", 1);
+            AbilityCanUseLevel.Add("連續衝刺", 2);
+            AbilityCanUseLevel.Add("疾行", 2);
+            AbilityCanUseLevel.Add("召回", 2);
+            AbilityCanUseLevel.Add("磁場", 1);
+            AbilityCanUseLevel.Add("濺射", 1);
+            AbilityCanUseLevel.Add("根性", 1);
+            AbilityCanUseLevel.Add("光鏢", 1);
+            AbilityCanUseLevel.Add("免疫", 1);
             #endregion
 
             #region//可買的等級上限

@@ -112,11 +112,6 @@ namespace com.DungeonPad
             {
                 collider.GetComponent<Crystal>().hited();
             }
-            if (collider.name == "場外商人")
-            {
-                GameObject.Find("shop").transform.GetChild(0).gameObject.SetActive(true);
-                GameObject.Find("shop").transform.GetChild(0).GetChild(0).GetComponent<AbilityDatas>().start();
-            }
             else if (collider.GetComponent<LifeSeller>())
             {
                 if (!sellers.Contains(collider.transform))

@@ -323,7 +323,7 @@ MonoBehaviour:
   Loaded: {fileID: 21300000, guid: f4e8d64e3425d6041badf7d67aba2242, type: 3}
   Loading: {fileID: 21300000, guid: 8bf21f0c996e7a64596dc0b0e412acec, type: 3}
   UnLoad: {fileID: 21300000, guid: 28154f4e57b710840ac01bca623db330, type: 3}
-  dataNum: 1
+  dataNum: 0
   detailName: {fileID: 0}
   detail: {fileID: 0}
   detailMoneyA: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4595816216441045376
 RectTransform:
   m_ObjectHideFlags: 0

@@ -29,6 +29,14 @@ namespace com.DungeonPad
         public Sprite canUseMinus, cantUseMinus, canUseMinusSelected, cantUseMinusSelected;
         public Sprite canUseUnlock, cantUseUnlock, canUseUnlockSelected, cantUseUnlockSelected;
 
+        public void Awake()
+        {
+            if (!SceneManager.GetActiveScene().name.Contains("Select"))
+            {
+                awake();
+            }
+        }
+
         public void awake()
         {
             if (dataNum >= AbilityManager.AbilityCurrentLevel.Count)

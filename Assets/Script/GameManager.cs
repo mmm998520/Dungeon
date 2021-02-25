@@ -64,6 +64,12 @@ namespace com.DungeonPad
 
         void Update()
         {
+            if (Input.GetKeyDown(KeyCode.JoystickButton7) || Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameObject.Find("shop").transform.GetChild(0).gameObject.SetActive(true);
+                GameObject.Find("shop").transform.GetChild(0).GetChild(0).GetComponent<AbilityDatas>().start();
+            }
+
             //if (abilityStore)
             /*
             {

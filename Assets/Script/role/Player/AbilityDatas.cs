@@ -62,16 +62,22 @@ namespace com.DungeonPad
                     TotalCosts[i].sprite = UnLoad;
                 }
             }
-            if (Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1))
+            if (Input.GetKeyDown(KeyCode.JoystickButton7) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1))
             {
                 transform.parent.gameObject.SetActive(false);
-                selectMouse.SetActive(true);
+                if (selectMouse)
+                {
+                    selectMouse.SetActive(true);
+                }
                 GameManager.players.gameObject.SetActive(true);
             }
             else
             {
                 transform.parent.gameObject.SetActive(true);
-                selectMouse.SetActive(false);
+                if (selectMouse)
+                {
+                    selectMouse.SetActive(false);
+                }
                 GameManager.players.gameObject.SetActive(false);
             }
             if (Input.GetKeyDown(KeyCode.F1))
