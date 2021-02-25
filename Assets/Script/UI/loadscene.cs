@@ -9,7 +9,7 @@ namespace com.DungeonPad
     {
         void Start()
         {
-
+            ReGamer.ReAbility();
         }
 
 

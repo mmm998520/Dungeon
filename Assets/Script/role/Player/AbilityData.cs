@@ -31,7 +31,7 @@ namespace com.DungeonPad
 
         public void Awake()
         {
-            if (!SceneManager.GetActiveScene().name.Contains("Select"))
+            if (!SceneManager.GetActiveScene().name.Contains("SelectRole_Game 1"))
             {
                 awake();
             }
