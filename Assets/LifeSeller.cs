@@ -28,6 +28,10 @@ namespace com.DungeonPad
                 {
                     Instantiate(GameManager.gameManager.moneyB, transform.position, Quaternion.identity);
                 }
+                if (Random.Range(0, 100) < 30)
+                {
+                    Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
+                }
                 Destroy(gameObject);
             }
             times++;
