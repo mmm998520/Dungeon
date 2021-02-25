@@ -283,16 +283,16 @@ namespace com.DungeonPad
                 case "血量上限增加":
                     PlayerManager.MaxHP = 60 + abilityLevel * 20;
                     break;
-                case "強力衝刺":
+                case "突進":
                     PlayerManager.DashSpeed = 11 + abilityLevel * 4;
                     break;
-                case "連續衝刺":
+                case "降低衝刺冷卻":
                     PlayerManager.DashCD = 0.5f - abilityLevel * 0.1f;
                     break;
                 case "疾行":
                     PlayerManager.moveSpeed = 3 + abilityLevel;
                     break;
-                case "召回":
+                case "傳送":
                     if (abilityLevel == 0)
                     {
                         PlayerManager.homeButton = false;
