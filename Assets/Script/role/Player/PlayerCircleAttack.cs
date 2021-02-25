@@ -6,10 +6,8 @@ namespace com.DungeonPad
 {
     public class PlayerCircleAttack : PlayerAttack
     {
-        [SerializeField] float growSpeed, destroyTime;
         void Start()
         {
-            Destroy(gameObject, destroyTime);
             transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
         }
         /*

@@ -15,6 +15,14 @@ namespace com.DungeonPad
 
         private void Update()
         {
+            if(transform.position.x - transform.parent.parent.position.x > 0)
+            {
+                transform.right = Vector3.left;
+            }
+            else
+            {
+                transform.right = Vector3.right;
+            }
             timer += Time.deltaTime;
             if (timer > timerStoper)
             {

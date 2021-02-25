@@ -4915,6 +4915,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 60170270}
+  - component: {fileID: 60170271}
   m_Layer: 0
   m_Name: stickBats
   m_TagString: Untagged
@@ -4936,6 +4937,18 @@ Transform:
   m_Father: {fileID: 1942137159}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &60170271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60170269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2804d7f24b39f3488f08282a6aa07be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &64088308
 GameObject:
   m_ObjectHideFlags: 0
@@ -18795,6 +18808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1814879191}
+  - component: {fileID: 1814879192}
   m_Layer: 0
   m_Name: stickBats
   m_TagString: Untagged
@@ -18816,6 +18830,18 @@ Transform:
   m_Father: {fileID: 1042426420}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1814879192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814879190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2804d7f24b39f3488f08282a6aa07be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1818286214
 GameObject:
   m_ObjectHideFlags: 0
