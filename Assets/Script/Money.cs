@@ -57,10 +57,10 @@ namespace com.DungeonPad
                         {
                             abilityName = "重來一次";
                         }
-                        if (GameManager.CurrentSceneName == "Game 0")
+                        if (GameManager.CurrentSceneName == "Game 0_3")
                         {
-                            HashSet<string> abilityNames = new HashSet<string>() { "血量上限增加", "傷害減輕" };
-                            if (!abilityNames.Contains(abilityName))
+                            //HashSet<string> abilityNames = new HashSet<string>() { "血量上限增加", "傷害減輕" };
+                            if (abilityName != "強力衝刺")
                             {
                                 abilityName = "重來一次";
                             }

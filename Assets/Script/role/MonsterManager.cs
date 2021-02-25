@@ -193,20 +193,14 @@ namespace com.DungeonPad
             }
 
             Destroy(gameObject);
-            if (gameObject.name.Contains("TutorialSpiderBig"))
+            if (gameObject.name.Contains("SpiderBig"))
             {
                 insMoney(Random.Range(2, 4));
-                insMoneyB(1);
-                Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
-            }
-            else if (gameObject.name.Contains("SpiderBig"))
-            {
-                insMoney(Random.Range(2, 4));
-                if (Random.Range(0, 100) < 15)
+                if (Random.Range(0, 100) < 15 || GameManager.CurrentSceneName == "Game 0_4")
                 {
                     insMoneyB(1);
                 }
-                if (Random.Range(0, 100) < 15)
+                if (Random.Range(0, 100) < 15 || GameManager.CurrentSceneName == "Game 0_4")
                 {
                     Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
                 }

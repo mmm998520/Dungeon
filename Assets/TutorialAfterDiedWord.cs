@@ -10,6 +10,7 @@ namespace com.DungeonPad
     {
         public Text text;
         float timer;
+        public static string nextSceneName;
 
         // Update is called once per frame
         void Update()
@@ -19,13 +20,13 @@ namespace com.DungeonPad
             {
                 text.color = new Color(text.color.r, text.color.g, text.color.b, timer);
             }
-            if (timer < 3)
+            if (timer < 5)
             {
                 text.color = new Color(text.color.r, text.color.g, text.color.b, timer - 1);
             }
             else
             {
-                SwitchScenePanel.NextScene = "game 0";
+                SwitchScenePanel.NextScene = nextSceneName;
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 PlayerManager.HP = PlayerManager.MaxHP;
                 PlayerManager.Life = 1;

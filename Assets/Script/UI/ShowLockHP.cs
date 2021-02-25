@@ -42,11 +42,12 @@ namespace com.DungeonPad
                 {
                     GamePad.SetVibration((PlayerIndex)i, 0, 0);
                 }
-                if (SceneManager.GetActiveScene().name == "Game 0")
+                if (GameManager.CurrentSceneName.Contains("Game 0"))
                 {
                     PlayerManager.DiedTimer = 10;
                     ReGamer.ReAbility();
                     SwitchScenePanel.NextScene = "AfterGame 0";
+                    TutorialAfterDiedWord.nextSceneName = GameManager.CurrentSceneName;
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
                 else
