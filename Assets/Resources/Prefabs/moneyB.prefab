@@ -87,6 +87,8 @@ MonoBehaviour:
   animator: {fileID: 4535775244995362369}
   sound: {fileID: 3694377445020159880}
   moneyB: 1
+  final: 0
+  spriteRenderer: {fileID: 4535775245015503820}
 --- !u!1 &4535775245015503822
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 4535775245015503822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6235, y: 0.6235, z: 0.6235}
   m_Children: []
   m_Father: {fileID: 4535775244995362368}
   m_RootOrder: 0
@@ -136,7 +138,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 09f367c65b8d5b3448c9b62ec785556b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,11 +156,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -405536031
+  m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cb5c3192d99537749aca737e25c05146, type: 3}
-  m_Color: {r: 1, g: 0.42834568, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: d1e3c1ea9b18b4b478a89aec009a327c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

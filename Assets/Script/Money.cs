@@ -14,6 +14,7 @@ namespace com.DungeonPad
         public Transform sound;
         public bool moneyB;
         [HideInInspector]public bool final;
+        [SerializeField]Transform spriteRenderer;
         void Start()
         {
             transform.eulerAngles = new Vector3(0, Random.Range(0, 2) * 180, Random.Range(-20f,0f));
@@ -22,6 +23,10 @@ namespace com.DungeonPad
 
         void Update()
         {
+            if (spriteRenderer)
+            {
+                spriteRenderer.right = Vector3.right;
+            }
             Transform minDisPlayer = MinDisPlayer();
             if (GetCollider.enabled == true)
             {
@@ -88,7 +93,7 @@ namespace com.DungeonPad
                 Destroy(sound.gameObject,2);
                 print(1);
             }
-            else if (distance < 3)
+            else if ((distance < 3 && !moneyB) || (distance < 0.5f && moneyB))
             {
                 child.position = child.position + Vector3.Normalize(MinDisPlayer().position - child.position) * 10 * Time.deltaTime;
                 print(2);
