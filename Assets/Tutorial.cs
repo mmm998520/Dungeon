@@ -50,7 +50,6 @@ namespace com.DungeonPad
             }
             if(CameraManager.center.x > goNextScenePosX + 0.7f)
             {
-                ReGamer.ReAbility();
                 SwitchScenePanel.NextScene = nextSceneName;
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }

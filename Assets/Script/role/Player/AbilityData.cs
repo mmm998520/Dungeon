@@ -250,7 +250,7 @@ namespace com.DungeonPad
         {
             switch (abilityName)
             {
-                case "爆擊率":
+                case "暴擊":
                     if (abilityLevel <= 0)
                     {
                         PlayerManager.criticalRate = 0;
@@ -264,7 +264,7 @@ namespace com.DungeonPad
                         PlayerManager.criticalRate = 10;
                     }
                     break;
-                case "傷害減輕":
+                case "不屈":
                     if (abilityLevel <= 0)
                     {
                         PlayerManager.reducesDamage = 0;
@@ -274,19 +274,19 @@ namespace com.DungeonPad
                         PlayerManager.reducesDamage = 50;
                     }
                     break;
-                case "放射水晶線條數":
+                case "光炸":
                     CrystalScattering.scatteringLightCount = 6 + abilityLevel * 2;
                     break;
-                case "放射水晶線條加寬":
+                case "強光":
                     CrystalScatteringLight.Large = (abilityLevel == 1);
                     break;
-                case "血量上限增加":
+                case "守護":
                     PlayerManager.MaxHP = 60 + abilityLevel * 20;
                     break;
                 case "突進":
                     PlayerManager.DashSpeed = 11 + abilityLevel * 4;
                     break;
-                case "降低衝刺冷卻":
+                case "低耗":
                     PlayerManager.DashCD = 0.5f - abilityLevel * 0.1f;
                     break;
                 case "疾行":
@@ -297,16 +297,19 @@ namespace com.DungeonPad
                     {
                         PlayerManager.homeButton = false;
                         PlayerManager.homeButtonTimer = 12;
+                        PlayerManager.homeButtonTimerStoper = 12;
                     }
                     else if (abilityLevel == 1)
                     {
                         PlayerManager.homeButton = true;
                         PlayerManager.homeButtonTimer = 12;
+                        PlayerManager.homeButtonTimerStoper = 12;
                     }
                     else
                     {
                         PlayerManager.homeButton = true;
                         PlayerManager.homeButtonTimer = 6;
+                        PlayerManager.homeButtonTimerStoper = 6;
                     }
                     break;
                 case "磁場":
@@ -316,10 +319,11 @@ namespace com.DungeonPad
                     PlayerManager.circleAttack = (abilityLevel != 0);
                     break;
                 case "根性":
+                    string sceneName = SceneManager.GetActiveScene().name;
                     if (abilityLevel <= 0)
                     {
                         PlayerManager.root = false;
-                        if(SceneManager.GetActiveScene().name=="Game 1")
+                        if (sceneName == "Game 0" || sceneName == "Game 1" || sceneName.Contains("Game 0_"))
                         {
                             GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 0;
                         }
@@ -327,7 +331,7 @@ namespace com.DungeonPad
                     else
                     {
                         PlayerManager.root = true;
-                        if (SceneManager.GetActiveScene().name == "Game 1")
+                        if (sceneName == "Game 0" || sceneName == "Game 1" || sceneName.Contains("Game 0_"))
                         {
                             GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 0.8f;
                         }

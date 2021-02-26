@@ -14,6 +14,7 @@ namespace com.DungeonPad
         }
         public GostBehavior gostBehavior;
 
+        [HideInInspector]public List<GameObject> Attacks = new List<GameObject>();
         bool attacking = false;
         public Animator SpriteAnimator;
 
@@ -83,7 +84,7 @@ namespace com.DungeonPad
             }
             for (int i = 0; i < 3; i++)
             {
-                Instantiate(base.attack, transform.position + Quaternion.Euler(0, 0, Random.Range(0, 360)) * Vector3.right * Random.Range(0.5f, 5f), Quaternion.identity, GameObject.Find(AtttackType).transform).GetComponent<MonsterAttack>();
+                Attacks.Add(Instantiate(base.attack, transform.position + Quaternion.Euler(0, 0, Random.Range(0, 360)) * Vector3.right * Random.Range(0.5f, 5f), Quaternion.identity, GameObject.Find(AtttackType).transform));
             }
         }
 
@@ -100,6 +101,11 @@ namespace com.DungeonPad
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            for(int i = 0; i < Attacks.Count; i++)
+            {
+                Destroy(Attacks[i]);
+            }
+
             SpriteAnimator.transform.parent = null;
             SpriteAnimator.SetTrigger("Destroy");
         }

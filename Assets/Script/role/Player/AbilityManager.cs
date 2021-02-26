@@ -34,13 +34,13 @@ namespace com.DungeonPad
         void setDictionary()
         {
             #region//當前等級
-            AbilityCurrentLevel.Add("爆擊率", 0);
-            AbilityCurrentLevel.Add("傷害減輕", 0);
-            AbilityCurrentLevel.Add("放射水晶線條數", 0);
-            AbilityCurrentLevel.Add("放射水晶線條加寬", 0);
-            AbilityCurrentLevel.Add("血量上限增加", 0);
+            AbilityCurrentLevel.Add("暴擊", 0);
+            AbilityCurrentLevel.Add("不屈", 0);
+            AbilityCurrentLevel.Add("光炸", 0);
+            AbilityCurrentLevel.Add("強光", 0);
+            AbilityCurrentLevel.Add("守護", 0);
             AbilityCurrentLevel.Add("突進", 0);
-            AbilityCurrentLevel.Add("降低衝刺冷卻", 0);
+            AbilityCurrentLevel.Add("低耗", 0);
             AbilityCurrentLevel.Add("疾行", 0);
             AbilityCurrentLevel.Add("傳送", 0);
             AbilityCurrentLevel.Add("磁場", 0);
@@ -51,13 +51,13 @@ namespace com.DungeonPad
             #endregion
 
             #region//已購買的等級
-            AbilityCanUseLevel.Add("爆擊率", 2);
-            AbilityCanUseLevel.Add("傷害減輕", 1);
-            AbilityCanUseLevel.Add("放射水晶線條數", 2);
-            AbilityCanUseLevel.Add("放射水晶線條加寬", 1);
-            AbilityCanUseLevel.Add("血量上限增加", 2);
+            AbilityCanUseLevel.Add("暴擊", 2);
+            AbilityCanUseLevel.Add("不屈", 1);
+            AbilityCanUseLevel.Add("光炸", 2);
+            AbilityCanUseLevel.Add("強光", 1);
+            AbilityCanUseLevel.Add("守護", 2);
             AbilityCanUseLevel.Add("突進", 1);
-            AbilityCanUseLevel.Add("降低衝刺冷卻", 2);
+            AbilityCanUseLevel.Add("低耗", 2);
             AbilityCanUseLevel.Add("疾行", 2);
             AbilityCanUseLevel.Add("傳送", 2);
             AbilityCanUseLevel.Add("磁場", 1);
@@ -68,13 +68,13 @@ namespace com.DungeonPad
             #endregion
 
             #region//可買的等級上限
-            AbilityCanBuyLevel.Add("爆擊率", 2);
-            AbilityCanBuyLevel.Add("傷害減輕", 1);
-            AbilityCanBuyLevel.Add("放射水晶線條數", 2);
-            AbilityCanBuyLevel.Add("放射水晶線條加寬", 1);
-            AbilityCanBuyLevel.Add("血量上限增加", 2);
+            AbilityCanBuyLevel.Add("暴擊", 2);
+            AbilityCanBuyLevel.Add("不屈", 1);
+            AbilityCanBuyLevel.Add("光炸", 2);
+            AbilityCanBuyLevel.Add("強光", 1);
+            AbilityCanBuyLevel.Add("守護", 2);
             AbilityCanBuyLevel.Add("突進", 1);
-            AbilityCanBuyLevel.Add("降低衝刺冷卻", 2);
+            AbilityCanBuyLevel.Add("低耗", 2);
             AbilityCanBuyLevel.Add("疾行", 2);
             AbilityCanBuyLevel.Add("傳送", 2);
             AbilityCanBuyLevel.Add("磁場", 1);

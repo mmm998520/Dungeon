@@ -27,7 +27,7 @@ namespace com.DungeonPad
                 if (SceneManager.GetActiveScene().name == "Game 4")
                 {
                     ReGamer.ReGame();
-                    SwitchScenePanel.NextScene = "SelectRole_Game 1";
+                    SwitchScenePanel.NextScene = "Home";
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
             }
