@@ -60,6 +60,10 @@ namespace com.DungeonPad
             {
                 
             }
+            if (CurrentSceneName.Contains("Select"))
+            {
+                ReGamer.ReGame();
+            }
         }
 
         void Update()
