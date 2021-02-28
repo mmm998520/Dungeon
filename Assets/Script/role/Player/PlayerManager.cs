@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = true;
+        public static bool lockedHP = false;
         public static float lockedHPTimer = 10, DiedTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -248,7 +248,7 @@ namespace com.DungeonPad
                     {
                         HP = MaxHP;
                     }
-                    HPMaxCircleLight.color = new Color(1, 1, 1, 0.15f * Mathf.Clamp01(Mathf.InverseLerp(MaxHP*0.9f,MaxHP,HP)) + 0.07f);
+                    HPMaxCircleLight.color = new Color(1, 1, 1, 0.12f * Mathf.Clamp01(Mathf.InverseLerp(MaxHP*0.9f,MaxHP,HP)) + 0.15f);
                     HPMaxCircleLight.transform.Rotate(0, 0, Time.deltaTime * 7);
                     recoveryRate();
                     if (HP / MaxHP > 0.4f)//(HP > 20)
