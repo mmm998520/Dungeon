@@ -9,13 +9,9 @@ namespace com.DungeonPad
 {
     public class ShowLockHP : MonoBehaviour
     {
-        public Image image;
-        public Color origialColor;
-        //public static float hurtTimer;
-        void Start()
-        {
-
-        }
+        [SerializeField] Image WhiteBakGround;
+        [SerializeField] Color origialColor;
+        [SerializeField] Image[] Life, MaxLife;
 
         void Update()
         {
@@ -33,7 +29,7 @@ namespace com.DungeonPad
                     playerManager.DashTimer = 10;
                     playerManager.enabled = false;
                 }
-                image.color = new Color(origialColor.r, origialColor.g, origialColor.b, Mathf.Pow(PlayerManager.DiedTimer, 2));
+                WhiteBakGround.color = new Color(origialColor.r, origialColor.g, origialColor.b, Mathf.Pow(PlayerManager.DiedTimer, 2));
                 return;
             }
             else if(PlayerManager.DiedTimer < 2)
@@ -64,40 +60,23 @@ namespace com.DungeonPad
             #region//復活效果
             float lockHPLight = 1 - PlayerManager.lockedHPTimer;
             PlayerManager.lockedHPTimer += Time.deltaTime;
-            if (lockHPLight > 0.6f)
+
+            /*if (lockHPLight > 0.6f)
             {
-                PlayerManager playerManager;
-                Rigidbody2D rigidbody;
-                for(int i=0;i< GameManager.players.childCount; i++)
-                {
-                    playerManager = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
-                    rigidbody = GameManager.players.GetChild(i).GetComponent<Rigidbody2D>();
-                    if (rigidbody.velocity.magnitude > PlayerManager.moveSpeed)
-                    {
-                        rigidbody.velocity = rigidbody.velocity.normalized * PlayerManager.moveSpeed;
-                    }
-                    playerManager.DashTimer = 10;
-                    playerManager.enabled = false;
-                }
+                lowSpeed();
                 Time.timeScale = 0.3f;
                 Time.fixedDeltaTime = 0.02F * Time.timeScale;
             }
             else if (lockHPLight > 0.3f)
             {
-                PlayerManager playerManager;
-                Rigidbody2D rigidbody;
-                for (int i = 0; i < GameManager.players.childCount; i++)
-                {
-                    playerManager = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
-                    rigidbody = GameManager.players.GetChild(i).GetComponent<Rigidbody2D>();
-                    if (rigidbody.velocity.magnitude > PlayerManager.moveSpeed)
-                    {
-                        rigidbody.velocity = rigidbody.velocity.normalized * PlayerManager.moveSpeed;
-                    }
-                    playerManager.DashTimer = 10;
-                    playerManager.enabled = false;
-                }
-                Time.timeScale = 0.7f;
+                lowSpeed();
+                Time.timeScale = 0.6f;
+                Time.fixedDeltaTime = 0.02F * Time.timeScale;
+            }*/
+            if(lockHPLight > 0.2f)
+            {
+                lowSpeed();
+                Time.timeScale = 1 - lockHPLight;
                 Time.fixedDeltaTime = 0.02F * Time.timeScale;
             }
             else if (lockHPLight > 0.1f)
@@ -112,11 +91,51 @@ namespace com.DungeonPad
             //hurtTimer += Time.deltaTime;
             if (lockHPLight > 0)
             {
-                image.color = new Color(origialColor.r, origialColor.g, origialColor.b, Mathf.Pow(lockHPLight, 3));
+                WhiteBakGround.color = new Color(origialColor.r, origialColor.g, origialColor.b, lockHPLight * 1.5f);
+                for (int i = 0; i < Life.Length; i++)
+                {
+                    if (i < PlayerManager.Life - 1)
+                    {
+                        Life[i].color = new Color(origialColor.r, origialColor.g, origialColor.b, lockHPLight * 1.5f);
+                    }
+                    else if (i == PlayerManager.Life - 1)
+                    {
+                        Life[i].color = new Color(origialColor.r, origialColor.g, origialColor.b, Mathf.Pow(lockHPLight * 1.05f, 8));
+                    }
+                    else
+                    {
+                        Life[i].color = Color.clear;
+                    }
+                }
+                for (int i = 0; i < MaxLife.Length; i++)
+                {
+                    MaxLife[i].color = new Color(origialColor.r, origialColor.g, origialColor.b, lockHPLight * 2);
+                }
             }
             else
             {
-                image.color = Color.clear;
+                WhiteBakGround.color = Color.clear;
+                for (int i = 0; i < Life.Length; i++)
+                {
+                    Life[i].color = Color.clear;
+                }
+            }
+        }
+
+        void lowSpeed()
+        {
+            PlayerManager playerManager;
+            Rigidbody2D rigidbody;
+            for (int i = 0; i < GameManager.players.childCount; i++)
+            {
+                playerManager = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
+                rigidbody = GameManager.players.GetChild(i).GetComponent<Rigidbody2D>();
+                if (rigidbody.velocity.magnitude > PlayerManager.moveSpeed)
+                {
+                    rigidbody.velocity = rigidbody.velocity.normalized * PlayerManager.moveSpeed;
+                }
+                playerManager.DashTimer = 10;
+                playerManager.enabled = false;
             }
         }
     }

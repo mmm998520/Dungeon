@@ -136,8 +136,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.6, y: 0.6}
+  m_EdgeRadius: 0.2
 --- !u!1 &4234864129404480555
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,8 +302,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.6, y: 0.6}
+  m_EdgeRadius: 0.2
 --- !u!1 &5348147694506867228
 GameObject:
   m_ObjectHideFlags: 0

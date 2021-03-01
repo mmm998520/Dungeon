@@ -62,7 +62,6 @@ namespace com.DungeonPad
             animator.SetBool("Sleep", SleepTimer < 0f);
             SleepUI.enabled = SleepTimer < 0f;
             float dis = Vector3.Distance(minDisPlayer.position, transform.position);
-            Debug.LogError(dis);
             if (SleepTimer < 0f)
             {
                 rigidbody.velocity = Vector3.zero;
@@ -316,7 +315,17 @@ namespace com.DungeonPad
         {
             endRow[0] = Mathf.RoundToInt(minDisPlayer.position.x);
             endCol[0] = Mathf.RoundToInt(minDisPlayer.position.y);
-            findRoad();
+            int pos = endRow[0] * MazeCreater.totalCol + endCol[0];
+            if (CrystalSidePos.ContainsValue(pos))
+            {
+                roads.Clear();
+                roads.Add(new int[] { endRow[0], endCol[0] });
+                roads.Add(new int[] { endRow[0], endCol[0] });
+            }
+            else
+            {
+                findRoad();
+            }
         }
 
         void move()
