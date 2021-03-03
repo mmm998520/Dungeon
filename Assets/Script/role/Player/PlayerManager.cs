@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = false;
+        public static bool lockedHP = true;
         public static float lockedHPTimer = 10, DiedTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -80,7 +80,7 @@ namespace com.DungeonPad
 
         public void Start()
         {
-            if(SceneManager.GetActiveScene().name == "Game 1")
+            //if(SceneManager.GetActiveScene().name == "Game 1")
             {
                 if (root)
                 {

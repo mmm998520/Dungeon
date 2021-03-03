@@ -137,7 +137,6 @@ namespace com.DungeonPad
                                 if (fireBallTrackCDTimer > fireBallTrackCD)
                                 {
                                     throwByClockwise = (Random.Range(0, 2) > 0);
-                                    animator.SetBool("FireBallTrack", true);
                                     if (HP < 30)
                                     {
                                         animator.SetInteger("Stat", 30);
@@ -150,6 +149,8 @@ namespace com.DungeonPad
                                     {
                                         animator.SetInteger("Stat", 90);
                                     }
+                                    animator.SetBool("FireBallTrack", true);
+
                                     playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
                                     canUseThisAttack = true;
                                 }
