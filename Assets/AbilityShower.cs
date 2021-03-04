@@ -9,14 +9,13 @@ namespace com.DungeonPad
     {
         public Image[] abilityImages;
         public Image[] homeButtonTimerImages;
-
+        [SerializeField] Image[] selecteds;
+        int selectedNum = 0;
         public static List<string> abilityNamesAndLevels = new List<string>();
 
         void Start()
         {
             string[] ability;
-            Debug.LogError(2123132123132);
-
             for (int i = 0; i < abilityNamesAndLevels.Count; i++)
             {
                 ability = System.Text.RegularExpressions.Regex.Split(abilityNamesAndLevels[i], "Lv");
@@ -40,6 +39,20 @@ namespace com.DungeonPad
                         homeButtonTimerImages[i].fillAmount = PlayerManager.homeButtonTimer / (-PlayerManager.homeButtonTimerStoper * 2);
                         break;
                     }
+                }
+            }
+
+
+            if (Input.GetKeyDown(KeyCode.JoystickButton6))
+            {
+                if (!selecteds[selectedNum].enabled && abilityNamesAndLevels.Count > 0)
+                {
+                    selectedNum = 0;
+                    selecteds[selectedNum].enabled = true;
+                }
+                else if (selecteds[selectedNum].enabled)
+                {
+                    selecteds[selectedNum].enabled = false;
                 }
             }
         }
