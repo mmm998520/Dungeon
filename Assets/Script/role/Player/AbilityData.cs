@@ -33,6 +33,7 @@ namespace com.DungeonPad
         {
             if (!SceneManager.GetActiveScene().name.Contains("SelectRole_Game 1"))
             {
+                Debug.LogError("212311651");
                 awake();
             }
         }
@@ -248,6 +249,7 @@ namespace com.DungeonPad
 
         public static void setPlayerAbility(string abilityName, int abilityLevel)
         {
+            GameManager.abilityShower.setAbility(abilityName, abilityLevel);
             switch (abilityName)
             {
                 case "暴擊":

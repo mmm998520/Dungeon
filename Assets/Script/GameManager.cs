@@ -27,6 +27,7 @@ namespace com.DungeonPad
         public bool haveFinalRoomStore;
         public static GameObject Hurted;
         public static ShowAbilityDetail showAbilityDetail;
+        public static AbilityShower abilityShower;
         public static string CurrentSceneName;
         void Awake()
         {
@@ -37,6 +38,14 @@ namespace com.DungeonPad
             monsters = GameObject.Find("Monsters").transform;
             triggers = GameObject.Find("Triggers").transform;
             magneticFields = GameObject.Find("MagneticFields").transform;
+            try
+            {
+                abilityShower = GameObject.Find("AbilityShower").GetComponent<AbilityShower>();
+            }
+            catch
+            {
+
+            }
             if (GameObject.Find("MazeCreater"))
             {
                 mazeCreater = GameObject.Find("MazeCreater").GetComponent<MazeCreater>();
