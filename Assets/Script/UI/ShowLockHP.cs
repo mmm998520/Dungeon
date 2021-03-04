@@ -91,7 +91,7 @@ namespace com.DungeonPad
             //hurtTimer += Time.deltaTime;
             if (lockHPLight > 0)
             {
-                WhiteBakGround.color = new Color(origialColor.r, origialColor.g, origialColor.b, lockHPLight * 1.5f);
+                WhiteBakGround.color = new Color(0, 0, 0, lockHPLight * 1.5f);
                 for (int i = 0; i < Life.Length; i++)
                 {
                     if (i < PlayerManager.Life - 1)
@@ -100,7 +100,7 @@ namespace com.DungeonPad
                     }
                     else if (i == PlayerManager.Life - 1)
                     {
-                        Life[i].color = new Color(origialColor.r, origialColor.g, origialColor.b, Mathf.Pow(lockHPLight * 1.05f, 8));
+                        Life[i].color = new Color(origialColor.r, origialColor.g, origialColor.b, Mathf.Pow(lockHPLight * 1.02f, 20));
                     }
                     else
                     {

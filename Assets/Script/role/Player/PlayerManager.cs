@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = true;
+        public static bool lockedHP = false;
         public static float lockedHPTimer = 10, DiedTimer = 10;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -1177,7 +1177,7 @@ namespace com.DungeonPad
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent<ParticleSystem>().shape.arc / 2 + 180);
 
             #region//子彈
-
+            /*
             if (BulletNum > 0)
             {
                 if (p1)
@@ -1227,7 +1227,7 @@ namespace com.DungeonPad
                     }
                 }
             }
-
+            */
             //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy + "R");
             #endregion
         }
@@ -1270,7 +1270,7 @@ namespace com.DungeonPad
                     break;
             }
             DashA = Vector3.Normalize(DashA) * DashSpeed;
-            for(int i = 0; i < 5; i++)
+            for(int i = 0; i < 37; i++)
             {
                 if (DashA.magnitude <= 10)
                 {
