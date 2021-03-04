@@ -5674,7 +5674,7 @@ MonoBehaviour:
   mouse2: {fileID: 503378752}
   BluePlayer: {fileID: 252037856}
   RedPlayer: {fileID: 1179144343}
-  NextScene: Game 2
+  NextScene: Game 1
 --- !u!224 &447325376 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6623596174500636619, guid: d43f99542c8703f4aa42ec119e7ed20b,

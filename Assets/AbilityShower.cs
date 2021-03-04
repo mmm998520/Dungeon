@@ -15,16 +15,18 @@ namespace com.DungeonPad
         void Start()
         {
             string[] ability;
-            /*
+            Debug.LogError(2123132123132);
+
             for (int i = 0; i < abilityNamesAndLevels.Count; i++)
             {
                 ability = System.Text.RegularExpressions.Regex.Split(abilityNamesAndLevels[i], "Lv");
+                Debug.LogError(ability[0] + ",,,," + ability[1]);
                 setAbility(ability[0], int.Parse(ability[1]));
                 if (i > 50)
                 {
                     break;
                 }
-            }*/
+            }
         }
 
         void Update()
@@ -48,9 +50,9 @@ namespace com.DungeonPad
             {
                 if ((abilityImages[i].sprite && abilityImages[i].sprite.name.Contains(abilityName)) || !abilityImages[i].enabled)
                 {
-                    for (int j = 0; j < 5; i++)
+                    if(abilityNamesAndLevels.Count>i)
                     {
-                        abilityNamesAndLevels.Remove(abilityName + "Lv" + j);
+                        abilityNamesAndLevels.RemoveAt(i);
                     }
                     if (abilityLevel == 0)
                     {
@@ -66,7 +68,7 @@ namespace com.DungeonPad
                     }
                     else
                     {
-                        abilityNamesAndLevels.Add(abilityName + "Lv" + abilityLevel);
+                        abilityNamesAndLevels.Insert(i ,abilityName + "Lv" + abilityLevel);
                         abilityImages[i].enabled = true;
                         abilityImages[i].sprite = Resources.Load<Sprite>("UI/Ability/AbilityImage/" + abilityName + "Lv" + abilityLevel);
                         if (abilityName == "傳送")
