@@ -12,7 +12,9 @@ namespace com.DungeonPad
         [SerializeField] GameObject[] TutorialText;
         [SerializeField] int goNextScenePosX;
         [SerializeField] string nextSceneName;
-
+        [SerializeField] Transform[] insSpiderWebPoses;
+        [SerializeField] GameObject spiderWeb;
+        float insSpiderWebTimer = 3;
         public int ShowHPLine;
         public Image[] HPBarImages;
 
@@ -42,7 +44,28 @@ namespace com.DungeonPad
                 }
                 nowTextNum++;
             }
+            else
+            {
+                if (GameManager.CurrentSceneName == "Game 0" || GameManager.CurrentSceneName == "Game 0_1")
+                {
+                    for (int i = 0; i < GameManager.players.childCount; i++)
+                    {
+                        GameManager.players.GetChild(i).GetComponent<PlayerManager>().DashTimer = 0.3f;
+                    }
+                }
+            }
 
+            insSpiderWebTimer += Time.deltaTime;
+            if (insSpiderWebTimer >= 2.7f)
+            {
+                insSpiderWebTimer = 0;
+                for (int i = 0; i < insSpiderWebPoses.Length; i++)
+                {
+                    GameObject web = Instantiate(spiderWeb, insSpiderWebPoses[i].position, Quaternion.Euler(0, 180, 0));
+                    web.GetComponent<MonsterAttack>().ATK = 25;
+                    web.GetComponent<MonsterShooter>().timerStoper = 999;
+                }
+            }
 
             for (int i = 0; i < HPBarImages.Length; i++)
             {

@@ -52,9 +52,11 @@ namespace com.DungeonPad
 
         public virtual void hited()
         {
-            mySpriteRendererBottom.sprite = breakSprite;
+            mySpriteRendererBottom.enabled = false;
+            mySpriteRendererTop.enabled = true;
+            /*mySpriteRendererBottom.sprite = breakSprite;
             mySpriteRendererBottom.transform.Translate(Vector3.down);
-            mySpriteRendererTop.enabled = false;
+            mySpriteRendererTop.enabled = false;*/
             for(int i= 0; i < myCollider2d.Length; i++)
             {
                 myCollider2d[i].enabled = false;

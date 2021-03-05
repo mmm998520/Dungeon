@@ -57,7 +57,7 @@ namespace com.DungeonPad
                         {
                             abilityName = "重來一次";
                         }
-                        if (GameManager.CurrentSceneName == "Game 0_3")
+                        if (GameManager.CurrentSceneName == "Game 0_4")
                         {
                             //HashSet<string> abilityNames = new HashSet<string>() { "守護", "不屈" };
                             if (abilityName != "突進")

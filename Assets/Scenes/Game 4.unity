@@ -60093,6 +60093,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityShower
       objectReference: {fileID: 0}
+    - target: {fileID: 6165025539838499293, guid: cc90ff966bf57d64daae90de43a05066,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc90ff966bf57d64daae90de43a05066, type: 3}
 --- !u!224 &1752821034 stripped

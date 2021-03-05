@@ -327,7 +327,7 @@ namespace com.DungeonPad
                         PlayerManager.root = false;
                         if (sceneName == "Game 0" || sceneName == "Game 1" || sceneName.Contains("Game 0_"))
                         {
-                            GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 0;
+                            GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 0.8f;
                         }
                     }
                     else

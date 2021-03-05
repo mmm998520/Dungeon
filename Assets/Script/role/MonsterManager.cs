@@ -196,11 +196,11 @@ namespace com.DungeonPad
             if (gameObject.name.Contains("SpiderBig"))
             {
                 insMoney(Random.Range(2, 4));
-                if (Random.Range(0, 100) < 15 || GameManager.CurrentSceneName == "Game 0_4")
+                if (Random.Range(0, 100) < 15 || GameManager.CurrentSceneName == "Game 0_5")
                 {
                     insMoneyB(1);
                 }
-                if (Random.Range(0, 100) < 15 || GameManager.CurrentSceneName == "Game 0_4")
+                if (Random.Range(0, 100) < 15 || GameManager.CurrentSceneName == "Game 0_5")
                 {
                     Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
                 }

@@ -28,8 +28,24 @@ namespace com.DungeonPad
         }
         public static PlayerColor playerColor;
 
+        void Start()
+        {
+            ReGamer.ReAbility();
+            if (GameManager.CurrentSceneName == "SelectRole_Game 0")
+            {
+                PlayerManager.Life = 1;
+            }
+        }
+
         void Update()
         {
+            if (GameManager.CurrentSceneName == "SelectRole_Game 0")
+            {
+                for (int i = 0; i < GameManager.players.childCount; i++)
+                {
+                    GameManager.players.GetChild(i).GetComponent<PlayerManager>().DashTimer = 0.3f;
+                }
+            }
             if (p1Stat == mouseStat.UnSelect && p2Stat == mouseStat.UnSelect)
             {
                 p1Stat = selectMouse(true, p1Stat);

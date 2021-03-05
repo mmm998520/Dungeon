@@ -43,7 +43,7 @@ namespace com.DungeonPad
         public SpriteRenderer ConfusionUIRenderer;
         public ConfusionUIcontroler ConfusionUIcontroler;
 
-        const float LightRangeMinSize = 2.5f, LightRangeMaxSize = 20;
+        const float LightRangeMinSize = 3f, LightRangeMaxSize = 20;
         float lastUpdateHp;
         public static List<float> timerRecord = new List<float>(), recoveryRecord = new List<float>();
         public float lightRotateTimer, lightRotateTimerStoper;
@@ -88,7 +88,7 @@ namespace com.DungeonPad
                 }
                 else
                 {
-                    GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 0;
+                    GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 0.8f;
                 }
             }
             batStickedNum = 0;
@@ -251,7 +251,7 @@ namespace com.DungeonPad
                     HPMaxCircleLight.color = new Color(1, 1, 1, 0.12f * Mathf.Clamp01(Mathf.InverseLerp(MaxHP*0.9f,MaxHP,HP)) + 0.15f);
                     HPMaxCircleLight.transform.Rotate(0, 0, Time.deltaTime * 7);
                     recoveryRate();
-                    if (HP / MaxHP > 0.4f)//(HP > 20)
+                    if (HP / MaxHP > 0.4f)//(HP > 20)   //後面的數字是提示的時間，如果要有提示，我推薦0.4，不要的話我推薦0.1
                     {
                         Vector3 size = Vector3.one * ((HP / MaxHP - 0.4f) / 0.6f * (LightRangeMaxSize - LightRangeMinSize) + LightRangeMinSize);
                         transform.GetChild(5).localScale = size;
@@ -262,10 +262,13 @@ namespace com.DungeonPad
                     }
                     else
                     {
+                        //Vector3 size = Vector3.one * ((LightRangeMinSize -3f) * (HP / MaxHP * 10 / 4) + 3f);
                         Vector3 size = Vector3.one * LightRangeMinSize;
                         transform.GetChild(5).localScale = size;
                         transform.GetChild(6).localScale = size;
                         HPMaxCircleLight.transform.localScale = size;
+                        HPMaxCircleLight.color = new Color(0.7f,0.1f, 0.1f);
+
                         //transform.GetChild(5).localScale = Vector3.one * (5) / 1.5f;//20 : 3.3333
                         //transform.GetChild(6).localScale = Vector3.one * (5) / 1.5f;
                     }
