@@ -249,7 +249,14 @@ namespace com.DungeonPad
 
         public static void setPlayerAbility(string abilityName, int abilityLevel)
         {
-            GameManager.abilityShower.setAbility(abilityName, abilityLevel);
+            try
+            {
+                GameManager.abilityShower.setAbility(abilityName, abilityLevel);
+            }
+            catch
+            {
+
+            }
             switch (abilityName)
             {
                 case "暴擊":

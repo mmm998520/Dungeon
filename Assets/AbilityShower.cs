@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace com.DungeonPad
 {
@@ -9,12 +10,16 @@ namespace com.DungeonPad
     {
         public Image[] abilityImages;
         public Image[] homeButtonTimerImages;
-        [SerializeField] Image[] selecteds;
+        [SerializeField] GameObject[] selects;
+        [SerializeField] GameObject select_None;
+        [SerializeField] Image text;
+        public static bool showSelected;
         int selectedNum = 0;
         public static List<string> abilityNamesAndLevels = new List<string>();
-
+        EventSystem eventSystem;
         void Start()
         {
+            eventSystem = EventSystem.current;
             string[] ability;
             for (int i = 0; i < abilityNamesAndLevels.Count; i++)
             {
@@ -45,14 +50,45 @@ namespace com.DungeonPad
 
             if (Input.GetKeyDown(KeyCode.JoystickButton6))
             {
-                if (!selecteds[selectedNum].enabled && abilityNamesAndLevels.Count > 0)
+                if (showSelected)
+                {
+                    showSelected = false;
+                }
+                else if (abilityNamesAndLevels.Count > 0)
                 {
                     selectedNum = 0;
-                    selecteds[selectedNum].enabled = true;
+                    showSelected = true;
+                    eventSystem.SetSelectedGameObject(selects[0]);
+                    for(int i = 0; i < selects.Length; i++)
+                    {
+                        selects[i].GetComponent<Image>().enabled = (i < abilityNamesAndLevels.Count);
+                    }
                 }
-                else if (selecteds[selectedNum].enabled)
+            }
+            text.enabled = showSelected;
+            if (showSelected)
+            {
+                if (eventSystem.currentSelectedGameObject == selects[abilityNamesAndLevels.Count])
                 {
-                    selecteds[selectedNum].enabled = false;
+                    eventSystem.SetSelectedGameObject(selects[0]);
+                }
+                else if(eventSystem.currentSelectedGameObject == select_None)
+                {
+                    eventSystem.SetSelectedGameObject(selects[abilityNamesAndLevels.Count - 1]);
+                }
+                for(int i=0; i < selects.Length; i++)
+                {
+                    if(eventSystem.currentSelectedGameObject == selects[i] && eventSystem.currentSelectedGameObject.GetComponent<Image>().enabled)
+                    {
+                        text.sprite = Resources.Load<Sprite>("UI/Ability/AbilityText/" + abilityImages[i].sprite.name);
+                    }
+                }
+            }
+            else
+            {
+                if (!GameManager.shopPanel.activeSelf)
+                {
+                    eventSystem.SetSelectedGameObject(select_None);
                 }
             }
         }

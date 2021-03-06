@@ -29,6 +29,7 @@ namespace com.DungeonPad
         public static ShowAbilityDetail showAbilityDetail;
         public static AbilityShower abilityShower;
         public static string CurrentSceneName;
+        public static GameObject shopPanel;
         void Awake()
         {
             CurrentSceneName = SceneManager.GetActiveScene().name;
@@ -73,14 +74,15 @@ namespace com.DungeonPad
             {
                 ReGamer.ReGame();
             }
+            shopPanel = GameObject.Find("shop").transform.GetChild(0).gameObject;
         }
 
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.JoystickButton7) || Input.GetKeyDown(KeyCode.Escape))
             {
-                GameObject.Find("shop").transform.GetChild(0).gameObject.SetActive(true);
-                GameObject.Find("shop").transform.GetChild(0).GetChild(0).GetComponent<AbilityDatas>().start();
+                shopPanel.SetActive(true);
+                shopPanel.transform.GetChild(0).GetComponent<AbilityDatas>().start();
             }
 
             //if (abilityStore)

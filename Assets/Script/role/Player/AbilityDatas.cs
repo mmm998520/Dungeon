@@ -23,6 +23,7 @@ namespace com.DungeonPad
         public void start()
         {
             EventSystem.current.SetSelectedGameObject(firstSelected);
+            AbilityShower.showSelected = false;
         }
 
         void Update()
