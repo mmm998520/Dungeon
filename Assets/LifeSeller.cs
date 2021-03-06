@@ -32,6 +32,7 @@ namespace com.DungeonPad
                 {
                     Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
                 }
+                transform.GetChild(1).SetParent(transform.parent);
                 Destroy(gameObject);
             }
             times++;
