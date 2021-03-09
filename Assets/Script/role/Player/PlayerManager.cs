@@ -12,7 +12,7 @@ namespace com.DungeonPad
         public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
         public static bool lockedHP = false;
-        public static float lockedHPTimer = 10, DiedTimer = 10;
+        public static float lockedHPTimer = 10, DiedTimer = 10, HP0Timer = 0;
         public float ATK, hand, atkTime;
         public bool continued = false;
         public float CD, CDTimer;
@@ -191,30 +191,35 @@ namespace com.DungeonPad
                 {
                     TwoPlayerBehavior();
                 }
-                if (HP <= 0)
+                if (HP <= 0 && HPMaxCircleLight.color.r <= 0.8f)
                 {
-                    Players.DiedAudioSource.Play();
-                    
-                    if (SceneName.Contains("SelectRole"))
+                    HP0Timer += Time.deltaTime / 2;
+                    if (HP0Timer > 0.2f)
                     {
-                        HP = MaxHP;
-                        lockedHPTimer = 0;
-                    }
-                    else
-                    {
-                        if (--Life > 0)
+                        Players.DiedAudioSource.Play();
+
+                        if (SceneName.Contains("SelectRole"))
                         {
                             HP = MaxHP;
                             lockedHPTimer = 0;
                         }
                         else
                         {
-                            DiedTimer = 0;
+                            if (--Life > 0)
+                            {
+                                HP = MaxHP;
+                                lockedHPTimer = 0;
+                            }
+                            else
+                            {
+                                DiedTimer = 0;
+                            }
                         }
                     }
                 }
                 else
                 {
+                    HP0Timer = 0;
                     float dis = Vector3.Distance(GameManager.players.GetChild(0).localPosition, GameManager.players.GetChild(1).localPosition);
                     float hpUpRate = 0;
                     if (dis < 2f)

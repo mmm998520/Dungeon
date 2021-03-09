@@ -79,12 +79,24 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.JoystickButton7) || Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Home))
             {
                 shopPanel.SetActive(true);
                 shopPanel.transform.GetChild(0).GetComponent<AbilityDatas>().start();
             }
-
+            if (PlayerManager.HP0Timer < 0.2f && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7)))
+            {
+                if(Time.timeScale == 1)
+                {
+                    Time.timeScale = 0;
+                    Time.fixedDeltaTime = 0.02F * Time.timeScale;
+                }
+                else
+                {
+                    Time.timeScale = 1;
+                    Time.fixedDeltaTime = 0.02F * Time.timeScale;
+                }
+            }
             //if (abilityStore)
             /*
             {

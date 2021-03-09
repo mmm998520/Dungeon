@@ -61,18 +61,6 @@ namespace com.DungeonPad
             float lockHPLight = 1 - PlayerManager.lockedHPTimer;
             PlayerManager.lockedHPTimer += Time.deltaTime;
 
-            /*if (lockHPLight > 0.6f)
-            {
-                lowSpeed();
-                Time.timeScale = 0.3f;
-                Time.fixedDeltaTime = 0.02F * Time.timeScale;
-            }
-            else if (lockHPLight > 0.3f)
-            {
-                lowSpeed();
-                Time.timeScale = 0.6f;
-                Time.fixedDeltaTime = 0.02F * Time.timeScale;
-            }*/
             if(lockHPLight > 0.2f)
             {
                 lowSpeed();
