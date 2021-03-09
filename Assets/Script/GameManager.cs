@@ -29,7 +29,7 @@ namespace com.DungeonPad
         public static ShowAbilityDetail showAbilityDetail;
         public static AbilityShower abilityShower;
         public static string CurrentSceneName;
-        public static GameObject shopPanel;
+        public static GameObject shopPanel, stopPanel;
         void Awake()
         {
             CurrentSceneName = SceneManager.GetActiveScene().name;
@@ -75,6 +75,7 @@ namespace com.DungeonPad
                 ReGamer.ReGame();
             }
             shopPanel = GameObject.Find("shop").transform.GetChild(0).gameObject;
+            stopPanel = GameObject.Find("stop").transform.GetChild(0).gameObject;
         }
 
         void Update()

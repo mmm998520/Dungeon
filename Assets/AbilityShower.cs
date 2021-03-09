@@ -86,7 +86,7 @@ namespace com.DungeonPad
             }
             else
             {
-                if (!GameManager.shopPanel.activeSelf)
+                if (!GameManager.shopPanel.activeSelf && !GameManager.stopPanel.activeSelf)
                 {
                     eventSystem.SetSelectedGameObject(select_None);
                 }
