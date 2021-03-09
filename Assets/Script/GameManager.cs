@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 namespace com.DungeonPad
 {
@@ -30,6 +31,7 @@ namespace com.DungeonPad
         public static AbilityShower abilityShower;
         public static string CurrentSceneName;
         public static GameObject shopPanel, stopPanel;
+
         void Awake()
         {
             CurrentSceneName = SceneManager.GetActiveScene().name;
@@ -87,16 +89,17 @@ namespace com.DungeonPad
             }
             if (PlayerManager.HP0Timer < 0.2f && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7)))
             {
-                if(Time.timeScale == 1)
-                {
-                    Time.timeScale = 0;
-                    Time.fixedDeltaTime = 0.02F * Time.timeScale;
-                }
-                else
+                if (stopPanel.activeSelf)
                 {
                     Time.timeScale = 1;
                     Time.fixedDeltaTime = 0.02F * Time.timeScale;
                 }
+                else
+                {
+                    Time.timeScale = 0;
+                    Time.fixedDeltaTime = 0.02F * Time.timeScale;
+                }
+                stopPanel.SetActive(!stopPanel.activeSelf);
             }
             //if (abilityStore)
             /*
