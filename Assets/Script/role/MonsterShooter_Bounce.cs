@@ -20,7 +20,7 @@ namespace com.DungeonPad
 
         void Update()
         {
-            sprite.right = Vector3.right;
+            //sprite.right = Vector3.right;
             transform.Translate(Vector3.right * Time.deltaTime * speed);
             if ((timer += Time.deltaTime) > timerStoper)
             {

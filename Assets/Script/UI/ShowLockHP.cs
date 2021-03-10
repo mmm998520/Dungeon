@@ -107,6 +107,10 @@ namespace com.DungeonPad
                 {
                     Life[i].color = Color.clear;
                 }
+                for (int i = 0; i < MaxLife.Length; i++)
+                {
+                    MaxLife[i].color = Color.clear;
+                }
             }
         }
 
