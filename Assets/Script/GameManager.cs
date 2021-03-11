@@ -101,6 +101,11 @@ namespace com.DungeonPad
                 }
                 stopPanel.SetActive(!stopPanel.activeSelf);
             }
+            if (stopPanel.activeSelf && Input.GetKeyDown(KeyCode.JoystickButton1))
+            {
+                Time.timeScale = 1;
+                Time.fixedDeltaTime = 0.02F * Time.timeScale;
+            }
             //if (abilityStore)
             /*
             {
