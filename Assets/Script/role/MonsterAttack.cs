@@ -32,6 +32,14 @@ namespace com.DungeonPad
                     {
                         PlayerManager.HP -= ATK;
                     }
+                    try
+                    {
+                        Camera.main.GetComponent<Animator>().SetTrigger("Hit");
+                    }
+                    catch
+                    {
+                        Debug.LogError("這場景忘了放畫面抖動");
+                    }
                     Instantiate(GameManager.Hurted, collider.transform.position, Quaternion.identity, collider.transform);
 
                     collider.GetComponent<PlayerJoyVibration>().hurt();

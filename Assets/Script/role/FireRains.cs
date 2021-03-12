@@ -70,6 +70,14 @@ namespace com.DungeonPad
                         {
                             PlayerManager.HP -= BaseDamage + (++hitedTimer[playerManager][1] * SingleDamage);
                         }
+                        try
+                        {
+                            Camera.main.GetComponent<Animator>().SetTrigger("Hit");
+                        }
+                        catch
+                        {
+                            Debug.LogError("這場景忘了放畫面抖動");
+                        }
                         Instantiate(GameManager.Hurted, playerManager.transform.position, Quaternion.identity, playerManager.transform);
                     }
                 }

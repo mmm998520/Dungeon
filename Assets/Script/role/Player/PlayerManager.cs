@@ -1496,7 +1496,14 @@ namespace com.DungeonPad
                             {
                                 HP -= 20;
                             }
-
+                            try
+                            {
+                                Camera.main.GetComponent<Animator>().SetTrigger("Hit");
+                            }
+                            catch
+                            {
+                                Debug.LogError("這場景忘了放畫面抖動");
+                            }
                             Instantiate(GameManager.Hurted, transform.position, Quaternion.identity, transform);
                             HardStraightTimer = 0.1f;
                         }
@@ -1510,6 +1517,14 @@ namespace com.DungeonPad
                             else
                             {
                                 HP -= 10;
+                            }
+                            try
+                            {
+                                Camera.main.GetComponent<Animator>().SetTrigger("Hit");
+                            }
+                            catch
+                            {
+                                Debug.LogError("這場景忘了放畫面抖動");
                             }
                             Instantiate(GameManager.Hurted, transform.position, Quaternion.identity, transform);
                             HardStraightTimer = 0;
@@ -1525,6 +1540,14 @@ namespace com.DungeonPad
                         else
                         {
                             HP -= 15;
+                        }
+                        try
+                        {
+                            Camera.main.GetComponent<Animator>().SetTrigger("Hit");
+                        }
+                        catch
+                        {
+                            Debug.LogError("這場景忘了放畫面抖動");
                         }
                         Instantiate(GameManager.Hurted,transform.position,Quaternion.identity, transform);
                         HardStraightTimer = 0;

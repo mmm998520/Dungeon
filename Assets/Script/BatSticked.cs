@@ -35,6 +35,14 @@ namespace com.DungeonPad
                 {
                     PlayerManager.HP -= SingleDamage;
                 }
+                try
+                {
+                    Camera.main.GetComponent<Animator>().SetTrigger("Hit");
+                }
+                catch
+                {
+                    Debug.LogError("這場景忘了放畫面抖動");
+                }
                 Instantiate(GameManager.Hurted, transform.parent.position, Quaternion.identity, transform.parent);
             }
         }
