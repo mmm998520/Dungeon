@@ -37,6 +37,7 @@ namespace com.DungeonPad
 
         public Animator HitedAnimator;
 
+        public static int genMoneyNum;
         protected virtual void Update()
         {
             poison();
@@ -283,8 +284,11 @@ namespace com.DungeonPad
         {
             for (int i = 0; i < times; i++)
             {
-                Debug.LogError("whyNo???");
-                Instantiate(GameManager.gameManager.moneyB, transform.position, Quaternion.identity);
+                if (genMoneyNum < 2)
+                {
+                    genMoneyNum++;
+                    Instantiate(GameManager.gameManager.moneyB, transform.position, Quaternion.identity);
+                }
             }
         }
 

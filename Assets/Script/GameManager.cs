@@ -78,6 +78,7 @@ namespace com.DungeonPad
             }
             shopPanel = GameObject.Find("shop").transform.GetChild(0).gameObject;
             stopPanel = GameObject.Find("stop").transform.GetChild(0).gameObject;
+            MonsterManager.genMoneyNum = 0;
         }
 
         void Update()

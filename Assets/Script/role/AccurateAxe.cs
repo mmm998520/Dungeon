@@ -13,6 +13,7 @@ namespace com.DungeonPad
         public float attackLength;
         bool canFollow = true;
 
+        [SerializeField] Transform rightSpider, leftSpider, upSpider, downSpider;
         void Start()
         {
             animator = GetComponent<Animator>();
@@ -24,6 +25,10 @@ namespace com.DungeonPad
             {
                 follow();
             }
+            rightSpider.position = new Vector3(21, rightSpider.position.y, 0);
+            leftSpider.position = new Vector3(0, leftSpider.position.y, 0);
+            upSpider.position = new Vector3(upSpider.position.x, 11.3f, 0);
+            downSpider.position = new Vector3(downSpider.position.x, 0.3f, 0);
         }
 
         void follow()
