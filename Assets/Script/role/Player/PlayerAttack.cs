@@ -10,19 +10,31 @@ namespace com.DungeonPad
         protected virtual bool attack(Collider2D collider, float damage)
         {
             bool attack = false;
-            if (collider.GetComponent<MonsterManager>() && !monsters.Contains(collider.GetComponent<MonsterManager>()))
+            if (collider.GetComponent<MonsterManager>())
             {
-                monsters.Add(collider.GetComponent<MonsterManager>());
-                if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
+                MonsterManager monsterManager = collider.GetComponent<MonsterManager>();
+                if (!monsters.Contains(monsterManager))
                 {
-                    collider.GetComponent<MonsterManager>().HP -= damage;
-                    attack = true;
-                }
-                print(collider.gameObject.name);
-                if (collider.GetComponent<MonsterManager>().HP <= 0)
-                {
-                    collider.GetComponent<MonsterManager>().beforeDied();
-                    Debug.LogWarning("hitTimes");
+                    monsters.Add(monsterManager);
+                    if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
+                    {
+                        monsterManager.HP -= damage;
+                        try
+                        {
+                            monsterManager.HitedAnimator.SetTrigger("Hit");
+                        }
+                        catch
+                        {
+                            Debug.LogError("這種怪沒放到受傷特效 : " + collider.name, collider.gameObject);
+                        }
+                        attack = true;
+                    }
+                    print(collider.gameObject.name);
+                    if (monsterManager.HP <= 0)
+                    {
+                        monsterManager.beforeDied();
+                        Debug.LogWarning("hitTimes");
+                    }
                 }
             }
             if (collider.GetComponent<Bubble>() || (collider.GetComponent<MonsterShooter>() && collider.GetComponent<MonsterShooter>().canRemoveByPlayerAttack) || collider.GetComponent<MonsterShooter_Bounce>() || (collider.GetComponent<MonsterShooter_Bounce>() && collider.GetComponent<MonsterShooter_Bounce>().canRemoveByPlayerAttack))

@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRenderer: {fileID: 6115880101781433286}
+  alphaChanger: 0
 --- !u!1 &286314265
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6115880101781433285}
   - component: {fileID: 6115880101781433286}
+  - component: {fileID: 3120433595311430887}
   m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
@@ -424,7 +426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6115880101781433284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03, y: 0, z: 0}
+  m_LocalPosition: {x: 0.1, y: 0, z: 0}
   m_LocalScale: {x: 0.17448156, y: 0.17448156, z: 0.17448156}
   m_Children:
   - {fileID: 249001977}
@@ -481,6 +483,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3120433595311430887
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6115880101781433284}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1a671c7077356f041a4d67783d9458fb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6115880101944645945
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,6 +684,7 @@ MonoBehaviour:
   rigidbody: {fileID: 0}
   poisonTimers: []
   Ammunition: {fileID: 0}
+  HitedAnimator: {fileID: 3120433595311430887}
   attacking: 0
   HPBar: {fileID: 0}
   hpBar: {fileID: 0}
@@ -723,6 +745,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0049031526, y: -0.08688629}
+  m_Offset: {x: 0.07, y: -0.08688629}
   m_Size: {x: 0.39213562, y: 0.8262274}
   m_Direction: 0

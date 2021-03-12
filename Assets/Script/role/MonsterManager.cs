@@ -35,6 +35,8 @@ namespace com.DungeonPad
         public List<float> poisonTimers = new List<float>();
         public GameObject Ammunition;
 
+        public Animator HitedAnimator;
+
         protected virtual void Update()
         {
             poison();

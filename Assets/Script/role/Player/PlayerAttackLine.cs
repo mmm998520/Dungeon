@@ -44,35 +44,47 @@ namespace com.DungeonPad
         protected override bool attack(Collider2D collider, float damage)
         {
             bool attack = false;
-            if (collider.GetComponent<MonsterManager>() && !monsters.Contains(collider.GetComponent<MonsterManager>()))
+            if (collider.GetComponent<MonsterManager>())
             {
-                monsters.Add(collider.GetComponent<MonsterManager>());
-                if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
+                MonsterManager monsterManager = collider.GetComponent<MonsterManager>();
+                if (!monsters.Contains(monsterManager))
                 {
-                    collider.GetComponent<MonsterManager>().HP -= damage;
-                    attack = true;
-                    if (Random.Range(0, 100) < PlayerManager.criticalRate)
+                    monsters.Add(monsterManager);
+                    if (!(collider.GetComponent<TaurenBoss>() && collider.GetComponent<TaurenBoss>().InvincibleTimer < 0.4f))
                     {
-                        collider.GetComponent<MonsterManager>().HP -= 1;
-                    }
-                    if (PlayerManager.circleAttack)
-                    {
-                        Instantiate(AttackCircle, collider.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerCircleAttack>().monsters.Add(collider.GetComponent<MonsterManager>());
-                    }
-                    if (PlayerManager.poison)
-                    {
-                        collider.GetComponent<MonsterManager>().poisonTimers.Add(0);
-                        if (collider.GetComponent<MonsterManager>().poisonTimers.Count > 10)
+                        monsterManager.HP -= damage;
+                        try
                         {
-                            collider.GetComponent<MonsterManager>().poisonTimers.RemoveAt(0);
+                            monsterManager.HitedAnimator.SetTrigger("Hit");
+                        }
+                        catch
+                        {
+                            Debug.LogError("這種怪沒放到受傷特效 : " + collider.name, collider.gameObject);
+                        }
+                        attack = true;
+                        if (Random.Range(0, 100) < PlayerManager.criticalRate)
+                        {
+                            monsterManager.HP -= 1;
+                        }
+                        if (PlayerManager.circleAttack)
+                        {
+                            Instantiate(AttackCircle, collider.transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerCircleAttack>().monsters.Add(collider.GetComponent<MonsterManager>());
+                        }
+                        if (PlayerManager.poison)
+                        {
+                            monsterManager.poisonTimers.Add(0);
+                            if (monsterManager.poisonTimers.Count > 10)
+                            {
+                                monsterManager.poisonTimers.RemoveAt(0);
+                            }
                         }
                     }
-                }
-                print(collider.gameObject.name);
-                if (collider.GetComponent<MonsterManager>().HP <= 0)
-                {
-                    collider.GetComponent<MonsterManager>().beforeDied();
-                    Debug.LogWarning("hitTimes");
+                    print(collider.gameObject.name);
+                    if (monsterManager.HP <= 0)
+                    {
+                        monsterManager.beforeDied();
+                        Debug.LogWarning("hitTimes");
+                    }
                 }
             }
             if (collider.GetComponent<BatSticked>())
