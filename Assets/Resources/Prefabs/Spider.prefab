@@ -828,7 +828,7 @@ GameObject:
   - component: {fileID: 2119920280186257428}
   - component: {fileID: 4463854513834865796}
   - component: {fileID: 6957770606409311386}
-  - component: {fileID: 5369523058743696916}
+  - component: {fileID: 7085213209003018479}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -888,7 +888,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 09f367c65b8d5b3448c9b62ec785556b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -908,19 +908,19 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.72, y: 5.93}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5369523058743696916
+--- !u!114 &7085213209003018479
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -932,9 +932,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28dce20a771f8b04c9615f991f1f32d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mySpriteRenderer: {fileID: 0}
-  targetSpriteRenderer: {fileID: 0}
-  timer: 0
+  mySpriteRenderer: {fileID: 6957770606409311386}
+  targetSpriteRenderer: {fileID: 2620143969172077071}
+  hurt: 0
 --- !u!1 &7592697512192133930
 GameObject:
   m_ObjectHideFlags: 0

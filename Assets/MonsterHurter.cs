@@ -7,7 +7,7 @@ namespace com.DungeonPad
     public class MonsterHurter : MonoBehaviour
     {
         [SerializeField] SpriteRenderer mySpriteRenderer, targetSpriteRenderer;
-        public float timer;
+        [HideInInspector] public bool hurt = false;
         void Start()
         {
             if (!mySpriteRenderer)
@@ -29,7 +29,7 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (timer < 1)
+            if (hurt)
             {
                 try
                 {
