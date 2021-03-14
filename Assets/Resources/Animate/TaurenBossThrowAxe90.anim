@@ -66,7 +66,7 @@ AnimationClip:
     - time: 1.75
       value: {fileID: 21300000, guid: 693e40b0e93828840b9a0343971ef1f8, type: 3}
     attribute: m_Sprite
-    path: New Sprite
+    path: GameObject/New Sprite
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -84,7 +84,7 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2673217936
+      path: 1011896149
       attribute: 0
       script: {fileID: 0}
       typeID: 212

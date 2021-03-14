@@ -60,10 +60,27 @@ namespace com.DungeonPad
         {
             if (collider2D.GetComponent<MonsterManager>())
             {
-                collider2D.GetComponent<MonsterManager>().HP -= 1;
-                if (collider2D.GetComponent<MonsterManager>().HP <= 0)
+                MonsterManager monsterManager = collider2D.GetComponent<MonsterManager>();
+                monsterManager.HP -= 1;
+                try
                 {
-                    collider2D.GetComponent<MonsterManager>().beforeDied();
+                    monsterManager.HitedAnimator.SetBool("Hit", true);
+                }
+                catch
+                {
+                    Debug.LogError("這種怪沒放到受傷特效 : " + collider2D.name, collider2D.gameObject);
+                }
+                try
+                {
+                    Camera.main.GetComponent<Animator>().SetTrigger("Hit");
+                }
+                catch
+                {
+                    Debug.LogError("這場景忘了放畫面抖動");
+                }
+                if (monsterManager.HP <= 0)
+                {
+                    monsterManager.beforeDied();
                 }
             }
             if (collider2D.GetComponent<BatSticked>())

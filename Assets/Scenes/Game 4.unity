@@ -77612,14 +77612,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 527527104}
     m_Modifications:
-    - target: {fileID: 257297929, guid: a9f61054ac700b14583a5b5e78b31a05, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 311932920, guid: a9f61054ac700b14583a5b5e78b31a05, type: 3}
-      propertyPath: m_SortingOrder
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 2026925606197622379, guid: a9f61054ac700b14583a5b5e78b31a05,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -77679,16 +77671,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DragonBoss
-      objectReference: {fileID: 0}
-    - target: {fileID: 2026925607031981192, guid: a9f61054ac700b14583a5b5e78b31a05,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2026925607031981195, guid: a9f61054ac700b14583a5b5e78b31a05,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
         type: 3}

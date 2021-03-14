@@ -6,10 +6,12 @@ namespace com.DungeonPad
 {
     public class MonsterHurter : MonoBehaviour
     {
+        Animator animator;
         [SerializeField] SpriteRenderer mySpriteRenderer, targetSpriteRenderer;
         [HideInInspector] public bool hurt = false;
         void Start()
         {
+            animator = GetComponent<Animator>();
             if (!mySpriteRenderer)
             {
                 targetSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -40,6 +42,11 @@ namespace com.DungeonPad
                     Debug.LogError("沒有這張圖");
                 }
             }
+        }
+
+        void endHit()
+        {
+            animator.SetBool("Hit", false);
         }
     }
 }

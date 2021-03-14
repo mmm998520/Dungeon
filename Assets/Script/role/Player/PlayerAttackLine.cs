@@ -55,11 +55,19 @@ namespace com.DungeonPad
                         monsterManager.HP -= damage;
                         try
                         {
-                            monsterManager.HitedAnimator.SetTrigger("Hit");
+                            monsterManager.HitedAnimator.SetBool("Hit", true);
                         }
                         catch
                         {
                             Debug.LogError("這種怪沒放到受傷特效 : " + collider.name, collider.gameObject);
+                        }
+                        try
+                        {
+                            Camera.main.GetComponent<Animator>().SetTrigger("Hit");
+                        }
+                        catch
+                        {
+                            Debug.LogError("這場景忘了放畫面抖動");
                         }
                         attack = true;
                         if (Random.Range(0, 100) < PlayerManager.criticalRate)
