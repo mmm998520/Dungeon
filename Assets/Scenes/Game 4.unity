@@ -17077,6 +17077,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2099597263}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &585867243 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2880458332805723466, guid: a9f61054ac700b14583a5b5e78b31a05,
+    type: 3}
+  m_PrefabInstance: {fileID: 5259903739102427977}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &586716999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1691314572940453475, guid: eba2d36b39f4da94fbf235b4e1066e15,
@@ -76612,6 +76618,11 @@ PrefabInstance:
       propertyPath: NewWall
       value: 
       objectReference: {fileID: 1195320041}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: HitedAnimator
+      value: 
+      objectReference: {fileID: 585867243}
     - target: {fileID: 4736757456382075896, guid: a9f61054ac700b14583a5b5e78b31a05,
         type: 3}
       propertyPath: m_SortingOrder
