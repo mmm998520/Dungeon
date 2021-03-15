@@ -13,9 +13,9 @@ namespace com.DungeonPad
             base.Start();
         }
 
-        void Update()
+        protected override void Update()
         {
-
+            base.Update();
         }
 
         public override void hited()

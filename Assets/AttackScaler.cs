@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AttackScaler : MonoBehaviour
 {
-    float timer, timerStoper;
     float maxX;
     void Start()
     {

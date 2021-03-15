@@ -14,6 +14,7 @@ namespace com.DungeonPad
         public SpriteRenderer CircleLight;
         Dictionary<int, int> myCrystalPos = new Dictionary<int, int>(), myCrystalSidePos = new Dictionary<int, int>();
         static int myCrystalPosKeyNum;
+        float destroyTimer, destroyTimerStoper = 10;
 
         protected enum CrystalStat
         {
@@ -34,6 +35,22 @@ namespace com.DungeonPad
                 {
                     Navigate.CrystalSidePos.Add(myCrystalPosKeyNum++, (posX + i) * MazeCreater.totalCol + (posY + j));
                     myCrystalSidePos.Add(myCrystalPosKeyNum++, (posX + i) * MazeCreater.totalCol + (posY + j));
+                }
+            }
+        }
+
+        protected virtual void Update()
+        {
+            if (crystalStat == CrystalStat.use)
+            {
+                destroyTimer += Time.deltaTime;
+                if (destroyTimer > destroyTimerStoper)
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    mySpriteRendererTop.color = new Color(mySpriteRendererTop.color.r, mySpriteRendererTop.color.g, mySpriteRendererTop.color.b, 1 - destroyTimer / destroyTimerStoper);
                 }
             }
         }
