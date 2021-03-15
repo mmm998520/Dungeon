@@ -22,5 +22,16 @@ namespace com.DungeonPad
                 spriteRenderer.color = Color.white;
             }
         }
+
+        void OnDestroy()
+        {
+            for (int i = -2; i <= 2; i++)
+            {
+                for (int j = -2; j <= 2; j++)
+                {
+                    FireRainInser.insPoses.Remove(((int)transform.position.x + i) * MazeCreater.totalCol + ((int)transform.position.y + j));
+                }
+            }
+        }
     }
 }

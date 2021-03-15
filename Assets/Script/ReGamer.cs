@@ -50,6 +50,8 @@ namespace com.DungeonPad
             ButtonTwo.p1used = false;
             ButtonTwo.p2used = false;
             DataSaver.Save();
+            FireRainInser.insPoses.Clear();
+            CrystalRainInser.insPoses.Clear();
         }
 
         public static void ReAbility()

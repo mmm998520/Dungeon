@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 6622522744665132574}
   - component: {fileID: 5499631849575821276}
   - component: {fileID: 2856599435905882273}
+  - component: {fileID: 2365678740471394409}
   m_Layer: 0
   m_Name: FireBallFast
   m_TagString: Untagged
@@ -237,6 +238,18 @@ MonoBehaviour:
   ATK: 20
   continued: 0
   MonsterType: 
+--- !u!114 &2365678740471394409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683994576417963163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87870ba005d3f7441983492d08a2cdff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6065665823652114783
 GameObject:
   m_ObjectHideFlags: 0

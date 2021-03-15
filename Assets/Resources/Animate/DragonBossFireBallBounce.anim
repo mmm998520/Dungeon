@@ -152,14 +152,14 @@ AnimationClip:
     functionName: FireBallBounce
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 3
+    floatParameter: 20
     intParameter: 0
     messageOptions: 0
   - time: 0.16666667
     functionName: FireBallBounce
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: -3
+    floatParameter: -20
     intParameter: 0
     messageOptions: 0
   - time: 0.78333336
@@ -173,14 +173,14 @@ AnimationClip:
     functionName: FireBallBounce
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: -3
+    floatParameter: -20
     intParameter: 0
     messageOptions: 0
   - time: 1.3833333
     functionName: FireBallBounce
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 3
+    floatParameter: 20
     intParameter: 0
     messageOptions: 0
   - time: 1.6333333

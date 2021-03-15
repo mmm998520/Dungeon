@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 5832881625152555993}
   - component: {fileID: 5832881625152555990}
   - component: {fileID: 5832881625152555991}
+  - component: {fileID: 7897360787291466763}
   m_Layer: 0
   m_Name: FireBallTrack
   m_TagString: Untagged
@@ -220,6 +221,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7897360787291466763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5832881625152555986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87870ba005d3f7441983492d08a2cdff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5832881625243826500
 GameObject:
   m_ObjectHideFlags: 0

@@ -237,22 +237,54 @@ namespace com.DungeonPad
         #region//FireBall
         void FireBallBounce(float positionOffset)
         {
-            Instantiate(fireBallBounce, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
+            //Instantiate(fireBallBounce, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle));
+            if (transform.eulerAngles.y <= 200 && transform.eulerAngles.y >= 160)
+            {
+                Instantiate(fireBallBounce, transform.position + new Vector3(-2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset));
+            }
+            else
+            {
+                Instantiate(fireBallBounce, transform.position + new Vector3(2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset));
+            }
         }
 
         void FireBall(float positionOffset)
         {
-            Instantiate(fireBall, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            //Instantiate(fireBall, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            if (transform.eulerAngles.y <= 200 && transform.eulerAngles.y >= 160)
+            {
+                Instantiate(fireBall, transform.position + new Vector3(-2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            }
+            else
+            {
+                Instantiate(fireBall, transform.position + new Vector3(2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            }
         }
 
         void FireBallFsat(float positionOffset)
         {
-            Instantiate(fireBallFast, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            //Instantiate(fireBallFast, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            if (transform.eulerAngles.y <= 200 && transform.eulerAngles.y >= 160)
+            {
+                Instantiate(fireBallFast, transform.position + new Vector3(-2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            }
+            else
+            {
+                Instantiate(fireBallFast, transform.position + new Vector3(2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            }
         }
 
         void FireBallTrack(float positionOffset)
         {
-            Instantiate(fireBallTrack, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle + Random.Range(-10, 10))).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0,2));
+            //Instantiate(fireBallTrack, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle + Random.Range(-10, 10))).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0,2));
+            if (transform.eulerAngles.y <= 200 && transform.eulerAngles.y >= 160)
+            {
+                Instantiate(fireBallTrack, transform.position + new Vector3(-2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            }
+            else
+            {
+                Instantiate(fireBallTrack, transform.position + new Vector3(2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+            }
         }
 
         void endFireBall()
@@ -314,19 +346,34 @@ namespace com.DungeonPad
 
         void resetRoad()
         {
-            endRow[0] = Mathf.RoundToInt(minDisPlayer.position.x);
-            endCol[0] = Mathf.RoundToInt(minDisPlayer.position.y);
+            endRow = new int[1] { Mathf.RoundToInt(minDisPlayer.position.x) };
+            endCol = new int[1] { Mathf.RoundToInt(minDisPlayer.position.y) };
             int pos = endRow[0] * MazeCreater.totalCol + endCol[0];
             if (CrystalSidePos.ContainsValue(pos))
             {
+                int posX = Mathf.RoundToInt(minDisPlayer.position.x), posY = Mathf.RoundToInt(minDisPlayer.position.y);
+                endRow = new int[5];
+                endCol = new int[5];
+                int t = 0;
+                for(int i = -1; i <= 1; i++)
+                {
+                    for (int j = -1; j <= 1; j++)
+                    {
+                        if (i == 0 || j == 0)
+                        {
+                            endRow[t] = posX + i;
+                            endCol[t] = posY + j;
+                            t++;
+                        }
+                    }
+                }
+                /*
                 roads.Clear();
                 roads.Add(new int[] { endRow[0], endCol[0] });
                 roads.Add(new int[] { endRow[0], endCol[0] });
+                */
             }
-            else
-            {
-                findRoad();
-            }
+            findRoad();
         }
 
         void move()

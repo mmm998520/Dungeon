@@ -36,6 +36,14 @@ namespace com.DungeonPad
                 }
                 Instantiate(crystalScatteringLight, transform.position, Quaternion.Euler(0, 0, angle));
             }
+
+            for (int i = -4; i <= 4; i++)
+            {
+                for (int j = -4; j <= 4; j++)
+                {
+                    CrystalRainInser.insPoses.Remove(((int)transform.position.x + i) * MazeCreater.totalCol + ((int)transform.position.y + j));
+                }
+            }
         }
     }
 }
