@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -53,7 +54,10 @@ namespace com.DungeonPad
             {
                 PlayerNumSlider.value = 1;
             }
-            gameObject.SetActive(false);
+            if(SceneManager.GetActiveScene().name != "Setting")
+            {
+                gameObject.SetActive(false);
+            }
         }
 
         void OnEnable()
