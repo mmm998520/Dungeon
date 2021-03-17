@@ -82,6 +82,30 @@ namespace com.DungeonPad
                 PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
                 PlayerPrefs.Save();
             }
+            if (PlayerPrefs.HasKey("Keyboard"))
+            {
+                string[] keyboardNum = PlayerPrefs.GetString("Keyboard").Split(',');
+                InputManager.p1KeyboardUpNum = int.Parse(keyboardNum[0]);
+                InputManager.p1KeyboardDownNum = int.Parse(keyboardNum[1]);
+                InputManager.p1KeyboardLeftNum = int.Parse(keyboardNum[2]);
+                InputManager.p1KeyboardRightNum = int.Parse(keyboardNum[3]);
+                InputManager.p1KeyboardDashNum = int.Parse(keyboardNum[4]);
+                InputManager.p1KeyboardBreakfreeKeyNum = int.Parse(keyboardNum[5]);
+                InputManager.p1KeyboardSkillKeyNum = int.Parse(keyboardNum[6]);
+                InputManager.p1KeyboardLookskillKeyNum = int.Parse(keyboardNum[7]);
+                InputManager.p2KeyboardUpNum = int.Parse(keyboardNum[8]);
+                InputManager.p2KeyboardDownNum = int.Parse(keyboardNum[9]);
+                InputManager.p2KeyboardLeftNum = int.Parse(keyboardNum[10]);
+                InputManager.p2KeyboardRightNum = int.Parse(keyboardNum[11]);
+                InputManager.p2KeyboardDashNum = int.Parse(keyboardNum[12]);
+                InputManager.p2KeyboardBreakfreeKeyNum = int.Parse(keyboardNum[13]);
+                InputManager.p2KeyboardSkillKeyNum = int.Parse(keyboardNum[14]);
+                InputManager.p2KeyboardLookskillKeyNum = int.Parse(keyboardNum[15]);
+            }
+            else
+            {
+                PlayerPrefs.SetString("Keyboard", "36,32,14,17,23,24,26,3,62,63,60,61,84,85,83,80");
+            }
         }
 
         void Start()
