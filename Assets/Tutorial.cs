@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -20,13 +21,14 @@ namespace com.DungeonPad
 
         void Update()
         {
+            Keyboard keyboard = Keyboard.current;
             if (nowTextNum < TutorialText.Length)
             {
                 for (int i = 0; i < GameManager.players.childCount; i++)
                 {
                     GameManager.players.GetChild(i).GetComponent<PlayerManager>().enabled = false;
                 }
-                if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.JoystickButton0))
+                if (keyboard.enterKey.wasPressedThisFrame || keyboard.numpadEnterKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame || Gamepad.current.aButton.wasPressedThisFrame)
                 {
                     TutorialText[nowTextNum].SetActive(false);
                     nowTextNum++;

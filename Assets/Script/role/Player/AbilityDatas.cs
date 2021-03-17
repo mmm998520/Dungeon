@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -28,6 +29,7 @@ namespace com.DungeonPad
 
         void Update()
         {
+            Keyboard keyboard = Keyboard.current;
             if (EventSystem.current.currentSelectedGameObject == null)
             {
                 EventSystem.current.SetSelectedGameObject(firstSelected);
@@ -63,7 +65,7 @@ namespace com.DungeonPad
                     TotalCosts[i].sprite = UnLoad;
                 }
             }
-            if (Input.GetKeyDown(KeyCode.JoystickButton7) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1))
+            if (keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || Gamepad.current.bButton.wasPressedThisFrame)
             {
                 transform.parent.gameObject.SetActive(false);
                 if (selectMouse)
@@ -81,31 +83,31 @@ namespace com.DungeonPad
                 }
                 GameManager.players.gameObject.SetActive(false);
             }
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (keyboard.f1Key.wasPressedThisFrame)
             {
                 PlayerManager.money++;
             }
-            if (Input.GetKeyDown(KeyCode.F2))
+            if (keyboard.f2Key.wasPressedThisFrame)
             {
                 PlayerManager.money--;
             }
-            if (Input.GetKeyDown(KeyCode.F3))
+            if (keyboard.f3Key.wasPressedThisFrame)
             {
                 PlayerManager.moneyB++;
             }
-            if (Input.GetKeyDown(KeyCode.F4))
+            if (keyboard.f4Key.wasPressedThisFrame)
             {
                 PlayerManager.moneyB--;
             }
-            if (Input.GetKeyDown(KeyCode.F5))
+            if (keyboard.f5Key.wasPressedThisFrame)
             {
                 PlayerManager.money+=10;
             }
-            if (Input.GetKeyDown(KeyCode.F6))
+            if (keyboard.f6Key.wasPressedThisFrame)
             {
                 PlayerManager.money-= 10;
             }
-            if (Input.GetKeyDown(KeyCode.F12))
+            if (keyboard.f7Key.wasPressedThisFrame)
             {
                 PlayerPrefs.DeleteAll();
             }

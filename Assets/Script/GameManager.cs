@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
@@ -83,12 +84,13 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Home))
+            Keyboard keyboard = Keyboard.current;
+            if (keyboard.homeKey.wasPressedThisFrame)
             {
                 shopPanel.SetActive(true);
                 shopPanel.transform.GetChild(0).GetComponent<AbilityDatas>().start();
             }
-            if (PlayerManager.HP0Timer < 0.2f && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7)))
+            if (PlayerManager.HP0Timer < 0.2f && (keyboard.escapeKey.wasPressedThisFrame || Gamepad.current.startButton.wasPressedThisFrame))
             {
                 if (stopPanel.activeSelf)
                 {
@@ -102,7 +104,7 @@ namespace com.DungeonPad
                 }
                 stopPanel.SetActive(!stopPanel.activeSelf);
             }
-            if (stopPanel.activeSelf && Input.GetKeyDown(KeyCode.JoystickButton1))
+            if (stopPanel.activeSelf && keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || Gamepad.current.bButton.wasPressedThisFrame)
             {
                 Time.timeScale = 1;
                 Time.fixedDeltaTime = 0.02F * Time.timeScale;

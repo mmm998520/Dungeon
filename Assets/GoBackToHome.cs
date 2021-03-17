@@ -9,34 +9,8 @@ namespace com.DungeonPad
     {
         void Update()
         {
-            var gamepad = Gamepad.current;//手柄
-            var keyboard = Keyboard.current;//手柄
-            if (gamepad.aButton.isPressed)
-            {
-                Debug.Log("A");
-            }
-            if (gamepad.bButton.isPressed)
-            {
-                Debug.Log("B");
-            }
-            if (gamepad.xButton.isPressed)
-            {
-                Debug.Log("X");
-            }
-            if (gamepad.yButton.isPressed)
-            {
-                Debug.Log("Y");
-            }
-            if (gamepad.leftShoulder.isPressed)
-            {
-                Debug.Log("leftShoulder");
-            }
-            if (gamepad.leftTrigger.isPressed)
-            {
-                Debug.Log("leftTrigger");
-            }
-            
-            if (keyboard.escapeKey.isPressed || Input.GetKeyDown(KeyCode.JoystickButton1))
+            Keyboard keyboard = Keyboard.current;
+            if (keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || Gamepad.current.bButton.wasPressedThisFrame)
             {
                 SwitchScenePanel.NextScene = "Home";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");

@@ -22,11 +22,11 @@ public class InputManager : MonoBehaviour
                                  p2KeyboardSkillKeyNum = 83,
                                  p2KeyboardLookskillKeyNum = 80;
 
-    Gamepad p1Gampad, p2Gamepad;
+    public static Gamepad p1Gamepad, p2Gamepad;
     /// <summary>
     /// Horizontal水平；Vertical垂直
     /// </summary>
-    float p1HorizontalValue, p1VerticalValue, p2HorizontalValue, p2VerticalValue;
+    public static float p1KeyboardHorizontalValue, p1KeyboardVerticalValue, p2KeyboardHorizontalValue, p2KeyboardVerticalValue, p1GamepadHorizontalValue, p1GamepadVerticalValue, p2GamepadHorizontalValue, p2GamepadVerticalValue;
 
     void Start()
     {
@@ -58,7 +58,7 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        p1Gampad = Gamepad.all[0];
+        p1Gamepad = Gamepad.all[0];
         //Debug.Log("gamepadx : " + p1Gampad.rightStick.ReadValue().x);
         //Debug.Log("gamepady : " + p1Gampad.rightStick.ReadValue().y);
         Keyboard keyboard = Keyboard.current;
@@ -72,21 +72,22 @@ public class InputManager : MonoBehaviour
                 }
             }
         }
+        /*
         if (p1Gampad != null)
         {
             p1VerticalValue = gamepadAxes(p1Gampad.leftStick.ReadValue().x, p1VerticalValue);
             p1HorizontalValue = gamepadAxes(p1Gampad.leftStick.ReadValue().y, p1HorizontalValue);
             Debug.Log("p1VerticalValue : " + p1VerticalValue);
-        }
+        }*/
     }
 
     #region//Axes
-    float keyboardAxes(int lessKeyNum, int addKeyNum, float value)
+    public static float keyboardAxes(int lessKeyNum, int addKeyNum, float value)
     {
         return keyboardAxes(lessKeyNum, addKeyNum, value, 3f, 0.01f, 3f);
     }
 
-    float keyboardAxes(int lessKeyNum, int addKeyNum, float value, float addSpeed, float critical, float gravity)
+    public static float keyboardAxes(int lessKeyNum, int addKeyNum, float value, float addSpeed, float critical, float gravity)
     {
         Keyboard keyboard = Keyboard.current;
         if (keyboard != null)
@@ -124,24 +125,24 @@ public class InputManager : MonoBehaviour
         return value;
     }
 
-    float gamepadAxes(float gamepadValue, float value)
+    public static float gamepadAxes(float gamepadValue, float value)
     {
         return gamepadAxes(gamepadValue, value, 0.1f, 3, 0.01f, 3f);
     }
 
-    float gamepadAxes(float gamepadValue, float value, float deadZone, float addSpeed, float critical, float gravity)
+    public static float gamepadAxes(float gamepadStickValue, float value, float deadZone, float addSpeed, float critical, float gravity)
     {
-        if (gamepadValue > deadZone)
+        if (gamepadStickValue > deadZone)
         {
             value += Time.deltaTime * addSpeed;
         }
-        else if (gamepadValue < -deadZone)
+        else if (gamepadStickValue < -deadZone)
         {
             value -= Time.deltaTime * addSpeed;
         }
         value = Mathf.Clamp(value, -1, 1);
 
-        if (gamepadValue < deadZone && gamepadValue > -deadZone)
+        if (gamepadStickValue < deadZone && gamepadStickValue > -deadZone)
         {
             if (value > critical)
             {

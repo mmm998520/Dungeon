@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Collections;
 using System.IO;
 using System.Text;
@@ -39,7 +40,7 @@ namespace com.DungeonPad
                     function = 2;
                     break;
             }
-                    if (Input.GetKeyDown(KeyCode.R))
+            if (Keyboard.current.rKey.wasPressedThisFrame)
             {
                 switch (inputType)
                 {

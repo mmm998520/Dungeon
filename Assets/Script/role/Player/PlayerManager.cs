@@ -179,9 +179,11 @@ namespace com.DungeonPad
             lastUpdateHp = HP;
         }
 
+        Keyboard keyboard;
 
         void Update()
         {
+            keyboard = Keyboard.current;
             if (playerStatAnimator.GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle"))
             {
                 if (lockedHP || lockedHPTimer <= 2)
@@ -343,8 +345,6 @@ namespace com.DungeonPad
             timer();
         }
 
-        bool canUseTriggerButton = true;
-
         #region//操作模式
         void OnePlayerBehavior()
         {
@@ -354,7 +354,7 @@ namespace com.DungeonPad
                 switch (SelectMouse.p1Joy)
                 {
                     case "WASD":
-                        if (Input.GetKeyDown(KeyCode.J))
+                        if (keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame)
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -362,7 +362,7 @@ namespace com.DungeonPad
                         }
                         break;
                     case "ArrowKey":
-                        if (Input.GetKeyDown(KeyCode.Keypad1))
+                        if (keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame)
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -377,19 +377,11 @@ namespace com.DungeonPad
                     case "6":
                     case "7":
                     case "8":
-                        if (Input.GetAxis("RT")>0.1f)
+                        if (Gamepad.current.leftShoulder.wasPressedThisFrame)
                         {
-                            if (canUseTriggerButton)
-                            {
-                                ConfusionTimer += 0.7f;
-                                StickTimer += 0.7f;
-                                lastDirRight = true;
-                                canUseTriggerButton = false;
-                            }
-                        }
-                        else
-                        {
-                            canUseTriggerButton = true;
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
+                            lastDirRight = true;
                         }
                         break;
                 }
@@ -399,7 +391,7 @@ namespace com.DungeonPad
                 switch (SelectMouse.p2Joy)
                 {
                     case "WASD":
-                        if (Input.GetKeyDown(KeyCode.J))
+                        if (keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame)
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -407,7 +399,7 @@ namespace com.DungeonPad
                         }
                         break;
                     case "ArrowKey":
-                        if (Input.GetKeyDown(KeyCode.Keypad1))
+                        if (keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame)
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -422,19 +414,11 @@ namespace com.DungeonPad
                     case "6":
                     case "7":
                     case "8":
-                        if (Input.GetAxis("LT") > 0.1f)
+                        if (Gamepad.current.rightShoulder.wasPressedThisFrame)
                         {
-                            if (canUseTriggerButton)
-                            {
-                                ConfusionTimer += 0.7f;
-                                StickTimer += 0.7f;
-                                lastDirRight = true;
-                                canUseTriggerButton = false;
-                            }
-                        }
-                        else
-                        {
-                            canUseTriggerButton = true;
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
+                            lastDirRight = true;
                         }
                         break;
                 }
@@ -465,12 +449,12 @@ namespace com.DungeonPad
                     switch (SelectMouse.p1Joy)
                     {
                         case "WASD":
-                            v.x += Input.GetAxis("HorizontalWASD") * moveSpeed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalWASD") * moveSpeed * 2 / 3;
+                            v.x += InputManager.keyboardAxes(InputManager.p1KeyboardLeftNum, InputManager.p1KeyboardRightNum, InputManager.p1KeyboardHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.keyboardAxes(InputManager.p1KeyboardDownNum, InputManager.p1KeyboardUpNum, InputManager.p1KeyboardVerticalValue) * moveSpeed * 2 / 3;
                             break;
                         case "ArrowKey":
-                            v.x += Input.GetAxis("HorizontalArrowKey") * moveSpeed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalArrowKey") * moveSpeed * 2 / 3;
+                            v.x += InputManager.keyboardAxes(InputManager.p2KeyboardLeftNum, InputManager.p2KeyboardRightNum, InputManager.p2KeyboardHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.keyboardAxes(InputManager.p2KeyboardDownNum, InputManager.p2KeyboardUpNum, InputManager.p2KeyboardVerticalValue) * moveSpeed * 2 / 3;
                             break;
                         case "1":
                         case "2":
@@ -480,8 +464,9 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoyP1") * moveSpeed * 2 / 3;
-                            v.y -= Input.GetAxis("VerticalJoyP1") * moveSpeed * 2 / 3;
+                            Vector2 stickValue = Gamepad.current.leftStick.ReadValue();
+                            v.x += InputManager.gamepadAxes(stickValue.x,InputManager.p1GamepadHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue) * moveSpeed * 2 / 3;
                             break;
                     }
                 }
@@ -490,12 +475,12 @@ namespace com.DungeonPad
                     switch (SelectMouse.p2Joy)
                     {
                         case "WASD":
-                            v.x += Input.GetAxis("HorizontalWASD") * moveSpeed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalWASD") * moveSpeed * 2 / 3;
+                            v.x += InputManager.keyboardAxes(InputManager.p1KeyboardLeftNum, InputManager.p1KeyboardRightNum, InputManager.p1KeyboardHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.keyboardAxes(InputManager.p1KeyboardDownNum, InputManager.p1KeyboardUpNum, InputManager.p1KeyboardVerticalValue) * moveSpeed * 2 / 3;
                             break;
                         case "ArrowKey":
-                            v.x += Input.GetAxis("HorizontalArrowKey") * moveSpeed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalArrowKey") * moveSpeed * 2 / 3;
+                            v.x += InputManager.keyboardAxes(InputManager.p2KeyboardLeftNum, InputManager.p2KeyboardRightNum, InputManager.p2KeyboardHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.keyboardAxes(InputManager.p2KeyboardDownNum, InputManager.p2KeyboardUpNum, InputManager.p2KeyboardVerticalValue) * moveSpeed * 2 / 3;
                             break;
                         case "1":
                         case "2":
@@ -505,8 +490,9 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoyP2") * moveSpeed * 2 / 3;
-                            v.y -= Input.GetAxis("VerticalJoyP2") * moveSpeed * 2 / 3;
+                            Vector2 stickValue = Gamepad.current.rightStick.ReadValue();
+                            v.x += InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue) * moveSpeed * 2 / 3;
                             break;
                     }
                 }
@@ -547,16 +533,15 @@ namespace com.DungeonPad
                         switch (SelectMouse.p1Joy)
                         {
                             case "WASD":
-                                if (Input.GetKeyDown(KeyCode.J))
+                                if (keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p1Joy, 1));
-                                    
+                                    StartCoroutine(dash(SelectMouse.p1Joy, Gamepad.current));
                                 }
                                 break;
                             case "ArrowKey":
-                                if (Input.GetKeyDown(KeyCode.Keypad1))
+                                if (keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p1Joy, 1));
+                                    StartCoroutine(dash(SelectMouse.p1Joy, Gamepad.current));
                                 }
                                 break;
                             case "1":
@@ -567,9 +552,9 @@ namespace com.DungeonPad
                             case "6":
                             case "7":
                             case "8":
-                                if (Input.GetKeyDown(KeyCode.JoystickButton4))
+                                if (Gamepad.current.leftShoulder.wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p1Joy, 1));
+                                    StartCoroutine(dash(SelectMouse.p1Joy, Gamepad.current));
                                 }
                                 break;
                         }
@@ -579,15 +564,15 @@ namespace com.DungeonPad
                         switch (SelectMouse.p2Joy)
                         {
                             case "WASD":
-                                if (Input.GetKeyDown(KeyCode.J))
+                                if (keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p2Joy, 2));
+                                    StartCoroutine(dash(SelectMouse.p2Joy, Gamepad.current));
                                 }
                                 break;
                             case "ArrowKey":
-                                if (Input.GetKeyDown(KeyCode.Keypad1))
+                                if (keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p2Joy, 2));
+                                    StartCoroutine(dash(SelectMouse.p2Joy, Gamepad.current));
                                 }
                                 break;
                             case "1":
@@ -598,9 +583,9 @@ namespace com.DungeonPad
                             case "6":
                             case "7":
                             case "8":
-                                if (Input.GetKeyDown(KeyCode.JoystickButton5))
+                                if (Gamepad.current.rightShoulder.wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p2Joy, 2));
+                                    StartCoroutine(dash(SelectMouse.p2Joy, Gamepad.current));
                                 }
                                 break;
                         }
@@ -623,7 +608,7 @@ namespace com.DungeonPad
                         switch (SelectMouse.p1Joy)
                         {
                             case "WASD":
-                                if (Input.GetKeyDown(KeyCode.M))
+                                if (keyboard.allKeys[InputManager.p1KeyboardSkillKeyNum].wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -639,7 +624,7 @@ namespace com.DungeonPad
                                 }
                                 break;
                             case "ArrowKey":
-                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                if (keyboard.allKeys[InputManager.p2KeyboardSkillKeyNum].wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -662,7 +647,7 @@ namespace com.DungeonPad
                             case "6":
                             case "7":
                             case "8":
-                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 2)))
+                                if (Gamepad.current.leftTrigger.wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -684,7 +669,7 @@ namespace com.DungeonPad
                         switch (SelectMouse.p2Joy)
                         {
                             case "WASD":
-                                if (Input.GetKeyDown(KeyCode.M))
+                                if (keyboard.allKeys[InputManager.p1KeyboardSkillKeyNum].wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -700,7 +685,7 @@ namespace com.DungeonPad
                                 }
                                 break;
                             case "ArrowKey":
-                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                if (keyboard.allKeys[InputManager.p2KeyboardSkillKeyNum].wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -723,7 +708,7 @@ namespace com.DungeonPad
                             case "6":
                             case "7":
                             case "8":
-                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 2)))
+                                if (Gamepad.current.rightTrigger.wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -810,7 +795,7 @@ namespace com.DungeonPad
                 switch (SelectMouse.p1Joy)
                 {
                     case "WASD":
-                        if (Input.GetKeyDown(KeyCode.J))
+                        if (keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame)
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -818,7 +803,7 @@ namespace com.DungeonPad
                         }
                         break;
                     case "ArrowKey":
-                        if (Input.GetKeyDown(KeyCode.Keypad1))
+                        if (keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame)
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -833,7 +818,7 @@ namespace com.DungeonPad
                     case "6":
                     case "7":
                     case "8":
-                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 1)))
+                        if (InputManager.p1Gamepad.bButton.wasPressedThisFrame)
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -847,7 +832,7 @@ namespace com.DungeonPad
                 switch (SelectMouse.p2Joy)
                 {
                     case "WASD":
-                        if (Input.GetKeyDown(KeyCode.J))
+                        if (keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame)
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -855,7 +840,7 @@ namespace com.DungeonPad
                         }
                         break;
                     case "ArrowKey":
-                        if (Input.GetKeyDown(KeyCode.Keypad1))
+                        if (keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame)
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -870,7 +855,7 @@ namespace com.DungeonPad
                     case "6":
                     case "7":
                     case "8":
-                        if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 1)))
+                        if (InputManager.p2Gamepad.bButton.wasPressedThisFrame)
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -905,12 +890,12 @@ namespace com.DungeonPad
                     switch (SelectMouse.p1Joy)
                     {
                         case "WASD":
-                            v.x += Input.GetAxis("HorizontalWASD") * moveSpeed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalWASD") * moveSpeed * 2 / 3;
+                            v.x += InputManager.keyboardAxes(InputManager.p1KeyboardLeftNum,InputManager.p1KeyboardRightNum,InputManager.p1KeyboardHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.keyboardAxes(InputManager.p1KeyboardDownNum, InputManager.p1KeyboardUpNum, InputManager.p1GamepadVerticalValue) * moveSpeed * 2 / 3;
                             break;
                         case "ArrowKey":
-                            v.x += Input.GetAxis("HorizontalArrowKey") * moveSpeed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalArrowKey") * moveSpeed * 2 / 3;
+                            v.x += InputManager.keyboardAxes(InputManager.p2KeyboardLeftNum, InputManager.p2KeyboardRightNum, InputManager.p2KeyboardHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.keyboardAxes(InputManager.p2KeyboardDownNum, InputManager.p2KeyboardUpNum, InputManager.p2GamepadVerticalValue) * moveSpeed * 2 / 3;
                             break;
                         case "1":
                         case "2":
@@ -920,8 +905,9 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p1Joy) * moveSpeed * 2 / 3;
-                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p1Joy) * moveSpeed * 2 / 3;
+                            Vector2 stickValue = InputManager.p1Gamepad.leftStick.ReadValue();
+                            v.x += InputManager.gamepadAxes(stickValue.x,InputManager.p1GamepadHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue) * moveSpeed * 2 / 3;
                             break;
                     }
                 }
@@ -930,12 +916,12 @@ namespace com.DungeonPad
                     switch (SelectMouse.p2Joy)
                     {
                         case "WASD":
-                            v.x += Input.GetAxis("HorizontalWASD") * moveSpeed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalWASD") * moveSpeed * 2 / 3;
+                            v.x += InputManager.keyboardAxes(InputManager.p1KeyboardLeftNum, InputManager.p1KeyboardRightNum, InputManager.p1KeyboardHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.keyboardAxes(InputManager.p1KeyboardDownNum, InputManager.p1KeyboardUpNum, InputManager.p1GamepadVerticalValue) * moveSpeed * 2 / 3;
                             break;
                         case "ArrowKey":
-                            v.x += Input.GetAxis("HorizontalArrowKey") * moveSpeed * 2 / 3;
-                            v.y += Input.GetAxis("VerticalArrowKey") * moveSpeed * 2 / 3;
+                            v.x += InputManager.keyboardAxes(InputManager.p2KeyboardLeftNum, InputManager.p2KeyboardRightNum, InputManager.p2KeyboardHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.keyboardAxes(InputManager.p2KeyboardDownNum, InputManager.p2KeyboardUpNum, InputManager.p2GamepadVerticalValue) * moveSpeed * 2 / 3;
                             break;
                         case "1":
                         case "2":
@@ -945,8 +931,9 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            v.x += Input.GetAxis("HorizontalJoy" + SelectMouse.p2Joy) * moveSpeed * 2 / 3;
-                            v.y -= Input.GetAxis("VerticalJoy" + SelectMouse.p2Joy) * moveSpeed * 2 / 3;
+                            Vector2 stickValue = InputManager.p2Gamepad.leftStick.ReadValue();
+                            v.x += InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue) * moveSpeed * 2 / 3;
+                            v.y += InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue) * moveSpeed * 2 / 3;
                             break;
                     }
                 }
@@ -987,15 +974,15 @@ namespace com.DungeonPad
                         switch (SelectMouse.p1Joy)
                         {
                             case "WASD":
-                                if (Input.GetKeyDown(KeyCode.J))
+                                if (keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p1Joy, 0));
+                                    StartCoroutine(dash(SelectMouse.p1Joy, Gamepad.current));
                                 }
                                 break;
                             case "ArrowKey":
-                                if (Input.GetKeyDown(KeyCode.Keypad1))
+                                if (keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p1Joy, 0));
+                                    StartCoroutine(dash(SelectMouse.p1Joy, Gamepad.current));
                                 }
                                 break;
                             case "1":
@@ -1006,9 +993,9 @@ namespace com.DungeonPad
                             case "6":
                             case "7":
                             case "8":
-                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy))))
+                                if (InputManager.p1Gamepad.aButton.wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p1Joy, 0));
+                                    StartCoroutine(dash(SelectMouse.p1Joy, InputManager.p1Gamepad));
                                 }
                                 break;
                         }
@@ -1018,15 +1005,15 @@ namespace com.DungeonPad
                         switch (SelectMouse.p2Joy)
                         {
                             case "WASD":
-                                if (Input.GetKeyDown(KeyCode.J))
+                                if (keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p2Joy, 0));
+                                    StartCoroutine(dash(SelectMouse.p2Joy, Gamepad.current));
                                 }
                                 break;
                             case "ArrowKey":
-                                if (Input.GetKeyDown(KeyCode.Keypad1))
+                                if (keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p2Joy, 0));
+                                    StartCoroutine(dash(SelectMouse.p2Joy, Gamepad.current));
                                 }
                                 break;
                             case "1":
@@ -1037,9 +1024,9 @@ namespace com.DungeonPad
                             case "6":
                             case "7":
                             case "8":
-                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy))))
+                                if (InputManager.p2Gamepad.aButton.wasPressedThisFrame)
                                 {
-                                    StartCoroutine(dash(SelectMouse.p2Joy, 0));
+                                    StartCoroutine(dash(SelectMouse.p2Joy, InputManager.p2Gamepad));
                                 }
                                 break;
                         }
@@ -1062,7 +1049,7 @@ namespace com.DungeonPad
                         switch (SelectMouse.p1Joy)
                         {
                             case "WASD":
-                                if (Input.GetKeyDown(KeyCode.M))
+                                if (keyboard.allKeys[InputManager.p1KeyboardSkillKeyNum].wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -1078,7 +1065,7 @@ namespace com.DungeonPad
                                 }
                                 break;
                             case "ArrowKey":
-                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                if (keyboard.allKeys[InputManager.p2KeyboardSkillKeyNum].wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -1101,7 +1088,7 @@ namespace com.DungeonPad
                             case "6":
                             case "7":
                             case "8":
-                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 2)))
+                                if (InputManager.p1Gamepad.xButton.wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -1123,7 +1110,7 @@ namespace com.DungeonPad
                         switch (SelectMouse.p2Joy)
                         {
                             case "WASD":
-                                if (Input.GetKeyDown(KeyCode.M))
+                                if (keyboard.allKeys[InputManager.p1KeyboardSkillKeyNum].wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -1139,7 +1126,7 @@ namespace com.DungeonPad
                                 }
                                 break;
                             case "ArrowKey":
-                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                if (keyboard.allKeys[InputManager.p2KeyboardSkillKeyNum].wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -1162,7 +1149,7 @@ namespace com.DungeonPad
                             case "6":
                             case "7":
                             case "8":
-                                if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 2)))
+                                if (InputManager.p2Gamepad.xButton.wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {
@@ -1244,18 +1231,18 @@ namespace com.DungeonPad
 
         static WaitForSeconds waitForPress = new WaitForSeconds(0.03f);
         static WaitForSeconds waitForMinut = new WaitForSeconds(0.01f);
-        IEnumerator dash(string p1p2joy, int TwoPlayerModeORp1p2)
+        IEnumerator dash(string p1p2joy, Gamepad gamepad)
         {
             yield return waitForPress;
             switch (p1p2joy)
             {
                 case "WASD":
-                    DashA.x = Input.GetAxisRaw("HorizontalWASD");
-                    DashA.y = Input.GetAxisRaw("VerticalWASD");
+                    DashA.x = InputManager.p1KeyboardHorizontalValue;
+                    DashA.y = InputManager.p1KeyboardVerticalValue;
                     break;
                 case "ArrowKey":
-                    DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
-                    DashA.y = Input.GetAxisRaw("VerticalArrowKey");
+                    DashA.x = InputManager.p2KeyboardHorizontalValue;
+                    DashA.y = InputManager.p2KeyboardVerticalValue;
                     break;
                 case "1":
                 case "2":
@@ -1265,15 +1252,30 @@ namespace com.DungeonPad
                 case "6":
                 case "7":
                 case "8":
-                    if (TwoPlayerModeORp1p2 == 0)
+                    Vector2 stickValue;
+                    if (gamepad == InputManager.p1Gamepad)
                     {
-                        DashA.x = Input.GetAxisRaw("HorizontalJoy" + p1p2joy);
-                        DashA.y = -Input.GetAxisRaw("VerticalJoy" + p1p2joy);
+                        stickValue = InputManager.p1Gamepad.leftStick.ReadValue();
+                        DashA.x = InputManager.gamepadAxes(stickValue.x,InputManager.p1GamepadHorizontalValue);
+                        DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
+                    }
+                    else if(gamepad == InputManager.p2Gamepad)
+                    {
+                        stickValue = InputManager.p2Gamepad.leftStick.ReadValue();
+                        DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue);
+                        DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
+                    }
+                    else if(p1)
+                    {
+                        stickValue = Gamepad.current.leftStick.ReadValue();
+                        DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p1GamepadHorizontalValue);
+                        DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
                     }
                     else
                     {
-                        DashA.x = Input.GetAxisRaw("HorizontalJoyP" + TwoPlayerModeORp1p2);
-                        DashA.y = -Input.GetAxisRaw("VerticalJoyP" + TwoPlayerModeORp1p2);
+                        stickValue = Gamepad.current.rightStick.ReadValue();
+                        DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue);
+                        DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
                     }
 
                     break;
@@ -1287,12 +1289,12 @@ namespace com.DungeonPad
                     switch (p1p2joy)
                     {
                         case "WASD":
-                            DashA.x = Input.GetAxisRaw("HorizontalWASD");
-                            DashA.y = Input.GetAxisRaw("VerticalWASD");
+                            DashA.x = InputManager.p1KeyboardHorizontalValue;
+                            DashA.y = InputManager.p1KeyboardVerticalValue;
                             break;
                         case "ArrowKey":
-                            DashA.x = Input.GetAxisRaw("HorizontalArrowKey");
-                            DashA.y = Input.GetAxisRaw("VerticalArrowKey");
+                            DashA.x = InputManager.p2KeyboardHorizontalValue;
+                            DashA.y = InputManager.p2KeyboardVerticalValue;
                             break;
                         case "1":
                         case "2":
@@ -1302,17 +1304,31 @@ namespace com.DungeonPad
                         case "6":
                         case "7":
                         case "8":
-                            if (TwoPlayerModeORp1p2 == 0)
+                            Vector2 stickValue;
+                            if (gamepad == InputManager.p1Gamepad)
                             {
-                                DashA.x = Input.GetAxisRaw("HorizontalJoy" + p1p2joy);
-                                DashA.y = -Input.GetAxisRaw("VerticalJoy" + p1p2joy);
+                                stickValue = InputManager.p1Gamepad.leftStick.ReadValue();
+                                DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p1GamepadHorizontalValue);
+                                DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
+                            }
+                            else if (gamepad == InputManager.p2Gamepad)
+                            {
+                                stickValue = InputManager.p2Gamepad.leftStick.ReadValue();
+                                DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue);
+                                DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
+                            }
+                            else if (p1)
+                            {
+                                stickValue = Gamepad.current.leftStick.ReadValue();
+                                DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p1GamepadHorizontalValue);
+                                DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
                             }
                             else
                             {
-                                DashA.x = Input.GetAxisRaw("HorizontalJoyP" + TwoPlayerModeORp1p2);
-                                DashA.y = -Input.GetAxisRaw("VerticalJoyP" + TwoPlayerModeORp1p2);
+                                stickValue = Gamepad.current.rightStick.ReadValue();
+                                DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue);
+                                DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
                             }
-
                             break;
                     }
                     DashA = Vector3.Normalize(DashA) * DashSpeed;

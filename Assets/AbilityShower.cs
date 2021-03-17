@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -47,8 +48,8 @@ namespace com.DungeonPad
                 }
             }
 
-
-            if (Input.GetKeyDown(KeyCode.JoystickButton6))
+            Keyboard keyboard = Keyboard.current;
+            if (keyboard.allKeys[InputManager.p1KeyboardLookskillKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardLookskillKeyNum].wasPressedThisFrame || Gamepad.current.selectButton.wasPressedThisFrame)
             {
                 if (showSelected)
                 {
