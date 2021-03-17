@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using XInputDotNetPure; // Required in C#
+using System.Linq;
+
 
 namespace com.DungeonPad
 {
@@ -30,6 +33,13 @@ namespace com.DungeonPad
 
         void Start()
         {
+            var gamepad = Gamepad.current;//手柄
+            if (gamepad.aButton.isPressed)
+            {
+
+            }
+
+            var keyboard = Keyboard.current;//键盘
             ReGamer.ReAbility();
             if (GameManager.CurrentSceneName == "SelectRole_Game 0")
             {
