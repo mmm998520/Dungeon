@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.InputSystem;
 using XInputDotNetPure; // Required in C#
 
 namespace com.DungeonPad
@@ -353,7 +354,7 @@ namespace com.DungeonPad
                 switch (SelectMouse.p1Joy)
                 {
                     case "WASD":
-                        if (Input.GetKeyDown(KeyCode.LeftAlt))
+                        if (Input.GetKeyDown(KeyCode.J))
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -398,7 +399,7 @@ namespace com.DungeonPad
                 switch (SelectMouse.p2Joy)
                 {
                     case "WASD":
-                        if (Input.GetKeyDown(KeyCode.LeftAlt))
+                        if (Input.GetKeyDown(KeyCode.J))
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -546,14 +547,14 @@ namespace com.DungeonPad
                         switch (SelectMouse.p1Joy)
                         {
                             case "WASD":
-                                if (Input.GetKeyDown(KeyCode.Space))
+                                if (Input.GetKeyDown(KeyCode.J))
                                 {
                                     StartCoroutine(dash(SelectMouse.p1Joy, 1));
                                     
                                 }
                                 break;
                             case "ArrowKey":
-                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                if (Input.GetKeyDown(KeyCode.Keypad1))
                                 {
                                     StartCoroutine(dash(SelectMouse.p1Joy, 1));
                                 }
@@ -578,13 +579,13 @@ namespace com.DungeonPad
                         switch (SelectMouse.p2Joy)
                         {
                             case "WASD":
-                                if (Input.GetKeyDown(KeyCode.Space))
+                                if (Input.GetKeyDown(KeyCode.J))
                                 {
                                     StartCoroutine(dash(SelectMouse.p2Joy, 2));
                                 }
                                 break;
                             case "ArrowKey":
-                                if (Input.GetKeyDown(KeyCode.Keypad0))
+                                if (Input.GetKeyDown(KeyCode.Keypad1))
                                 {
                                     StartCoroutine(dash(SelectMouse.p2Joy, 2));
                                 }
