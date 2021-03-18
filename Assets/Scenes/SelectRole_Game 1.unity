@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3334,9 +3334,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  otherPlayerJoyVibration: {fileID: 1179144346}
-  HurtVibration_Main: 0.6
-  HurtVibration_notMain: 0.15
+  otherPlayerJoyVibration: {fileID: 0}
+  HurtVibration_Main: 0
+  HurtVibration_notMain: 0
   StickVibration: 0
   ConfusionVibration: 0
   DashVibration: 0
@@ -3377,7 +3377,7 @@ MonoBehaviour:
   v: {x: 0, y: 0}
   HardStraightA: {x: 0, y: 0}
   DashA: {x: 0, y: 0}
-  playerJoyVibration: {fileID: 252037859}
+  playerJoyVibration: {fileID: 0}
   StickTimer: 8213.414
   HardStraightTimer: 5283.437
   DashTimer: 8206.7
@@ -5660,15 +5660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591cf69653a2a6e46afe4719352bd22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1Stat: 0
-  p2Stat: 0
-  blue: {fileID: 146626077}
-  red: {fileID: 237141769}
-  mouse1: {fileID: 1918030472}
-  mouse2: {fileID: 503378752}
-  BluePlayer: {fileID: 252037856}
-  RedPlayer: {fileID: 1179144343}
-  NextScene: Game 4
+  NextScene: Game 1
 --- !u!224 &447325376 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6623596174500636619, guid: d43f99542c8703f4aa42ec119e7ed20b,
@@ -6423,9 +6415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925b02c4b558d55468afa48fd8f902ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1: 0
-  canUse: 0
-  selectMouse: {fileID: 421072570}
 --- !u!1001 &505398860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20741,9 +20730,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  otherPlayerJoyVibration: {fileID: 252037859}
-  HurtVibration_Main: 0.6
-  HurtVibration_notMain: 0.15
+  otherPlayerJoyVibration: {fileID: 0}
+  HurtVibration_Main: 0
+  HurtVibration_notMain: 0
   StickVibration: 0
   ConfusionVibration: 0
   DashVibration: 0
@@ -20781,7 +20770,7 @@ MonoBehaviour:
   v: {x: 0, y: 0}
   HardStraightA: {x: 0, y: 0}
   DashA: {x: 0, y: 0}
-  playerJoyVibration: {fileID: 1179144346}
+  playerJoyVibration: {fileID: 0}
   StickTimer: 5320.3853
   HardStraightTimer: 4754.4785
   DashTimer: 8190.216
@@ -34141,9 +34130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925b02c4b558d55468afa48fd8f902ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  p1: 1
-  canUse: 0
-  selectMouse: {fileID: 421072570}
 --- !u!1 &1920954960
 GameObject:
   m_ObjectHideFlags: 0
