@@ -19,21 +19,26 @@ namespace com.DungeonPad
         void OnEnable()
         {
             playerManager = GetComponent<PlayerManager>();
-            playerManager.Start();
             if (playerManager.p1)
             {
                 if (InputManager.p1Gamepad != null)
                 {
-                    GetComponent<PlayerJoyVibration>().enabled = true;
                     gamepad = InputManager.p1Gamepad;
+                }
+                else
+                {
+                    this.enabled = false;
                 }
             }
             else
             {
                 if (InputManager.p2Gamepad != null)
                 {
-                    GetComponent<PlayerJoyVibration>().enabled = true;
                     gamepad = InputManager.p2Gamepad;
+                }
+                else
+                {
+                    this.enabled = false;
                 }
             }
         }
@@ -48,7 +53,36 @@ namespace com.DungeonPad
                 //CountLowHPVibration();
                 CountDashVibration();
                 float maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, LowHPVibration, DashVibration);
-                gamepad.SetMotorSpeeds(maxer * weight / 4, maxer * weight);
+                if(gamepad != null)
+                {
+                    gamepad.SetMotorSpeeds(maxer * weight / 4, maxer * weight);
+                }
+                else
+                {
+                    playerManager = GetComponent<PlayerManager>();
+                    if (playerManager.p1)
+                    {
+                        if (InputManager.p1Gamepad != null)
+                        {
+                            gamepad = InputManager.p1Gamepad;
+                        }
+                        else
+                        {
+                            this.enabled = false;
+                        }
+                    }
+                    else
+                    {
+                        if (InputManager.p2Gamepad != null)
+                        {
+                            gamepad = InputManager.p2Gamepad;
+                        }
+                        else
+                        {
+                            this.enabled = false;
+                        }
+                    }
+                }
                 if (PlayerManager.HP <= 0)
                 {
                     gamepad.SetMotorSpeeds(0, 0);

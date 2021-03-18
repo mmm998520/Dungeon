@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.InputSystem;
-using XInputDotNetPure; // Required in C#
 
 namespace com.DungeonPad
 {
