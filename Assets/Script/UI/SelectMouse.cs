@@ -532,4 +532,187 @@ namespace com.DungeonPad
             GamePad.SetVibration(P2PlayerIndex.Value, 0, 0);
         }
     }
+    public class NewSelectMouse// : MonoBehaviour
+    {
+        enum PlayerMod
+        {
+            none,
+            keyboardP1,
+            keyboardP2,
+            gamepadP1,
+            gamepadP2,
+            singleP1,
+            singleP2
+        }
+        PlayerMod p1Mod = PlayerMod.none, p2Mod = PlayerMod.none;
+        Gamepad p1Gamepad, p2Gamepad;
+        bool twoPlayerMode = true;
+        
+        #region//selectRole
+        void selectRole()
+        {
+            RemoveDevice();
+            p1Mod = back(p1Mod);
+            p2Mod = back(p2Mod);
+            if (p1Mod == PlayerMod.none)
+            {
+                p1Mod = select(true);
+            }
+            else if (p2Mod == PlayerMod.none)
+            {
+                p2Mod = select(false);
+            }
+            Debug.Log("p1 : " + p1Mod.ToString() + "        " + "p2 : " + p2Mod.ToString());
+        }
+
+        void RemoveDevice()
+        {
+            InputSystem.onDeviceChange += (device, change) =>
+            {
+                switch (change)
+                {
+                    case InputDeviceChange.Added:
+                        //Debug.Log("New device added: " + device);
+                        break;
+
+                    case InputDeviceChange.Removed:
+                        //Debug.Log("Device removed: " + device);
+                        if (device == p1Gamepad)
+                        {
+                            p1Mod = PlayerMod.none;
+                            p1Gamepad = null;
+                        }
+                        if (device == p2Gamepad)
+                        {
+                            p2Mod = PlayerMod.none;
+                            p2Gamepad = null;
+                        }
+                        break;
+                }
+            };
+
+        }
+
+        PlayerMod select(bool selectP1)
+        {
+            Gamepad pad = Gamepad.current, temp = null;
+            PlayerMod playerMod = PlayerMod.none;
+            Keyboard keyboard = Keyboard.current;
+            if (keyboard != null && keyboard.jKey.wasPressedThisFrame)
+            {
+                playerMod = PlayerMod.keyboardP1;
+            }
+            else if (keyboard != null && keyboard.numpad1Key.wasPressedThisFrame)
+            {
+                playerMod = PlayerMod.keyboardP2;
+            }
+            else if (pad != null && pad.leftShoulder.wasPressedThisFrame)
+            {
+                playerMod = PlayerMod.singleP1;
+            }
+            else if (pad != null && pad.rightShoulder.wasPressedThisFrame)
+            {
+                playerMod = PlayerMod.singleP2;
+            }
+            else if (pad != null && pad.aButton.wasPressedThisFrame)
+            {
+                if (selectP1)
+                {
+                    playerMod = PlayerMod.gamepadP1;
+                    temp = pad;
+                }
+                else
+                {
+                    playerMod = PlayerMod.gamepadP2;
+                    temp = pad;
+                }
+                /*
+                for (int i = 0; i < Gamepad.all.Count; i++)
+                {
+                    if (Gamepad.all[i].aButton.wasPressedThisFrame)
+                    {
+                        if(gamepad == p1Gamepad && Gamepad.all[i] != p2Gamepad)
+                        {
+                            playerMod = PlayerMod.gamepadP1;
+                            p1Gamepad = Gamepad.all[i];
+                        }
+                        else if (gamepad == p2Gamepad && Gamepad.all[i] != p1Gamepad)
+                        {
+                            playerMod = PlayerMod.gamepadP2;
+                            p2Gamepad = Gamepad.all[i];
+                        }
+                    }
+                }
+                */
+            }
+            if (p1Mod == playerMod || p2Mod == playerMod)
+            {
+                return PlayerMod.none;
+            }
+            else
+            {
+                if (temp != null)
+                {
+                    if (selectP1)
+                    {
+                        p1Gamepad = temp;
+                    }
+                    else
+                    {
+                        p2Gamepad = temp;
+                    }
+                }
+                return playerMod;
+            }
+        }
+
+        PlayerMod back(PlayerMod playerMod)
+        {
+            Keyboard keyboard = Keyboard.current;
+            Gamepad pad = Gamepad.current;
+            switch (playerMod)
+            {
+                case PlayerMod.keyboardP1:
+                    if (keyboard != null && keyboard.kKey.wasPressedThisFrame)
+                    {
+                        playerMod = PlayerMod.none;
+                    }
+                    break;
+                case PlayerMod.keyboardP2:
+                    if (keyboard != null && keyboard.numpad2Key.wasPressedThisFrame)
+                    {
+                        playerMod = PlayerMod.none;
+                    }
+                    break;
+                case PlayerMod.gamepadP1:
+                    if (p1Gamepad != null && p1Gamepad.bButton.wasPressedThisFrame)
+                    {
+                        playerMod = PlayerMod.none;
+                        p1Gamepad = null;
+                    }
+                    break;
+                case PlayerMod.gamepadP2:
+                    if (p2Gamepad != null && p2Gamepad.bButton.wasPressedThisFrame)
+                    {
+                        playerMod = PlayerMod.none;
+                        p2Gamepad = null;
+                    }
+                    break;
+                case PlayerMod.singleP1:
+                    if (pad != null && pad.leftTrigger.wasPressedThisFrame)
+                    {
+                        playerMod = PlayerMod.none;
+                    }
+                    break;
+                case PlayerMod.singleP2:
+                    if (pad != null && pad.rightTrigger.wasPressedThisFrame)
+                    {
+                        playerMod = PlayerMod.none;
+                    }
+                    break;
+            }
+            return playerMod;
+        }
+        #endregion
+    }
 }
