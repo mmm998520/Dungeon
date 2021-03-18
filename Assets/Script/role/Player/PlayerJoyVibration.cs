@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure; // Required in C#
@@ -133,4 +133,4 @@ namespace com.DungeonPad
             otherPlayerJoyVibration.HurtVibration_notMain = 0.15f;
         }
     }
-}
+}*/

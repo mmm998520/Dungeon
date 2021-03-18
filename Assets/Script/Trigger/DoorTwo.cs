@@ -21,7 +21,7 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (ButtonTwo.p1used && ButtonTwo.p2used)
+            if (ButtonTwo.redUsed && ButtonTwo.blueUsed)
             {
                 localX -= Time.deltaTime * speed;
                 spriteRenderer.sprite = p1_p2;
@@ -29,27 +29,13 @@ namespace com.DungeonPad
             else
             {
                 localX += Time.deltaTime * speed;
-                if(ButtonTwo.p1used)
+                if(ButtonTwo.redUsed)
                 {
-                    if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
-                    {
-                        spriteRenderer.sprite = blue;
-                    }
-                    else
-                    {
-                        spriteRenderer.sprite = red;
-                    }
+                    spriteRenderer.sprite = red;
                 }
-                else if(ButtonTwo.p2used)
+                else if(ButtonTwo.blueUsed)
                 {
-                    if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
-                    {
-                        spriteRenderer.sprite = red;
-                    }
-                    else
-                    {
-                        spriteRenderer.sprite = blue;
-                    }
+                    spriteRenderer.sprite = blue;
                 }
                 else
                 {

@@ -9,14 +9,14 @@ namespace com.DungeonPad
         enum ButtonStat
         {
             non,
-            p1,
-            p2,
-            p1_p2,
-            p2_p1
+            red,
+            blue,
+            red_blue,
+            blue_red
         }
         ButtonStat buttonStat = ButtonStat.non;
 
-        public static bool p1used = false, p2used = false;
+        public static bool redUsed = false, blueUsed = false;
         public SpriteRenderer spriteRenderer;
         public Sprite non, blue, red;
 
@@ -31,40 +31,26 @@ namespace com.DungeonPad
             {
                 if (buttonStat == ButtonStat.non)
                 {
-                    if (collider.GetComponent<PlayerManager>().p1)
+                    if (collider.gameObject.name == "Red")
                     {
-                        buttonStat = ButtonStat.p1;
-                        if(SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
-                        {
-                            spriteRenderer.sprite = blue;
-                        }
-                        else
-                        {
-                            spriteRenderer.sprite = red;
-                        }
-                        p1used = true;
+                        buttonStat = ButtonStat.red;
+                        spriteRenderer.sprite = red;
+                        redUsed = true;
                     }
                     else
                     {
-                        buttonStat = ButtonStat.p2;
-                        if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
-                        {
-                            spriteRenderer.sprite = red;
-                        }
-                        else
-                        {
-                            spriteRenderer.sprite = blue;
-                        }
-                        p2used = true;
+                        buttonStat = ButtonStat.blue;
+                        spriteRenderer.sprite = blue;
+                        blueUsed = true;
                     }
                 }
-                else if(buttonStat == ButtonStat.p1)
+                else if(buttonStat == ButtonStat.red && collider.gameObject.name == "Blue")
                 {
-                    buttonStat = ButtonStat.p1_p2;
+                    buttonStat = ButtonStat.red_blue;
                 }
-                else if(buttonStat == ButtonStat.p2)
+                else if(buttonStat == ButtonStat.blue && collider.gameObject.name == "Red")
                 {
-                    buttonStat = ButtonStat.p2_p1;
+                    buttonStat = ButtonStat.blue_red;
                 }
                 else
                 {
@@ -77,47 +63,33 @@ namespace com.DungeonPad
         {
             if (collider.GetComponent<PlayerManager>())
             {
-                if (buttonStat == ButtonStat.p1)
+                if (buttonStat == ButtonStat.red)
                 {
                     buttonStat = ButtonStat.non;
                     spriteRenderer.sprite = non;
-                    p1used = false;
+                    redUsed = false;
                 }
-                else if (buttonStat == ButtonStat.p2)
+                else if (buttonStat == ButtonStat.blue)
                 {
                     buttonStat = ButtonStat.non;
                     spriteRenderer.sprite = non;
-                    p2used = false;
+                    blueUsed = false;
                 }
-                else if(buttonStat == ButtonStat.p1_p2 || buttonStat == ButtonStat.p2_p1)
+                else if(buttonStat == ButtonStat.red_blue || buttonStat == ButtonStat.blue_red)
                 {
-                    if (collider.GetComponent<PlayerManager>().p1)
+                    if (collider.gameObject.name == "Red")
                     {
-                        buttonStat = ButtonStat.p2;
-                        if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
-                        {
-                            spriteRenderer.sprite = red;
-                        }
-                        else
-                        {
-                            spriteRenderer.sprite = blue;
-                        }
-                        p1used = false;
-                        p2used = true;
+                        buttonStat = ButtonStat.blue;
+                        spriteRenderer.sprite = blue;
+                        redUsed = false;
+                        blueUsed = true;
                     }
                     else
                     {
-                        buttonStat = ButtonStat.p1;
-                        if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
-                        {
-                            spriteRenderer.sprite = blue;
-                        }
-                        else
-                        {
-                            spriteRenderer.sprite = red;
-                        }
-                        p1used = true;
-                        p2used = false;
+                        buttonStat = ButtonStat.red;
+                        spriteRenderer.sprite = red;
+                        blueUsed = false;
+                        redUsed = true;
                     }
                 }
                 else

@@ -5,6 +5,18 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    public enum PlayerMod
+    {
+        none,
+        keyboardP1,
+        keyboardP2,
+        gamepadP1,
+        gamepadP2,
+        singleP1,
+        singleP2
+    }
+    public static PlayerMod p1Mod = PlayerMod.none, p2Mod = PlayerMod.none;
+
     public static int p1KeyboardUpNum = 36,
                                  p1KeyboardDownNum = 32,
                                  p1KeyboardLeftNum = 14,
@@ -23,11 +35,12 @@ public class InputManager : MonoBehaviour
                                  p2KeyboardLookskillKeyNum = 80;
 
     public static Gamepad p1Gamepad, p2Gamepad;
+    public static Gamepad currentGamepad;
     /// <summary>
     /// Horizontal水平；Vertical垂直
     /// </summary>
     public static float p1KeyboardHorizontalValue, p1KeyboardVerticalValue, p2KeyboardHorizontalValue, p2KeyboardVerticalValue, p1GamepadHorizontalValue, p1GamepadVerticalValue, p2GamepadHorizontalValue, p2GamepadVerticalValue;
-
+    bool twoPlayerMode = true;
     void Start()
     {
         if (PlayerPrefs.HasKey("Keyboard"))
@@ -84,7 +97,7 @@ public class InputManager : MonoBehaviour
     #region//Axes
     public static float keyboardAxes(int lessKeyNum, int addKeyNum, float value)
     {
-        return keyboardAxes(lessKeyNum, addKeyNum, value, 3f, 0.01f, 3f);
+        return keyboardAxes(lessKeyNum, addKeyNum, value, 10f, 0.01f, 15f);
     }
 
     public static float keyboardAxes(int lessKeyNum, int addKeyNum, float value, float addSpeed, float critical, float gravity)

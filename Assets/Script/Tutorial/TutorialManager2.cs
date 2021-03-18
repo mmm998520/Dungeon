@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -470,4 +470,4 @@ namespace com.DungeonPad
             p2.ConfusionUIcontroler.enabled = false;
         }
     }
-}
+}*/

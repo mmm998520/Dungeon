@@ -85,12 +85,13 @@ namespace com.DungeonPad
         void Update()
         {
             Keyboard keyboard = Keyboard.current;
+            InputManager.currentGamepad = Gamepad.current;
             if (keyboard.homeKey.wasPressedThisFrame)
             {
                 shopPanel.SetActive(true);
                 shopPanel.transform.GetChild(0).GetComponent<AbilityDatas>().start();
             }
-            if (PlayerManager.HP0Timer < 0.2f && (keyboard.escapeKey.wasPressedThisFrame || Gamepad.current.startButton.wasPressedThisFrame))
+            if (PlayerManager.HP0Timer < 0.2f && (keyboard.escapeKey.wasPressedThisFrame || (InputManager.currentGamepad != null && InputManager.currentGamepad.startButton.wasPressedThisFrame)))
             {
                 if (stopPanel.activeSelf)
                 {
@@ -104,7 +105,7 @@ namespace com.DungeonPad
                 }
                 stopPanel.SetActive(!stopPanel.activeSelf);
             }
-            if (stopPanel.activeSelf && keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || Gamepad.current.bButton.wasPressedThisFrame)
+            if (stopPanel.activeSelf && keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || (InputManager.currentGamepad != null && InputManager.currentGamepad.bButton.wasPressedThisFrame))
             {
                 Time.timeScale = 1;
                 Time.fixedDeltaTime = 0.02F * Time.timeScale;

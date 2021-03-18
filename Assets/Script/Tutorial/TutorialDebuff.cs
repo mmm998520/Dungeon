@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,4 +45,4 @@ namespace com.DungeonPad
             GameManager.players.GetComponent<TutorialManager2>().reStartBubble();
         }
     }
-}
+}*/

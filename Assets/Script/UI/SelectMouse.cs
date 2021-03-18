@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace com.DungeonPad
 {
+    /*
     public class SelectMouse : MonoBehaviour
     {
         public enum mouseStat
@@ -532,43 +533,92 @@ namespace com.DungeonPad
             GamePad.SetVibration(P2PlayerIndex.Value, 0, 0);
         }
     }
-    public class NewSelectMouse// : MonoBehaviour
+    */
+
+    public class SelectMouse : MonoBehaviour
     {
-        enum PlayerMod
+        private void Start()
         {
-            none,
-            keyboardP1,
-            keyboardP2,
-            gamepadP1,
-            gamepadP2,
-            singleP1,
-            singleP2
+            if (GameManager.CurrentSceneName == "SelectRole_Game 0")
+            {
+                PlayerManager.Life = 1;
+            }
         }
-        PlayerMod p1Mod = PlayerMod.none, p2Mod = PlayerMod.none;
-        Gamepad p1Gamepad, p2Gamepad;
-        bool twoPlayerMode = true;
-        
+
+        void Update()
+        {
+            if (GameManager.CurrentSceneName == "SelectRole_Game 0")
+            {
+                for (int i = 0; i < GameManager.players.childCount; i++)
+                {
+                    GameManager.players.GetChild(i).GetComponent<PlayerManager>().DashTimer = 0.3f;
+                }
+            }
+            selectRole();
+        }
+
         #region//selectRole
         void selectRole()
         {
             RemoveDevice();
-            p1Mod = back(p1Mod);
-            p2Mod = back(p2Mod);
-            if (p1Mod == PlayerMod.none)
+            InputManager.p1Mod = back(InputManager.p1Mod);
+            InputManager.p2Mod = back(InputManager.p2Mod);
+            if (InputManager.p1Mod == InputManager.PlayerMod.none)
             {
-                p1Mod = select(true);
+                InputManager.p1Mod = select(true);
+
             }
-            else if (p2Mod == PlayerMod.none)
+            else if (InputManager.p2Mod == InputManager.PlayerMod.none)
             {
-                p2Mod = select(false);
+                InputManager.p2Mod = select(false);
             }
-            Debug.Log("p1 : " + p1Mod.ToString() + "        " + "p2 : " + p2Mod.ToString());
+
+            Transform p1 = GameManager.players.GetChild(0), p2 = GameManager.players.GetChild(1);
+            if (InputManager.p1Mod != InputManager.PlayerMod.none)
+            {
+                p1.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
+                p1.GetComponent<PlayerManager>().p1 = true;
+                //p1.GetComponent<PlayerJoyVibration>().enabled = true;
+            }
+            else
+            {
+                p1.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                p1.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                //p1.GetComponent<PlayerJoyVibration>().enabled = false;
+            }
+            if (InputManager.p2Mod != InputManager.PlayerMod.none)
+            {
+                p2.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
+                p2.GetComponent<PlayerManager>().p1 = false;
+                //p1.GetComponent<PlayerJoyVibration>().enabled = true;
+            }
+            else
+            {
+                p2.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                p2.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                //p1.GetComponent<PlayerJoyVibration>().enabled = false;
+            }
+            //Debug.Log("p1 : " + p1Mod.ToString() + "        " + "p2 : " + p2Mod.ToString());
         }
 
         void RemoveDevice()
         {
             InputSystem.onDeviceChange += (device, change) =>
             {
+                if(change == InputDeviceChange.Removed && device != null)
+                {
+                    if (device == InputManager.p1Gamepad)
+                    {
+                        InputManager.p1Mod = InputManager.PlayerMod.none;
+                        InputManager.p1Gamepad = null;
+                    }
+                    if (device == InputManager.p2Gamepad)
+                    {
+                        InputManager.p2Mod = InputManager.PlayerMod.none;
+                        InputManager.p2Gamepad = null;
+                    }
+                }
+                /*
                 switch (change)
                 {
                     case InputDeviceChange.Added:
@@ -589,41 +639,42 @@ namespace com.DungeonPad
                         }
                         break;
                 }
+                */
             };
 
         }
 
-        PlayerMod select(bool selectP1)
+        InputManager.PlayerMod select(bool selectP1)
         {
             Gamepad pad = Gamepad.current, temp = null;
-            PlayerMod playerMod = PlayerMod.none;
+            InputManager.PlayerMod playerMod = InputManager.PlayerMod.none;
             Keyboard keyboard = Keyboard.current;
             if (keyboard != null && keyboard.jKey.wasPressedThisFrame)
             {
-                playerMod = PlayerMod.keyboardP1;
+                playerMod = InputManager.PlayerMod.keyboardP1;
             }
             else if (keyboard != null && keyboard.numpad1Key.wasPressedThisFrame)
             {
-                playerMod = PlayerMod.keyboardP2;
+                playerMod = InputManager.PlayerMod.keyboardP2;
             }
             else if (pad != null && pad.leftShoulder.wasPressedThisFrame)
             {
-                playerMod = PlayerMod.singleP1;
+                playerMod = InputManager.PlayerMod.singleP1;
             }
             else if (pad != null && pad.rightShoulder.wasPressedThisFrame)
             {
-                playerMod = PlayerMod.singleP2;
+                playerMod = InputManager.PlayerMod.singleP2;
             }
             else if (pad != null && pad.aButton.wasPressedThisFrame)
             {
                 if (selectP1)
                 {
-                    playerMod = PlayerMod.gamepadP1;
+                    playerMod = InputManager.PlayerMod.gamepadP1;
                     temp = pad;
                 }
                 else
                 {
-                    playerMod = PlayerMod.gamepadP2;
+                    playerMod = InputManager.PlayerMod.gamepadP2;
                     temp = pad;
                 }
                 /*
@@ -645,9 +696,9 @@ namespace com.DungeonPad
                 }
                 */
             }
-            if (p1Mod == playerMod || p2Mod == playerMod)
+            if (InputManager.p1Mod == playerMod || InputManager.p2Mod == playerMod)
             {
-                return PlayerMod.none;
+                return InputManager.PlayerMod.none;
             }
             else
             {
@@ -655,59 +706,59 @@ namespace com.DungeonPad
                 {
                     if (selectP1)
                     {
-                        p1Gamepad = temp;
+                        InputManager.p1Gamepad = temp;
                     }
                     else
                     {
-                        p2Gamepad = temp;
+                        InputManager.p2Gamepad = temp;
                     }
                 }
                 return playerMod;
             }
         }
 
-        PlayerMod back(PlayerMod playerMod)
+        InputManager.PlayerMod back(InputManager.PlayerMod playerMod)
         {
             Keyboard keyboard = Keyboard.current;
             Gamepad pad = Gamepad.current;
             switch (playerMod)
             {
-                case PlayerMod.keyboardP1:
+                case InputManager.PlayerMod.keyboardP1:
                     if (keyboard != null && keyboard.kKey.wasPressedThisFrame)
                     {
-                        playerMod = PlayerMod.none;
+                        playerMod = InputManager.PlayerMod.none;
                     }
                     break;
-                case PlayerMod.keyboardP2:
+                case InputManager.PlayerMod.keyboardP2:
                     if (keyboard != null && keyboard.numpad2Key.wasPressedThisFrame)
                     {
-                        playerMod = PlayerMod.none;
+                        playerMod = InputManager.PlayerMod.none;
                     }
                     break;
-                case PlayerMod.gamepadP1:
-                    if (p1Gamepad != null && p1Gamepad.bButton.wasPressedThisFrame)
+                case InputManager.PlayerMod.gamepadP1:
+                    if (InputManager.p1Gamepad != null && InputManager.p1Gamepad.bButton.wasPressedThisFrame)
                     {
-                        playerMod = PlayerMod.none;
-                        p1Gamepad = null;
+                        playerMod = InputManager.PlayerMod.none;
+                        InputManager.p1Gamepad = null;
                     }
                     break;
-                case PlayerMod.gamepadP2:
-                    if (p2Gamepad != null && p2Gamepad.bButton.wasPressedThisFrame)
+                case InputManager.PlayerMod.gamepadP2:
+                    if (InputManager.p2Gamepad != null && InputManager.p2Gamepad.bButton.wasPressedThisFrame)
                     {
-                        playerMod = PlayerMod.none;
-                        p2Gamepad = null;
+                        playerMod = InputManager.PlayerMod.none;
+                        InputManager.p2Gamepad = null;
                     }
                     break;
-                case PlayerMod.singleP1:
+                case InputManager.PlayerMod.singleP1:
                     if (pad != null && pad.leftTrigger.wasPressedThisFrame)
                     {
-                        playerMod = PlayerMod.none;
+                        playerMod = InputManager.PlayerMod.none;
                     }
                     break;
-                case PlayerMod.singleP2:
+                case InputManager.PlayerMod.singleP2:
                     if (pad != null && pad.rightTrigger.wasPressedThisFrame)
                     {
-                        playerMod = PlayerMod.none;
+                        playerMod = InputManager.PlayerMod.none;
                     }
                     break;
             }

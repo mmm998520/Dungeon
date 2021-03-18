@@ -49,7 +49,8 @@ namespace com.DungeonPad
             }
 
             Keyboard keyboard = Keyboard.current;
-            if (keyboard.allKeys[InputManager.p1KeyboardLookskillKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardLookskillKeyNum].wasPressedThisFrame || Gamepad.current.selectButton.wasPressedThisFrame)
+            InputManager.currentGamepad = Gamepad.current;
+            if (keyboard.allKeys[InputManager.p1KeyboardLookskillKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardLookskillKeyNum].wasPressedThisFrame || InputManager.currentGamepad != null && InputManager.currentGamepad.selectButton.wasPressedThisFrame)
             {
                 if (showSelected)
                 {

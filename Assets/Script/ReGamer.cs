@@ -44,13 +44,13 @@ namespace com.DungeonPad
             PlayerManager.Life = 2;
             PlayerManager.timerRecord = new List<float>();
             PlayerManager.recoveryRecord = new List<float>();
-            PlayerJoyVibration.canVibration = true;
+            //PlayerJoyVibration.canVibration = true;
             GameManager.layers = 1;
             GameManager.level = 1;
             GameManager.DiedBecause = "Distance";
             ButtonOne.useButtonNum = 0;
-            ButtonTwo.p1used = false;
-            ButtonTwo.p2used = false;
+            ButtonTwo.redUsed = false;
+            ButtonTwo.blueUsed = false;
             DataSaver.Save();
             FireRainInser.insPoses.Clear();
             CrystalRainInser.insPoses.Clear();
