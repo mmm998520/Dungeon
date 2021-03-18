@@ -51,7 +51,7 @@ namespace com.DungeonPad
                     playerManager.SleepTimer = -8;
                 }
                 //PlayerManager.HP -= ATKforPlayer;
-                //collider.GetComponent<PlayerJoyVibration>().hurt();
+                collider.GetComponent<PlayerJoyVibration>().hurt();
             }
             if (collider.GetComponent<TaurenBoss>())
             {

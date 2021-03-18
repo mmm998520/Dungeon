@@ -1,48 +1,39 @@
-﻿/*using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure; // Required in C#
+using UnityEngine.InputSystem;
 
 namespace com.DungeonPad
 {
     public class PlayerJoyVibration : MonoBehaviour
     {
         public float weight = 1;
-        public PlayerIndex? playerIndex;
         PlayerManager playerManager;
         public PlayerJoyVibration otherPlayerJoyVibration;
         public float HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, DashVibration;
         public static float LowHPVibration;
 
         public static bool canVibration = true;
+
+        Gamepad gamepad;
         void OnEnable()
         {
             playerManager = GetComponent<PlayerManager>();
             playerManager.Start();
-            if (transform.name == "Blue")
+            if (playerManager.p1)
             {
-                if (SelectMouse.P1PlayerIndex == null)
+                if (InputManager.p1Gamepad != null)
                 {
-                    GetComponent<PlayerJoyVibration>().enabled = false;
-                    print(SelectMouse.P1PlayerIndex);
-                }
-                else
-                {
-                    GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P1PlayerIndex;
-                    print(GetComponent<PlayerJoyVibration>().playerIndex + "p1");
+                    GetComponent<PlayerJoyVibration>().enabled = true;
+                    gamepad = InputManager.p1Gamepad;
                 }
             }
             else
             {
-                if (SelectMouse.P2PlayerIndex == null)
+                if (InputManager.p2Gamepad != null)
                 {
-                    GetComponent<PlayerJoyVibration>().enabled = false;
-                    print(SelectMouse.P1PlayerIndex);
-                }
-                else
-                {
-                    GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P2PlayerIndex;
-                    print(GetComponent<PlayerJoyVibration>().playerIndex + "p2");
+                    GetComponent<PlayerJoyVibration>().enabled = true;
+                    gamepad = InputManager.p2Gamepad;
                 }
             }
         }
@@ -57,15 +48,15 @@ namespace com.DungeonPad
                 //CountLowHPVibration();
                 CountDashVibration();
                 float maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, LowHPVibration, DashVibration);
-                GamePad.SetVibration(playerIndex.Value, maxer * weight, maxer * weight);
+                gamepad.SetMotorSpeeds(maxer * weight / 4, maxer * weight);
                 if (PlayerManager.HP <= 0)
                 {
-                    GamePad.SetVibration(playerIndex.Value, 0, 0);
+                    gamepad.SetMotorSpeeds(0, 0);
                 }
             }
             else
             {
-                GamePad.SetVibration(playerIndex.Value, 0, 0);
+                gamepad.SetMotorSpeeds(0, 0);
                 HurtVibration_Main = 0;
                 HurtVibration_notMain = 0;
                 StickVibration = 0;
@@ -133,4 +124,4 @@ namespace com.DungeonPad
             otherPlayerJoyVibration.HurtVibration_notMain = 0.15f;
         }
     }
-}*/
+}

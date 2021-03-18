@@ -537,6 +537,8 @@ namespace com.DungeonPad
 
     public class SelectMouse : MonoBehaviour
     {
+        [SerializeField] string NextScene;
+
         private void Start()
         {
             if (GameManager.CurrentSceneName == "SelectRole_Game 0")
@@ -555,6 +557,17 @@ namespace com.DungeonPad
                 }
             }
             selectRole();
+            if (Gamepad.current != null)
+            {
+                if (Gamepad.current.xButton.wasPressedThisFrame)
+                {
+                    InputSystem.PauseHaptics();
+                }
+                else if(Gamepad.current.yButton.wasPressedThisFrame)
+                {
+                    InputSystem.ResumeHaptics();
+                }
+            }
         }
 
         #region//selectRole
@@ -566,7 +579,6 @@ namespace com.DungeonPad
             if (InputManager.p1Mod == InputManager.PlayerMod.none)
             {
                 InputManager.p1Mod = select(true);
-
             }
             else if (InputManager.p2Mod == InputManager.PlayerMod.none)
             {
@@ -577,28 +589,121 @@ namespace com.DungeonPad
             if (InputManager.p1Mod != InputManager.PlayerMod.none)
             {
                 p1.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
-                p1.GetComponent<PlayerManager>().p1 = true;
-                //p1.GetComponent<PlayerJoyVibration>().enabled = true;
+                //p1.GetComponent<PlayerManager>().p1 = true;
+                p1.GetComponent<PlayerJoyVibration>().enabled = true;
             }
             else
             {
-                p1.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                //p1.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                 p1.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                //p1.GetComponent<PlayerJoyVibration>().enabled = false;
+                p1.GetComponent<PlayerJoyVibration>().enabled = false;
             }
             if (InputManager.p2Mod != InputManager.PlayerMod.none)
             {
                 p2.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
-                p2.GetComponent<PlayerManager>().p1 = false;
-                //p1.GetComponent<PlayerJoyVibration>().enabled = true;
+                //p2.GetComponent<PlayerManager>().p1 = false;
+                p2.GetComponent<PlayerJoyVibration>().enabled = true;
             }
             else
             {
-                p2.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
+                //p2.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                 p2.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                //p1.GetComponent<PlayerJoyVibration>().enabled = false;
+                p2.GetComponent<PlayerJoyVibration>().enabled = false;
             }
-            //Debug.Log("p1 : " + p1Mod.ToString() + "        " + "p2 : " + p2Mod.ToString());
+            Debug.Log("p1 : " + InputManager.p1Mod.ToString() + "        " + "p2 : " + InputManager.p2Mod.ToString());
+            if(InputManager.p1Mod != InputManager.PlayerMod.none && InputManager.p2Mod != InputManager.PlayerMod.none)
+            {
+                int start = -1;
+                switch (InputManager.p1Mod)
+                {
+                    case InputManager.PlayerMod.keyboardP1:
+                        if (Keyboard.current.allKeys[InputManager.p1KeyboardDashNum].isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                    case InputManager.PlayerMod.keyboardP2:
+                        if (Keyboard.current.allKeys[InputManager.p2KeyboardDashNum].isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                    case InputManager.PlayerMod.gamepadP1:
+                        if (InputManager.p1Gamepad.aButton.isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                    case InputManager.PlayerMod.gamepadP2:
+                        if (InputManager.p2Gamepad.aButton.isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                    case InputManager.PlayerMod.singleP1:
+                        if (InputManager.currentGamepad.leftShoulder.isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                    case InputManager.PlayerMod.singleP2:
+                        if (InputManager.currentGamepad.rightShoulder.isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                }
+                switch (InputManager.p2Mod)
+                {
+                    case InputManager.PlayerMod.keyboardP1:
+                        if (Keyboard.current.allKeys[InputManager.p1KeyboardDashNum].isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                    case InputManager.PlayerMod.keyboardP2:
+                        if (Keyboard.current.allKeys[InputManager.p2KeyboardDashNum].isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                    case InputManager.PlayerMod.gamepadP1:
+                        if (InputManager.p1Gamepad.aButton.isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                    case InputManager.PlayerMod.gamepadP2:
+                        if (InputManager.p2Gamepad.aButton.isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                    case InputManager.PlayerMod.singleP1:
+                        if (InputManager.currentGamepad.leftShoulder.isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                    case InputManager.PlayerMod.singleP2:
+                        if (InputManager.currentGamepad.rightShoulder.isPressed)
+                        {
+                            start++;
+                        }
+                        break;
+                }
+                Debug.Log(start);
+                if (start >= 1)
+                {
+                    if (NextScene == "Game 3")
+                    {
+                        GameManager.layers = 2;
+                        NextScene = "Game 1";
+                    }
+                    SwitchScenePanel.NextScene = NextScene;
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+                }
+            }
         }
 
         void RemoveDevice()
@@ -649,23 +754,23 @@ namespace com.DungeonPad
             Gamepad pad = Gamepad.current, temp = null;
             InputManager.PlayerMod playerMod = InputManager.PlayerMod.none;
             Keyboard keyboard = Keyboard.current;
-            if (keyboard != null && keyboard.jKey.wasPressedThisFrame)
+            if (keyboard != null && keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame)
             {
                 playerMod = InputManager.PlayerMod.keyboardP1;
             }
-            else if (keyboard != null && keyboard.numpad1Key.wasPressedThisFrame)
+            else if (keyboard != null && keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame)
             {
                 playerMod = InputManager.PlayerMod.keyboardP2;
             }
-            else if (pad != null && pad.leftShoulder.wasPressedThisFrame)
+            else if (pad != null && pad.leftShoulder.wasPressedThisFrame && !InputManager.twoPlayerMode)
             {
                 playerMod = InputManager.PlayerMod.singleP1;
             }
-            else if (pad != null && pad.rightShoulder.wasPressedThisFrame)
+            else if (pad != null && pad.rightShoulder.wasPressedThisFrame && !InputManager.twoPlayerMode)
             {
                 playerMod = InputManager.PlayerMod.singleP2;
             }
-            else if (pad != null && pad.aButton.wasPressedThisFrame)
+            else if (pad != null && pad.aButton.wasPressedThisFrame && InputManager.twoPlayerMode)
             {
                 if (selectP1)
                 {
@@ -696,7 +801,7 @@ namespace com.DungeonPad
                 }
                 */
             }
-            if (InputManager.p1Mod == playerMod || InputManager.p2Mod == playerMod)
+            if (InputManager.p1Mod == playerMod || InputManager.p2Mod == playerMod || (temp != null && (InputManager.p1Gamepad == temp || temp != null && (InputManager.p2Gamepad == temp))))
             {
                 return InputManager.PlayerMod.none;
             }
@@ -724,13 +829,13 @@ namespace com.DungeonPad
             switch (playerMod)
             {
                 case InputManager.PlayerMod.keyboardP1:
-                    if (keyboard != null && keyboard.kKey.wasPressedThisFrame)
+                    if (keyboard != null && keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame)
                     {
                         playerMod = InputManager.PlayerMod.none;
                     }
                     break;
                 case InputManager.PlayerMod.keyboardP2:
-                    if (keyboard != null && keyboard.numpad2Key.wasPressedThisFrame)
+                    if (keyboard != null && keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame)
                     {
                         playerMod = InputManager.PlayerMod.none;
                     }

@@ -42,7 +42,7 @@ namespace com.DungeonPad
                     }
                     Instantiate(GameManager.Hurted, collider.transform.position, Quaternion.identity, collider.transform);
 
-                    //collider.GetComponent<PlayerJoyVibration>().hurt();
+                    collider.GetComponent<PlayerJoyVibration>().hurt();
                     if(MonsterType == "Spider")
                     {
                         if (collider.GetComponent<PlayerManager>().p1)

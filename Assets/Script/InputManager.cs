@@ -40,7 +40,7 @@ public class InputManager : MonoBehaviour
     /// Horizontal水平；Vertical垂直
     /// </summary>
     public static float p1KeyboardHorizontalValue, p1KeyboardVerticalValue, p2KeyboardHorizontalValue, p2KeyboardVerticalValue, p1GamepadHorizontalValue, p1GamepadVerticalValue, p2GamepadHorizontalValue, p2GamepadVerticalValue;
-    bool twoPlayerMode = true;
+    public static bool twoPlayerMode = true;
     void Start()
     {
         if (PlayerPrefs.HasKey("Keyboard"))
@@ -97,7 +97,7 @@ public class InputManager : MonoBehaviour
     #region//Axes
     public static float keyboardAxes(int lessKeyNum, int addKeyNum, float value)
     {
-        return keyboardAxes(lessKeyNum, addKeyNum, value, 10f, 0.01f, 15f);
+        return keyboardAxes(lessKeyNum, addKeyNum, value, 10f, 0.05f, 15f);
     }
 
     public static float keyboardAxes(int lessKeyNum, int addKeyNum, float value, float addSpeed, float critical, float gravity)
@@ -140,7 +140,7 @@ public class InputManager : MonoBehaviour
 
     public static float gamepadAxes(float gamepadValue, float value)
     {
-        return gamepadAxes(gamepadValue, value, 0.1f, 3, 0.01f, 3f);
+        return gamepadAxes(gamepadValue, value, 0.2f, 15, 0.05f, 20f);
     }
 
     public static float gamepadAxes(float gamepadStickValue, float value, float deadZone, float addSpeed, float critical, float gravity)

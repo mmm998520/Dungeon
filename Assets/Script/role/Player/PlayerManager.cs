@@ -37,7 +37,7 @@ namespace com.DungeonPad
 
         Transform otherPlayer;
 
-        //public PlayerJoyVibration playerJoyVibration;
+        public PlayerJoyVibration playerJoyVibration;
 
         public float StickTimer = 10, HardStraightTimer = 10, DashTimer = 10, SleepTimer = 10;
         public float ConfusionTimer = 100;
@@ -176,7 +176,7 @@ namespace com.DungeonPad
             {
                 HP = MaxHP;
             }
-            //playerJoyVibration = GetComponent<PlayerJoyVibration>();
+            playerJoyVibration = GetComponent<PlayerJoyVibration>();
             lastPos = transform.position;
             lastUpdateHp = HP;
         }
@@ -1298,7 +1298,7 @@ namespace com.DungeonPad
             }*/
             if (DashA.magnitude > 10)
             {
-                //playerJoyVibration.DashVibration = 0.7f;
+                playerJoyVibration.DashVibration = 0.7f;
             }
             else
             {
@@ -1514,7 +1514,7 @@ namespace com.DungeonPad
                         Instantiate(GameManager.Hurted,transform.position,Quaternion.identity, transform);
                         HardStraightTimer = 0;
                     }
-                    //playerJoyVibration.hurt();
+                    playerJoyVibration.hurt();
 
                     //玩家進入無敵狀態
                     gameObject.layer = 16;

@@ -44,7 +44,7 @@ namespace com.DungeonPad
             PlayerManager.Life = 2;
             PlayerManager.timerRecord = new List<float>();
             PlayerManager.recoveryRecord = new List<float>();
-            //PlayerJoyVibration.canVibration = true;
+            PlayerJoyVibration.canVibration = true;
             GameManager.layers = 1;
             GameManager.level = 1;
             GameManager.DiedBecause = "Distance";
