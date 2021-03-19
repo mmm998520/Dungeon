@@ -26,6 +26,15 @@ namespace com.DungeonPad
             GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
         }
 
+        public void QuitGame()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+Application.Quit();
+#endif
+        }
+
         public void selectSetting()
         {
             SwitchScenePanel.NextScene = "Setting";

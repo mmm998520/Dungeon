@@ -19,6 +19,11 @@ namespace com.DungeonPad
         public int ShowHPLine;
         public Image[] HPBarImages;
 
+        private void Start()
+        {
+
+        }
+
         void Update()
         {
             Keyboard keyboard = Keyboard.current;
@@ -26,7 +31,11 @@ namespace com.DungeonPad
             {
                 for (int i = 0; i < GameManager.players.childCount; i++)
                 {
-                    GameManager.players.GetChild(i).GetComponent<PlayerManager>().enabled = false;
+                    Transform player = GameManager.players.GetChild(i);
+                    player.GetComponent<PlayerManager>().enabled = false;
+                    player.GetComponent<PlayerManager>().v = Vector3.zero;
+                    player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                    player.GetChild(0).GetComponent<Animator>().enabled = false;
                 }
                 if (keyboard.enterKey.wasPressedThisFrame || keyboard.numpadEnterKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame || Gamepad.current.aButton.wasPressedThisFrame)
                 {

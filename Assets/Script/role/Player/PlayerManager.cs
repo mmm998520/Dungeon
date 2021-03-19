@@ -91,6 +91,7 @@ namespace com.DungeonPad
                     GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 0.8f;
                 }
             }
+            v = Vector3.zero;
             batStickedNum = 0;
             for (int i = 0; i < GameManager.players.childCount; i++)
             {

@@ -29,8 +29,8 @@ public class InputManager : MonoBehaviour
                                  p2KeyboardDownNum = 63,
                                  p2KeyboardLeftNum = 60,
                                  p2KeyboardRightNum = 61,
-                                 p2KeyboardDashNum = 84,
-                                 p2KeyboardBreakfreeKeyNum = 85,
+                                 p2KeyboardDashNum = 8,//84
+                                 p2KeyboardBreakfreeKeyNum = 51,//85
                                  p2KeyboardSkillKeyNum = 83,
                                  p2KeyboardLookskillKeyNum = 80;
 
@@ -41,8 +41,10 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public static float p1KeyboardHorizontalValue, p1KeyboardVerticalValue, p2KeyboardHorizontalValue, p2KeyboardVerticalValue, p1GamepadHorizontalValue, p1GamepadVerticalValue, p2GamepadHorizontalValue, p2GamepadVerticalValue;
     public static bool twoPlayerMode = true;
+
     void Start()
     {
+        PlayerPrefs.DeleteAll();
         if (PlayerPrefs.HasKey("Keyboard"))
         {
             string[] keyboardNum = PlayerPrefs.GetString("Keyboard").Split(',');
@@ -66,14 +68,12 @@ public class InputManager : MonoBehaviour
         else
         {
             PlayerPrefs.SetString("Keyboard", "36,32,14,17,23,24,26,3,62,63,60,61,84,85,83,80");
+            PlayerPrefs.SetString("Keyboard", "36,32,14,17,23,24,26,3,62,63,60,61,8,51,83,80");
         }
     }
 
     void Update()
     {
-        p1Gamepad = Gamepad.all[0];
-        //Debug.Log("gamepadx : " + p1Gampad.rightStick.ReadValue().x);
-        //Debug.Log("gamepady : " + p1Gampad.rightStick.ReadValue().y);
         Keyboard keyboard = Keyboard.current;
         if (keyboard != null)
         {
@@ -81,17 +81,10 @@ public class InputManager : MonoBehaviour
             {
                 if (keyboard.allKeys[i].isPressed)
                 {
-                    //Debug.Log(i);
+                    Debug.Log(i);
                 }
             }
         }
-        /*
-        if (p1Gampad != null)
-        {
-            p1VerticalValue = gamepadAxes(p1Gampad.leftStick.ReadValue().x, p1VerticalValue);
-            p1HorizontalValue = gamepadAxes(p1Gampad.leftStick.ReadValue().y, p1HorizontalValue);
-            Debug.Log("p1VerticalValue : " + p1VerticalValue);
-        }*/
     }
 
     #region//Axes
