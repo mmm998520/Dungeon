@@ -106,69 +106,6 @@ namespace com.DungeonPad
             if (!SceneManager.GetActiveScene().name.Contains("SelectRole"))
             {
                 playerStat = PlayerStat.Move;
-                /*
-                if (SelectMouse.playerColor == SelectMouse.PlayerColor.P1Blue_P2Red)
-                {
-                    if (transform.name == "Blue")
-                    {
-                        p1 = true;
-                        if (SelectMouse.P1PlayerIndex == null)
-                        {
-                            GetComponent<PlayerJoyVibration>().enabled = false;
-                            print(SelectMouse.P1PlayerIndex);
-                        }
-                        else
-                        {
-                            GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P1PlayerIndex;
-                            print(GetComponent<PlayerJoyVibration>().playerIndex + "p1");
-                        }
-                    }
-                    else
-                    {
-                        p1 = false;
-                        if (SelectMouse.P2PlayerIndex == null)
-                        {
-                            GetComponent<PlayerJoyVibration>().enabled = false;
-                            print(SelectMouse.P1PlayerIndex);
-                        }
-                        else
-                        {
-                            GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P2PlayerIndex;
-                            print(GetComponent<PlayerJoyVibration>().playerIndex + "p2");
-                        }
-                    }
-                }
-                else
-                {
-                    if (transform.name == "Blue")
-                    {
-                        p1 = false;
-                        if (SelectMouse.P2PlayerIndex == null)
-                        {
-                            GetComponent<PlayerJoyVibration>().enabled = false;
-                            print(SelectMouse.P2PlayerIndex);
-                        }
-                        else
-                        {
-                            GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P2PlayerIndex;
-                            print(GetComponent<PlayerJoyVibration>().playerIndex + "p2");
-                        }
-                    }
-                    else
-                    {
-                        p1 = true;
-                        if (SelectMouse.P1PlayerIndex == null)
-                        {
-                            GetComponent<PlayerJoyVibration>().enabled = false;
-                            print(SelectMouse.P1PlayerIndex);
-                        }
-                        else
-                        {
-                            GetComponent<PlayerJoyVibration>().playerIndex = SelectMouse.P1PlayerIndex;
-                            print(GetComponent<PlayerJoyVibration>().playerIndex + "p1");
-                        }
-                    }
-                }*/
                 HP = MaxHP;
             }
             else
@@ -348,385 +285,6 @@ namespace com.DungeonPad
 
         #region//操作模式
 
-        /*
-        void OnePlayerBehavior()
-        {
-            #region//掙脫
-            if (p1)
-            {
-                switch (InputManager.p1Mod)
-                {
-                    case InputManager.PlayerMod.keyboardP1:
-                        if (keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame)
-                        {
-                            ConfusionTimer += 0.7f;
-                            StickTimer += 0.7f;
-                            lastDirRight = true;
-                        }
-                        break;
-                    case InputManager.PlayerMod.keyboardP2:
-                        if (keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame)
-                        {
-                            ConfusionTimer += 0.7f;
-                            StickTimer += 0.7f;
-                            lastDirRight = true;
-                        }
-                        break;
-
-                }
-            }
-            else
-            {
-                switch (InputManager.p2Mod)
-                {
-                    case InputManager.PlayerMod.keyboardP1:
-                        if (keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame)
-                        {
-                            ConfusionTimer += 0.7f;
-                            StickTimer += 0.7f;
-                            lastDirRight = true;
-                        }
-                        break;
-                    case InputManager.PlayerMod.keyboardP2:
-                        if (keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame)
-                        {
-                            ConfusionTimer += 0.7f;
-                            StickTimer += 0.7f;
-                            lastDirRight = true;
-                        }
-                        break;
-                    case InputManager.PlayerMod.singleP2:
-                        if (Gamepad.current.rightShoulder.wasPressedThisFrame)
-                        {
-                            ConfusionTimer += 0.7f;
-                            StickTimer += 0.7f;
-                            lastDirRight = true;
-                        }
-                        break;
-                }
-            }
-            #endregion
-            if (ConfusionTimer < 10 || StickTimer < 10)
-            {
-                ConfusionUIRenderer.enabled = true;
-                ConfusionUIcontroler.enabled = true;
-            }
-            else
-            {
-                ConfusionUIRenderer.enabled = false;
-                ConfusionUIcontroler.enabled = false;
-            }
-            if (ConfusionTimer < 10)
-            {
-                float tempVX = v.x + Random.Range(-6f, 6f);
-                float tempVY = v.y + Random.Range(-6f, 6f);
-                v.x += (tempVX + v.x) / 3;
-                v.y += (tempVY + v.y) / 3;
-            }
-            else
-            {
-                #region//操作移動
-                if (p1)
-                {
-                    switch (InputManager.p1Mod)
-                    {
-                        case InputManager.PlayerMod.keyboardP1:
-                            v.x += InputManager.keyboardAxes(InputManager.p1KeyboardLeftNum, InputManager.p1KeyboardRightNum, InputManager.p1KeyboardHorizontalValue) * moveSpeed * 2 / 3;
-                            v.y += InputManager.keyboardAxes(InputManager.p1KeyboardDownNum, InputManager.p1KeyboardUpNum, InputManager.p1KeyboardVerticalValue) * moveSpeed * 2 / 3;
-                            break;
-                        case InputManager.PlayerMod.keyboardP2:
-                            v.x += InputManager.keyboardAxes(InputManager.p2KeyboardLeftNum, InputManager.p2KeyboardRightNum, InputManager.p2KeyboardHorizontalValue) * moveSpeed * 2 / 3;
-                            v.y += InputManager.keyboardAxes(InputManager.p2KeyboardDownNum, InputManager.p2KeyboardUpNum, InputManager.p2KeyboardVerticalValue) * moveSpeed * 2 / 3;
-                            break;
-                        case InputManager.PlayerMod.singleP1:
-                            Vector2 stickValue = Gamepad.current.leftStick.ReadValue();
-                            v.x += InputManager.gamepadAxes(stickValue.x,InputManager.p1GamepadHorizontalValue) * moveSpeed * 2 / 3;
-                            v.y += InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue) * moveSpeed * 2 / 3;
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (InputManager.p2Mod)
-                    {
-                        case InputManager.PlayerMod.keyboardP1:
-                            v.x += InputManager.keyboardAxes(InputManager.p1KeyboardLeftNum, InputManager.p1KeyboardRightNum, InputManager.p1KeyboardHorizontalValue) * moveSpeed * 2 / 3;
-                            v.y += InputManager.keyboardAxes(InputManager.p1KeyboardDownNum, InputManager.p1KeyboardUpNum, InputManager.p1KeyboardVerticalValue) * moveSpeed * 2 / 3;
-                            break;
-                        case InputManager.PlayerMod.keyboardP2:
-                            v.x += InputManager.keyboardAxes(InputManager.p2KeyboardLeftNum, InputManager.p2KeyboardRightNum, InputManager.p2KeyboardHorizontalValue) * moveSpeed * 2 / 3;
-                            v.y += InputManager.keyboardAxes(InputManager.p2KeyboardDownNum, InputManager.p2KeyboardUpNum, InputManager.p2KeyboardVerticalValue) * moveSpeed * 2 / 3;
-                            break;
-                        case InputManager.PlayerMod.singleP2:
-                            Vector2 stickValue = Gamepad.current.rightStick.ReadValue();
-                            v.x += InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue) * moveSpeed * 2 / 3;
-                            v.y += InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue) * moveSpeed * 2 / 3;
-                            break;
-                    }
-                }
-                #endregion
-            }
-            if ((StickTimer) < 10)
-            {
-                if (v.magnitude > 0.5f)
-                {
-                    v = v.normalized * 0.5f;
-                }
-            }
-            else if (v.magnitude > moveSpeed)
-            {
-                v = v.normalized * moveSpeed;
-            }
-            if (HardStraightTimer < 0.3f)
-            {
-                v = HardStraightA;
-            }
-            if (SleepTimer < 0f)
-            {
-                v = Vector3.zero;
-            }
-            //玩家解除無敵狀態
-            else if (HardStraightTimer > 0.5f)
-            {
-                gameObject.layer = 8;
-            }
-
-            #region//衝刺
-            if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10)
-            {
-                if (DashTimer > DashCD)
-                {
-                    if (p1)
-                    {
-                        switch (InputManager.p1Mod)
-                        {
-                            case InputManager.PlayerMod.keyboardP1:
-                                if (keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame)
-                                {
-                                    StartCoroutine(dash(SelectMouse.p1Joy, Gamepad.current));
-                                }
-                                break;
-                            case InputManager.PlayerMod.keyboardP2:
-                                if (keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame)
-                                {
-                                    StartCoroutine(dash(SelectMouse.p1Joy, Gamepad.current));
-                                }
-                                break;
-                            case InputManager.PlayerMod.singleP1:
-                                if (Gamepad.current.leftShoulder.wasPressedThisFrame)
-                                {
-                                    StartCoroutine(dash(SelectMouse.p1Joy, Gamepad.current));
-                                }
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        switch (InputManager.p2Mod)
-                        {
-                            case InputManager.PlayerMod.keyboardP1:
-                                if (keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame)
-                                {
-                                    StartCoroutine(dash(SelectMouse.p2Joy, Gamepad.current));
-                                }
-                                break;
-                            case InputManager.PlayerMod.keyboardP2:
-                                if (keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame)
-                                {
-                                    StartCoroutine(dash(SelectMouse.p2Joy, Gamepad.current));
-                                }
-                                break;
-                            case InputManager.PlayerMod.singleP2:
-                                if (Gamepad.current.rightShoulder.wasPressedThisFrame)
-                                {
-                                    StartCoroutine(dash(SelectMouse.p2Joy, Gamepad.current));
-                                }
-                                break;
-                        }
-                    }
-                }
-                if (DashTimer < 0.3f)
-                {
-                    v = DashA;
-                }
-            }
-            #endregion
-            
-            #region//傳送
-            if (homeButton)
-            {
-                if (HardStraightTimer >= 0.3f && ConfusionTimer >= 10 && SleepTimer >= 0 && StickTimer >= 10 && DashTimer > DashCD)
-                {
-                    if (p1)
-                    {
-                        switch (InputManager.p1Mod)
-                        {
-                            case InputManager.PlayerMod.keyboardP1:
-                                if (keyboard.allKeys[InputManager.p1KeyboardSkillKeyNum].wasPressedThisFrame)
-                                {
-                                    if (homeButtonTimer > 0)
-                                    {
-                                        homeButtonTimer = -homeButtonTimerStoper * 2;
-                                        for (int i = 0; i < GameManager.players.childCount; i++)
-                                        {
-                                            if (GameManager.players.GetChild(i) != transform)
-                                            {
-                                                transform.position = GameManager.players.GetChild(i).position;
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                            case InputManager.PlayerMod.keyboardP2:
-                                if (keyboard.allKeys[InputManager.p2KeyboardSkillKeyNum].wasPressedThisFrame)
-                                {
-                                    if (homeButtonTimer > 0)
-                                    {
-                                        homeButtonTimer = -homeButtonTimerStoper * 2;
-                                        for (int i = 0; i < GameManager.players.childCount; i++)
-                                        {
-                                            if (GameManager.players.GetChild(i) != transform)
-                                            {
-                                                transform.position = GameManager.players.GetChild(i).position;
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                            case InputManager.PlayerMod.singleP1:
-                                if (Gamepad.current.leftTrigger.wasPressedThisFrame)
-                                {
-                                    if (homeButtonTimer > 0)
-                                    {
-                                        homeButtonTimer = -homeButtonTimerStoper * 2;
-                                        for (int i = 0; i < GameManager.players.childCount; i++)
-                                        {
-                                            if (GameManager.players.GetChild(i) != transform)
-                                            {
-                                                transform.position = GameManager.players.GetChild(i).position;
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        switch (InputManager.p2Mod)
-                        {
-                            case InputManager.PlayerMod.keyboardP1:
-                                if (keyboard.allKeys[InputManager.p1KeyboardSkillKeyNum].wasPressedThisFrame)
-                                {
-                                    if (homeButtonTimer > 0)
-                                    {
-                                        homeButtonTimer = -homeButtonTimerStoper * 2;
-                                        for (int i = 0; i < GameManager.players.childCount; i++)
-                                        {
-                                            if (GameManager.players.GetChild(i) != transform)
-                                            {
-                                                transform.position = GameManager.players.GetChild(i).position;
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                            case InputManager.PlayerMod.keyboardP2:
-                                if (keyboard.allKeys[InputManager.p2KeyboardSkillKeyNum].wasPressedThisFrame)
-                                {
-                                    if (homeButtonTimer > 0)
-                                    {
-                                        homeButtonTimer = -homeButtonTimerStoper * 2;
-                                        for (int i = 0; i < GameManager.players.childCount; i++)
-                                        {
-                                            if (GameManager.players.GetChild(i) != transform)
-                                            {
-                                                transform.position = GameManager.players.GetChild(i).position;
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                            case InputManager.PlayerMod.singleP2:
-                                if (Gamepad.current.rightTrigger.wasPressedThisFrame)
-                                {
-                                    if (homeButtonTimer > 0)
-                                    {
-                                        homeButtonTimer = -homeButtonTimerStoper * 2;
-                                        for (int i = 0; i < GameManager.players.childCount; i++)
-                                        {
-                                            if (GameManager.players.GetChild(i) != transform)
-                                            {
-                                                transform.position = GameManager.players.GetChild(i).position;
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                        }
-                    }
-                }
-            }
-            #endregion
-            GetComponent<Rigidbody2D>().velocity = v;
-            transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent<ParticleSystem>().shape.arc / 2 + 180);
-
-            #region//子彈
-            
-            if (BulletNum > 0)
-            {
-                if (p1)
-                {
-                    switch (SelectMouse.p1Joy)
-                    {
-                        case "WASD":
-                            break;
-                        case "ArrowKey":
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 5)))
-                            {
-                                shootBullet();
-                            }
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (SelectMouse.p2Joy)
-                    {
-                        case "WASD":
-                            break;
-                        case "ArrowKey":
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 5)))
-                            {
-                                shootBullet();
-                            }
-                            break;
-                    }
-                }
-            }
-
-            //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy + "R");
-            #endregion
-        }*/
-
         void TwoPlayerBehavior()
         {
             #region//掙脫
@@ -833,29 +391,29 @@ namespace com.DungeonPad
                     {
                         case InputManager.PlayerMod.keyboardP1:
                             InputManager.p1KeyboardHorizontalValue = InputManager.keyboardAxes(InputManager.p1KeyboardLeftNum, InputManager.p1KeyboardRightNum, InputManager.p1KeyboardHorizontalValue);
-                            v.x += InputManager.p1KeyboardHorizontalValue * moveSpeed * 2 / 3;
+                            v.x = InputManager.p1KeyboardHorizontalValue * moveSpeed;
                             InputManager.p1KeyboardVerticalValue = InputManager.keyboardAxes(InputManager.p1KeyboardDownNum, InputManager.p1KeyboardUpNum, InputManager.p1KeyboardVerticalValue);
-                            v.y += InputManager.p1KeyboardVerticalValue * moveSpeed * 2 / 3;
+                            v.y = InputManager.p1KeyboardVerticalValue * moveSpeed;
                             break;
                         case InputManager.PlayerMod.keyboardP2:
                             InputManager.p2KeyboardHorizontalValue = InputManager.keyboardAxes(InputManager.p2KeyboardLeftNum, InputManager.p2KeyboardRightNum, InputManager.p2KeyboardHorizontalValue);
-                            v.x += InputManager.p2KeyboardHorizontalValue * moveSpeed * 2 / 3;
+                            v.x = InputManager.p2KeyboardHorizontalValue * moveSpeed;
                             InputManager.p2KeyboardVerticalValue = InputManager.keyboardAxes(InputManager.p2KeyboardDownNum, InputManager.p2KeyboardUpNum, InputManager.p2KeyboardVerticalValue);
-                            v.y += InputManager.p2KeyboardVerticalValue * moveSpeed * 2 / 3;
+                            v.y = InputManager.p2KeyboardVerticalValue * moveSpeed;
                             break;
                         case InputManager.PlayerMod.gamepadP1:
                             Vector2 stickValue = InputManager.p1Gamepad.leftStick.ReadValue();
                             InputManager.p1GamepadHorizontalValue = InputManager.gamepadAxes(stickValue.x, InputManager.p1GamepadHorizontalValue);
-                            v.x += InputManager.p1GamepadHorizontalValue * moveSpeed * 2 / 3;
+                            v.x = InputManager.p1GamepadHorizontalValue * moveSpeed;
                             InputManager.p1GamepadVerticalValue = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
-                            v.y += InputManager.p1GamepadVerticalValue * moveSpeed * 2 / 3;
+                            v.y = InputManager.p1GamepadVerticalValue * moveSpeed;
                             break;
                         case InputManager.PlayerMod.singleP1:
                             stickValue = Gamepad.current.leftStick.ReadValue();
                             InputManager.p1GamepadHorizontalValue = InputManager.gamepadAxes(stickValue.x, InputManager.p1GamepadHorizontalValue);
-                            v.x += InputManager.p1GamepadHorizontalValue * moveSpeed * 2 / 3;
+                            v.x = InputManager.p1GamepadHorizontalValue * moveSpeed;
                             InputManager.p1GamepadVerticalValue = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
-                            v.y += InputManager.p1GamepadVerticalValue * moveSpeed * 2 / 3;
+                            v.y = InputManager.p1GamepadVerticalValue * moveSpeed;
                             break;
                     }
                 }
@@ -865,29 +423,29 @@ namespace com.DungeonPad
                     {
                         case InputManager.PlayerMod.keyboardP1:
                             InputManager.p1KeyboardHorizontalValue = InputManager.keyboardAxes(InputManager.p1KeyboardLeftNum, InputManager.p1KeyboardRightNum, InputManager.p1KeyboardHorizontalValue);
-                            v.x += InputManager.p1KeyboardHorizontalValue * moveSpeed * 2 / 3;
+                            v.x = InputManager.p1KeyboardHorizontalValue * moveSpeed;
                             InputManager.p1KeyboardVerticalValue = InputManager.keyboardAxes(InputManager.p1KeyboardDownNum, InputManager.p1KeyboardUpNum, InputManager.p1KeyboardVerticalValue);
-                            v.y += InputManager.p1KeyboardVerticalValue * moveSpeed * 2 / 3;
+                            v.y = InputManager.p1KeyboardVerticalValue * moveSpeed;
                             break;
                         case InputManager.PlayerMod.keyboardP2:
                             InputManager.p2KeyboardHorizontalValue = InputManager.keyboardAxes(InputManager.p2KeyboardLeftNum, InputManager.p2KeyboardRightNum, InputManager.p2KeyboardHorizontalValue);
-                            v.x += InputManager.p2KeyboardHorizontalValue * moveSpeed * 2 / 3;
+                            v.x = InputManager.p2KeyboardHorizontalValue * moveSpeed;
                             InputManager.p2KeyboardVerticalValue = InputManager.keyboardAxes(InputManager.p2KeyboardDownNum, InputManager.p2KeyboardUpNum, InputManager.p2KeyboardVerticalValue);
-                            v.y += InputManager.p2KeyboardVerticalValue * moveSpeed * 2 / 3;
+                            v.y = InputManager.p2KeyboardVerticalValue * moveSpeed;
                             break;
                         case InputManager.PlayerMod.gamepadP2:
                             Vector2 stickValue = InputManager.p2Gamepad.leftStick.ReadValue();
                             InputManager.p2GamepadHorizontalValue = InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue);
-                            v.x += InputManager.p2GamepadHorizontalValue * moveSpeed * 2 / 3;
+                            v.x = InputManager.p2GamepadHorizontalValue * moveSpeed;
                             InputManager.p2GamepadVerticalValue = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
-                            v.y += InputManager.p2GamepadVerticalValue * moveSpeed * 2 / 3;
+                            v.y = InputManager.p2GamepadVerticalValue * moveSpeed;
                             break;
                         case InputManager.PlayerMod.singleP2:
                             stickValue = Gamepad.current.rightStick.ReadValue();
                             InputManager.p2GamepadHorizontalValue = InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue);
-                            v.x += InputManager.p2GamepadHorizontalValue * moveSpeed * 2 / 3;
+                            v.x = InputManager.p2GamepadHorizontalValue * moveSpeed;
                             InputManager.p2GamepadVerticalValue = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
-                            v.y += InputManager.p2GamepadVerticalValue * moveSpeed * 2 / 3;
+                            v.y = InputManager.p2GamepadVerticalValue * moveSpeed;
                             break;
                     }
                 }
@@ -1142,61 +700,6 @@ namespace com.DungeonPad
             #endregion
             GetComponent<Rigidbody2D>().velocity = v;
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent<ParticleSystem>().shape.arc / 2 + 180);
-
-            #region//子彈
-            /*
-            if (BulletNum > 0)
-            {
-                if (p1)
-                {
-                    switch (SelectMouse.p1Joy)
-                    {
-                        case "WASD":
-                            break;
-                        case "ArrowKey":
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p1Joy) + 5)))
-                            {
-                                shootBullet();
-                            }
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (SelectMouse.p2Joy)
-                    {
-                        case "WASD":
-                            break;
-                        case "ArrowKey":
-                            break;
-                        case "1":
-                        case "2":
-                        case "3":
-                        case "4":
-                        case "5":
-                        case "6":
-                        case "7":
-                        case "8":
-                            if (Input.GetKeyDown((KeyCode)(330 + 20 * int.Parse(SelectMouse.p2Joy) + 5)))
-                            {
-                                shootBullet();
-                            }
-                            break;
-                    }
-                }
-            }
-            */
-            //loat x = Input.GetAxisRaw("HorizontalJoy" + SelectMouse.p1Joy + "R");
-            #endregion
         }
         #endregion
 
@@ -1205,76 +708,15 @@ namespace com.DungeonPad
         IEnumerator dash(InputManager.PlayerMod playerMod)
         {
             yield return waitForPress;
-            switch (playerMod)
-            {
-                case InputManager.PlayerMod.keyboardP1:
-                    DashA.x = InputManager.p1KeyboardHorizontalValue;
-                    DashA.y = InputManager.p1KeyboardVerticalValue;
-                    break;
-                case InputManager.PlayerMod.keyboardP2:
-                    DashA.x = InputManager.p2KeyboardHorizontalValue;
-                    DashA.y = InputManager.p2KeyboardVerticalValue;
-                    break;
-                case InputManager.PlayerMod.gamepadP1:
-                    Vector2 stickValue;
-                    stickValue = InputManager.p1Gamepad.leftStick.ReadValue();
-                    DashA.x = InputManager.gamepadAxes(stickValue.x,InputManager.p1GamepadHorizontalValue);
-                    DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
-                    break;
-                case InputManager.PlayerMod.gamepadP2:
-                    stickValue = InputManager.p2Gamepad.leftStick.ReadValue();
-                    DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue);
-                    DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
-                    break;
-                case InputManager.PlayerMod.singleP1:
-                    stickValue = Gamepad.current.leftStick.ReadValue();
-                    DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p1GamepadHorizontalValue);
-                    DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
-                    break;
-                case InputManager.PlayerMod.singleP2:
-                    stickValue = Gamepad.current.rightStick.ReadValue();
-                    DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue);
-                    DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
-                    break;
-            }
+
+            dashCount(playerMod);
             DashA = Vector3.Normalize(DashA) * DashSpeed;
             for(int i = 0; i < 37; i++)
             {
                 if (DashA.magnitude <= 10)
                 {
                     yield return waitForMinut;
-                    switch (playerMod)
-                    {
-                        case InputManager.PlayerMod.keyboardP1:
-                            DashA.x = InputManager.p1KeyboardHorizontalValue;
-                            DashA.y = InputManager.p1KeyboardVerticalValue;
-                            break;
-                        case InputManager.PlayerMod.keyboardP2:
-                            DashA.x = InputManager.p2KeyboardHorizontalValue;
-                            DashA.y = InputManager.p2KeyboardVerticalValue;
-                            break;
-                        case InputManager.PlayerMod.gamepadP1:
-                            Vector2 stickValue;
-                            stickValue = InputManager.p1Gamepad.leftStick.ReadValue();
-                            DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p1GamepadHorizontalValue);
-                            DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
-                            break;
-                        case InputManager.PlayerMod.gamepadP2:
-                            stickValue = InputManager.p2Gamepad.leftStick.ReadValue();
-                            DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue);
-                            DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
-                            break;
-                        case InputManager.PlayerMod.singleP1:
-                            stickValue = Gamepad.current.leftStick.ReadValue();
-                            DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p1GamepadHorizontalValue);
-                            DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
-                            break;
-                        case InputManager.PlayerMod.singleP2:
-                            stickValue = Gamepad.current.rightStick.ReadValue();
-                            DashA.x = InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue);
-                            DashA.y = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
-                            break;
-                    }
+                    dashCount(playerMod);
                     DashA = Vector3.Normalize(DashA) * DashSpeed;
                 }
                 if (DashA.magnitude > 10)
@@ -1282,19 +724,6 @@ namespace com.DungeonPad
                     break;
                 }
             }
-
-            /*if (DashA.magnitude <= 10)
-            {
-
-                if (head.flipX)
-                {
-                    DashA = Vector3.right * DashSpeed;
-                }
-                else
-                {
-                    DashA = Vector3.left * DashSpeed;
-                }
-            }*/
             if (DashA.magnitude > 10)
             {
                 playerJoyVibration.DashVibration = 0.7f;
@@ -1317,9 +746,88 @@ namespace com.DungeonPad
             }
         }
 
+        void dashCount(InputManager.PlayerMod playerMod)
+        {
+            bool up, down, left, right;
+            switch (playerMod)
+            {
+                case InputManager.PlayerMod.keyboardP1:
+                    up = keyboard.allKeys[InputManager.p1KeyboardUpNum].isPressed;
+                    down = keyboard.allKeys[InputManager.p1KeyboardDownNum].isPressed;
+                    left = keyboard.allKeys[InputManager.p1KeyboardLeftNum].isPressed;
+                    right = keyboard.allKeys[InputManager.p1KeyboardRightNum].isPressed;
+                    if (left && right || !left && !right)
+                    {
+                        DashA.x = 0;
+                    }
+                    else if (left)
+                    {
+                        DashA.x = -1;
+                    }
+                    else
+                    {
+                        DashA.x = 1;
+                    }
+                    if (up && down || !up && !down)
+                    {
+                        DashA.y = 0;
+                    }
+                    else if (up)
+                    {
+                        DashA.y = 1;
+                    }
+                    else
+                    {
+                        DashA.y = -1;
+                    }
+                    break;
+                case InputManager.PlayerMod.keyboardP2:
+                    up = keyboard.allKeys[InputManager.p2KeyboardUpNum].isPressed;
+                    down = keyboard.allKeys[InputManager.p2KeyboardDownNum].isPressed;
+                    left = keyboard.allKeys[InputManager.p2KeyboardLeftNum].isPressed;
+                    right = keyboard.allKeys[InputManager.p2KeyboardRightNum].isPressed;
+                    if (left && right || !left && !right)
+                    {
+                        DashA.x = 0;
+                    }
+                    else if (left)
+                    {
+                        DashA.x = -1;
+                    }
+                    else
+                    {
+                        DashA.x = 1;
+                    }
+                    if (up && down || !up && !down)
+                    {
+                        DashA.y = 0;
+                    }
+                    else if (up)
+                    {
+                        DashA.y = 1;
+                    }
+                    else
+                    {
+                        DashA.y = -1;
+                    }
+                    break;
+                case InputManager.PlayerMod.gamepadP1:
+                    DashA = InputManager.p1Gamepad.leftStick.ReadValue();
+                    break;
+                case InputManager.PlayerMod.gamepadP2:
+                    DashA = InputManager.p2Gamepad.leftStick.ReadValue();
+                    break;
+                case InputManager.PlayerMod.singleP1:
+                    DashA = Gamepad.current.leftStick.ReadValue();
+                    break;
+                case InputManager.PlayerMod.singleP2:
+                    DashA = Gamepad.current.rightStick.ReadValue();
+                    break;
+            }
+        }
         private void FixedUpdate()
         {
-            v *= 0.9f;
+            //v *= 0.9f;
             if (HardStraightA.magnitude > 0.8f)
             {
                 HardStraightA -= (Vector2)Vector3.Normalize(HardStraightA) * 0.8f;

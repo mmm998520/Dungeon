@@ -97,7 +97,7 @@ public class InputManager : MonoBehaviour
     #region//Axes
     public static float keyboardAxes(int lessKeyNum, int addKeyNum, float value)
     {
-        return keyboardAxes(lessKeyNum, addKeyNum, value, 10f, 0.05f, 15f);
+        return keyboardAxes(lessKeyNum, addKeyNum, value, 2.5f, 0.1f, 3f);
     }
 
     public static float keyboardAxes(int lessKeyNum, int addKeyNum, float value, float addSpeed, float critical, float gravity)
@@ -140,20 +140,30 @@ public class InputManager : MonoBehaviour
 
     public static float gamepadAxes(float gamepadValue, float value)
     {
-        return gamepadAxes(gamepadValue, value, 0.2f, 15, 0.05f, 20f);
+        return gamepadAxes(gamepadValue, value, 0.2f, 2.5f, 0.1f, 1.5f);
     }
 
     public static float gamepadAxes(float gamepadStickValue, float value, float deadZone, float addSpeed, float critical, float gravity)
     {
+        float absStickValue = Mathf.Abs(gamepadStickValue);
         if (gamepadStickValue > deadZone)
         {
-            value += Time.deltaTime * addSpeed;
+            if (gamepadStickValue > deadZone * 3 && value < 0)
+            {
+                value = 0;
+            }
+            value += Time.deltaTime * addSpeed * absStickValue;
         }
         else if (gamepadStickValue < -deadZone)
         {
-            value -= Time.deltaTime * addSpeed;
+            if (gamepadStickValue < -deadZone * 3 && value > 0)
+            {
+                value = 0;
+            }
+            value -= Time.deltaTime * addSpeed * absStickValue;
         }
         value = Mathf.Clamp(value, -1, 1);
+        value = Mathf.Clamp(value, -absStickValue - 0.5f, absStickValue + 0.5f);
 
         if (gamepadStickValue < deadZone && gamepadStickValue > -deadZone)
         {

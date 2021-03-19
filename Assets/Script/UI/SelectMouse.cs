@@ -545,10 +545,15 @@ namespace com.DungeonPad
             {
                 PlayerManager.Life = 1;
             }
+            InputManager.p1Mod = InputManager.PlayerMod.none;
+            InputManager.p2Mod = InputManager.PlayerMod.none;
+            InputManager.p1Gamepad = null;
+            InputManager.p2Gamepad = null;
         }
 
         void Update()
         {
+            InputManager.currentGamepad = Gamepad.current;
             if (GameManager.CurrentSceneName == "SelectRole_Game 0")
             {
                 for (int i = 0; i < GameManager.players.childCount; i++)
@@ -557,9 +562,9 @@ namespace com.DungeonPad
                 }
             }
             selectRole();
-            if (Gamepad.current != null)
+            if (InputManager.currentGamepad != null)
             {
-                if (Gamepad.current.xButton.wasPressedThisFrame)
+                if (InputManager.currentGamepad.xButton.wasPressedThisFrame)
                 {
                     InputSystem.PauseHaptics();
                 }
