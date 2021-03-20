@@ -35,6 +35,7 @@ namespace com.DungeonPad
 
         void Awake()
         {
+            Debug.LogError("try");
             CurrentSceneName = SceneManager.GetActiveScene().name;
             MazeCreater.setTotalRowCol();
             gameManager = this;
@@ -78,12 +79,30 @@ namespace com.DungeonPad
                 ReGamer.ReGame();
             }
             shopPanel = GameObject.Find("shop").transform.GetChild(0).gameObject;
-            stopPanel = GameObject.Find("stop").transform.GetChild(0).gameObject;
+            try
+            {
+                stopPanel = GameObject.Find("stop").transform.GetChild(0).gameObject;
+            }
+            catch
+            {
+                stopPanel = GameObject.Find("select").transform.GetChild(0).gameObject;
+                Debug.LogError(CurrentSceneName + "的stopPanal要改名字喔!!!!!!!");
+            }
             MonsterManager.genMoneyNum = 0;
         }
 
         void Update()
         {
+            if (CurrentSceneName == "Game 1" || CurrentSceneName == "Game 2" || CurrentSceneName == "Game 4")
+            {
+                GameTimer.Timer += Time.deltaTime;
+                Debug.LogError(GameTimer.Timer);
+            }
+            else
+            {
+                GameTimer.Timer = 0;
+                Debug.LogError(GameTimer.Timer);
+            }
             Keyboard keyboard = Keyboard.current;
             InputManager.currentGamepad = Gamepad.current;
             if (keyboard.homeKey.wasPressedThisFrame)
@@ -110,6 +129,7 @@ namespace com.DungeonPad
                 Time.timeScale = 1;
                 Time.fixedDeltaTime = 0.02F * Time.timeScale;
             }
+
             //if (abilityStore)
             /*
             {
