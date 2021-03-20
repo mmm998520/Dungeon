@@ -3493,12 +3493,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  otherPlayerJoyVibration: {fileID: 0}
+  otherPlayerJoyVibration: {fileID: 1179144346}
   HurtVibration_Main: 0
   HurtVibration_notMain: 0
   StickVibration: 0
   ConfusionVibration: 0
   DashVibration: 0
+  maxer: 0
 --- !u!114 &252037860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21134,12 +21135,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  otherPlayerJoyVibration: {fileID: 0}
+  otherPlayerJoyVibration: {fileID: 252037859}
   HurtVibration_Main: 0
   HurtVibration_notMain: 0
   StickVibration: 0
   ConfusionVibration: 0
   DashVibration: 0
+  maxer: 0
 --- !u!114 &1179144347
 MonoBehaviour:
   m_ObjectHideFlags: 0
