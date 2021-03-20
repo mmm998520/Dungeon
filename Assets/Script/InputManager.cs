@@ -29,8 +29,8 @@ public class InputManager : MonoBehaviour
                                  p2KeyboardDownNum = 63,
                                  p2KeyboardLeftNum = 60,
                                  p2KeyboardRightNum = 61,
-                                 p2KeyboardDashNum = 8,//84
-                                 p2KeyboardBreakfreeKeyNum = 51,//85
+                                 p2KeyboardDashNum = 84,
+                                 p2KeyboardBreakfreeKeyNum = 85,
                                  p2KeyboardSkillKeyNum = 83,
                                  p2KeyboardLookskillKeyNum = 80;
 
@@ -40,36 +40,33 @@ public class InputManager : MonoBehaviour
     /// Horizontal水平；Vertical垂直
     /// </summary>
     public static float p1KeyboardHorizontalValue, p1KeyboardVerticalValue, p2KeyboardHorizontalValue, p2KeyboardVerticalValue, p1GamepadHorizontalValue, p1GamepadVerticalValue, p2GamepadHorizontalValue, p2GamepadVerticalValue;
-    public static bool twoPlayerMode = true;
+    public static bool twoPlayerMode = false;
 
     void Start()
     {
-        PlayerPrefs.DeleteAll();
-        if (PlayerPrefs.HasKey("Keyboard"))
-        {
-            string[] keyboardNum = PlayerPrefs.GetString("Keyboard").Split(',');
-            p1KeyboardUpNum = int.Parse(keyboardNum[0]);
-            p1KeyboardDownNum = int.Parse(keyboardNum[1]);
-            p1KeyboardLeftNum = int.Parse(keyboardNum[2]);
-            p1KeyboardRightNum = int.Parse(keyboardNum[3]);
-            p1KeyboardDashNum = int.Parse(keyboardNum[4]);
-            p1KeyboardBreakfreeKeyNum = int.Parse(keyboardNum[5]);
-            p1KeyboardSkillKeyNum = int.Parse(keyboardNum[6]);
-            p1KeyboardLookskillKeyNum = int.Parse(keyboardNum[7]);
-            p2KeyboardUpNum = int.Parse(keyboardNum[8]);
-            p2KeyboardDownNum = int.Parse(keyboardNum[9]);
-            p2KeyboardLeftNum = int.Parse(keyboardNum[10]);
-            p2KeyboardRightNum = int.Parse(keyboardNum[11]);
-            p2KeyboardDashNum = int.Parse(keyboardNum[12]);
-            p2KeyboardBreakfreeKeyNum = int.Parse(keyboardNum[13]);
-            p2KeyboardSkillKeyNum = int.Parse(keyboardNum[14]);
-            p2KeyboardLookskillKeyNum = int.Parse(keyboardNum[15]);
-        }
-        else
+        if (!PlayerPrefs.HasKey("Keyboard"))
         {
             PlayerPrefs.SetString("Keyboard", "36,32,14,17,23,24,26,3,62,63,60,61,84,85,83,80");
-            PlayerPrefs.SetString("Keyboard", "36,32,14,17,23,24,26,3,62,63,60,61,8,51,83,80");
+            PlayerPrefs.Save();
+            //PlayerPrefs.SetString("Keyboard", "36,32,14,17,23,24,26,3,62,63,60,61,8,51,83,80");
         }
+        string[] keyboardNum = PlayerPrefs.GetString("Keyboard").Split(',');
+        p1KeyboardUpNum = int.Parse(keyboardNum[0]);
+        p1KeyboardDownNum = int.Parse(keyboardNum[1]);
+        p1KeyboardLeftNum = int.Parse(keyboardNum[2]);
+        p1KeyboardRightNum = int.Parse(keyboardNum[3]);
+        p1KeyboardDashNum = int.Parse(keyboardNum[4]);
+        p1KeyboardBreakfreeKeyNum = int.Parse(keyboardNum[5]);
+        p1KeyboardSkillKeyNum = int.Parse(keyboardNum[6]);
+        p1KeyboardLookskillKeyNum = int.Parse(keyboardNum[7]);
+        p2KeyboardUpNum = int.Parse(keyboardNum[8]);
+        p2KeyboardDownNum = int.Parse(keyboardNum[9]);
+        p2KeyboardLeftNum = int.Parse(keyboardNum[10]);
+        p2KeyboardRightNum = int.Parse(keyboardNum[11]);
+        p2KeyboardDashNum = int.Parse(keyboardNum[12]);
+        p2KeyboardBreakfreeKeyNum = int.Parse(keyboardNum[13]);
+        p2KeyboardSkillKeyNum = int.Parse(keyboardNum[14]);
+        p2KeyboardLookskillKeyNum = int.Parse(keyboardNum[15]);
     }
 
     void Update()

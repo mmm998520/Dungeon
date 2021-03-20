@@ -325,6 +325,14 @@ namespace com.DungeonPad
                             lastDirRight = true;
                         }
                         break;
+                    case InputManager.PlayerMod.singleP2:
+                        if (Gamepad.current.rightShoulder.wasPressedThisFrame)
+                        {
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
+                            lastDirRight = true;
+                        }
+                        break;
                 }
             }
             else
@@ -349,6 +357,14 @@ namespace com.DungeonPad
                         break;
                     case InputManager.PlayerMod.gamepadP2:
                         if (InputManager.p2Gamepad.bButton.wasPressedThisFrame)
+                        {
+                            ConfusionTimer += 0.7f;
+                            StickTimer += 0.7f;
+                            lastDirRight = true;
+                        }
+                        break;
+                    case InputManager.PlayerMod.singleP1:
+                        if (Gamepad.current.leftShoulder.wasPressedThisFrame)
                         {
                             ConfusionTimer += 0.7f;
                             StickTimer += 0.7f;
@@ -416,6 +432,13 @@ namespace com.DungeonPad
                             InputManager.p1GamepadVerticalValue = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
                             v.y = InputManager.p1GamepadVerticalValue * moveSpeed;
                             break;
+                        case InputManager.PlayerMod.singleP2:
+                            stickValue = Gamepad.current.rightStick.ReadValue();
+                            InputManager.p2GamepadHorizontalValue = InputManager.gamepadAxes(stickValue.x, InputManager.p2GamepadHorizontalValue);
+                            v.x = InputManager.p2GamepadHorizontalValue * moveSpeed;
+                            InputManager.p2GamepadVerticalValue = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
+                            v.y = InputManager.p2GamepadVerticalValue * moveSpeed;
+                            break;
                     }
                 }
                 else
@@ -440,6 +463,13 @@ namespace com.DungeonPad
                             v.x = InputManager.p2GamepadHorizontalValue * moveSpeed;
                             InputManager.p2GamepadVerticalValue = InputManager.gamepadAxes(stickValue.y, InputManager.p2GamepadVerticalValue);
                             v.y = InputManager.p2GamepadVerticalValue * moveSpeed;
+                            break;
+                        case InputManager.PlayerMod.singleP1:
+                            stickValue = Gamepad.current.leftStick.ReadValue();
+                            InputManager.p1GamepadHorizontalValue = InputManager.gamepadAxes(stickValue.x, InputManager.p1GamepadHorizontalValue);
+                            v.x = InputManager.p1GamepadHorizontalValue * moveSpeed;
+                            InputManager.p1GamepadVerticalValue = InputManager.gamepadAxes(stickValue.y, InputManager.p1GamepadVerticalValue);
+                            v.y = InputManager.p1GamepadVerticalValue * moveSpeed;
                             break;
                         case InputManager.PlayerMod.singleP2:
                             stickValue = Gamepad.current.rightStick.ReadValue();
@@ -510,6 +540,12 @@ namespace com.DungeonPad
                                     StartCoroutine(dash(InputManager.p1Mod));
                                 }
                                 break;
+                            case InputManager.PlayerMod.singleP2:
+                                if (Gamepad.current.rightShoulder.wasPressedThisFrame)
+                                {
+                                    StartCoroutine(dash(InputManager.p1Mod));
+                                }
+                                break;
                         }
                     }
                     else
@@ -531,6 +567,12 @@ namespace com.DungeonPad
                                 break;
                             case InputManager.PlayerMod.gamepadP2:
                                 if (InputManager.p2Gamepad.aButton.wasPressedThisFrame)
+                                {
+                                    StartCoroutine(dash(InputManager.p2Mod));
+                                }
+                                break;
+                            case InputManager.PlayerMod.singleP1:
+                                if (Gamepad.current.leftShoulder.wasPressedThisFrame)
                                 {
                                     StartCoroutine(dash(InputManager.p2Mod));
                                 }
@@ -624,6 +666,22 @@ namespace com.DungeonPad
                                     }
                                 }
                                 break;
+                            case InputManager.PlayerMod.singleP2:
+                                if (Gamepad.current.rightTrigger.wasPressedThisFrame)
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
                         }
                     }
                     else
@@ -664,6 +722,22 @@ namespace com.DungeonPad
                                 break;
                             case InputManager.PlayerMod.gamepadP2:
                                 if (InputManager.p2Gamepad.xButton.wasPressedThisFrame)
+                                {
+                                    if (homeButtonTimer > 0)
+                                    {
+                                        homeButtonTimer = -homeButtonTimerStoper * 2;
+                                        for (int i = 0; i < GameManager.players.childCount; i++)
+                                        {
+                                            if (GameManager.players.GetChild(i) != transform)
+                                            {
+                                                transform.position = GameManager.players.GetChild(i).position;
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case InputManager.PlayerMod.singleP1:
+                                if (Gamepad.current.leftTrigger.wasPressedThisFrame)
                                 {
                                     if (homeButtonTimer > 0)
                                     {

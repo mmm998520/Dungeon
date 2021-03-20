@@ -10,7 +10,7 @@ namespace com.DungeonPad
         public float weight = 1;
         PlayerManager playerManager;
         public PlayerJoyVibration otherPlayerJoyVibration;
-        public float HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, DashVibration;
+        public float HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, DashVibration, maxer;
         public static float LowHPVibration;
 
         public static bool canVibration = true;
@@ -19,69 +19,70 @@ namespace com.DungeonPad
         void OnEnable()
         {
             playerManager = GetComponent<PlayerManager>();
-            if (playerManager.p1)
+            if (playerManager.p1 && InputManager.p1Mod != InputManager.PlayerMod.gamepadP1 && InputManager.p1Mod != InputManager.PlayerMod.singleP1 && InputManager.p1Mod != InputManager.PlayerMod.singleP2)
             {
-                if (InputManager.p1Gamepad != null)
+                this.enabled = false;
+            }
+            if (!playerManager.p1 && InputManager.p2Mod != InputManager.PlayerMod.gamepadP1 && InputManager.p2Mod != InputManager.PlayerMod.singleP1 && InputManager.p2Mod != InputManager.PlayerMod.singleP2)
+            {
+                this.enabled = false;
+            }
+            if (InputManager.twoPlayerMode)
+            {
+                if (playerManager.p1)
                 {
-                    gamepad = InputManager.p1Gamepad;
+                    if (InputManager.p1Gamepad != null)
+                    {
+                        gamepad = InputManager.p1Gamepad;
+                    }
+                    else
+                    {
+                        this.enabled = false;
+                    }
                 }
                 else
                 {
-                    this.enabled = false;
+                    if (InputManager.p2Gamepad != null)
+                    {
+                        gamepad = InputManager.p2Gamepad;
+                    }
+                    else
+                    {
+                        this.enabled = false;
+                    }
                 }
             }
-            else
+            else if(Gamepad.current != null)
             {
-                if (InputManager.p2Gamepad != null)
-                {
-                    gamepad = InputManager.p2Gamepad;
-                }
-                else
-                {
-                    this.enabled = false;
-                }
+                gamepad = Gamepad.current;
             }
         }
 
         void Update()
         {
+            CountHurtVibration();
+            CountStickVibration();
+            CountConfusionVibration();
+            //CountLowHPVibration();
+            CountDashVibration();
+            maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, LowHPVibration, DashVibration);
+        }
+
+        private void LateUpdate()
+        {
             if (canVibration)
             {
-                CountHurtVibration();
-                CountStickVibration();
-                CountConfusionVibration();
-                //CountLowHPVibration();
-                CountDashVibration();
-                float maxer = Mathf.Max(HurtVibration_Main, HurtVibration_notMain, StickVibration, ConfusionVibration, LowHPVibration, DashVibration);
-                if(gamepad != null)
+                if (gamepad != null)
                 {
-                    gamepad.SetMotorSpeeds(maxer * weight / 4, maxer * weight);
+                    if (!InputManager.twoPlayerMode)
+                    {
+                        maxer = Mathf.Max(maxer, otherPlayerJoyVibration.maxer);
+                    }
+                    gamepad.SetMotorSpeeds(maxer * weight / 3, maxer * weight);
                 }
                 else
                 {
-                    playerManager = GetComponent<PlayerManager>();
-                    if (playerManager.p1)
-                    {
-                        if (InputManager.p1Gamepad != null)
-                        {
-                            gamepad = InputManager.p1Gamepad;
-                        }
-                        else
-                        {
-                            this.enabled = false;
-                        }
-                    }
-                    else
-                    {
-                        if (InputManager.p2Gamepad != null)
-                        {
-                            gamepad = InputManager.p2Gamepad;
-                        }
-                        else
-                        {
-                            this.enabled = false;
-                        }
-                    }
+                    OnEnable();
                 }
                 if (PlayerManager.HP <= 0)
                 {

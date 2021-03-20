@@ -16,6 +16,7 @@ namespace com.DungeonPad
 
         private void Start()
         {
+            ReGamer.ReAbility();
             if (GameManager.CurrentSceneName == "SelectRole_Game 0")
             {
                 PlayerManager.Life = 1;
