@@ -773,7 +773,12 @@ namespace com.DungeonPad
                 }
             }
             #endregion
+            if (AbilityShower.showSelected)
+            {
+                v = Vector3.zero;
+            }
             GetComponent<Rigidbody2D>().velocity = v;
+
             transform.GetChild(8).transform.rotation = Quaternion.Euler(0, 0, Vector3.SignedAngle(Vector3.right, v, Vector3.forward) - transform.GetChild(8).GetComponent<ParticleSystem>().shape.arc / 2 + 180);
         }
         #endregion

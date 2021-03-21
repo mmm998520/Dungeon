@@ -19,11 +19,6 @@ namespace com.DungeonPad
         public int ShowHPLine;
         public Image[] HPBarImages;
 
-        private void Start()
-        {
-
-        }
-
         void Update()
         {
             Keyboard keyboard = Keyboard.current;
@@ -39,11 +34,14 @@ namespace com.DungeonPad
                 }
                 if (keyboard.enterKey.wasPressedThisFrame || keyboard.numpadEnterKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame || Gamepad.current.aButton.wasPressedThisFrame)
                 {
-                    TutorialText[nowTextNum].SetActive(false);
-                    nowTextNum++;
-                    if (nowTextNum < TutorialText.Length)
+                    if(Time.timeScale > 0.1f)
                     {
-                        TutorialText[nowTextNum].SetActive(true);
+                        TutorialText[nowTextNum].SetActive(false);
+                        nowTextNum++;
+                        if (nowTextNum < TutorialText.Length)
+                        {
+                            TutorialText[nowTextNum].SetActive(true);
+                        }
                     }
                 }
             }

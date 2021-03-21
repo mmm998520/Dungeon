@@ -52,7 +52,7 @@ namespace com.DungeonPad
             InputManager.currentGamepad = Gamepad.current;
             if (keyboard.allKeys[InputManager.p1KeyboardLookskillKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardLookskillKeyNum].wasPressedThisFrame || InputManager.currentGamepad != null && InputManager.currentGamepad.selectButton.wasPressedThisFrame)
             {
-                if (showSelected)
+                if (showSelected || Time.timeScale <= 0.1f)
                 {
                     showSelected = false;
                 }
@@ -66,6 +66,10 @@ namespace com.DungeonPad
                         selects[i].GetComponent<Image>().enabled = (i < abilityNamesAndLevels.Count);
                     }
                 }
+            }
+            if (Time.timeScale <= 0.1f)
+            {
+                showSelected = false;
             }
             text.enabled = showSelected;
             if (showSelected)
@@ -88,7 +92,7 @@ namespace com.DungeonPad
             }
             else
             {
-                if (!GameManager.shopPanel.activeSelf && !GameManager.stopPanel.activeSelf)
+                if (!GameManager.shopPanel.activeSelf && !GameManager.stopPanel.activeSelf && !GameManager.settingPanel.activeSelf)
                 {
                     eventSystem.SetSelectedGameObject(select_None);
                 }

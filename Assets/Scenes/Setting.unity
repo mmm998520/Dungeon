@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -593,37 +593,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 138e0800a7685e04f9366f37add8c8af, type: 3}
---- !u!1 &1384253789 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5933761647623168568, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
-    type: 3}
-  m_PrefabInstance: {fileID: 199096719}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1384253790 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5933761647623168569, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
     type: 3}
   m_PrefabInstance: {fileID: 199096719}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1384253791
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384253789}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7aa3e30271c218d4db46cb79f65a3e0f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1690821589
 GameObject:
   m_ObjectHideFlags: 0

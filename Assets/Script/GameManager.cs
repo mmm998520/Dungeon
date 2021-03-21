@@ -31,7 +31,7 @@ namespace com.DungeonPad
         public static ShowAbilityDetail showAbilityDetail;
         public static AbilityShower abilityShower;
         public static string CurrentSceneName;
-        public static GameObject shopPanel, stopPanel;
+        public static GameObject shopPanel, stopPanel, settingPanel;
 
         void Awake()
         {
@@ -85,8 +85,16 @@ namespace com.DungeonPad
             }
             catch
             {
-                stopPanel = GameObject.Find("select").transform.GetChild(0).gameObject;
+                stopPanel = GameObject.Find("setting").transform.GetChild(0).gameObject;
                 Debug.LogError(CurrentSceneName + "的stopPanal要改名字喔!!!!!!!");
+            }
+            try
+            {
+                settingPanel = GameObject.Find("setting").transform.GetChild(0).gameObject;
+            }
+            catch
+            {
+                Debug.LogError(CurrentSceneName + "三小????!!!!!!!");
             }
             MonsterManager.genMoneyNum = 0;
         }
@@ -117,6 +125,10 @@ namespace com.DungeonPad
                     Time.timeScale = 1;
                     Time.fixedDeltaTime = 0.02F * Time.timeScale;
                 }
+                else if (settingPanel.activeSelf)
+                {
+                    settingPanel.SetActive(false);
+                }
                 else
                 {
                     Time.timeScale = 0;
@@ -124,10 +136,10 @@ namespace com.DungeonPad
                 }
                 stopPanel.SetActive(!stopPanel.activeSelf);
             }
-            if (stopPanel.activeSelf && keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || (InputManager.currentGamepad != null && InputManager.currentGamepad.bButton.wasPressedThisFrame))
+            if(settingPanel.activeSelf && InputManager.currentGamepad != null && InputManager.currentGamepad.bButton.wasPressedThisFrame)
             {
-                Time.timeScale = 1;
-                Time.fixedDeltaTime = 0.02F * Time.timeScale;
+                settingPanel.SetActive(false);
+                stopPanel.SetActive(true);
             }
 
             //if (abilityStore)

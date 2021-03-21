@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
-    public class StopPanal : MonoBehaviour
+    public class SettingPanal : MonoBehaviour
     {
         EventSystem eventSystem;
         static int MusicSound, FXSound, Lightness, PlayerNum;
@@ -27,7 +27,7 @@ namespace com.DungeonPad
             }
             else
             {
-                MusicSoundSlider.value = 5;
+                MusicSoundSlider.value = 10;
             }
             setMusicSound();
             if (PlayerPrefs.HasKey("FXSound"))
@@ -36,7 +36,7 @@ namespace com.DungeonPad
             }
             else
             {
-                FXSoundSlider.value = 5;
+                FXSoundSlider.value = 10;
             }
             if (PlayerPrefs.HasKey("Lightness"))
             {
@@ -44,7 +44,7 @@ namespace com.DungeonPad
             }
             else
             {
-                LightnessSlider.value = 5;
+                LightnessSlider.value = 10;
             }
             if (PlayerPrefs.HasKey("PlayerNum"))
             {
@@ -54,7 +54,11 @@ namespace com.DungeonPad
             {
                 PlayerNumSlider.value = 1;
             }
-            if(SceneManager.GetActiveScene().name != "Setting")
+            if (SceneManager.GetActiveScene().name == "Home")
+            {
+                Destroy(gameObject);
+            }
+            else if (SceneManager.GetActiveScene().name != "Setting")
             {
                 gameObject.SetActive(false);
             }
@@ -94,24 +98,28 @@ namespace com.DungeonPad
         {
             MusicSound = (int)MusicSoundSlider.value;
             PlayerPrefs.SetInt("MusicSound", MusicSound);
+            PlayerPrefs.Save();
         }
 
         public void setFXSound()
         {
             FXSound = (int)FXSoundSlider.value;
             PlayerPrefs.SetInt("FXSound", FXSound);
+            PlayerPrefs.Save();
         }
 
         public void setLightness()
         {
             Lightness = (int)LightnessSlider.value;
             PlayerPrefs.SetInt("Lightness", Lightness);
+            PlayerPrefs.Save();
         }
 
         public void setPlayerNum()
         {
             PlayerNum = (int)PlayerNumSlider.value;
             PlayerPrefs.SetInt("PlayerNum", PlayerNum);
+            PlayerPrefs.Save();
         }
 
         private IEnumerator SelectButtonLater()
