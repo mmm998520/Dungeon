@@ -20,6 +20,9 @@ namespace com.DungeonPad
 
         void Awake()
         {
+            PlayerPrefs.DeleteKey("MusicSound");
+            PlayerPrefs.DeleteKey("FXSound");
+            PlayerPrefs.DeleteKey("Lightness");
             eventSystem = EventSystem.current;
             if (PlayerPrefs.HasKey("MusicSound"))
             {

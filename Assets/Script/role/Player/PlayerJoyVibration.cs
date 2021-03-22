@@ -23,7 +23,7 @@ namespace com.DungeonPad
             {
                 this.enabled = false;
             }
-            if (!playerManager.p1 && InputManager.p2Mod != InputManager.PlayerMod.gamepadP1 && InputManager.p2Mod != InputManager.PlayerMod.singleP1 && InputManager.p2Mod != InputManager.PlayerMod.singleP2)
+            if (!playerManager.p1 && InputManager.p2Mod != InputManager.PlayerMod.gamepadP2 && InputManager.p2Mod != InputManager.PlayerMod.singleP1 && InputManager.p2Mod != InputManager.PlayerMod.singleP2)
             {
                 this.enabled = false;
             }
