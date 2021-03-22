@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using XInputDotNetPure; // Required in C#
 
 namespace com.DungeonPad
 {
@@ -34,10 +33,6 @@ namespace com.DungeonPad
             }
             else if(PlayerManager.DiedTimer < 2)
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    GamePad.SetVibration((PlayerIndex)i, 0, 0);
-                }
                 if (GameManager.CurrentSceneName.Contains("Game 0"))
                 {
                     PlayerManager.DiedTimer = 10;
