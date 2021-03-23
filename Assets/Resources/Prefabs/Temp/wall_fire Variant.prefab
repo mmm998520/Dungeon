@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: 422931602908215896, guid: 35d1326c29a02614ba76fca276269285,
         type: 3}
       propertyPath: m_Name
-      value: wall_fire (99)
+      value: wall_fire Variant
       objectReference: {fileID: 0}
     - target: {fileID: 683388871172169143, guid: 35d1326c29a02614ba76fca276269285,
         type: 3}
@@ -148,6 +148,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 725971a76d079b24c8a2499c5a0d550a,
         type: 3}
+    - target: {fileID: 6479455100583083952, guid: 35d1326c29a02614ba76fca276269285,
+        type: 3}
+      propertyPath: fire
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6779215446440728435, guid: 35d1326c29a02614ba76fca276269285,
         type: 3}
       propertyPath: sprites.Array.data[0]

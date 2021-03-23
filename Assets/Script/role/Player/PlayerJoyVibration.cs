@@ -155,7 +155,7 @@ namespace com.DungeonPad
 
         public void hurt()
         {
-            HurtVibration_Main = 0.6f;
+            HurtVibration_Main = 0.7f;
             otherPlayerJoyVibration.HurtVibration_notMain = 0.15f;
         }
     }

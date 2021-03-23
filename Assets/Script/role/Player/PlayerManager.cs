@@ -806,7 +806,7 @@ namespace com.DungeonPad
             }
             if (DashA.magnitude > 10)
             {
-                playerJoyVibration.DashVibration = 0.7f;
+                playerJoyVibration.DashVibration = 0.6f;
             }
             else
             {

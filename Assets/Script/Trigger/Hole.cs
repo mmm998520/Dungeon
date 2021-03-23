@@ -35,6 +35,7 @@ namespace com.DungeonPad
                             if(PlayerManager.HP <= PlayerManager.MaxHP * 0.3f)
                             {
                                 PlayerManager.HP -= 10 * (100f - PlayerManager.reducesDamage) / 100f;
+                                player.GetComponent<PlayerJoyVibration>().hurt();
                             }
                             else
                             {

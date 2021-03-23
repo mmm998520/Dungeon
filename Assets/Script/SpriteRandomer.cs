@@ -2,41 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpriteRandomer : MonoBehaviour
+namespace com.DungeonPad
 {
-    public Sprite[] sprites;
-    public bool wall;
-    public bool randomRotate;
-    public bool holeSide;
-    void Start()
+    public class SpriteRandomer : MonoBehaviour
     {
-        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
-        if (holeSide)
+        public Sprite[] sprites;
+        public bool wall;
+        public bool randomRotate;
+        public bool holeSide;
+        [SerializeField] bool fire;
+        void Start()
         {
-            Transform child = transform.GetChild(0);
-            child.SetParent(null);
-            transform.Rotate(0, 0, 90 * Random.Range(0, 4));
-            child.SetParent(transform);
-        }
-        else if (!wall)
-        {
-            transform.rotation = Quaternion.Euler(0, 180 * Random.Range(0, 2), 0);
-        }
-        else
-        {
-            int r = Random.Range(0, 2);
-            transform.parent.GetChild(0).rotation = Quaternion.Euler(0, 180 * r, 0);
-            transform.parent.GetChild(1).rotation = Quaternion.Euler(0, 180 * r, 0);
-        }
-        if (randomRotate)
-        {
-            transform.Rotate(0, 0, 90 * Random.Range(0, 4));
+            if (GameManager.layers ==2 && GameManager.CurrentSceneName == "Game 1" && !fire && (transform.parent.gameObject.name == "floor" || transform.parent.gameObject.name == "floor(Clone)"))
+            {
+                Destroy(transform.parent.gameObject);
+                Instantiate(Resources.Load<GameObject>("Prefabs/Temp/floor_fire Variant"), transform.position, Quaternion.identity);
+                return;
+            }
+            GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
+            if (holeSide)
+            {
+                Transform child = transform.GetChild(0);
+                child.SetParent(null);
+                transform.Rotate(0, 0, 90 * Random.Range(0, 4));
+                child.SetParent(transform);
+            }
+            else if (!wall)
+            {
+                transform.rotation = Quaternion.Euler(0, 180 * Random.Range(0, 2), 0);
+            }
+            else
+            {
+                int r = Random.Range(0, 2);
+                transform.parent.GetChild(0).rotation = Quaternion.Euler(0, 180 * r, 0);
+                transform.parent.GetChild(1).rotation = Quaternion.Euler(0, 180 * r, 0);
+            }
+            if (randomRotate)
+            {
+                transform.Rotate(0, 0, 90 * Random.Range(0, 4));
+            }
+
         }
 
-    }
+        void Update()
+        {
 
-    void Update()
-    {
-
+        }
     }
 }
