@@ -104,7 +104,6 @@ namespace com.DungeonPad
             if (CurrentSceneName == "Game 1" || CurrentSceneName == "Game 2" || CurrentSceneName == "Game 4")
             {
                 GameTimer.Timer += Time.deltaTime;
-                Debug.LogError(GameTimer.Timer);
             }
             else
             {
