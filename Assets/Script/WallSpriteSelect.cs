@@ -14,7 +14,7 @@ namespace com.DungeonPad
                 if (gameObject.name == "Wall(Clone)" || gameObject.name == "Wall")
                 {
                     Destroy(gameObject);
-                    Instantiate(Resources.Load<GameObject>("Prefabs/Temp/wall_fire Variant"), transform.position, Quaternion.identity);
+                    Instantiate(Resources.Load<GameObject>("Prefabs/Temp/wall_red Variant"), transform.position, Quaternion.identity);
                     return;
                 }
             }

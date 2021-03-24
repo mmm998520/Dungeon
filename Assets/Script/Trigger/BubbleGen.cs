@@ -10,6 +10,14 @@ namespace com.DungeonPad
         public GameObject Bubble;
         public AudioSource BubbleSource;
 
+        private void Start()
+        {
+            if(GameManager.layers == 2 && GameManager.CurrentSceneName =="Game 1")
+            {
+                transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.2941177f, 0.2352941f, 0.227451f);
+            }
+        }
+
         void Update()
         {
             if ((timer += Time.deltaTime) >= timerStoper)

@@ -13,11 +13,18 @@ namespace com.DungeonPad
         [SerializeField] bool fire;
         void Start()
         {
-            if (GameManager.layers ==2 && GameManager.CurrentSceneName == "Game 1" && !fire && (transform.parent.gameObject.name == "floor" || transform.parent.gameObject.name == "floor(Clone)"))
+            if (GameManager.layers ==2 && GameManager.CurrentSceneName == "Game 1")
             {
-                Destroy(transform.parent.gameObject);
-                Instantiate(Resources.Load<GameObject>("Prefabs/Temp/floor_fire Variant"), transform.position, Quaternion.identity);
-                return;
+                if (!fire && transform.parent.gameObject.name == "floor" || transform.parent.gameObject.name == "floor(Clone)")
+                {
+                    Destroy(transform.parent.gameObject);
+                    Instantiate(Resources.Load<GameObject>("Prefabs/Temp/floor_fire Variant"), transform.position, Quaternion.identity);
+                    return;
+                }
+                else if (transform.parent.gameObject.name.Contains("上") || transform.parent.gameObject.name.Contains("下") || transform.parent.gameObject.name.Contains("左") || transform.parent.gameObject.name.Contains("右"))
+                {
+                    sprites[0] = Resources.Load<Sprite>("Pictures/floorbroken_red");
+                }
             }
             GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
             if (holeSide)
