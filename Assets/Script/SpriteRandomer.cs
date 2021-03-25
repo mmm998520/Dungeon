@@ -29,10 +29,20 @@ namespace com.DungeonPad
             GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
             if (holeSide)
             {
-                Transform child = transform.GetChild(0);
-                child.SetParent(null);
+                Transform[] childs = new Transform[transform.childCount];
+                for(int i = 0; i < childs.Length; i++)
+                {
+                    childs[i] = transform.GetChild(i);
+                }
+                for (int i = 0; i < childs.Length; i++)
+                {
+                    childs[i].SetParent(null);
+                }
                 transform.Rotate(0, 0, 90 * Random.Range(0, 4));
-                child.SetParent(transform);
+                for (int i = 0; i < childs.Length; i++)
+                {
+                    childs[i].SetParent(transform);
+                }
             }
             else if (!wall)
             {
