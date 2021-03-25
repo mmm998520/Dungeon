@@ -33,12 +33,9 @@ namespace com.DungeonPad
         void Update()
         {
             InputManager.currentGamepad = Gamepad.current;
-            if (GameManager.CurrentSceneName == "SelectRole_Game 0")
+            for (int i = 0; i < GameManager.players.childCount; i++)
             {
-                for (int i = 0; i < GameManager.players.childCount; i++)
-                {
-                    GameManager.players.GetChild(i).GetComponent<PlayerManager>().DashTimer = 0.3f;
-                }
+                GameManager.players.GetChild(i).GetComponent<PlayerManager>().DashTimer = 0.3f;
             }
             selectRole();
         }
