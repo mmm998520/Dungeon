@@ -37,9 +37,9 @@ namespace com.DungeonPad
                 if (Vector3.Distance(transform.position, playerPos[i]) < transform.localScale.x && CanHit)
                 {
                     PlayerManager playerManager = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
-                    if (playerManager.HardStraightTimer > 0.5f)
+                    //if (playerManager.HardStraightTimer > 0.5f)
                     {
-                        playerManager.HardStraightA = (Vector2)Vector3.Normalize(playerPos[i] - transform.position) * 10;
+                        //playerManager.HardStraightA = (Vector2)Vector3.Normalize(playerPos[i] - transform.position) * 10;
                         if (PlayerManager.HP <= PlayerManager.MaxHP * 0.3f)
                         {
                             PlayerManager.HP -= 20 * (100f - PlayerManager.reducesDamage) / 100f;
@@ -57,7 +57,7 @@ namespace com.DungeonPad
                             Debug.LogError("這場景忘了放畫面抖動");
                         }
                         Instantiate(GameManager.Hurted, transform.position, Quaternion.identity, transform);
-                        playerManager.HardStraightTimer = 0;
+                        //playerManager.HardStraightTimer = 0;
                         GetComponent<Animator>().SetTrigger("Boom");
                     }
                 }
