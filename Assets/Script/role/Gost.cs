@@ -77,17 +77,22 @@ namespace com.DungeonPad
             if (gameObject.name.Contains("Big"))
             {
                 AtttackType = "FireRainsBigGost";
+                for (int i = 0; i < 3; i++)
+                {
+                    Attacks.Add(Instantiate(base.attack, transform.position + Quaternion.Euler(0, 0, Random.Range(0, 360)) * Vector3.right * Random.Range(0.5f, 5f), Quaternion.identity, GameObject.Find(AtttackType).transform));
+                }
             }
             else
             {
                 AtttackType = "FireRainsGost";
+                Vector3 minDisPlayerVector = Vector3.Normalize((Vector2)(MinDisPlayer().position - transform.position));
+                float space = 2;
+                for (int i = 0; i < 3; i++)
+                {
+                    Attacks.Add(Instantiate(base.attack, transform.position + minDisPlayerVector * (i + 1) * space, Quaternion.identity, GameObject.Find(AtttackType).transform));
+                }
             }
-            Vector3 minDisPlayerVector = Vector3.Normalize((Vector2)(MinDisPlayer().position - transform.position));
-            float space = 2;
-            for (int i = 0; i < 3; i++)
-            {
-                Attacks.Add(Instantiate(base.attack, transform.position + minDisPlayerVector * (i + 1) * space, Quaternion.identity, GameObject.Find(AtttackType).transform));
-            }
+
         }
 
         public override void beforeDied()

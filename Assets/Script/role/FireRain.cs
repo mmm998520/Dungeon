@@ -23,6 +23,10 @@ namespace com.DungeonPad
 
         private void Update()
         {
+            if(gameObject.name.Contains("Fire") || gameObject.name.Contains("Big"))
+            {
+                return;
+            }
             int i, j;
 
             for (i = 0; i < playerPos.Length; i++)

@@ -35,7 +35,7 @@ namespace com.DungeonPad
 
         void LateUpdate()
         {
-            if (gameObject.name == "FireRains")
+            if (gameObject.name == "FireRains" || gameObject.name == "FireRainsBigGost")
             {
                 lava();
             }
@@ -52,51 +52,49 @@ namespace com.DungeonPad
             }
 
             for (i = 0; i < playerPos.Length; i++)
-                for (i = 0; i < playerPos.Length; i++)
+            {
+                bool hited = false;
+                PlayerManager playerManager = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
+                for (j = 0; j < transform.childCount; j++)
                 {
-                    bool hited = false;
-                    PlayerManager playerManager = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
-                    for (j = 0; j < transform.childCount; j++)
-                        for (j = 0; j < transform.childCount; j++)
-                        {
-                            child = transform.GetChild(j);
-                            if (Vector3.Distance(child.position, playerPos[i]) < child.localScale.x && child.GetComponent<FireRain>().CanHit)
-                            {
-                                hited = true;
-                                break;
-                            }
-                        }
-                    if (hited)
+                    child = transform.GetChild(j);
+                    if (Vector3.Distance(child.position, playerPos[i]) < child.localScale.x && child.GetComponent<FireRain>().CanHit)
                     {
-                        hitedTimer[playerManager][0] += Time.deltaTime;
-                        if (hitedTimer[playerManager][0] > hitedTimeSpan)
-                        {
-                            hitedTimer[playerManager][0] = 0;
-                            if (PlayerManager.HP <= PlayerManager.MaxHP * 0.3f)
-                            {
-                                PlayerManager.HP -= BaseDamage + (++hitedTimer[playerManager][1] * SingleDamage) * (100f - PlayerManager.reducesDamage) / 100f;
-                            }
-                            else
-                            {
-                                PlayerManager.HP -= BaseDamage + (++hitedTimer[playerManager][1] * SingleDamage);
-                            }
-                            try
-                            {
-                                Camera.main.GetComponent<Animator>().SetTrigger("Hit");
-                            }
-                            catch
-                            {
-                                Debug.LogError("這場景忘了放畫面抖動");
-                            }
-                            Instantiate(GameManager.Hurted, playerManager.transform.position, Quaternion.identity, playerManager.transform);
-                        }
-                    }
-                    else
-                    {
-                        hitedTimer[playerManager][0] = 0;
-                        hitedTimer[playerManager][1] = 0;
+                        hited = true;
+                        break;
                     }
                 }
+                if (hited)
+                {
+                    hitedTimer[playerManager][0] += Time.deltaTime;
+                    if (hitedTimer[playerManager][0] > hitedTimeSpan)
+                    {
+                        hitedTimer[playerManager][0] = 0;
+                        if (PlayerManager.HP <= PlayerManager.MaxHP * 0.3f)
+                        {
+                            PlayerManager.HP -= BaseDamage + (++hitedTimer[playerManager][1] * SingleDamage) * (100f - PlayerManager.reducesDamage) / 100f;
+                        }
+                        else
+                        {
+                            PlayerManager.HP -= BaseDamage + (++hitedTimer[playerManager][1] * SingleDamage);
+                        }
+                        try
+                        {
+                            Camera.main.GetComponent<Animator>().SetTrigger("Hit");
+                        }
+                        catch
+                        {
+                            Debug.LogError("這場景忘了放畫面抖動");
+                        }
+                        Instantiate(GameManager.Hurted, playerManager.transform.position, Quaternion.identity, playerManager.transform);
+                    }
+                }
+                else
+                {
+                    hitedTimer[playerManager][0] = 0;
+                    hitedTimer[playerManager][1] = 0;
+                }
+            }
         }
     }
 }
