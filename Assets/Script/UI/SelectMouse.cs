@@ -33,11 +33,28 @@ namespace com.DungeonPad
         void Update()
         {
             InputManager.currentGamepad = Gamepad.current;
+            if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                SwitchScenePanel.NextScene = "Home";
+                GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+            }
+            if (InputManager.currentGamepad != null && InputManager.currentGamepad.bButton.wasPressedThisFrame)
+            {
+                if (InputManager.currentGamepad != InputManager.p1Gamepad && InputManager.currentGamepad != InputManager.p2Gamepad)
+                {
+                    SwitchScenePanel.NextScene = "Home";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+                }
+            }
             for (int i = 0; i < GameManager.players.childCount; i++)
             {
                 GameManager.players.GetChild(i).GetComponent<PlayerManager>().DashTimer = 0.3f;
             }
             selectRole();
+            if (Keyboard.current != null && Keyboard.current.f12Key.wasPressedThisFrame)
+            {
+                PlayerPrefs.DeleteAll();
+            }
         }
 
         #region//selectRole
