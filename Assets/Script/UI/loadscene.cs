@@ -49,8 +49,17 @@ Application.Quit();
                 SwitchScenePanel.NextScene = "Home";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }
+
+            if (keyboard.escapeKey.isPressed)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
-
     }
-
 }
