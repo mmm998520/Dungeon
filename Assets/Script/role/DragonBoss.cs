@@ -344,6 +344,7 @@ namespace com.DungeonPad
         }
         #endregion
 
+        /*
         void resetRoad()
         {
             endRow = new int[1] { Mathf.RoundToInt(minDisPlayer.position.x) };
@@ -367,13 +368,26 @@ namespace com.DungeonPad
                         }
                     }
                 }
-                /*
+            }
+            findRoad();
+        }
+        */
+
+        void resetRoad()
+        {
+            endRow[0] = Mathf.RoundToInt(minDisPlayer.position.x);
+            endCol[0] = Mathf.RoundToInt(minDisPlayer.position.y);
+            int pos = endRow[0] * MazeCreater.totalCol + endCol[0];
+            if (CrystalSidePos.ContainsValue(pos))
+            {
                 roads.Clear();
                 roads.Add(new int[] { endRow[0], endCol[0] });
                 roads.Add(new int[] { endRow[0], endCol[0] });
-                */
             }
-            findRoad();
+            else
+            {
+                findRoad();
+            }
         }
 
         void move()
