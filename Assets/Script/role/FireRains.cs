@@ -35,6 +35,14 @@ namespace com.DungeonPad
 
         void LateUpdate()
         {
+            if (gameObject.name == "FireRains" || gameObject.name == "FireRainsBigGost")
+            {
+                lava();
+            }
+        }
+
+        void lava()
+        {
             int i, j;
             Transform child;
 
@@ -43,11 +51,11 @@ namespace com.DungeonPad
                 playerPos[i] = GameManager.players.GetChild(i).position;
             }
 
-            for(i = 0; i < playerPos.Length; i++)
+            for (i = 0; i < playerPos.Length; i++)
             {
                 bool hited = false;
                 PlayerManager playerManager = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
-                for (j=0;j< transform.childCount; j++)
+                for (j = 0; j < transform.childCount; j++)
                 {
                     child = transform.GetChild(j);
                     if (Vector3.Distance(child.position, playerPos[i]) < child.localScale.x && child.GetComponent<FireRain>().CanHit)
