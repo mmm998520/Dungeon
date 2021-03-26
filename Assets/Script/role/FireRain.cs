@@ -46,11 +46,11 @@ namespace com.DungeonPad
                         //playerManager.HardStraightA = (Vector2)Vector3.Normalize(playerPos[i] - transform.position) * 10;
                         if (PlayerManager.HP <= PlayerManager.MaxHP * 0.3f)
                         {
-                            PlayerManager.HP -= 10 * (100f - PlayerManager.reducesDamage) / 100f;
+                            PlayerManager.HP -= 7 * (100f - PlayerManager.reducesDamage) / 100f;
                         }
                         else
                         {
-                            PlayerManager.HP -= 10;
+                            PlayerManager.HP -= 7;
                         }
                         try
                         {
