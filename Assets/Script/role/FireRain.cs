@@ -27,7 +27,7 @@ namespace com.DungeonPad
             {
                 return;
             }
-            int i, j;
+            int i;
 
             for (i = 0; i < playerPos.Length; i++)
             {

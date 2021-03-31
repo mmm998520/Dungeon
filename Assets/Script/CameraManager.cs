@@ -40,7 +40,7 @@ namespace com.DungeonPad
                 }
             }
             center = new Vector3((maxX + minX) / 2, (maxY + minY) / 2, -10);
-            Center.position = center + Vector3.forward * 10;
+            Center.position = center/* + Vector3.forward * 10*/;
             cameraMove();
             //cameraSize();
         }

@@ -203,7 +203,7 @@ namespace com.DungeonPad
         {
             //第三維紀錄房間四邊是否"必須"/"絕不能"有牆，0為上方牆壁，順時針遞增
             bool[,,] mustRoad = new bool[roomCountRowNum, roomCountColNum, 4], mustNotRoad = new bool[roomCountRowNum, roomCountColNum, 4];
-            int t, i, j;
+            int i, j;
             for (i = 0; i < roomCountRowNum; i++)
             {
                 for (j = 0; j < roomCountColNum; j++)
@@ -705,10 +705,9 @@ namespace com.DungeonPad
         /// <summary> 根據狀態補全對應房間資訊 </summary>
         public void mazeCreat(int layers, int passwayType, int level, int functionTypeNum, int roomRow, int roomCol)
         {
-            string[,] objectDatas;
             Dictionary<int, string[,]> roomData = DataLoader.AllRoomDatas[layers, passwayType, level, functionTypeNum];
             int r = Random.Range(0, roomData.Count);
-            if (!roomData.TryGetValue(r, out objectDatas))
+            if (!roomData.TryGetValue(r, out string[,] objectDatas))
             {
                 Debug.LogError("roomData : " + roomData);
                 Debug.LogError("layers : " + layers);
@@ -789,8 +788,7 @@ namespace com.DungeonPad
             }
             else
             {
-                GameObject[] prefab;
-                if (!instantiateObjects.TryGetValue(objectData, out prefab))
+                if (!instantiateObjects.TryGetValue(objectData, out GameObject[] prefab))
                 {
                     Debug.LogError(objectData);
                 }
