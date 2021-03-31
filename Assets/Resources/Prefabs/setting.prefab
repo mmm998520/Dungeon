@@ -191,15 +191,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 0}
   m_HandleRect: {fileID: 8579830571452779233}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: 1
+  m_MaxValue: 2
   m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2130114123}
-        m_MethodName: setLightness
+        m_MethodName: setPlayerNum
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

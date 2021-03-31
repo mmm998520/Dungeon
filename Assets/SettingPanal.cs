@@ -20,9 +20,6 @@ namespace com.DungeonPad
 
         void Awake()
         {
-            PlayerPrefs.DeleteKey("MusicSound");
-            PlayerPrefs.DeleteKey("FXSound");
-            PlayerPrefs.DeleteKey("Lightness");
             eventSystem = EventSystem.current;
             if (PlayerPrefs.HasKey("MusicSound"))
             {
@@ -41,6 +38,7 @@ namespace com.DungeonPad
             {
                 FXSoundSlider.value = 10;
             }
+            setFXSound();
             if (PlayerPrefs.HasKey("Lightness"))
             {
                 LightnessSlider.value = PlayerPrefs.GetInt("Lightness");
@@ -49,14 +47,17 @@ namespace com.DungeonPad
             {
                 LightnessSlider.value = 10;
             }
+            setLightness();
             if (PlayerPrefs.HasKey("PlayerNum"))
             {
                 PlayerNumSlider.value = PlayerPrefs.GetInt("PlayerNum");
+                Debug.LogError("PlayerNum : " + PlayerNum);
             }
             else
             {
-                PlayerNumSlider.value = 1;
+                PlayerNumSlider.value = 2;
             }
+            setPlayerNum();
             if (SceneManager.GetActiveScene().name == "Home")
             {
                 Destroy(gameObject);
@@ -121,8 +122,17 @@ namespace com.DungeonPad
         public void setPlayerNum()
         {
             PlayerNum = (int)PlayerNumSlider.value;
+            Debug.LogError("PlayerNum : " + PlayerNum + " , "+ (int)PlayerNumSlider.value);
             PlayerPrefs.SetInt("PlayerNum", PlayerNum);
             PlayerPrefs.Save();
+            if(PlayerNum == 1)
+            {
+                InputManager.twoPlayerMode = false;
+            }
+            else
+            {
+                InputManager.twoPlayerMode = true;
+            }
         }
 
         private IEnumerator SelectButtonLater()
