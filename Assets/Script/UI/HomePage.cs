@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
-    public class loadscene : MonoBehaviour
+    public class HomePage : MonoBehaviour
     {
         void Start()
         {
