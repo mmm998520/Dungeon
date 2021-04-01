@@ -18,7 +18,7 @@ namespace com.DungeonPad
         void Update()
         {
             Keyboard keyboard = Keyboard.current;
-            if (keyboard.escapeKey.wasPressedThisFrame || (InputManager.currentGamepad != null && InputManager.currentGamepad.bButton.wasPressedThisFrame))
+            if (keyboard.escapeKey.wasPressedThisFrame || (InputManager.currentGamepad != null && InputManager.currentGamepad.bButton.wasPressedThisFrame) && !SceneManager.GetActiveScene().name.Contains("Select"))
             {
                 back();
             }

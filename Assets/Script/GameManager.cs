@@ -117,7 +117,7 @@ namespace com.DungeonPad
                 shopPanel.SetActive(true);
                 shopPanel.transform.GetChild(0).GetComponent<AbilityDatas>().start();
             }
-            if (PlayerManager.HP0Timer < 0.2f && ((keyboard.escapeKey.wasPressedThisFrame || (InputManager.currentGamepad != null && InputManager.currentGamepad.startButton.wasPressedThisFrame))))
+            if (PlayerManager.HP0Timer < 0.2f && ((keyboard.escapeKey.wasPressedThisFrame || (InputManager.currentGamepad != null && InputManager.currentGamepad.startButton.wasPressedThisFrame))) && !SceneManager.GetActiveScene().name.Contains("Select"))
             {
                 if (stopPanel.activeSelf)
                 {
