@@ -7,7 +7,7 @@ namespace com.DungeonPad
     public class CrystalScatteringLight : MonoBehaviour
     {
         public static bool Large;
-        public Transform rayPos1, rayPos2, mask;
+        public Transform rayPos1, rayPos2, line;
         float distance;
         float maxDistance = 10, minDistance = 0.5f;
         void Start()
@@ -16,11 +16,6 @@ namespace com.DungeonPad
             {
                 GetComponent<Animator>().SetTrigger("Large");
             }
-        }
-
-        void Update()
-        {
-
         }
 
         void setLight()
@@ -42,17 +37,20 @@ namespace com.DungeonPad
             {
                 if(distance > minDistance)
                 {
-                    mask.localScale = new Vector3(maxDistance - distance, 1, 1);
+                    //mask.localScale = new Vector3(maxDistance - distance, 1, 1);
+                    line.localScale = new Vector3(distance, 1, 1);
                 }
                 else
                 {
-                    mask.localScale = new Vector3(maxDistance - minDistance, 1, 1);
+                    //mask.localScale = new Vector3(maxDistance - minDistance, 1, 1);
+                    line.localScale = new Vector3(minDistance, 1, 1);
                 }
                 setHited(hited);
             }
             else
             {
-                mask.localScale = new Vector3(0, 1, 1);
+                //mask.localScale = new Vector3(0, 1, 1);
+                line.localScale = new Vector3(maxDistance, 1, 1);
             }
         }
 
