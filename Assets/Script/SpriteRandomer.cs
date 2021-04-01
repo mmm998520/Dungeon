@@ -13,7 +13,7 @@ namespace com.DungeonPad
         [SerializeField] bool fire;
         void Start()
         {
-            if (GameManager.layers ==2 && GameManager.CurrentSceneName == "Game 1")
+            if ((GameManager.layers ==2 && GameManager.CurrentSceneName == "Game 1") || GameManager.CurrentSceneName == "Game 4")
             {
                 if (!fire && transform.parent.gameObject.name == "floor" || transform.parent.gameObject.name == "floor(Clone)")
                 {
