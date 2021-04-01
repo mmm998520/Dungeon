@@ -151,6 +151,16 @@ namespace com.DungeonPad
                             {
                                 HP = MaxHP;
                                 lockedHPTimer = 0;
+                                for (int i = 0; i < GameManager.players.childCount; i++)
+                                {
+                                    Transform player = GameManager.players.GetChild(i);
+                                    PlayerManager playerManager = player.GetComponent<PlayerManager>();
+                                    Vector3 size = Vector3.one * ((HP / MaxHP - 0.4f) / 0.6f * (LightRangeMaxSize - LightRangeMinSize) + LightRangeMinSize);
+                                    player.GetChild(5).localScale = size;
+                                    player.GetChild(6).localScale = size;
+                                    playerManager.HPMaxCircleLight.transform.localScale = size;
+                                    playerManager.HPMaxCircleLight.color = new Color(1, 1, 1, 0.12f * Mathf.Clamp01(Mathf.InverseLerp(MaxHP * 0.9f, MaxHP, HP)) + 0.15f);
+                                }
                             }
                             else
                             {

@@ -71,19 +71,6 @@ namespace com.DungeonPad
                 Time.fixedDeltaTime = 0.02F * Time.timeScale;
                 GetComponent<Animator>().SetBool("Died", false);
             }
-            if (lockHPLight < 0.5f && lockHPLight > 0.2f)
-            {
-                for (int i = 0; i < GameManager.players.childCount; i++)
-                {
-                    Transform player = GameManager.players.GetChild(i);
-                    PlayerManager playerManager = player.GetComponent<PlayerManager>();
-                    Vector3 size = Vector3.one * ((PlayerManager.HP / PlayerManager.MaxHP - 0.4f) / 0.6f * (PlayerManager.LightRangeMaxSize - PlayerManager.LightRangeMinSize) + PlayerManager.LightRangeMinSize);
-                    player.GetChild(5).localScale = size;
-                    player.GetChild(6).localScale = size;
-                    playerManager.HPMaxCircleLight.transform.localScale = size;
-                    playerManager.HPMaxCircleLight.color = new Color(1f, 1f, 1f);
-                }
-            }
             #endregion
             //float hurtLight = 0.25f - hurtTimer;
             //hurtTimer += Time.deltaTime;
