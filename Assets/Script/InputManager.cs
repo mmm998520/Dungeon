@@ -44,6 +44,11 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
+        keyboardSetting();
+    }
+
+    public static void keyboardSetting()
+    {
         if (!PlayerPrefs.HasKey("Keyboard"))
         {
             PlayerPrefs.SetString("Keyboard", "36,32,14,17,23,24,26,3,62,63,60,61,84,85,83,80,");

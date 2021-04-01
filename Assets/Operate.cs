@@ -10,46 +10,63 @@ namespace com.DungeonPad
     public class Operate : MonoBehaviour
     {
         [SerializeField] Image panel;
+        [SerializeField] RectTransform buttons;
         [SerializeField] Sprite[] Operates;
         [SerializeField] EventSystem eventSystem;
         [Space]
         [SerializeField] GameObject[] selectedButtons;
         [SerializeField] GameObject[] changingButtons;
-        [SerializeField] Sprite[] keys;
+        [SerializeField] Sprite[] selectedKeys;
+        [SerializeField] Sprite[] unSelectedKeys;
 
         GameObject selected;
-
+        Keyboard keyboard;
         void Start()
         {
+            InputManager.keyboardSetting();
             string[] keyboardNum = PlayerPrefs.GetString("Keyboard").Split(',');
-            for (int i = 0; i < selectedButtons.Length; i++)
+            int i;
+            for (i = 0; i < selectedButtons.Length; i++)
             {
-                selectedButtons[i].GetComponent<Image>().sprite = keys[int.Parse(keyboardNum[i])];
+                setButtonSprite(selectedButtons[i], int.Parse(keyboardNum[i]));
             }
         }
 
         void Update()
         {
+            keyboard = Keyboard.current;
             selected = eventSystem.currentSelectedGameObject;
             switchPanel();
             changeingKey();
+            if(keyboard != null && selected.transform.parent.parent.name != "ChangingButtons")
+            {
+                if (keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || Gamepad.current.bButton.wasPressedThisFrame)
+                {
+                    SwitchScenePanel.NextScene = "Home";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+                }
+            }
         }
 
         void switchPanel()
         {
-            switch (selected.name.Split('_')[0])
+            switch (selected.transform.parent.name)
             {
-                case "gamepad2Player":
+                case "2PlayerGamepad":
                     panel.sprite = Operates[0];
+                    buttons.anchoredPosition = Vector2.left * 10000 * 0;
                     break;
-                case "gamepad1Player":
+                case "1PlayerGamepad":
                     panel.sprite = Operates[1];
+                    buttons.anchoredPosition = Vector2.left * 10000 * 1;
                     break;
-                case "keyboardP1":
+                case "P1Keyboard":
                     panel.sprite = Operates[2];
+                    buttons.anchoredPosition = Vector2.left * 10000 * 2;
                     break;
-                case "keyboardP2":
+                case "P2Keyboard":
                     panel.sprite = Operates[3];
+                    buttons.anchoredPosition = Vector2.left * 10000 * 3;
                     break;
             }
         }
@@ -71,18 +88,24 @@ namespace com.DungeonPad
 
         void changeingKey()
         {
-            Keyboard keyboard = Keyboard.current;
-            if (selected.name.Contains("nullKey") && keyboard != null)
+            if (selected.transform.parent.parent.name == "ChangingButtons" && keyboard != null)
             {
                 int i, j;
+                for (j = 0; j < changingButtons.Length; j++)
+                {
+                    if (changingButtons[j] == selected)
+                    {
+                        break;
+                    }
+                }
                 string[] keyboardNums = PlayerPrefs.GetString("Keyboard").Split(',');
                 for (i = 0; i < Keyboard.KeyCount; i++)
                 {
-                    if (keyboard.allKeys[i].wasPressedThisFrame && keys[i] != null)
+                    if (keyboard.allKeys[i].wasPressedThisFrame && i < unSelectedKeys.Length && unSelectedKeys[i] != null)
                     {
                         for(int k=0; k < selectedButtons.Length; k++)
                         {
-                            if (int.Parse(keyboardNums[k]) == i)
+                            if (k != j && int.Parse(keyboardNums[k]) == i)
                             {
                                 return;
                             }
@@ -104,13 +127,6 @@ namespace com.DungeonPad
                     return;
                 }
 
-                for (j = 0; j < selectedButtons.Length; j++)
-                {
-                    if (selectedButtons[j] == selected)
-                    {
-                        break;
-                    }
-                }
                 switch (j)
                 {
                     #region//P1
@@ -166,18 +182,31 @@ namespace com.DungeonPad
                         break;
                         #endregion
                 }
-                selectedButtons[j].GetComponent<Image>().sprite = keys[i];
+                Debug.LogError(j + "," + i);
+                Debug.LogError(selectedButtons[j].gameObject, selectedButtons[j].gameObject);
+                setButtonSprite(selectedButtons[j], i);
                 selectedButtons[j].GetComponent<Image>().enabled = true;
                 eventSystem.SetSelectedGameObject(selectedButtons[j]);
                 keyboardNums[j] = "" + i;
                 string Keyboards = "";
-                for (int k = 0; k < 16; k++)
+                for (int k = 0; k < selectedButtons.Length; k++)
                 {
                     Keyboards += keyboardNums[k] + ",";
                 }
                 PlayerPrefs.SetString("Keyboard", Keyboards);
                 PlayerPrefs.Save();
             }
+        }
+
+        void setButtonSprite(GameObject button , int keyNum)
+        {
+            button.GetComponent<Image>().sprite = unSelectedKeys[keyNum];
+            SpriteState spriteState = button.GetComponent<Button>().spriteState;
+            spriteState.highlightedSprite = selectedKeys[keyNum];
+            spriteState.pressedSprite = selectedKeys[keyNum];
+            spriteState.selectedSprite = selectedKeys[keyNum];
+            spriteState.disabledSprite = unSelectedKeys[keyNum];
+            button.GetComponent<Button>().spriteState = spriteState;
         }
     }
 }

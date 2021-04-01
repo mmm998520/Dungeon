@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Setting.unity
     guid: f88c7dfb6f2a1c144bfc1527b32c1646
   - enabled: 1
+    path: Assets/Scenes/Operate.unity
+    guid: 1270b705db941364cb8c6790a8cceb99
+  - enabled: 1
     path: Assets/Scenes/Tutorial1.unity
     guid: e2a7875ae1c489741969818fb41cac1e
   - enabled: 1

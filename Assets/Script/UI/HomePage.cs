@@ -40,14 +40,20 @@ Application.Quit();
             GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
         }
 
+        public void selectOperate()
+        {
+            SwitchScenePanel.NextScene = "Operate";
+            GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+        }
+
         void Update()
         {
             Keyboard keyboard = Keyboard.current;
-            if (keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || Gamepad.current.bButton.wasPressedThisFrame)
+            /*if (keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || Gamepad.current.bButton.wasPressedThisFrame)
             {
                 SwitchScenePanel.NextScene = "Home";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
-            }
+            }*/
 
             if (keyboard.escapeKey.isPressed)
             {
