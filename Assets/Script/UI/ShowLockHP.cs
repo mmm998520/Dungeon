@@ -59,8 +59,9 @@ namespace com.DungeonPad
             if(lockHPLight > 0.2f)
             {
                 lowSpeed();
-                Time.timeScale = 1 - lockHPLight;
+                Time.timeScale = 0.17f;
                 Time.fixedDeltaTime = 0.02F * Time.timeScale;
+                GetComponent<Animator>().SetBool("Died", true);
             }
             else if (lockHPLight > 0.1f)
             {
@@ -68,11 +69,25 @@ namespace com.DungeonPad
                 GameManager.players.GetChild(1).GetComponent<PlayerManager>().enabled = true;
                 Time.timeScale = 1;
                 Time.fixedDeltaTime = 0.02F * Time.timeScale;
+                GetComponent<Animator>().SetBool("Died", false);
+            }
+            if (lockHPLight < 0.5f && lockHPLight > 0.2f)
+            {
+                for (int i = 0; i < GameManager.players.childCount; i++)
+                {
+                    Transform player = GameManager.players.GetChild(i);
+                    PlayerManager playerManager = player.GetComponent<PlayerManager>();
+                    Vector3 size = Vector3.one * ((PlayerManager.HP / PlayerManager.MaxHP - 0.4f) / 0.6f * (PlayerManager.LightRangeMaxSize - PlayerManager.LightRangeMinSize) + PlayerManager.LightRangeMinSize);
+                    player.GetChild(5).localScale = size;
+                    player.GetChild(6).localScale = size;
+                    playerManager.HPMaxCircleLight.transform.localScale = size;
+                    playerManager.HPMaxCircleLight.color = new Color(1f, 1f, 1f);
+                }
             }
             #endregion
             //float hurtLight = 0.25f - hurtTimer;
             //hurtTimer += Time.deltaTime;
-            if (lockHPLight > 0)
+            /*if (lockHPLight > 0)
             {
                 WhiteBakGround.color = new Color(0, 0, 0, lockHPLight * 1.5f);
                 for (int i = 0; i < Life.Length; i++)
@@ -106,7 +121,7 @@ namespace com.DungeonPad
                 {
                     MaxLife[i].color = Color.clear;
                 }
-            }
+            }*/
         }
 
         void lowSpeed()

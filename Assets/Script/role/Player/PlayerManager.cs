@@ -43,7 +43,7 @@ namespace com.DungeonPad
         public SpriteRenderer ConfusionUIRenderer;
         public ConfusionUIcontroler ConfusionUIcontroler;
 
-        const float LightRangeMinSize = 3f, LightRangeMaxSize = 20;
+        public const float LightRangeMinSize = 3f, LightRangeMaxSize = 20;
         float lastUpdateHp;
         public static List<float> timerRecord = new List<float>(), recoveryRecord = new List<float>();
         public float lightRotateTimer, lightRotateTimerStoper;

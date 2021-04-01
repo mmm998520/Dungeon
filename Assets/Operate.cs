@@ -40,7 +40,7 @@ namespace com.DungeonPad
             changeingKey();
             if(keyboard != null && selected.transform.parent.parent.name != "ChangingButtons")
             {
-                if (keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || Gamepad.current.bButton.wasPressedThisFrame)
+                if (keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.bButton.wasPressedThisFrame))
                 {
                     SwitchScenePanel.NextScene = "Home";
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
@@ -182,8 +182,6 @@ namespace com.DungeonPad
                         break;
                         #endregion
                 }
-                Debug.LogError(j + "," + i);
-                Debug.LogError(selectedButtons[j].gameObject, selectedButtons[j].gameObject);
                 setButtonSprite(selectedButtons[j], i);
                 selectedButtons[j].GetComponent<Image>().enabled = true;
                 eventSystem.SetSelectedGameObject(selectedButtons[j]);
