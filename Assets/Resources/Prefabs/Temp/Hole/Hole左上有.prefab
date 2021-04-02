@@ -113,6 +113,7 @@ MonoBehaviour:
   wall: 0
   randomRotate: 0
   holeSide: 1
+  fire: 0
 --- !u!1 &230086863259111985
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +227,7 @@ MonoBehaviour:
   wall: 0
   randomRotate: 0
   holeSide: 1
+  fire: 0
 --- !u!1 &381687774017098914
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,6 +442,7 @@ MonoBehaviour:
   wall: 0
   randomRotate: 0
   holeSide: 0
+  fire: 0
 --- !u!1 &852236853149958396
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +602,7 @@ MonoBehaviour:
   wall: 0
   randomRotate: 0
   holeSide: 1
+  fire: 0
 --- !u!1 &5209330330552466935
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +703,7 @@ MonoBehaviour:
   wall: 0
   randomRotate: 0
   holeSide: 1
+  fire: 0
 --- !u!1 &6322811153997013817
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +861,7 @@ MonoBehaviour:
   wall: 0
   randomRotate: 0
   holeSide: 0
+  fire: 0
 --- !u!1 &6569923315346090140
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,6 +975,7 @@ MonoBehaviour:
   wall: 0
   randomRotate: 0
   holeSide: 0
+  fire: 0
 --- !u!1 &6663824787721039438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,7 +1047,7 @@ SpriteRenderer:
   m_SortingLayer: -4
   m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: b32b11418a2f65e4a9840694078976d7, type: 3}
-  m_Color: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1163,6 +1170,7 @@ MonoBehaviour:
   wall: 0
   randomRotate: 0
   holeSide: 0
+  fire: 0
 --- !u!1 &7911321398122339640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,6 +1284,7 @@ MonoBehaviour:
   wall: 0
   randomRotate: 0
   holeSide: 1
+  fire: 0
 --- !u!1 &8977524532833046415
 GameObject:
   m_ObjectHideFlags: 0
