@@ -19,6 +19,7 @@ namespace com.DungeonPad
 
         void Update()
         {
+            transform.GetChild(0).right = Vector3.right;
             circleCollider.offset = child.localPosition;
             if (spriteColorAlphaUp)
             {
