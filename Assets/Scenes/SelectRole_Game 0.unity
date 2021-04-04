@@ -5502,6 +5502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 378675074}
+  - component: {fileID: 378675075}
   m_Layer: 8
   m_Name: HPMaxCircleLight
   m_TagString: Untagged
@@ -5524,6 +5525,18 @@ Transform:
   m_Father: {fileID: 252037856}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &378675075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378675073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c0915d4910946458929a5240c6b90b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &381675375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21259,6 +21272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1128749822}
+  - component: {fileID: 1128749823}
   m_Layer: 8
   m_Name: HPMaxCircleLight
   m_TagString: Untagged
@@ -21281,6 +21295,18 @@ Transform:
   m_Father: {fileID: 1179144343}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1128749823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128749821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c0915d4910946458929a5240c6b90b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1129206603
 PrefabInstance:
   m_ObjectHideFlags: 0
