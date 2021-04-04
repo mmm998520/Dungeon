@@ -328,23 +328,7 @@ namespace com.DungeonPad
                     PlayerManager.circleAttack = (abilityLevel != 0);
                     break;
                 case "根性":
-                    string sceneName = SceneManager.GetActiveScene().name;
-                    if (abilityLevel <= 0)
-                    {
-                        PlayerManager.root = false;
-                        if (sceneName == "Game 0" || sceneName == "Game 1" || sceneName.Contains("Game 0_"))
-                        {
-                            GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 1.2f;
-                        }
-                    }
-                    else
-                    {
-                        PlayerManager.root = true;
-                        if (sceneName == "Game 0" || sceneName == "Game 1" || sceneName.Contains("Game 0_"))
-                        {
-                            GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = 1.2f;
-                        }
-                    }
+                    PlayerManager.root = abilityLevel > 0;
                     break;
                 case "光鏢":
                     PlayerManager.trackBullet = (abilityLevel != 0);

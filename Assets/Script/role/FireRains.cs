@@ -78,6 +78,7 @@ namespace com.DungeonPad
                         {
                             PlayerManager.HP -= BaseDamage + (++hitedTimer[playerManager][1] * SingleDamage);
                         }
+                        playerManager.playerJoyVibration.hurt();
                         try
                         {
                             Camera.main.GetComponent<Animator>().SetTrigger("Hit");

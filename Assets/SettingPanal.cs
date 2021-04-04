@@ -10,7 +10,7 @@ namespace com.DungeonPad
     public class SettingPanal : MonoBehaviour
     {
         EventSystem eventSystem;
-        static int MusicSound, FXSound, Lightness, PlayerNum;
+        public static int MusicSound, FXSound, Lightness, PlayerNum;
         [SerializeField] Sprite MusicSoundSpriteSelect, MusicSoundSpriteUnSelect,
                                                 FXSoundSpriteSelect, FXSoundSpriteUnSelect,
                                                 LightnessSpriteSelect, LightnessSpriteUnSelect,
@@ -117,6 +117,7 @@ namespace com.DungeonPad
             Lightness = (int)LightnessSlider.value;
             PlayerPrefs.SetInt("Lightness", Lightness);
             PlayerPrefs.Save();
+            GlobalLightSetting.settingLight();
         }
 
         public void setPlayerNum()

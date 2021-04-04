@@ -40,7 +40,6 @@ namespace com.DungeonPad
                 Debug.LogError("CanHit : " + CanHit);
                 if (Vector3.Distance(transform.position, playerPos[i]) < transform.localScale.x && CanHit)
                 {
-                    PlayerManager playerManager = GameManager.players.GetChild(i).GetComponent<PlayerManager>();
                     //if (playerManager.HardStraightTimer > 0.5f)
                     {
                         //playerManager.HardStraightA = (Vector2)Vector3.Normalize(playerPos[i] - transform.position) * 10;
@@ -52,6 +51,7 @@ namespace com.DungeonPad
                         {
                             PlayerManager.HP -= 7;
                         }
+                        GameManager.players.GetChild(i).GetComponent<PlayerJoyVibration>().hurt();
                         try
                         {
                             Camera.main.GetComponent<Animator>().SetTrigger("Hit");
