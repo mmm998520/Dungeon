@@ -46,7 +46,8 @@ namespace com.DungeonPad
                         }
                     }
                 }
-                if(disX < 0.5f / 3 * 2.5f && disY < 0.5f / 3 * 2.5f)
+                //if(disX < 0.5f / 3 * 2.5f && disY < 0.5f / 3 * 2.5f)
+                if (disX < 0.8f && disY < 0.8f)
                 {
                     if (!isHole)
                     {
