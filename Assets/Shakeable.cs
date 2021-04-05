@@ -15,7 +15,8 @@ namespace com.DungeonPad
             {
                 timer += Time.deltaTime;
                 rate = PlayerManager.MaxHP / PlayerManager.HP / 20;
-                timerStoper = PlayerManager.HP / PlayerManager.MaxHP / 2;
+                timerStoper = Mathf.Pow(PlayerManager.HP / PlayerManager.MaxHP / 4, 2) * 10;
+                Debug.LogError("timerStoper : " + timerStoper + ", " + (timerStoper > Time.deltaTime));
                 if (timer > timerStoper)
                 {
                     timer = 0;
@@ -30,7 +31,7 @@ namespace com.DungeonPad
 
         void Shake()
         {
-            rate = Mathf.Clamp(rate / 5, 0, 0.2f);
+            rate = Mathf.Clamp(rate, 0, 0.07f);
             transform.localPosition = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1)) * rate;
         }
     }
