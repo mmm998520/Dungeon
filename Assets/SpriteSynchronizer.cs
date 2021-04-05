@@ -20,7 +20,8 @@ namespace com.DungeonPad
                 myRenderner.color = new Color(myRenderner.color.r, myRenderner.color.g, myRenderner.color.b, 0);
             }
         }
-        void Update()
+
+        void LateUpdate()
         {
             myRenderner.sprite = targetRenderer.sprite;
             if (alphaChanger)
