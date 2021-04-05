@@ -32,10 +32,12 @@ namespace com.DungeonPad
             {
                 if ((CDTimer += Time.deltaTime) >= CD)
                 {
-                    if (!stoping)
+                    Animator animator = GetComponent<Animator>();
+                    //if (!stoping)
+                    if (!animator.GetCurrentAnimatorStateInfo(0).IsName("SlimeStop"))
                     {
                         stoping = true;
-                        GetComponent<Animator>().SetTrigger("Stop");
+                        animator.SetTrigger("Stop");
                     }
                     rigidbody.velocity = Vector3.zero;
                     rigidbody.angularDrag = 0;
@@ -54,9 +56,10 @@ namespace com.DungeonPad
         bool Blew = false;
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.collider.GetComponent<PlayerManager>())
+            PlayerManager playerManager = collision.collider.GetComponent<PlayerManager>();
+            if (playerManager)
             {
-                collision.collider.GetComponent<PlayerManager>().StickTimer = 0;
+                playerManager.StickTimer = 0;
                 attackSource.Play();
                 attackSource.transform.parent = null;
                 Destroy(gameObject);
