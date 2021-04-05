@@ -20,9 +20,9 @@ namespace com.DungeonPad
                 Transform player = GameManager.players.GetChild(i);
                 PlayerManager playerManager = player.GetComponent<PlayerManager>();
                 float disX = Mathf.Abs(player.position.x - pos.x), disY = Mathf.Abs(player.position.y - pos.y);
-                if(disX < 0.5f / 3f && disY < 0.5f / 3f && playerManager.DashTimer > 0.3f)
+                if(isHole && disX < 0.5f / 3f && disY < 0.5f / 3f && playerManager.DashTimer > 0.3f)
                 {
-                    if (isHole && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle"))
+                    if (player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("PlayerIdle"))
                     {
                         player.GetComponent<Animator>().SetTrigger("Fall");
                         //player.position = playerManager.nextHoleSide.position;
@@ -47,12 +47,9 @@ namespace com.DungeonPad
                     }
                 }
                 //if(disX < 0.5f / 3 * 2.5f && disY < 0.5f / 3 * 2.5f)
-                if (disX < 0.8f && disY < 0.8f)
+                if (!isHole && disX < 0.8f && disY < 0.8f)
                 {
-                    if (!isHole)
-                    {
-                        playerManager.nextHoleSide = transform;
-                    }
+                    playerManager.nextHoleSide = transform;
                 }
             }
         }
