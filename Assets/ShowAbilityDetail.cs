@@ -7,11 +7,12 @@ namespace com.DungeonPad
 {
     public class ShowAbilityDetail : MonoBehaviour
     {
-        Text text;
+        Image text;
+        [SerializeField] Sprite Null;
         float timer = 10;
         void Start()
         {
-            text = GetComponent<Text>();
+            text = GetComponent<Image>();
         }
 
         void Update()
@@ -19,14 +20,14 @@ namespace com.DungeonPad
             timer += Time.deltaTime;
             if (timer > 10)
             {
-                text.text = "";
+                text.sprite = Null;
             }
         }
 
-        public void showDetail(string detail)
+        public void showDetail(string ability)
         {
             timer = 0;
-            text.text = detail;
+            text.sprite = Resources.Load<Sprite>("UI/Ability/AbilityText/" + ability);
         }
     }
 }

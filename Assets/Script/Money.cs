@@ -80,7 +80,7 @@ namespace com.DungeonPad
                     }
                     try
                     {
-                        GameManager.showAbilityDetail.showDetail(abilityName + " : " + AbilityManager.Abilitys[r].detail[AbilityManager.AbilityCurrentLevel[abilityName]]);
+                        GameManager.showAbilityDetail.showDetail(abilityName + "Lv" + AbilityManager.AbilityCurrentLevel[abilityName]);
                     }
                     catch
                     {
