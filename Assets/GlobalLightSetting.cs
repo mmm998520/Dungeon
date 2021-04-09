@@ -14,7 +14,14 @@ namespace com.DungeonPad
 
         public static void settingLight()
         {
-            GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = SettingPanal.Lightness / 10f;
+            try
+            {
+                GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = SettingPanal.Lightness / 10f;
+            }
+            catch
+            {
+
+            }
         }
     }
 }

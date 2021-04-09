@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5835,7 +5835,7 @@ MonoBehaviour:
   - {fileID: 1974684749}
   - {fileID: 1612970426}
   - {fileID: 1920954960}
-  NextScene: Game 1
+  NextScene: Game 4
   selectBackGround: {fileID: 705484351}
   p1select: {fileID: 1168529714}
   p2select: {fileID: 899787890}
@@ -18033,7 +18033,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 949566440}
-  - component: {fileID: 949566441}
   m_Layer: 13
   m_Name: Center
   m_TagString: Untagged
@@ -18055,14 +18054,6 @@ Transform:
   m_Father: {fileID: 1691508766}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &949566441
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949566439}
-  m_Enabled: 1
 --- !u!1001 &950002356
 PrefabInstance:
   m_ObjectHideFlags: 0
