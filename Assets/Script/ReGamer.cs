@@ -58,12 +58,19 @@ namespace com.DungeonPad
 
         public static void ReAbility()
         {
-            for(int i=0;i< AbilityManager.Abilitys.Length; i++)
+            try
             {
-                AbilityManager.AbilityCurrentLevel[AbilityManager.Abilitys[i].name] = 0;
-                AbilityData.setPlayerAbility(AbilityManager.Abilitys[i].name, 0);
+                for (int i = 0; i < AbilityManager.Abilitys.Length; i++)
+                {
+                    AbilityManager.AbilityCurrentLevel[AbilityManager.Abilitys[i].name] = 0;
+                    AbilityData.setPlayerAbility(AbilityManager.Abilitys[i].name, 0);
+                }
+                AbilityShower.abilityNamesAndLevels.Clear();
             }
-            AbilityShower.abilityNamesAndLevels.Clear();
+            catch
+            {
+
+            }
         }
     }
 }

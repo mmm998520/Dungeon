@@ -51,7 +51,6 @@ namespace com.DungeonPad
             if (PlayerPrefs.HasKey("PlayerNum"))
             {
                 PlayerNumSlider.value = PlayerPrefs.GetInt("PlayerNum");
-                Debug.LogError("PlayerNum : " + PlayerNum);
             }
             else
             {
@@ -123,7 +122,6 @@ namespace com.DungeonPad
         public void setPlayerNum()
         {
             PlayerNum = (int)PlayerNumSlider.value;
-            Debug.LogError("PlayerNum : " + PlayerNum + " , "+ (int)PlayerNumSlider.value);
             PlayerPrefs.SetInt("PlayerNum", PlayerNum);
             PlayerPrefs.Save();
             if(PlayerNum == 1)
