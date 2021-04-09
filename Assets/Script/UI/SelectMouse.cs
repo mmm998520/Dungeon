@@ -14,7 +14,7 @@ namespace com.DungeonPad
         [SerializeField] Image selectBackGround;
         [SerializeField] Image p1select, p2select;
         [SerializeField] GameObject p1selectKeyboard, p1selectGamepad, p2selectKeyboard, p2selectGamepad;
-        [SerializeField] Sprite SelectAll, UnSelectAll, p1selectTrue, p1selectFalse, p2selectTrue, p2selectFalse;
+        [SerializeField] Sprite SelectAll2P, SelectAll1P, UnSelectAll2P, UnSelectAll1P, p1selectTrue, p1selectFalse, p2selectTrue, p2selectFalse;
         float p1KeyboardTimer, p2KeyboardTimer, p1GamepadTimer, p2GamepadTimer, p1SingleTimer, p2SingleTimer;
 
         private void Start()
@@ -28,6 +28,14 @@ namespace com.DungeonPad
             InputManager.p2Mod = InputManager.PlayerMod.none;
             InputManager.p1Gamepad = null;
             InputManager.p2Gamepad = null;
+            if (InputManager.twoPlayerMode)
+            {
+                selectBackGround.sprite = UnSelectAll2P;
+            }
+            else
+            {
+                selectBackGround.sprite = UnSelectAll1P;
+            }
         }
 
         void Update()
@@ -132,7 +140,14 @@ namespace com.DungeonPad
             Debug.Log("p1 : " + InputManager.p1Mod.ToString() + "        " + "p2 : " + InputManager.p2Mod.ToString());
             if(InputManager.p1Mod != InputManager.PlayerMod.none && InputManager.p2Mod != InputManager.PlayerMod.none)
             {
-                selectBackGround.sprite = SelectAll;
+                if (InputManager.twoPlayerMode)
+                {
+                    selectBackGround.sprite = SelectAll2P;
+                }
+                else
+                {
+                    selectBackGround.sprite = SelectAll1P;
+                }
                 switch (InputManager.p1Mod)
                 {
                     case InputManager.PlayerMod.keyboardP1:
@@ -272,7 +287,14 @@ namespace com.DungeonPad
             }
             else
             {
-                selectBackGround.sprite = UnSelectAll;
+                if (InputManager.twoPlayerMode)
+                {
+                    selectBackGround.sprite = UnSelectAll2P;
+                }
+                else
+                {
+                    selectBackGround.sprite = UnSelectAll1P;
+                }
                 p1KeyboardTimer = 0;
                 p2KeyboardTimer = 0;
                 p1GamepadTimer = 0;

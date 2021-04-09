@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5835,7 +5835,7 @@ MonoBehaviour:
   - {fileID: 1974684749}
   - {fileID: 1612970426}
   - {fileID: 1920954960}
-  NextScene: Game 3
+  NextScene: Game 1
   selectBackGround: {fileID: 705484351}
   p1select: {fileID: 1168529714}
   p2select: {fileID: 899787890}
@@ -5843,8 +5843,10 @@ MonoBehaviour:
   p1selectGamepad: {fileID: 580278223}
   p2selectKeyboard: {fileID: 437090963}
   p2selectGamepad: {fileID: 1974052249}
-  SelectAll: {fileID: 21300000, guid: efc3e8255b6a4344c9e41aeff75870be, type: 3}
-  UnSelectAll: {fileID: 21300000, guid: 5f7e5702c8a862b4d8db76ac7eff8427, type: 3}
+  SelectAll2P: {fileID: 21300000, guid: ae53abcd0de19c0429038bd06256be7c, type: 3}
+  SelectAll1P: {fileID: 21300000, guid: a80b08c9e87c44e45bcc73e25a036e05, type: 3}
+  UnSelectAll2P: {fileID: 21300000, guid: 22300acf08bb1e04c9ac4058c2f01a4e, type: 3}
+  UnSelectAll1P: {fileID: 21300000, guid: 0dce3ad8263255541953ca145243952a, type: 3}
   p1selectTrue: {fileID: 21300000, guid: 37adc2fc2f696fb41ad45c1327bd1c5c, type: 3}
   p1selectFalse: {fileID: 21300000, guid: b85bb4c68986e044b851806a7dd17bce, type: 3}
   p2selectTrue: {fileID: 21300000, guid: e28fd7a839fa44a43aac678bb89b5f10, type: 3}

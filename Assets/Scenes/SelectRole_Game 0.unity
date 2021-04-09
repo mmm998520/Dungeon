@@ -6095,8 +6095,10 @@ MonoBehaviour:
   p1selectGamepad: {fileID: 622385561}
   p2selectKeyboard: {fileID: 944690350}
   p2selectGamepad: {fileID: 908594655}
-  SelectAll: {fileID: 21300000, guid: efc3e8255b6a4344c9e41aeff75870be, type: 3}
-  UnSelectAll: {fileID: 21300000, guid: 5f7e5702c8a862b4d8db76ac7eff8427, type: 3}
+  SelectAll2P: {fileID: 21300000, guid: ae53abcd0de19c0429038bd06256be7c, type: 3}
+  SelectAll1P: {fileID: 21300000, guid: a80b08c9e87c44e45bcc73e25a036e05, type: 3}
+  UnSelectAll2P: {fileID: 21300000, guid: 22300acf08bb1e04c9ac4058c2f01a4e, type: 3}
+  UnSelectAll1P: {fileID: 21300000, guid: 0dce3ad8263255541953ca145243952a, type: 3}
   p1selectTrue: {fileID: 21300000, guid: 37adc2fc2f696fb41ad45c1327bd1c5c, type: 3}
   p1selectFalse: {fileID: 21300000, guid: b85bb4c68986e044b851806a7dd17bce, type: 3}
   p2selectTrue: {fileID: 21300000, guid: e28fd7a839fa44a43aac678bb89b5f10, type: 3}
