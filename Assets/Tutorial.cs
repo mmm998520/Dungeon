@@ -32,7 +32,7 @@ namespace com.DungeonPad
                     player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                     player.GetChild(0).GetComponent<Animator>().enabled = false;
                 }
-                if (keyboard.enterKey.wasPressedThisFrame || keyboard.numpadEnterKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame || Gamepad.current.aButton.wasPressedThisFrame)
+                if (keyboard.enterKey.wasPressedThisFrame || keyboard.numpadEnterKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame || (Gamepad.current  != null && Gamepad.current.aButton.wasPressedThisFrame))
                 {
                     if(Time.timeScale > 0.1f)
                     {
