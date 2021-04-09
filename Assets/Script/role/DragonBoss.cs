@@ -464,8 +464,10 @@ namespace com.DungeonPad
         private void OnDestroy()
         {
             HPBar.localScale = Vector3.zero;
-            DestoryWall.SetActive(false);
-            NewWall.SetActive(true);
+            SwitchScenePanel.NextScene = "Win";
+            GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+            //DestoryWall.SetActive(false);
+            //NewWall.SetActive(true);
         }
     }
 }
