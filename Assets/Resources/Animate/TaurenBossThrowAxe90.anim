@@ -160,6 +160,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.35
+    functionName: ThrowAxeSFX
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.5
     functionName: ThrowAxe
     data: 
@@ -167,8 +174,22 @@ AnimationClip:
     floatParameter: 45
     intParameter: 0
     messageOptions: 0
+  - time: 1
+    functionName: ThrowAxeSFX
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.1333333
     functionName: ThrowAxe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.6333333
+    functionName: ThrowAxeSFX
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

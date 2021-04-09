@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5835,7 +5835,7 @@ MonoBehaviour:
   - {fileID: 1974684749}
   - {fileID: 1612970426}
   - {fileID: 1920954960}
-  NextScene: Game 1
+  NextScene: Game 3
   selectBackGround: {fileID: 705484351}
   p1select: {fileID: 1168529714}
   p2select: {fileID: 899787890}
@@ -17363,7 +17363,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef341df3440476a4ba0dc46e09794110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX: {fileID: 0}
 --- !u!4 &919169220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1691314572940453475, guid: eba2d36b39f4da94fbf235b4e1066e15,

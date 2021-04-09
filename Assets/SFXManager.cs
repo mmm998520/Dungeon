@@ -18,7 +18,7 @@ public class SFXManager : MonoBehaviour
     void Update()
     {
         //audioSource.volume = thisVolume * volume;
-        audioSource.volume = 1;
+        audioSource.volume = thisVolume;
         if (gameObject.name == "DoorOneSFX")
         {
             if (!DoorOneUse)
