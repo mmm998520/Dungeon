@@ -279,6 +279,8 @@ MonoBehaviour:
   CircleLight: {fileID: 8760750764245187747}
   crystalScatteringLight: {fileID: 6089583897553511087, guid: 5618f625d31b9574ca88234ec9ee1afc,
     type: 3}
+  CrystalHitSFX: {fileID: 5304603037793218459, guid: 452d0b3bd2e6c734d8824e11518e854e,
+    type: 3}
 --- !u!61 &1980852825
 BoxCollider2D:
   m_ObjectHideFlags: 0

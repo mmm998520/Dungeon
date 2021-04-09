@@ -8,6 +8,8 @@ namespace com.DungeonPad
     {
         public GameObject crystalScatteringLight;
         public static float scatteringLightCount = 6;
+
+        [SerializeField] GameObject CrystalHitSFX;
         protected override void Start()
         {
             base.Start();
@@ -25,6 +27,7 @@ namespace com.DungeonPad
                 return;
             }
             base.hited();
+            Destroy(Instantiate(CrystalHitSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
 
             int startAngle = Random.Range(0, 360);
             for (int i = 0; i < scatteringLightCount; i++)

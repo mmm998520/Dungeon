@@ -25,6 +25,9 @@ namespace com.DungeonPad
 
         public float SleepTimer;
         public SpriteRenderer SleepUI;
+
+        public GameObject throwAxeSFX;
+
         void Start()
         {
             speed = 3;
@@ -192,7 +195,14 @@ namespace com.DungeonPad
         }
         #endregion
 
+
+
         #region//ThrowAxe
+        void ThrowAxeSFX()
+        {
+            Destroy(Instantiate(throwAxeSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
+        }
+
         void ThrowAxe(float angle)
         {
             if (!throwByClockwise)
@@ -222,6 +232,7 @@ namespace com.DungeonPad
                 GameObject temp = Instantiate(AxeAll, transform.position, Quaternion.Euler(0, 0, angle + preAngle * i));
                 Debug.Log(temp.transform.rotation.eulerAngles.z);
             }
+            ThrowAxeSFX();
         }
 
         void endThrowAxe90()

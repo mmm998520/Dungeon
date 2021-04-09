@@ -21,6 +21,7 @@ namespace com.DungeonPad
 
         void Update()
         {
+            float tempLocalX = localX;
             if (ButtonOne.useButtonNum >= 1)
             {
                 localX -= Time.deltaTime * speed;
@@ -34,6 +35,7 @@ namespace com.DungeonPad
             localX = Mathf.Clamp(localX, 0, localXMax);
             doorSprite.localPosition = new Vector3(localX, 0, 0);
             doorCollider.localScale = new Vector3(localX, 1, 1);
+            transform.GetChild(4).GetComponent<SFXManager>().DoorOneUse = (Mathf.Abs(tempLocalX - localX) > 0.001f);
         }
     }
 }
