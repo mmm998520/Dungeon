@@ -23,14 +23,9 @@ namespace com.DungeonPad
         Keyboard keyboard;
         void Start()
         {
-            InputManager.keyboardSetting();
-            string[] keyboardNum = PlayerPrefs.GetString("Keyboard").Split(',');
-            int i;
-            for (i = 0; i < selectedButtons.Length; i++)
-            {
-                setButtonSprite(selectedButtons[i], int.Parse(keyboardNum[i]));
-            }
+            setKeySprite();
         }
+
 
         void Update()
         {
@@ -45,6 +40,17 @@ namespace com.DungeonPad
                     SwitchScenePanel.NextScene = "Home";
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
+            }
+        }
+
+        void setKeySprite()
+        {
+            InputManager.keyboardSetting();
+            string[] keyboardNum = PlayerPrefs.GetString("Keyboard").Split(',');
+            int i;
+            for (i = 0; i < selectedButtons.Length; i++)
+            {
+                setButtonSprite(selectedButtons[i], int.Parse(keyboardNum[i]));
             }
         }
 
@@ -205,6 +211,12 @@ namespace com.DungeonPad
             spriteState.selectedSprite = selectedKeys[keyNum];
             spriteState.disabledSprite = unSelectedKeys[keyNum];
             button.GetComponent<Button>().spriteState = spriteState;
+        }
+
+        public void restKey()
+        {
+            PlayerPrefs.DeleteKey("Keyboard");
+            setKeySprite();
         }
     }
 }
