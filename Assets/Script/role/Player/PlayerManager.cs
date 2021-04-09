@@ -78,6 +78,9 @@ namespace com.DungeonPad
         public Transform sticksBat;
         string SceneName;
 
+        static int dashSFXNum = 0;
+        [SerializeField] GameObject[] dashSFX;
+
         public void Start()
         {
             v = Vector3.zero;
@@ -806,6 +809,11 @@ namespace com.DungeonPad
             if (DashA.magnitude > 10)
             {
                 playerJoyVibration.DashVibration = 0.6f;
+                if (++dashSFXNum >= dashSFX.Length)
+                {
+                    dashSFXNum = 0;
+                }
+                Destroy(Instantiate(dashSFX[dashSFXNum], CameraManager.center, Quaternion.identity), 2);
             }
             else
             {

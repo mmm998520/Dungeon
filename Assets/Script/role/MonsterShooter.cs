@@ -7,7 +7,7 @@ namespace com.DungeonPad
     public class MonsterShooter : MonoBehaviour
     {
         public float speed, timer, timerStoper, destoryTime;
-        public AudioSource hitSound;
+        //public AudioSource hitSound;
         public Animator animator;
         public bool canRemoveByPlayerAttack = true;
         public bool focusPlayer;
@@ -26,10 +26,10 @@ namespace com.DungeonPad
                 {
                     speed = 0;
                     animator.SetTrigger("Hit");
-                    hitSound.Play();
-                    hitSound.transform.parent = null;
+                    //hitSound.Play();
+                    //hitSound.transform.parent = null;
                     Destroy(gameObject, destoryTime);
-                    Destroy(hitSound.gameObject, 5);
+                    //Destroy(hitSound.gameObject, 5);
                 }
             }
             else
@@ -39,10 +39,10 @@ namespace com.DungeonPad
                 {
                     speed = 0;
                     animator.SetTrigger("Hit");
-                    hitSound.Play();
-                    hitSound.transform.parent = null;
+                    //hitSound.Play();
+                    //hitSound.transform.parent = null;
                     Destroy(gameObject, destoryTime);
-                    Destroy(hitSound.gameObject, 5);
+                    //Destroy(hitSound.gameObject, 5);
                 }
             }
         }
@@ -55,9 +55,9 @@ namespace com.DungeonPad
                 try
                 {
                     animator.SetTrigger("Hit");
-                    hitSound.Play();
-                    hitSound.transform.parent = null;
-                    Destroy(hitSound.gameObject, 5);
+                    //hitSound.Play();
+                    //hitSound.transform.parent = null;
+                    //Destroy(hitSound.gameObject, 5);
                 }
                 catch
                 {
@@ -75,9 +75,9 @@ namespace com.DungeonPad
                 try
                 {
                     animator.SetTrigger("Hit");
-                    hitSound.Play();
-                    hitSound.transform.parent = null;
-                    Destroy(hitSound.gameObject, 5);
+                    //hitSound.Play();
+                    //hitSound.transform.parent = null;
+                    //Destroy(hitSound.gameObject, 5);
                 }
                 catch
                 {

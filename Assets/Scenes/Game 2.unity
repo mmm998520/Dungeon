@@ -2455,6 +2455,9 @@ MonoBehaviour:
   playerStat: 0
   insAfterImages: {fileID: 926245038}
   sticksBat: {fileID: 0}
+  dashSFX:
+  - {fileID: 4463740323464384201, guid: f6be9f6af3b40334dbe677c90b7cfaaa, type: 3}
+  - {fileID: 4393566151145407735, guid: 94abac8d3c603004ba3ba99c96ed25b4, type: 3}
 --- !u!23 &170081937
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24432,6 +24435,9 @@ MonoBehaviour:
   playerStat: 0
   insAfterImages: {fileID: 1226183663}
   sticksBat: {fileID: 0}
+  dashSFX:
+  - {fileID: 4463740323464384201, guid: f6be9f6af3b40334dbe677c90b7cfaaa, type: 3}
+  - {fileID: 4393566151145407735, guid: 94abac8d3c603004ba3ba99c96ed25b4, type: 3}
 --- !u!23 &1308180495
 MeshRenderer:
   m_ObjectHideFlags: 0

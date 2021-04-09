@@ -3455,6 +3455,9 @@ MonoBehaviour:
   playerStat: 0
   insAfterImages: {fileID: 1611169916}
   sticksBat: {fileID: 0}
+  dashSFX:
+  - {fileID: 4463740323464384201, guid: f6be9f6af3b40334dbe677c90b7cfaaa, type: 3}
+  - {fileID: 4393566151145407735, guid: 94abac8d3c603004ba3ba99c96ed25b4, type: 3}
 --- !u!23 &252037861
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4009,9 +4012,29 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5933761647356383873, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933761647356383873, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5933761647524790856, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933761647524790856, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933761647524790856, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
+        type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5933761647623168568, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
@@ -4127,6 +4150,16 @@ PrefabInstance:
     - target: {fileID: 5933761647963480457, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933761647963480457, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933761647963480457, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
+        type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8579830571452779233, guid: 498bff53a6ffac940bc8d837e2c0ca5e,
@@ -22237,6 +22270,9 @@ MonoBehaviour:
   playerStat: 0
   insAfterImages: {fileID: 534531181}
   sticksBat: {fileID: 0}
+  dashSFX:
+  - {fileID: 4463740323464384201, guid: f6be9f6af3b40334dbe677c90b7cfaaa, type: 3}
+  - {fileID: 4393566151145407735, guid: 94abac8d3c603004ba3ba99c96ed25b4, type: 3}
 --- !u!23 &1179144348
 MeshRenderer:
   m_ObjectHideFlags: 0

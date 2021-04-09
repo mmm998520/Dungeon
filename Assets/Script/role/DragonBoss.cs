@@ -25,6 +25,8 @@ namespace com.DungeonPad
 
         public float SleepTimer;
         public SpriteRenderer SleepUI;
+
+        [SerializeField] GameObject FireSFX;
         void Start()
         {
             speed = 3;
@@ -248,6 +250,11 @@ namespace com.DungeonPad
             }
         }
 
+        void fireSFX()
+        {
+            Destroy(Instantiate(FireSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
+        }
+
         void FireBall(float positionOffset)
         {
             //Instantiate(fireBall, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
@@ -259,6 +266,7 @@ namespace com.DungeonPad
             {
                 Instantiate(fireBall, transform.position + new Vector3(2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
             }
+            Destroy(Instantiate(FireSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
         }
 
         void FireBallFsat(float positionOffset)
@@ -272,6 +280,7 @@ namespace com.DungeonPad
             {
                 Instantiate(fireBallFast, transform.position + new Vector3(2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
             }
+            Destroy(Instantiate(FireSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
         }
 
         void FireBallTrack(float positionOffset)
@@ -279,12 +288,13 @@ namespace com.DungeonPad
             //Instantiate(fireBallTrack, transform.position + Quaternion.Euler(0, 0, playerAngle) * Vector3.up * positionOffset, Quaternion.Euler(0, 0, playerAngle + Random.Range(-10, 10))).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0,2));
             if (transform.eulerAngles.y <= 200 && transform.eulerAngles.y >= 160)
             {
-                Instantiate(fireBallTrack, transform.position + new Vector3(-2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+                Instantiate(fireBallTrack, transform.position + new Vector3(-2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + Random.Range(-45, 45) + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
             }
             else
             {
-                Instantiate(fireBallTrack, transform.position + new Vector3(2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
+                Instantiate(fireBallTrack, transform.position + new Vector3(2, 0.6f, 0), Quaternion.Euler(0, 0, playerAngle + Random.Range(-45, 45) + positionOffset)).GetComponent<MonsterTrack>().Target = GameManager.players.GetChild(Random.Range(0, 2));
             }
+            Destroy(Instantiate(FireSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
         }
 
         void endFireBall()
@@ -331,6 +341,7 @@ namespace com.DungeonPad
             {
                 Instantiate(fireRainInser).GetComponent<FireRainInser>().fireRainNum = 2;
             }
+            Destroy(Instantiate(FireSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
         }
         void CrystalRain()
         {

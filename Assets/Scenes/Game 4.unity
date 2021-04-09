@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5120,6 +5120,9 @@ MonoBehaviour:
   playerStat: 0
   insAfterImages: {fileID: 926245038}
   sticksBat: {fileID: 0}
+  dashSFX:
+  - {fileID: 4463740323464384201, guid: f6be9f6af3b40334dbe677c90b7cfaaa, type: 3}
+  - {fileID: 4393566151145407735, guid: 94abac8d3c603004ba3ba99c96ed25b4, type: 3}
 --- !u!23 &170081937
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -45473,6 +45476,9 @@ MonoBehaviour:
   playerStat: 0
   insAfterImages: {fileID: 1226183663}
   sticksBat: {fileID: 0}
+  dashSFX:
+  - {fileID: 4463740323464384201, guid: f6be9f6af3b40334dbe677c90b7cfaaa, type: 3}
+  - {fileID: 4393566151145407735, guid: 94abac8d3c603004ba3ba99c96ed25b4, type: 3}
 --- !u!23 &1308180495
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -75762,7 +75768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 257297929, guid: a9f61054ac700b14583a5b5e78b31a05, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 257297929, guid: a9f61054ac700b14583a5b5e78b31a05, type: 3}
       propertyPath: m_Size.x
@@ -75913,6 +75919,12 @@ PrefabInstance:
       propertyPath: HitedAnimator
       value: 
       objectReference: {fileID: 585867243}
+    - target: {fileID: 3343121514145411655, guid: a9f61054ac700b14583a5b5e78b31a05,
+        type: 3}
+      propertyPath: FireSFX
+      value: 
+      objectReference: {fileID: 1141356496049554240, guid: 80356764d28345549a34caa5f254a58e,
+        type: 3}
     - target: {fileID: 4736757456382075896, guid: a9f61054ac700b14583a5b5e78b31a05,
         type: 3}
       propertyPath: m_SortingOrder
