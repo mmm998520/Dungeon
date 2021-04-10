@@ -11,7 +11,6 @@ namespace com.DungeonPad
         public Collider2D GetCollider;
         public Animator animator;
         float timer = 0;
-        public Transform sound;
         public bool moneyB;
         [HideInInspector]public bool final;
         [SerializeField]Transform spriteRenderer;
@@ -87,10 +86,7 @@ namespace com.DungeonPad
                         Debug.LogError("找不到 : 能力敘述文字");
                     }
                 }
-                sound.SetParent(null);
-                sound.GetComponent<AudioSource>().Play();
                 Destroy(gameObject);
-                Destroy(sound.gameObject,2);
                 print(1);
             }
             else if ((distance < 3 && !moneyB) || (distance < 0.5f && moneyB))
