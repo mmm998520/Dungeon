@@ -82,6 +82,25 @@ namespace com.DungeonPad
                 PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
                 PlayerPrefs.Save();
             }
+            if (PlayerPrefs.HasKey("layerOneCntinuousDideTimes"))
+            {
+                GameManager.layerOneCntinuousDideTimes = PlayerPrefs.GetInt("layerOneCntinuousDideTimes");
+            }
+            else
+            {
+                PlayerPrefs.SetInt("layerOneCntinuousDideTimes", GameManager.layerOneCntinuousDideTimes);
+                PlayerPrefs.Save();
+            }
+            if (PlayerPrefs.HasKey("layerTwoCntinuousDideTimes"))
+            {
+                GameManager.layerTwoCntinuousDideTimes = PlayerPrefs.GetInt("layerTwoCntinuousDideTimes");
+            }
+            else
+            {
+                PlayerPrefs.SetInt("layerTwoCntinuousDideTimes", GameManager.layerTwoCntinuousDideTimes);
+                PlayerPrefs.Save();
+            }
+
             if (PlayerPrefs.HasKey("Keyboard"))
             {
                 string[] keyboardNum = PlayerPrefs.GetString("Keyboard").Split(',');

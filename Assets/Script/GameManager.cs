@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static GameManager gameManager;
         public static Transform players, monsters, triggers, UI, magneticFields;
-        public static int layers = 1, level = 1, passLayerOneTimes = 0, passLayerTwoTimes = 0;
+        public static int layers = 1, level = 1, passLayerOneTimes = 0, passLayerTwoTimes = 0, layerOneCntinuousDideTimes = 0, layerTwoCntinuousDideTimes = 0;
         public static MazeCreater mazeCreater;
         public static SmallMap smallMap;
         public static float Gammar = 1;
@@ -35,7 +35,7 @@ namespace com.DungeonPad
 
         void Awake()
         {
-            Debug.LogError("try");
+            Debug.LogError("passLayerOneTimes : " + passLayerOneTimes + ", passLayerTwoTimes : " + passLayerTwoTimes);
             CurrentSceneName = SceneManager.GetActiveScene().name;
             MazeCreater.setTotalRowCol();
             gameManager = this;
