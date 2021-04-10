@@ -16,7 +16,7 @@ namespace com.DungeonPad
         [SerializeField] GameObject p1selectKeyboard, p1selectGamepad, p2selectKeyboard, p2selectGamepad;
         [SerializeField] Sprite SelectAll2P, SelectAll1P, UnSelectAll2P, UnSelectAll1P, p1selectTrue, p1selectFalse, p2selectTrue, p2selectFalse;
         float p1KeyboardTimer, p2KeyboardTimer, p1GamepadTimer, p2GamepadTimer, p1SingleTimer, p2SingleTimer;
-
+        float p1MotorSpeeds, p2MotorSpeeds;
         private void Start()
         {
             ReGamer.ReAbility();
@@ -63,6 +63,32 @@ namespace com.DungeonPad
             {
                 PlayerPrefs.DeleteAll();
             }
+
+            p1MotorSpeeds = Mathf.Clamp01(p1MotorSpeeds - Time.deltaTime * 2);
+            p2MotorSpeeds = Mathf.Clamp01(p2MotorSpeeds - Time.deltaTime * 2);
+            if (InputManager.p1Gamepad != null)
+            {
+                InputManager.p1Gamepad.SetMotorSpeeds(p1MotorSpeeds / 3, p1MotorSpeeds);
+            }
+            if (InputManager.p2Gamepad != null)
+            {
+                InputManager.p2Gamepad.SetMotorSpeeds(p2MotorSpeeds / 3, p2MotorSpeeds);
+            }
+            if (InputManager.p1Mod == InputManager.PlayerMod.singleP1 || InputManager.p1Mod == InputManager.PlayerMod.singleP2 || InputManager.p2Mod == InputManager.PlayerMod.singleP1 || InputManager.p2Mod == InputManager.PlayerMod.singleP2)
+            {
+                if (Gamepad.current != null)
+                {
+                    float maxer = Mathf.Max(p1MotorSpeeds, p2MotorSpeeds);
+                    Gamepad.current.SetMotorSpeeds(maxer / 3, maxer);
+                }
+            }
+            else if (p1MotorSpeeds <= 0.01f && p2MotorSpeeds <= 0.01f)
+            {
+                if (Gamepad.current != null)
+                {
+                    Gamepad.current.SetMotorSpeeds(0, 0);
+                }
+            }
         }
 
         #region//selectRole
@@ -85,7 +111,7 @@ namespace com.DungeonPad
             {
                 p1.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                 //p1.GetComponent<PlayerManager>().p1 = true;
-                p1.GetComponent<PlayerJoyVibration>().enabled = true;
+                //p1.GetComponent<PlayerJoyVibration>().enabled = true;
                 p1select.sprite = p1selectTrue;
                 if(InputManager.p1Mod == InputManager.PlayerMod.keyboardP1 || InputManager.p1Mod == InputManager.PlayerMod.keyboardP2)
                 {
@@ -102,7 +128,7 @@ namespace com.DungeonPad
             {
                 //p1.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                 p1.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                p1.GetComponent<PlayerJoyVibration>().enabled = false;
+                //p1.GetComponent<PlayerJoyVibration>().enabled = false;
                 p1.GetComponent<PlayerManager>().v = Vector3.zero;
                 p1.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
                 p1select.sprite = p1selectFalse;
@@ -113,7 +139,7 @@ namespace com.DungeonPad
             {
                 p2.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.Move;
                 //p2.GetComponent<PlayerManager>().p1 = false;
-                p2.GetComponent<PlayerJoyVibration>().enabled = true;
+                //p2.GetComponent<PlayerJoyVibration>().enabled = true;
                 p2select.sprite = p2selectTrue;
                 if (InputManager.p2Mod == InputManager.PlayerMod.keyboardP1 || InputManager.p2Mod == InputManager.PlayerMod.keyboardP2)
                 {
@@ -130,7 +156,7 @@ namespace com.DungeonPad
             {
                 //p2.GetComponent<PlayerManager>().playerStat = PlayerManager.PlayerStat.UnSelect;
                 p2.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                p2.GetComponent<PlayerJoyVibration>().enabled = false;
+                //p2.GetComponent<PlayerJoyVibration>().enabled = false;
                 p2.GetComponent<PlayerManager>().v = Vector3.zero;
                 p2.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
                 p2select.sprite = p2selectFalse;
@@ -404,24 +430,6 @@ namespace com.DungeonPad
                     playerMod = InputManager.PlayerMod.gamepadP2;
                     temp = pad;
                 }
-                /*
-                for (int i = 0; i < Gamepad.all.Count; i++)
-                {
-                    if (Gamepad.all[i].aButton.wasPressedThisFrame)
-                    {
-                        if(gamepad == p1Gamepad && Gamepad.all[i] != p2Gamepad)
-                        {
-                            playerMod = PlayerMod.gamepadP1;
-                            p1Gamepad = Gamepad.all[i];
-                        }
-                        else if (gamepad == p2Gamepad && Gamepad.all[i] != p1Gamepad)
-                        {
-                            playerMod = PlayerMod.gamepadP2;
-                            p2Gamepad = Gamepad.all[i];
-                        }
-                    }
-                }
-                */
             }
             if (InputManager.p1Mod == playerMod || InputManager.p2Mod == playerMod || (temp != null && (InputManager.p1Gamepad == temp || temp != null && (InputManager.p2Gamepad == temp))))
             {
@@ -434,10 +442,23 @@ namespace com.DungeonPad
                     if (selectP1)
                     {
                         InputManager.p1Gamepad = temp;
+                        p1MotorSpeeds = 0.7f;
                     }
                     else
                     {
                         InputManager.p2Gamepad = temp;
+                        p2MotorSpeeds = 0.7f;
+                    }
+                }
+                else if(playerMod == InputManager.PlayerMod.singleP1 || playerMod == InputManager.PlayerMod.singleP2)
+                {
+                    if (selectP1)
+                    {
+                        p1MotorSpeeds = 0.7f;
+                    }
+                    else
+                    {
+                        p2MotorSpeeds = 0.7f;
                     }
                 }
                 return playerMod;
