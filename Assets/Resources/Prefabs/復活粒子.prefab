@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240500545243709503}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.025, z: 0}
-  m_LocalScale: {x: 0.17502742, y: 0.17502742, z: 0.17502742}
+  m_LocalPosition: {x: 0, y: -0.02, z: 0}
+  m_LocalScale: {x: 0.16452578, y: 0.16452578, z: 0.16452578}
   m_Children: []
   m_Father: {fileID: 8905642310724304020}
   m_RootOrder: 0
@@ -67,10 +67,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 19b157cb6828f584ca87935dd1bc1558, type: 3}
+  m_SortingLayerID: -1796997543
+  m_SortingLayer: 3
+  m_SortingOrder: 32767
+  m_Sprite: {fileID: 21300000, guid: 7f525b1768d14494e84255a00b648ae1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -146,9 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b87c379d135f13419360e7c0e91601a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 3628339308716585708}
   circleCollider: {fileID: 8819815771889162528}
-  child: {fileID: 0}
+  child: {fileID: 4289597268775937748}
 --- !u!58 &8819815771889162528
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -37,6 +37,10 @@ namespace com.DungeonPad
                     spriteColorAlphaUp = true;
                 }
             }
+            if (track)
+            {
+                Track();
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -45,9 +49,47 @@ namespace com.DungeonPad
             {
                 if (PlayerManager.Life < PlayerManager.MaxLife)
                 {
-                    Destroy(gameObject);
-                    PlayerManager.Life++;
+                    track = true;
                 }
+            }
+        }
+
+        bool track;
+        float timer, speed = 5, RotateSpeed = 1;
+        void Track()
+        {
+            Vector2 targetDir = Quaternion.Euler(0,0,Random.Range(0, 360)) * Vector3.right;
+            timer += Time.deltaTime;
+            if (timer < 0.3f)
+            {
+                speed -= 1 * Time.deltaTime;
+                transform.position += transform.right * speed * Time.deltaTime;
+            }
+            else
+            {
+                targetDir = Camera.main.ScreenToWorldPoint(new Vector3(56, 1014, 10)) - transform.position;
+                float a = Vector2.Angle(transform.right, targetDir) / RotateSpeed;
+                speed += timer * timer * timer * 100f * Time.deltaTime;
+
+                if (a > 0.1f || a < -0.1f)
+                {
+                    transform.right = Vector2.Lerp(transform.right, targetDir, Time.deltaTime * RotateSpeed).normalized;
+                }
+                else
+                {
+                    transform.right = Vector2.Lerp(transform.right, targetDir, 1).normalized;
+                }
+
+                transform.position += transform.right * speed * Time.deltaTime;
+            }
+
+            
+            transform.localScale = Vector3.one * Mathf.Lerp(transform.localScale.x, 0, Time.deltaTime / 2);
+
+            if (Camera.main.WorldToScreenPoint(transform.position).x < 56 && Camera.main.WorldToScreenPoint(transform.position).y > 1014)
+            {
+                Destroy(gameObject);
+                PlayerManager.Life++;
             }
         }
     }
