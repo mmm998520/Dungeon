@@ -28,7 +28,7 @@ namespace com.DungeonPad
                 {
                     Instantiate(GameManager.gameManager.moneyB, transform.position, Quaternion.identity);
                 }
-                //if (Random.Range(0, 100) < 15)
+                if (Random.Range(0, 100) < 15)
                 {
                     Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
                 }
