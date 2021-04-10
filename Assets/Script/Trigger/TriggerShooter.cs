@@ -7,7 +7,7 @@ namespace com.DungeonPad
     public class TriggerShooter : MonoBehaviour
     {
         public float speed, timer, timerStoper, destoryTime;
-        public AudioSource hitSound;
+        //public AudioSource hitSound;
         public Animator animator;
         public bool canRemoveByPlayerAttack = true;
         public float ATKforPlayer, ATKforBoss;
@@ -23,10 +23,10 @@ namespace com.DungeonPad
             {
                 speed = 0;
                 animator.SetTrigger("Hit");
-                hitSound.Play();
-                hitSound.transform.parent = null;
+                //hitSound.Play();
+                //hitSound.transform.parent = null;
                 Destroy(gameObject, destoryTime);
-                Destroy(hitSound.gameObject, 5);
+                //Destroy(hitSound.gameObject, 5);
             }
         }
 

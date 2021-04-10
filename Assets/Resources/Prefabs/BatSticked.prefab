@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6295164500627775231}
   - component: {fileID: 9201655110530601900}
+  - component: {fileID: 2464611523711889726}
   m_Layer: 0
   m_Name: BatSFX
   m_TagString: Untagged
@@ -43,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6ed88e7754d630040820ee1bb79134c6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -127,6 +128,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2464611523711889726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251452678778678404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688d266b5e0fcf34c97bfbfa92682eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  DoorOneUse: 0
+  DoorTwoUse: 0
 --- !u!1 &7408763281802317388
 GameObject:
   m_ObjectHideFlags: 0

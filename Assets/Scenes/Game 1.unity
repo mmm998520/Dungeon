@@ -8177,6 +8177,7 @@ GameObject:
   - component: {fileID: 342662066}
   - component: {fileID: 342662065}
   - component: {fileID: 342662067}
+  - component: {fileID: 342662068}
   m_Layer: 0
   m_Name: Players
   m_TagString: Untagged
@@ -8232,7 +8233,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8dca7967807959142b8d5969b8994666, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8316,6 +8317,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &342662068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342662064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688d266b5e0fcf34c97bfbfa92682eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  DoorOneUse: 0
+  DoorTwoUse: 0
 --- !u!1001 &342993021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17261,6 +17277,7 @@ GameObject:
   - component: {fileID: 773393580}
   - component: {fileID: 773393582}
   - component: {fileID: 773393581}
+  - component: {fileID: 773393583}
   m_Layer: 13
   m_Name: Center
   m_TagString: Untagged
@@ -17386,6 +17403,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773393579}
   m_Enabled: 1
+--- !u!114 &773393583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773393579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51980ad4f140b8b439d1d99d39fca81e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
 --- !u!1001 &773626657
 PrefabInstance:
   m_ObjectHideFlags: 0

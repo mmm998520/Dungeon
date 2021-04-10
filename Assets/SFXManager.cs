@@ -4,34 +4,51 @@ using UnityEngine;
 
 public class SFXManager : MonoBehaviour
 {
-    AudioSource audioSource;
-    public static float volume;
+    [SerializeField] AudioSource audioSource;
+    public static float gameVolume;
     float thisVolume;
     public bool DoorOneUse, DoorTwoUse;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        if(!audioSource)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
         thisVolume = audioSource.volume;
+        setVolume();
     }
 
     void Update()
     {
-        //audioSource.volume = thisVolume * volume;
-        audioSource.volume = thisVolume;
         if (gameObject.name == "DoorOneSFX")
         {
-            if (!DoorOneUse)
-            {
-                audioSource.volume = 0;
-            }
+            audioSource.mute = !DoorOneUse;
         }
         else if (gameObject.name == "DoorTwoSFX")
         {
-            if (!DoorTwoUse)
-            {
-                audioSource.volume = 0;
-            }
+            audioSource.mute = !DoorTwoUse;
+        }
+    }
+
+    public void setVolume()
+    {
+        try
+        {
+            audioSource.volume = thisVolume * gameVolume;
+        }
+        catch
+        {
+
+        }
+    }
+
+    public static void SetAllVolume()
+    {
+        SFXManager[] SFXManagers = FindObjectsOfType<SFXManager>();
+        for(int i = 0; i < SFXManagers.Length; i++)
+        {
+            SFXManagers[i].setVolume();
         }
     }
 }

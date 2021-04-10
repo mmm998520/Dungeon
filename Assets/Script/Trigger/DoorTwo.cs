@@ -46,7 +46,11 @@ namespace com.DungeonPad
             localX = Mathf.Clamp(localX, 0, localXMax);
             doorSprite.localPosition = new Vector3(localX, 0, 0);
             doorCollider.localScale = new Vector3(localX, 1, 1);
-            transform.GetChild(4).GetComponent<SFXManager>().DoorTwoUse = (Mathf.Abs(tempLocalX - localX) > 0.0001f);
+            SFXManager[] SFXManagers = transform.GetChild(4).GetComponents<SFXManager>();
+            for (int i = 0; i < SFXManagers.Length; i++)
+            {
+                SFXManagers[i].DoorTwoUse = (Mathf.Abs(tempLocalX - localX) > 0.001f);
+            }
         }
     }
 }

@@ -102,6 +102,8 @@ namespace com.DungeonPad
             MusicSound = (int)MusicSoundSlider.value;
             PlayerPrefs.SetInt("MusicSound", MusicSound);
             PlayerPrefs.Save();
+            MusicManager.gameVolume = MusicSound / 10f;
+            MusicManager.SetAllVolume();
         }
 
         public void setFXSound()
@@ -109,6 +111,8 @@ namespace com.DungeonPad
             FXSound = (int)FXSoundSlider.value;
             PlayerPrefs.SetInt("FXSound", FXSound);
             PlayerPrefs.Save();
+            SFXManager.gameVolume = FXSound / 10f;
+            SFXManager.SetAllVolume();
         }
 
         public void setLightness()

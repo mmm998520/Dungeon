@@ -30,7 +30,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 3.6833334
+        time: 2
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -51,6 +51,8 @@ AnimationClip:
       value: {fileID: 21300000, guid: eb0d7aaef9543124392751624a6a6b97, type: 3}
     - time: 1
       value: {fileID: 21300000, guid: 345bf3efe14c694488f5e67d46643915, type: 3}
+    - time: 2
+      value: {fileID: 21300000, guid: 08599eebdfcf7fd408ab1f6da7811073, type: 3}
     attribute: m_Sprite
     path: GameObject/New Sprite
     classID: 212
@@ -79,12 +81,13 @@ AnimationClip:
     pptrCurveMapping:
     - {fileID: 21300000, guid: eb0d7aaef9543124392751624a6a6b97, type: 3}
     - {fileID: 21300000, guid: 345bf3efe14c694488f5e67d46643915, type: 3}
+    - {fileID: 21300000, guid: 08599eebdfcf7fd408ab1f6da7811073, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 3.6833334
+    m_StopTime: 2.0166667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -113,7 +116,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 3.6833334
+        time: 2
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -146,21 +149,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.6666666
+  - time: 1.8333334
     functionName: reSpeed
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 3.65
+  - time: 1.9833333
     functionName: endPunch
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 3.65
+  - time: 1.9833333
     functionName: ReCD
     data: 
     objectReferenceParameter: {fileID: 0}
