@@ -17,7 +17,7 @@ namespace com.DungeonPad
                                                 PlayerNumSpriteSelect, PlayerNumSpriteUnSelect;
         [SerializeField] Image MusicSoundText, FXSoundText, LightnessText, PlayerNumText;
         [SerializeField] Slider MusicSoundSlider, FXSoundSlider, LightnessSlider, PlayerNumSlider;
-
+        [SerializeField] GameObject Locker;
         void Awake()
         {
             eventSystem = EventSystem.current;
@@ -56,7 +56,7 @@ namespace com.DungeonPad
             {
                 PlayerNumSlider.value = 2;
             }
-            setPlayerNum();
+            setPlayerNum(1);
             if (SceneManager.GetActiveScene().name == "Home")
             {
                 Destroy(gameObject);
@@ -64,6 +64,7 @@ namespace com.DungeonPad
             else if (SceneManager.GetActiveScene().name != "Setting")
             {
                 gameObject.SetActive(false);
+                Locker.SetActive(true);
             }
         }
 
@@ -123,18 +124,25 @@ namespace com.DungeonPad
             GlobalLightSetting.settingLight();
         }
 
-        public void setPlayerNum()
+        public void setPlayerNum(int awake)
         {
-            PlayerNum = (int)PlayerNumSlider.value;
-            PlayerPrefs.SetInt("PlayerNum", PlayerNum);
-            PlayerPrefs.Save();
-            if(PlayerNum == 1)
+            if (awake == 1 || SceneManager.GetActiveScene().name == "Setting")
             {
-                InputManager.twoPlayerMode = false;
+                PlayerNum = (int)PlayerNumSlider.value;
+                PlayerPrefs.SetInt("PlayerNum", PlayerNum);
+                PlayerPrefs.Save();
+                if (PlayerNum == 1)
+                {
+                    InputManager.twoPlayerMode = false;
+                }
+                else
+                {
+                    InputManager.twoPlayerMode = true;
+                }
             }
             else
             {
-                InputManager.twoPlayerMode = true;
+                PlayerNumSlider.value = PlayerNum;
             }
         }
 
