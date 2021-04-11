@@ -101,9 +101,6 @@ namespace com.DungeonPad
                 }
 
             }
-            Debug.LogError(Num.text);
-            Debug.LogError(ability.name);
-            Debug.LogError(AbilityManager.AbilityCurrentLevel[ability.name]);
             Num.text = ability.Num[AbilityManager.AbilityCurrentLevel[ability.name]];
         }
 

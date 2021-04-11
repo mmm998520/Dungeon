@@ -108,7 +108,6 @@ namespace com.DungeonPad
             else
             {
                 GameTimer.Timer = 0;
-                Debug.LogError(GameTimer.Timer);
             }
             Keyboard keyboard = Keyboard.current;
             InputManager.currentGamepad = Gamepad.current;

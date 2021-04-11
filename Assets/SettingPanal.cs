@@ -126,7 +126,7 @@ namespace com.DungeonPad
 
         public void setPlayerNum(int awake)
         {
-            if (awake == 1 || SceneManager.GetActiveScene().name == "Setting")
+            if (awake == 1 || SceneManager.GetActiveScene().name == "Setting" || SceneManager.GetActiveScene().name == "Home")
             {
                 PlayerNum = (int)PlayerNumSlider.value;
                 PlayerPrefs.SetInt("PlayerNum", PlayerNum);
