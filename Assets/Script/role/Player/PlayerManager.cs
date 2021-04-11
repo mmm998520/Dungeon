@@ -157,6 +157,30 @@ namespace com.DungeonPad
                             else
                             {
                                 DiedTimer = 0;
+                                if(GameManager.CurrentSceneName == "Game 1")
+                                {
+                                    if(GameManager.layers == 1)
+                                    {
+                                        if (++GameManager.layerOneCntinuousDideTimes >= 2)
+                                        {
+                                            if (GameManager.passLayerOneTimes >= 7)
+                                            {
+                                                GameManager.passLayerOneTimes = 5;
+                                                GameManager.layerOneCntinuousDideTimes = 0;
+                                            }
+                                            else if (GameManager.passLayerOneTimes >= 5)
+                                            {
+                                                GameManager.passLayerOneTimes = 4;
+                                                GameManager.layerOneCntinuousDideTimes = 0;
+                                            }
+                                        }
+                                    }
+                                    PlayerPrefs.SetInt("passLayerOneTimes", GameManager.passLayerOneTimes);
+                                    PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
+                                    PlayerPrefs.SetInt("layerOneCntinuousDideTimes", GameManager.layerOneCntinuousDideTimes);
+                                    PlayerPrefs.SetInt("layerTwoCntinuousDideTimes", GameManager.layerTwoCntinuousDideTimes);
+                                    PlayerPrefs.Save();
+                                }
                             }
                         }
                     }

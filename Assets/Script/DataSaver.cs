@@ -169,6 +169,8 @@ namespace com.DungeonPad
             PlayerPrefs.SetInt("TotalCost", AbilityManager.TotalCost);
             PlayerPrefs.SetInt("passLayerOneTimes", GameManager.passLayerOneTimes);
             PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
+            PlayerPrefs.SetInt("layerOneCntinuousDideTimes", GameManager.layerOneCntinuousDideTimes);
+            PlayerPrefs.SetInt("layerTwoCntinuousDideTimes", GameManager.layerTwoCntinuousDideTimes);
             PlayerPrefs.Save();
         }
 
