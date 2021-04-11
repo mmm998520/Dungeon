@@ -134,10 +134,14 @@ namespace com.DungeonPad
                 }
                 stopPanel.SetActive(!stopPanel.activeSelf);
             }
-            if(settingPanel.activeSelf && InputManager.currentGamepad != null && InputManager.currentGamepad.bButton.wasPressedThisFrame)
+            if(settingPanel.activeSelf && InputManager.anyExit())
             {
                 settingPanel.SetActive(false);
                 stopPanel.SetActive(true);
+            }
+            if (stopPanel.activeSelf && InputManager.anyExit())
+            {
+                stopPanel.SetActive(false);
             }
 
             //if (abilityStore)
