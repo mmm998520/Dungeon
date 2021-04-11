@@ -35,7 +35,7 @@ namespace com.DungeonPad
             changeingKey();
             if(keyboard != null && selected.transform.parent.parent.name != "ChangingButtons")
             {
-                if (keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.bButton.wasPressedThisFrame))
+                if (InputManager.anyExit())
                 {
                     SwitchScenePanel.NextScene = "Home";
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");

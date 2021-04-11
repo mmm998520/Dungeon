@@ -46,13 +46,18 @@ namespace com.DungeonPad
                 SwitchScenePanel.NextScene = "Home";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }
-            if (InputManager.currentGamepad != null && InputManager.currentGamepad.bButton.wasPressedThisFrame)
+            if (InputManager.twoPlayerGamepadExit() || InputManager.onePlayerGamepadExit())
             {
                 if (InputManager.currentGamepad != InputManager.p1Gamepad && InputManager.currentGamepad != InputManager.p2Gamepad)
                 {
                     SwitchScenePanel.NextScene = "Home";
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
+            }
+            if(Keyboard.current != null && (Keyboard.current.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame && InputManager.p1Mod != InputManager.PlayerMod.keyboardP1 && InputManager.p2Mod != InputManager.PlayerMod.keyboardP1) || (Keyboard.current.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame && InputManager.p1Mod != InputManager.PlayerMod.keyboardP2 && InputManager.p2Mod != InputManager.PlayerMod.keyboardP2))
+            {
+                SwitchScenePanel.NextScene = "Home";
+                GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }
             for (int i = 0; i < GameManager.players.childCount; i++)
             {

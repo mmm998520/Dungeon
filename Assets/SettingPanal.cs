@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 namespace com.DungeonPad
 {
@@ -95,6 +96,11 @@ namespace com.DungeonPad
             else if (slider == PlayerNumSlider)
             {
                 PlayerNumText.sprite = PlayerNumSpriteSelect;
+            }
+
+            if (InputManager.anyEnter())
+            {
+
             }
         }
 

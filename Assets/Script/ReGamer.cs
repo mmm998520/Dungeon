@@ -18,14 +18,14 @@ namespace com.DungeonPad
         void Update()
         {
             Keyboard keyboard = Keyboard.current;
-            if (keyboard.enterKey.wasPressedThisFrame || keyboard.numpadEnterKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardDashNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardDashNum].wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.aButton.wasPressedThisFrame))
+            if (InputManager.anyEnter())
             {
                 ReGame();
                 ReAbility();
                 SwitchScenePanel.NextScene = "Game 1";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }
-            else if (keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || (Gamepad.current != null && Gamepad.current.bButton.wasPressedThisFrame))
+            else if (InputManager.anyExit())
             {
                 ReGame();
                 ReAbility();

@@ -178,4 +178,56 @@ public class InputManager : MonoBehaviour
         return value;
     }
     #endregion
+
+    #region// EnterKey / ExitKey
+    public static bool keyboardEnter()
+    {
+        return Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame;
+    }
+
+    public static bool playerKeyboardEnter()
+    {
+        return Keyboard.current != null && (Keyboard.current.allKeys[p1KeyboardDashNum].wasPressedThisFrame || Keyboard.current.allKeys[p2KeyboardDashNum].wasPressedThisFrame);
+    }
+
+    public static bool twoPlayerGamepadEnter()
+    {
+        return Gamepad.current != null && Gamepad.current.aButton.wasPressedThisFrame;
+    }
+
+    public static bool onePlayerGamepadEnter()
+    {
+        return Gamepad.current != null && (Gamepad.current.leftShoulder.wasPressedThisFrame || Gamepad.current.rightShoulder.wasPressedThisFrame);
+    }
+
+    public static bool anyEnter()
+    {
+        return keyboardEnter() || playerKeyboardEnter() || twoPlayerGamepadEnter() || onePlayerGamepadEnter();
+    }
+
+    public static bool keyboardExit()
+    {
+        return Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
+    }
+
+    public static bool playerKeyboardExit()
+    {
+        return Keyboard.current != null && (Keyboard.current.allKeys[p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || Keyboard.current.allKeys[p2KeyboardBreakfreeKeyNum].wasPressedThisFrame);
+    }
+
+    public static bool twoPlayerGamepadExit()
+    {
+        return Gamepad.current != null && Gamepad.current.bButton.wasPressedThisFrame;
+    }
+
+    public static bool onePlayerGamepadExit()
+    {
+        return Gamepad.current != null && (Gamepad.current.leftTrigger.wasPressedThisFrame || Gamepad.current.rightTrigger.wasPressedThisFrame);
+    }
+
+    public static bool anyExit()
+    {
+        return keyboardExit() || playerKeyboardExit() || twoPlayerGamepadExit() || onePlayerGamepadExit();
+    }
+    #endregion
 }

@@ -65,7 +65,7 @@ namespace com.DungeonPad
                     TotalCosts[i].sprite = UnLoad;
                 }
             }
-            if (keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || Gamepad.current.bButton.wasPressedThisFrame)
+            if (InputManager.anyExit())
             {
                 transform.parent.gameObject.SetActive(false);
                 if (selectMouse)

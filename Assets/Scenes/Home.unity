@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 227383997}
   - component: {fileID: 227383996}
   - component: {fileID: 227383995}
+  - component: {fileID: 227383998}
   m_Layer: 5
   m_Name: EXIT
   m_TagString: Untagged
@@ -339,6 +340,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227383993}
   m_CullTransparentMesh: 0
+--- !u!114 &227383998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227383993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719064877e968034ea8194a61b4143d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &320325505
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +748,7 @@ GameObject:
   - component: {fileID: 900496841}
   - component: {fileID: 900496840}
   - component: {fileID: 900496839}
+  - component: {fileID: 900496842}
   m_Layer: 5
   m_Name: TUTORIAL
   m_TagString: Untagged
@@ -853,6 +867,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900496837}
   m_CullTransparentMesh: 0
+--- !u!114 &900496842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900496837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719064877e968034ea8194a61b4143d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &981893202
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,6 +891,7 @@ GameObject:
   - component: {fileID: 981893206}
   - component: {fileID: 981893205}
   - component: {fileID: 981893204}
+  - component: {fileID: 981893207}
   m_Layer: 5
   m_Name: SETTING
   m_TagString: Untagged
@@ -983,6 +1010,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981893202}
   m_CullTransparentMesh: 0
+--- !u!114 &981893207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981893202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719064877e968034ea8194a61b4143d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &982984170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1250,7 @@ GameObject:
   - component: {fileID: 1531298151}
   - component: {fileID: 1531298150}
   - component: {fileID: 1531298149}
+  - component: {fileID: 1531298152}
   m_Layer: 5
   m_Name: PLAY
   m_TagString: Untagged
@@ -1329,6 +1369,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531298147}
   m_CullTransparentMesh: 0
+--- !u!114 &1531298152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531298147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719064877e968034ea8194a61b4143d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1783300114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,6 +1446,7 @@ GameObject:
   - component: {fileID: 1836529742}
   - component: {fileID: 1836529741}
   - component: {fileID: 1836529740}
+  - component: {fileID: 1836529743}
   m_Layer: 5
   m_Name: CONTROL
   m_TagString: Untagged
@@ -1512,6 +1565,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836529738}
   m_CullTransparentMesh: 0
+--- !u!114 &1836529743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836529738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719064877e968034ea8194a61b4143d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7954081956055244028
 PrefabInstance:
   m_ObjectHideFlags: 0
