@@ -8,7 +8,6 @@ public class AttackScaler : MonoBehaviour
     void Start()
     {
         maxX = transform.localScale.x;
-        Debug.LogError(maxX);
         transform.localScale = new Vector3(0, transform.localScale.y, transform.localScale.z);
     }
 

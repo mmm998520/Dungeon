@@ -81,8 +81,11 @@ namespace com.DungeonPad
         static int dashSFXNum = 0;
         [SerializeField] GameObject[] dashSFX;
 
+        static bool Died = false;
+
         public void Start()
         {
+            Died = false;
             v = Vector3.zero;
             batStickedNum = 0;
             for (int i = 0; i < GameManager.players.childCount; i++)
@@ -154,8 +157,9 @@ namespace com.DungeonPad
                                     playerManager.HPMaxCircleLight.color = new Color(1, 1, 1, 0.12f * Mathf.Clamp01(Mathf.InverseLerp(MaxHP * 0.9f, MaxHP, HP)) + 0.15f);
                                 }
                             }
-                            else
+                            else if(!Died)
                             {
+                                Died = true;
                                 DiedTimer = 0;
                                 if(GameManager.CurrentSceneName == "Game 1")
                                 {

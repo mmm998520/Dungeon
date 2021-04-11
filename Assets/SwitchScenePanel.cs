@@ -8,9 +8,17 @@ namespace com.DungeonPad
     public class SwitchScenePanel : MonoBehaviour
     {
         public static string NextScene;
+        public float gradientVolume;
+        float timer;
+        static bool Gradient;
+
         void switchScenePanel()
         {
             SceneManager.LoadScene(NextScene);
+            Gradient = true;
+            GameObject[] musicObjs = GameObject.FindGameObjectsWithTag("music");
+            GameObject[] TutorialMusicObjs = GameObject.FindGameObjectsWithTag("TutorialMusic");
+
             switch (NextScene)
             {
                 case "Game 1":
@@ -22,11 +30,13 @@ namespace com.DungeonPad
                 case "Game 0_3":
                 case "Game 0_4":
                 case "Game 0_5":
-                    GameObject[] objs = GameObject.FindGameObjectsWithTag("music");
-                    for (int i = 0; i < objs.Length; i++)
+                    for (int i = 0; i < musicObjs.Length; i++)
                     {
-                        Destroy(objs[i]);
+                        Destroy(musicObjs[i]);
                     }
+                    break;
+                default:
+                    Gradient = false;
                     break;
             }
             switch (NextScene)
@@ -37,14 +47,30 @@ namespace com.DungeonPad
                 case "Game 0_3":
                 case "Game 0_4":
                 case "Game 0_5":
+                    Gradient = false;
                     break;
                 default:
-                    GameObject[] objs = GameObject.FindGameObjectsWithTag("TutorialMusic");
-                    for (int i = 0; i < objs.Length; i++)
+                    for (int i = 0; i < TutorialMusicObjs.Length; i++)
                     {
-                        Destroy(objs[i]);
+                        Destroy(TutorialMusicObjs[i]);
                     }
                     break;
+            }
+            timer = 0;
+        }
+
+        void setMusicSound()
+        {
+            MusicManager.gradientVolume = gradientVolume;
+            MusicManager.SetAllVolume();
+        }
+
+        void Update()
+        {
+            timer += Time.deltaTime;
+            if (timer < 2.1f && Gradient)
+            {
+                setMusicSound();
             }
         }
     }
