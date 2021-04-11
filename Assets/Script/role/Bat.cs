@@ -65,7 +65,7 @@ namespace com.DungeonPad
         {
             if (collision.collider.GetComponent<PlayerManager>())
             {
-                Instantiate(stickBat, collision.collider.GetComponent<PlayerManager>().sticksBat).transform.localPosition = (transform.position - collision.transform.position).normalized * 0.9f;
+                Instantiate(stickBat, collision.collider.GetComponent<PlayerManager>().sticksBat).transform.position = collision.transform.position + (transform.position - collision.transform.position).normalized * 0.9f;
                 Destroy(gameObject);
             }
         }
