@@ -7,16 +7,17 @@ namespace com.DungeonPad
     public class DoorOne : MonoBehaviour
     {
         float localX, localXMax, speed = 1.5f;
-        Transform doorSprite, doorCollider;
+        [SerializeField] Transform doorSpriteTop, doorSpriteFront, doorCollider;
         public SpriteRenderer spriteRenderer;
         public Sprite non, used;
+        [SerializeField] Transform SFXManagersTransform;
+        SFXManager[] SFXManagers;
 
         void Start()
         {
-            doorSprite = transform.GetChild(0);
-            localX = localXMax = doorSprite.localPosition.x;
-            doorCollider = transform.GetChild(1);
+            localX = localXMax = doorSpriteTop.localPosition.x;
             doorCollider.localScale = new Vector3(localX, 1, 1);
+            SFXManagers = SFXManagersTransform.GetComponents<SFXManager>();
         }
 
         void Update()
@@ -33,9 +34,9 @@ namespace com.DungeonPad
                 spriteRenderer.sprite = non;
             }
             localX = Mathf.Clamp(localX, 0, localXMax);
-            doorSprite.localPosition = new Vector3(localX, 0, 0);
+            doorSpriteTop.localPosition = new Vector3(localX, 0, 0);
+            doorSpriteFront.localPosition = new Vector3(localX, 0, 0);
             doorCollider.localScale = new Vector3(localX, 1, 1);
-            SFXManager[] SFXManagers = transform.GetChild(4).GetComponents<SFXManager>();
             for(int i = 0; i < SFXManagers.Length; i++)
             {
                 SFXManagers[i].DoorOneUse = (Mathf.Abs(tempLocalX - localX) > 0.001f);
