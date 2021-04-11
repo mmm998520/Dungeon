@@ -67,6 +67,10 @@ namespace com.DungeonPad
                     }
                 }
             }
+            if((showSelected || Time.timeScale <= 0.1f) && InputManager.anyExit())
+            {
+                showSelected = false;
+            }
             if (Time.timeScale <= 0.1f)
             {
                 showSelected = false;

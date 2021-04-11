@@ -116,7 +116,8 @@ namespace com.DungeonPad
                 shopPanel.SetActive(true);
                 shopPanel.transform.GetChild(0).GetComponent<AbilityDatas>().start();
             }
-            if (PlayerManager.HP0Timer < 0.2f && ((keyboard.escapeKey.wasPressedThisFrame || (InputManager.currentGamepad != null && InputManager.currentGamepad.startButton.wasPressedThisFrame))) && !SceneManager.GetActiveScene().name.Contains("Select"))
+            bool openStopPanel = false, closeSettingPanel = false;
+            if (!settingPanel.activeSelf  && PlayerManager.HP0Timer < 0.2f && ((keyboard.escapeKey.wasPressedThisFrame || (InputManager.currentGamepad != null && InputManager.currentGamepad.startButton.wasPressedThisFrame))) && !SceneManager.GetActiveScene().name.Contains("Select"))
             {
                 if (stopPanel.activeSelf)
                 {
@@ -129,18 +130,23 @@ namespace com.DungeonPad
                 }
                 else
                 {
+                    openStopPanel = true;
                     Time.timeScale = 0;
                     Time.fixedDeltaTime = 0.02F * Time.timeScale;
                 }
                 stopPanel.SetActive(!stopPanel.activeSelf);
+                Debug.LogWarning("stopPanel.activeSelf : " + stopPanel.activeSelf);
             }
-            if(settingPanel.activeSelf && InputManager.anyExit())
+            if (settingPanel.activeSelf && InputManager.anyExit())
             {
                 settingPanel.SetActive(false);
                 stopPanel.SetActive(true);
+                closeSettingPanel = true;
             }
-            if (stopPanel.activeSelf && InputManager.anyExit())
+            if (stopPanel.activeSelf && InputManager.anyExit() && !openStopPanel && !closeSettingPanel)
             {
+                Time.timeScale = 1;
+                Time.fixedDeltaTime = 0.02F * Time.timeScale;
                 stopPanel.SetActive(false);
             }
 
