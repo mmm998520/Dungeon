@@ -26,7 +26,7 @@ namespace com.DungeonPad
         public float SleepTimer;
         public SpriteRenderer SleepUI;
 
-        [SerializeField] GameObject FireSFX;
+        [SerializeField] GameObject FireSFX, normalAttackSFX;
         void Start()
         {
             speed = 3;
@@ -219,6 +219,11 @@ namespace com.DungeonPad
         {
             Record();
             rigidbody.velocity = Vector3.zero;
+        }
+
+        void NormalAttackSFX()
+        {
+            Destroy(Instantiate(normalAttackSFX, transform.position + Vector3.back * 10, Quaternion.identity), 5);
         }
 
         void normalAttack()
