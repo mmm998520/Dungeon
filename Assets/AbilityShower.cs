@@ -60,6 +60,7 @@ namespace com.DungeonPad
                 {
                     selectedNum = 0;
                     showSelected = true;
+                    ButtonSelect.OnClicked();
                     eventSystem.SetSelectedGameObject(selects[0]);
                     for(int i = 0; i < selects.Length; i++)
                     {
@@ -70,6 +71,7 @@ namespace com.DungeonPad
             if((showSelected || Time.timeScale <= 0.1f) && InputManager.anyExit())
             {
                 showSelected = false;
+                ButtonSelect.OnClicked();
             }
             if (Time.timeScale <= 0.1f)
             {

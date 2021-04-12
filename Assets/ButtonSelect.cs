@@ -11,9 +11,18 @@ namespace com.DungeonPad
         Button button;
         [SerializeField] bool canAnyEnter;
         [SerializeField] GameObject selectedSFX, clickedSFX;
+        public static GameObject SelectedSFX, ClickedSFX;
         void Start()
         {
             button = GetComponent<Button>();
+            if (SelectedSFX == null)
+            {
+                SelectedSFX = selectedSFX;
+            }
+            if (ClickedSFX == null)
+            {
+                ClickedSFX = clickedSFX;
+            }
         }
 
         void Update()
@@ -27,14 +36,36 @@ namespace com.DungeonPad
 
         public void onSelected()
         {
-            Debug.LogWarning("onSelected");
-            Instantiate(selectedSFX, Camera.main.transform.position, Quaternion.identity);
+            OnSelected();
         }
 
         public void onClicked()
         {
-            Debug.LogWarning("onClicked");
-            Instantiate(clickedSFX, Camera.main.transform.position, Quaternion.identity);
+            OnClicked();
+        }
+
+        public static void OnSelected()
+        {
+            try
+            {
+                Destroy(Instantiate(SelectedSFX, Camera.main.transform.position, Quaternion.identity), 3);
+            }
+            catch
+            {
+
+            }
+        }
+
+        public static void OnClicked()
+        {
+            try
+            {
+                Destroy(Instantiate(ClickedSFX, Camera.main.transform.position, Quaternion.identity), 3);
+            }
+            catch
+            {
+
+            }
         }
     }
 }

@@ -330,7 +330,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3411986416876569675}
+        - m_Target: {fileID: 376641029093823182}
           m_MethodName: onSelected
           m_Mode: 1
           m_Arguments:
@@ -487,7 +487,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1730241474435662473}
+        - m_Target: {fileID: 376641029093823182}
           m_MethodName: onSelected
           m_Mode: 1
           m_Arguments:
@@ -1374,7 +1374,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 703036271856018991}
+        - m_Target: {fileID: 376641029093823182}
           m_MethodName: onSelected
           m_Mode: 1
           m_Arguments:

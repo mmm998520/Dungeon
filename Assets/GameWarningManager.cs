@@ -23,9 +23,19 @@ namespace com.DungeonPad
             Keyboard keyboard = Keyboard.current;
             Gamepad gamepad = Gamepad.current;
             timer += Time.deltaTime;
-            if (timer > timerStoper || (keyboard.anyKey.wasPressedThisFrame || (gamepad != null && gamepad.aButton.wasPressedThisFrame)))
+            if (timer > timerStoper)
             {
-                
+                SwitchScenePanel.NextScene = nextScene;
+                GameObject.Find("SwitchScenePanel").GetComponent<Image>().sprite = nextSprite;
+                if (nextSprite != null)
+                {
+                    GameObject.Find("SwitchScenePanel").GetComponent<Image>().color = Color.white;
+                }
+                GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+            }
+            if (keyboard.anyKey.wasPressedThisFrame || (gamepad != null && gamepad.aButton.wasPressedThisFrame))
+            {
+                ButtonSelect.OnClicked();
                 SwitchScenePanel.NextScene = nextScene;
                 GameObject.Find("SwitchScenePanel").GetComponent<Image>().sprite = nextSprite;
                 if (nextSprite != null)

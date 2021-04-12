@@ -184,6 +184,10 @@ namespace com.DungeonPad
             InvincibleTimer = 0;
             rigidbody.velocity = RecordDir * 15;
             punching = true;
+        }
+
+        void PunchSFX()
+        {
             Destroy(Instantiate(punchSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
         }
 

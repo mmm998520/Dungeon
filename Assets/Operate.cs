@@ -188,6 +188,7 @@ namespace com.DungeonPad
                         break;
                         #endregion
                 }
+                ButtonSelect.OnClicked();
                 setButtonSprite(selectedButtons[j], i);
                 selectedButtons[j].GetComponent<Image>().enabled = true;
                 eventSystem.SetSelectedGameObject(selectedButtons[j]);

@@ -123,10 +123,12 @@ namespace com.DungeonPad
                 {
                     Time.timeScale = 1;
                     Time.fixedDeltaTime = 0.02F * Time.timeScale;
+                    ButtonSelect.OnClicked();
                 }
                 else if (settingPanel.activeSelf)
                 {
                     settingPanel.SetActive(false);
+                    ButtonSelect.OnClicked();
                 }
                 else
                 {
@@ -142,12 +144,14 @@ namespace com.DungeonPad
                 settingPanel.SetActive(false);
                 stopPanel.SetActive(true);
                 closeSettingPanel = true;
+                ButtonSelect.OnClicked();
             }
             if (stopPanel.activeSelf && InputManager.anyExit() && !openStopPanel && !closeSettingPanel)
             {
                 Time.timeScale = 1;
                 Time.fixedDeltaTime = 0.02F * Time.timeScale;
                 stopPanel.SetActive(false);
+                ButtonSelect.OnClicked();
             }
 
             //if (abilityStore)

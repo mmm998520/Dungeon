@@ -166,7 +166,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6893855308817483}
+        - m_Target: {fileID: 8767557837459478586}
           m_MethodName: onClicked
           m_Mode: 1
           m_Arguments:
@@ -177,11 +177,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 10
+  - eventID: 11
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6893855308817483}
+        - m_Target: {fileID: 8767557837459478586}
           m_MethodName: onSelected
           m_Mode: 1
           m_Arguments:
@@ -493,7 +493,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 10
+  - eventID: 11
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -674,7 +674,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6420519090763001865}
+        - m_Target: {fileID: 8767557837459478586}
           m_MethodName: onClicked
           m_Mode: 1
           m_Arguments:
@@ -685,11 +685,11 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventID: 10
+  - eventID: 11
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6420519090763001865}
+        - m_Target: {fileID: 8767557837459478586}
           m_MethodName: onSelected
           m_Mode: 1
           m_Arguments:

@@ -36,6 +36,7 @@ namespace com.DungeonPad
                 {
                     if(Time.timeScale > 0.1f)
                     {
+                        ButtonSelect.OnClicked();
                         TutorialText[nowTextNum].SetActive(false);
                         nowTextNum++;
                         if (nowTextNum < TutorialText.Length)

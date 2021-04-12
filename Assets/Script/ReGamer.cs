@@ -24,6 +24,7 @@ namespace com.DungeonPad
                 ReAbility();
                 SwitchScenePanel.NextScene = "Game 1";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+                ButtonSelect.OnClicked();
             }
             else if (InputManager.anyExit())
             {
@@ -31,6 +32,7 @@ namespace com.DungeonPad
                 ReAbility();
                 SwitchScenePanel.NextScene = "Home";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+                ButtonSelect.OnClicked();
             }
         }
 
