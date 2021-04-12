@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DragonBossFireBallBounce 1
+  m_Name: DragonBossFireBallBounce90
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -175,32 +175,11 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.78333336
-    functionName: FireBallBounce
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.78333336
-    functionName: fireSFX
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 1.3833333
     functionName: FireBallBounce
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: -20
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.3833333
-    functionName: FireBallBounce
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 20
+    floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.3833333
