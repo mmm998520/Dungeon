@@ -48,12 +48,20 @@ Application.Quit();
 
         void Update()
         {
-            Keyboard keyboard = Keyboard.current;
-            /*if (keyboard.escapeKey.wasPressedThisFrame || keyboard.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame || keyboard.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame || Gamepad.current.bButton.wasPressedThisFrame)
+            if ((Keyboard.current != null && Keyboard.current.f12Key.wasPressedThisFrame) || (Gamepad.current != null && Gamepad.current.selectButton.isPressed && Gamepad.current.startButton.isPressed))
             {
-                SwitchScenePanel.NextScene = "Home";
+                GameManager.passLayerOneTimes = 0;
+                GameManager.passLayerTwoTimes = 0;
+                GameManager.layerOneCntinuousDideTimes = 0;
+                GameManager.layerTwoCntinuousDideTimes = 0;
+                PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerOneTimes);
+                PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
+                PlayerPrefs.SetInt("layerOneCntinuousDideTimes", GameManager.layerOneCntinuousDideTimes);
+                PlayerPrefs.SetInt("layerTwoCntinuousDideTimes", GameManager.layerTwoCntinuousDideTimes);
+                PlayerPrefs.Save();
+                SwitchScenePanel.NextScene = "GameWarning";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
-            }*/
+            }
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

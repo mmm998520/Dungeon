@@ -52,7 +52,7 @@ namespace com.DungeonPad
                     totalCol = 20;
                     break;
                 default:
-                    Debug.LogError("新scene要記得先設定我");
+                    Debug.LogWarning("新scene要記得先設定我");
                     break;
             }
         }

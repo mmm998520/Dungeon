@@ -64,9 +64,19 @@ namespace com.DungeonPad
                 GameManager.players.GetChild(i).GetComponent<PlayerManager>().DashTimer = 0.3f;
             }
             selectRole();
-            if (Keyboard.current != null && Keyboard.current.f12Key.wasPressedThisFrame)
+            if ((Keyboard.current != null && Keyboard.current.f12Key.wasPressedThisFrame) || (Gamepad.current != null && Gamepad.current.selectButton.isPressed && Gamepad.current.startButton.isPressed))
             {
-                PlayerPrefs.DeleteAll();
+                GameManager.passLayerOneTimes = 0;
+                GameManager.passLayerTwoTimes = 0;
+                GameManager.layerOneCntinuousDideTimes = 0;
+                GameManager.layerTwoCntinuousDideTimes = 0;
+                PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerOneTimes);
+                PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
+                PlayerPrefs.SetInt("layerOneCntinuousDideTimes", GameManager.layerOneCntinuousDideTimes);
+                PlayerPrefs.SetInt("layerTwoCntinuousDideTimes", GameManager.layerTwoCntinuousDideTimes);
+                PlayerPrefs.Save();
+                SwitchScenePanel.NextScene = "GameWarning";
+                GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }
 
             p1MotorSpeeds = Mathf.Clamp01(p1MotorSpeeds - Time.deltaTime * 2);
