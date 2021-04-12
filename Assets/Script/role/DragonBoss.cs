@@ -11,7 +11,7 @@ namespace com.DungeonPad
         Transform minDisPlayer;
         public RectTransform HPBar;
         public Image hpBar;
-        public Sprite YellowHP, RedHP;
+        public Sprite GreenHP, YellowHP, RedHP;
         public float InvincibleTimer = 10;//無敵
         public Animator animator;
         public Vector3 RecordDir;
@@ -51,13 +51,17 @@ namespace com.DungeonPad
             InvincibleTimer += Time.deltaTime;
             float scale = HP / MaxHP;
             HPBar.localScale = new Vector3(scale, 1, 1);
-            if (scale <= 0.5f)
+            if (scale <= 1f / 3f)
             {
                 hpBar.sprite = RedHP;
             }
-            else
+            else if (scale <= 2f / 3f)
             {
                 hpBar.sprite = YellowHP;
+            }
+            else
+            {
+                hpBar.sprite = GreenHP;
             }
             minDisPlayer = MinDisPlayer();
 
