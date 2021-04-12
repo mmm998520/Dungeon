@@ -179,6 +179,22 @@ namespace com.DungeonPad
                                             }
                                         }
                                     }
+                                    else if (GameManager.layers == 2)
+                                    {
+                                        if (++GameManager.layerTwoCntinuousDideTimes >= 2)
+                                        {
+                                            if (GameManager.passLayerTwoTimes >= 3)
+                                            {
+                                                GameManager.passLayerTwoTimes = 2;
+                                                GameManager.layerTwoCntinuousDideTimes = 0;
+                                            }
+                                            else if (GameManager.passLayerTwoTimes >= 2)
+                                            {
+                                                GameManager.passLayerTwoTimes = 1;
+                                                GameManager.layerTwoCntinuousDideTimes = 0;
+                                            }
+                                        }
+                                    }
                                     PlayerPrefs.SetInt("passLayerOneTimes", GameManager.passLayerOneTimes);
                                     PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
                                     PlayerPrefs.SetInt("layerOneCntinuousDideTimes", GameManager.layerOneCntinuousDideTimes);
