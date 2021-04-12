@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -709,6 +709,18 @@ PrefabInstance:
       propertyPath: throwAxeSFX
       value: 
       objectReference: {fileID: 2008936489919695510, guid: f48887c528031fe4b8be54cb0fc75eef,
+        type: 3}
+    - target: {fileID: 6115880101944645947, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
+        type: 3}
+      propertyPath: throwAxeAllSFX
+      value: 
+      objectReference: {fileID: 2008936489919695510, guid: b685129e77f831340ab6afbed1036a92,
+        type: 3}
+    - target: {fileID: 6115880101944645947, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
+        type: 3}
+      propertyPath: punchSFX
+      value: 
+      objectReference: {fileID: 2008936489919695510, guid: bab460f8b18a0534d9356b472e4e9d4e,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7af27b8f06c86a84ab6c1f5c47f6977e, type: 3}
@@ -25971,6 +25983,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   DoorOneUse: 0
   DoorTwoUse: 0
+  gameObjects: []
 --- !u!4 &1395043635 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1691314572940453475, guid: eba2d36b39f4da94fbf235b4e1066e15,

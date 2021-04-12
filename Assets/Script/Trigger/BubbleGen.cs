@@ -25,7 +25,7 @@ namespace com.DungeonPad
                 timer = 0;
                 timerStoper = Random.Range(timerStoperMin, timerStoperMax);
                 Destroy(Instantiate(Bubble, transform.position+Vector3.up * 0.2f, Quaternion.identity, transform), 6);
-                BubbleSource.pitch += Random.Range(-0.2f, 0.2f);
+                BubbleSource.pitch += Random.Range(-0.1f, 0.1f);
                 BubbleSource.pitch = Mathf.Clamp(BubbleSource.pitch, 0.8f, 1.3f);
                 BubbleSource.Play();
             }

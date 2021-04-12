@@ -7,7 +7,7 @@ namespace com.DungeonPad
     public class BatSticked : MonoBehaviour
     {
         [SerializeField] float timer, timerStoper, SingleDamage;
-
+        [SerializeField] Transform SFX;
         private void Start()
         {
             PlayerManager.batStickedNum++;
@@ -46,7 +46,10 @@ namespace com.DungeonPad
                 Instantiate(GameManager.Hurted, transform.parent.position, Quaternion.identity, transform.parent);
             }
         }
-
+        private void LateUpdate()
+        {
+            SFX.transform.position = new Vector3(SFX.transform.position.x, SFX.transform.position.y, -10);
+        }
         private void OnDestroy()
         {
             PlayerManager.batStickedNum--;

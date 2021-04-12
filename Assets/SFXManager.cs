@@ -8,6 +8,7 @@ public class SFXManager : MonoBehaviour
     public static float gameVolume;
     float thisVolume;
     public bool DoorOneUse, DoorTwoUse;
+    public List<GameObject> gameObjects = new List<GameObject>();
 
     void Start()
     {
@@ -29,13 +30,32 @@ public class SFXManager : MonoBehaviour
         {
             audioSource.mute = !DoorTwoUse;
         }
+        else if(gameObjects.Count > 0)
+        {
+            setVolume();
+        }
     }
 
     public void setVolume()
     {
         try
         {
-            audioSource.volume = thisVolume * gameVolume;
+            if (gameObjects.Count <= 0)
+            {
+                audioSource.volume = thisVolume * gameVolume;
+            }
+            else
+            {
+                int count = 0;
+                for (int i = 0; i < gameObjects.Count; i++)
+                {
+                    if (gameObjects[i] != null)
+                    {
+                        count++;
+                    }
+                }
+                audioSource.volume = thisVolume * gameVolume * count;
+            }
         }
         catch
         {

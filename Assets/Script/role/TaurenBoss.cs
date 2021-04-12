@@ -26,7 +26,7 @@ namespace com.DungeonPad
         public float SleepTimer;
         public SpriteRenderer SleepUI;
 
-        public GameObject throwAxeSFX;
+        public GameObject punchSFX, throwAxeSFX, throwAxeAllSFX;
 
         void Start()
         {
@@ -184,6 +184,7 @@ namespace com.DungeonPad
             InvincibleTimer = 0;
             rigidbody.velocity = RecordDir * 15;
             punching = true;
+            Destroy(Instantiate(punchSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
         }
 
         void endPunch()
@@ -200,7 +201,7 @@ namespace com.DungeonPad
         #region//ThrowAxe
         void ThrowAxeSFX()
         {
-            Destroy(Instantiate(throwAxeSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
+            //Destroy(Instantiate(throwAxeSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
         }
 
         void ThrowAxe(float angle)
@@ -226,13 +227,14 @@ namespace com.DungeonPad
                 angle *= -1;
             }
             float preAngle = 360f / axeNum;
+            List<GameObject> axes = new List<GameObject>();
             for (int i = 0; i < axeNum; i++)
             {
-
-                GameObject temp = Instantiate(AxeAll, transform.position, Quaternion.Euler(0, 0, angle + preAngle * i));
-                Debug.Log(temp.transform.rotation.eulerAngles.z);
+                axes.Add(Instantiate(AxeAll, transform.position, Quaternion.Euler(0, 0, angle + preAngle * i)));
             }
-            ThrowAxeSFX();
+            GameObject SFX = Instantiate(throwAxeAllSFX, CameraManager.center, Quaternion.identity);
+            SFX.GetComponent<SFXManager>().gameObjects = axes;
+            Destroy(SFX, 10);
         }
 
         void endThrowAxe90()
