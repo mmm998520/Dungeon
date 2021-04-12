@@ -125,6 +125,18 @@ namespace com.DungeonPad
                                 if (fireBallBounceCDTimer > fireBallBounceCD)
                                 {
                                     throwByClockwise = (Random.Range(0, 2) > 0);
+                                    if (HP < 30)
+                                    {
+                                        animator.SetInteger("Stat", 30);
+                                    }
+                                    else if (HP < 60)
+                                    {
+                                        animator.SetInteger("Stat", 60);
+                                    }
+                                    else
+                                    {
+                                        animator.SetInteger("Stat", 90);
+                                    }
                                     animator.SetBool("FireBallBounce", true);
                                     playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
                                     canUseThisAttack = true;
@@ -340,15 +352,15 @@ namespace com.DungeonPad
         {
             if (HP < 30)
             {
-                Instantiate(fireRainInser).GetComponent<FireRainInser>().fireRainNum = 6;
+                Instantiate(fireRainInser).GetComponent<FireRainInser>().fireRainNum = 12;
             }
             else if (HP < 60)
             {
-                Instantiate(fireRainInser).GetComponent<FireRainInser>().fireRainNum = 4;
+                Instantiate(fireRainInser).GetComponent<FireRainInser>().fireRainNum = 8;
             }
             else
             {
-                Instantiate(fireRainInser).GetComponent<FireRainInser>().fireRainNum = 2;
+                Instantiate(fireRainInser).GetComponent<FireRainInser>().fireRainNum = 4;
             }
             Destroy(Instantiate(FireSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
         }
