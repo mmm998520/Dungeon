@@ -47,7 +47,7 @@ namespace com.DungeonPad
                     }
                 }
                 //if(disX < 0.5f / 3 * 2.5f && disY < 0.5f / 3 * 2.5f)
-                if (!isHole && disX < 0.76875f && disY < 0.76875f)
+                if (!isHole && disX < 0.768715625f && disY < 0.768715625f)
                 {
                     playerManager.nextHoleSide = transform;
                 }

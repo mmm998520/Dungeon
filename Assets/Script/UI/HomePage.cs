@@ -62,9 +62,6 @@ Application.Quit();
                 SwitchScenePanel.NextScene = "GameWarning";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }
-
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
     }
 }

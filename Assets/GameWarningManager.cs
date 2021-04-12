@@ -11,6 +11,13 @@ namespace com.DungeonPad
         [SerializeField] string nextScene;
         [SerializeField] Sprite nextSprite;
         [SerializeField] float timer, timerStoper;
+
+        private void Start()
+        {
+            //Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
         void Update()
         {
             Keyboard keyboard = Keyboard.current;
