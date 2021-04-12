@@ -10,9 +10,17 @@ public class SFXManager : MonoBehaviour
     public bool DoorOneUse, DoorTwoUse;
     public List<GameObject> gameObjects = new List<GameObject>();
 
+    static int clickedInOneFrame;
+
     void Start()
     {
-        if(!audioSource)
+        clickedInOneFrame++;
+        Debug.LogWarning(clickedInOneFrame);
+        if (gameObject.name.Contains("ButtonClickSFX") && clickedInOneFrame >= 2)
+        {
+            Destroy(gameObject);
+        }
+        if (!audioSource)
         {
             audioSource = GetComponent<AudioSource>();
         }
@@ -22,6 +30,7 @@ public class SFXManager : MonoBehaviour
 
     void Update()
     {
+        clickedInOneFrame = 0;
         if (gameObject.name == "DoorOneSFX")
         {
             audioSource.mute = !DoorOneUse;

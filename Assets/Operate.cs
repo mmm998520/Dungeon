@@ -21,6 +21,8 @@ namespace com.DungeonPad
 
         GameObject selected;
         Keyboard keyboard;
+
+        bool changing = false;
         void Start()
         {
             setKeySprite();
@@ -29,6 +31,7 @@ namespace com.DungeonPad
 
         void Update()
         {
+            changing = false;
             keyboard = Keyboard.current;
             selected = eventSystem.currentSelectedGameObject;
             switchPanel();
@@ -37,6 +40,7 @@ namespace com.DungeonPad
             {
                 if (InputManager.anyExit())
                 {
+                    ButtonSelect.OnClicked();
                     SwitchScenePanel.NextScene = "Home";
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
@@ -79,17 +83,21 @@ namespace com.DungeonPad
 
         public void preChangeKey()
         {
-            selected = eventSystem.currentSelectedGameObject;
-            int i;
-            for (i = 0; i < selectedButtons.Length; i++)
+            if (!changing)
             {
-                if(selectedButtons[i] == selected)
+                ButtonSelect.OnClicked();
+                selected = eventSystem.currentSelectedGameObject;
+                int i;
+                for (i = 0; i < selectedButtons.Length; i++)
                 {
-                    break;
+                    if (selectedButtons[i] == selected)
+                    {
+                        break;
+                    }
                 }
+                selectedButtons[i].GetComponent<Image>().enabled = false;
+                eventSystem.SetSelectedGameObject(changingButtons[i]);
             }
-            selectedButtons[i].GetComponent<Image>().enabled = false;
-            eventSystem.SetSelectedGameObject(changingButtons[i]);
         }
 
         void changeingKey()
@@ -103,6 +111,15 @@ namespace com.DungeonPad
                     {
                         break;
                     }
+                }
+                if (InputManager.anyExit())
+                {
+                    ButtonSelect.OnClicked();
+                    changing = true;
+                    setButtonSprite(selectedButtons[j], int.Parse(PlayerPrefs.GetString("Keyboard").Split(',')[j]));
+                    selectedButtons[j].GetComponent<Image>().enabled = true;
+                    eventSystem.SetSelectedGameObject(selectedButtons[j]);
+                    return;
                 }
                 string[] keyboardNums = PlayerPrefs.GetString("Keyboard").Split(',');
                 for (i = 0; i < Keyboard.KeyCount; i++)
@@ -189,6 +206,7 @@ namespace com.DungeonPad
                         #endregion
                 }
                 ButtonSelect.OnClicked();
+                changing = true;
                 setButtonSprite(selectedButtons[j], i);
                 selectedButtons[j].GetComponent<Image>().enabled = true;
                 eventSystem.SetSelectedGameObject(selectedButtons[j]);

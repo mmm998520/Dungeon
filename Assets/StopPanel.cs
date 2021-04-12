@@ -40,6 +40,7 @@ namespace com.DungeonPad
         public void home()
         {
             back();
+            ButtonSelect.OnClicked();
             SwitchScenePanel.NextScene = "Home";
             GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
         }

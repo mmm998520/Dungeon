@@ -123,12 +123,10 @@ namespace com.DungeonPad
                 {
                     Time.timeScale = 1;
                     Time.fixedDeltaTime = 0.02F * Time.timeScale;
-                    ButtonSelect.OnClicked();
                 }
                 else if (settingPanel.activeSelf)
                 {
                     settingPanel.SetActive(false);
-                    ButtonSelect.OnClicked();
                 }
                 else
                 {
@@ -136,6 +134,7 @@ namespace com.DungeonPad
                     Time.timeScale = 0;
                     Time.fixedDeltaTime = 0.02F * Time.timeScale;
                 }
+                ButtonSelect.OnClicked();
                 stopPanel.SetActive(!stopPanel.activeSelf);
                 Debug.LogWarning("stopPanel.activeSelf : " + stopPanel.activeSelf);
             }

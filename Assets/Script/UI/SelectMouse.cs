@@ -17,6 +17,7 @@ namespace com.DungeonPad
         [SerializeField] Sprite SelectAll2P, SelectAll1P, UnSelectAll2P, UnSelectAll1P, p1selectTrue, p1selectFalse, p2selectTrue, p2selectFalse;
         float p1KeyboardTimer, p2KeyboardTimer, p1GamepadTimer, p2GamepadTimer, p1SingleTimer, p2SingleTimer;
         float p1MotorSpeeds, p2MotorSpeeds;
+        bool goNext = false;
         private void Start()
         {
             ReGamer.ReAbility();
@@ -43,6 +44,7 @@ namespace com.DungeonPad
             InputManager.currentGamepad = Gamepad.current;
             if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             {
+                ButtonSelect.OnClicked();
                 SwitchScenePanel.NextScene = "Home";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }
@@ -50,12 +52,14 @@ namespace com.DungeonPad
             {
                 if (InputManager.currentGamepad != InputManager.p1Gamepad && InputManager.currentGamepad != InputManager.p2Gamepad)
                 {
+                    ButtonSelect.OnClicked();
                     SwitchScenePanel.NextScene = "Home";
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
             }
             if(Keyboard.current != null && (Keyboard.current.allKeys[InputManager.p1KeyboardBreakfreeKeyNum].wasPressedThisFrame && InputManager.p1Mod != InputManager.PlayerMod.keyboardP1 && InputManager.p2Mod != InputManager.PlayerMod.keyboardP1) || (Keyboard.current.allKeys[InputManager.p2KeyboardBreakfreeKeyNum].wasPressedThisFrame && InputManager.p1Mod != InputManager.PlayerMod.keyboardP2 && InputManager.p2Mod != InputManager.PlayerMod.keyboardP2))
             {
+                ButtonSelect.OnClicked();
                 SwitchScenePanel.NextScene = "Home";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }
@@ -322,6 +326,11 @@ namespace com.DungeonPad
                         GameManager.layers = 2;
                         NextScene = "Game 1";
                     }
+                    if (!goNext)
+                    {
+                        goNext = true;
+                        ButtonSelect.OnClicked();
+                    }
                     SwitchScenePanel.NextScene = NextScene;
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
@@ -476,6 +485,10 @@ namespace com.DungeonPad
                         p2MotorSpeeds = 0.7f;
                     }
                 }
+                if (playerMod != InputManager.PlayerMod.none)
+                {
+                    ButtonSelect.OnClicked();
+                }
                 return playerMod;
             }
         }
@@ -524,6 +537,12 @@ namespace com.DungeonPad
                         playerMod = InputManager.PlayerMod.none;
                     }
                     break;
+                case InputManager.PlayerMod.none:
+                    return playerMod;
+            }
+            if(playerMod == InputManager.PlayerMod.none)
+            {
+                ButtonSelect.OnClicked();
             }
             return playerMod;
         }

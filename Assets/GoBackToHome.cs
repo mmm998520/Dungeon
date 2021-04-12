@@ -12,6 +12,7 @@ namespace com.DungeonPad
             Keyboard keyboard = Keyboard.current;
             if (InputManager.anyExit())
             {
+                ButtonSelect.OnClicked();
                 SwitchScenePanel.NextScene = "Home";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
             }

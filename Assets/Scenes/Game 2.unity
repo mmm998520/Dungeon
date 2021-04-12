@@ -722,6 +722,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2008936489919695510, guid: bab460f8b18a0534d9356b472e4e9d4e,
         type: 3}
+    - target: {fileID: 6115880101944645947, guid: 7af27b8f06c86a84ab6c1f5c47f6977e,
+        type: 3}
+      propertyPath: punchHitSFX
+      value: 
+      objectReference: {fileID: 4463740323464384201, guid: 4f8cba51212279f488d997b26d6f5a4a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7af27b8f06c86a84ab6c1f5c47f6977e, type: 3}
 --- !u!1 &55191366

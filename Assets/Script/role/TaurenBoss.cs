@@ -26,7 +26,7 @@ namespace com.DungeonPad
         public float SleepTimer;
         public SpriteRenderer SleepUI;
 
-        public GameObject punchSFX, throwAxeSFX, throwAxeAllSFX;
+        public GameObject punchSFX, punchHitSFX, throwAxeSFX, throwAxeAllSFX;
 
         void Start()
         {
@@ -346,6 +346,7 @@ namespace com.DungeonPad
         {
             if (punching)
             {
+                Destroy(Instantiate(punchHitSFX, transform.position + Vector3.back * 10, Quaternion.identity), 3);
                 animator.SetBool("Punch", false);
                 InvincibleTimer = 10;
                 rigidbody.velocity = RecordDir * -5;
