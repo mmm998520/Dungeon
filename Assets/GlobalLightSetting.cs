@@ -16,7 +16,7 @@ namespace com.DungeonPad
         {
             try
             {
-                GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = SettingPanal.Lightness / 10f;
+                GameObject.Find("Directional Light 2D").GetComponent<Light2D>().intensity = SettingPanal.Lightness * 5 / 10f;
             }
             catch
             {

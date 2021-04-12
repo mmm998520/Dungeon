@@ -46,7 +46,7 @@ namespace com.DungeonPad
             }
             else
             {
-                LightnessSlider.value = 10;
+                LightnessSlider.value = 5;
             }
             setLightness();
             if (PlayerPrefs.HasKey("PlayerNum"))
