@@ -40,17 +40,20 @@ namespace com.DungeonPad
             OnSelected();
         }
 
-        public static string FirstInScene = "";
-
         public void onClicked()
         {
-            if (FirstInScene != "")
+            ButtonBUGSolver buttonBUGSolver = null;
+            try
+            {
+                buttonBUGSolver = GameObject.Find("ButtonBUGSolver").GetComponent<ButtonBUGSolver>();
+            }
+            catch
+            {
+
+            }
+            if (buttonBUGSolver == null || buttonBUGSolver.UpdateNum >= 3)
             {
                 OnClicked();
-            }
-            else
-            {
-                FirstInScene = SceneManager.GetActiveScene().name;
             }
         }
 
