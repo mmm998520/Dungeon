@@ -34,7 +34,7 @@ namespace UnityEngine.Experimental.Rendering.Universal
 
         internal static bool GetGlobalColor(int sortingLayerIndex, int blendStyleIndex, out Color color)
         {
-            bool  foundGlobalColor = false;
+            bool foundGlobalColor = false;
             color = Color.black;
 
             // This should be rewritten to search only global lights
@@ -123,7 +123,7 @@ namespace UnityEngine.Experimental.Rendering.Universal
         /// <summary>
         /// an enumeration of the types of light
         /// </summary>
-        
+
         public enum LightType
         {
             Parametric = 0,
@@ -152,7 +152,7 @@ namespace UnityEngine.Experimental.Rendering.Universal
         float m_Intensity = 1;
 
         [SerializeField] float m_LightVolumeOpacity = 0.0f;
-        [SerializeField] int[] m_ApplyToSortingLayers = new int[1];     // These are sorting layer IDs. If we need to update this at runtime make sure we add code to update global lights
+        [SerializeField] public int[] m_ApplyToSortingLayers = new int[1];     // These are sorting layer IDs. If we need to update this at runtime make sure we add code to update global lights
         [SerializeField] Sprite m_LightCookieSprite = null;
         [SerializeField] bool m_UseNormalMap = false;
 
@@ -161,17 +161,17 @@ namespace UnityEngine.Experimental.Rendering.Universal
 
         int m_PreviousLightOrder = -1;
         int m_PreviousBlendStyleIndex;
-        float       m_PreviousLightVolumeOpacity;
-        bool        m_PreviousLightCookieSpriteExists = false;
-        Sprite      m_PreviousLightCookieSprite     = null;
-        Mesh        m_Mesh;
-        int         m_LightCullingIndex             = -1;
-        Bounds      m_LocalBounds;
-        
+        float m_PreviousLightVolumeOpacity;
+        bool m_PreviousLightCookieSpriteExists = false;
+        Sprite m_PreviousLightCookieSprite = null;
+        Mesh m_Mesh;
+        int m_LightCullingIndex = -1;
+        Bounds m_LocalBounds;
 
-        [Range(0,1)]
-        [SerializeField] float m_ShadowIntensity    = 0.0f;
-        [Range(0,1)]
+
+        [Range(0, 1)]
+        [SerializeField] float m_ShadowIntensity = 0.0f;
+        [Range(0, 1)]
         [SerializeField] float m_ShadowVolumeIntensity = 0.0f;
 
         internal struct LightStats
@@ -251,7 +251,7 @@ namespace UnityEngine.Experimental.Rendering.Universal
         public static string s_GlobalLightIconPath = s_IconsPath + "GlobalLight.png";
         public static string[] s_LightIconPaths = new string[] { s_ParametricLightIconPath, s_FreeformLightIconPath, s_SpriteLightIconPath, s_PointLightIconPath, s_GlobalLightIconPath };
 #endif
-        
+
 
         internal static void SetupCulling(ScriptableRenderContext context, Camera camera)
         {
@@ -327,7 +327,7 @@ namespace UnityEngine.Experimental.Rendering.Universal
 
             for (int i = 0; i < m_ApplyToSortingLayers.Length; ++i)
             {
-                for(int layer = layers.Length - 1; layer >= largestLayer; --layer)
+                for (int layer = layers.Length - 1; layer >= largestLayer; --layer)
                 {
                     if (layers[layer].id == m_ApplyToSortingLayers[i])
                     {
@@ -427,7 +427,7 @@ namespace UnityEngine.Experimental.Rendering.Universal
             {
                 int sortingLayer = m_ApplyToSortingLayers[i];
 
-                if(Light2DManager.ContainsDuplicateGlobalLight(sortingLayer, blendStyleIndex))
+                if (Light2DManager.ContainsDuplicateGlobalLight(sortingLayer, blendStyleIndex))
                     Debug.LogError("More than one global light on layer " + SortingLayer.IDToName(sortingLayer) + " for light blend style index " + m_BlendStyleIndex);
             }
         }
@@ -495,7 +495,7 @@ namespace UnityEngine.Experimental.Rendering.Universal
         static internal LightStats GetLightStatsByLayer(int layer)
         {
             LightStats returnStats = new LightStats();
-            for(int blendStyleIndex = 0; blendStyleIndex < Light2DManager.lights.Length; blendStyleIndex++)
+            for (int blendStyleIndex = 0; blendStyleIndex < Light2DManager.lights.Length; blendStyleIndex++)
             {
                 List<Light2D> lights = Light2DManager.lights[blendStyleIndex];
                 for (int lightIndex = 0; lightIndex < lights.Count; lightIndex++)
@@ -555,7 +555,7 @@ namespace UnityEngine.Experimental.Rendering.Universal
 #if UNITY_EDITOR
             rebuildMesh |= LightUtility.CheckForChange(LightUtility.GetShapePathHash(m_ShapePath), ref m_PreviousShapePathHash);
 #endif
-            if(rebuildMesh && m_LightType != LightType.Global)
+            if (rebuildMesh && m_LightType != LightType.Global)
                 UpdateMesh();
         }
 

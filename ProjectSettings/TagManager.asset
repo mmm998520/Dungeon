@@ -46,10 +46,10 @@ TagManager:
   - name: LineAttack
     uniqueID: 3889431265
     locked: 0
-  - name: RedPlayer
+  - name: Behind
     uniqueID: 195322321
     locked: 0
-  - name: BluePlayer
+  - name: Infront
     uniqueID: 3857386605
     locked: 0
   - name: Default

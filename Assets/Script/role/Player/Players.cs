@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 namespace com.DungeonPad
 {
@@ -19,37 +20,64 @@ namespace com.DungeonPad
         public float trackBulletTimer;
         [SerializeField] GameObject playerTrack;
 
+        Transform[] players = new Transform[2];
+        SpriteRenderer[] playerRenderers = new SpriteRenderer[2];
+        Light2D[] playerColorLights = new Light2D[2], playerLights = new Light2D[4];
+        int[] behind = new int[6], infront = new int[6];
+
         private void Awake()
         {
             playerChildCount = transform.childCount;
             lineAttacks = new GameObject("lineAttacks").transform;
             draw = true;
             DiedAudioSource = GetComponent<AudioSource>();
+
+            int k = 0;
+            for(int i = 0; i < 2; i++)
+            {
+                players[i] = transform.GetChild(i);
+                playerRenderers[i] = players[i].Find("頭像").GetComponent<SpriteRenderer>();
+                playerColorLights[i] = playerRenderers[i].transform.GetChild(0).GetComponent<Light2D>();
+                playerLights[k++] = players[i].Find("GameObject").GetChild(0).GetComponent<Light2D>();
+                playerLights[k++] = players[i].Find("GameObject (1)").GetChild(0).GetComponent<Light2D>();
+            }
+            
+            behind[0] = infront[0] = SortingLayer.NameToID("floor");
+            behind[1] = SortingLayer.NameToID("Behind");
+            infront[1] = SortingLayer.NameToID("Infront");
+            behind[2] = infront[2] = SortingLayer.NameToID("Default");
+            behind[3] = infront[3] = SortingLayer.NameToID("Bubble");
+            behind[4] = infront[4] = SortingLayer.NameToID("wall(front)");
+            behind[5] = infront[5] = SortingLayer.NameToID("wall(top)");
         }
         void Update()
         {
             fightingTimer += Time.deltaTime;
             trackBullet();
-            /*
-            if (GameManager.players.GetChild(0).GetComponent<PlayerManager>().DashTimer < 0.5f || GameManager.players.GetChild(1).GetComponent<PlayerManager>().DashTimer < 0.5f)
+            if(players[0].position.y > players[1].position.y)
             {
-                draw = true;
+                playerRenderers[0].sortingLayerName = "Behind";
+                playerColorLights[0].m_ApplyToSortingLayers[0] = SortingLayer.NameToID("Behind");
+                playerLights[0].m_ApplyToSortingLayers = behind;
+                playerLights[1].m_ApplyToSortingLayers = behind;
+
+                playerRenderers[1].sortingLayerName = "Infront";
+                playerColorLights[1].m_ApplyToSortingLayers[0] = SortingLayer.NameToID("Infront");
+                playerLights[2].m_ApplyToSortingLayers = infront;
+                playerLights[3].m_ApplyToSortingLayers = infront;
             }
             else
             {
-                draw = false;
+                playerRenderers[0].sortingLayerName = "Infront";
+                playerColorLights[0].m_ApplyToSortingLayers[0] = SortingLayer.NameToID("Infront");
+                playerLights[0].m_ApplyToSortingLayers = infront;
+                playerLights[1].m_ApplyToSortingLayers = infront;
+
+                playerRenderers[1].sortingLayerName = "Behind";
+                playerColorLights[1].m_ApplyToSortingLayers[0] = SortingLayer.NameToID("Behind");
+                playerLights[2].m_ApplyToSortingLayers = behind;
+                playerLights[3].m_ApplyToSortingLayers = behind;
             }
-            if (draw)
-            {
-                drawLine();
-            }
-            else
-            {
-                if (lineAttacks != null)
-                {
-                    Destroy(lineAttacks.gameObject);
-                }
-            }*/
         }
 
         void trackBullet()
