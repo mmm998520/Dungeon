@@ -357,12 +357,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3267036d0e577d14c8d33c8d45c84503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputType: 3
+  inputType: 0
   textAsset: []
   layers: 2
-  passwayNum: 2
+  passwayNum: 4
   level: 1
-  function: 0
+  function: 1
   num: 0
   passwayType: 0
 --- !u!4 &1533619235
