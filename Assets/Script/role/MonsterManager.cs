@@ -195,10 +195,18 @@ namespace com.DungeonPad
                 //Players.reTimer = 0;
             }
 
-            Destroy(gameObject);
+            /*if (gameObject.name == "DragonBoss")
+            {
+                GetComponent<DragonBoss>().HPBar.localScale = Vector3.zero;
+                GetComponent<Animator>().SetTrigger("Died");
+            }
+            else*/
+            {
+                Destroy(gameObject);
+            }
             if (gameObject.name.Contains("SpiderBig"))
             {
-                insMoney(Random.Range(2, 4));
+                insMoney(Random.Range(5, 8));
                 if (Random.Range(0, 100) < 15 || GameManager.CurrentSceneName == "Game 0_5")
                 {
                     insMoneyB(1);
@@ -226,7 +234,7 @@ namespace com.DungeonPad
             }
             else if(gameObject.name.Contains("TaurenBoss"))
             {
-                insMoney(50);
+                insMoney(25);
                 //insMoneyB(3);
                 if (Random.Range(0, 100) < 15)
                 {
@@ -235,7 +243,7 @@ namespace com.DungeonPad
             }
             else if (gameObject.name.Contains("GostBig"))
             {
-                insMoney(Random.Range(9, 13));
+                insMoney(Random.Range(5, 8));
                 if (Random.Range(0, 100) < 15)
                 {
                     insMoneyB(1);
@@ -247,7 +255,7 @@ namespace com.DungeonPad
             }
             else if (gameObject.name.Contains("Gost"))
             {
-                insMoney(2);
+                insMoney(Random.Range(2, 4));
                 if (Random.Range(0, 100) < 1)
                 {
                     Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
@@ -260,6 +268,10 @@ namespace com.DungeonPad
                 {
                     Instantiate(GameManager.gameManager.reLifeParticle, transform.position, Quaternion.identity);
                 }
+            }
+            else if (gameObject.name == "DragonBoss")
+            {
+                insMoney(25);
             }
             else
             {

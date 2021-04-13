@@ -163,12 +163,11 @@ MonoBehaviour:
   timer: 0
   timerStoper: 5
   destoryTime: 0
-  hitSound: {fileID: 0}
   animator: {fileID: 0}
   canRemoveByPlayerAttack: 1
   focusPlayer: 0
   Target: {fileID: 0}
-  RotateSpeed: 60
+  RotateSpeed: 30
 --- !u!114 &5832881625152555993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edf42f0ff0f9084596a2c5a66d2e079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ATK: 20
+  ATK: 9
   continued: 0
   MonsterType: 
 --- !u!58 &5832881625152555990

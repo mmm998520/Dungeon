@@ -201,7 +201,6 @@ MonoBehaviour:
   timer: 0
   timerStoper: 15
   destoryTime: 0
-  hitSound: {fileID: 0}
   animator: {fileID: 0}
   canRemoveByPlayerAttack: 1
   focusPlayer: 0

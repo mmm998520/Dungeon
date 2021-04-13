@@ -482,11 +482,14 @@ namespace com.DungeonPad
 
         public GameObject DestoryWall;
         public GameObject NewWall;
+
         private void OnDestroy()
         {
-            HPBar.localScale = Vector3.zero;
-            SwitchScenePanel.NextScene = "Win";
-            GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+            GetComponent<DragonBoss>().HPBar.localScale = Vector3.zero;
+            Transform DragonBossSprite = transform.GetChild(0).GetChild(0);
+            DragonBossSprite = Instantiate(DragonBossSprite.gameObject, DragonBossSprite.position, DragonBossSprite.rotation).transform;
+            DragonBossSprite.GetComponent<DragonBossDied>().enabled = true;
+            DragonBossSprite.localScale = transform.GetChild(0).GetChild(0).lossyScale;
             //DestoryWall.SetActive(false);
             //NewWall.SetActive(true);
         }

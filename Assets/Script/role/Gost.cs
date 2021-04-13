@@ -77,7 +77,7 @@ namespace com.DungeonPad
             if (gameObject.name.Contains("Big"))
             {
                 AtttackType = "FireRainsBigGost";
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     Attacks.Add(Instantiate(base.attack, transform.position + Quaternion.Euler(0, 0, Random.Range(0, 360)) * Vector3.right * Random.Range(0.5f, 5f), Quaternion.identity, GameObject.Find(AtttackType).transform));
                 }
