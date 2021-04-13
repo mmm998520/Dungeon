@@ -27,7 +27,7 @@ namespace com.DungeonPad
             if (timer > timerStoper)
             {
                 timer = 0;
-                if (PlayerManager.HP <= PlayerManager.MaxHP * 0.3f)
+                if (PlayerManager.HP / PlayerManager.MaxHP <= 0.4f)
                 {
                     PlayerManager.HP -= SingleDamage * (100f - PlayerManager.reducesDamage) / 100f;
                 }

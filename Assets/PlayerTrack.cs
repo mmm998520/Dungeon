@@ -87,7 +87,7 @@ namespace com.DungeonPad
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-            if(attack(collider, 0.3f))
+            if(attack(collider, 0.1f))
             {
                 Destroy(gameObject);
             }

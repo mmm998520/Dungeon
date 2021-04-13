@@ -11,7 +11,7 @@ namespace com.DungeonPad
     {
         public static float MaxHP = 60, HP = 60;
         public static int Life = 2, MaxLife = 4;
-        public static bool lockedHP = true;
+        public static bool lockedHP = false;
         public static float lockedHPTimer = 10, DiedTimer = 10, HP0Timer = 0;
         public float ATK, hand, atkTime;
         public bool continued = false;
@@ -59,7 +59,7 @@ namespace com.DungeonPad
         SpriteRenderer head;
 
         public int MaxBulletNum = 5, BulletNum = 5;
-        public GameObject Bullet, attackLine, magneticFieldPrefab;
+        public GameObject Bullet, attackLine, magneticFieldPrefab, playerTrack;
         public Animator playerAttackLineAnimator;
 
         public static int money = 0, moneyB = 0;
@@ -216,17 +216,14 @@ namespace com.DungeonPad
                         {
                             hpUpRate = 20;//共回40;
                         }
-                        Players.canTrack = false;
                     }
                     else if (dis < 4.5f)
                     {
                         hpUpRate = 0;
-                        Players.canTrack = true;
                     }
                     else
                     {
                         hpUpRate = -6f;//共扣12;
-                        Players.canTrack = true;
                     }
 
                     if (!SceneName.Contains("SelectRole"))
@@ -858,6 +855,7 @@ namespace com.DungeonPad
                     dashSFXNum = 0;
                 }
                 Destroy(Instantiate(dashSFX[dashSFXNum], CameraManager.center, Quaternion.identity), 2);
+                TrackBullet();
             }
             else
             {
@@ -977,6 +975,32 @@ namespace com.DungeonPad
             }
         }
 
+        void TrackBullet()
+        {
+            if (trackBullet)
+            {
+                Transform minDisMonster = null;
+                float minDis = 5;//距離至少要5以下才會觸發攻擊
+                for (int i = 0; i < GameManager.monsters.childCount; i++)
+                {
+                    Transform monster = GameManager.monsters.GetChild(i);
+                    if (monster.gameObject.activeSelf)
+                    {
+                        if (Vector2.Distance(monster.position, transform.position) < minDis)
+                        {
+                            float Dis = Vector2.Distance(monster.position, transform.position);
+                            minDisMonster = monster;
+                            minDis = Dis;
+                        }
+                    }
+                }
+                if (minDisMonster != null)
+                {
+                    Instantiate(playerTrack, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerTrack>().Target = minDisMonster;
+                }
+            }
+        }
+
         void timer()
         {
             CDTimer += Time.deltaTime;
@@ -1088,7 +1112,7 @@ namespace com.DungeonPad
                         if (taurenBoss.punching && Vector2.Angle(taurenBoss.RecordDir, transform.position - collision.transform.position) < 90)
                         {
                             HardStraightA = (Vector2)taurenBoss.RecordDir * 40;
-                            if (HP <= MaxHP * 0.3f)
+                            if (HP / MaxHP <= 0.4f)
                             {
                                 HP -= 20 * (100f - reducesDamage) / 100f;
                             }
@@ -1110,7 +1134,7 @@ namespace com.DungeonPad
                         else
                         {
                             HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
-                            if (HP <= MaxHP * 0.3f)
+                            if (HP / MaxHP <= 0.4f)
                             {
                                 HP -= 10 * (100f - reducesDamage) / 100f;
                             }
@@ -1133,7 +1157,7 @@ namespace com.DungeonPad
                     else
                     {
                         HardStraightA = (Vector2)Vector3.Normalize(transform.position - collision.transform.position) * 10;
-                        if (HP <= MaxHP * 0.3f)
+                        if (HP / MaxHP <= 0.4f)
                         {
                             HP -= 15 * (100f - reducesDamage) / 100f;
                         }

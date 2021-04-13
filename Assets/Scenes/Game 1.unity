@@ -8202,9 +8202,6 @@ MonoBehaviour:
   attack: {fileID: 6887112125340408767, guid: cc0e89c33dcb1ed4e9baa8ff77dfdc3d, type: 3}
   attackCollider: {fileID: 1205839234}
   draw: 1
-  trackBulletTimer: 0
-  playerTrack: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
-    type: 3}
 --- !u!4 &342662066
 Transform:
   m_ObjectHideFlags: 0
@@ -20284,6 +20281,8 @@ MonoBehaviour:
     type: 3}
   magneticFieldPrefab: {fileID: 2323811627200118044, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
     type: 3}
+  playerTrack: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
+    type: 3}
   playerAttackLineAnimator: {fileID: 806873523}
   playerStat: 0
   insAfterImages: {fileID: 1061877085}
@@ -32316,6 +32315,8 @@ MonoBehaviour:
   attackLine: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
     type: 3}
   magneticFieldPrefab: {fileID: 2323811627200118044, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
+    type: 3}
+  playerTrack: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
     type: 3}
   playerAttackLineAnimator: {fileID: 91852305}
   playerStat: 0

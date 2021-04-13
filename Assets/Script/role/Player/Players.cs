@@ -16,9 +16,6 @@ namespace com.DungeonPad
         public static float fightingTimer = 10;
         public static Color32 spriteColor;
         public static AudioSource DiedAudioSource;
-        public static bool canTrack;
-        public float trackBulletTimer;
-        [SerializeField] GameObject playerTrack;
 
         Transform[] players = new Transform[2];
         SpriteRenderer[] playerRenderers = new SpriteRenderer[2];
@@ -53,7 +50,6 @@ namespace com.DungeonPad
         void Update()
         {
             fightingTimer += Time.deltaTime;
-            trackBullet();
             if(players[0].position.y > players[1].position.y)
             {
                 playerRenderers[0].sortingLayerName = "Behind";
@@ -78,44 +74,6 @@ namespace com.DungeonPad
                 playerLights[2].m_ApplyToSortingLayers = behind;
                 playerLights[3].m_ApplyToSortingLayers = behind;
             }
-        }
-
-        void trackBullet()
-        {
-            if (canTrack)
-            {
-                trackBulletTimer += Time.deltaTime;
-            }
-
-            if (PlayerManager.trackBullet)
-            {
-                if (trackBulletTimer > 1 && PlayerManager.HP > 30)
-                {
-                    trackBulletTimer = 0;
-                    Transform minDisMonster = null;
-                    float minDis = 5;//距離至少要5以下才會觸發攻擊
-                    Transform player = GameManager.players.GetChild(Random.Range(0, GameManager.players.childCount));
-                    for (int i = 0; i < GameManager.monsters.childCount; i++)
-                    {
-                        Transform monster = GameManager.monsters.GetChild(i);
-                        if (monster.gameObject.activeSelf)
-                        {
-                            if (Vector2.Distance(monster.position, player.position) < minDis)
-                            {
-                                float Dis = Vector2.Distance(monster.position, player.position);
-                                minDisMonster = monster;
-                                minDis = Dis;
-                            }
-                        }
-                    }
-                    if (minDisMonster != null)
-                    {
-                        trackBulletTimer = 0;
-                        Instantiate(playerTrack, player.position, Quaternion.Euler(0, 0, Random.Range(0, 360))).GetComponent<PlayerTrack>().Target = minDisMonster;
-                    }
-                }
-            }
-
         }
 
         void drawLine()

@@ -32,7 +32,7 @@ namespace com.DungeonPad
                         playerManager.HardStraightTimer = -0.5f;
                         if (!PlayerManager.immunity)
                         {
-                            if(PlayerManager.HP <= PlayerManager.MaxHP * 0.3f)
+                            if (PlayerManager.HP / PlayerManager.MaxHP <= 0.4f)
                             {
                                 PlayerManager.HP -= 10 * (100f - PlayerManager.reducesDamage) / 100f;
                                 player.GetComponent<PlayerJoyVibration>().hurt();
