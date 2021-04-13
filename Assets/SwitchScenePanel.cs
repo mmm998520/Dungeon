@@ -73,5 +73,10 @@ namespace com.DungeonPad
                 setMusicSound();
             }
         }
+
+        void clearButtonClickedFirstInScene()
+        {
+            ButtonSelect.FirstInScene = "";
+        }
     }
 }

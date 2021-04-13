@@ -14,12 +14,22 @@ public class SFXManager : MonoBehaviour
 
     void Start()
     {
-        clickedInOneFrame++;
-        Debug.LogWarning(clickedInOneFrame);
-        if (gameObject.name.Contains("ButtonClickSFX") && clickedInOneFrame >= 2)
+        if (gameObject.name.Contains("ButtonClickSFX"))
         {
-            Destroy(gameObject);
+            clickedInOneFrame++;
+            Debug.LogWarning(clickedInOneFrame);
+            if (clickedInOneFrame >= 2)
+            {
+                Destroy(gameObject);
+            }
+            if (!audioSource)
+            {
+                audioSource = GetComponent<AudioSource>();
+            }
+            thisVolume = audioSource.volume;
+            setVolume();
         }
+
         if (!audioSource)
         {
             audioSource = GetComponent<AudioSource>();

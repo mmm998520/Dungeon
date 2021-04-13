@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -39,9 +40,18 @@ namespace com.DungeonPad
             OnSelected();
         }
 
+        public static string FirstInScene = "";
+
         public void onClicked()
         {
-            OnClicked();
+            if (FirstInScene != "")
+            {
+                OnClicked();
+            }
+            else
+            {
+                FirstInScene = SceneManager.GetActiveScene().name;
+            }
         }
 
         public static void OnSelected()
