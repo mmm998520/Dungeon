@@ -68,6 +68,7 @@ namespace com.DungeonPad
                     AbilityData.setPlayerAbility(AbilityManager.Abilitys[i].name, 0);
                 }
                 AbilityShower.abilityNamesAndLevels.Clear();
+                GameManager.AbilityNum = 0;
             }
             catch
             {

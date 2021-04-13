@@ -33,6 +33,7 @@ namespace com.DungeonPad
         public static string CurrentSceneName;
         public static GameObject shopPanel, stopPanel, settingPanel;
 
+        public static int AbilityNum;
         void Awake()
         {
             Debug.LogError("passLayerOneTimes : " + passLayerOneTimes + ", passLayerTwoTimes : " + passLayerTwoTimes);

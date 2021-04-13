@@ -42,6 +42,8 @@ namespace com.DungeonPad
         {
             poison();
         }
+
+        public bool canMove = true;
         /// <summary> 獲取最近玩家 </summary>
         public Transform MinDisPlayer()
         {
@@ -234,6 +236,7 @@ namespace com.DungeonPad
             }
             else if(gameObject.name.Contains("TaurenBoss"))
             {
+                PlayerPrefs.SetString("TaurenStat", "TaurenTalk_PlayerWin");
                 insMoney(25);
                 //insMoneyB(3);
                 if (Random.Range(0, 100) < 15)
@@ -271,6 +274,7 @@ namespace com.DungeonPad
             }
             else if (gameObject.name == "DragonBoss")
             {
+                PlayerPrefs.SetString("DragonStat", "DragonTalk_PlayerWin");
                 insMoney(25);
             }
             else

@@ -201,6 +201,14 @@ namespace com.DungeonPad
                                     PlayerPrefs.SetInt("layerTwoCntinuousDideTimes", GameManager.layerTwoCntinuousDideTimes);
                                     PlayerPrefs.Save();
                                 }
+                                else if (GameManager.CurrentSceneName == "Game 2")
+                                {
+                                    PlayerPrefs.SetString("TaurenStat", "TaurenTalk_PlayerDied");
+                                }
+                                else if (GameManager.CurrentSceneName == "Game 4")
+                                {
+                                    PlayerPrefs.SetString("DragonStat", "DragonTalk_PlayerDied");
+                                }
                             }
                         }
                     }

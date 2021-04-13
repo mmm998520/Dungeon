@@ -40,6 +40,10 @@ namespace com.DungeonPad
 
         protected override void Update()
         {
+            if (!canMove)
+            {
+                return;
+            }
             base.Update();
             SleepTimer += Time.deltaTime;
             punchCDTimer += Time.deltaTime;
