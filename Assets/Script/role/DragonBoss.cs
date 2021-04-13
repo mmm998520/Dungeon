@@ -410,7 +410,7 @@ namespace com.DungeonPad
             endRow[0] = Mathf.RoundToInt(minDisPlayer.position.x);
             endCol[0] = Mathf.RoundToInt(minDisPlayer.position.y);
             int pos = endRow[0] * MazeCreater.totalCol + endCol[0];
-            if (CrystalSidePos.ContainsValue(pos))
+            if (CrystalSidePos.Contains(pos))
             {
                 roads.Clear();
                 roads.Add(new int[] { endRow[0], endCol[0] });

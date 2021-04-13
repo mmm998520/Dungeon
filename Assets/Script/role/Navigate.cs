@@ -9,7 +9,7 @@ namespace com.DungeonPad
         public int startRoomRow, startRoomCol;
         int[,] canGoRoom;
         public Dictionary<int, int> canGo = new Dictionary<int, int>();
-        public static Dictionary<int, int> CrystalPos = new Dictionary<int, int>(), CrystalSidePos = new Dictionary<int, int>();
+        public static HashSet<int> CrystalPos = new HashSet<int>(), CrystalSidePos = new HashSet<int>();
         public bool Boss;
 
         [SerializeField]
@@ -210,7 +210,7 @@ namespace com.DungeonPad
                         h[i, j] = 99999;
                         f[i, j] = 999999;
                         int pos = i * MazeCreater.totalCol + j;
-                        if (!canGo.ContainsValue(pos) || CrystalPos.ContainsValue(pos) || (Boss && CrystalSidePos.ContainsValue(pos)))
+                        if (!canGo.ContainsValue(pos) || CrystalPos.Contains(pos) || (Boss && CrystalSidePos.Contains(pos)))
                         {
                             close.Add(pos);
                         }

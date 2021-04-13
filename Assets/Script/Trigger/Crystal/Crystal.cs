@@ -12,7 +12,7 @@ namespace com.DungeonPad
         public Sprite breakSprite;
         public Light2D crystalLight;
         public SpriteRenderer CircleLight;
-        Dictionary<int, int> myCrystalPos = new Dictionary<int, int>(), myCrystalSidePos = new Dictionary<int, int>();
+        HashSet<int> myCrystalPos = new HashSet<int>(), myCrystalSidePos = new HashSet<int>();
         static int myCrystalPosKeyNum;
         float destroyTimer, destroyTimerStoper = 10;
 
@@ -27,14 +27,14 @@ namespace com.DungeonPad
         {
             int posX = Mathf.RoundToInt(transform.position.x), posY = Mathf.RoundToInt(transform.position.y);
             int i, j;
-            Navigate.CrystalPos.Add(myCrystalPosKeyNum++, posX * MazeCreater.totalCol + posY);
-            myCrystalPos.Add(myCrystalPosKeyNum++, posX * MazeCreater.totalCol + posY);
+            Navigate.CrystalPos.Add(posX * MazeCreater.totalCol + posY);
+            myCrystalPos.Add(posX * MazeCreater.totalCol + posY);
             for(i = -1; i <= 1; i++)
             {
                 for (j = -1; j <= 1; j++)
                 {
-                    Navigate.CrystalSidePos.Add(myCrystalPosKeyNum++, (posX + i) * MazeCreater.totalCol + (posY + j));
-                    myCrystalSidePos.Add(myCrystalPosKeyNum++, (posX + i) * MazeCreater.totalCol + (posY + j));
+                    Navigate.CrystalSidePos.Add((posX + i) * MazeCreater.totalCol + (posY + j));
+                    myCrystalSidePos.Add((posX + i) * MazeCreater.totalCol + (posY + j));
                 }
             }
         }
@@ -57,13 +57,13 @@ namespace com.DungeonPad
 
         protected virtual void End()
         {
-            foreach(int key in myCrystalPos.Keys)
+            foreach(int value in myCrystalPos)
             {
-                Navigate.CrystalPos.Remove(key);
+                Navigate.CrystalPos.Remove(value);
             }
-            foreach (int key in myCrystalSidePos.Keys)
+            foreach (int value in myCrystalSidePos)
             {
-                Navigate.CrystalSidePos.Remove(key);
+                Navigate.CrystalSidePos.Remove(value);
             }
         }
 
