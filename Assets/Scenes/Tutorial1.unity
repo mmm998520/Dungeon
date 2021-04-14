@@ -7287,7 +7287,10 @@ MonoBehaviour:
   repTimes: 1
   repTimer: 1
   rigidbody: {fileID: 279285765}
+  poisonTimers: []
   Ammunition: {fileID: 0}
+  HitedAnimator: {fileID: 0}
+  canMove: 1
   spiderBehavior: 0
   SpriteAnimator: {fileID: 24605357}
 --- !u!50 &279285765
@@ -27576,6 +27579,7 @@ MonoBehaviour:
   flashTimer: 0
   flashTimerStoper: 0.1
   startRayPoss: []
+  reTimer: 10
   p1: 1
   lastDirRight: 0
   v: {x: 0, y: 0}
@@ -27615,10 +27619,13 @@ MonoBehaviour:
   Bullet: {fileID: 323923915377658229, guid: 630a53c73085f8b4091220d634e477ae, type: 3}
   attackLine: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
     type: 3}
+  magneticFieldPrefab: {fileID: 0}
+  playerTrack: {fileID: 0}
   playerAttackLineAnimator: {fileID: 0}
   playerStat: 0
   insAfterImages: {fileID: 0}
   sticksBat: {fileID: 0}
+  dashSFX: []
 --- !u!23 &918233117
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -33488,7 +33495,10 @@ MonoBehaviour:
   repTimes: 1
   repTimer: 1
   rigidbody: {fileID: 1127612567}
+  poisonTimers: []
   Ammunition: {fileID: 0}
+  HitedAnimator: {fileID: 0}
+  canMove: 1
   spiderBehavior: 0
   SpriteAnimator: {fileID: 331643212}
 --- !u!50 &1127612567
@@ -36065,12 +36075,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -44193,6 +44203,7 @@ MonoBehaviour:
   - {x: 0.35, y: 0.35, z: 0}
   - {x: 0.35, y: 0, z: 0}
   - {x: 0.35, y: -0.35, z: 0}
+  reTimer: 10
   p1: 0
   lastDirRight: 0
   v: {x: 0, y: 0}
@@ -44232,10 +44243,13 @@ MonoBehaviour:
   Bullet: {fileID: 323923915377658229, guid: 630a53c73085f8b4091220d634e477ae, type: 3}
   attackLine: {fileID: 3769475992939477765, guid: 2c5f170c43c597848b427065e4279332,
     type: 3}
+  magneticFieldPrefab: {fileID: 0}
+  playerTrack: {fileID: 0}
   playerAttackLineAnimator: {fileID: 0}
   playerStat: 0
   insAfterImages: {fileID: 0}
   sticksBat: {fileID: 0}
+  dashSFX: []
 --- !u!23 &1402152499
 MeshRenderer:
   m_ObjectHideFlags: 0

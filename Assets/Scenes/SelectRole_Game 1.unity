@@ -3573,6 +3573,7 @@ MonoBehaviour:
     type: 3}
   magneticFieldPrefab: {fileID: 2323811627200118044, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
     type: 3}
+  playerTrack: {fileID: 0}
   playerAttackLineAnimator: {fileID: 67414435}
   playerStat: 0
   insAfterImages: {fileID: 1611169916}
@@ -17239,8 +17240,6 @@ MonoBehaviour:
   attack: {fileID: 6887112125340408767, guid: cc0e89c33dcb1ed4e9baa8ff77dfdc3d, type: 3}
   attackCollider: {fileID: 1469694920}
   draw: 1
-  trackBulletTimer: 0
-  playerTrack: {fileID: 0}
 --- !u!4 &912701140
 Transform:
   m_ObjectHideFlags: 0
@@ -21608,6 +21607,7 @@ MonoBehaviour:
     type: 3}
   magneticFieldPrefab: {fileID: 2323811627200118044, guid: 600a65a0f51aeca4ca22d7cfcde6826f,
     type: 3}
+  playerTrack: {fileID: 0}
   playerAttackLineAnimator: {fileID: 67414434}
   playerStat: 0
   insAfterImages: {fileID: 534531181}
@@ -21980,12 +21980,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
