@@ -337,6 +337,7 @@ namespace com.DungeonPad
                     Debug.LogError("沒有這個能力 : " + abilityName);
                     break;
             }
+            GameManager.AbilityNum++;
         }
     }
 }
