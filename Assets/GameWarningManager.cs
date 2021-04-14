@@ -15,7 +15,17 @@ namespace com.DungeonPad
         private void Start()
         {
             //Cursor.lockState = CursorLockMode.Locked;
+            //SystemInfo.size.Width
+            //SystemInfo.PrimaryMonitorSize.Height
             Cursor.visible = false;
+            if (Screen.currentResolution.width / 16f >= Screen.currentResolution.height / 9f)//太寬
+            {
+                Screen.SetResolution((int)(Screen.currentResolution.height * 16f / 9f), Screen.currentResolution.height, true);
+            }
+            else//太高
+            {
+                Screen.SetResolution(Screen.currentResolution.width, (int)(Screen.currentResolution.width * 9f / 16f), true);
+            }
         }
 
         void Update()
