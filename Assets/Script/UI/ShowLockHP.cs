@@ -48,6 +48,7 @@ namespace com.DungeonPad
                     SwitchScenePanel.NextScene = "Died";
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
                 }
+                GetComponent<Animator>().SetBool("Died", true);
                 return;
             }
             #endregion
@@ -61,7 +62,7 @@ namespace com.DungeonPad
                 lowSpeed();
                 Time.timeScale = 0.17f;
                 Time.fixedDeltaTime = 0.02F * Time.timeScale;
-                GetComponent<Animator>().SetBool("Died", true);
+                GetComponent<Animator>().SetBool("ReLife", true);
             }
             else if (lockHPLight > 0.1f)
             {
@@ -69,46 +70,9 @@ namespace com.DungeonPad
                 GameManager.players.GetChild(1).GetComponent<PlayerManager>().enabled = true;
                 Time.timeScale = 1;
                 Time.fixedDeltaTime = 0.02F * Time.timeScale;
-                GetComponent<Animator>().SetBool("Died", false);
+                GetComponent<Animator>().SetBool("ReLife", false);
             }
             #endregion
-            //float hurtLight = 0.25f - hurtTimer;
-            //hurtTimer += Time.deltaTime;
-            /*if (lockHPLight > 0)
-            {
-                WhiteBakGround.color = new Color(0, 0, 0, lockHPLight * 1.5f);
-                for (int i = 0; i < Life.Length; i++)
-                {
-                    if (i < PlayerManager.Life - 1)
-                    {
-                        Life[i].color = new Color(origialColor.r, origialColor.g, origialColor.b, lockHPLight * 1.5f);
-                    }
-                    else if (i == PlayerManager.Life - 1)
-                    {
-                        Life[i].color = new Color(origialColor.r, origialColor.g, origialColor.b, Mathf.Pow(lockHPLight * 1.02f, 20));
-                    }
-                    else
-                    {
-                        Life[i].color = Color.clear;
-                    }
-                }
-                for (int i = 0; i < MaxLife.Length; i++)
-                {
-                    MaxLife[i].color = new Color(origialColor.r, origialColor.g, origialColor.b, lockHPLight * 2);
-                }
-            }
-            else
-            {
-                WhiteBakGround.color = Color.clear;
-                for (int i = 0; i < Life.Length; i++)
-                {
-                    Life[i].color = Color.clear;
-                }
-                for (int i = 0; i < MaxLife.Length; i++)
-                {
-                    MaxLife[i].color = Color.clear;
-                }
-            }*/
         }
 
         void lowSpeed()

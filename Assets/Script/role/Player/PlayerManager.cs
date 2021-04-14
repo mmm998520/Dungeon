@@ -161,7 +161,8 @@ namespace com.DungeonPad
                             {
                                 Died = true;
                                 DiedTimer = 0;
-                                if(PlayerPrefs.HasKey("layerFourCntinuousWinTimes") && PlayerPrefs.GetInt("layerFourCntinuousWinTimes") < 3)
+                                GameObject.Find("DiedLight").GetComponent<Animator>().SetBool("Died", true);
+                                if (PlayerPrefs.HasKey("layerFourCntinuousWinTimes") && PlayerPrefs.GetInt("layerFourCntinuousWinTimes") < 3)
                                 {
                                     GameManager.layerFourCntinuousWinTimes = 0;
                                     PlayerPrefs.SetInt("layerFourCntinuousWinTimes", 0);
