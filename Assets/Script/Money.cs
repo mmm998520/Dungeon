@@ -43,6 +43,7 @@ namespace com.DungeonPad
                 }
                 else
                 {
+                    GameManager.AbilityNum++;
                     PlayerManager.moneyB++;
                     int r = 0;
                     string abilityName = "";

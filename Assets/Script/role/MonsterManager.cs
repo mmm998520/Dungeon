@@ -204,6 +204,8 @@ namespace com.DungeonPad
             }
             else*/
             {
+                insMoneyB(1);
+
                 Destroy(gameObject);
             }
             if (gameObject.name.Contains("SpiderBig"))
