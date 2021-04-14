@@ -28,6 +28,7 @@ namespace com.DungeonPad
 
         public GameObject punchSFX, punchHitSFX, throwAxeSFX, throwAxeAllSFX;
 
+        [SerializeField] GameObject Go;
         void Start()
         {
             speed = 3;
@@ -386,6 +387,7 @@ namespace com.DungeonPad
             {
                 Destroy(DestoryWall[i]);
             }
+            Go.SetActive(true);
         }
     }
 }

@@ -85,8 +85,9 @@ MonoBehaviour:
   child: {fileID: 4535775245015503820}
   GetCollider: {fileID: 4535775244995362371}
   animator: {fileID: 4535775244995362369}
-  sound: {fileID: 3694377445020159880}
   moneyB: 0
+  final: 0
+  spriteRenderer: {fileID: 0}
 --- !u!1 &4535775245015503822
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +114,7 @@ Transform:
   m_GameObject: {fileID: 4535775245015503822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.27910417, y: 0.27910417, z: 0.27910417}
   m_Children: []
   m_Father: {fileID: 4535775244995362368}
   m_RootOrder: 0
@@ -154,11 +155,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -405536031
+  m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cb5c3192d99537749aca737e25c05146, type: 3}
-  m_Color: {r: 0.61870235, g: 0.8773585, b: 0.6166341, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 153ca15eb726ea347afa9524a8652a75, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
