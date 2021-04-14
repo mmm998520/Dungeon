@@ -17,6 +17,9 @@ namespace com.DungeonPad
         [SerializeField] Sprite[] DragonTalk_Normal;
         [SerializeField] Sprite DragonTalk_PlayerWin;
         [SerializeField] Sprite DragonTalk_PlayerDied;
+        [Space]
+        [SerializeField] SpriteRenderer[] dragonSpriteRenderers;
+        [SerializeField] Sprite dragonWalk1;
 
         private void Start()
         {
@@ -79,6 +82,15 @@ namespace com.DungeonPad
                 playerManagers[1].enabled = true;
                 gameObject.SetActive(false);
                 GameObject.Find("Main Camera").GetComponent<CameraManager>().enabled = true;
+            }
+        }
+        
+        void LateUpdate()
+        {
+            if (GameManager.CurrentSceneName == "Game 4")
+            {
+                dragonSpriteRenderers[0].sprite = dragonWalk1;
+                dragonSpriteRenderers[1].sprite = dragonWalk1;
             }
         }
     }
