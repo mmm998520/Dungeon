@@ -161,6 +161,13 @@ namespace com.DungeonPad
                             {
                                 Died = true;
                                 DiedTimer = 0;
+                                if(PlayerPrefs.HasKey("layerFourCntinuousWinTimes") && PlayerPrefs.GetInt("layerFourCntinuousWinTimes") < 3)
+                                {
+                                    GameManager.layerFourCntinuousWinTimes = 0;
+                                    PlayerPrefs.SetInt("layerFourCntinuousWinTimes", 0);
+                                    PlayerPrefs.Save();
+                                }
+                                
                                 if(GameManager.CurrentSceneName == "Game 1")
                                 {
                                     if(GameManager.layers == 1)
@@ -181,24 +188,24 @@ namespace com.DungeonPad
                                     }
                                     else if (GameManager.layers == 2)
                                     {
-                                        if (++GameManager.layerTwoCntinuousDideTimes >= 2)
+                                        if (++GameManager.layerThreeCntinuousDideTimes >= 2)
                                         {
-                                            if (GameManager.passLayerTwoTimes >= 3)
+                                            if (GameManager.passLayerThreeTimes >= 3)
                                             {
-                                                GameManager.passLayerTwoTimes = 2;
-                                                GameManager.layerTwoCntinuousDideTimes = 0;
+                                                GameManager.passLayerThreeTimes = 2;
+                                                GameManager.layerThreeCntinuousDideTimes = 0;
                                             }
-                                            else if (GameManager.passLayerTwoTimes >= 2)
+                                            else if (GameManager.passLayerThreeTimes >= 2)
                                             {
-                                                GameManager.passLayerTwoTimes = 1;
-                                                GameManager.layerTwoCntinuousDideTimes = 0;
+                                                GameManager.passLayerThreeTimes = 1;
+                                                GameManager.layerThreeCntinuousDideTimes = 0;
                                             }
                                         }
                                     }
                                     PlayerPrefs.SetInt("passLayerOneTimes", GameManager.passLayerOneTimes);
-                                    PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
+                                    PlayerPrefs.SetInt("passLayerThreeTimes", GameManager.passLayerThreeTimes);
                                     PlayerPrefs.SetInt("layerOneCntinuousDideTimes", GameManager.layerOneCntinuousDideTimes);
-                                    PlayerPrefs.SetInt("layerTwoCntinuousDideTimes", GameManager.layerTwoCntinuousDideTimes);
+                                    PlayerPrefs.SetInt("layerThreeCntinuousDideTimes", GameManager.layerThreeCntinuousDideTimes);
                                     PlayerPrefs.Save();
                                 }
                                 else if (GameManager.CurrentSceneName == "Game 2")

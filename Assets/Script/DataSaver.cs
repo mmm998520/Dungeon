@@ -73,13 +73,13 @@ namespace com.DungeonPad
                 PlayerPrefs.SetInt("passLayerOneTimes", GameManager.passLayerOneTimes);
                 PlayerPrefs.Save();
             }
-            if (PlayerPrefs.HasKey("passLayerTwoTimes"))
+            if (PlayerPrefs.HasKey("passLayerThreeTimes"))
             {
-                GameManager.passLayerTwoTimes = PlayerPrefs.GetInt("passLayerTwoTimes");
+                GameManager.passLayerThreeTimes = PlayerPrefs.GetInt("passLayerThreeTimes");
             }
             else
             {
-                PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
+                PlayerPrefs.SetInt("passLayerThreeTimes", GameManager.passLayerThreeTimes);
                 PlayerPrefs.Save();
             }
             if (PlayerPrefs.HasKey("layerOneCntinuousDideTimes"))
@@ -91,13 +91,13 @@ namespace com.DungeonPad
                 PlayerPrefs.SetInt("layerOneCntinuousDideTimes", GameManager.layerOneCntinuousDideTimes);
                 PlayerPrefs.Save();
             }
-            if (PlayerPrefs.HasKey("layerTwoCntinuousDideTimes"))
+            if (PlayerPrefs.HasKey("layerThreeCntinuousDideTimes"))
             {
-                GameManager.layerTwoCntinuousDideTimes = PlayerPrefs.GetInt("layerTwoCntinuousDideTimes");
+                GameManager.layerThreeCntinuousDideTimes = PlayerPrefs.GetInt("layerThreeCntinuousDideTimes");
             }
             else
             {
-                PlayerPrefs.SetInt("layerTwoCntinuousDideTimes", GameManager.layerTwoCntinuousDideTimes);
+                PlayerPrefs.SetInt("layerThreeCntinuousDideTimes", GameManager.layerThreeCntinuousDideTimes);
                 PlayerPrefs.Save();
             }
 
@@ -168,9 +168,9 @@ namespace com.DungeonPad
             PlayerPrefs.SetInt("Costed", AbilityManager.Costed);
             PlayerPrefs.SetInt("TotalCost", AbilityManager.TotalCost);
             PlayerPrefs.SetInt("passLayerOneTimes", GameManager.passLayerOneTimes);
-            PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
+            PlayerPrefs.SetInt("passLayerThreeTimes", GameManager.passLayerThreeTimes);
             PlayerPrefs.SetInt("layerOneCntinuousDideTimes", GameManager.layerOneCntinuousDideTimes);
-            PlayerPrefs.SetInt("layerTwoCntinuousDideTimes", GameManager.layerTwoCntinuousDideTimes);
+            PlayerPrefs.SetInt("layerThreeCntinuousDideTimes", GameManager.layerThreeCntinuousDideTimes);
             PlayerPrefs.Save();
         }
 

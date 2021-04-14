@@ -674,15 +674,15 @@ namespace com.DungeonPad
             #region//第二層
             else if (layer == 2)
             {
-                if (GameManager.passLayerTwoTimes < 1)
+                if (GameManager.passLayerThreeTimes < 1)
                 {
                     level = levelRamdomer(new int[] { 0, 1, 0, 1, 1 });
                 }
-                else if (GameManager.passLayerTwoTimes < 2)
+                else if (GameManager.passLayerThreeTimes < 2)
                 {
                     level = levelRamdomer(new int[] { 0, 1, 0, 1, 1, 1 });
                 }
-                else if (GameManager.passLayerTwoTimes < 3)
+                else if (GameManager.passLayerThreeTimes < 3)
                 {
                     level = levelRamdomer(new int[] { 0, 0, 1, 1, 1, 2, 1 });
                 }

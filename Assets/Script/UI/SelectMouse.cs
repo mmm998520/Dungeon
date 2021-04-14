@@ -71,13 +71,17 @@ namespace com.DungeonPad
             if ((Keyboard.current != null && Keyboard.current.f12Key.wasPressedThisFrame) || (Gamepad.current != null && Gamepad.current.selectButton.isPressed && Gamepad.current.startButton.isPressed))
             {
                 GameManager.passLayerOneTimes = 0;
-                GameManager.passLayerTwoTimes = 0;
+                GameManager.passLayerThreeTimes = 0;
                 GameManager.layerOneCntinuousDideTimes = 0;
-                GameManager.layerTwoCntinuousDideTimes = 0;
-                PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerOneTimes);
-                PlayerPrefs.SetInt("passLayerTwoTimes", GameManager.passLayerTwoTimes);
+                GameManager.layerThreeCntinuousDideTimes = 0;
+                GameManager.layerFourCntinuousWinTimes = 0;
+                PlayerPrefs.SetInt("passLayerThreeTimes", GameManager.passLayerOneTimes);
+                PlayerPrefs.SetInt("passLayerThreeTimes", GameManager.passLayerThreeTimes);
                 PlayerPrefs.SetInt("layerOneCntinuousDideTimes", GameManager.layerOneCntinuousDideTimes);
-                PlayerPrefs.SetInt("layerTwoCntinuousDideTimes", GameManager.layerTwoCntinuousDideTimes);
+                PlayerPrefs.SetInt("layerThreeCntinuousDideTimes", GameManager.layerThreeCntinuousDideTimes);
+                PlayerPrefs.SetInt("layerFourCntinuousWinTimes", GameManager.layerFourCntinuousWinTimes);
+                PlayerPrefs.DeleteKey("TaurenStat");
+                PlayerPrefs.DeleteKey("DragonStat");
                 PlayerPrefs.Save();
                 SwitchScenePanel.NextScene = "GameWarning";
                 GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");

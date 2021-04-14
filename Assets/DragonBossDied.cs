@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -21,8 +22,11 @@ namespace com.DungeonPad
             timer += Time.deltaTime;
             if (timer >= 4)
             {
-                SwitchScenePanel.NextScene = "Win";
-                GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+                if(SceneManager.GetActiveScene().name == "Game 4")
+                {
+                    SwitchScenePanel.NextScene = "Ending";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+                }
             }
             transform.position = startPos;
             spriteRenderer[0].color = new Color(1, 1, 1, Mathf.Clamp01((2 - timer) / 2));

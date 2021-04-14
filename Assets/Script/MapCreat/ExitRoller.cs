@@ -28,8 +28,8 @@ namespace com.DungeonPad
                 {
                     if (!goNext)
                     {
-                        GameManager.passLayerTwoTimes += 1;
-                        GameManager.layerTwoCntinuousDideTimes = 0;
+                        GameManager.passLayerThreeTimes += 1;
+                        GameManager.layerThreeCntinuousDideTimes = 0;
                         goNext = true;
                         SwitchScenePanel.NextScene = "Game 4";
                         GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
