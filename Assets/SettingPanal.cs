@@ -28,7 +28,7 @@ namespace com.DungeonPad
             }
             else
             {
-                MusicSoundSlider.value = 10;
+                MusicSoundSlider.value = 5;
             }
             setMusicSound();
             if (PlayerPrefs.HasKey("FXSound"))
@@ -37,7 +37,7 @@ namespace com.DungeonPad
             }
             else
             {
-                FXSoundSlider.value = 10;
+                FXSoundSlider.value = 5;
             }
             setFXSound();
             if (PlayerPrefs.HasKey("Lightness"))
