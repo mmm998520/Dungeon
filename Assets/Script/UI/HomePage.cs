@@ -48,7 +48,7 @@ Application.Quit();
 
         void Update()
         {
-            if ((Keyboard.current != null && Keyboard.current.f12Key.wasPressedThisFrame) || (Gamepad.current != null && Gamepad.current.selectButton.isPressed && Gamepad.current.startButton.isPressed))
+            if (GameManager.staff && ((Keyboard.current != null && Keyboard.current.f12Key.wasPressedThisFrame) || (Gamepad.current != null && Gamepad.current.selectButton.isPressed && Gamepad.current.startButton.isPressed)))
             {
                 GameManager.passLayerOneTimes = 0;
                 GameManager.passLayerThreeTimes = 0;

@@ -9,6 +9,8 @@ namespace com.DungeonPad
 {
     public class GameManager : MonoBehaviour
     {
+        public const bool staff = false;
+
         public static GameManager gameManager;
         public static Transform players, monsters, triggers, UI, magneticFields;
         public static int layers = 1, level = 1, passLayerOneTimes = 0, passLayerThreeTimes = 0, layerOneCntinuousDideTimes = 0, layerThreeCntinuousDideTimes = 0, layerFourCntinuousWinTimes = 0;
@@ -112,7 +114,7 @@ namespace com.DungeonPad
             }
             Keyboard keyboard = Keyboard.current;
             InputManager.currentGamepad = Gamepad.current;
-            if (keyboard.homeKey.wasPressedThisFrame)
+            if (staff && keyboard.homeKey.wasPressedThisFrame)
             {
                 shopPanel.SetActive(true);
                 shopPanel.transform.GetChild(0).GetComponent<AbilityDatas>().start();

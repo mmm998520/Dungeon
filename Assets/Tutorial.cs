@@ -19,6 +19,9 @@ namespace com.DungeonPad
         public int ShowHPLine;
         public Image[] HPBarImages;
 
+        float tutorialTextTimer;
+        int tutorialTextStat = 0;
+
         void Update()
         {
             Keyboard keyboard = Keyboard.current;
@@ -38,6 +41,8 @@ namespace com.DungeonPad
                     {
                         ButtonSelect.OnClicked();
                         TutorialText[nowTextNum].SetActive(false);
+                        TutorialText[nowTextNum].transform.GetChild(0).gameObject.SetActive(false);
+                        TutorialText[nowTextNum].GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
                         nowTextNum++;
                         if (nowTextNum < TutorialText.Length)
                         {
@@ -53,6 +58,7 @@ namespace com.DungeonPad
                     GameManager.players.GetChild(i).GetComponent<PlayerManager>().enabled = true;
                 }
                 nowTextNum++;
+                tutorialTextStat = TutorialText.Length - 1;
             }
             else
             {
@@ -62,6 +68,17 @@ namespace com.DungeonPad
                     {
                         GameManager.players.GetChild(i).GetComponent<PlayerManager>().DashTimer = 0.3f;
                     }
+                }
+                tutorialTextTimer += Time.deltaTime;
+                if (tutorialTextTimer >= 10)
+                {
+                    tutorialTextTimer = 0;
+                    TutorialText[tutorialTextStat].SetActive(false);
+                    if (++tutorialTextStat >= TutorialText.Length)
+                    {
+                        tutorialTextStat = 0;
+                    }
+                    TutorialText[tutorialTextStat].SetActive(true);
                 }
             }
 
