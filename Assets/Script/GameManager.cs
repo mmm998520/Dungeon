@@ -9,7 +9,7 @@ namespace com.DungeonPad
 {
     public class GameManager : MonoBehaviour
     {
-        public const bool staff = false;
+        public const bool staff = true;
 
         public static GameManager gameManager;
         public static Transform players, monsters, triggers, UI, magneticFields;
@@ -195,6 +195,19 @@ namespace com.DungeonPad
                 if (GameObject.Find("lineAttacks"))
                 {
                     Destroy(GameObject.Find("lineAttacks"));
+                }
+            }
+        }
+
+        public void OnApplicationPause(bool pause)
+        {
+            if (pause)
+            {
+                if (!(stopPanel.activeSelf || settingPanel.activeSelf) && !CurrentSceneName.Contains("Select") && !CurrentSceneName.Contains("Home"))
+                {
+                    Time.timeScale = 0;
+                    Time.fixedDeltaTime = 0.02F * Time.timeScale;
+                    stopPanel.SetActive(true);
                 }
             }
         }
