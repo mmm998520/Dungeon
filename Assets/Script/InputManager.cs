@@ -42,7 +42,7 @@ public class InputManager : MonoBehaviour
     public static float p1KeyboardHorizontalValue, p1KeyboardVerticalValue, p2KeyboardHorizontalValue, p2KeyboardVerticalValue, p1GamepadHorizontalValue, p1GamepadVerticalValue, p2GamepadHorizontalValue, p2GamepadVerticalValue;
     public static bool twoPlayerMode = true;
 
-    void Start()
+    void Awake()
     {
         keyboardSetting();
     }

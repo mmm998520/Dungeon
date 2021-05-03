@@ -19,7 +19,7 @@ namespace com.DungeonPad
         public int ShowHPLine;
         public Image[] HPBarImages;
 
-        float tutorialTextTimer;
+        float tutorialTextTimer = 999;
         int tutorialTextStat = 0;
 
         void Update()

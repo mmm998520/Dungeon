@@ -123,7 +123,7 @@ namespace com.DungeonPad
             }
             else
             {
-                PlayerPrefs.SetString("Keyboard", "36,32,14,17,23,24,26,3,62,63,60,61,84,85,83,80");
+                PlayerPrefs.SetString("Keyboard", "36,32,14,17,23,24,26,29,62,63,60,61,84,85,83,92,");
             }
         }
 

@@ -13,11 +13,14 @@ namespace com.DungeonPad
         [Space]
         [SerializeField] Image selectBackGround;
         [SerializeField] Image p1select, p2select;
+        [SerializeField] ButtonShower p1ButtonShower, p2ButtonShower, enterGameButtonShower;
         [SerializeField] GameObject p1selectKeyboard, p1selectGamepad, p2selectKeyboard, p2selectGamepad;
         [SerializeField] Sprite SelectAll2P, SelectAll1P, UnSelectAll2P, UnSelectAll1P, p1selectTrue, p1selectFalse, p2selectTrue, p2selectFalse;
         float p1KeyboardTimer, p2KeyboardTimer, p1GamepadTimer, p2GamepadTimer, p1SingleTimer, p2SingleTimer;
         float p1MotorSpeeds, p2MotorSpeeds;
         bool goNext = false;
+
+        bool start;
         private void Start()
         {
             ReGamer.ReAbility();
@@ -112,6 +115,15 @@ namespace com.DungeonPad
                     Gamepad.current.SetMotorSpeeds(0, 0);
                 }
             }
+
+            setSelectButtonSprite(InputManager.p1Mod, InputManager.p2Mod, p1ButtonShower);
+            setSelectButtonSprite(InputManager.p2Mod, InputManager.p1Mod, p2ButtonShower);
+            if (!start)
+            {
+                start = true;
+                p1ButtonShower.selected();
+                p2ButtonShower.selected();
+            }
         }
 
         #region//selectRole
@@ -189,6 +201,10 @@ namespace com.DungeonPad
             Debug.Log("p1 : " + InputManager.p1Mod.ToString() + "        " + "p2 : " + InputManager.p2Mod.ToString());
             if(InputManager.p1Mod != InputManager.PlayerMod.none && InputManager.p2Mod != InputManager.PlayerMod.none)
             {
+                enterGameButtonShower.gameObject.SetActive(true);
+                setEnterGameButtonSprite();
+                enterGameButtonShower.image.sprite = enterGameButtonShower.buttons[enterGameButtonShower.buttonNum];
+
                 if (InputManager.twoPlayerMode)
                 {
                     selectBackGround.sprite = SelectAll2P;
@@ -341,6 +357,8 @@ namespace com.DungeonPad
             }
             else
             {
+                enterGameButtonShower.gameObject.SetActive(false);
+
                 if (InputManager.twoPlayerMode)
                 {
                     selectBackGround.sprite = UnSelectAll2P;
@@ -492,6 +510,7 @@ namespace com.DungeonPad
                 if (playerMod != InputManager.PlayerMod.none)
                 {
                     ButtonSelect.OnClicked();
+                    StartCoroutine(ButtonShowerSelected(playerMod));
                 }
                 return playerMod;
             }
@@ -547,9 +566,132 @@ namespace com.DungeonPad
             if(playerMod == InputManager.PlayerMod.none)
             {
                 ButtonSelect.OnClicked();
+                StartCoroutine(ButtonShowerSelected(playerMod));
             }
             return playerMod;
         }
+
+        WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
+
+        IEnumerator ButtonShowerSelected(InputManager.PlayerMod playerMod)
+        {
+            yield return waitForEndOfFrame;
+            p1ButtonShower.selected();
+            p2ButtonShower.selected();
+        }
         #endregion
+
+        void setSelectButtonSprite(InputManager.PlayerMod myPlayerMod, InputManager.PlayerMod otherPlayerMod, ButtonShower myButtonShower)
+        {
+            switch (myPlayerMod)
+            {
+                case InputManager.PlayerMod.none:
+                    myButtonShower.buttons.Clear();
+                    if (InputManager.twoPlayerMode)
+                    {
+                        if (Gamepad.all.Count > 0)
+                        {
+                            myButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadA]);
+                        }
+                    }
+                    else
+                    {
+                        if (Gamepad.all.Count > 0)
+                        {
+                            myButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadLB]);
+                            myButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadRB]);
+                        }
+                    }
+                    myButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.keyboardP1A]);
+                    myButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.keyboardP2A]);
+                    switch (otherPlayerMod)
+                    {
+                        case InputManager.PlayerMod.gamepadP1:
+                        case InputManager.PlayerMod.gamepadP2:
+                            if (Gamepad.all.Count <= 1)
+                            {
+                                myButtonShower.buttons.Remove(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadA]);
+                            }
+                            break;
+                        case InputManager.PlayerMod.singleP1:
+                            myButtonShower.buttons.Remove(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadLB]);
+                            break;
+                        case InputManager.PlayerMod.singleP2:
+                            myButtonShower.buttons.Remove(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadRB]);
+                            break;
+                        case InputManager.PlayerMod.keyboardP1:
+                            myButtonShower.buttons.Remove(ButtonShower.buttonSprites[ButtonShower.Buttons.keyboardP1A]);
+                            break;
+                        case InputManager.PlayerMod.keyboardP2:
+                            myButtonShower.buttons.Remove(ButtonShower.buttonSprites[ButtonShower.Buttons.keyboardP2A]);
+                            break;
+                    }
+                    break;
+                case InputManager.PlayerMod.gamepadP1:
+                case InputManager.PlayerMod.gamepadP2:
+                    myButtonShower.buttons.Clear();
+                    myButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadB]);
+                    break;
+                case InputManager.PlayerMod.singleP1:
+                    myButtonShower.buttons.Clear();
+                    myButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadLT]);
+                    break;
+                case InputManager.PlayerMod.singleP2:
+                    myButtonShower.buttons.Clear();
+                    myButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadRT]);
+                    break;
+                case InputManager.PlayerMod.keyboardP1:
+                    myButtonShower.buttons.Clear();
+                    myButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.keyboardP1B]);
+                    break;
+                case InputManager.PlayerMod.keyboardP2:
+                    myButtonShower.buttons.Clear();
+                    myButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.keyboardP2B]);
+                    break;
+            }
+        }
+
+        void setEnterGameButtonSprite()
+        {
+            enterGameButtonShower.buttons.Clear();
+            switch (InputManager.p1Mod)
+            {
+                case InputManager.PlayerMod.gamepadP1:
+                case InputManager.PlayerMod.gamepadP2:
+                    enterGameButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadA]);
+                    break;
+                case InputManager.PlayerMod.singleP1:
+                    enterGameButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadLB]);
+                    break;
+                case InputManager.PlayerMod.singleP2:
+                    enterGameButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadRB]);
+                    break;
+                case InputManager.PlayerMod.keyboardP1:
+                    enterGameButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.keyboardP1A]);
+                    break;
+                case InputManager.PlayerMod.keyboardP2:
+                    enterGameButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.keyboardP2A]);
+                    break;
+            }
+            switch (InputManager.p2Mod)
+            {
+                case InputManager.PlayerMod.gamepadP1:
+                case InputManager.PlayerMod.gamepadP2:
+                    enterGameButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadA]);
+                    break;
+                case InputManager.PlayerMod.singleP1:
+                    enterGameButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadLB]);
+                    break;
+                case InputManager.PlayerMod.singleP2:
+                    enterGameButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.gamepadRB]);
+                    break;
+                case InputManager.PlayerMod.keyboardP1:
+                    enterGameButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.keyboardP1A]);
+                    break;
+                case InputManager.PlayerMod.keyboardP2:
+                    enterGameButtonShower.addButtons(ButtonShower.buttonSprites[ButtonShower.Buttons.keyboardP2A]);
+                    break;
+            }
+        }
     }
 }
