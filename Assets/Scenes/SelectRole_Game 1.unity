@@ -20343,10 +20343,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d593bd567ed4a49875481ff3b1a317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchTime: 2
   buttons: []
   buttonNum: 0
   image: {fileID: 0}
+  AddAll: 0
   AutoGetPlayerMode: 0
+  AutoGetPlayerMode_onlyThisPlayer: {fileID: 0}
   function: 1
 --- !u!114 &1093827994
 MonoBehaviour:
@@ -25039,10 +25042,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d593bd567ed4a49875481ff3b1a317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchTime: 2
   buttons: []
   buttonNum: 0
   image: {fileID: 0}
+  AddAll: 0
   AutoGetPlayerMode: 0
+  AutoGetPlayerMode_onlyThisPlayer: {fileID: 0}
   function: 1
 --- !u!114 &1440913132
 MonoBehaviour:
@@ -29960,10 +29966,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d593bd567ed4a49875481ff3b1a317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchTime: 2
   buttons: []
   buttonNum: 0
   image: {fileID: 0}
+  AddAll: 0
   AutoGetPlayerMode: 0
+  AutoGetPlayerMode_onlyThisPlayer: {fileID: 0}
   function: 1
 --- !u!114 &1826233040
 MonoBehaviour:

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace com.DungeonPad
@@ -13,6 +14,7 @@ namespace com.DungeonPad
         public List<Sprite> buttons = new List<Sprite>();
         [HideInInspector] public int buttonNum = 0;
         [HideInInspector] public Image image;
+        [SerializeField] bool AddAll;
         [SerializeField] bool AutoGetPlayerMode;
         [SerializeField] PlayerManager AutoGetPlayerMode_onlyThisPlayer;
         public enum Functions
@@ -53,6 +55,10 @@ namespace com.DungeonPad
                 setButtonSprites();
             }
             image = GetComponent<Image>();
+            if (AddAll)
+            {
+                addALL();
+            }
             if (AutoGetPlayerMode && buttons.Count <= 0)
             {
                 getUsingButton();
@@ -115,12 +121,12 @@ namespace com.DungeonPad
             if (!neverUseThisFrame_1)
             {
                 neverUseThisFrame_1 = true;
-                StartCoroutine(Timer());
+                timer_1 += Time.unscaledDeltaTime;
             }
             if (!neverUseThisFrame_2)
             {
+                timer_2 += Time.unscaledDeltaTime;
                 neverUseThisFrame_2 = true;
-                StartCoroutine(Timer());
             }
             if (switchTime > 1.5f)
             {
@@ -148,13 +154,30 @@ namespace com.DungeonPad
             }
         }
 
+
+        private void LateUpdate()
+        {
+            if (timer_1 >= switchTime)
+            {
+                timer_1 = 0;
+            }
+            if (timer_2 >= switchTime)
+            {
+                timer_2 = 0;
+            }
+            neverUseThisFrame_1 = false;
+            neverUseThisFrame_2 = false;
+        }
+        /*
         WaitForEndOfFrame waitForEnd = new WaitForEndOfFrame();
 
         IEnumerator Timer()
         {
-            timer_2 += Time.deltaTime;
-            timer_1 += Time.deltaTime;
+            timer_2 += Time.unscaledDeltaTime;
+            timer_1 += Time.unscaledDeltaTime;
             yield return waitForEnd;
+
+            Debug.Log("front : " + neverUseThisFrame_1 + ", " + neverUseThisFrame_2);
             if (switchTime > 1.5f)
             {
                 if (timer_2 >= switchTime)
@@ -171,8 +194,10 @@ namespace com.DungeonPad
                 }
                 neverUseThisFrame_1 = false;
             }
-        }
+            Debug.Log("hide");
 
+        }
+        */
         public void selected()
         {
             buttonNum = 0;
@@ -322,6 +347,47 @@ namespace com.DungeonPad
                         break;
                 }
             }
+        }
+
+        public void addALL()
+        {
+            buttons.Clear();
+            switch (function)
+            {
+                case Functions.Enter:
+                    if (Gamepad.all.Count > 0)
+                    {
+                        if (InputManager.twoPlayerMode)
+                        {
+                            addButtons(buttonSprites[Buttons.gamepadA]);
+                        }
+                        else
+                        {
+                            addButtons(buttonSprites[Buttons.gamepadLB]);
+                            addButtons(buttonSprites[Buttons.gamepadRB]);
+                        }
+                    }
+                    addButtons(buttonSprites[Buttons.keyboardP1A]);
+                    addButtons(buttonSprites[Buttons.keyboardP2A]);
+                    break;
+                case Functions.Back:
+                    if (Gamepad.all.Count > 0)
+                    {
+                        if (InputManager.twoPlayerMode)
+                        {
+                            addButtons(buttonSprites[Buttons.gamepadB]);
+                        }
+                        else
+                        {
+                            addButtons(buttonSprites[Buttons.gamepadLT]);
+                            addButtons(buttonSprites[Buttons.gamepadRT]);
+                        }
+                    }
+                    addButtons(buttonSprites[Buttons.keyboardP1B]);
+                    addButtons(buttonSprites[Buttons.keyboardP2B]);
+                    break;
+            }
+            selected();
         }
     }
 }

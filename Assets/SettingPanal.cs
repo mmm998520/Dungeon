@@ -19,6 +19,8 @@ namespace com.DungeonPad
         [SerializeField] Image MusicSoundText, FXSoundText, LightnessText, PlayerNumText;
         [SerializeField] Slider MusicSoundSlider, FXSoundSlider, LightnessSlider, PlayerNumSlider;
         [SerializeField] GameObject Locker;
+
+        [SerializeField] ButtonShower buttonShower;
         void Awake()
         {
             eventSystem = EventSystem.current;
@@ -149,6 +151,10 @@ namespace com.DungeonPad
             else
             {
                 PlayerNumSlider.value = PlayerNum;
+            }
+            if (awake == 0 && SceneManager.GetActiveScene().name == "Setting")
+            {
+                buttonShower.addALL();
             }
         }
 
