@@ -7,13 +7,14 @@ namespace com.DungeonPad
 {
     public class ButtonShower : MonoBehaviour
     {
-        static float timer = 0;
-        static bool neverUseThisFrame;
+        static float timer_1 = 0, timer_2 = 0;
+        [SerializeField] float switchTime = 2;
+        static bool neverUseThisFrame_1, neverUseThisFrame_2;
         public List<Sprite> buttons = new List<Sprite>();
         [HideInInspector] public int buttonNum = 0;
         [HideInInspector] public Image image;
-        public bool AutoGetPlayerMode;
-
+        [SerializeField] bool AutoGetPlayerMode;
+        [SerializeField] PlayerManager AutoGetPlayerMode_onlyThisPlayer;
         public enum Functions
         {
             Move,
@@ -56,6 +57,53 @@ namespace com.DungeonPad
             {
                 getUsingButton();
             }
+            if (buttons.Count <= 0 && AutoGetPlayerMode_onlyThisPlayer != null)
+            {
+                if (AutoGetPlayerMode_onlyThisPlayer.p1)
+                {
+                    switch (InputManager.p1Mod)
+                    {
+                        case InputManager.PlayerMod.gamepadP1:
+                        case InputManager.PlayerMod.gamepadP2:
+                            addButtons(buttonSprites[Buttons.gamepadB]);
+                            break;
+                        case InputManager.PlayerMod.singleP1:
+                            addButtons(buttonSprites[Buttons.gamepadLB]);
+                            break;
+                        case InputManager.PlayerMod.singleP2:
+                            addButtons(buttonSprites[Buttons.gamepadRB]);
+                            break;
+                        case InputManager.PlayerMod.keyboardP1:
+                            addButtons(buttonSprites[Buttons.keyboardP1B]);
+                            break;
+                        case InputManager.PlayerMod.keyboardP2:
+                            addButtons(buttonSprites[Buttons.keyboardP2B]);
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (InputManager.p2Mod)
+                    {
+                        case InputManager.PlayerMod.gamepadP1:
+                        case InputManager.PlayerMod.gamepadP2:
+                            addButtons(buttonSprites[Buttons.gamepadB]);
+                            break;
+                        case InputManager.PlayerMod.singleP1:
+                            addButtons(buttonSprites[Buttons.gamepadLB]);
+                            break;
+                        case InputManager.PlayerMod.singleP2:
+                            addButtons(buttonSprites[Buttons.gamepadRB]);
+                            break;
+                        case InputManager.PlayerMod.keyboardP1:
+                            addButtons(buttonSprites[Buttons.keyboardP1B]);
+                            break;
+                        case InputManager.PlayerMod.keyboardP2:
+                            addButtons(buttonSprites[Buttons.keyboardP2B]);
+                            break;
+                    }
+                }
+            }
             if (buttons.Count > 0)
             {
                 image.sprite = buttons[buttonNum];
@@ -64,35 +112,71 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if (!neverUseThisFrame)
+            if (!neverUseThisFrame_1)
             {
-                neverUseThisFrame = true;
-                timer += Time.deltaTime;
+                neverUseThisFrame_1 = true;
+                StartCoroutine(Timer());
             }
-            if (timer >= 2f)
+            if (!neverUseThisFrame_2)
             {
-                if (++buttonNum >= buttons.Count)
+                neverUseThisFrame_2 = true;
+                StartCoroutine(Timer());
+            }
+            if (switchTime > 1.5f)
+            {
+                if (timer_2 >= switchTime)
                 {
-                    buttonNum = 0;
+                    if (++buttonNum >= buttons.Count)
+                    {
+                        buttonNum = 0;
+                    }
+                    image.sprite = buttons[buttonNum];
                 }
-                image.sprite = buttons[buttonNum];
+                image.color = new Color(1, 1, 1, ((switchTime / 2 * 0.8f) - Mathf.Pow(Mathf.Abs(timer_2 - (switchTime / 2)), switchTime * 1.5f)) / (switchTime / 2));
             }
-            image.color = new Color(1,1,1,(0.8f - Mathf.Pow(Mathf.Abs(timer - 1f), 3f)) / 1f);
+            else
+            {
+                if (timer_1 >= switchTime)
+                {
+                    if (++buttonNum >= buttons.Count)
+                    {
+                        buttonNum = 0;
+                    }
+                    image.sprite = buttons[buttonNum];
+                }
+                image.color = new Color(1, 1, 1, ((switchTime / 2 * 0.8f) - Mathf.Pow(Mathf.Abs(timer_1 - (switchTime / 2)), switchTime * 1.5f)) / (switchTime / 2));
+            }
+        }
+
+        WaitForEndOfFrame waitForEnd = new WaitForEndOfFrame();
+
+        IEnumerator Timer()
+        {
+            timer_2 += Time.deltaTime;
+            timer_1 += Time.deltaTime;
+            yield return waitForEnd;
+            if (switchTime > 1.5f)
+            {
+                if (timer_2 >= switchTime)
+                {
+                    timer_2 = 0;
+                }
+                neverUseThisFrame_2 = false;
+            }
+            else
+            {
+                if (timer_1 >= switchTime)
+                {
+                    timer_1 = 0;
+                }
+                neverUseThisFrame_1 = false;
+            }
         }
 
         public void selected()
         {
             buttonNum = 0;
             image.sprite = buttons[buttonNum];
-        }
-
-        private void LateUpdate()
-        {
-            neverUseThisFrame = false;
-            if (timer >= 2f)
-            {
-                timer = 0;
-            }
         }
 
         public void addButtons(Sprite sprite)
@@ -105,7 +189,7 @@ namespace com.DungeonPad
 
         public void reset()
         {
-            timer = 0;
+            timer_2 = 0;
             buttonNum = 0;
             image.sprite = buttons[buttonNum];
         }

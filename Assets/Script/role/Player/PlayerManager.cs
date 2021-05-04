@@ -441,16 +441,6 @@ namespace com.DungeonPad
                 }
             }
             #endregion
-            if (ConfusionTimer < 10 || StickTimer < 10)
-            {
-                ConfusionUIRenderer.enabled = true;
-                ConfusionUIcontroler.enabled = true;
-            }
-            else
-            {
-                ConfusionUIRenderer.enabled = false;
-                ConfusionUIcontroler.enabled = false;
-            }
             if (ConfusionTimer < 10)
             {
                 float tempVX = v.x + Random.Range(-6f, 6f);
