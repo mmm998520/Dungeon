@@ -8,7 +8,7 @@ namespace com.DungeonPad
     {
         public SpriteRenderer spriteRenderer;
         bool spriteColorAlphaUp = false;
-        float spriteColorAMax = 1, spriteColorAMin = 0.5f;
+        float spriteColorAMax = 0.6f, spriteColorAMin = 0.2f;
         public CircleCollider2D circleCollider;
         public Transform child;
         void Start()
@@ -23,7 +23,7 @@ namespace com.DungeonPad
             circleCollider.offset = child.localPosition;
             if (spriteColorAlphaUp)
             {
-                spriteRenderer.color = new Color(1, 1, 1, Mathf.Lerp(spriteRenderer.color.a, spriteColorAMax, Time.deltaTime));
+                spriteRenderer.color = new Color(1, 1, 1, Mathf.Lerp(spriteRenderer.color.a, spriteColorAMax, Time.deltaTime * 1.5f));
                 if((spriteColorAMax - spriteRenderer.color.a) <= 0.05f)
                 {
                     spriteColorAlphaUp = false;
@@ -31,7 +31,7 @@ namespace com.DungeonPad
             }
             else
             {
-                spriteRenderer.color = new Color(1, 1, 1, Mathf.Lerp(spriteRenderer.color.a, spriteColorAMin, Time.deltaTime));
+                spriteRenderer.color = new Color(1, 1, 1, Mathf.Lerp(spriteRenderer.color.a, spriteColorAMin, Time.deltaTime * 1.5f));
                 if ((spriteRenderer.color.a - spriteColorAMin) <= 0.05f)
                 {
                     spriteColorAlphaUp = true;
