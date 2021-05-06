@@ -40,55 +40,45 @@ namespace com.DungeonPad
                     PlayerManager.money++;
                     PlayerManager.HP += 10;
                     minDisPlayer.GetComponent<PlayerManager>().reTimer = 0;
+                    Destroy(gameObject);
                 }
                 else
                 {
-                    GameManager.AbilityNum++;
-                    PlayerManager.moneyB++;
-                    int r = 0;
-                    string abilityName = "";
-                    int times = 0;
-                    do
+                    AbilityShower abilityShower = GameObject.Find("AbilityShower").GetComponent<AbilityShower>();
+                    if (abilityShower.rotate == 0)
                     {
-                        r = Random.Range(0, AbilityManager.Abilitys.Length);
-                        abilityName = AbilityManager.Abilitys[r].name;
-                        times++;
-                        if (final && abilityName == "免疫")
+                        GameManager.AbilityNum++;
+                        PlayerManager.moneyB++;
+                        int r = 0;
+                        string abilityName = "";
+                        int times = 0;
+                        do
                         {
-                            abilityName = "重來一次";
-                        }
-                        if (GameManager.CurrentSceneName == "Game 0_4")
-                        {
-                            //HashSet<string> abilityNames = new HashSet<string>() { "守護", "不屈" };
-                            if (abilityName != "突進")
+                            r = Random.Range(0, AbilityManager.Abilitys.Length);
+                            abilityName = AbilityManager.Abilitys[r].name;
+                            times++;
+                            if (final && abilityName == "免疫")
                             {
                                 abilityName = "重來一次";
                             }
+                            if (GameManager.CurrentSceneName == "Game 0_4")
+                            {
+                                //HashSet<string> abilityNames = new HashSet<string>() { "守護", "不屈" };
+                                if (abilityName != "突進")
+                                {
+                                    abilityName = "重來一次";
+                                }
+                            }
+                        } while ((abilityName == "重來一次" || AbilityManager.AbilityCurrentLevel[abilityName] >= AbilityManager.AbilityCanBuyLevel[abilityName]) && times < 1000);
+                        if (times >= 1000)
+                        {
+                            Debug.LogError("能力都滿了");
                         }
-                    } while ((abilityName == "重來一次" || AbilityManager.AbilityCurrentLevel[abilityName] >= AbilityManager.AbilityCanBuyLevel[abilityName]) && times < 1000);
-                    if (times >= 1000)
-                    {
-                        Debug.LogError("能力都滿了");
-                    }
-                    try
-                    {
-                        AbilityData.setPlayerAbility(abilityName, ++AbilityManager.AbilityCurrentLevel[abilityName]);
-                    }
-                    catch
-                    {
-                        Debug.LogError("能力有問題");
-                    }
-                    try
-                    {
-                        GameManager.showAbilityDetail.showDetail(abilityName + "Lv" + AbilityManager.AbilityCurrentLevel[abilityName]);
-                    }
-                    catch
-                    {
-                        Debug.LogError("找不到 : 能力敘述文字");
+                        abilityShower.rotate = 1;
+                        abilityShower.abilityName = abilityName;
+                        Destroy(gameObject);
                     }
                 }
-                Destroy(gameObject);
-                print(1);
             }
             else if ((distance < 3 && !moneyB) || (distance < 0.5f && moneyB))
             {

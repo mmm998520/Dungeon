@@ -36,6 +36,11 @@ namespace com.DungeonPad
 
         void Update()
         {
+            if(rotate != 0)
+            {
+                abilityRandomer();
+            }
+
             if (PlayerManager.homeButton)
             {
                 for(int i = 0; i < homeButtonTimerImages.Length; i++)
@@ -169,6 +174,81 @@ namespace com.DungeonPad
                     }
                     emptyAbilityOrder.RemoveAt(0);
                     emptyAbilityOrder.Add(i);
+                }
+            }
+        }
+
+        public int rotate = 0;
+        public string abilityName;
+        float speed = 800;
+        [SerializeField] Image randomer;
+        [SerializeField] Sprite[] randomeSprites;
+        float scaleTimer = -1f;
+        public void abilityRandomer()
+        {
+            randomer.enabled = true;
+            if (rotate == 1)
+            {
+                speed = Mathf.Lerp(speed, 10, Time.deltaTime / 2);
+            }
+            else if(rotate == 2)
+            {
+                speed = 160;
+            }
+            randomer.transform.Rotate(0, speed * Time.deltaTime, 0);
+            if (rotate == 2 && (Mathf.Abs(randomer.transform.eulerAngles.y - 0) < 5 || Mathf.Abs(randomer.transform.eulerAngles.y - 180) < 5))
+            {
+                speed = 0;
+                rotate = 3;
+            }
+            else if (rotate == 1 && randomer.transform.eulerAngles.y >= 90 && randomer.transform.eulerAngles.y < 270)
+            {
+                if(speed <= 160)
+                {
+                    rotate = 2;
+                    randomer.transform.eulerAngles = new Vector3(0, -90, 0);
+                    randomer.sprite = Resources.Load<Sprite>("UI/Ability/AbilityImage/" + abilityName + "Lv1");
+                }
+                else
+                {
+                    randomer.transform.eulerAngles = new Vector3(0, -90, 0);
+                    randomer.sprite = randomeSprites[Random.Range(0, randomeSprites.Length)];
+                 }
+            }
+            else if(rotate == 3)
+            {
+                scaleTimer += Time.deltaTime;
+                if (scaleTimer < 0 && scaleTimer >= -0.5f)
+                {
+                    randomer.transform.localScale = Vector3.one * (1 - Mathf.Abs(scaleTimer) / 3);
+                }
+                else if(scaleTimer >= 0)
+                {
+                    randomer.transform.localScale = Vector3.one * (1 - Mathf.Abs(scaleTimer) * 2);
+                }
+                if (randomer.transform.localScale.x <= 0)
+                {
+                    scaleTimer = -1f;
+                    randomer.transform.localScale = Vector3.one * (1 - Mathf.Abs(scaleTimer) / 3);
+                    rotate = 0;
+                    speed = 1000;
+                    randomer.enabled = false;
+                    try
+                    {
+                        AbilityData.setPlayerAbility(abilityName, ++AbilityManager.AbilityCurrentLevel[abilityName]);
+                    }
+                    catch
+                    {
+                        Debug.LogError("能力有問題");
+                    }
+                    try
+                    {
+                        GameManager.showAbilityDetail.showDetail(abilityName + "Lv" + AbilityManager.AbilityCurrentLevel[abilityName]);
+                    }
+                    catch
+                    {
+                        Debug.LogError("找不到 : 能力敘述文字");
+                    }
                 }
             }
         }
