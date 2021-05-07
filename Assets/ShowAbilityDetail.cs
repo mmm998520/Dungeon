@@ -28,6 +28,14 @@ namespace com.DungeonPad
         {
             timer = 0;
             text.sprite = Resources.Load<Sprite>("UI/Ability/AbilityText/" + ability);
+            try
+            {
+                transform.GetChild(0).gameObject.SetActive(ability.Contains("傳送"));
+            }
+            catch
+            {
+                Debug.LogError("這場景忘了放");
+            }
         }
     }
 }
