@@ -10,6 +10,8 @@ namespace com.DungeonPad
         Image text;
         [SerializeField] Sprite Null;
         float timer = 10;
+        [SerializeField] GameObject[] Xs;
+
         void Start()
         {
             text = GetComponent<Image>();
@@ -22,20 +24,16 @@ namespace com.DungeonPad
             {
                 text.sprite = Null;
             }
+            for (int i = 0; i < 2; i++)
+            {
+                Xs[i].SetActive(text.sprite.name == "傳送Lv" + (i + 1));
+            }
         }
 
         public void showDetail(string ability)
         {
             timer = 0;
             text.sprite = Resources.Load<Sprite>("UI/Ability/AbilityText/" + ability);
-            try
-            {
-                transform.GetChild(0).gameObject.SetActive(ability.Contains("傳送"));
-            }
-            catch
-            {
-                Debug.LogError("這場景忘了放");
-            }
         }
     }
 }

@@ -70,6 +70,7 @@ namespace com.DungeonPad
                                 }
                             }
                         } while ((abilityName == "重來一次" || AbilityManager.AbilityCurrentLevel[abilityName] >= AbilityManager.AbilityCanBuyLevel[abilityName]) && times < 1000);
+                        abilityName = "傳送";
                         if (times >= 1000)
                         {
                             Debug.LogError("能力都滿了");

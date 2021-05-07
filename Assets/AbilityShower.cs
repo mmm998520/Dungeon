@@ -14,6 +14,8 @@ namespace com.DungeonPad
         [SerializeField] GameObject[] selects;
         [SerializeField] GameObject select_None;
         [SerializeField] Image text;
+        [SerializeField] GameObject[] Xs;
+
         public static bool showSelected;
         int selectedNum = 0;
         public static List<string> abilityNamesAndLevels = new List<string>();
@@ -36,7 +38,12 @@ namespace com.DungeonPad
 
         void Update()
         {
-            if(rotate != 0)
+            for(int i = 0; i < 2; i++)
+            {
+                Xs[i].SetActive(text.sprite.name == "傳送Lv" + (i + 1) && text.enabled);
+            }
+
+            if (rotate != 0)
             {
                 abilityRandomer();
             }
