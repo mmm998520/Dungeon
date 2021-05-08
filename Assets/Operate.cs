@@ -22,7 +22,7 @@ namespace com.DungeonPad
         GameObject selected;
         Keyboard keyboard;
 
-        bool changing = false;
+        bool changing = false, changingFrame = false;
         void Start()
         {
             setKeySprite();
@@ -35,8 +35,15 @@ namespace com.DungeonPad
             keyboard = Keyboard.current;
             selected = eventSystem.currentSelectedGameObject;
             switchPanel();
-            changeingKey();
-            if(keyboard != null && selected.transform.parent.parent.name != "ChangingButtons")
+            if (!changingFrame)
+            {
+                changeingKey();
+            }
+            else
+            {
+                changingFrame = false;
+            }
+            if (keyboard != null && selected.transform.parent.parent.name != "ChangingButtons")
             {
                 if (InputManager.anyExit())
                 {
@@ -97,6 +104,7 @@ namespace com.DungeonPad
                 }
                 selectedButtons[i].GetComponent<Image>().enabled = false;
                 eventSystem.SetSelectedGameObject(changingButtons[i]);
+                changingFrame = true;
             }
         }
 
@@ -126,6 +134,7 @@ namespace com.DungeonPad
                 {
                     if (keyboard.allKeys[i].wasPressedThisFrame && i < unSelectedKeys.Length && unSelectedKeys[i] != null)
                     {
+                        Debug.Log("test");
                         for(int k=0; k < selectedButtons.Length; k++)
                         {
                             if (k != j && int.Parse(keyboardNums[k]) == i)
@@ -218,6 +227,8 @@ namespace com.DungeonPad
                 }
                 PlayerPrefs.SetString("Keyboard", Keyboards);
                 PlayerPrefs.Save();
+                ButtonShower.setButtonSprites();
+                Debug.Log("setButtonSprites");
             }
         }
 
