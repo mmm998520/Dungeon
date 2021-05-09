@@ -214,7 +214,7 @@ namespace com.DungeonPad
                 {
                     rotate = 2;
                     randomer.transform.eulerAngles = new Vector3(0, -90, 0);
-                    randomer.sprite = Resources.Load<Sprite>("UI/Ability/AbilityImage/" + abilityName + "Lv1");
+                    randomer.sprite = Resources.Load<Sprite>("UI/Ability/AbilityImage/" + abilityName);
                 }
                 else
                 {
