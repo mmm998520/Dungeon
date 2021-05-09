@@ -38,6 +38,7 @@ namespace com.DungeonPad
         public static int AbilityNum;
         void Awake()
         {
+            ReLifeParticle.Tracking = false;
             Debug.LogError("passLayerOneTimes : " + passLayerOneTimes + ", passLayerThreeTimes : " + passLayerThreeTimes);
             CurrentSceneName = SceneManager.GetActiveScene().name;
             MazeCreater.setTotalRowCol();

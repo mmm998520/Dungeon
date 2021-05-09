@@ -47,13 +47,15 @@ namespace com.DungeonPad
         {
             if (collider.GetComponent<PlayerManager>())
             {
-                if (PlayerManager.Life < PlayerManager.MaxLife)
+                if (PlayerManager.Life < PlayerManager.MaxLife && !Tracking)
                 {
                     track = true;
+                    Tracking = true;
                 }
             }
         }
 
+        public static bool Tracking;
         bool track;
         float timer, speed = 5, RotateSpeed = 1;
         void Track()
@@ -90,6 +92,7 @@ namespace com.DungeonPad
             {
                 Destroy(gameObject);
                 PlayerManager.Life++;
+                Tracking = false;
             }
         }
     }

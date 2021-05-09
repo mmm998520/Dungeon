@@ -33,7 +33,7 @@ namespace com.DungeonPad
             }
             float distance = Vector3.Distance(child.position, minDisPlayer.position);
             print(0);
-            if (distance < 0.3f)
+            if ((distance < 0.3f && !moneyB) || (distance < 0.5f && moneyB))
             {
                 if (!moneyB)
                 {
@@ -80,7 +80,7 @@ namespace com.DungeonPad
                     }
                 }
             }
-            else if ((distance < 3 && !moneyB) || (distance < 0.5f && moneyB))
+            else if (distance < 3 && !moneyB)
             {
                 child.position = child.position + Vector3.Normalize(MinDisPlayer().position - child.position) * 10 * Time.deltaTime;
                 print(2);
