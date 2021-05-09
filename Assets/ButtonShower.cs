@@ -138,7 +138,7 @@ namespace com.DungeonPad
                     }
                     image.sprite = buttons[buttonNum];
                 }
-                image.color = new Color(1, 1, 1, ((switchTime / 2 * 0.8f) - Mathf.Pow(Mathf.Abs(timer_2 - (switchTime / 2)), switchTime * 1.5f)) / (switchTime / 2));
+                image.color = new Color(1, 1, 1, ((switchTime / 2 * 0.8f) - Mathf.Pow(Mathf.Abs(timer_2 - (switchTime / 2)), switchTime * 1.5f)) / (switchTime / 2 * 0.8f));
             }
             else
             {
@@ -150,7 +150,7 @@ namespace com.DungeonPad
                     }
                     image.sprite = buttons[buttonNum];
                 }
-                image.color = new Color(1, 1, 1, ((switchTime / 2 * 0.8f) - Mathf.Pow(Mathf.Abs(timer_1 - (switchTime / 2)), switchTime * 1.5f)) / (switchTime / 2));
+                image.color = new Color(1, 1, 1, ((switchTime / 2 * 0.8f) - Mathf.Pow(Mathf.Abs(timer_1 - (switchTime / 2)), switchTime * 1.5f)) / (switchTime / 2 * 0.8f));
             }
         }
 
