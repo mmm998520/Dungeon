@@ -23,13 +23,7 @@ namespace com.DungeonPad
                 }
                 else if (transform.parent.gameObject.name.Contains("上") || transform.parent.gameObject.name.Contains("下") || transform.parent.gameObject.name.Contains("左") || transform.parent.gameObject.name.Contains("右"))
                 {
-                    Debug.LogWarning("namename : " + Resources.Load<Sprite>("Pictures/floorbroken_red").name);
                     sprites[0] = Resources.Load<Sprite>("Pictures/floorbroken_red");
-                    Debug.LogWarning("namename : " + sprites[0].name);
-                }
-                else
-                {
-                    Debug.LogWarning("namename : " + Resources.Load<Sprite>("Pictures/floorbroken_red").name);
                 }
             }
             GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
