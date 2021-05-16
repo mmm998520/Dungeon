@@ -15,10 +15,10 @@ namespace com.DungeonPad
             {
                 GameManager.DiedBecause = "Distance";
             }
-            writeFile("TestData", "\r" + GameManager.DiedBecause + "," + (int)GameManager.PlayTime/60 + " : " + (int)GameManager.PlayTime % 60 + "," + 
+            /*writeFile("TestData", "\r" + GameManager.DiedBecause + "," + (int)GameManager.PlayTime/60 + " : " + (int)GameManager.PlayTime % 60 + "," + 
                 GameManager.KillSpider + "," + GameManager.KillSlime + "," + 
                 GameManager.P1SpiderShooted + "," + GameManager.P1SpiderHit + "," + GameManager.P1SlimeHit + "," + GameManager.P1BubbleTimes + "," + 
-                GameManager.P2SpiderShooted + "," + GameManager.P2SpiderHit + "," + GameManager.P2SlimeHit + "," + GameManager.P2BubbleTimes);
+                GameManager.P2SpiderShooted + "," + GameManager.P2SpiderHit + "," + GameManager.P2SlimeHit + "," + GameManager.P2BubbleTimes);*/
         }
 
         // Update is called once per frame

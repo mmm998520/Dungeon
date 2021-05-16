@@ -87,9 +87,9 @@ namespace com.DungeonPad
             }
             instantiateObjectPrefab = null;
             int row, col, level;
-            for (i = -1; i <= 1; i++)
+            for (i = -2; i <= 2; i++)
             {
-                for (j = -1; j <= 1; j++)
+                for (j = -2; j <= 2; j++)
                 {
                     level = levelRateSetter(GameManager.layers);
 
