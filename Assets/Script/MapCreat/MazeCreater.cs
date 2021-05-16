@@ -102,7 +102,7 @@ namespace com.DungeonPad
                             mazeCreat(GameManager.layers, roomPasswayDatas[row, col], level, 0, row, col);
                             created[row, col] = true;
                         }
-                        else
+                        else if (!(row == endRow && col == endCol))
                         {
                             mazeCreat(GameManager.layers, roomPasswayDatas[row, col], level, 1, row, col);
                             created[row, col] = true;
