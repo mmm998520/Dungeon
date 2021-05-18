@@ -9,7 +9,7 @@ namespace com.DungeonPad
 {
     public class GameManager : MonoBehaviour
     {
-        public const bool staff = true;
+        public const bool staff = false;
 
         public static GameManager gameManager;
         public static Transform players, monsters, triggers, UI, magneticFields;
