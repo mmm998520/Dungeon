@@ -6,7 +6,7 @@ public class MusicManager : MonoBehaviour
 {
     [SerializeField] AudioSource audioSource;
     public static float gameVolume, gradientVolume = 1;
-    float thisVolume;
+    public float thisVolume;
 
     void Start()
     {

@@ -383,11 +383,21 @@ namespace com.DungeonPad
         private void OnDestroy()
         {
             HPBar.localScale = Vector3.zero;
-            for(int i = 0; i < DestoryWall.Length; i++)
+            if (!GameManager.DEMO)
             {
-                Destroy(DestoryWall[i]);
+                for (int i = 0; i < DestoryWall.Length; i++)
+                {
+                    Destroy(DestoryWall[i]);
+                }
+                Go.SetActive(true);
             }
-            Go.SetActive(true);
+            else
+            {
+                Transform DragonBossSprite = transform.GetChild(0).GetChild(0);
+                DragonBossSprite = Instantiate(DragonBossSprite.gameObject, DragonBossSprite.position, DragonBossSprite.rotation).transform;
+                DragonBossSprite.GetComponent<DragonBossDied>().enabled = true;
+                DragonBossSprite.localScale = transform.GetChild(0).GetChild(0).lossyScale;
+            }
         }
     }
 }

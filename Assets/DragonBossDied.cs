@@ -22,7 +22,12 @@ namespace com.DungeonPad
             timer += Time.deltaTime;
             if (timer >= 4)
             {
-                if(SceneManager.GetActiveScene().name == "Game 4")
+                if (GameManager.DEMO && SceneManager.GetActiveScene().name == "Game 2")
+                {
+                    SwitchScenePanel.NextScene = "DEMO Ending";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+                }
+                else if (SceneManager.GetActiveScene().name == "Game 4")
                 {
                     SwitchScenePanel.NextScene = "Ending";
                     GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");

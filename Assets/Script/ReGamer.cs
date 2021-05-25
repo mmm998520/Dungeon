@@ -20,11 +20,18 @@ namespace com.DungeonPad
             Keyboard keyboard = Keyboard.current;
             if (InputManager.anyEnter())
             {
-                ReGame();
-                ReAbility();
-                SwitchScenePanel.NextScene = "Game 1";
-                GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
-                ButtonSelect.OnClicked();
+                if (SceneManager.GetActiveScene().name == "DEMO Thanks")
+                {
+                    Application.OpenURL("https://www.facebook.com/tmd10glim");
+                }
+                else
+                {
+                    ReGame();
+                    ReAbility();
+                    SwitchScenePanel.NextScene = "Game 1";
+                    GameObject.Find("SwitchScenePanel").GetComponent<Animator>().SetTrigger("Loading");
+                    ButtonSelect.OnClicked();
+                }
             }
             else if (InputManager.anyExit())
             {
