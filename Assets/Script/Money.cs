@@ -12,7 +12,7 @@ namespace com.DungeonPad
         public Animator animator;
         float timer = 0;
         public bool moneyB;
-        [HideInInspector]public bool final;
+        [HideInInspector]public bool finalOne, finalTwo;
         [SerializeField]Transform spriteRenderer;
         void Start()
         {
@@ -57,17 +57,17 @@ namespace com.DungeonPad
                             r = Random.Range(0, AbilityManager.Abilitys.Length);
                             abilityName = AbilityManager.Abilitys[r].name;
                             times++;
-                            if (final && abilityName == "免疫")
+                            if (GameManager.CurrentSceneName == "Game 0_4"  && abilityName != "突進")
+                            {
+                                abilityName = "突進";
+                            }
+                            else if ((abilityName == "光炸" || abilityName == "強光") && finalOne)
                             {
                                 abilityName = "重來一次";
                             }
-                            if (GameManager.CurrentSceneName == "Game 0_4")
+                            else if (abilityName == "免疫" && (finalOne || finalTwo))
                             {
-                                //HashSet<string> abilityNames = new HashSet<string>() { "守護", "不屈" };
-                                if (abilityName != "突進")
-                                {
-                                    abilityName = "重來一次";
-                                }
+                                abilityName = "重來一次";
                             }
                         } while ((abilityName == "重來一次" || AbilityManager.AbilityCurrentLevel[abilityName] >= AbilityManager.AbilityCanBuyLevel[abilityName]) && times < 1000);
                         if (times >= 1000)

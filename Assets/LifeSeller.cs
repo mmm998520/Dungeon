@@ -8,7 +8,7 @@ namespace com.DungeonPad
     {
         public int price;
         public int times;
-        [SerializeField] bool final;
+        [SerializeField] bool finalOne, finalTwo;
 
         public List<Transform> brightOrder;
         Color gray = new Color(0.3f, 0.3f, 0.3f, 1);
@@ -20,9 +20,13 @@ namespace com.DungeonPad
         {
             if (times == 0)
             {
-                if (final)
+                if (finalOne)
                 {
-                    Instantiate(GameManager.gameManager.moneyB, transform.position, Quaternion.identity).GetComponent<Money>().final = true;
+                    Instantiate(GameManager.gameManager.moneyB, transform.position, Quaternion.identity).GetComponent<Money>().finalOne = true;
+                }
+                else if (finalTwo)
+                {
+                    Instantiate(GameManager.gameManager.moneyB, transform.position, Quaternion.identity).GetComponent<Money>().finalTwo = true;
                 }
                 else
                 {

@@ -411,6 +411,7 @@ MonoBehaviour:
   wall: 0
   randomRotate: 1
   holeSide: 0
+  fire: 0
 --- !u!1 &5280081687595512778
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +488,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 30
   times: 0
-  final: 1
+  finalOne: 0
+  finalTwo: 1
   brightOrder:
   - {fileID: 0}
   - {fileID: 0}
