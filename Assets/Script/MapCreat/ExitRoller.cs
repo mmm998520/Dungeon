@@ -8,14 +8,23 @@ namespace com.DungeonPad
     public class ExitRoller : MonoBehaviour
     {
         bool goNext = false;
+        bool open = false;
         void Update()
         {
             transform.localPosition = Vector3.zero;
-            if (transform.rotation.eulerAngles.z > 180 && transform.rotation.eulerAngles.z < 200)
+            if (!open)
+            {
+                if (transform.rotation.eulerAngles.z > 180 && transform.rotation.eulerAngles.z < 200)
+                {
+                    open = true;
+                }
+            }
+            else
             {
                 if (GameManager.layers == 1)
                 {
-                    if (!goNext)
+                    AbilityShower abilityShower = GameObject.Find("AbilityShower").GetComponent<AbilityShower>();
+                    if (!goNext && abilityShower.rotate == 0 && !ReLifeParticle.Tracking)
                     {
                         GameManager.passLayerOneTimes += 1;
                         GameManager.layerOneCntinuousDideTimes = 0;
@@ -26,7 +35,8 @@ namespace com.DungeonPad
                 }
                 else
                 {
-                    if (!goNext)
+                    AbilityShower abilityShower = GameObject.Find("AbilityShower").GetComponent<AbilityShower>();
+                    if (!goNext && abilityShower.rotate == 0 && !ReLifeParticle.Tracking)
                     {
                         GameManager.passLayerThreeTimes += 1;
                         GameManager.layerThreeCntinuousDideTimes = 0;
