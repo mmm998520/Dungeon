@@ -29,6 +29,8 @@ namespace com.DungeonPad
         public GameObject punchSFX, punchHitSFX, throwAxeSFX, throwAxeAllSFX;
 
         [SerializeField] GameObject Go;
+
+        string[] lastUseSkills = new string[2] { "", "" };
         void Start()
         {
             speed = 3;
@@ -102,40 +104,43 @@ namespace com.DungeonPad
                             transform.rotation = Quaternion.Euler(0, 180, 0);
                         }
                         r = Random.Range(0, CDs.Count);
-                        switch (CDs[r])
+                        if (!(lastUseSkills[0] == CDs[r] && lastUseSkills[1] == CDs[r]))
                         {
-                            case "Punch":
-                                if (punchCDTimer > punchCD)
-                                {
-                                    animator.SetBool("Punch", true);
-                                    canUseThisAttack = true;
-                                }
-                                break;
-                            case "ThrowAxe90":
-                                if (throwAxe90CDTimer > throwAxe90CD)
-                                {
-                                    throwByClockwise = (Random.Range(0, 2) > 0);
-                                    animator.SetBool("ThrowAxe90", true);
-                                    playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
-                                    canUseThisAttack = true;
-                                }
-                                break;
-                            case "ThrowAxe180":
-                                if (throwAxe180CDTimer > throwAxe180CD)
-                                {
-                                    throwByClockwise = (Random.Range(0, 2) > 0);
-                                    animator.SetBool("ThrowAxe180", true);
-                                    playerAngle = 0;
-                                    canUseThisAttack = true;
-                                }
-                                break;
-                            case "AccurateAxe":
-                                if (accurateAxeCDTimer > accurateAxeCD)
-                                {
-                                    animator.SetBool("AccurateAxe", true);
-                                    canUseThisAttack = true;
-                                }
-                                break;
+                            switch (CDs[r])
+                            {
+                                case "Punch":
+                                    if (punchCDTimer > punchCD)
+                                    {
+                                        animator.SetBool("Punch", true);
+                                        canUseThisAttack = true;
+                                    }
+                                    break;
+                                case "ThrowAxe90":
+                                    if (throwAxe90CDTimer > throwAxe90CD)
+                                    {
+                                        throwByClockwise = (Random.Range(0, 2) > 0);
+                                        animator.SetBool("ThrowAxe90", true);
+                                        playerAngle = Vector2.SignedAngle(Vector2.right, minDisPlayer.position - transform.position);
+                                        canUseThisAttack = true;
+                                    }
+                                    break;
+                                case "ThrowAxe180":
+                                    if (throwAxe180CDTimer > throwAxe180CD)
+                                    {
+                                        throwByClockwise = (Random.Range(0, 2) > 0);
+                                        animator.SetBool("ThrowAxe180", true);
+                                        playerAngle = 0;
+                                        canUseThisAttack = true;
+                                    }
+                                    break;
+                                case "AccurateAxe":
+                                    if (accurateAxeCDTimer > accurateAxeCD)
+                                    {
+                                        animator.SetBool("AccurateAxe", true);
+                                        canUseThisAttack = true;
+                                    }
+                                    break;
+                            }
                         }
                         if (!canUseThisAttack)
                         {
@@ -144,6 +149,11 @@ namespace com.DungeonPad
                         }
                         else
                         {
+                            if(CDs[r] != "AccurateAxe")
+                            {
+                                lastUseSkills[0] = lastUseSkills[1];
+                                lastUseSkills[1] = CDs[r];
+                            }
                             break;
                         }
                     }
