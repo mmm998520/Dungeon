@@ -15,14 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Home.unity
     guid: 26804c7f50141de45b65241c870ad4f4
   - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: be182a5f4f314244785cf249c7e90268
+    path: Assets/Scenes/Setting.unity
+    guid: f88c7dfb6f2a1c144bfc1527b32c1646
   - enabled: 1
-    path: Assets/Scenes/SelectRole_Tutorial.unity
-    guid: e98a33b1084e9bb4ea6695b06339f66a
-  - enabled: 1
-    path: Assets/Scenes/SelectRole_Game.unity
-    guid: b36dd8e7b9c90f143ad478d46075dbd9
+    path: Assets/Scenes/Operate.unity
+    guid: 1270b705db941364cb8c6790a8cceb99
   - enabled: 1
     path: Assets/Scenes/SelectRole_Game 0.unity
     guid: 347fde1e32f0510428d81ddc6bf782d4
@@ -30,26 +27,17 @@ EditorBuildSettings:
     path: Assets/Scenes/SelectRole_Game 1.unity
     guid: b87e08f024e140c4c97fb9d046e04105
   - enabled: 1
-    path: Assets/Scenes/Setting.unity
-    guid: f88c7dfb6f2a1c144bfc1527b32c1646
-  - enabled: 1
-    path: Assets/Scenes/Operate.unity
-    guid: 1270b705db941364cb8c6790a8cceb99
-  - enabled: 1
-    path: Assets/Scenes/Tutorial1.unity
-    guid: e2a7875ae1c489741969818fb41cac1e
-  - enabled: 1
     path: Assets/Scenes/AfterGame 0.unity
     guid: eba1e443397f1ff4fa7742006d5eea82
   - enabled: 1
     path: Assets/Scenes/Game 0.unity
     guid: 339e2e9a7fbd0aa4ebdd7322cf87f291
   - enabled: 1
-    path: Assets/Scenes/Game 0_2.unity
-    guid: e4fe09eaf32cce84d8abb599c672c20d
-  - enabled: 1
     path: Assets/Scenes/Game 0_1.unity
     guid: fa72cd4a54becf94d831c82293bbab1d
+  - enabled: 1
+    path: Assets/Scenes/Game 0_2.unity
+    guid: e4fe09eaf32cce84d8abb599c672c20d
   - enabled: 1
     path: Assets/Scenes/Game 0_3.unity
     guid: 96389cc201deef349a3d7bc0c8e72575
@@ -65,18 +53,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game 2.unity
     guid: 2036eb2e78598b245a554fa3bf976a51
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game 4.unity
     guid: 699998c1d87c9154582ce611e4c6ccdd
-  - enabled: 1
-    path: Assets/Scenes/Ending.unity
-    guid: 28d5c62f5733063409b838ad59373f6b
+  - enabled: 0
+    path: Assets/Scenes/Win.unity
+    guid: 1671509a7c10f5744aa34603b617dc5d
   - enabled: 1
     path: Assets/Scenes/Died.unity
     guid: 37f4d63e26e181c42a3eced295df3b05
   - enabled: 1
-    path: Assets/Scenes/Win.unity
-    guid: 1671509a7c10f5744aa34603b617dc5d
+    path: Assets/Scenes/Ending.unity
+    guid: 28d5c62f5733063409b838ad59373f6b
   - enabled: 1
     path: Assets/Scenes/DEMO Ending.unity
     guid: c0f6b12349780ea428e49c24ace520ff
