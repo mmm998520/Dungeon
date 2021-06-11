@@ -26,14 +26,14 @@ namespace com.DungeonPad
             }
             for (int i = 0; i < 2; i++)
             {
-                Xs[i].SetActive(text.sprite.name == "傳送Lv" + (i + 1));
+                Xs[i].SetActive(text.sprite.name == "傳送Lv" + (i + 1) + GameManager.language);
             }
         }
 
         public void showDetail(string ability)
         {
             timer = 0;
-            text.sprite = Resources.Load<Sprite>("UI/Ability/AbilityText/" + ability);
+            text.sprite = Resources.Load<Sprite>("UI/Ability/AbilityText/" + ability + GameManager.language);
         }
     }
 }

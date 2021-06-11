@@ -143,11 +143,11 @@ namespace com.DungeonPad
                     {
                         abilityNamesAndLevels.Insert(i ,abilityName + "Lv" + abilityLevel);
                         abilityImages[i].enabled = true;
-                        abilityImages[i].sprite = Resources.Load<Sprite>("UI/Ability/AbilityImage/" + abilityName + "Lv" + abilityLevel);
+                        abilityImages[i].sprite = Resources.Load<Sprite>("UI/Ability/AbilityImage/" + abilityName + "Lv" + abilityLevel + GameManager.language);
                         if (abilityName == "傳送")
                         {
                             homeButtonTimerImages[i].enabled = true;
-                            homeButtonTimerImages[i].sprite = Resources.Load<Sprite>("UI/Ability/AbilityImage/" + abilityName + "Lv" + abilityLevel + "(黑)");
+                            homeButtonTimerImages[i].sprite = Resources.Load<Sprite>("UI/Ability/AbilityImage/" + abilityName + "Lv" + abilityLevel + "(黑)" + GameManager.language);
                         }
                         abilityOrder();
                         return;

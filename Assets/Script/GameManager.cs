@@ -10,6 +10,7 @@ namespace com.DungeonPad
     public class GameManager : MonoBehaviour
     {
         public const bool staff = false, DEMO = true;
+        public static string language = "_CH";
 
         public static GameManager gameManager;
         public static Transform players, monsters, triggers, UI, magneticFields;
