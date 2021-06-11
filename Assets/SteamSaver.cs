@@ -105,18 +105,31 @@ public class SteamSaver : MonoBehaviour
         {
             SteamStorage = SaveLoadFile.Load();
 
+
             PlayerPrefs.SetInt("passLayerOneTimes", int.Parse(SteamStorage.passLayerOneTimes));
             PlayerPrefs.SetInt("passLayerThreeTimes", int.Parse(SteamStorage.passLayerThreeTimes));
             PlayerPrefs.SetInt("layerOneCntinuousDideTimes", int.Parse(SteamStorage.layerOneCntinuousDideTimes));
             PlayerPrefs.SetInt("layerThreeCntinuousDideTimes", int.Parse(SteamStorage.layerThreeCntinuousDideTimes));
-            PlayerPrefs.SetString("Keyboard", SteamStorage.Keyboard);
+            if (SteamStorage.Keyboard != "")
+            {
+                PlayerPrefs.SetString("Keyboard", SteamStorage.Keyboard);
+            }
             PlayerPrefs.SetInt("layerFourCntinuousWinTimes", int.Parse(SteamStorage.layerFourCntinuousWinTimes));
-            PlayerPrefs.SetString("TaurenStat", SteamStorage.TaurenStat);
-            PlayerPrefs.SetString("DragonStat", SteamStorage.DragonStat);
+            if (SteamStorage.TaurenStat != "")
+            {
+                PlayerPrefs.SetString("TaurenStat", SteamStorage.TaurenStat);
+            }
+            if (SteamStorage.DragonStat != "")
+            {
+                PlayerPrefs.SetString("DragonStat", SteamStorage.DragonStat);
+            }
             PlayerPrefs.SetInt("MusicSound", int.Parse(SteamStorage.MusicSound));
             PlayerPrefs.SetInt("FXSound", int.Parse(SteamStorage.FXSound));
             PlayerPrefs.SetInt("Lightness", int.Parse(SteamStorage.Lightness));
-            PlayerPrefs.SetInt("PlayerNum", int.Parse(SteamStorage.PlayerNum));
+            if (SteamStorage.PlayerNum != "0")
+            {
+                PlayerPrefs.SetString("PlayerNum", SteamStorage.PlayerNum);
+            }
         }
     }
 }
