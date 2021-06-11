@@ -60,6 +60,11 @@ namespace com.DungeonPad
 
         void Update()
         {
+            if (Time.timeScale < 0.5f)
+            {
+                maxer = 0;
+                return;
+            }
             CountHurtVibration();
             CountStickVibration();
             CountConfusionVibration();
