@@ -12,58 +12,6 @@ namespace com.DungeonPad
         public static void tryLoad()
         {
             //PlayerPrefs.DeleteAll();
-            if (PlayerPrefs.HasKey("data1_AbilityCurrentLevel"))
-            {
-                /*
-                AbilityManager.AbilityCurrentLevel = loadDictionary("data1_AbilityCurrentLevel");
-                AbilityManager.AbilityCanUseLevel = loadDictionary("data1_AbilityCanUseLevel");
-                AbilityManager.AbilityCanBuyLevel = loadDictionary("data1_AbilityCanBuyLevel");
-                */
-            }
-            else
-            {
-                /*
-                saveDictionary("data1_AbilityCurrentLevel", AbilityManager.AbilityCurrentLevel);
-                saveDictionary("data1_AbilityCanUseLevel", AbilityManager.AbilityCanUseLevel);
-                saveDictionary("data1_AbilityCanBuyLevel", AbilityManager.AbilityCanBuyLevel);
-                */
-            }
-            if (PlayerPrefs.HasKey("moneyA"))
-            {
-                PlayerManager.money = PlayerPrefs.GetInt("moneyA");
-            }
-            else
-            {
-                PlayerPrefs.SetInt("moneyA", PlayerManager.money);
-                PlayerPrefs.Save();
-            }
-            if (PlayerPrefs.HasKey("moneyB"))
-            {
-                PlayerManager.moneyB = PlayerPrefs.GetInt("moneyB");
-            }
-            else
-            {
-                PlayerPrefs.SetInt("moneyB", PlayerManager.moneyB);
-                PlayerPrefs.Save();
-            }
-            if (PlayerPrefs.HasKey("Costed"))
-            {
-                AbilityManager.Costed = PlayerPrefs.GetInt("Costed");
-            }
-            else
-            {
-                PlayerPrefs.SetInt("Costed", AbilityManager.Costed);
-                PlayerPrefs.Save();
-            }
-            if (PlayerPrefs.HasKey("TotalCost"))
-            {
-                AbilityManager.TotalCost = PlayerPrefs.GetInt("TotalCost");
-            }
-            else
-            {
-                PlayerPrefs.SetInt("TotalCost", AbilityManager.TotalCost);
-                PlayerPrefs.Save();
-            }
             if (PlayerPrefs.HasKey("passLayerOneTimes"))
             {
                 GameManager.passLayerOneTimes = PlayerPrefs.GetInt("passLayerOneTimes");
@@ -160,13 +108,6 @@ namespace com.DungeonPad
         }
         public static void Save()
         {
-            saveDictionary("data1_AbilityCurrentLevel", AbilityManager.AbilityCurrentLevel);
-            saveDictionary("data1_AbilityCanUseLevel", AbilityManager.AbilityCanUseLevel);
-            saveDictionary("data1_AbilityCanBuyLevel", AbilityManager.AbilityCanBuyLevel);
-            PlayerPrefs.SetInt("moneyA", PlayerManager.money);
-            PlayerPrefs.SetInt("moneyB", PlayerManager.moneyB);
-            PlayerPrefs.SetInt("Costed", AbilityManager.Costed);
-            PlayerPrefs.SetInt("TotalCost", AbilityManager.TotalCost);
             PlayerPrefs.SetInt("passLayerOneTimes", GameManager.passLayerOneTimes);
             PlayerPrefs.SetInt("passLayerThreeTimes", GameManager.passLayerThreeTimes);
             PlayerPrefs.SetInt("layerOneCntinuousDideTimes", GameManager.layerOneCntinuousDideTimes);
