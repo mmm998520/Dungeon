@@ -53,10 +53,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game 2.unity
     guid: 2036eb2e78598b245a554fa3bf976a51
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Game 4.unity
     guid: 699998c1d87c9154582ce611e4c6ccdd
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: 1671509a7c10f5744aa34603b617dc5d
   - enabled: 1
@@ -65,10 +65,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ending.unity
     guid: 28d5c62f5733063409b838ad59373f6b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DEMO Ending.unity
     guid: c0f6b12349780ea428e49c24ace520ff
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DEMO Thanks.unity
     guid: 83fac1d88eaff6a438b37f1781f7cee9
   m_configObjects: {}

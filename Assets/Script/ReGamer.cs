@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,7 +13,11 @@ namespace com.DungeonPad
         float timer;
         void Start()
         {
-
+            ReadOnlyArray<Gamepad> gamepads = Gamepad.all;
+            for(int i = 0; i < gamepads.Count; i++)
+            {
+                gamepads[i].SetMotorSpeeds(0, 0);
+            }
         }
 
         void Update()
