@@ -9081,7 +9081,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 72, y: -189}
-  m_SizeDelta: {x: 1018, y: 96}
+  m_SizeDelta: {x: 1927, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &233972768
 MonoBehaviour:
@@ -24692,6 +24692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
+  thisVolume: 0
 --- !u!1001 &993808359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29754,7 +29755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -170, y: -23}
+  m_AnchoredPosition: {x: 55, y: -30}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1295617384
@@ -36812,8 +36813,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -341, y: -27}
-  m_SizeDelta: {x: 136, y: 42}
+  m_AnchoredPosition: {x: -245, y: -35}
+  m_SizeDelta: {x: 244.8, y: 75.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1767822091
 MonoBehaviour:
@@ -37786,7 +37787,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 574, y: -69}
+  m_AnchoredPosition: {x: 750, y: -85}
   m_SizeDelta: {x: 137, y: 57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1814438482
