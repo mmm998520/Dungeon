@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -79,6 +80,10 @@ public class SteamSaver : MonoBehaviour
     void OnApplicationQuit()
     {
         save();
+        for(int i = 0; i < Gamepad.all.Count; i++)
+        {
+            Gamepad.all[i].SetMotorSpeeds(0, 0);
+        }
     }
 
     void save()
