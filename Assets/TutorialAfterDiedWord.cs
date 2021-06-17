@@ -8,7 +8,7 @@ namespace com.DungeonPad
 {
     public class TutorialAfterDiedWord : MonoBehaviour
     {
-        public Text text;
+        public Image text;
         float timer;
         public static string nextSceneName;
 

@@ -547,8 +547,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1947757095}
   - component: {fileID: 1947757098}
-  - component: {fileID: 1947757097}
   - component: {fileID: 1947757096}
+  - component: {fileID: 1947757097}
   m_Layer: 5
   m_Name: TextDied
   m_TagString: Untagged
@@ -570,10 +570,10 @@ RectTransform:
   m_Father: {fileID: 1112578739}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1380, y: 144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1947757096
 MonoBehaviour:
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed001802210bdb14ab1310397ed61072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1947757097}
+  text: {fileID: 0}
 --- !u!114 &1947757097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,30 +597,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1947757094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.36099997, g: 0.36099997, b: 0.36099997, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 84
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1.2
-  m_Text: "\u5149\u662F\u4F60\u5011\u5171\u540C\u7684\u751F\u547D\uFF0C\u5931\u53BB\u5149\uFF0C\u4F60\u5011\u90FD\u5C07\u6D88\u901D"
+  m_Sprite: {fileID: 21300000, guid: 5d9bfd8876e7d7746909cc357102dddd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1947757098
 CanvasRenderer:
   m_ObjectHideFlags: 0
