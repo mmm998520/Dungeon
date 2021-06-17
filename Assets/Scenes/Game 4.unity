@@ -24234,12 +24234,12 @@ PrefabInstance:
     - target: {fileID: 2415582821448294211, guid: d815344838f1c9447b690797390ef1cc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 900
+      value: 1370
       objectReference: {fileID: 0}
     - target: {fileID: 2415582821448294211, guid: d815344838f1c9447b690797390ef1cc,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 2415582821448294211, guid: d815344838f1c9447b690797390ef1cc,
         type: 3}
@@ -59227,6 +59227,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1946633567}
     m_Modifications:
+    - target: {fileID: 1494757766, guid: cc90ff966bf57d64daae90de43a05066, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1370
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494757766, guid: cc90ff966bf57d64daae90de43a05066, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 31
+      objectReference: {fileID: 0}
     - target: {fileID: 6165025539838499292, guid: cc90ff966bf57d64daae90de43a05066,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -68923,6 +68931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
+  thisVolume: 0
 --- !u!1 &1946633563
 GameObject:
   m_ObjectHideFlags: 0

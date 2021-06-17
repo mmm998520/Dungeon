@@ -22300,6 +22300,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 408198256}
     m_Modifications:
+    - target: {fileID: 1494757766, guid: cc90ff966bf57d64daae90de43a05066, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1370
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494757766, guid: cc90ff966bf57d64daae90de43a05066, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 31
+      objectReference: {fileID: 0}
     - target: {fileID: 6165025539838499292, guid: cc90ff966bf57d64daae90de43a05066,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26808,7 +26816,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 50, y: -177}
-  m_SizeDelta: {x: 787, y: 90}
+  m_SizeDelta: {x: 2034, y: 126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1096738099
 MonoBehaviour:
@@ -31423,7 +31431,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 424, y: -72}
+  m_AnchoredPosition: {x: 695, y: -72}
   m_SizeDelta: {x: 137, y: 57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1401685978
@@ -36613,12 +36621,12 @@ PrefabInstance:
     - target: {fileID: 2415582821448294211, guid: d815344838f1c9447b690797390ef1cc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 900
+      value: 1370
       objectReference: {fileID: 0}
     - target: {fileID: 2415582821448294211, guid: d815344838f1c9447b690797390ef1cc,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 2415582821448294211, guid: d815344838f1c9447b690797390ef1cc,
         type: 3}
@@ -37826,6 +37834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
+  thisVolume: 0
 --- !u!1001 &1863890034
 PrefabInstance:
   m_ObjectHideFlags: 0

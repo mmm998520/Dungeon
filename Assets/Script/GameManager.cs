@@ -9,7 +9,7 @@ namespace com.DungeonPad
 {
     public class GameManager : MonoBehaviour
     {
-        public const bool staff = false, DEMO = false;
+        public const bool staff = true, DEMO = false;
         public static string language = "_CH";
 
         public static GameManager gameManager;
