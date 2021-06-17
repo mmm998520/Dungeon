@@ -14,6 +14,8 @@ namespace com.DungeonPad
         [SerializeField] Image selectBackGround;
         [SerializeField] Image p1select, p2select;
         [SerializeField] ButtonShower p1ButtonShower, p2ButtonShower, enterGameButtonShower;
+        [SerializeField] RectTransform p1ButtonShowerTransform, p2ButtonShowerTransform;
+        [SerializeField] Vector2 ButtonShowerSelectedPos, ButtonShowerUnSelectedPos;
         [SerializeField] GameObject p1selectKeyboard, p1selectGamepad, p2selectKeyboard, p2selectGamepad;
         [SerializeField] Sprite SelectAll2P, SelectAll1P, UnSelectAll2P, UnSelectAll1P, p1selectTrue, p1selectFalse, p2selectTrue, p2selectFalse;
         float p1KeyboardTimer, p2KeyboardTimer, p1GamepadTimer, p2GamepadTimer, p1SingleTimer, p2SingleTimer;
@@ -116,6 +118,22 @@ namespace com.DungeonPad
                 }
             }
 
+            if(InputManager.p1Mod == InputManager.PlayerMod.none)
+            {
+                p1ButtonShowerTransform.anchoredPosition = ButtonShowerUnSelectedPos;
+            }
+            else
+            {
+                p1ButtonShowerTransform.anchoredPosition = ButtonShowerSelectedPos;
+            }
+            if (InputManager.p2Mod == InputManager.PlayerMod.none)
+            {
+                p2ButtonShowerTransform.anchoredPosition = ButtonShowerUnSelectedPos;
+            }
+            else
+            {
+                p2ButtonShowerTransform.anchoredPosition = ButtonShowerSelectedPos;
+            }
             setSelectButtonSprite(InputManager.p1Mod, InputManager.p2Mod, p1ButtonShower);
             setSelectButtonSprite(InputManager.p2Mod, InputManager.p1Mod, p2ButtonShower);
             if (!start)

@@ -5843,6 +5843,10 @@ MonoBehaviour:
   p1ButtonShower: {fileID: 1093827993}
   p2ButtonShower: {fileID: 1440913131}
   enterGameButtonShower: {fileID: 1826233039}
+  p1ButtonShowerTransform: {fileID: 1093827992}
+  p2ButtonShowerTransform: {fileID: 1440913130}
+  ButtonShowerSelectedPos: {x: 52.77, y: -45.2}
+  ButtonShowerUnSelectedPos: {x: 0, y: -35.6}
   p1selectKeyboard: {fileID: 1966501026}
   p1selectGamepad: {fileID: 580278223}
   p2selectKeyboard: {fileID: 437090963}

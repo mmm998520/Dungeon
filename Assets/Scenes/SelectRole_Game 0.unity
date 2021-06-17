@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6146,6 +6146,10 @@ MonoBehaviour:
   p1ButtonShower: {fileID: 2010143236}
   p2ButtonShower: {fileID: 1073027827}
   enterGameButtonShower: {fileID: 1339284858}
+  p1ButtonShowerTransform: {fileID: 2010143235}
+  p2ButtonShowerTransform: {fileID: 1073027826}
+  ButtonShowerSelectedPos: {x: 52.77, y: -45.2}
+  ButtonShowerUnSelectedPos: {x: 0, y: -35.6}
   p1selectKeyboard: {fileID: 1454160912}
   p1selectGamepad: {fileID: 622385561}
   p2selectKeyboard: {fileID: 944690350}
