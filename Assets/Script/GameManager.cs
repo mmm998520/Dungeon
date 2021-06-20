@@ -211,6 +211,10 @@ namespace com.DungeonPad
                     Time.fixedDeltaTime = 0.02F * Time.timeScale;
                     stopPanel.SetActive(true);
                 }
+                for (int i = 0; i < Gamepad.all.Count; i++)
+                {
+                    Gamepad.all[i].SetMotorSpeeds(0, 0);
+                }
             }
         }
     }
