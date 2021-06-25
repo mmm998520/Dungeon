@@ -106,6 +106,11 @@ namespace com.DungeonPad
 
         void Update()
         {
+            /*Debug.LogWarning("P1 : " + InputManager.p1Gamepad);
+            Debug.LogWarning("P2 : " + InputManager.p2Gamepad);
+            reConnectGamePad(InputManager.p1Mod, InputManager.p1Gamepad);
+            reConnectGamePad(InputManager.p2Mod, InputManager.p2Gamepad);*/
+
             if (CurrentSceneName == "Game 1" || CurrentSceneName == "Game 2" || CurrentSceneName == "Game 4")
             {
                 GameTimer.Timer += Time.deltaTime;
@@ -217,5 +222,20 @@ namespace com.DungeonPad
                 }
             }
         }
+
+        /*void reConnectGamePad(InputManager.PlayerMod playerMod, Gamepad gamepad)
+        {
+            if (gamepad == null && (playerMod == InputManager.PlayerMod.gamepadP1 || playerMod == InputManager.PlayerMod.gamepadP2))
+            {
+                Debug.LogError("???");
+                InputSystem.onDeviceChange += (device, change) =>
+                {
+                    if (change == InputDeviceChange.Added && device != null)
+                    {
+                        gamepad = (Gamepad)device;
+                    }
+                };
+            }
+        }*/
     }
 }

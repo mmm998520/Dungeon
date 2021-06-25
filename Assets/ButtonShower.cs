@@ -128,7 +128,6 @@ namespace com.DungeonPad
                 timer_2 += Time.unscaledDeltaTime;
                 neverUseThisFrame_2 = true;
             }
-            Debug.LogWarning("t1 : " + timer_1 + ", t2 : " + timer_2);
             if (switchTime > 1.5f)
             {
                 if (timer_2 >= switchTime)
