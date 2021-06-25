@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace com.DungeonPad
 {
@@ -406,15 +407,18 @@ namespace com.DungeonPad
             {
                 if(change == InputDeviceChange.Removed && device != null)
                 {
-                    if (device == InputManager.p1Gamepad)
+                    if (SceneManager.GetActiveScene().name.Contains("SelectRole"))
                     {
-                        InputManager.p1Mod = InputManager.PlayerMod.none;
-                        InputManager.p1Gamepad = null;
-                    }
-                    if (device == InputManager.p2Gamepad)
-                    {
-                        InputManager.p2Mod = InputManager.PlayerMod.none;
-                        InputManager.p2Gamepad = null;
+                        if (device == InputManager.p1Gamepad)
+                        {
+                            InputManager.p1Mod = InputManager.PlayerMod.none;
+                            InputManager.p1Gamepad = null;
+                        }
+                        if (device == InputManager.p2Gamepad)
+                        {
+                            InputManager.p2Mod = InputManager.PlayerMod.none;
+                            InputManager.p2Gamepad = null;
+                        }
                     }
                 }
                 /*
