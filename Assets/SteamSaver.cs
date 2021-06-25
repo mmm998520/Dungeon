@@ -143,7 +143,7 @@ public class SteamSaver : MonoBehaviour
             PlayerPrefs.SetInt("Lightness", int.Parse(SteamStorage.Lightness));
             if (SteamStorage.PlayerNum != "0")
             {
-                PlayerPrefs.SetString("PlayerNum", SteamStorage.PlayerNum);
+                PlayerPrefs.SetInt("PlayerNum", int.Parse(SteamStorage.PlayerNum));
             }
         }
     }
